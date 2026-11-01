@@ -186,18 +186,20 @@
           ]
         },
         {
-          "type": "image",
-          "path": "assets/figures/chapter01/installation.png",
-          "caption": "도식 1-1. 설치 순서와 담당 도구.",
-          "width_mm": 127
-        },
-        {
-          "type": "h",
-          "text": "1장의 순서"
-        },
-        {
           "type": "p",
-          "text": "1.1 구성 → 1.2 가상머신 → 1.3 사전 확인 → 1.4 저장소·설정 → 1.5 인덱서 준비 → 1.6 Docker 설치 → 1.7 kt66 기동 → 1.8 화면 접속 → 1.9 센서 확인 → 1.10 중지·복구 → 1.11 문제 해결 → 1.12 공격자 VM 사전 준비"
+          "text": "1권은 환경 준비 → 공격 실습 → 기록 분석 → 침해대응 순서로 진행한다."
+        }
+      ]
+    },
+    {
+      "title": "1장의 진행 순서",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "image",
+          "path": "assets/figures/chapter01/chapter-roadmap.png",
+          "caption": "도식 1-1. 1장 학습 순서.",
+          "width_mm": 127
         }
       ]
     },
@@ -343,8 +345,8 @@
         },
         {
           "type": "image",
-          "path": "assets/illustrations/chapter01/install.png",
-          "caption": "삽화. 설치 명령 입력.",
+          "path": "assets/illustrations/chapter01/install-v2.png",
+          "caption": "삽화. 설치 준비.",
           "width_mm": 45,
           "align": "right"
         }
@@ -1009,7 +1011,7 @@
         },
         {
           "type": "image",
-          "path": "assets/illustrations/chapter01/notes.png",
+          "path": "assets/illustrations/chapter01/notes-v2.png",
           "caption": "삽화. 접속 주소 확인.",
           "width_mm": 45,
           "align": "right"
@@ -1559,7 +1561,7 @@
         },
         {
           "type": "image",
-          "path": "assets/illustrations/chapter01/network.png",
+          "path": "assets/illustrations/chapter01/network-v2.png",
           "caption": "삽화. 연결 점검.",
           "width_mm": 45,
           "align": "right"

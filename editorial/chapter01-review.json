@@ -1,13 +1,13 @@
 {
   "date": "2026-11-01",
-  "scope": "머리말·미리 안내·1장 전체 문장 및 캡션 재검토, 공격자 VM 준비·도식·캐릭터 삽화 추가",
+  "scope": "1장 학습 순서를 전용 도식으로 교체하고 삽화의 인물·배경·소품 다양화",
   "deliverable": "manuscript/volume01-chapter01.docx",
-  "pages": 33,
+  "pages": 34,
   "command_files": 54,
   "body_character_count": {
     "previous": 21819,
-    "new": 16066,
-    "reduction_percent": 26.4,
+    "new": 15947,
+    "reduction_percent": 26.9,
     "count_method": "p/h/code/command의 text+why+result. 표·캡션은 제외. 페이지 수 감소율이 아님."
   },
   "environment": {
@@ -77,9 +77,10 @@
     "illustration_source": "Git e12cd37:assets/illustrations/overview.png (기존 승인 그림 재사용)",
     "diagram_source": [
       "tools/diagram_chapter01.py",
-      "tools/diagrams_chapter01.py"
+      "tools/diagrams_chapter01.py",
+      "tools/roadmap_chapter01.py"
     ],
-    "visual_review": "33쪽 전체 렌더 배열 확인. 네트워크·기록 흐름·설치 순서·설정 파일·포트·중지·문제 해결 도식과 캐릭터 삽화를 최종 판형 환산 렌더에서 확인. 명령의 자동 줄바꿈은 별도 검사.",
+    "visual_review": "34쪽 조판 검사 통과. 학습 순서 도식과 교체된 삽화 세 지면을 최종 판형 환산 렌더로 확인. 나머지 지면은 기존 검사 및 명령 배치 자동 검사 유지.",
     "new_character_illustrations": 3,
     "illustration_generation": "built-in image_gen; prompts and file provenance: editorial/chapter01-illustrations.json"
   },
@@ -143,7 +144,7 @@
     }
   ],
   "repository_scope": "집필 저장소만 변경. kt66/강의 저장소는 읽기만 수행. 기존 원고 삭제 상태를 유지하고 새 1장만 작성.",
-  "docx_sha256": "7df619d37027fe1c1c2ba4d617c6ae071d0532afcdeba53730db3cf46356a5fc",
+  "docx_sha256": "ba0c4626f231b102afb83c5b939b80b03a42bc7a28e1f699b2b502955fc793c0",
   "revisions": [
     "불필요한 삽화 주의문 삭제",
     "Windows 선택 설명을 1권에서 사용하지 않으므로 N을 선택한다로 수정",
@@ -153,7 +154,9 @@
     "dpkg 조회를 -s와 Status 확인으로 수정",
     "별도 공격자 VM과 일괄 설치 명령 추가",
     "7개 도식과 3개 작은 캐릭터 삽화 반영",
-    "동일한 문체 오류를 막기 위한 집필·검토 지침을 AGENTS.md에 기록"
+    "동일한 문체 오류를 막기 위한 집필·검토 지침을 AGENTS.md에 기록",
+    "긴 화살표 문장을 삭제하고 12개 절을 네 묶음으로 표시한 학습 순서 도식을 별도 지면에 배치",
+    "실습실·사무실·장비실의 서로 다른 인물과 소품으로 작은 삽화 3개 교체"
   ],
   "lecture_source_commit": "36897d0c3d72fcb0e8a00ad719934a83074a3e84"
 }

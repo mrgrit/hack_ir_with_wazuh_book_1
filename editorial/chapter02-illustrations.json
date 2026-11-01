@@ -1,0 +1,10 @@
+{
+  "mode": "built-in image_gen",
+  "images": [
+    {
+      "path": "assets/illustrations/chapter02/evidence.png",
+      "source": "/home/ccc/.codex/generated_images/01a1963a-4c4d-7911-a89f-726638e9a6ac/exec-96189f5a-a94f-4e51-a71d-478ff15a7639.png",
+      "prompt": "Original small spot illustration for a Korean engineering manual. Retro PC-98 1990s computer-game pixel art with crisp square pixels, limited indigo, lavender, cyan, rose and cream, checkerboard dithering and dark outlines. Scene: night security operations desk. Two adult analysts, a woman with a straight short bob and a man with a shaved head, stand on adjacent sides of a small table comparing two printed log sheets with a magnifying glass and a pencil. A simple wall clock and a small window with night sky form a minimal local background. One analyst points to the same position on both sheets while the other takes notes. Documents have only abstract short lines, no readable words or numbers. No computer screen needed. Warm desk lamp. Moderate natural adult proportions, no chibi. Compact coherent perspective, full objects inside frame with generous transparent exterior margins, no speech bubbles, no logos, no headset. This illustrates correlating records before judging an incident."
+    }
+  ]
+}

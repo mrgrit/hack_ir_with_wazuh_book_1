@@ -61,8 +61,8 @@ def table(doc,block):
             para(cell,txt,size=10,name=HEAD if n==0 else BODY,after=0)
     para(doc,'',size=1,after=3).paragraph_format.line_spacing=1
 
-def build(output):
-    data=json.loads((ROOT/'manuscript/volume01-chapter01.json').read_text())
+def build(output,source=None):
+    data=json.loads((source or ROOT/'manuscript/volume01-chapter01.json').read_text())
     doc=Document(ROOT/'tools/assets/bookk-B5.docx')
     sect=deepcopy(doc.sections[0]._sectPr)
     for x in list(doc.element.body):doc.element.body.remove(x)
@@ -124,4 +124,5 @@ def build(output):
 
 if __name__=='__main__':
     ap=argparse.ArgumentParser();ap.add_argument('--output',type=Path,default=ROOT/'build/volume01-chapter01.docx')
-    build(ap.parse_args().output)
+    ap.add_argument('--source',type=Path)
+    args=ap.parse_args();build(args.output,args.source)

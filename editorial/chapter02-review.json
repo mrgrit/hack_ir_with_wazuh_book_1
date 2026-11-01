@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-01T09:44:15.255958+00:00",
+  "scope": "2장 초안: 구체적인 SSH 실패 기록 → 용어와 탐지 과정 → 직접 조회 → 관제·대응·기록 작성",
+  "deliverable": "manuscript/volume01-chapter02.docx",
+  "pages": 8,
+  "commands": 3,
+  "diagrams": 3,
+  "small_illustrations": 1,
+  "case_provenance": {
+    "kind": "existing lab alert; read-only author query",
+    "host": "192.168.0.189",
+    "index": "wazuh-alerts-4.x-2026.11.01",
+    "document_id": "WfiPlaEBEYWT20nnUNlQ",
+    "event_timestamp": "2026-11-01T05:22:36.778+0000",
+    "raw_record": "examples/chapter02/case-ssh.json",
+    "raw_log": "examples/chapter02/case-ssh.log",
+    "retrieval": "Authenticated dashboard console search proxy; author-only read. No fresh SSH authentication attack performed."
+  },
+  "newly_verified": [
+    "기존 SSH 실패 경보에서 full_log·계정·출발지·규칙 번호·수준·수집 위치를 대조했다.",
+    "date -Is: 2026-11-01T18:38:21+09:00",
+    "date -u -Is: 2026-11-01T09:38:21+00:00",
+    "curl -I --max-time 15 http://192.168.0.189/: HTTP/1.1 200 OK"
+  ],
+  "sources": [
+    {
+      "name": "Wazuh 4.10.0 SSH 규칙",
+      "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0095-sshd_rules.xml"
+    },
+    {
+      "name": "Wazuh Decoders",
+      "url": "https://documentation.wazuh.com/current/user-manual/ruleset/decoders/index.html"
+    },
+    {
+      "name": "Wazuh Rules",
+      "url": "https://documentation.wazuh.com/current/user-manual/ruleset/rules/index.html"
+    },
+    {
+      "name": "HTTP semantics",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-15"
+    }
+  ],
+  "checks": [
+    "경보 원본과 본문 필드값 일치",
+    "복사용 명령 3개와 원고 일치",
+    "bash -n 구문 검사",
+    "판형·여백·테마 및 글꼴 검사",
+    "8쪽 전체 렌더와 도식·삽화 가독성 확인"
+  ],
+  "limitations": [
+    "독자의 새 VM에서 같은 과거 경보가 생긴다고 가정하지 않는다. 본문은 기존 경보를 제공한 읽기 사례이다.",
+    "공격 실행·차단·계정 통제·복구를 새로 수행하지 않았다. 대응 절차는 개념 설명이다.",
+    "Consolas 부재로 검사 렌더는 DejaVu Sans Mono 사용. Word 최종 인쇄 교정은 별도이다."
+  ],
+  "authoring_boundary": "No lecture or kt66 repository edits. No PDF distribution.",
+  "art_provenance": "editorial/chapter02-illustrations.json",
+  "docx_sha256": "2bd7571cf815ed3bc07e04f6a57f074db97165dba40e46d87de41362b0caf22c"
+}

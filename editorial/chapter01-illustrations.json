@@ -22,6 +22,33 @@
       "mode": "built-in image_gen",
       "prompt": "Create a sibling illustration for the same engineering book. Keep this exact adult analyst identity, navy work jacket, cream shirt, short dark hair, face visible front three-quarter, same compact desk scene, exact limited PC-98 palette, crisp square pixel edges and checkerboard dithering. Change the moment: analyst leans slightly to inspect a cable plugged into a small network switch on the desk beside the same beige tower computer, one hand rests near the connector and other hand steadies switch. Monitor remains correctly oriented toward analyst with opaque back visible to viewer. Calm focused expression. Small compact spot vignette with generous transparent margin. Remove glow and all background haze completely. No text, no letters, no speech bubbles, no headset. Preserve coherent physical perspective. Transparent background.",
       "source": "/home/ccc/.codex/generated_images/01a1963a-4c4d-7911-a89f-726638e9a6ac/exec-f6f1fe6f-64d8-453d-aab2-5ee9c49262ca.png"
+    },
+    {
+      "name": "install-v2",
+      "path": "assets/illustrations/chapter01/install-v2.png",
+      "mode": "built-in image_gen",
+      "prompt": "Create one original small spot illustration for a Korean engineering manual, printed 45mm wide. Style strictly retro PC-98 1990s computer-game pixel art: deliberate square pixels, limited navy, lavender, muted cyan, dusty rose and cream palette, checkerboard dithering and dark outlines. Adult natural proportions, no chibi. Compact complete vignette with a SMALL LOCAL BACKGROUND that establishes the place, cut out with transparent exterior margin. No lettering, no numbers, no fake UI text, no logos, no speech balloons, no headset. Computer screens face their users; opaque monitor backs toward viewer when appropriate. Physically coherent posture and perspective. Scene: college computer lab in daytime. A young adult woman with a dark ponytail and round glasses, teal cardigan, seated side-on at a narrow light wooden table, connecting a small USB installation drive beside a compact laptop. Her face is visible three-quarter. Behind her a small pale window and stack of two blank disk cases. One simple chair, tidy lab furnishings. Emphasis is preparing an Ubuntu VM installation. This must be a different person and different composition from a male analyst at a beige desktop PC.",
+      "source": "/home/ccc/.codex/generated_images/01a1963a-4c4d-7911-a89f-726638e9a6ac/exec-96875117-f09f-4bad-8115-aa517322e5f2.png"
+    },
+    {
+      "name": "notes-v2",
+      "path": "assets/illustrations/chapter01/notes-v2.png",
+      "mode": "built-in image_gen",
+      "prompt": "Create one original small spot illustration for a Korean engineering manual, printed 45mm wide. Style strictly retro PC-98 1990s computer-game pixel art: deliberate square pixels, limited navy, lavender, muted cyan, dusty rose and cream palette, checkerboard dithering and dark outlines. Adult natural proportions, no chibi. Compact complete vignette with a SMALL LOCAL BACKGROUND that establishes the place, cut out with transparent exterior margin. No lettering, no numbers, no fake UI text, no logos, no speech balloons, no headset. Computer screens face their users; opaque monitor backs toward viewer when appropriate. Physically coherent posture and perspective. Scene: a quiet office corner. A middle-aged man with close-cropped gray hair, short beard and burgundy sweater stands beside a desk, comparing a small paper note with a laptop tilted toward him. Left hand holds notebook, right hand points at a single line without readable text. Small wall pinboard with one simple unlabeled network sketch and a brass desk lamp provide the background. Emphasis is checking the destination address before connecting. Three-quarter face. No large CRT or tower PC.",
+      "source": "/home/ccc/.codex/generated_images/01a1963a-4c4d-7911-a89f-726638e9a6ac/exec-2ad7845d-5a60-4e90-bd40-232803510f92.png"
+    },
+    {
+      "name": "network-v2",
+      "path": "assets/illustrations/chapter01/network-v2.png",
+      "mode": "built-in image_gen",
+      "prompt": "Create one original small spot illustration for a Korean engineering manual, printed 45mm wide. Style strictly retro PC-98 1990s computer-game pixel art: deliberate square pixels, limited navy, lavender, muted cyan, dusty rose and cream palette, checkerboard dithering and dark outlines. Adult natural proportions, no chibi. Compact complete vignette with a SMALL LOCAL BACKGROUND that establishes the place, cut out with transparent exterior margin. No lettering, no numbers, no fake UI text, no logos, no speech balloons, no headset. Computer screens face their users; opaque monitor backs toward viewer when appropriate. Physically coherent posture and perspective. Scene: small equipment room. A young adult woman with short curly hair, rolled-up beige sleeves, dark trousers is kneeling beside a low open rack, checking one Ethernet plug near a compact switch while looking at a rugged small laptop on a stool. Her face is visible three-quarter. Only three pieces of network equipment, a neatly coiled spare blue cable and one rack frame form a minimal background. Emphasis is diagnosing network connectivity. Different pose, furniture and equipment from an office desk. No large monitor or desk.",
+      "source": "/home/ccc/.codex/generated_images/01a1963a-4c4d-7911-a89f-726638e9a6ac/exec-dfe7383d-c2a5-40e6-9027-107ef27b3775.png"
     }
-  ]
+  ],
+  "active_images": [
+    "assets/illustrations/chapter01/install-v2.png",
+    "assets/illustrations/chapter01/notes-v2.png",
+    "assets/illustrations/chapter01/network-v2.png"
+  ],
+  "revision_note": "인물·장소·소품을 모두 다르게 구성한 v2 삽화로 교체. v1은 제작 이력으로만 보존."
 }

@@ -11,21 +11,21 @@ import pymupdf
 
 ROOT=Path(__file__).resolve().parents[1]
 def compact(s):return re.sub(r'\s+','',s)
-def main(pdf):
-    data=json.loads((ROOT/'manuscript/volume01-chapter01.json').read_text())
+def main(pdf,chapter="01"):
+    data=json.loads((ROOT/f'manuscript/volume01-chapter{chapter}.json').read_text())
     cmds=[b for pg in data['pages'] for b in pg['blocks'] if b['type']=='command']
-    assert cmds==json.loads((ROOT/'examples/chapter01/manifest.json').read_text())
-    assert len(list((ROOT/'examples/chapter01').glob('C01-*.txt')))==len(cmds)
+    assert cmds==json.loads((ROOT/f'examples/chapter{chapter}/manifest.json').read_text())
+    assert len(list((ROOT/f'examples/chapter{chapter}').glob(f'C{chapter}-*.txt')))==len(cmds)
     for b in cmds:
-        assert (ROOT/'examples/chapter01'/f"{b['id']}.txt").read_text()==b['text']+'\n', b['id']
+        assert (ROOT/f'examples/chapter{chapter}'/f"{b['id']}.txt").read_text()==b['text']+'\n', b['id']
         subprocess.run(['bash','-n'],input=b['text'],text=True,check=True,capture_output=True)
         assert not re.search(r'docker\s+exec\s+(?!-it)',b['text'])
-    d=Document(ROOT/'manuscript/volume01-chapter01.docx')
+    d=Document(ROOT/f'manuscript/volume01-chapter{chapter}.docx')
     src=Document(ROOT/'tools/assets/bookk-B5.docx')
     assert len(d.sections)==1
     for tag in ['w:pgSz','w:pgMar']:
         assert dict(d.sections[0]._sectPr.find(qn(tag)).attrib)==dict(src.sections[0]._sectPr.find(qn(tag)).attrib)
-    with ZipFile(ROOT/'manuscript/volume01-chapter01.docx') as z, ZipFile(ROOT/'tools/assets/bookk-B5.docx') as base:
+    with ZipFile(ROOT/f'manuscript/volume01-chapter{chapter}.docx') as z, ZipFile(ROOT/'tools/assets/bookk-B5.docx') as base:
         assert z.read('word/theme/theme1.xml')==base.read('word/theme/theme1.xml')
         xml=z.read('word/document.xml').decode()
         for f in ['부크크 명조 Light','부크크 고딕 Light','Consolas']:assert f in xml
@@ -51,8 +51,8 @@ def main(pdf):
                     assert span['bbox'][1]>=77 and span['bbox'][3]<=625,span
                     assert span['bbox'][0]>=75 and span['bbox'][2]<=460,span
     report={'docx_pages':len(rendered),'command_files':len(cmds),'command_syntax':'bash -n only; not executed','template_page_size_and_margins_inherited':True,'template_theme_identical':True,'all_primary_commands_and_explanations_on_same_page':True,'body_text_within_page_bounds':True,'no_implicit_command_line_wraps':True}
-    (ROOT/'editorial/chapter01-layout-check.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+    (ROOT/f'editorial/chapter{chapter}-layout-check.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps(report,ensure_ascii=False))
 
 if __name__=='__main__':
-    ap=argparse.ArgumentParser();ap.add_argument('pdf',type=Path);main(ap.parse_args().pdf)
+    ap=argparse.ArgumentParser();ap.add_argument('pdf',type=Path);ap.add_argument('--chapter',default='01');args=ap.parse_args();main(args.pdf,args.chapter)

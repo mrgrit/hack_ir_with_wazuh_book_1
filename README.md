@@ -2,15 +2,17 @@
 
 1권 **시스템 침투와 SIEM 분석**의 집필 저장소입니다.
 
-기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
+기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
 
-- **[새 원고 DOCX](manuscript/volume01-chapter01.docx)** — 부크크 B5, 편집·검토용
+- **[머리말·1장 DOCX](manuscript/volume01-chapter01.docx)** — 부크크 B5, 편집·검토용
+- **[2장 초안 DOCX](manuscript/volume01-chapter02.docx)** — 공격과 보안관제의 기초, 8쪽
+- [2장 사례·복사용 명령](examples/chapter02/)
 - [복사용 명령](examples/chapter01/) — 본문의 C01 번호와 대응
 - [집필 지침](AGENTS.md)
 - [검토·검증 기록](editorial/chapter01-review.json)
 - [캐릭터 삽화](assets/illustrations/chapter01/) · [생성 프롬프트·출처 기록](editorial/chapter01-illustrations.json)
 
-1장은 VMware·Ubuntu 준비, kt66 설치·기동, 웹·Wazuh 접속, 센서 확인, 중지·복구를 다룹니다. kt66과 공격자 VM의 브리지 구성도와 선택적 공격자 VM 준비 절차도 포함합니다. 공격자 VM은 Ubuntu 22.04 Live Server를 사용하며 5장부터 필요합니다. 도구 일괄 설치 명령은 C01-52입니다. 본문은 33쪽이며 설명 도식 7개와 작은 캐릭터 삽화 3개를 추가했습니다. 1권 전체 범위는 Module 01 실습 01~30 및 62, 11장과 부록입니다. 이번 산출물에 2장 이후 본문은 없습니다.
+1장은 VMware·Ubuntu 준비, kt66 설치·기동, 웹·Wazuh 접속, 센서 확인, 중지·복구를 다룹니다. kt66과 공격자 VM의 브리지 구성도와 선택적 공격자 VM 준비 절차도 포함합니다. 공격자 VM은 Ubuntu 22.04 Live Server를 사용하며 5장부터 필요합니다. 도구 일괄 설치 명령은 C01-52입니다. 머리말·1장은 34쪽이며 설명 도식 7개와 작은 캐릭터 삽화 3개를 수록합니다. 1장의 12개 절은 한 쪽의 학습 순서 도식으로 정리했습니다. 작은 삽화는 인물·장소·소품을 달리한 v2로 교체했습니다. 1권 전체 범위는 Module 01 실습 01~30 및 62, 11장과 부록입니다. 2장은 기존 kt66의 SSH 인증 실패 경보를 사례로 로그·탐지·판단·대응을 설명합니다. 새 공격을 실행하지 않고 기존 경보 조회와 시각·웹 응답 확인을 수행했습니다.
 
 ## 확인한 범위
 
@@ -26,6 +28,7 @@ DOCX를 직접 편집할 수 있습니다. 조판기는 기본적으로 `build/`
 .venv/bin/python tools/write_chapter01.py
 .venv/bin/python tools/diagram_chapter01.py
 .venv/bin/python tools/diagrams_chapter01.py
+.venv/bin/python tools/roadmap_chapter01.py
 .venv/bin/python tools/build_chapter01.py
 ```
 
@@ -34,5 +37,16 @@ DOCX를 직접 편집할 수 있습니다. 조판기는 기본적으로 `build/`
 - 본문 10.5pt 부크크 명조 Light, 제목 부크크 고딕 Light, 코드 10pt Consolas
 - 저자용 의존성: `tools/requirements-docx.txt`
 - UI 촬영: `tools/capture_chapter01.py`; 기존 환경을 조회하며 설치 작업은 하지 않음
+
+2장 재생성:
+
+```bash
+.venv/bin/python tools/write_chapter02.py
+.venv/bin/python tools/diagrams_chapter02.py
+.venv/bin/python tools/build_chapter01.py --source manuscript/volume01-chapter02.json --output build/volume01-chapter02.docx
+```
+
+- [2장 검토 기록](editorial/chapter02-review.json)
+- [2장 삽화와 생성 프롬프트](editorial/chapter02-illustrations.json)
 
 PDF는 배포하지 않습니다. 임시 PDF·페이지 이미지는 DOCX 배치 검사용으로만 사용합니다. Consolas가 없는 환경에서는 대체 글꼴로 보일 수 있으므로 Word에서 최종 인쇄 크기를 재확인합니다.
