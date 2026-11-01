@@ -1,0 +1,32 @@
+{
+  "_index": "wazuh-archives-4.x-2026.11.01",
+  "_id": "SfmklqEBEYWT20nnsWlX",
+  "_score": null,
+  "_source": {
+    "predecoder": {
+      "hostname": "bastion",
+      "program_name": "book04",
+      "timestamp": "Nov  1 19:25:30"
+    },
+    "agent": {
+      "ip": "10.20.30.201",
+      "name": "bastion",
+      "id": "010"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "decoder": {},
+    "full_log": "Nov  1 19:25:30 bastion book04: book04-collection-01",
+    "input": {
+      "type": "log"
+    },
+    "@timestamp": "2026-11-01T10:25:31.349Z",
+    "location": "/var/log/auth.log",
+    "id": "1793528731.110131710",
+    "timestamp": "2026-11-01T10:25:31.349+0000"
+  },
+  "sort": [
+    1793528731349
+  ]
+}

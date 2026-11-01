@@ -1,0 +1,178 @@
+{
+  "date": "2026-11-01T10:34:06.292846+00:00",
+  "deliverable": "manuscript/volume01-chapter04.docx",
+  "pages": 24,
+  "commands": 37,
+  "queries": 2,
+  "screenshots": [
+    {
+      "path": "assets/screens/chapter04/alert-record.png",
+      "sha256": "b2b02033f1d5498a1645be0027a6cfb698fa09bcfeea6c843464f26518ccab64",
+      "pixels": [
+        1000,
+        440
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_required_css_font_px": 12,
+      "estimated_print_text_pt": 8.64,
+      "capture": "Actual Chromium UI, viewport resized or cropped; no fabricated UI or altered field values",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover"
+    },
+    {
+      "path": "assets/screens/chapter04/archive-record.png",
+      "sha256": "b9f9d3cf33208723e65c2558dffb84beeed01da9cc6cddc31ceb417d8f92d683",
+      "pixels": [
+        1120,
+        440
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_required_css_font_px": 12,
+      "estimated_print_text_pt": 7.71,
+      "capture": "Actual Chromium UI, viewport resized or cropped; no fabricated UI or altered field values",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover"
+    },
+    {
+      "path": "assets/screens/chapter04/logtest-custom.png",
+      "sha256": "280343c6cad793b63d4d1073ba65694c0e3e8ac0b15c4cf39f0e058a9a8871b5",
+      "pixels": [
+        940,
+        490
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_required_css_font_px": 12,
+      "estimated_print_text_pt": 9.19,
+      "capture": "Actual Chromium UI, viewport resized or cropped; no fabricated UI or altered field values",
+      "url": "https://192.168.0.189:5601/app/ruleset-test"
+    },
+    {
+      "path": "assets/screens/chapter04/logtest-decode.png",
+      "sha256": "dee9e832d157249f432a170df27f18dad1aba962772682147b68d90bf9f2eeee",
+      "pixels": [
+        940,
+        480
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_required_css_font_px": 12,
+      "estimated_print_text_pt": 9.19,
+      "capture": "Actual Chromium UI, viewport resized or cropped; no fabricated UI or altered field values",
+      "url": "https://192.168.0.189:5601/app/ruleset-test"
+    },
+    {
+      "path": "assets/screens/chapter04/logtest-input.png",
+      "sha256": "488f2ef319508013511529ad102cb0cf3ba351997e907d44536d76711aee3a75",
+      "pixels": [
+        980,
+        640
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 115,
+      "minimum_required_css_font_px": 14,
+      "estimated_print_text_pt": 9.31,
+      "capture": "Actual Chromium UI, viewport resized or cropped; no fabricated UI or altered field values",
+      "url": "https://192.168.0.189:5601/app/ruleset-test"
+    },
+    {
+      "path": "assets/screens/chapter04/logtest-rule.png",
+      "sha256": "0db622f419b44064812e8ac596443daf6bc99f524cde978498b799652d1dce5d",
+      "pixels": [
+        940,
+        290
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_required_css_font_px": 12,
+      "estimated_print_text_pt": 9.19,
+      "capture": "Actual Chromium UI, viewport resized or cropped; no fabricated UI or altered field values",
+      "url": "https://192.168.0.189:5601/app/ruleset-test"
+    },
+    {
+      "path": "assets/screens/chapter04/logtest-variant.png",
+      "sha256": "4f66953b82b932346b164733f8c51fa85d460ca6e00c0199317eaaa5abb2a581",
+      "pixels": [
+        940,
+        290
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_required_css_font_px": 12,
+      "estimated_print_text_pt": 9.19,
+      "capture": "Actual Chromium UI, viewport resized or cropped; no fabricated UI or altered field values",
+      "url": "https://192.168.0.189:5601/app/ruleset-test"
+    }
+  ],
+  "diagrams": 4,
+  "small_illustrations": 1,
+  "scope": "bastion 파일 수집, Ruleset Test, 사용자 규칙 작성·적용·새 경보·원복",
+  "environment": {
+    "kt66_commit": "63d4180b1d6866de986ef263a3bd831d6082b5d5",
+    "manager_version": "4.10.0",
+    "host": "192.168.0.189",
+    "bastion_agent_id": "010",
+    "bastion_agent_version_note": "기준 스크립트의 에이전트 설정과 실행 중 localfile 설정 대조",
+    "collection": "/var/log/auth.log · syslog",
+    "logall_json": "yes",
+    "filebeat_archives_enabled": true,
+    "log_alert_level": 3
+  },
+  "execution": {
+    "access": "저자 검증은 kt66의 배포된 SSH 키로 bastion에 접속하고 Docker 관리 경로를 사용했다. 독자 본문은 호스트에서 docker exec -it로 접속한 뒤 한 명령씩 실행한다.",
+    "rule_creation": "독자 nano 입력과 동일한 XML을 저자용 도구로 별도 파일에 전달했다. 기존 파일 부재와 번호 미사용을 사전 확인했다.",
+    "changed_path": "kt66-siem:/var/ossec/etc/rules/book04_rules.xml",
+    "rule_id": 100410,
+    "file_mode": "0640 root:wazuh",
+    "restart_before_after": true
+  },
+  "newly_verified": [
+    {
+      "step": "수집 전",
+      "record": "examples/chapter04/collection-before.json",
+      "observed": "2026-11-01 19:20:01 KST의 확인 문구를 auth.log에서 수집. 경보 검색 0건."
+    },
+    {
+      "step": "SSH 규칙 시험",
+      "record": "editorial/evidence/chapter04/ssh-logtest.txt",
+      "observed": "sshd; srcip 10.20.30.254; srcuser book03_probe; rule 5710 level 5"
+    },
+    {
+      "step": "변경 문장 시험",
+      "record": "editorial/evidence/chapter04/ssh-variant-logtest.txt",
+      "observed": "invalid user 제거 후 rule 5760 level 5; dstuser로 추출"
+    },
+    {
+      "step": "사용자 규칙 시험",
+      "record": "editorial/evidence/chapter04/custom-logtest.txt",
+      "observed": "새 세션에서 rule 100410 level 5. analysisd -t 종료 상태 0."
+    },
+    {
+      "step": "적용 후 새 경보",
+      "record": "examples/chapter04/collection-alert.json",
+      "observed": "19:22:01 KST의 새 문구 → 19:22:03.139 경보. rule 100410, location /var/log/auth.log."
+    },
+    {
+      "step": "원복",
+      "record": "editorial/evidence/chapter04/collection-restored.json",
+      "observed": "작성 파일 일치 확인 후 삭제. analysisd -t 성공, Manager restart Completed, analysisd·remoted running. 19:25:30의 새 문구는 아카이브에 저장되고 rule 없음. 기존 경보는 1건 유지."
+    }
+  ],
+  "checks": [
+    "24쪽 전체를 렌더해 페이지 넘침·그림 겹침·글자 잘림을 확인했다.",
+    "화면 7개는 실제 UI에서 촬영했고 필수 필드·원문을 최종 지면 크기로 확인했다.",
+    "37개 명령 파일과 2개 DQL 파일의 원고 일치·명시적 줄바꿈을 검사했다.",
+    "bash -n은 구문 검사로만 사용했으며 실제 실행 검증과 구분했다.",
+    "부크크 판형·여백·테마, 검정 본문, 참고 URL 전체 문자열 검사 통과.",
+    "기본 수집 설정·Filebeat 설정과 공식 문서·기준 커밋을 대조했다."
+  ],
+  "limitations": [
+    "기존 kt66에서 검증했다. 새 VMware 설치 검증은 포함하지 않는다.",
+    "로컬 호스트의 Docker 권한이 없어 저자 검증은 SSH를 경유했다. 독자 접속·nano 조작 전체를 새 VM에서 재수행하지는 않았다.",
+    "이 장의 수집 실험은 bastion 파일 수집이다. kt66-host journald의 실습 재현을 주장하지 않는다.",
+    "Consolas 부재로 검사 렌더는 DejaVu Sans Mono 대체. Word 최종 인쇄 교정 필요."
+  ],
+  "art_provenance": "editorial/chapter04-illustrations.json",
+  "authoring_boundary": "강의·kt66 소스 저장소 무수정. 실행 환경의 실습 규칙은 원복 완료. PDF는 /tmp 검사용.",
+  "docx_sha256": "931ab62aa3e8623cfbc662b6ae485d194709cfd73d03a6bc54281bc99789f875"
+}

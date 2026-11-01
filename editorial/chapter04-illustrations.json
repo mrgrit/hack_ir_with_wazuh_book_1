@@ -1,0 +1,16 @@
+{
+  "mode": "built-in image_gen",
+  "images": [
+    {
+      "path": "assets/illustrations/chapter04/field-check.png",
+      "source": "/home/ccc/.codex/generated_images/01a1963a-4c4d-7911-a89f-726638e9a6ac/exec-6920512a-33ed-4012-8ed9-5cfc7022b552.png",
+      "reference_url": "https://m.blog.naver.com/studygir/220961448822",
+      "reference_usage": "style only; outdoor scene newly generated",
+      "prompt": "Use case: illustration-story. Make a NEW original outdoor spot illustration for chapter 4 of a Korean engineering book about log collection. Reference images are STYLE ONLY: crisp old PC-game pixel backgrounds, limited pink/cyan/indigo flat colors and prominent checkerboard dithering, careful architectural perspective. Do not copy the reference locations or text. Scene: a quiet urban side street beside a small building at late afternoon, short brick wall, pavement and one leafy tree, compact outdoor telecom cabinet opened to show a neatly mounted network switch and router. A young adult woman field security technician with dark braided hair, teal work jacket and shoulder tool pouch stands in a natural front three-quarter view, holding a rugged small terminal/tablet toward herself and reading the log-collection status while comparing a small paper checklist. The tablet screen faces her, its opaque back is visible to us. A single sensible cable from the portable terminal to the cabinet, no tangled wires. Character and cabinet prominent; the street and building create a meaningful localized outdoor setting, no office desk or chair. Natural adult proportions, no headset, no readable text or numbers, no fake dashboard, no logos. Landscape compact composition with room around whole objects, background street vignette with genuinely transparent outer margins. Suitable printed about 60mm wide; bold clear pixel clusters, not soft gradients, no photorealism."
+    }
+  ],
+  "unused_variant": {
+    "source": "/home/ccc/.codex/generated_images/01a1963a-4c4d-7911-a89f-726638e9a6ac/exec-262e41ca-15a4-45c3-9b24-78a778a80f51.png",
+    "reason": "사용자의 야외 장면 요청에 따라 채택하지 않음. DOCX와 저장소 산출물에서 제외."
+  }
+}

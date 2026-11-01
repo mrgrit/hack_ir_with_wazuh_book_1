@@ -1,0 +1,2 @@
+chown root:wazuh \
+  /var/ossec/etc/rules/book04_rules.xml

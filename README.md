@@ -2,11 +2,13 @@
 
 1권 **시스템 침투와 SIEM 분석**의 집필 저장소입니다.
 
-기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2·3장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
+기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2~4장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
 
 - **[머리말·1장 DOCX](manuscript/volume01-chapter01.docx)** — 부크크 B5, 편집·검토용
 - **[2장 초안 DOCX](manuscript/volume01-chapter02.docx)** — 공격과 보안관제의 기초, 9쪽
 - **[3장 초안 DOCX](manuscript/volume01-chapter03.docx)** — Wazuh 기본 운용, 12쪽
+- **[4장 초안 DOCX](manuscript/volume01-chapter04.docx)** — 로그 수집과 탐지 규칙, 24쪽
+- [4장 명령·검색식·규칙 파일](examples/chapter04/)
 - [3장 복사용 검색식·조사 양식](examples/chapter03/)
 - [2장 사례·복사용 명령](examples/chapter02/)
 - [복사용 명령](examples/chapter01/) — 본문의 C01 번호와 대응
@@ -17,6 +19,8 @@
 1장은 VMware·Ubuntu 준비, kt66 설치·기동, 웹·Wazuh 접속, 센서 확인, 중지·복구를 다룹니다. kt66과 공격자 VM의 브리지 구성도와 선택적 공격자 VM 준비 절차도 포함합니다. 공격자 VM은 Ubuntu 22.04 Live Server를 사용하며 5장부터 필요합니다. 도구 일괄 설치 명령은 C01-52입니다. 머리말·1장은 35쪽이며 설명 도식 7개와 작은 캐릭터 삽화 3개를 수록합니다. 1장의 12개 절은 한 쪽의 학습 순서 도식으로 정리했습니다. 작은 삽화는 인물·장소·소품을 달리한 v2로 교체했습니다. 1권 전체 범위는 Module 01 실습 01~30 및 62, 11장과 부록입니다. 2장은 기존 kt66의 SSH 인증 실패 경보를 사례로 로그·탐지·판단·대응을 설명합니다. 새 공격을 실행하지 않고 기존 경보 조회와 시각·웹 응답 확인을 수행했습니다.
 
 3장은 Discover에서 인덱스·기간·DQL을 지정하고 경보의 필드·원문을 읽는 실습입니다. 실제 UI 화면 8개, 개념 도식 2개, 작은 삽화 1개를 수록했습니다. 기존 SSH 사례를 검색한 두 조건은 각각 2건을 반환했습니다. 모든 장의 참고 자료에는 제목과 전체 URL을 함께 인쇄합니다.
+
+4장은 bastion에 확인 문구를 기록하고 아카이브에서 찾은 뒤, 사용자 규칙 100410을 적용해 새 경보를 생성하는 실습입니다. 수집·규칙 시험·실제 경보 생성·규칙 제거와 재시작을 기존 kt66에서 검증했습니다. 실제 화면 7개, 도식 4개, 야외 통신함 점검 삽화 1개를 수록했습니다.
 
 ## 확인한 범위
 
@@ -63,5 +67,16 @@ DOCX를 직접 편집할 수 있습니다. 조판기는 기본적으로 `build/`
 
 - [3장 검토·화면 촬영 기록](editorial/chapter03-review.json)
 - [3장 삽화 생성 프롬프트](editorial/chapter03-illustrations.json)
+
+4장 재생성:
+
+```bash
+.venv/bin/python tools/write_chapter04.py
+.venv/bin/python tools/diagrams_chapter04.py
+.venv/bin/python tools/build_chapter01.py --source manuscript/volume01-chapter04.json --output build/volume01-chapter04.docx
+```
+
+- [4장 검토·검증 기록](editorial/chapter04-review.json)
+- [4장 야외 삽화와 생성 프롬프트](editorial/chapter04-illustrations.json)
 
 PDF는 배포하지 않습니다. 임시 PDF·페이지 이미지는 DOCX 배치 검사용으로만 사용합니다. Consolas가 없는 환경에서는 대체 글꼴로 보일 수 있으므로 Word에서 최종 인쇄 크기를 재확인합니다.

@@ -1,0 +1,23 @@
+"""4장: 수집 경로, 저장 분기, 규칙 조건, 적용·원복."""
+import diagrams_chapter01 as drawing
+drawing.OUT=drawing.ROOT/'assets/figures/chapter04';drawing.OUT.mkdir(parents=True,exist_ok=True)
+Figure=drawing.Figure
+f=Figure(650)
+for x,y,t,c in [(35,35,'bastion\n/var/log/auth.log',0),(535,35,'Agent\n수집·전송',1),(1035,35,'Manager\n분석·저장',2),(1035,365,'Filebeat\n파일 전송',2),(535,365,'Indexer\n인덱스 저장',1),(35,365,'Discover\n검색·대조',0)]:f.box((x,y,x+430,y+200),t,c,46)
+f.arrow((470,135),(525,135));f.arrow((970,135),(1025,135));f.arrow((1250,245),(1250,355));f.arrow((1025,465),(970,465));f.arrow((525,465),(470,465));f.save('collection-path')
+f=Figure(650)
+f.box((350,30,1150,170),'Manager가 받은 로그',0,54)
+f.arrow((540,180),(340,285));f.arrow((970,180),(1170,285))
+f.box((35,300,690,485),'전체 수신 기록\narchives.json',1,51)
+f.box((810,300,1465,485),'경보 저장 조건 충족\nalerts.json',2,46)
+f.label((35,505,690,625),'wazuh-archives-*',48);f.label((810,505,1465,625),'wazuh-alerts-*',48);f.save('storage')
+f=Figure(530)
+f.box((35,35,680,210),'program_name = book04',0,45);f.box((820,35,1465,210),'본문에 확인 문구 포함',1,48)
+f.label((680,70,820,170),'AND',34)
+f.arrow((350,225),(700,325));f.arrow((1150,225),(800,325))
+f.box((350,340,1150,500),'규칙 100410 · 수준 5',2,53);f.save('rule-conditions')
+f=Figure(680)
+for x,y,t,c in [(35,35,'새 규칙 저장',0),(850,35,'구문·Ruleset test',1),(850,380,'Manager 재시작',2),(35,380,'새 로그 발생·검색',0)]:f.box((x,y,x+615,y+180),t,c,48)
+f.arrow((665,125),(835,125));f.arrow((1155,225),(1155,365));f.arrow((835,470),(665,470))
+f.label((35,585,1465,665),'원복: 실습 규칙 삭제 → 구문 검사 → Manager 재시작',43);f.save('apply')
+print('4 chapter 4 diagrams')

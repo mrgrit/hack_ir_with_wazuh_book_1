@@ -1,0 +1,7 @@
+<group name="book04,">
+  <rule id="100410" level="5">
+    <program_name>^book04$</program_name>
+    <match>book04-collection-01</match>
+    <description>Book04 collection check</description>
+  </rule>
+</group>

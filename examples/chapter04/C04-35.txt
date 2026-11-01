@@ -1,0 +1,2 @@
+grep -E 'logall_json|log_alert_level' \
+  /var/ossec/etc/ossec.conf
