@@ -123,14 +123,18 @@ pages.append(page("Discover와 시간 범위", "3.5  기록을 화면에서 조�
     P("Dashboard에서 기록을 조회하는 기본 화면이 Discover 이다. 브라우저로 Wazuh에 로그인한 뒤 왼쪽 메뉴에서 "
       "Discover 를 연다. 메뉴 위치는 버전에 따라 다를 수 있다. Discover 는 저장된 이벤트와 경보를 시간순으로 "
       "보여 주고, 검색과 필드 선택을 지원한다."),
-    IMG("assets/figures/ch03/discover.png",
-        "그림 3-3. Discover 화면의 구성. ① 검색창 ② 시간 범위 ③ 필드 목록 ④ 문서 표 ⑤ 문서 펼치기.", 127),
-    P("Discover 는 색인 패턴을 기준으로 데이터를 읽는다. Wazuh의 경보는 보통 wazuh-alerts-* 패턴, 시간 필드는 "
-      "timestamp 이다. 화면 왼쪽 위에서 현재 패턴이 wazuh-alerts-* 인지 확인한다."),
-    P("가장 흔한 실수는 시간 범위이다. 오른쪽 위의 시간 범위가 좁으면(예: Last 15 minutes) 방금 전 기록만 보이고 "
-      "그 전 기록은 보이지 않는다. 기록이 없어 보이면 먼저 시간 범위를 Last 24 hours 나 Last 7 days 로 넓힌다. "
-      "데이터가 없는 것과, 범위 밖이라 보이지 않는 것을 혼동하지 않는다."),
-    SHOT("01", "Discover 열기와 시간 범위", "왼쪽 메뉴에서 Discover 선택, 색인 패턴 wazuh-alerts-*, 오른쪽 시간 범위 설정 화면. 두 장으로 분할.", 50),
+    IMG("assets/screens/ch03/discover-overview.png",
+        "그림 3-3. Discover 화면. 왼쪽에 필드 목록, 가운데 위에 검색창과 시간 범위, 아래에 시간순 문서 표가 있다.", 127),
+    P("Discover 는 색인 패턴을 기준으로 데이터를 읽는다. Wazuh의 경보는 wazuh-alerts-* 패턴, 시간 필드는 timestamp "
+      "이다. 화면 왼쪽 위에서 현재 패턴이 wazuh-alerts-* 인지 확인한다. 위쪽의 검색창과 그 오른쪽의 시간 범위가 "
+      "조회 결과를 결정한다."),
+    IMG("assets/screens/ch03/discover-searchbar.png",
+        "그림 3-4. 검색창(DQL)과 시간 범위. 왼쪽 색인 패턴, 가운데 검색창, 오른쪽 시간 범위(Last 24 hours).", 127),
+    P("가장 흔한 실수는 시간 범위이다. 범위가 좁으면(예: Last 15 minutes) 방금 전 기록만 보이고 그 전 기록은 보이지 "
+      "않는다. 기록이 없어 보이면 먼저 시간 범위를 넓힌다. 오른쪽 위의 시간 범위를 누르면 Today·Last 24 hours·"
+      "Last 7 days·Last 90 days 등을 고를 수 있다. 데이터가 없는 것과, 범위 밖이라 보이지 않는 것을 혼동하지 않는다."),
+    IMG("assets/screens/ch03/discover-timerange.png",
+        "그림 3-5. 시간 범위 선택 메뉴. 자주 쓰는 범위를 눌러 조회 기간을 바꾼다.", 100),
 ]))
 
 # ============================== 3.6 DQL ==============================
@@ -154,7 +158,8 @@ pages.append(page("DQL과 필드", "3.6  검색어로 범위를 좁힌다", [
         ["rule.description", "규칙이 붙인 설명"],
         ["data.srcip · data.url", "해석으로 뽑은 출발지·경로 등"],
     ], [2.8, 5.8]),
-    SHOT("02", "DQL 검색과 열 추가", "검색창에 DQL 입력 후 문서 표가 좁혀진 화면과, 필드를 열로 추가한 화면. 글자가 읽히도록 확대.", 50),
+    IMG("assets/screens/ch03/discover-dql.png",
+        "그림 3-6. 검색창에 rule.level >= 7 을 입력하고 agent.name·rule.level·rule.description 을 열로 추가한 결과.", 127),
 ]))
 
 # ============================== 3.7 Dev Tools ==============================
@@ -170,7 +175,8 @@ pages.append(page("Dev Tools의 JSON", "3.7  같은 질의를 JSON으로", [
          'GET wazuh-alerts-*/_search\n{\n  "query": {\n    "range": { "rule.level": { "gte": 7 } }\n  }\n}'),
     P("query 안의 range 는 범위 조건으로, 위 질의는 rule.level 이 7 이상인 경보를 가져온다. 이는 Discover에서 "
       "rule.level >= 7 을 입력한 것과 같은 결과를 조회한다. DQL과 JSON은 표현만 다를 뿐 같은 데이터를 조회한다."),
-    SHOT("03", "Dev Tools 콘솔", "Dev Tools에서 왼쪽 질의와 오른쪽 JSON 응답. hits 안의 _source 필드가 보이도록 확대.", 50),
+    IMG("assets/screens/ch03/devtools.png",
+        "그림 3-7. Dev Tools 콘솔. 왼쪽 질의(GET wazuh-alerts-*/_search), 오른쪽 JSON 응답. hits 안의 _source 에 필드가 담긴다.", 127),
 ]))
 
 # ============================== 읽기 실습 ==============================
@@ -183,6 +189,8 @@ pages.append(page("읽기 실습", "3.8  경보 한 건을 펼쳐 필드 읽기"
         ["3", "문서 표에서 한 줄의 펼치기(>)를 누른다"],
         ["4", "timestamp·agent.name·rule.description·rule.level 값을 읽는다"],
     ], [1.2, 7.4]),
+    IMG("assets/screens/ch03/discover-doc.png",
+        "그림 3-8. 문서 한 건을 펼친 모습. 필드 이름과 값이 나열된다(예: agent.name, data.win.eventdata.image).", 127),
     P("읽은 값을 2장의 방식대로 세 문장으로 정리한다. 확인한 사실(어느 시각에 어느 대상에서 어떤 규칙이 몇 수준으로 "
       "기록되었는가), 아직 가설인 부분, 추가로 확인할 대상을 나눈다. 이 한 건이 공격인지 아닌지를 지금 단정하지 "
       "않는다. 5장부터 직접 생성한 공격 기록으로 같은 절차를 반복한다."),

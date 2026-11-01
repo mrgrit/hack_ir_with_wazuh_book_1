@@ -8,6 +8,7 @@
 - [머리말·1장 DOCX](manuscript/volume01-opening.docx) · [2장 DOCX](manuscript/volume01-chapter02.docx) · [3장 DOCX](manuscript/volume01-chapter03.docx) — 부크크 B5 서식
 - 내용 소스(JSON): [1장](manuscript/volume01-opening.json) · [2장](manuscript/volume01-chapter02.json) · [3장](manuscript/volume01-chapter03.json)
 - 개념 도식은 `tools/illustrate.py`(Pillow)로 생성 → [assets/figures/](assets/figures/)
+- UI 화면(Discover·Dev Tools 등)은 실제 kt66 대시보드에서 캡처(`tools/capture_screens.py`) → [assets/screens/](assets/screens/)
 - [1장 복사용 명령·설정 예시](examples/chapter01/)
 - [삽화 화풍·구도 기준](editorial/ILLUSTRATION_STYLE.md) · [삽화 원본](assets/illustrations/)
 

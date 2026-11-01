@@ -280,8 +280,9 @@ def fig_discover():
 if __name__ == "__main__":
     import sys
     only = sys.argv[1:]
+    # discover 는 실제 스크린샷(assets/screens/ch03)으로 대체되어 기본 생성에서 제외
     allf = {"risk": fig_risk, "log": fig_log_pipeline, "fpfn": fig_fpfn,
-            "components": fig_components, "dirs": fig_dirs, "discover": fig_discover}
+            "components": fig_components, "dirs": fig_dirs}
     for k, fn in allf.items():
         if not only or k in only:
             fn()
