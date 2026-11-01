@@ -20,28 +20,34 @@
         "kind": "image",
         "src": "assets/diagrams/overview.svg",
         "y": 195.3,
-        "height": 160.1,
+        "height": 208.6,
         "source_px": [
-          900,
-          330
+          900.0,
+          430.0
         ],
         "display_width_mm": 154.0
       },
       {
         "kind": "text",
-        "y": 363.4,
+        "y": 411.9,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 431.5,
         "height": 34.1,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 405.5,
+        "y": 473.6,
         "height": 48.5,
         "font_pt": 10
       },
       {
         "kind": "text",
-        "y": 461.9,
+        "y": 530.0,
         "height": 34.1,
         "font_pt": 10.5
       }
@@ -55,36 +61,42 @@
       {
         "kind": "text",
         "y": 109.3,
+        "height": 53.0,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 170.3,
         "height": 34.1,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 151.4,
+        "y": 212.4,
         "height": 15.2,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 174.6,
+        "y": 235.6,
         "height": 34.1,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 216.7,
+        "y": 277.7,
         "height": 15.2,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 239.9,
+        "y": 300.9,
         "height": 34.1,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 418.8,
+        "y": 479.7,
         "height": 48.5,
         "font_pt": 10
       }
@@ -213,28 +225,34 @@
         "kind": "image",
         "src": "assets/diagrams/sqli.svg",
         "y": 151.4,
-        "height": 160.1,
+        "height": 208.6,
         "source_px": [
-          900,
-          330
+          900.0,
+          430.0
         ],
         "display_width_mm": 154.0
       },
       {
         "kind": "text",
-        "y": 319.5,
+        "y": 368.0,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 387.6,
         "height": 45.6,
         "font_pt": 10
       },
       {
         "kind": "text",
-        "y": 373.1,
+        "y": 441.2,
         "height": 53.0,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 434.1,
+        "y": 502.2,
         "height": 48.5,
         "font_pt": 10
       }
@@ -352,49 +370,49 @@
       {
         "kind": "text",
         "y": 109.3,
-        "height": 34.1,
+        "height": 15.2,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 151.4,
+        "y": 132.6,
         "height": 42.8,
         "font_pt": 10
       },
       {
         "kind": "text",
-        "y": 202.2,
+        "y": 183.3,
         "height": 11.6,
         "font_pt": 8
       },
       {
         "kind": "text",
-        "y": 221.8,
+        "y": 202.9,
         "height": 15.2,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 245.0,
+        "y": 226.1,
         "height": 15.2,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 268.2,
+        "y": 249.3,
         "height": 15.2,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 291.4,
+        "y": 272.5,
         "height": 15.2,
         "font_pt": 10.5
       },
       {
         "kind": "image",
         "src": "assets/screens/sqli-response.png",
-        "y": 314.6,
+        "y": 295.7,
         "height": 312.4,
         "source_px": [
           862,
@@ -404,7 +422,7 @@
       },
       {
         "kind": "text",
-        "y": 635.0,
+        "y": 616.1,
         "height": 29.2,
         "font_pt": 9
       }
@@ -534,34 +552,40 @@
         "kind": "image",
         "src": "assets/diagrams/ssh.svg",
         "y": 109.3,
-        "height": 160.1,
+        "height": 208.6,
         "source_px": [
-          900,
-          330
+          900.0,
+          430.0
         ],
         "display_width_mm": 154.0
       },
       {
         "kind": "text",
-        "y": 277.4,
+        "y": 325.9,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 345.5,
         "height": 53.0,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 338.4,
+        "y": 406.5,
         "height": 34.1,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 380.5,
+        "y": 448.5,
         "height": 48.5,
         "font_pt": 10
       },
       {
         "kind": "text",
-        "y": 436.9,
+        "y": 505.0,
         "height": 34.1,
         "font_pt": 10.5
       }
@@ -861,40 +885,41 @@
   {
     "page": 16,
     "section": "실습 62 · osquery",
-    "title": "이벤트와 현재 상태를 함께 보기",
+    "title": "osquery로 무엇을 확인할까",
     "blocks": [
       {
-        "kind": "image",
-        "src": "assets/diagrams/osquery.svg",
+        "kind": "text",
         "y": 109.3,
-        "height": 160.1,
-        "source_px": [
-          900,
-          330
-        ],
-        "display_width_mm": 154.0
-      },
-      {
-        "kind": "text",
-        "y": 277.4,
-        "height": 34.1,
+        "height": 53.0,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 319.5,
-        "height": 34.1,
+        "y": 170.3,
+        "height": 53.0,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 361.6,
-        "height": 48.5,
+        "y": 231.3,
+        "height": 53.0,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 454.5,
+        "height": 53.0,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 515.5,
+        "height": 66.4,
         "font_pt": 10
       },
       {
         "kind": "text",
-        "y": 418.0,
+        "y": 589.9,
         "height": 34.1,
         "font_pt": 10.5
       }
@@ -903,7 +928,98 @@
   {
     "page": 17,
     "section": "실습 62 · osquery",
-    "title": "01 준비 상태를 직접 확인하기",
+    "title": "01 설치된 도구와 서비스 확인하기",
+    "blocks": [
+      {
+        "kind": "text",
+        "y": 109.3,
+        "height": 53.0,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 170.3,
+        "height": 27.6,
+        "font_pt": 10
+      },
+      {
+        "kind": "text",
+        "y": 205.9,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 225.5,
+        "height": 27.6,
+        "font_pt": 10
+      },
+      {
+        "kind": "text",
+        "y": 261.2,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 280.8,
+        "height": 27.6,
+        "font_pt": 10
+      },
+      {
+        "kind": "text",
+        "y": 316.4,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 336.0,
+        "height": 27.6,
+        "font_pt": 10
+      },
+      {
+        "kind": "text",
+        "y": 371.6,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 391.2,
+        "height": 71.8,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 471.0,
+        "height": 27.6,
+        "font_pt": 10
+      },
+      {
+        "kind": "text",
+        "y": 506.7,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 526.3,
+        "height": 34.1,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 568.4,
+        "height": 34.1,
+        "font_pt": 10.5
+      }
+    ]
+  },
+  {
+    "page": 18,
+    "section": "실습 62 · osquery",
+    "title": "02 SQL로 호스트 정보 읽기",
     "blocks": [
       {
         "kind": "text",
@@ -926,75 +1042,179 @@
       {
         "kind": "text",
         "y": 206.7,
-        "height": 27.6,
-        "font_pt": 10
-      },
-      {
-        "kind": "text",
-        "y": 242.3,
-        "height": 11.6,
-        "font_pt": 8
-      },
-      {
-        "kind": "text",
-        "y": 261.9,
-        "height": 27.6,
-        "font_pt": 10
-      },
-      {
-        "kind": "text",
-        "y": 297.5,
-        "height": 11.6,
-        "font_pt": 8
-      },
-      {
-        "kind": "text",
-        "y": 317.1,
-        "height": 27.6,
-        "font_pt": 10
-      },
-      {
-        "kind": "text",
-        "y": 352.7,
-        "height": 11.6,
-        "font_pt": 8
-      },
-      {
-        "kind": "text",
-        "y": 372.3,
-        "height": 15.2,
-        "font_pt": 10.5
-      },
-      {
-        "kind": "text",
-        "y": 395.5,
-        "height": 27.6,
-        "font_pt": 10
-      },
-      {
-        "kind": "text",
-        "y": 431.2,
-        "height": 11.6,
-        "font_pt": 8
-      },
-      {
-        "kind": "text",
-        "y": 450.8,
         "height": 34.1,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 492.8,
-        "height": 30.5,
+        "y": 248.7,
+        "height": 27.6,
         "font_pt": 10
+      },
+      {
+        "kind": "text",
+        "y": 284.4,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 304.0,
+        "height": 15.2,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 327.2,
+        "height": 27.6,
+        "font_pt": 10
+      },
+      {
+        "kind": "text",
+        "y": 362.8,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 382.4,
+        "height": 15.2,
+        "font_pt": 10.5
       }
     ]
   },
   {
-    "page": 18,
+    "page": 19,
     "section": "실습 62 · osquery",
-    "title": "02 리스닝 포트 만들기",
+    "title": "02 SQL의 구조와 결과 읽기",
+    "blocks": [
+      {
+        "kind": "text",
+        "y": 263.2,
+        "height": 53.0,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 324.2,
+        "height": 27.6,
+        "font_pt": 10
+      },
+      {
+        "kind": "text",
+        "y": 359.8,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 379.4,
+        "height": 53.0,
+        "font_pt": 10.5
+      }
+    ]
+  },
+  {
+    "page": 20,
+    "section": "실습 62 · osquery",
+    "title": "03 예약 조회와 Wazuh 수집",
+    "blocks": [
+      {
+        "kind": "image",
+        "src": "assets/diagrams/osquery.svg",
+        "y": 109.3,
+        "height": 208.6,
+        "source_px": [
+          900.0,
+          430.0
+        ],
+        "display_width_mm": 154.0
+      },
+      {
+        "kind": "text",
+        "y": 325.9,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 345.5,
+        "height": 34.1,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 387.6,
+        "height": 15.2,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 410.8,
+        "height": 34.1,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 452.9,
+        "height": 34.1,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 495.0,
+        "height": 34.1,
+        "font_pt": 10.5
+      }
+    ]
+  },
+  {
+    "page": 21,
+    "section": "실습 62 · osquery",
+    "title": "03 추가 기록을 해석하는 기준",
+    "blocks": [
+      {
+        "kind": "text",
+        "y": 109.3,
+        "height": 53.0,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 170.3,
+        "height": 66.4,
+        "font_pt": 10
+      },
+      {
+        "kind": "text",
+        "y": 244.7,
+        "height": 53.0,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 305.7,
+        "height": 18.8,
+        "font_pt": 13
+      },
+      {
+        "kind": "text",
+        "y": 332.5,
+        "height": 34.1,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 511.4,
+        "height": 53.0,
+        "font_pt": 10.5
+      }
+    ]
+  },
+  {
+    "page": 22,
+    "section": "실습 62 · osquery",
+    "title": "04 리스닝 포트 만들기",
     "blocks": [
       {
         "kind": "text",
@@ -1065,9 +1285,9 @@
     ]
   },
   {
-    "page": 19,
+    "page": 23,
     "section": "실습 62 · osquery",
-    "title": "03 예약 쿼리 결과 찾기",
+    "title": "05 예약 쿼리 결과 찾기",
     "blocks": [
       {
         "kind": "text",
@@ -1121,19 +1341,13 @@
         "y": 581.4,
         "height": 13.0,
         "font_pt": 9
-      },
-      {
-        "kind": "text",
-        "y": 602.4,
-        "height": 34.1,
-        "font_pt": 10.5
       }
     ]
   },
   {
-    "page": 20,
+    "page": 24,
     "section": "실습 62 · osquery",
-    "title": "04 실습용 SSH 키 하나 추가하기",
+    "title": "06 실습용 SSH 키 하나 추가하기",
     "blocks": [
       {
         "kind": "text",
@@ -1216,9 +1430,9 @@
     ]
   },
   {
-    "page": 21,
+    "page": 25,
     "section": "실습 62 · osquery",
-    "title": "05 공개키 등록 후 변화 확인하기",
+    "title": "07 공개키 등록 후 변화 확인하기",
     "blocks": [
       {
         "kind": "text",
@@ -1301,9 +1515,9 @@
     ]
   },
   {
-    "page": 22,
+    "page": 26,
     "section": "실습 62 · osquery",
-    "title": "06 추가한 상태 되돌리기",
+    "title": "08 공개키 삭제 명령 이해하기",
     "blocks": [
       {
         "kind": "text",
@@ -1314,99 +1528,148 @@
       {
         "kind": "text",
         "y": 151.4,
+        "height": 15.2,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 422.6,
+        "height": 34.1,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 464.7,
         "height": 27.6,
         "font_pt": 10
       },
       {
         "kind": "text",
-        "y": 187.1,
+        "y": 500.3,
         "height": 11.6,
         "font_pt": 8
       },
       {
         "kind": "text",
-        "y": 206.7,
-        "height": 34.1,
+        "y": 519.9,
+        "height": 15.2,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 543.1,
+        "height": 27.6,
+        "font_pt": 10
+      },
+      {
+        "kind": "text",
+        "y": 578.7,
+        "height": 11.6,
+        "font_pt": 8
+      }
+    ]
+  },
+  {
+    "page": 27,
+    "section": "실습 62 · osquery",
+    "title": "09 삭제 확인과 나머지 원복",
+    "blocks": [
+      {
+        "kind": "text",
+        "y": 109.3,
+        "height": 15.2,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 132.6,
+        "height": 27.6,
+        "font_pt": 10
+      },
+      {
+        "kind": "text",
+        "y": 168.2,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 187.8,
+        "height": 53.0,
         "font_pt": 10.5
       },
       {
         "kind": "text",
         "y": 248.7,
-        "height": 27.6,
-        "font_pt": 10
-      },
-      {
-        "kind": "text",
-        "y": 284.4,
-        "height": 11.6,
-        "font_pt": 8
-      },
-      {
-        "kind": "text",
-        "y": 304.0,
-        "height": 27.6,
-        "font_pt": 10
-      },
-      {
-        "kind": "text",
-        "y": 339.6,
-        "height": 11.6,
-        "font_pt": 8
-      },
-      {
-        "kind": "text",
-        "y": 359.2,
         "height": 34.1,
         "font_pt": 10.5
       },
       {
         "kind": "text",
-        "y": 401.3,
+        "y": 290.8,
         "height": 27.6,
         "font_pt": 10
       },
       {
         "kind": "text",
-        "y": 436.9,
+        "y": 326.5,
         "height": 11.6,
         "font_pt": 8
       },
       {
         "kind": "text",
-        "y": 456.5,
+        "y": 346.0,
+        "height": 34.1,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 388.1,
         "height": 27.6,
         "font_pt": 10
       },
       {
         "kind": "text",
-        "y": 492.1,
+        "y": 423.8,
         "height": 11.6,
         "font_pt": 8
       },
       {
         "kind": "text",
-        "y": 511.7,
+        "y": 443.4,
         "height": 27.6,
         "font_pt": 10
       },
       {
         "kind": "text",
-        "y": 547.4,
+        "y": 479.0,
         "height": 11.6,
         "font_pt": 8
       },
       {
         "kind": "text",
-        "y": 566.9,
+        "y": 498.6,
+        "height": 27.6,
+        "font_pt": 10
+      },
+      {
+        "kind": "text",
+        "y": 534.2,
+        "height": 11.6,
+        "font_pt": 8
+      },
+      {
+        "kind": "text",
+        "y": 553.8,
         "height": 48.5,
         "font_pt": 10
       }
     ]
   },
   {
-    "page": 23,
+    "page": 28,
     "section": "실습 62 · osquery",
-    "title": "07 결과가 없을 때 순서대로 확인하기",
+    "title": "10 결과가 없을 때 순서대로 확인하기",
     "blocks": [
       {
         "kind": "text",
@@ -1477,7 +1740,7 @@
     ]
   },
   {
-    "page": 24,
+    "page": 29,
     "section": "세 실습을 마친 뒤",
     "title": "증거와 판단을 구분해서 쓰기",
     "blocks": [
@@ -1508,6 +1771,12 @@
       {
         "kind": "text",
         "y": 390.5,
+        "height": 34.1,
+        "font_pt": 10.5
+      },
+      {
+        "kind": "text",
+        "y": 432.6,
         "height": 34.1,
         "font_pt": 10.5
       }

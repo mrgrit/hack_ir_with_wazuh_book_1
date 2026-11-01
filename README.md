@@ -1,7 +1,7 @@
 # 해킹·침해대응 실무 with Wazuh
 
 강의 자료와 분리한 집필용 로컬 Git 저장소입니다. 1권 제목 제안 **시스템 침투와 SIEM 분석**을 시범 표지에 적용했습니다.
-시범 원고는 SQL 인젝션·SSH 인증 기록·osquery 상태 조사의 세 사례를 B5 24쪽으로 구성합니다.
+시범 원고는 SQL 인젝션·SSH 인증 기록·osquery 상태 조사의 세 사례를 B5 29쪽으로 구성합니다.
 
 - [브라우저로 읽기](preview.html)
 - [PDF 시범 원고](build/volume01-sample.pdf)
@@ -37,6 +37,8 @@ python3 tools/typeset_pdf.py
 ```
 
 PDF 출력에는 Python Pillow, 시스템 Cairo·Pango·librsvg, Noto Sans CJK KR 글꼴이 필요합니다.
-브라우저 기반 출력 도구 render_pdf.py도 제공하지만, 현재 환경에서는 Chromium 실행 권한이 없어 사용하지 않았습니다.
+PDF는 Cairo/Pango로 출력했습니다. Chromium으로 HTML 29쪽의 넘침과 이미지 로딩도 확인했습니다.
+브라우저 기반 출력 도구 render_pdf.py는 별도 출력 방식입니다.
 `tools/draft_sample.py`는 최초 시범본 생성 기록이며 다시 실행하면 원고 편집 내용을 덮어씁니다.
-`tools/diagrams.py`는 SVG 개념 그림 생성기입니다. 그림은 코드로 작성된 벡터이며 실행 화면과 구분합니다.
+`tools/diagrams.py`는 생성형 픽셀오피스 삽화에 한글 설명을 별도 조판하는 SVG 구성 도구입니다.
+삽화 원본은 `assets/illustrations/`, 내장 imagegen 도구의 최종 프롬프트는 `editorial/illustration-prompts.json`에 있습니다. 실제 화면 캡처와 구분합니다.

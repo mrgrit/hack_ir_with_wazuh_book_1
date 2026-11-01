@@ -28,6 +28,7 @@ figcaption {font-size:9pt; line-height:1.6; margin-top:2mm; color:#4e5b69;}
 .diagram {display:block; width:100%; margin:5mm 0; image-rendering:pixelated;}
 table {width:100%; border-collapse:collapse; margin:4mm 0;} td,th {text-align:left; border-bottom:1px solid #c8d1d4; padding:2mm; vertical-align:top;} th {background:#edf2f1}
 footer {position:absolute; bottom:7mm; left:14mm; right:14mm; display:flex; justify-content:space-between; font-size:8pt; color:#687581;}
+.command-parts {table-layout:fixed;} .command-parts th:first-child,.command-parts td:first-child {width:34%;}
 a {color:#426b9b}
 @media print {body {background:white} .sheet {margin:0; box-shadow:none;}}
 '''

@@ -3,6 +3,7 @@ import ctypes as C
 from pathlib import Path
 from html.parser import HTMLParser
 import json
+import xml.etree.ElementTree as ET
 from PIL import Image
 R=Path(__file__).resolve().parents[1]
 D=C.c_double; I=C.c_int; P=C.c_void_p; S=C.c_char_p
@@ -70,7 +71,8 @@ def para(s,size=10.5,bg=None,mono=False,bold=False):
 def image(node,detail=False):
  global y
  src=node.attrs['src'];path=R/src
- if path.suffix=='.svg':iw,ih=900,330
+ if path.suffix=='.svg':
+  _,_,iw,ih=map(float,ET.parse(path).getroot().attrib['viewBox'].split())
  else:iw,ih=Image.open(path).size
  dw=250*mm if detail else CW;dh=ih*dw/iw
  ensure(dh+8)
