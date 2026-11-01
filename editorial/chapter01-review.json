@@ -109,5 +109,9 @@
     }
   ],
   "repository_scope": "집필 저장소만 변경. kt66/강의 저장소는 읽기만 수행. 기존 원고 삭제 상태를 유지하고 새 1장만 작성.",
-  "docx_sha256": "48cab36c1fe8ea455807595964a03ce93ac05b3d0a979fe86fc30ce4faa7af53"
+  "docx_sha256": "5395a1e067aa1e760a6bff78074ef98b1d12eafd97f8d836baeedd5d8ae2bda1",
+  "revisions": [
+    "불필요한 삽화 주의문 삭제",
+    "Windows 선택 설명을 1권에서 사용하지 않으므로 N을 선택한다로 수정"
+  ]
 }

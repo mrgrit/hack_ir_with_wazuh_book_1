@@ -40,7 +40,7 @@
         {
           "type": "image",
           "path": "assets/illustrations/overview.png",
-          "caption": "삽화. 공격을 실행하는 자리와 기록을 분석하는 자리. 실제 네트워크 배치를 나타내지는 않는다.",
+          "caption": "삽화. 공격을 실행하는 자리와 기록을 분석하는 자리.",
           "width_mm": 127
         },
         {
@@ -726,8 +726,8 @@
               "kt66.lab 입력 또는 기본값 수락"
             ],
             [
-              "Windows 실습 PC",
-              "N. Windows 호스트 PC를 뜻하는 질문이 아니다."
+              "Windows 추가 설치",
+              "1권에서는 사용하지 않으므로 N을 선택한다."
             ],
             [
               "netplan static 적용",
