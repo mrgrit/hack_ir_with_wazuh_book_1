@@ -1,0 +1,2 @@
+grep -n -E '^SecRuleEngine|^SecAuditEngine' \
+  /etc/modsecurity/modsecurity.conf

@@ -1,0 +1,1 @@
+DVWA='http://dvwa.kt66.lab'

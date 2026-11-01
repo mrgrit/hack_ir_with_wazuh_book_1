@@ -1,0 +1,22 @@
+{
+  "mode": "built-in image_gen",
+  "date": "2026-11-01",
+  "skill": "/home/ccc/.codex/skills/.system/imagegen/SKILL.md",
+  "reference": "assets/illustrations/chapter04/field-check.png (style only)",
+  "style_reference_url": "https://m.blog.naver.com/studygir/220961448822",
+  "assets": [
+    {
+      "path": "assets/illustrations/chapter05/request.png",
+      "prompt": "Use case: illustration-story. Create a NEW original compact spot illustration for a Korean engineering textbook chapter on sending a web security test request. Reference image is STYLE ONLY: 1990s PC-98 adventure-game pixel art, crisp visible pixel clusters, limited indigo/cyan/pink colors, flat color areas and checkerboard dithering. Scene: a shaded university courtyard with a low concrete bench, tiled paving, brick facade and a small leafy tree at twilight. One adult authorized security tester in a dark hooded jacket sits on the bench, seen naturally from behind at a rear three-quarter angle, typing a single test request on an open laptop resting on their knees. Laptop screen faces the person, only plausible edge glimpse or backside from this viewpoint; no readable interface. A small notebook and closed tool pouch on the bench relate to recording the test. No headset, no office desk, no weapons, no floating symbols, no readable words or numbers, no logo, no watermarks. Localized landscape vignette with genuinely transparent outer margins, clear silhouette readable when printed 55mm wide, whole bench/person contained with generous margins, consistent perspective, no soft painting or gradients. Maintain the reference's retro pixel technique but use a new character, new pose and new courtyard setting.",
+      "role": "야외에서 웹 요청 시험",
+      "sha256": "494638eac7a567d80d6c3b02888f140ca6c745da2ee9723deaaacd98001e6256"
+    },
+    {
+      "path": "assets/illustrations/chapter05/review.png",
+      "prompt": "Use case: illustration-story. NEW original small vignette for a Korean engineering textbook on interpreting web firewall logs. Use the reference solely for pixel-art style: late-1980s/1990s PC adventure-game artwork, visible square pixel clusters, limited cyan/indigo/pink palette and checkerboard dithering. Scene: the sheltered entrance of a university computing building after rain, two glass doors behind the character with a small rack of network equipment visible through the side window, a tile step and a pot of foliage. One adult woman security analyst with short dark hair, rectangular glasses and a light utility jacket stands naturally in front three-quarter view; her face is clearly visible as she compares a short printed incident note in one hand with a handheld terminal in the other. The terminal screen faces her and its opaque back faces the viewer. She is checking the response and log from a web test. New person, location, pose and props distinct from the reference. No desk, office chair, headset, readable text, numbers, floating interface, logos, watermark, or impossible transparent device. Localized compact scene with truly transparent outer margins, whole character contained, readable at 55mm print width, crisp flat pixel colors, consistent perspective, not photorealistic or soft painted.",
+      "role": "건물 입구에서 응답·탐지 기록 대조",
+      "sha256": "6fbbf4ab2206714139d18aa05d5963e92d79fcffedc2cd505f39eb16bbf59966"
+    }
+  ],
+  "inspection": "각 PNG와 DOCX 렌더에서 인물 방향, 장비 화면 방향, 원근, 화풍과 본문 배치를 확인했다. 실제 UI와 구분해 삽화로 표기했다."
+}

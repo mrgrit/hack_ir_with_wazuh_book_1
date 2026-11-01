@@ -1,0 +1,12 @@
+실행 위치·시각·시간대:
+요청 URL·입력값·표식:
+HTTP 상태·관련 헤더·본문:
+agent.name·data.srcip:
+location·full_log:
+_index·_id:
+rule.id·data.id:
+WAF transaction_id:
+intercepted·CRS 규칙·차단 이유:
+확인한 사실:
+추가 확인할 사항:
+hosts 변경 내용·원상복구 결과:

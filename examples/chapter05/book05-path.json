@@ -1,0 +1,67 @@
+{
+  "_index": "wazuh-archives-4.x-2026.11.01",
+  "_id": "bvnUlqEBEYWT20nn85r8",
+  "_score": null,
+  "_source": {
+    "agent": {
+      "ip": "10.20.32.80",
+      "name": "web",
+      "id": "013"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "data": {
+      "protocol": "GET",
+      "srcip": "192.168.0.202",
+      "id": "403",
+      "url": "/vulnerabilities/fi/?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-path"
+    },
+    "rule": {
+      "firedtimes": 2,
+      "mail": false,
+      "level": 5,
+      "pci_dss": [
+        "6.5",
+        "11.4"
+      ],
+      "tsc": [
+        "CC6.6",
+        "CC7.1",
+        "CC8.1",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ],
+      "description": "Web server 400 error code.",
+      "groups": [
+        "web",
+        "accesslog",
+        "attack"
+      ],
+      "id": "31101",
+      "nist_800_53": [
+        "SA.11",
+        "SI.4"
+      ],
+      "gdpr": [
+        "IV_35.7.d"
+      ]
+    },
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "full_log": "192.168.0.202 - - [01/Nov/2026:20:18:16 +0900] \"GET /vulnerabilities/fi/?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-path HTTP/1.1\" 403 438 \"-\" \"curl/7.81.0\"",
+    "input": {
+      "type": "log"
+    },
+    "@timestamp": "2026-11-01T11:18:18.258Z",
+    "location": "/var/log/apache2/dvwa_access.log",
+    "id": "1793531898.130995269",
+    "timestamp": "2026-11-01T11:18:18.258+0000"
+  },
+  "sort": [
+    1793531898258
+  ]
+}

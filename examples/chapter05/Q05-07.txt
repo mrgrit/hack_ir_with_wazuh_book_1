@@ -1,0 +1,2 @@
+agent.name: "web" AND data.srcip: "192.168.0.202"
+AND (rule.id: "31104" OR data.url: *etc*passwd*)

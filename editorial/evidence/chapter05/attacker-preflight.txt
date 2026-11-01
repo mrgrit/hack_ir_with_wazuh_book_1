@@ -1,0 +1,28 @@
+att
+lo               UNKNOWN        127.0.0.1/8
+ens33            UP             192.168.0.202/24 metric 100
+               Local time: Sun 2026-11-01 20:18:17 KST
+           Universal time: Sun 2026-11-01 11:18:17 UTC
+                 RTC time: Sun 2026-11-01 11:18:17
+                Time zone: Asia/Seoul (KST, +0900)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+       Server: 192.168.0.189 (192.168.0.189)
+Poll interval: 34min 8s (min: 32s; max 34min 8s)
+         Leap: normal
+      Version: 4
+      Stratum: 4
+    Reference: C17BF302
+    Precision: 1us (-26)
+Root distance: 16.105ms (max: 5s)
+       Offset: +1.152ms
+        Delay: 315us
+       Jitter: 1.815ms
+ Packet count: 48
+    Frequency: -0.726ppm
+curl 7.81.0 (x86_64-pc-linux-gnu) libcurl/7.81.0 OpenSSL/3.0.2 zlib/1.2.11 brotli/1.0.9 zstd/1.4.8 libidn2/2.3.2 libpsl/0.21.0 (+libidn2/2.3.2) libssh/0.9.6/openssl/zlib nghttp2/1.43.0 librtmp/2.3 OpenLDAP/2.5.18
+Release-Date: 2022-01-05
+Protocols: dict file ftp ftps gopher gophers http https imap imaps ldap ldaps mqtt pop3 pop3s rtmp rtsp scp sftp smb smbs smtp smtps telnet tftp
+Features: alt-svc AsynchDNS brotli GSS-API HSTS HTTP2 HTTPS-proxy IDN IPv6 Kerberos Largefile libz NTLM NTLM_WB PSL SPNEGO SSL TLS-SRP UnixSockets zstd
+192.168.0.189   ccc.com juice.ccc.com dvwa.ccc.com neobank.ccc.com govportal.ccc.com mediforum.ccc.com admin.ccc.com ai.ccc.com portal.ccc.com

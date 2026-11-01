@@ -1,0 +1,519 @@
+{
+  "took": 4,
+  "timed_out": false,
+  "_shards": {
+    "total": 6,
+    "successful": 6,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 7,
+      "relation": "eq"
+    },
+    "max_score": null,
+    "hits": [
+      {
+        "_index": "wazuh-archives-4.x-2026.11.01",
+        "_id": "A_nQlqEBEYWT20nn-Jc6",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "ip": "10.20.32.80",
+            "name": "web",
+            "id": "013"
+          },
+          "manager": {
+            "name": "wazuh.manager"
+          },
+          "data": {
+            "protocol": "GET",
+            "srcip": "192.168.0.202",
+            "id": "302",
+            "url": "/vulnerabilities/sqli/?id=1&Submit=Submit&bookcase=book05-normal"
+          },
+          "decoder": {
+            "name": "web-accesslog"
+          },
+          "full_log": "192.168.0.202 - - [01/Nov/2026:20:13:48 +0900] \"GET /vulnerabilities/sqli/?id=1&Submit=Submit&bookcase=book05-normal HTTP/1.1\" 302 429 \"-\" \"curl/7.81.0\"",
+          "input": {
+            "type": "log"
+          },
+          "@timestamp": "2026-11-01T11:13:50.035Z",
+          "location": "/var/log/apache2/dvwa_access.log",
+          "id": "1793531630.128936098",
+          "timestamp": "2026-11-01T11:13:50.035+0000"
+        },
+        "sort": [
+          1793531630035
+        ]
+      },
+      {
+        "_index": "wazuh-archives-4.x-2026.11.01",
+        "_id": "CPnQlqEBEYWT20nn-Jc6",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "ip": "10.20.32.80",
+            "name": "web",
+            "id": "013"
+          },
+          "manager": {
+            "name": "wazuh.manager"
+          },
+          "data": {
+            "protocol": "GET",
+            "srcip": "192.168.0.202",
+            "id": "403",
+            "url": "/vulnerabilities/fi/?page=..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-traversal"
+          },
+          "rule": {
+            "firedtimes": 1,
+            "mail": false,
+            "level": 5,
+            "pci_dss": [
+              "6.5",
+              "11.4"
+            ],
+            "tsc": [
+              "CC6.6",
+              "CC7.1",
+              "CC8.1",
+              "CC6.1",
+              "CC6.8",
+              "CC7.2",
+              "CC7.3"
+            ],
+            "description": "Web server 400 error code.",
+            "groups": [
+              "web",
+              "accesslog",
+              "attack"
+            ],
+            "id": "31101",
+            "nist_800_53": [
+              "SA.11",
+              "SI.4"
+            ],
+            "gdpr": [
+              "IV_35.7.d"
+            ]
+          },
+          "decoder": {
+            "name": "web-accesslog"
+          },
+          "full_log": "192.168.0.202 - - [01/Nov/2026:20:13:49 +0900] \"GET /vulnerabilities/fi/?page=..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-traversal HTTP/1.1\" 403 438 \"-\" \"curl/7.81.0\"",
+          "input": {
+            "type": "log"
+          },
+          "@timestamp": "2026-11-01T11:13:50.047Z",
+          "location": "/var/log/apache2/dvwa_access.log",
+          "id": "1793531630.128937751",
+          "timestamp": "2026-11-01T11:13:50.047+0000"
+        },
+        "sort": [
+          1793531630047
+        ]
+      },
+      {
+        "_index": "wazuh-archives-4.x-2026.11.01",
+        "_id": "BfnQlqEBEYWT20nn-Jc6",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "ip": "10.20.32.80",
+            "name": "web",
+            "id": "013"
+          },
+          "manager": {
+            "name": "wazuh.manager"
+          },
+          "data": {
+            "protocol": "GET",
+            "srcip": "192.168.0.202",
+            "id": "403",
+            "url": "/vulnerabilities/sqli/?id=1%27+UNION+SELECT+user%2Cpassword+FROM+users--+&Submit=Submit&bookcase=book05-sqli"
+          },
+          "rule": {
+            "firedtimes": 1,
+            "mail": false,
+            "level": 7,
+            "pci_dss": [
+              "6.5",
+              "11.4",
+              "6.5.1"
+            ],
+            "tsc": [
+              "CC6.6",
+              "CC7.1",
+              "CC8.1",
+              "CC6.1",
+              "CC6.8",
+              "CC7.2",
+              "CC7.3"
+            ],
+            "description": "SQL injection attempt.",
+            "groups": [
+              "web",
+              "accesslog",
+              "attack",
+              "sql_injection"
+            ],
+            "mitre": {
+              "technique": [
+                "Exploit Public-Facing Application"
+              ],
+              "id": [
+                "T1190"
+              ],
+              "tactic": [
+                "Initial Access"
+              ]
+            },
+            "id": "31103",
+            "nist_800_53": [
+              "SA.11",
+              "SI.4"
+            ],
+            "gdpr": [
+              "IV_35.7.d"
+            ]
+          },
+          "decoder": {
+            "name": "web-accesslog"
+          },
+          "full_log": "192.168.0.202 - - [01/Nov/2026:20:13:49 +0900] \"GET /vulnerabilities/sqli/?id=1%27+UNION+SELECT+user%2Cpassword+FROM+users--+&Submit=Submit&bookcase=book05-sqli HTTP/1.1\" 403 438 \"-\" \"curl/7.81.0\"",
+          "input": {
+            "type": "log"
+          },
+          "@timestamp": "2026-11-01T11:13:50.047Z",
+          "location": "/var/log/apache2/dvwa_access.log",
+          "id": "1793531630.128937751",
+          "timestamp": "2026-11-01T11:13:50.047+0000"
+        },
+        "sort": [
+          1793531630047
+        ]
+      },
+      {
+        "_index": "wazuh-archives-4.x-2026.11.01",
+        "_id": "B_nQlqEBEYWT20nn-Jc6",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "ip": "10.20.32.80",
+            "name": "web",
+            "id": "013"
+          },
+          "manager": {
+            "name": "wazuh.manager"
+          },
+          "data": {
+            "protocol": "GET",
+            "srcip": "192.168.0.202",
+            "id": "403",
+            "url": "/vulnerabilities/xss_r/?name=%3Cscript%3Ealert%281%29%3C%2Fscript%3E&bookcase=book05-xss"
+          },
+          "rule": {
+            "firedtimes": 1,
+            "mail": false,
+            "level": 6,
+            "pci_dss": [
+              "6.5",
+              "11.4",
+              "6.5.7"
+            ],
+            "tsc": [
+              "CC6.6",
+              "CC7.1",
+              "CC8.1",
+              "CC6.1",
+              "CC6.8",
+              "CC7.2",
+              "CC7.3"
+            ],
+            "description": "XSS (Cross Site Scripting) attempt.",
+            "groups": [
+              "web",
+              "accesslog",
+              "attack"
+            ],
+            "mitre": {
+              "technique": [
+                "JavaScript"
+              ],
+              "id": [
+                "T1059.007"
+              ],
+              "tactic": [
+                "Execution"
+              ]
+            },
+            "id": "31105",
+            "nist_800_53": [
+              "SA.11",
+              "SI.4"
+            ],
+            "gdpr": [
+              "IV_35.7.d"
+            ]
+          },
+          "decoder": {
+            "name": "web-accesslog"
+          },
+          "full_log": "192.168.0.202 - - [01/Nov/2026:20:13:49 +0900] \"GET /vulnerabilities/xss_r/?name=%3Cscript%3Ealert%281%29%3C%2Fscript%3E&bookcase=book05-xss HTTP/1.1\" 403 438 \"-\" \"curl/7.81.0\"",
+          "input": {
+            "type": "log"
+          },
+          "@timestamp": "2026-11-01T11:13:50.047Z",
+          "location": "/var/log/apache2/dvwa_access.log",
+          "id": "1793531630.128937751",
+          "timestamp": "2026-11-01T11:13:50.047+0000"
+        },
+        "sort": [
+          1793531630047
+        ]
+      },
+      {
+        "_index": "wazuh-archives-4.x-2026.11.01",
+        "_id": "CPnSlqEBEYWT20nnpZnw",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "ip": "10.20.32.80",
+            "name": "web",
+            "id": "013"
+          },
+          "manager": {
+            "name": "wazuh.manager"
+          },
+          "data": {
+            "protocol": "GET",
+            "srcip": "192.168.0.202",
+            "id": "403",
+            "url": "/vulnerabilities/fi/?page=../../../../etc/passwd&bookcase=book05-traversal-raw"
+          },
+          "rule": {
+            "firedtimes": 1,
+            "mail": false,
+            "level": 6,
+            "pci_dss": [
+              "6.5",
+              "11.4",
+              "6.5.1"
+            ],
+            "tsc": [
+              "CC6.6",
+              "CC7.1",
+              "CC8.1",
+              "CC6.1",
+              "CC6.8",
+              "CC7.2",
+              "CC7.3"
+            ],
+            "description": "Common web attack.",
+            "groups": [
+              "web",
+              "accesslog",
+              "attack"
+            ],
+            "mitre": {
+              "technique": [
+                "Process Injection",
+                "File and Directory Discovery",
+                "Exploit Public-Facing Application"
+              ],
+              "id": [
+                "T1055",
+                "T1083",
+                "T1190"
+              ],
+              "tactic": [
+                "Defense Evasion",
+                "Privilege Escalation",
+                "Discovery",
+                "Initial Access"
+              ]
+            },
+            "id": "31104",
+            "nist_800_53": [
+              "SA.11",
+              "SI.4"
+            ],
+            "gdpr": [
+              "IV_35.7.d"
+            ]
+          },
+          "decoder": {
+            "name": "web-accesslog"
+          },
+          "full_log": "192.168.0.202 - - [01/Nov/2026:20:15:47 +0900] \"GET /vulnerabilities/fi/?page=../../../../etc/passwd&bookcase=book05-traversal-raw HTTP/1.1\" 403 438 \"-\" \"curl/7.81.0\"",
+          "input": {
+            "type": "log"
+          },
+          "@timestamp": "2026-11-01T11:15:48.127Z",
+          "location": "/var/log/apache2/dvwa_access.log",
+          "id": "1793531748.129808515",
+          "timestamp": "2026-11-01T11:15:48.127+0000"
+        },
+        "sort": [
+          1793531748127
+        ]
+      },
+      {
+        "_index": "wazuh-archives-4.x-2026.11.01",
+        "_id": "bvnUlqEBEYWT20nn85r8",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "ip": "10.20.32.80",
+            "name": "web",
+            "id": "013"
+          },
+          "manager": {
+            "name": "wazuh.manager"
+          },
+          "data": {
+            "protocol": "GET",
+            "srcip": "192.168.0.202",
+            "id": "403",
+            "url": "/vulnerabilities/fi/?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-path"
+          },
+          "rule": {
+            "firedtimes": 2,
+            "mail": false,
+            "level": 5,
+            "pci_dss": [
+              "6.5",
+              "11.4"
+            ],
+            "tsc": [
+              "CC6.6",
+              "CC7.1",
+              "CC8.1",
+              "CC6.1",
+              "CC6.8",
+              "CC7.2",
+              "CC7.3"
+            ],
+            "description": "Web server 400 error code.",
+            "groups": [
+              "web",
+              "accesslog",
+              "attack"
+            ],
+            "id": "31101",
+            "nist_800_53": [
+              "SA.11",
+              "SI.4"
+            ],
+            "gdpr": [
+              "IV_35.7.d"
+            ]
+          },
+          "decoder": {
+            "name": "web-accesslog"
+          },
+          "full_log": "192.168.0.202 - - [01/Nov/2026:20:18:16 +0900] \"GET /vulnerabilities/fi/?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-path HTTP/1.1\" 403 438 \"-\" \"curl/7.81.0\"",
+          "input": {
+            "type": "log"
+          },
+          "@timestamp": "2026-11-01T11:18:18.258Z",
+          "location": "/var/log/apache2/dvwa_access.log",
+          "id": "1793531898.130995269",
+          "timestamp": "2026-11-01T11:18:18.258+0000"
+        },
+        "sort": [
+          1793531898258
+        ]
+      },
+      {
+        "_index": "wazuh-archives-4.x-2026.11.01",
+        "_id": "cfnUlqEBEYWT20nn85r8",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "ip": "10.20.32.80",
+            "name": "web",
+            "id": "013"
+          },
+          "manager": {
+            "name": "wazuh.manager"
+          },
+          "data": {
+            "protocol": "GET",
+            "srcip": "192.168.0.202",
+            "id": "403",
+            "url": "/vulnerabilities/fi/?page=../../../../../etc/passwd&bookcase=book05-path-raw"
+          },
+          "rule": {
+            "firedtimes": 2,
+            "mail": false,
+            "level": 6,
+            "pci_dss": [
+              "6.5",
+              "11.4",
+              "6.5.1"
+            ],
+            "tsc": [
+              "CC6.6",
+              "CC7.1",
+              "CC8.1",
+              "CC6.1",
+              "CC6.8",
+              "CC7.2",
+              "CC7.3"
+            ],
+            "description": "Common web attack.",
+            "groups": [
+              "web",
+              "accesslog",
+              "attack"
+            ],
+            "mitre": {
+              "technique": [
+                "Process Injection",
+                "File and Directory Discovery",
+                "Exploit Public-Facing Application"
+              ],
+              "id": [
+                "T1055",
+                "T1083",
+                "T1190"
+              ],
+              "tactic": [
+                "Defense Evasion",
+                "Privilege Escalation",
+                "Discovery",
+                "Initial Access"
+              ]
+            },
+            "id": "31104",
+            "nist_800_53": [
+              "SA.11",
+              "SI.4"
+            ],
+            "gdpr": [
+              "IV_35.7.d"
+            ]
+          },
+          "decoder": {
+            "name": "web-accesslog"
+          },
+          "full_log": "192.168.0.202 - - [01/Nov/2026:20:18:17 +0900] \"GET /vulnerabilities/fi/?page=../../../../../etc/passwd&bookcase=book05-path-raw HTTP/1.1\" 403 438 \"-\" \"curl/7.81.0\"",
+          "input": {
+            "type": "log"
+          },
+          "@timestamp": "2026-11-01T11:18:18.265Z",
+          "location": "/var/log/apache2/dvwa_access.log",
+          "id": "1793531898.130995784",
+          "timestamp": "2026-11-01T11:18:18.265+0000"
+        },
+        "sort": [
+          1793531898265
+        ]
+      }
+    ]
+  }
+}

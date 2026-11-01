@@ -1,0 +1,56 @@
+[
+  {
+    "id": "C05-02",
+    "command_executed": "ip -br -4 address",
+    "exit": 0,
+    "stdout": "lo               UNKNOWN        127.0.0.1/8 \nens33            UP             192.168.0.202/24 metric 100 \n"
+  },
+  {
+    "id": "C05-03",
+    "command_executed": "curl --version",
+    "exit": 0,
+    "stdout": "curl 7.81.0 (x86_64-pc-linux-gnu) libcurl/7.81.0 OpenSSL/3.0.2 zlib/1.2.11 brotli/1.0.9 zstd/1.4.8 libidn2/2.3.2 libpsl/0.21.0 (+libidn2/2.3.2) libssh/0.9.6/openssl/zlib nghttp2/1.43.0 librtmp/2.3 OpenLDAP/2.5.18\nRelease-Date: 2022-01-05\nProtocols: dict file ftp ftps gopher gophers http https imap imaps ldap ldaps mqtt pop3 pop3s rtmp rtsp scp sftp smb smbs smtp smtps telnet tftp \nFeatures: alt-svc AsynchDNS brotli GSS-API HSTS HTTP2 HTTPS-proxy IDN IPv6 Kerberos Largefile libz NTLM NTLM_WB PSL SPNEGO SSL TLS-SRP UnixSockets zstd\n"
+  },
+  {
+    "id": "C05-04",
+    "command_executed": "grep -n -F 'dvwa.' /etc/hosts",
+    "exit": 0,
+    "stdout": "11:192.168.0.189  ccc.com juice.ccc.com dvwa.ccc.com neobank.ccc.com govportal.ccc.com mediforum.ccc.com admin.ccc.com ai.ccc.com portal.ccc.com\n"
+  },
+  {
+    "id": "C05-06",
+    "command_executed": "getent hosts dvwa.ccc.com",
+    "exit": 0,
+    "stdout": "192.168.0.189   ccc.com juice.ccc.com dvwa.ccc.com neobank.ccc.com govportal.ccc.com mediforum.ccc.com admin.ccc.com ai.ccc.com portal.ccc.com\n"
+  },
+  {
+    "id": "C05-09",
+    "command_executed": "date -Is",
+    "exit": 0,
+    "stdout": "2026-11-01T20:29:05+09:00\n"
+  },
+  {
+    "id": "C05-11",
+    "command_executed": "timedatectl status",
+    "exit": 0,
+    "stdout": "               Local time: Sun 2026-11-01 20:29:05 KST\n           Universal time: Sun 2026-11-01 11:29:05 UTC\n                 RTC time: Sun 2026-11-01 11:29:05\n                Time zone: Asia/Seoul (KST, +0900)\nSystem clock synchronized: yes\n              NTP service: active\n          RTC in local TZ: no\n"
+  },
+  {
+    "id": "C05-25",
+    "command_executed": "grep -n -E '^SecRuleEngine|^SecAuditEngine' \\\n  /etc/modsecurity/modsecurity.conf",
+    "exit": 0,
+    "stdout": "7:SecRuleEngine On\n190:SecAuditEngine RelevantOnly\n"
+  },
+  {
+    "id": "C05-26",
+    "command_executed": "grep -n -E 'ServerName|SecRuleEngine' \\\n  /etc/apache2/sites-enabled/020-dvwa.conf",
+    "exit": 0,
+    "stdout": "3:    ServerName dvwa.ccc.com\n17:    ServerName dvwa.ccc.com\n"
+  },
+  {
+    "id": "C05-27",
+    "command_executed": "grep -F -B 1 -A 1 '*_access.log' \\\n  /var/ossec/etc/ossec.conf",
+    "exit": 0,
+    "stdout": "    <log_format>apache</log_format>\n    <location>/var/log/apache2/*_access.log</location>\n  </localfile>\n--\n    <log_format>apache</log_format>\n    <location>/var/log/apache2/*_access.log</location>\n  </localfile>\n"
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "case": "normal",
+    "command": "curl -sS -i --max-time 15 --get http://dvwa.ccc.com/vulnerabilities/sqli/ --data-urlencode id=1 --data-urlencode Submit=Submit --data-urlencode bookcase=book05-normal",
+    "time_utc": "2026-11-01T11:13:48.907007+00:00",
+    "exit": 0,
+    "status_line": "HTTP/1.1 302 Found"
+  },
+  {
+    "case": "sqli",
+    "command": "curl -sS -i --max-time 15 --get http://dvwa.ccc.com/vulnerabilities/sqli/ --data-urlencode 'id=1'\"'\"' UNION SELECT user,password FROM users-- ' --data-urlencode Submit=Submit --data-urlencode bookcase=book05-sqli",
+    "time_utc": "2026-11-01T11:13:49.070645+00:00",
+    "exit": 0,
+    "status_line": "HTTP/1.1 403 Forbidden"
+  },
+  {
+    "case": "xss",
+    "command": "curl -sS -i --max-time 15 --get http://dvwa.ccc.com/vulnerabilities/xss_r/ --data-urlencode 'name=<script>alert(1)</script>' --data-urlencode bookcase=book05-xss",
+    "time_utc": "2026-11-01T11:13:49.238689+00:00",
+    "exit": 0,
+    "status_line": "HTTP/1.1 403 Forbidden"
+  },
+  {
+    "case": "traversal",
+    "command": "curl -sS -i --max-time 15 --get http://dvwa.ccc.com/vulnerabilities/fi/ --data-urlencode page=../../../../etc/passwd --data-urlencode bookcase=book05-traversal",
+    "time_utc": "2026-11-01T11:13:49.402277+00:00",
+    "exit": 0,
+    "status_line": "HTTP/1.1 403 Forbidden"
+  },
+  {
+    "case": "traversal-raw",
+    "command": "curl -sS -i --max-time 15 --get http://dvwa.ccc.com/vulnerabilities/fi/ --data page=../../../../etc/passwd --data bookcase=book05-traversal-raw",
+    "time_utc": "2026-11-01T11:15:47.714838+00:00",
+    "exit": 0,
+    "status_line": "HTTP/1.1 403 Forbidden"
+  },
+  {
+    "case": "path",
+    "command": "curl -sS -i --max-time 15 --get http://dvwa.ccc.com/vulnerabilities/fi/ --data-urlencode page=../../../../../etc/passwd --data bookcase=book05-path",
+    "time_utc": "2026-11-01T11:18:16.982549+00:00",
+    "exit": 0,
+    "status_line": "HTTP/1.1 403 Forbidden"
+  },
+  {
+    "case": "path-raw",
+    "command": "curl -sS -i --max-time 15 --get http://dvwa.ccc.com/vulnerabilities/fi/ --data page=../../../../../etc/passwd --data bookcase=book05-path-raw",
+    "time_utc": "2026-11-01T11:18:17.147142+00:00",
+    "exit": 0,
+    "status_line": "HTTP/1.1 403 Forbidden"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "Q05-01",
+    "index": "wazuh-archives-*",
+    "DQL": "agent.name: \"web\" AND data.url: *book05-normal*",
+    "hits": "1",
+    "range": "Last 24 hours",
+    "method": "Actual Discover DQL execution"
+  },
+  {
+    "id": "Q05-02",
+    "index": "wazuh-alerts-*",
+    "DQL": "agent.name: \"web\" AND data.url: *book05-sqli*",
+    "hits": "1",
+    "range": "Last 24 hours",
+    "method": "Actual Discover DQL execution"
+  },
+  {
+    "id": "Q05-03",
+    "index": "wazuh-archives-*",
+    "DQL": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND full_log: \"book05-sqli\"",
+    "hits": "1",
+    "range": "Last 24 hours",
+    "method": "Actual Discover DQL execution"
+  },
+  {
+    "id": "Q05-04",
+    "index": "wazuh-alerts-*",
+    "DQL": "agent.name: \"web\" AND data.url: *book05-xss*",
+    "hits": "1",
+    "range": "Last 24 hours",
+    "method": "Actual Discover DQL execution"
+  },
+  {
+    "id": "Q05-05",
+    "index": "wazuh-alerts-*",
+    "DQL": "agent.name: \"web\" AND data.url: *book05-path*",
+    "hits": "2",
+    "range": "Last 24 hours",
+    "method": "Actual Discover DQL execution"
+  },
+  {
+    "id": "Q05-06",
+    "index": "wazuh-alerts-*",
+    "DQL": "agent.name: \"web\" AND\n(rule.id: \"31104\" OR data.url: *etc*passwd*)",
+    "hits": "5",
+    "range": "Last 24 hours",
+    "method": "Actual Discover DQL execution"
+  },
+  {
+    "id": "Q05-07",
+    "index": "wazuh-alerts-*",
+    "DQL": "agent.name: \"web\" AND data.srcip: \"192.168.0.202\"\nAND (rule.id: \"31104\" OR data.url: *etc*passwd*)",
+    "hits": "5",
+    "range": "Last 24 hours",
+    "method": "Actual Discover DQL execution"
+  }
+]

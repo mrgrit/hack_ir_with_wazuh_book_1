@@ -2,12 +2,14 @@
 
 1권 **시스템 침투와 SIEM 분석**의 집필 저장소입니다.
 
-기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2~4장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
+기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2~5장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
 
 - **[머리말·1장 DOCX](manuscript/volume01-chapter01.docx)** — 부크크 B5, 편집·검토용
 - **[2장 초안 DOCX](manuscript/volume01-chapter02.docx)** — 공격과 보안관제의 기초, 9쪽
 - **[3장 초안 DOCX](manuscript/volume01-chapter03.docx)** — Wazuh 기본 운용, 12쪽
 - **[4장 초안 DOCX](manuscript/volume01-chapter04.docx)** — 로그 수집과 탐지 규칙, 31쪽
+- **[5장 초안 DOCX](manuscript/volume01-chapter05.docx)** — 웹 공격의 시작과 입력값 검증, 38쪽
+- [5장 복사용 명령·검색식·실제 로그](examples/chapter05/)
 - [4장 명령·검색식·규칙 파일](examples/chapter04/)
 - [3장 복사용 검색식·조사 양식](examples/chapter03/)
 - [2장 사례·복사용 명령](examples/chapter02/)
@@ -23,6 +25,10 @@
 4장은 bastion에 확인 문구를 기록하고 아카이브에서 찾은 뒤, 사용자 규칙 100410을 적용해 새 경보를 생성하는 실습입니다. 수집·규칙 시험·실제 경보 생성·규칙 제거와 재시작을 기존 kt66에서 검증했습니다. 실제 화면 7개, 도식 5개, 야외 통신함 점검 삽화 1개를 수록했습니다. SSH 원문과 추출 필드의 대응, 실제 디코더·규칙 파일의 위치와 조회 절차, logger·grep의 옵션과 정규표현식 해석을 보완했습니다.
 
 ## 확인한 범위
+
+5장은 Module 01 실습 01~03의 SQL 인젝션·XSS·경로 조작을 다룹니다. 공격자 VM에서 요청을 한 건씩 보내고 HTTP 응답, Apache 접속 로그, WAF 감사 기록, Wazuh 경보를 대조합니다. 명령 37개, DQL 검색식 7개, 실제 화면 8개, 설명 도식 6개, 야외 캐릭터 삽화 2개를 수록했습니다. 명령의 역할·옵션·구문, 로그 필드의 뜻과 파일 위치, 실패 시 확인 순서와 원상복구 절차를 설명합니다.
+
+Ubuntu 22.04.5 공격자 VM의 curl 7.81.0으로 정상 입력·SQL 구문·스크립트·두 가지 경로 표기를 보냈습니다. 정상 입력은 로그인 페이지로 이동하는 302, 공격 입력은 WAF 차단으로 403을 받았습니다. 인코딩된 경로는 Wazuh 31101, 그대로 보낸 경로는 31104로 분류됐습니다. 이 실험에서 DB 자료 유출·브라우저 스크립트 실행·파일 내용 노출은 확인되지 않았습니다. 7개 검색식은 실제 Discover에서 검증했습니다. 기존 hosts·시각 동기화 설정은 이미 맞아 변경하지 않았습니다.
 
 kt66 커밋 `63d4180b1d6866de986ef263a3bd831d6082b5d5`의 코드·설정과 공식 문서를 대조했습니다. 기존 가동 환경에서 웹 응답, 데모 계정 Wazuh 로그인, kt66-host 연결 상태를 확인하고 실제 화면을 촬영했습니다.
 
@@ -78,5 +84,17 @@ DOCX를 직접 편집할 수 있습니다. 조판기는 기본적으로 `build/`
 
 - [4장 검토·검증 기록](editorial/chapter04-review.json)
 - [4장 야외 삽화와 생성 프롬프트](editorial/chapter04-illustrations.json)
+
+5장 재생성:
+
+```bash
+.venv/bin/python tools/write_chapter05.py
+.venv/bin/python tools/diagrams_chapter05.py
+.venv/bin/python tools/build_chapter01.py --source manuscript/volume01-chapter05.json --output build/volume01-chapter05.docx
+```
+
+- [5장 검토·검증 기록](editorial/chapter05-review.json)
+- [5장 삽화·생성 프롬프트](editorial/chapter05-illustrations.json)
+- [실제 화면 촬영 기록](assets/screens/chapter05/provenance.json)
 
 PDF는 배포하지 않습니다. 임시 PDF·페이지 이미지는 DOCX 배치 검사용으로만 사용합니다. Consolas가 없는 환경에서는 대체 글꼴로 보일 수 있으므로 Word에서 최종 인쇄 크기를 재확인합니다.

@@ -1,0 +1,58 @@
+[
+  {
+    "type": "query",
+    "id": "Q05-01",
+    "text": "agent.name: \"web\" AND data.url: *book05-normal*",
+    "why": "agent.name은 수집 에이전트이다. 별표(*)는 앞뒤의 임의 문자열에 일치한다. web이 보낸 URL 중 book05-normal을 포함한 기록을 찾는다.",
+    "result": "행을 펼쳐 data.id의 302, data.srcip의 공격자 IP, data.url의 표식을 확인한다.",
+    "where": "Windows · Discover · wazuh-archives-*"
+  },
+  {
+    "type": "query",
+    "id": "Q05-02",
+    "text": "agent.name: \"web\" AND data.url: *book05-sqli*",
+    "why": "Discover에서 wazuh-alerts-*와 Last 24 hours를 선택한다. SQL 시험의 표식으로 찾는다.",
+    "result": "행을 펼쳐 원문에 UNION·SELECT가 있는지 읽는다. rule.id, data.id, data.srcip을 기록한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q05-03",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND full_log: \"book05-sqli\"",
+    "why": "Discover의 패턴을 wazuh-archives-*로 바꾼다. location은 감사 로그 파일, full_log의 큰따옴표는 표식의 구문 검색이다. AND로 세 조건을 모두 만족하는 기록을 찾는다.",
+    "result": "한 행을 펼쳐 data.request.request_line의 표식, transaction의 출발지와 시각을 앞의 접속 로그와 대조한다.",
+    "where": "Windows · Discover · wazuh-archives-*"
+  },
+  {
+    "type": "query",
+    "id": "Q05-04",
+    "text": "agent.name: \"web\" AND data.url: *book05-xss*",
+    "why": "패턴을 wazuh-alerts-*로 바꾸고 XSS 요청 표식을 찾는다.",
+    "result": "data.url과 403 응답을 확인한다. 검증 환경의 rule.id는 31105이다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q05-05",
+    "text": "agent.name: \"web\" AND data.url: *book05-path*",
+    "why": "인코딩한 요청과 다음 페이지의 비교 요청을 함께 찾는 조건이다. 처음에는 한 요청만 나온다.",
+    "result": "현재 요청의 rule.id와 data.id를 기록한다. 검증 환경에서는 31101과 403이었다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q05-06",
+    "text": "agent.name: \"web\" AND\n(rule.id: \"31104\" OR data.url: *etc*passwd*)",
+    "why": "OR는 양쪽 조건 중 하나를 만족하면 선택한다. 소괄호는 그 범위를 묶는다. *etc*passwd*는 etc와 passwd 사이의 / 또는 %2F도 포함하도록 찾는다.",
+    "result": "경로 조작 규칙에 일치한 요청과 파일명 문자열이 들어간 요청을 함께 읽는다. 이 장 밖의 기록도 나올 수 있다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q05-07",
+    "text": "agent.name: \"web\" AND data.srcip: \"192.168.0.202\"\nAND (rule.id: \"31104\" OR data.url: *etc*passwd*)",
+    "why": "AND로 출발지 조건을 추가한다. 기간은 실습 시작·종료 시각으로 지정한다.",
+    "result": "같은 출발지의 요청을 URL과 응답 코드로 묶어 읽는다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  }
+]

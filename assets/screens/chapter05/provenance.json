@@ -1,0 +1,158 @@
+{
+  "captured_at": "2026-11-01T11:31:33.620947+00:00",
+  "captures": [
+    {
+      "file": "normal-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-24h,to:now))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20*book05-normal*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 503.234375,
+        "width": 530,
+        "height": 176.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "8f5da4e3f742a126b5c78df091d6683b4e7a013ab91ac0063c3c5f468b1f10bd"
+    },
+    {
+      "file": "sqli-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-24h,to:now))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20*book05-sqli*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 629.484375,
+        "width": 530,
+        "height": 193.421875
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "0240737d6f7dad491259ad2f08624b6aee0218f318b527a41e47668e5852d3dc"
+    },
+    {
+      "file": "sqli-rule.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-24h,to:now))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20*book05-sqli*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 503.46875,
+        "width": 530,
+        "height": 86.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "dc99180551253501f13aeaf42f9ebed0d5951063e58377e60e1a799383cf91d5"
+    },
+    {
+      "file": "xss-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-24h,to:now))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20*book05-xss*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 723.0625,
+        "width": 530,
+        "height": 176.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "196ee5099904a2ceea0b5cdf3bdb5b107cd5d4a7434f97d4044b857568d8537d"
+    },
+    {
+      "file": "path-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-24h,to:now))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20*book05-path*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 723.5625,
+        "width": 530,
+        "height": 176.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "84630d6f94b2748ac7725acbdf332ca64fd1981293c21877c9cf4c6677757192"
+    },
+    {
+      "file": "waf-action.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-24h,to:now))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20location:%20%22%2Fvar%2Flog%2Fapache2%2Fmodsec_audit.log%22%20AND%20full_log:%20%22book05-sqli%22'))",
+      "clip_css": {
+        "x": 161,
+        "y": 766.203125,
+        "width": 530,
+        "height": 133.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "b1e71c713d9c069c169320f4a2db97ae70418704fd64fbbaf9436a8916216f52"
+    },
+    {
+      "file": "waf-response.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-24h,to:now))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20location:%20%22%2Fvar%2Flog%2Fapache2%2Fmodsec_audit.log%22%20AND%20full_log:%20%22book05-sqli%22'))",
+      "clip_css": {
+        "x": 161,
+        "y": 503.46875,
+        "width": 530,
+        "height": 301.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "2afa760213011fea26981b3424e2aa791577a2cc02918896990cbce4e7916f58"
+    },
+    {
+      "file": "dvwa-login.png",
+      "url": "http://dvwa.ccc.com/login.php",
+      "clip_css": {
+        "x": 25,
+        "y": 15,
+        "width": 450,
+        "height": 370
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 110,
+      "minimum_css_font_px": 14,
+      "estimated_text_pt": 9.7,
+      "sha256": "a06b89416f392f17476c4bd2ffc26d92ed80ee4235638d7f70218436edfa2c63"
+    }
+  ],
+  "DQL_verified": [
+    {
+      "name": "normal",
+      "index": "wazuh-archives-*",
+      "DQL": "agent.name: \"web\" AND data.url: *book05-normal*",
+      "hits": "1"
+    },
+    {
+      "name": "sqli",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND data.url: *book05-sqli*",
+      "hits": "1"
+    },
+    {
+      "name": "xss",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND data.url: *book05-xss*",
+      "hits": "1"
+    },
+    {
+      "name": "path",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND data.url: *book05-path*",
+      "hits": "2"
+    },
+    {
+      "name": "waf",
+      "index": "wazuh-archives-*",
+      "DQL": "agent.name: \"web\" AND location: \"/var/log/apache2/modsec_audit.log\" AND full_log: \"book05-sqli\"",
+      "hits": "1"
+    }
+  ],
+  "source": "Actual running kt66 UI; viewport resize/crop only; no field values altered"
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "C05-28",
+    "command": "grep -F -B 1 -A 1 'modsec_audit.log' \\\n  /var/ossec/etc/ossec.conf",
+    "container": "kt66-web",
+    "cwd": null,
+    "stdout": "    <log_format>json</log_format>\n    <location>/var/log/apache2/modsec_audit.log</location>\n  </localfile>\n--\n    <log_format>json</log_format>\n    <location>/var/log/apache2/modsec_audit.log</location>\n  </localfile>\n",
+    "exit": 0
+  },
+  {
+    "id": "C05-32",
+    "command": "grep -n -A 9 '<rule id=\"31104\"' \\\n  0245-web_rules.xml",
+    "container": "kt66-siem",
+    "cwd": "/var/ossec/ruleset/rules",
+    "stdout": "48:  <rule id=\"31104\" level=\"6\">\n49-    <if_sid>31100</if_sid>\n50-\n51-    <!-- Attempt to do directory transversal, simple sql injections,\n52-      -  or access to the etc or bin directory (unix). -->\n53-    <url>%027|%00|%01|%7f|%2E%2E|%0A|%0D|../..|..\\..|echo;|</url>\n54-    <url>cmd.exe|root.exe|_mem_bin|msadc|/winnt/|/boot.ini|</url>\n55-    <url>/x90/|default.ida|/sumthin|nsiislog.dll|chmod%|wget%|cd%20|</url>\n56-    <url>exec%20|../..//|%5C../%5C|././././|2e%2e%5c%2e|\\x5C\\x5C</url>\n57-    <description>Common web attack.</description>\n",
+    "exit": 0
+  }
+]

@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-01T11:40:38.676833+00:00",
+  "deliverable": "manuscript/volume01-chapter05.docx",
+  "pages": 38,
+  "commands": 37,
+  "queries": 7,
+  "screenshots": 8,
+  "diagrams": 6,
+  "small_illustrations": 2,
+  "scope": "Module 01 실습 01~03: HTTP 요청·SQL 인젝션·XSS·경로 조작·WAF 차단 근거·Wazuh 분류",
+  "environment": {
+    "kt66_commit": "63d4180b1d6866de986ef263a3bd831d6082b5d5",
+    "manager_version": "4.10.0",
+    "kt66_host": "192.168.0.189",
+    "attacker_host": "192.168.0.202",
+    "attacker_os": "Ubuntu 22.04.5 LTS",
+    "curl_version": "7.81.0",
+    "actual_dvwa": "http://dvwa.ccc.com",
+    "book_example_dvwa": "http://dvwa.kt66.lab",
+    "web_agent_id": "013",
+    "web_ip": "10.20.32.80",
+    "waf": "Apache 2.4.52 / ModSecurity 2.9.5 / OWASP CRS 3.3.2",
+    "waf_engine": "On",
+    "waf_audit": "RelevantOnly",
+    "time_zone": "Asia/Seoul; +09:00"
+  },
+  "execution": {
+    "requests": "사용자가 지정한 공격자 VM에 SSH 접속해 개별 curl 요청을 실행했다. 실제 웹 진입 주소와 DVWA 이름을 사용했다.",
+    "readback": "저자 검증에서는 kt66 SSH 경유 Docker 관리 경로로 설정과 로그를 읽었다. 본문에서는 호스트에서 docker exec -it로 들어간 뒤 한 명령씩 실행한다.",
+    "setup": "hosts에 DVWA 이름이 이미 등록돼 있었고 NTP도 동기화돼 있었다. hosts 편집·복구 및 조건부 NTP 활성화는 실행하지 않았다. 기존 값을 조회해 확인했다.",
+    "changes": "웹 앱·WAF·Wazuh 설정을 바꾸지 않았다. 요청에 따른 접속·감사 로그와 경보가 생성됐다.",
+    "conditional_and_shell_commands": "nano의 수동 편집 전체나 대화형 Docker 세션 전체를 새 VM에서 재수행한 것으로 주장하지 않는다. 셸 구문 검사는 실제 실행 검증과 구분한다."
+  },
+  "newly_verified": [
+    {
+      "case": "book05-normal",
+      "observed": "id=1 요청 → HTTP 302, Location login.php. Apache 접속 로그와 Wazuh 아카이브에 저장.",
+      "evidence": "examples/chapter05/book05-normal.json"
+    },
+    {
+      "case": "book05-sqli",
+      "observed": "SQL 입력 → HTTP 403, rule.id 31103. 동일 요청의 WAF 감사 기록에서 intercepted true, phase 2, response.status 403. CRS 942100·949110 및 이상 점수 20을 확인.",
+      "evidence": "examples/chapter05/book05-sqli-waf.json"
+    },
+    {
+      "case": "book05-xss",
+      "observed": "script 입력 → HTTP 403, rule.id 31105. WAF 차단. 브라우저 스크립트 실행은 확인되지 않음.",
+      "evidence": "examples/chapter05/book05-xss.json"
+    },
+    {
+      "case": "book05-path",
+      "observed": "다섯 단계 상위 경로의 슬래시를 %2F로 인코딩 → HTTP 403, rule.id 31101. 감사 기록에 경로 공격 탐지와 차단.",
+      "evidence": "examples/chapter05/book05-path.json"
+    },
+    {
+      "case": "book05-path-raw",
+      "observed": "동일 경로의 슬래시를 그대로 전송 → HTTP 403, rule.id 31104. 파일 내용 노출 없음.",
+      "evidence": "examples/chapter05/book05-path-raw.json"
+    }
+  ],
+  "evidence_notes": [
+    "request-execution.json의 traversal·traversal-raw 두 항목은 원고 확정 전 네 단계 상위 경로로 보낸 비교 요청이다. 본문·복사용 예제는 다섯 단계인 path·path-raw를 사용한다.",
+    "포괄 검색 Q05-06·07 결과에는 앞선 비교 요청도 포함된다. 검색 건수를 본문 다섯 사례의 고정 정답으로 제시하지 않는다.",
+    "normal-http.txt의 Set-Cookie 헤더는 세션 식별자를 제거하고 생략 표기로 대체했다. 응답 상태·Location 등 분석에 쓰는 값은 보존했다.",
+    "화면 data.url의 &amp; 표시는 실제 UI에 나온 문자열이다. 원문 full_log의 &와 대조하도록 본문에서 설명했다.",
+    "attacker-preflight.txt와 normal-http.txt의 행 끝 공백·파일 끝 빈 줄은 정리했다."
+  ],
+  "record_paths": {
+    "requests": "editorial/evidence/chapter05/request-execution.json",
+    "preflight": "editorial/evidence/chapter05/preflight-and-config-readback.json",
+    "additional_readback": "editorial/evidence/chapter05/additional-readback.json",
+    "DQL": "editorial/evidence/chapter05/dql-verification.json",
+    "screens": "assets/screens/chapter05/provenance.json",
+    "layout": "editorial/chapter05-layout-check.json",
+    "art": "editorial/chapter05-illustrations.json"
+  },
+  "checks": [
+    "실제 Discover에서 DQL 7개를 각각 실행했다. 웹 접속 로그·감사 원문·Wazuh 필드를 대조했다.",
+    "로그 파일 위치, Apache combined의 %O(헤더 포함 송신 바이트), DVWA low SQL 코드, Wazuh 4.10.0 기본 웹 규칙을 배포 파일과 대조했다.",
+    "curl·grep·SQL·정규표현식·퍼센트 인코딩을 문맥별로 설명했다. 도구 역할을 옵션보다 먼저 소개했다.",
+    "C05-32 grep 문맥을 9줄로 잡아 실제 description까지 출력되는지 재실행으로 확인했다.",
+    "38쪽 전체를 렌더해 검토하고 SQL·WAF 필드 화면·규칙 조회 지면을 별도로 확인했다.",
+    "부크크 B5 판형·여백·테마 상속, 검정 본문, 명령·설명 같은 지면, 본문 영역, 명령 줄바꿈, 참고 URL 전체 표시 검사 통과.",
+    "37개 명령과 7개 검색식의 원고·복사용 파일 일치 검사 통과. bash -n은 구문 검사로만 기록했다.",
+    "추가 파일에서 PAT·세션 쿠키·개인키·브라우저 저장 상태가 포함되지 않았음을 검사했다."
+  ],
+  "limitations": [
+    "기존 kt66과 이미 준비된 공격자 VM에서 검증했다. 새 VMware 설치 검증은 포함하지 않는다.",
+    "공격 입력은 WAF에서 차단됐다. SQL 실행·DB 유출·XSS 실행·파일 노출 성공을 검증한 실험이 아니다.",
+    "Consolas가 없는 검사 환경에서는 DejaVu Sans Mono로 대체됐다. Word에서 최종 인쇄 교정이 필요하다."
+  ],
+  "related_revision": "1장 33쪽의 다음 장 안내 한 문장을 수정했다. 웹 이름·시각은 5장, 계정·암호 목록은 이후 인증 실습에서 준비한다. 1장 35쪽·54개 명령 검사와 변경 지면 검토 통과.",
+  "authoring_boundary": "강의·kt66 소스 저장소 무수정. PDF는 /tmp의 조판 검사에만 사용. 배포 산출물은 DOCX.",
+  "docx_sha256": "16981ce2f07c387f13210804c6ae7221d286b6e96c40e42dd86cdbf5d188e4a4"
+}
