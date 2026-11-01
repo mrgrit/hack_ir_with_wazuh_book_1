@@ -1,0 +1,52 @@
+{
+  "_index": "wazuh-archives-4.x-2026.11.01",
+  "_id": "b_kYl6EBEYWT20nnoNVQ",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "agent": {
+      "ip": "10.20.32.80",
+      "name": "web",
+      "id": "013"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "data": {
+      "protocol": "GET",
+      "srcip": "10.20.30.254",
+      "id": "200",
+      "url": "/vulnerabilities/brute/?username=admin&password=book06-wrong2&Login=Login"
+    },
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "full_log": "10.20.30.254 - - [01/Nov/2026:21:32:12 +0900] \"GET /vulnerabilities/brute/?username=admin&password=book06-wrong2&Login=Login HTTP/1.1\" 200 1804 \"http://dvwa.ccc.com/vulnerabilities/brute/?username=admin&password=book06-wrong1&Login=Login\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36\"",
+    "input": {
+      "type": "log"
+    },
+    "@timestamp": "2026-11-01T12:32:14.200Z",
+    "location": "/var/log/apache2/dvwa_access.log",
+    "id": "1793536334.153516767",
+    "timestamp": "2026-11-01T12:32:14.200+0000"
+  },
+  "fields": {
+    "timestamp": [
+      "2026-11-01T12:32:14.200Z"
+    ],
+    "@timestamp": [
+      "2026-11-01T12:32:14.200Z"
+    ]
+  },
+  "highlight": {
+    "data.url": [
+      "@opensearch-dashboards-highlighted-field@/vulnerabilities/brute/?username=admin&password=book06-wrong2&Login=Login@/opensearch-dashboards-highlighted-field@"
+    ],
+    "agent.name": [
+      "@opensearch-dashboards-highlighted-field@web@/opensearch-dashboards-highlighted-field@"
+    ]
+  },
+  "sort": [
+    1793536334200
+  ]
+}

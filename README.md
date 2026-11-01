@@ -2,13 +2,15 @@
 
 1권 **시스템 침투와 SIEM 분석**의 집필 저장소입니다.
 
-기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2~5장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
+기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2~6장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
 
 - **[머리말·1장 DOCX](manuscript/volume01-chapter01.docx)** — 부크크 B5, 편집·검토용
 - **[2장 초안 DOCX](manuscript/volume01-chapter02.docx)** — 공격과 보안관제의 기초, 9쪽
 - **[3장 초안 DOCX](manuscript/volume01-chapter03.docx)** — Wazuh 기본 운용, 12쪽
 - **[4장 초안 DOCX](manuscript/volume01-chapter04.docx)** — 로그 수집과 탐지 규칙, 31쪽
 - **[5장 초안 DOCX](manuscript/volume01-chapter05.docx)** — 웹 공격의 시작과 입력값 검증, 55쪽
+- **[6장 초안 DOCX](manuscript/volume01-chapter06.docx)** — 웹 탐색과 인증 공격, 45쪽
+- [6장 복사용 입력·명령·검색식·실제 로그](examples/chapter06/)
 - [5장 복사용 명령·검색식·실제 로그](examples/chapter05/)
 - [4장 명령·검색식·규칙 파일](examples/chapter04/)
 - [3장 복사용 검색식·조사 양식](examples/chapter03/)
@@ -23,6 +25,10 @@
 3장은 Discover에서 인덱스·기간·DQL을 지정하고 경보의 필드·원문을 읽는 실습입니다. 실제 UI 화면 8개, 개념 도식 2개, 작은 삽화 1개를 수록했습니다. 기존 SSH 사례를 검색한 두 조건은 각각 2건을 반환했습니다. 모든 장의 참고 자료에는 제목과 전체 URL을 함께 인쇄합니다.
 
 4장은 bastion에 확인 문구를 기록하고 아카이브에서 찾은 뒤, 사용자 규칙 100410을 적용해 새 경보를 생성하는 실습입니다. 수집·규칙 시험·실제 경보 생성·규칙 제거와 재시작을 기존 kt66에서 검증했습니다. 실제 화면 7개, 도식 5개, 야외 통신함 점검 삽화 1개를 수록했습니다. SSH 원문과 추출 필드의 대응, 실제 디코더·규칙 파일의 위치와 조회 절차, logger·grep의 옵션과 정규표현식 해석을 보완했습니다.
+
+6장은 Module 01 실습 04~06, 13~15를 다룹니다. 브라우저 경로 탐색, User-Agent 변경, 일반 로그인과 Brute Force 결과 비교, PROPFIND, 관리 경로, 긴 URL을 실제 kt66에서 확인했습니다. Gobuster는 공격자 VM에서 23행의 짧은 경로 목록으로 시험하며, curl 두 예제는 선택 실습입니다. **45쪽, 실제 화면 33개, 도식 6개, 새 삽화 2개**이며 복사용 명령 28개·DQL 13개·브라우저 입력 11개를 제공합니다.
+
+6장의 DQL 13개를 실제 Discover에서 검증했고, 수집된 access 기록 63개를 Apache 원문과 대조했습니다. 일반 로그인은 성공·실패 모두 302, Brute Force는 모두 200이므로 이동 주소·본문과 함께 읽도록 설명했습니다. WAF 차단 근거, 로그·코드 위치, 명령 옵션·기호, 문제 해결과 원상복구 절차를 포함했습니다. 새 VM 설치와 패키지 재설치는 수행하지 않았습니다.
 
 ## 확인한 범위
 
@@ -99,5 +105,19 @@ DOCX를 직접 편집할 수 있습니다. 조판기는 기본적으로 `build/`
 - [5장 삽화·생성 프롬프트](editorial/chapter05-illustrations.json)
 - [브라우저 화면 촬영 기록](assets/screens/chapter05/browser/provenance.json) · [대응하는 Wazuh 화면](assets/screens/chapter05/browser/wazuh-provenance.json)
 - [이전 curl 검증 기록](editorial/chapter05-curl-review.json)
+
+6장 재생성:
+
+```bash
+.venv/bin/python tools/write_chapter06.py
+.venv/bin/python tools/diagrams_chapter06.py
+.venv/bin/python tools/build_chapter01.py --source manuscript/volume01-chapter06.json --output build/volume01-chapter06.docx
+```
+
+- [6장 검토·검증 기록](editorial/chapter06-review.json)
+- [6장 삽화·생성 프롬프트](editorial/chapter06-illustrations.json)
+- [브라우저 촬영 기록](assets/screens/chapter06/provenance.json) · [추가 촬영 기록](assets/screens/chapter06/detail-provenance.json) · [Wazuh 촬영 기록](assets/screens/chapter06/wazuh-provenance.json)
+- 저자용 촬영: `tools/capture_chapter06.py`, `tools/capture_chapter06_details.py`, `tools/capture_chapter06_wazuh.py`
+- 저자용 조회 검증: `tools/verify_chapter06.py`
 
 PDF는 배포하지 않습니다. 임시 PDF·페이지 이미지는 DOCX 배치 검사용으로만 사용합니다. Consolas가 없는 환경에서는 대체 글꼴로 보일 수 있으므로 Word에서 최종 인쇄 크기를 재확인합니다.

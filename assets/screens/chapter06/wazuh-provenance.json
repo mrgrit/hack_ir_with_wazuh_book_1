@@ -1,0 +1,333 @@
+{
+  "captured_at": "2026-11-01T12:48:16.090680+00:00",
+  "captures": [
+    {
+      "file": "path-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20%22%2Fbook06-missing%22'))",
+      "clip_css": {
+        "x": 161,
+        "y": 502.796875,
+        "width": 530,
+        "height": 172.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "4334651e5684b4e5411f6b2a992539edca6b52c04fb76eb2e6ea496b1766bf5f"
+    },
+    {
+      "file": "scan-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20full_log:%20%22book06-scan%22'))",
+      "clip_css": {
+        "x": 161,
+        "y": 503.75,
+        "width": 530,
+        "height": 172.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "817b1ded77b2c9f3fc76689657fa2b2e6200276149aeee8b2fb6ac7229a5ba6c"
+    },
+    {
+      "file": "scan-rule-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20rule.id:%20%2231151%22%20AND%20full_log:%20%22book06-scan%22'))",
+      "clip_css": {
+        "x": 161,
+        "y": 603.234375,
+        "width": 530,
+        "height": 172.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "1e3eb8d48c75dbfd8718bba8f3c54756deb2be66ae2a712a65da561c0459a3e7"
+    },
+    {
+      "file": "scan-rule.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20rule.id:%20%2231151%22%20AND%20full_log:%20%22book06-scan%22'))",
+      "clip_css": {
+        "x": 161,
+        "y": 500.65625,
+        "width": 530,
+        "height": 90.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "917f46909154ff6e1cfd182f712eb533a5cb8697d860e7b3c07b02cea540e109"
+    },
+    {
+      "file": "ua-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20%22%2Fbook06-ua%22%20AND%20full_log:%20%22sqlmap%22'))",
+      "clip_css": {
+        "x": 161,
+        "y": 723.375,
+        "width": 530,
+        "height": 172.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "eb28b03bf9d81785e1247e7fb7521c8e1d1ec03f90c844d7a58debed7aa6bdc3"
+    },
+    {
+      "file": "ua-waf-action.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20location:%20%22%2Fvar%2Flog%2Fapache2%2Fmodsec_audit.log%22%20AND%20data.request.request_line:%20*book06-ua*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 774.546875,
+        "width": 530,
+        "height": 133.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "398a1f52a95c1e24eccbb8dc42c48ca683b518c19832e294bee1e8ed380b7f29"
+    },
+    {
+      "file": "ua-waf-request-line.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20location:%20%22%2Fvar%2Flog%2Fapache2%2Fmodsec_audit.log%22%20AND%20data.request.request_line:%20*book06-ua*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 502.796875,
+        "width": 530,
+        "height": 43.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "b51287f4ddc696f504e0e90c41eef0eceeae0c9129a520c26a862f74d96725dc"
+    },
+    {
+      "file": "ua-waf-status.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20location:%20%22%2Fvar%2Flog%2Fapache2%2Fmodsec_audit.log%22%20AND%20data.request.request_line:%20*book06-ua*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 765.078125,
+        "width": 530,
+        "height": 43.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "afd1db1735cf4ad7dd731cf25f7b9a473519b751d043c5877b47f5e8964e82a4"
+    },
+    {
+      "file": "login-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.protocol:%20%22POST%22%20AND%20data.url:%20%22%2Flogin.php%22'))",
+      "clip_css": {
+        "x": 161,
+        "y": 766.828125,
+        "width": 530,
+        "height": 172.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "36f22031a91056242a6c16dbf419b30bb4d6a995134cef0106aca4ad1e5f3bc1"
+    },
+    {
+      "file": "brute-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20*vulnerabilities%2Fbrute%2F*%20AND%20data.url:%20*username%3Dadmin*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 767.546875,
+        "width": 530,
+        "height": 176.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "802289276c8bfd6089306e33e2d7dde6b6bc0b1c2f3151cffb165a872bc003da"
+    },
+    {
+      "file": "method-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.protocol:%20%22PROPFIND%22%20AND%20data.url:%20%22%2Fbook06-method%22'))",
+      "clip_css": {
+        "x": 161,
+        "y": 724.625,
+        "width": 530,
+        "height": 172.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "00c6df2a4eb4e17309a7a2c5b7eff2444e88c73c182ea796427bc750deb1b64b"
+    },
+    {
+      "file": "method-waf-action.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20location:%20%22%2Fvar%2Flog%2Fapache2%2Fmodsec_audit.log%22%20AND%20data.request.request_line:%20*book06-method*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 767.25,
+        "width": 530,
+        "height": 133.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "77ec45d250cec726ad50aec712813f81c875b14a093a3502b5f12eb9a1c6ce6a"
+    },
+    {
+      "file": "method-waf-request-line.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20location:%20%22%2Fvar%2Flog%2Fapache2%2Fmodsec_audit.log%22%20AND%20data.request.request_line:%20*book06-method*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 502.796875,
+        "width": 530,
+        "height": 43.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "d640d94c813620478251950a27b62920c355edcd7579563ab18d1f4e4171d0ea"
+    },
+    {
+      "file": "method-waf-status.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20location:%20%22%2Fvar%2Flog%2Fapache2%2Fmodsec_audit.log%22%20AND%20data.request.request_line:%20*book06-method*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 760.796875,
+        "width": 530,
+        "height": 43.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "90edbc3fa73233d4b820a8cce83ee81b8bb859b0cb40efab6bd553f7af2f8cc8"
+    },
+    {
+      "file": "admin-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20(%22%2Fadmin%2F%22%20OR%20%22%2Fphpmyadmin%2F%22%20OR%20%22%2Fwp-admin%2F%22%20OR%20%22%2Fmanager%2Fhtml%22)'))",
+      "clip_css": {
+        "x": 161,
+        "y": 723.40625,
+        "width": 530,
+        "height": 172.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "abd84bbc08960e163c07626a23287d852b5559dd01c405770c720c30523e5810"
+    },
+    {
+      "file": "long-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20rule.id:%20%2231115%22%20AND%20data.url:%20*book06-long*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 723.140625,
+        "width": 530,
+        "height": 129.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "4d670bcce1200112b93ef79e45a3ac8704c38cf6c2dfd55866b2702fac15a983"
+    },
+    {
+      "file": "long-rule.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:31:58.095470Z',to:'2026-11-01T12:32:31.964322Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20rule.id:%20%2231115%22%20AND%20data.url:%20*book06-long*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 501.140625,
+        "width": 530,
+        "height": 90.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "935ebc6aee1be0088463ee6a6223de8ce9b473dc295c696fb429dc953d97d0a0"
+    }
+  ],
+  "time_range": {
+    "from": "2026-11-01T12:31:58.095470Z",
+    "to": "2026-11-01T12:32:31.964322Z"
+  },
+  "DQL_verified": [
+    {
+      "name": "path",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND data.url: \"/book06-missing\"",
+      "hits": "1"
+    },
+    {
+      "name": "scan",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND full_log: \"book06-scan\"",
+      "hits": "22"
+    },
+    {
+      "name": "scan-rule",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND rule.id: \"31151\" AND full_log: \"book06-scan\"",
+      "hits": "1"
+    },
+    {
+      "name": "ua",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND data.url: \"/book06-ua\" AND full_log: \"sqlmap\"",
+      "hits": "1"
+    },
+    {
+      "name": "ua-waf",
+      "index": "wazuh-archives-*",
+      "DQL": "agent.name: \"web\" AND location: \"/var/log/apache2/modsec_audit.log\" AND data.request.request_line: *book06-ua*",
+      "hits": "1"
+    },
+    {
+      "name": "login",
+      "index": "wazuh-archives-*",
+      "DQL": "agent.name: \"web\" AND data.protocol: \"POST\" AND data.url: \"/login.php\"",
+      "hits": "3"
+    },
+    {
+      "name": "brute",
+      "index": "wazuh-archives-*",
+      "DQL": "agent.name: \"web\" AND data.url: *vulnerabilities/brute/* AND data.url: *username=admin*",
+      "hits": "3"
+    },
+    {
+      "name": "method",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND data.protocol: \"PROPFIND\" AND data.url: \"/book06-method\"",
+      "hits": "1"
+    },
+    {
+      "name": "method-waf",
+      "index": "wazuh-archives-*",
+      "DQL": "agent.name: \"web\" AND location: \"/var/log/apache2/modsec_audit.log\" AND data.request.request_line: *book06-method*",
+      "hits": "1"
+    },
+    {
+      "name": "admin",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND data.url: (\"/admin/\" OR \"/phpmyadmin/\" OR \"/wp-admin/\" OR \"/manager/html\")",
+      "hits": "5"
+    },
+    {
+      "name": "long",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND rule.id: \"31115\" AND data.url: *book06-long*",
+      "hits": "1"
+    }
+  ],
+  "source": "Actual running kt66 UI; viewport resize/crop only; no field values altered"
+}

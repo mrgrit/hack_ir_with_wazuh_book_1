@@ -1,0 +1,47 @@
+{
+  "source": "Actual Chromium DevTools; crop only",
+  "captures": [
+    {
+      "file": "login-success.png",
+      "clip_css": {
+        "x": 274,
+        "y": 105,
+        "width": 659,
+        "height": 21
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 24,
+      "estimated_text_pt": 13.11,
+      "sha256": "87cab0a98ea3aae5828d40b139cb4186e221c56b51a268d74aa6609a31346855"
+    },
+    {
+      "file": "method-console.png",
+      "clip_css": {
+        "x": 0,
+        "y": 55,
+        "width": 530,
+        "height": 190
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "ea678800d488425eed11f2a8ecc0cada4d2c21b445e4db8df3e930de96c5c339"
+    },
+    {
+      "file": "long-network.png",
+      "clip_css": {
+        "x": 0,
+        "y": 186,
+        "width": 385,
+        "height": 48
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 11.22,
+      "sha256": "4b15c37027bf2769b6afb94562c972900e4b8adee8c67437615faeaf0ff44169"
+    }
+  ]
+}

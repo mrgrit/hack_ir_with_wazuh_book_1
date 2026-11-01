@@ -1,0 +1,26 @@
+[
+  {
+    "id": "C06-12",
+    "container": "kt66-siem",
+    "directory": "/var/ossec/ruleset/rules",
+    "command": "sed -n '/<rule id=\"31151\"/,/<\\/rule>/p' \\\n  0245-web_rules.xml",
+    "stdout": "  <rule id=\"31151\" level=\"10\" frequency=\"14\" timeframe=\"90\">\n    <if_matched_sid>31101</if_matched_sid>\n    <same_source_ip />\n    <description>Multiple web server 400 error codes </description>\n    <description>from same source ip.</description>\n    <mitre>\n      <id>T1595.002</id>\n    </mitre>\n    <group>web_scan,recon,pci_dss_6.5,pci_dss_11.4,gdpr_IV_35.7.d,nist_800_53_SA.11,nist_800_53_SI.4,tsc_CC6.6,tsc_CC7.1,tsc_CC8.1,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>\n  </rule>\n",
+    "returncode": 0
+  },
+  {
+    "id": "C06-20",
+    "container": "kt66-dvwa",
+    "directory": "/var/www/html",
+    "command": "grep -nE 'checkToken|generateSessionToken|dvwaRedirect' \\\n  login.php",
+    "stdout": "12:\tcheckToken( $_REQUEST[ 'user_token' ], $_SESSION[ 'session_token' ], 'login.php' );\n30:\t\tdvwaRedirect( DVWA_WEB_PAGE_TO_ROOT . 'setup.php' );\n38:\t\tdvwaRedirect( DVWA_WEB_PAGE_TO_ROOT . 'index.php' );\n43:\tdvwaRedirect( 'login.php' );\n53:generateSessionToken();\n",
+    "returncode": 0
+  },
+  {
+    "id": "C06-21",
+    "container": "kt66-dvwa",
+    "directory": "/var/www/html",
+    "command": "grep -nE 'GET|Welcome|incorrect' \\\n  vulnerabilities/brute/source/low.php",
+    "stdout": "3:if( isset( $_GET[ 'Login' ] ) ) {\n5:\t$user = $_GET[ 'username' ];\n8:\t$pass = $_GET[ 'password' ];\n21:\t\t$html .= \"<p>Welcome to the password protected area {$user}</p>\";\n26:\t\t$html .= \"<pre><br />Username and/or password incorrect.</pre>\";\n",
+    "returncode": 0
+  }
+]

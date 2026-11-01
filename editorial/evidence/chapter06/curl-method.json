@@ -1,0 +1,5 @@
+{
+  "command": "curl -i --max-time 15 -X PROPFIND http://dvwa.ccc.com/book06-curl-method",
+  "returncode": 0,
+  "response_without_session_headers": "HTTP/1.1 403 Forbidden\nDate: Sun, 01 Nov 2026 12:36:03 GMT\nServer: Apache/2.4.52 (Ubuntu)\nContent-Length: 277\nContent-Type: text/html; charset=iso-8859-1\n\n<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\n<p>You don't have permission to access this resource.</p>\n<hr>\n<address>Apache/2.4.52 (Ubuntu) Server at dvwa.ccc.com Port 80</address>\n</body></html>"
+}

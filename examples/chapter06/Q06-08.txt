@@ -1,0 +1,2 @@
+agent.name: "web" AND data.protocol: "PROPFIND"
+AND data.url: "/book06-method"

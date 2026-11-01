@@ -1,0 +1,18 @@
+{
+  "mode": "built-in imagegen",
+  "reference": "assets/illustrations/chapter05/review.png",
+  "assets": [
+    {
+      "path": "assets/illustrations/chapter06/path-test.png",
+      "prompt": "Use case: illustration-story. Asset: small transparent textbook spot illustration. Reference image is STYLE ONLY, do not reuse its character or entrance composition. Create an original late-1990s PC-98 adventure-game pixel art vignette, crisp visible pixels and ordered checker dithering, restricted navy/cyan/muted rose palette. Scene: outdoor university courtyard at twilight; a hooded adult security student, viewed from rear three quarters, sits sideways on a stone bench, testing web paths on an open compact laptop on their knees; a paper checklist and small messenger bag beside them; tiled building wall, tree and walkway behind. Laptop screen faces the student naturally, not viewer; coherent perspective, realistic simple pose. This accompanies an authorized web directory exploration lab. Transparent outside scene silhouette. No text, letters, logos, speech bubbles, diagrams, headset or readable screen UI. Distinct from reference glass entrance and standing woman. Small print readable silhouette.",
+      "edit_prompt": "Use case: precise-object-edit. Edit target is the courtyard pixel-art illustration. Keep composition, bench, laptop orientation, tree, building, pixel texture, dithering and transparent silhouette unchanged. Change only the seated character: put the hood UP covering head and hair, make the entire hoodie dark charcoal-navy, rear view with face hidden. Hands naturally typing on laptop. No new objects or text. The adult is the authorized attacker in a lab textbook.",
+      "sha256": "77ca07ee0a4f80f176fd7df4cebf5e04655420f636e283531b9273a13f0227e3"
+    },
+    {
+      "path": "assets/illustrations/chapter06/log-review.png",
+      "prompt": "Use case: illustration-story. Original small textbook spot illustration on transparent background. Reference image STYLE ONLY: late 1990s PC-98 adventure game, hard visible pixels, limited navy cyan pale rose colors, orderly dither shading. Scene is a covered outdoor campus network maintenance walkway, a short rack cabinet at right under a shelter. Adult male defender with close cropped hair and rolled up light work shirt, face visible front three-quarter view, crouches beside closed rack cabinet reviewing a printed web access log sheet against a rugged tablet in his other hand. Tablet screen faces him; show its back naturally. One slim binder and tool bag on ground; small pavement and shrubs, overcast morning. Logical perspective and hands; character reviewing observations rather than repairing hardware. Distinct character, posture, backdrop and props from reference. No headset, office desk, readable text, letters, logos, diagrams or UI. Transparent margin around compact scene silhouette.",
+      "sha256": "11ccdd8f14c6b3cf4427e9ce1b14215aa1d41bca09f90dad312e9f7d1beeb679"
+    }
+  ],
+  "review": "Pixel/dither style, transparent margins, normal screen orientation; attacker dark hood rear, defender front three-quarter. New characters, places, props."
+}

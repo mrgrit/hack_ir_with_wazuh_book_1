@@ -1,0 +1,86 @@
+[
+  {
+    "_index": "wazuh-archives-4.x-2026.11.01",
+    "_id": "kPkYl6EBEYWT20nns9Xd",
+    "_score": 0,
+    "_source": {
+      "agent": {
+        "ip": "10.20.32.80",
+        "name": "web",
+        "id": "013"
+      },
+      "data": {
+        "request": {
+          "request_line": "GET /book06-ua HTTP/1.1"
+        },
+        "audit_data": {
+          "messages": [
+            "Warning. Matched phrase \"sqlmap\" at REQUEST_HEADERS:User-Agent. [file \"/usr/share/modsecurity-crs/rules/REQUEST-913-SCANNER-DETECTION.conf\"] [line \"54\"] [id \"913100\"] [msg \"Found User-Agent associated with security scanner\"] [data \"Matched Data: sqlmap found within REQUEST_HEADERS:User-Agent: sqlmap/1.0 book06-ua\"] [severity \"CRITICAL\"] [ver \"OWASP_CRS/3.3.2\"] [tag \"application-multi\"] [tag \"language-multi\"] [tag \"platform-multi\"] [tag \"attack-reputation-scanner\"] [tag \"paranoia-level/1\"] [tag \"OWASP_CRS\"] [tag \"capec/1000/118/224/541/310\"] [tag \"PCI/6.5.10\"]",
+            "Access denied with code 403 (phase 2). Operator GE matched 5 at TX:anomaly_score. [file \"/usr/share/modsecurity-crs/rules/REQUEST-949-BLOCKING-EVALUATION.conf\"] [line \"93\"] [id \"949110\"] [msg \"Inbound Anomaly Score Exceeded (Total Score: 5)\"] [severity \"CRITICAL\"] [ver \"OWASP_CRS/3.3.2\"] [tag \"application-multi\"] [tag \"language-multi\"] [tag \"platform-multi\"] [tag \"attack-generic\"]",
+            "Warning. Operator GE matched 5 at TX:inbound_anomaly_score. [file \"/usr/share/modsecurity-crs/rules/RESPONSE-980-CORRELATION.conf\"] [line \"91\"] [id \"980130\"] [msg \"Inbound Anomaly Score Exceeded (Total Inbound Score: 5 - SQLI=0,XSS=0,RFI=0,LFI=0,RCE=0,PHPI=0,HTTP=0,SESS=0): individual paranoia level scores: 5, 0, 0, 0\"] [ver \"OWASP_CRS/3.3.2\"] [tag \"event-correlation\"]"
+          ],
+          "action": {
+            "phase": "2",
+            "message": "Operator GE matched 5 at TX:anomaly_score.",
+            "intercepted": "true"
+          }
+        },
+        "response": {
+          "status": "403"
+        },
+        "transaction": {
+          "transaction_id": "aucxU0NWTKVTdsVcGBgiYAAAAAk",
+          "local_port": "80",
+          "remote_port": "34452",
+          "local_address": "10.20.32.80",
+          "time": "01/Nov/2026:21:32:19.438369 +0900",
+          "remote_address": "10.20.30.254"
+        }
+      },
+      "location": "/var/log/apache2/modsec_audit.log",
+      "timestamp": "2026-11-01T12:32:20.206+0000"
+    }
+  },
+  {
+    "_index": "wazuh-archives-4.x-2026.11.01",
+    "_id": "n_kYl6EBEYWT20nnv9WV",
+    "_score": 0,
+    "_source": {
+      "agent": {
+        "ip": "10.20.32.80",
+        "name": "web",
+        "id": "013"
+      },
+      "data": {
+        "request": {
+          "request_line": "PROPFIND /book06-method HTTP/1.1"
+        },
+        "audit_data": {
+          "messages": [
+            "Warning. Match of \"within %{tx.allowed_methods}\" against \"REQUEST_METHOD\" required. [file \"/usr/share/modsecurity-crs/rules/REQUEST-911-METHOD-ENFORCEMENT.conf\"] [line \"43\"] [id \"911100\"] [msg \"Method is not allowed by policy\"] [data \"PROPFIND\"] [severity \"CRITICAL\"] [ver \"OWASP_CRS/3.3.2\"] [tag \"application-multi\"] [tag \"language-multi\"] [tag \"platform-multi\"] [tag \"attack-generic\"] [tag \"paranoia-level/1\"] [tag \"OWASP_CRS\"] [tag \"capec/1000/210/272/220/274\"] [tag \"PCI/12.1\"]",
+            "Access denied with code 403 (phase 2). Operator GE matched 5 at TX:anomaly_score. [file \"/usr/share/modsecurity-crs/rules/REQUEST-949-BLOCKING-EVALUATION.conf\"] [line \"93\"] [id \"949110\"] [msg \"Inbound Anomaly Score Exceeded (Total Score: 5)\"] [severity \"CRITICAL\"] [ver \"OWASP_CRS/3.3.2\"] [tag \"application-multi\"] [tag \"language-multi\"] [tag \"platform-multi\"] [tag \"attack-generic\"]",
+            "Warning. Operator GE matched 5 at TX:inbound_anomaly_score. [file \"/usr/share/modsecurity-crs/rules/RESPONSE-980-CORRELATION.conf\"] [line \"91\"] [id \"980130\"] [msg \"Inbound Anomaly Score Exceeded (Total Inbound Score: 5 - SQLI=0,XSS=0,RFI=0,LFI=0,RCE=0,PHPI=0,HTTP=0,SESS=0): individual paranoia level scores: 5, 0, 0, 0\"] [ver \"OWASP_CRS/3.3.2\"] [tag \"event-correlation\"]"
+          ],
+          "action": {
+            "phase": "2",
+            "message": "Operator GE matched 5 at TX:anomaly_score.",
+            "intercepted": "true"
+          }
+        },
+        "response": {
+          "status": "403"
+        },
+        "transaction": {
+          "transaction_id": "aucxVENWTKVTdsVcGBgiYgAAAAw",
+          "local_port": "80",
+          "remote_port": "34452",
+          "local_address": "10.20.32.80",
+          "time": "01/Nov/2026:21:32:20.263927 +0900",
+          "remote_address": "10.20.30.254"
+        }
+      },
+      "location": "/var/log/apache2/modsec_audit.log",
+      "timestamp": "2026-11-01T12:32:22.208+0000"
+    }
+  }
+]

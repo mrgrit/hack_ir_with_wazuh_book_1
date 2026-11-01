@@ -1,0 +1,1 @@
+rm -i ~/book06-paths.txt

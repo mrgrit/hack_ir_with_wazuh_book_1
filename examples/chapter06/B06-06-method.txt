@@ -1,0 +1,2 @@
+fetch('/book06-method', {method: 'PROPFIND'})
+  .then(r => console.log(r.status));

@@ -1,0 +1,244 @@
+{
+  "source": "Actual DVWA and Chromium DevTools; crop only",
+  "captures": [
+    {
+      "file": "login-input.png",
+      "clip_css": {
+        "x": 293,
+        "y": 195,
+        "width": 400,
+        "height": 190
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 105,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.93,
+      "sha256": "e0b0cae4043bbd15cebf9311a7da4711cbd81ecaf80ebc0497a8a554e8995206"
+    },
+    {
+      "file": "login-failed.png",
+      "clip_css": {
+        "x": 293,
+        "y": 195,
+        "width": 400,
+        "height": 260
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 105,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.93,
+      "sha256": "2648cbb2fddced0612cd47e09965c650b09f77f8d9c2f3b1f4a01a3e32241c2a"
+    },
+    {
+      "file": "login-failed-headers.png",
+      "clip_css": {
+        "x": 200,
+        "y": 185,
+        "width": 450,
+        "height": 185
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 9.6,
+      "sha256": "ba4625bb7e7076f2128bf3a846c3c3377eacd650de6364f2a92e77656a9e30a3"
+    },
+    {
+      "file": "login-success-headers.png",
+      "clip_css": {
+        "x": 200,
+        "y": 185,
+        "width": 450,
+        "height": 185
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 9.6,
+      "sha256": "ba4625bb7e7076f2128bf3a846c3c3377eacd650de6364f2a92e77656a9e30a3"
+    },
+    {
+      "file": "security.png",
+      "clip_css": {
+        "x": 270,
+        "y": 100,
+        "width": 510,
+        "height": 125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.47,
+      "sha256": "dd1b72e88d617f2cd39a6ad868df02a3b0c1e8cffa66c28715330176b888633d"
+    },
+    {
+      "file": "brute-input.png",
+      "clip_css": {
+        "x": 270,
+        "y": 100,
+        "width": 510,
+        "height": 200
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.47,
+      "sha256": "7f28e4c1a388f12cd387782b967d9c28f8bff75492326b6986e4b4c38b971471"
+    },
+    {
+      "file": "brute-failed.png",
+      "clip_css": {
+        "x": 270,
+        "y": 100,
+        "width": 510,
+        "height": 260
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.47,
+      "sha256": "8d81c2b0625ad3ea5c33bb05a4e6e0bbf32629bca7334155aaf0e11da7001be9"
+    },
+    {
+      "file": "brute-failed-headers.png",
+      "clip_css": {
+        "x": 200,
+        "y": 185,
+        "width": 450,
+        "height": 185
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 9.6,
+      "sha256": "cc3693deb4dc499566458759d319b8d37be535ab887d71af8a7ae6c54413dd75"
+    },
+    {
+      "file": "brute-success.png",
+      "clip_css": {
+        "x": 270,
+        "y": 100,
+        "width": 510,
+        "height": 280
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.47,
+      "sha256": "1afc366e42c306fff7602ef33ced2a2309e99579fbb1d8d7fb8a64871ff51a25"
+    },
+    {
+      "file": "brute-success-headers.png",
+      "clip_css": {
+        "x": 200,
+        "y": 185,
+        "width": 450,
+        "height": 185
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 9.6,
+      "sha256": "6e9670cbdee9f0b8e44ffcb5182a19588b97f01a548984b4913722c4d43e2fe3"
+    },
+    {
+      "file": "path-missing.png",
+      "clip_css": {
+        "x": 0,
+        "y": 0,
+        "width": 560,
+        "height": 180
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 16,
+      "estimated_text_pt": 10.29,
+      "sha256": "e9a5de22942bab32881b075b424b02c718ca1090809d487677892aab85ac1cba"
+    },
+    {
+      "file": "path-missing-headers.png",
+      "clip_css": {
+        "x": 200,
+        "y": 185,
+        "width": 450,
+        "height": 185
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 9.6,
+      "sha256": "f76444fb5f485033e71607e33b5fc5769b2f6d72338223562d6d55d213008869"
+    },
+    {
+      "file": "admin.png",
+      "clip_css": {
+        "x": 0,
+        "y": 0,
+        "width": 560,
+        "height": 180
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 16,
+      "estimated_text_pt": 10.29,
+      "sha256": "196780af44e4dfbc8643314846d977dbd412c6ea109b76c5cea994c647d57553"
+    },
+    {
+      "file": "admin-headers.png",
+      "clip_css": {
+        "x": 200,
+        "y": 185,
+        "width": 450,
+        "height": 185
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 9.6,
+      "sha256": "275557487d909c4b64961ee2aafc64c3db47092cdf9c6887d0c706d9fbb10c42"
+    },
+    {
+      "file": "ua-settings.png",
+      "clip_css": {
+        "x": 148,
+        "y": 748,
+        "width": 530,
+        "height": 130
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "dc90d28fc086ebf0f9bd8abccb182275379ec5204f2c429d43464658907bb74d"
+    },
+    {
+      "file": "ua-response.png",
+      "clip_css": {
+        "x": 0,
+        "y": 0,
+        "width": 560,
+        "height": 180
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 16,
+      "estimated_text_pt": 10.29,
+      "sha256": "dfa070049ae3258d898b2f47413ebc34cbff2137fbe5d82a63cc80aaaf6ea3de"
+    },
+    {
+      "file": "method-headers.png",
+      "clip_css": {
+        "x": 200,
+        "y": 185,
+        "width": 450,
+        "height": 185
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 9.6,
+      "sha256": "947d8c6c199ac135f64a980928aca5fc6e92abf08cc7cd8dfd573cdeb715680d"
+    }
+  ],
+  "supplement": "detail-provenance.json"
+}

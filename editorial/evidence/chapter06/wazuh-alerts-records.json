@@ -1,0 +1,1813 @@
+{
+  "range": {
+    "from": "2026-11-01T12:31:58.095470+00:00",
+    "to": "2026-11-01T12:32:31.964322+00:00"
+  },
+  "total": {
+    "value": 30,
+    "relation": "eq"
+  },
+  "docs": [
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "JvkYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/42bdc110-c9c2-4121-927c-93190ca846bd"
+        },
+        "rule": {
+          "firedtimes": 16,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /42bdc110-c9c2-4121-927c-93190ca846bd HTTP/1.1\" 404 473 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.191+0000"
+      },
+      "sort": [
+        1793536322191
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "J_kYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/admin/"
+        },
+        "rule": {
+          "firedtimes": 17,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /admin/ HTTP/1.1\" 404 443 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.198+0000"
+      },
+      "sort": [
+        1793536322198
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "KPkYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-01"
+        },
+        "rule": {
+          "firedtimes": 18,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-01 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.201+0000"
+      },
+      "sort": [
+        1793536322201
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "KfkYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-02"
+        },
+        "rule": {
+          "firedtimes": 19,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-02 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.203+0000"
+      },
+      "sort": [
+        1793536322203
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "KvkYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-03"
+        },
+        "rule": {
+          "firedtimes": 20,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-03 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.205+0000"
+      },
+      "sort": [
+        1793536322205
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "K_kYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-04"
+        },
+        "rule": {
+          "firedtimes": 21,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-04 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.208+0000"
+      },
+      "sort": [
+        1793536322208
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "LPkYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-05"
+        },
+        "rule": {
+          "firedtimes": 22,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-05 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.210+0000"
+      },
+      "sort": [
+        1793536322210
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "LfkYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-06"
+        },
+        "rule": {
+          "firedtimes": 23,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-06 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.212+0000"
+      },
+      "sort": [
+        1793536322212
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "LvkYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-07"
+        },
+        "rule": {
+          "firedtimes": 24,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-07 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.214+0000"
+      },
+      "sort": [
+        1793536322214
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "MPkYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-08"
+        },
+        "rule": {
+          "firedtimes": 25,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-08 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.217+0000"
+      },
+      "sort": [
+        1793536322217
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "MfkYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-09"
+        },
+        "rule": {
+          "firedtimes": 26,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-09 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.219+0000"
+      },
+      "sort": [
+        1793536322219
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "MvkYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-10"
+        },
+        "rule": {
+          "firedtimes": 27,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-10 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.221+0000"
+      },
+      "sort": [
+        1793536322221
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "M_kYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-11"
+        },
+        "rule": {
+          "firedtimes": 1,
+          "mail": false,
+          "level": 10,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Multiple web server 400 error codes from same source ip.",
+          "groups": [
+            "web",
+            "accesslog",
+            "web_scan",
+            "recon"
+          ],
+          "mitre": {
+            "technique": [
+              "Vulnerability Scanning"
+            ],
+            "id": [
+              "T1595.002"
+            ],
+            "tactic": [
+              "Reconnaissance"
+            ]
+          },
+          "id": "31151",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "frequency": 14,
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-11 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.224+0000"
+      },
+      "sort": [
+        1793536322224
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "NPkYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-12"
+        },
+        "rule": {
+          "firedtimes": 28,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-12 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.226+0000"
+      },
+      "sort": [
+        1793536322226
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "NfkYl6EBEYWT20nnddVd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-13"
+        },
+        "rule": {
+          "firedtimes": 29,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-13 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.228+0000"
+      },
+      "sort": [
+        1793536322228
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "N_kYl6EBEYWT20nnddVn",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-14"
+        },
+        "rule": {
+          "firedtimes": 30,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-14 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.230+0000"
+      },
+      "sort": [
+        1793536322230
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "OPkYl6EBEYWT20nnddVn",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-15"
+        },
+        "rule": {
+          "firedtimes": 31,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-15 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.232+0000"
+      },
+      "sort": [
+        1793536322232
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "OfkYl6EBEYWT20nnddVn",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-16"
+        },
+        "rule": {
+          "firedtimes": 32,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-16 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.234+0000"
+      },
+      "sort": [
+        1793536322234
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "OvkYl6EBEYWT20nnddVn",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-17"
+        },
+        "rule": {
+          "firedtimes": 33,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-17 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.237+0000"
+      },
+      "sort": [
+        1793536322237
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "O_kYl6EBEYWT20nnddVn",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-18"
+        },
+        "rule": {
+          "firedtimes": 34,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-18 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.239+0000"
+      },
+      "sort": [
+        1793536322239
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "PPkYl6EBEYWT20nnddVn",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-19"
+        },
+        "rule": {
+          "firedtimes": 35,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-19 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.241+0000"
+      },
+      "sort": [
+        1793536322241
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "PfkYl6EBEYWT20nnddVn",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "192.168.0.202",
+          "id": "404",
+          "url": "/book06-scan-20"
+        },
+        "rule": {
+          "firedtimes": 36,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-20 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+        "timestamp": "2026-11-01T12:32:02.243+0000"
+      },
+      "sort": [
+        1793536322243
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "f_kYl6EBEYWT20nnr9Xz",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "10.20.30.254",
+          "id": "404",
+          "url": "/book06-missing"
+        },
+        "rule": {
+          "firedtimes": 37,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "10.20.30.254 - - [01/Nov/2026:21:32:16 +0900] \"GET /book06-missing HTTP/1.1\" 404 506 \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36\"",
+        "timestamp": "2026-11-01T12:32:18.204+0000"
+      },
+      "sort": [
+        1793536338204
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "gPkYl6EBEYWT20nnr9Xz",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "10.20.30.254",
+          "id": "404",
+          "url": "/admin/"
+        },
+        "rule": {
+          "firedtimes": 38,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "10.20.30.254 - - [01/Nov/2026:21:32:17 +0900] \"GET /admin/ HTTP/1.1\" 404 498 \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36\"",
+        "timestamp": "2026-11-01T12:32:18.245+0000"
+      },
+      "sort": [
+        1793536338245
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "i_kYl6EBEYWT20nns9Xd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "10.20.30.254",
+          "id": "404",
+          "url": "/phpmyadmin/"
+        },
+        "rule": {
+          "firedtimes": 39,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "10.20.30.254 - - [01/Nov/2026:21:32:18 +0900] \"GET /phpmyadmin/ HTTP/1.1\" 404 503 \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36\"",
+        "timestamp": "2026-11-01T12:32:20.206+0000"
+      },
+      "sort": [
+        1793536340206
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "jPkYl6EBEYWT20nns9Xd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "10.20.30.254",
+          "id": "404",
+          "url": "/wp-admin/"
+        },
+        "rule": {
+          "firedtimes": 40,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "10.20.30.254 - - [01/Nov/2026:21:32:18 +0900] \"GET /wp-admin/ HTTP/1.1\" 404 501 \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36\"",
+        "timestamp": "2026-11-01T12:32:20.209+0000"
+      },
+      "sort": [
+        1793536340209
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "jfkYl6EBEYWT20nns9Xd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "10.20.30.254",
+          "id": "404",
+          "url": "/manager/html"
+        },
+        "rule": {
+          "firedtimes": 41,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "10.20.30.254 - - [01/Nov/2026:21:32:18 +0900] \"GET /manager/html HTTP/1.1\" 404 504 \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36\"",
+        "timestamp": "2026-11-01T12:32:20.211+0000"
+      },
+      "sort": [
+        1793536340211
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "jvkYl6EBEYWT20nns9Xd",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "10.20.30.254",
+          "id": "403",
+          "url": "/book06-ua"
+        },
+        "rule": {
+          "firedtimes": 42,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "10.20.30.254 - - [01/Nov/2026:21:32:19 +0900] \"GET /book06-ua HTTP/1.1\" 403 493 \"-\" \"sqlmap/1.0 book06-ua\"",
+        "timestamp": "2026-11-01T12:32:20.213+0000"
+      },
+      "sort": [
+        1793536340213
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "nfkYl6EBEYWT20nnu9Ws",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "PROPFIND",
+          "srcip": "10.20.30.254",
+          "id": "403",
+          "url": "/book06-method"
+        },
+        "rule": {
+          "firedtimes": 43,
+          "mail": false,
+          "level": 5,
+          "pci_dss": [
+            "6.5",
+            "11.4"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "Web server 400 error code.",
+          "groups": [
+            "web",
+            "accesslog",
+            "attack"
+          ],
+          "id": "31101",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "10.20.30.254 - - [01/Nov/2026:21:32:20 +0900] \"PROPFIND /book06-method HTTP/1.1\" 403 493 \"http://dvwa.ccc.com/login.php\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36\"",
+        "timestamp": "2026-11-01T12:32:22.208+0000"
+      },
+      "sort": [
+        1793536342208
+      ]
+    },
+    {
+      "_index": "wazuh-alerts-4.x-2026.11.01",
+      "_id": "pPkYl6EBEYWT20nnv9WV",
+      "_score": null,
+      "_source": {
+        "agent": {
+          "ip": "10.20.32.80",
+          "name": "web",
+          "id": "013"
+        },
+        "data": {
+          "protocol": "GET",
+          "srcip": "10.20.30.254",
+          "id": "200",
+          "url": "/?book06-long=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        "rule": {
+          "firedtimes": 1,
+          "mail": true,
+          "level": 13,
+          "pci_dss": [
+            "6.5",
+            "11.4",
+            "6.5.8",
+            "10.2.4"
+          ],
+          "hipaa": [
+            "164.312.b"
+          ],
+          "tsc": [
+            "CC6.6",
+            "CC7.1",
+            "CC8.1",
+            "CC6.1",
+            "CC6.8",
+            "CC7.2",
+            "CC7.3"
+          ],
+          "description": "URL too long. Higher than allowed on most browsers. Possible attack.",
+          "groups": [
+            "web",
+            "accesslog",
+            "invalid_access"
+          ],
+          "mitre": {
+            "technique": [
+              "Endpoint Denial of Service"
+            ],
+            "id": [
+              "T1499"
+            ],
+            "tactic": [
+              "Impact"
+            ]
+          },
+          "id": "31115",
+          "nist_800_53": [
+            "SA.11",
+            "SI.4",
+            "AU.14",
+            "AC.7"
+          ],
+          "gdpr": [
+            "IV_35.7.d"
+          ]
+        },
+        "location": "/var/log/apache2/dvwa_access.log",
+        "decoder": {
+          "name": "web-accesslog"
+        },
+        "full_log": "10.20.30.254 - - [01/Nov/2026:21:32:21 +0900] \"GET /?book06-long=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA HTTP/1.1\" 200 3010 \"http://dvwa.ccc.com/login.php\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36\"",
+        "timestamp": "2026-11-01T12:32:22.211+0000"
+      },
+      "sort": [
+        1793536342211
+      ]
+    }
+  ]
+}

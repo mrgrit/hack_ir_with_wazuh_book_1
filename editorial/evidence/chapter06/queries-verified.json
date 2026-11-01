@@ -1,0 +1,145 @@
+[
+  {
+    "id": "Q06-01",
+    "query": "agent.name: \"web\"\nAND data.url: \"/book06-missing\"",
+    "hits": 1,
+    "index": "wazuh-alerts-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:32:31.964322Z"
+    },
+    "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+  },
+  {
+    "id": "Q06-02",
+    "query": "agent.name: \"web\"\nAND full_log: \"book06-scan\"",
+    "hits": 22,
+    "index": "wazuh-alerts-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:32:31.964322Z"
+    },
+    "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+  },
+  {
+    "id": "Q06-03",
+    "query": "agent.name: \"web\" AND rule.id: \"31151\"\nAND full_log: \"book06-scan\"",
+    "hits": 1,
+    "index": "wazuh-alerts-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:32:31.964322Z"
+    },
+    "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+  },
+  {
+    "id": "Q06-04",
+    "query": "agent.name: \"web\" AND data.url: \"/book06-ua\"\nAND full_log: \"sqlmap\"",
+    "hits": 1,
+    "index": "wazuh-alerts-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:32:31.964322Z"
+    },
+    "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+  },
+  {
+    "id": "Q06-05",
+    "query": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-ua*",
+    "hits": 1,
+    "index": "wazuh-archives-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:32:31.964322Z"
+    },
+    "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+  },
+  {
+    "id": "Q06-06",
+    "query": "agent.name: \"web\" AND data.protocol: \"POST\"\nAND data.url: \"/login.php\"",
+    "hits": 3,
+    "index": "wazuh-archives-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:32:31.964322Z"
+    },
+    "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+  },
+  {
+    "id": "Q06-07",
+    "query": "agent.name: \"web\"\nAND data.url: *vulnerabilities/brute/*\nAND data.url: *username=admin*",
+    "hits": 3,
+    "index": "wazuh-archives-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:32:31.964322Z"
+    },
+    "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+  },
+  {
+    "id": "Q06-08",
+    "query": "agent.name: \"web\" AND data.protocol: \"PROPFIND\"\nAND data.url: \"/book06-method\"",
+    "hits": 1,
+    "index": "wazuh-alerts-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:32:31.964322Z"
+    },
+    "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+  },
+  {
+    "id": "Q06-09",
+    "query": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-method*",
+    "hits": 1,
+    "index": "wazuh-archives-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:32:31.964322Z"
+    },
+    "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+  },
+  {
+    "id": "Q06-10",
+    "query": "agent.name: \"web\"\nAND data.url: (\"/admin/\" OR \"/phpmyadmin/\"\nOR \"/wp-admin/\" OR \"/manager/html\")",
+    "hits": 5,
+    "index": "wazuh-alerts-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:32:31.964322Z"
+    },
+    "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+  },
+  {
+    "id": "Q06-11",
+    "query": "agent.name: \"web\" AND rule.id: \"31115\"\nAND data.url: *book06-long*",
+    "hits": 1,
+    "index": "wazuh-alerts-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:32:31.964322Z"
+    },
+    "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+  },
+  {
+    "id": "Q06-12",
+    "query": "agent.name: \"web\" AND data.url: *book06-curl-ua*",
+    "hits": 1,
+    "index": "wazuh-alerts-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:50:02.762987Z"
+    },
+    "method": "Actual Discover UI"
+  },
+  {
+    "id": "Q06-13",
+    "query": "agent.name: \"web\" AND data.url: *book06-curl-method*",
+    "hits": 1,
+    "index": "wazuh-alerts-*",
+    "range": {
+      "from": "2026-11-01T12:31:58.095470Z",
+      "to": "2026-11-01T12:50:02.762987Z"
+    },
+    "method": "Actual Discover UI"
+  }
+]

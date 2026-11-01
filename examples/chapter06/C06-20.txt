@@ -1,0 +1,2 @@
+grep -nE 'checkToken|generateSessionToken|dvwaRedirect' \
+  login.php

@@ -1,0 +1,436 @@
+{
+  "chapter": 6,
+  "title": "웹 탐색과 인증 공격",
+  "reviewed_at": "2026-11-01T12:53:03.103171+00:00",
+  "scope": "Module 01 04–06 and 13–15",
+  "deliverable": "manuscript/volume01-chapter06.docx",
+  "pages": 45,
+  "counts": {
+    "screenshots": 33,
+    "diagrams": 6,
+    "illustrations": 2,
+    "commands": 28,
+    "DQL": 13,
+    "browser_inputs": 11
+  },
+  "environment": {
+    "kt66_baseline": "63d4180b1d6866de986ef263a3bd831d6082b5d5",
+    "wazuh": "4.10.0",
+    "DVWA": "v1.10 Development",
+    "CRS": "3.3.2",
+    "Gobuster": "Ubuntu 22.04 package 2.0.1-1build2",
+    "browser": "156.0.8078.4",
+    "author_browser_host": "Linux; Windows Chrome/Edge equivalent controls described",
+    "attacker": "Ubuntu 22.04 Live Server, 192.168.0.202"
+  },
+  "verified": {
+    "browser": "Actual login, Low selection, paths, User-Agent edit/restore, three main-login and three Brute Force attempts, Console PROPFIND, long navigation",
+    "scanner": "23 path candidates, single worker, actual attacker VM; 31151 observed",
+    "normal_login": "Two wrong and one correct password all POST 302; Location login.php vs index.php",
+    "brute_form": "Three GET responses all 200; failure/success distinguished by body",
+    "UA": "403; CRS 913100 and 949110; Wazuh access rule 31101",
+    "method": "PROPFIND 403; CRS 911100 and 949110",
+    "admin_paths": "All four browser candidates returned 404; query also includes earlier scanner admin request",
+    "long": "Authenticated 200; Wazuh 31115. Request target 8014 bytes, request line without CRLF 8027 bytes, raw access event without LF 8228 bytes. Separate unauthenticated rendering trial redirected with 302; text explains login dependency.",
+    "queries": [
+      {
+        "id": "Q06-01",
+        "query": "agent.name: \"web\"\nAND data.url: \"/book06-missing\"",
+        "hits": 1,
+        "index": "wazuh-alerts-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:32:31.964322Z"
+        },
+        "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+      },
+      {
+        "id": "Q06-02",
+        "query": "agent.name: \"web\"\nAND full_log: \"book06-scan\"",
+        "hits": 22,
+        "index": "wazuh-alerts-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:32:31.964322Z"
+        },
+        "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+      },
+      {
+        "id": "Q06-03",
+        "query": "agent.name: \"web\" AND rule.id: \"31151\"\nAND full_log: \"book06-scan\"",
+        "hits": 1,
+        "index": "wazuh-alerts-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:32:31.964322Z"
+        },
+        "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+      },
+      {
+        "id": "Q06-04",
+        "query": "agent.name: \"web\" AND data.url: \"/book06-ua\"\nAND full_log: \"sqlmap\"",
+        "hits": 1,
+        "index": "wazuh-alerts-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:32:31.964322Z"
+        },
+        "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+      },
+      {
+        "id": "Q06-05",
+        "query": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-ua*",
+        "hits": 1,
+        "index": "wazuh-archives-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:32:31.964322Z"
+        },
+        "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+      },
+      {
+        "id": "Q06-06",
+        "query": "agent.name: \"web\" AND data.protocol: \"POST\"\nAND data.url: \"/login.php\"",
+        "hits": 3,
+        "index": "wazuh-archives-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:32:31.964322Z"
+        },
+        "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+      },
+      {
+        "id": "Q06-07",
+        "query": "agent.name: \"web\"\nAND data.url: *vulnerabilities/brute/*\nAND data.url: *username=admin*",
+        "hits": 3,
+        "index": "wazuh-archives-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:32:31.964322Z"
+        },
+        "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+      },
+      {
+        "id": "Q06-08",
+        "query": "agent.name: \"web\" AND data.protocol: \"PROPFIND\"\nAND data.url: \"/book06-method\"",
+        "hits": 1,
+        "index": "wazuh-alerts-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:32:31.964322Z"
+        },
+        "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+      },
+      {
+        "id": "Q06-09",
+        "query": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-method*",
+        "hits": 1,
+        "index": "wazuh-archives-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:32:31.964322Z"
+        },
+        "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+      },
+      {
+        "id": "Q06-10",
+        "query": "agent.name: \"web\"\nAND data.url: (\"/admin/\" OR \"/phpmyadmin/\"\nOR \"/wp-admin/\" OR \"/manager/html\")",
+        "hits": 5,
+        "index": "wazuh-alerts-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:32:31.964322Z"
+        },
+        "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+      },
+      {
+        "id": "Q06-11",
+        "query": "agent.name: \"web\" AND rule.id: \"31115\"\nAND data.url: *book06-long*",
+        "hits": 1,
+        "index": "wazuh-alerts-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:32:31.964322Z"
+        },
+        "method": "Actual Discover UI; capture_chapter06_wazuh.py"
+      },
+      {
+        "id": "Q06-12",
+        "query": "agent.name: \"web\" AND data.url: *book06-curl-ua*",
+        "hits": 1,
+        "index": "wazuh-alerts-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:50:02.762987Z"
+        },
+        "method": "Actual Discover UI"
+      },
+      {
+        "id": "Q06-13",
+        "query": "agent.name: \"web\" AND data.url: *book06-curl-method*",
+        "hits": 1,
+        "index": "wazuh-alerts-*",
+        "range": {
+          "from": "2026-11-01T12:31:58.095470Z",
+          "to": "2026-11-01T12:50:02.762987Z"
+        },
+        "method": "Actual Discover UI"
+      }
+    ],
+    "access_readback": {
+      "indexed_access_records": 63,
+      "found_exactly_in_apache_file": 63
+    },
+    "source_read_commands": "C06-12, C06-20, C06-21 executed against actual containers; outputs in evidence/source-commands.json",
+    "curl": "Two optional requests from attacker VM returned 403, both matching DQL verified"
+  },
+  "restoration": {
+    "database_reset": false,
+    "security": "Original Low restored; logged out",
+    "user_agent": "Use browser default restored",
+    "scanner_list": "Author temporary list removed after use",
+    "configuration_changes": false
+  },
+  "accuracy_corrections": [
+    "Do not equate 200/302 with authentication success.",
+    "User-Agent is client-supplied; sqlmap label is not evidence of running sqlmap.",
+    "PUT, DELETE, PROPFIND can be legitimate service methods.",
+    "maxsize is event size; separate URL/request-line/access-event lengths.",
+    "Manager 31151 rule conditions read directly; prior 4xx requests affect position of alert.",
+    "Private address alone does not establish trusted management origin."
+  ],
+  "layout": {
+    "template": "tools/assets/bookk-B5.docx inherited",
+    "page_mm": [
+      188,
+      263
+    ],
+    "body_mm": [
+      127,
+      192
+    ],
+    "body_font_pt": 10.5,
+    "code_font_pt": 10,
+    "screens_min_estimated_text_pt": 8.15,
+    "all_45_pages_rendered": true,
+    "visual_review": "All initial 44 page layouts inspected as contact sheets, revised pages inspected at full render size; all six diagrams visually inspected. No clipped essential text; replaced cropped Home title and narrower Console capture.",
+    "checks": "editorial/chapter06-layout-check.json",
+    "rendering_limit": "Local LibreOffice uses a fallback when Consolas is unavailable; final Word print review remains.",
+    "distributed_PDF": false
+  },
+  "not_executed": [
+    "Fresh VMware/Ubuntu installation",
+    "Package installation via apt (Gobuster already installed)",
+    "Interactive nano entry by reader; equivalent author list was checked before run",
+    "Windows hosts edit in a Windows session"
+  ],
+  "sources": "Full primary-source URLs are printed in the DOCX; local installed DVWA/Wazuh source snapshots in evidence.",
+  "assets": [
+    {
+      "path": "assets/figures/chapter06/roadmap.png",
+      "caption": "도식 6-1. 실습 순서.",
+      "sha256": "8c346e66e4a4da2d43026b2568358932bfdaca330b4d0378ca6c9c1ad2010133"
+    },
+    {
+      "path": "assets/screens/chapter06/login-input.png",
+      "caption": "화면 6-1. DVWA 계정 입력.",
+      "sha256": "e0b0cae4043bbd15cebf9311a7da4711cbd81ecaf80ebc0497a8a554e8995206"
+    },
+    {
+      "path": "assets/screens/chapter06/security.png",
+      "caption": "화면 6-2. DVWA의 Low 단계.",
+      "sha256": "dd1b72e88d617f2cd39a6ad868df02a3b0c1e8cffa66c28715330176b888633d"
+    },
+    {
+      "path": "assets/figures/chapter06/path-scan.png",
+      "caption": "도식 6-2. 경로 탐색과 반복 요청의 기록.",
+      "sha256": "7846741e75c89c90341b2c749e4212284ee399db4b781cf18f184de1525c4ed4"
+    },
+    {
+      "path": "assets/screens/chapter06/path-missing.png",
+      "caption": "화면 6-3. 없는 경로의 404 응답.",
+      "sha256": "e9a5de22942bab32881b075b424b02c718ca1090809d487677892aab85ac1cba"
+    },
+    {
+      "path": "assets/screens/chapter06/path-data.png",
+      "caption": "화면 6-4. 없는 경로의 수집 기록.",
+      "sha256": "4334651e5684b4e5411f6b2a992539edca6b52c04fb76eb2e6ea496b1766bf5f"
+    },
+    {
+      "path": "assets/illustrations/chapter06/path-test.png",
+      "caption": "삽화. 실습 경로 목록 확인.",
+      "sha256": "77ca07ee0a4f80f176fd7df4cebf5e04655420f636e283531b9273a13f0227e3"
+    },
+    {
+      "path": "assets/screens/chapter06/scan-data.png",
+      "caption": "화면 6-5. 경로 목록에서 발생한 404 기록.",
+      "sha256": "817b1ded77b2c9f3fc76689657fa2b2e6200276149aeee8b2fb6ac7229a5ba6c"
+    },
+    {
+      "path": "assets/screens/chapter06/scan-rule.png",
+      "caption": "화면 6-6. 반복된 4xx 응답 경보.",
+      "sha256": "917f46909154ff6e1cfd182f712eb533a5cb8697d860e7b3c07b02cea540e109"
+    },
+    {
+      "path": "assets/figures/chapter06/user-agent.png",
+      "caption": "도식 6-3. User-Agent 검사와 로그 검색.",
+      "sha256": "27e9deee9de287873421155f260c3619721f440a57176c2cb1bcae0b0196dd58"
+    },
+    {
+      "path": "assets/screens/chapter06/ua-settings.png",
+      "caption": "화면 6-7. 사용자 지정 User-Agent.",
+      "sha256": "dc90d28fc086ebf0f9bd8abccb182275379ec5204f2c429d43464658907bb74d"
+    },
+    {
+      "path": "assets/screens/chapter06/ua-response.png",
+      "caption": "화면 6-8. User-Agent 변경 요청의 거부 응답.",
+      "sha256": "dfa070049ae3258d898b2f47413ebc34cbff2137fbe5d82a63cc80aaaf6ea3de"
+    },
+    {
+      "path": "assets/screens/chapter06/ua-data.png",
+      "caption": "화면 6-9. 헤더 변경 요청의 접속 기록.",
+      "sha256": "eb28b03bf9d81785e1247e7fb7521c8e1d1ec03f90c844d7a58debed7aa6bdc3"
+    },
+    {
+      "path": "assets/screens/chapter06/ua-waf-request-line.png",
+      "caption": "화면 6-10. WAF가 검사한 요청.",
+      "sha256": "b51287f4ddc696f504e0e90c41eef0eceeae0c9129a520c26a862f74d96725dc"
+    },
+    {
+      "path": "assets/screens/chapter06/ua-waf-status.png",
+      "caption": "화면 6-11. WAF의 응답 코드.",
+      "sha256": "afd1db1735cf4ad7dd731cf25f7b9a473519b751d043c5877b47f5e8964e82a4"
+    },
+    {
+      "path": "assets/screens/chapter06/ua-waf-action.png",
+      "caption": "화면 6-12. WAF의 차단 결정.",
+      "sha256": "398a1f52a95c1e24eccbb8dc42c48ca683b518c19832e294bee1e8ed380b7f29"
+    },
+    {
+      "path": "assets/illustrations/chapter06/log-review.png",
+      "caption": "삽화. 요청 기록과 차단 근거 대조.",
+      "sha256": "11ccdd8f14c6b3cf4427e9ce1b14215aa1d41bca09f90dad312e9f7d1beeb679"
+    },
+    {
+      "path": "assets/figures/chapter06/login-flow.png",
+      "caption": "도식 6-4. DVWA 로그인 응답의 분기.",
+      "sha256": "ef2b39cbb278504d6d75f1a005aca34b88659a53d5e94ede179b87680a01cd90"
+    },
+    {
+      "path": "assets/screens/chapter06/login-failed.png",
+      "caption": "화면 6-13. 일반 로그인 실패.",
+      "sha256": "2648cbb2fddced0612cd47e09965c650b09f77f8d9c2f3b1f4a01a3e32241c2a"
+    },
+    {
+      "path": "assets/screens/chapter06/login-failed-headers.png",
+      "caption": "화면 6-14. 실패한 로그인 요청의 302 응답.",
+      "sha256": "ba4625bb7e7076f2128bf3a846c3c3377eacd650de6364f2a92e77656a9e30a3"
+    },
+    {
+      "path": "assets/screens/chapter06/login-success.png",
+      "caption": "화면 6-15. 일반 로그인 성공 후 Home.",
+      "sha256": "87cab0a98ea3aae5828d40b139cb4186e221c56b51a268d74aa6609a31346855"
+    },
+    {
+      "path": "assets/screens/chapter06/login-success-headers.png",
+      "caption": "화면 6-16. 성공한 로그인 요청의 302 응답.",
+      "sha256": "ba4625bb7e7076f2128bf3a846c3c3377eacd650de6364f2a92e77656a9e30a3"
+    },
+    {
+      "path": "assets/screens/chapter06/login-data.png",
+      "caption": "화면 6-17. 일반 로그인 요청의 접속 기록.",
+      "sha256": "36f22031a91056242a6c16dbf419b30bb4d6a995134cef0106aca4ad1e5f3bc1"
+    },
+    {
+      "path": "assets/screens/chapter06/brute-input.png",
+      "caption": "화면 6-18. Brute Force 메뉴의 계정 입력.",
+      "sha256": "7f28e4c1a388f12cd387782b967d9c28f8bff75492326b6986e4b4c38b971471"
+    },
+    {
+      "path": "assets/screens/chapter06/brute-failed.png",
+      "caption": "화면 6-19. 틀린 암호의 결과.",
+      "sha256": "8d81c2b0625ad3ea5c33bb05a4e6e0bbf32629bca7334155aaf0e11da7001be9"
+    },
+    {
+      "path": "assets/screens/chapter06/brute-success.png",
+      "caption": "화면 6-20. 올바른 암호의 결과.",
+      "sha256": "1afc366e42c306fff7602ef33ced2a2309e99579fbb1d8d7fb8a64871ff51a25"
+    },
+    {
+      "path": "assets/screens/chapter06/brute-success-headers.png",
+      "caption": "화면 6-21. 학습용 인증 요청의 GET·200 응답.",
+      "sha256": "6e9670cbdee9f0b8e44ffcb5182a19588b97f01a548984b4913722c4d43e2fe3"
+    },
+    {
+      "path": "assets/screens/chapter06/brute-data.png",
+      "caption": "화면 6-22. Brute Force 요청의 쿼리 값.",
+      "sha256": "802289276c8bfd6089306e33e2d7dde6b6bc0b1c2f3151cffb165a872bc003da"
+    },
+    {
+      "path": "assets/figures/chapter06/method.png",
+      "caption": "도식 6-5. 메서드와 허용 정책 비교.",
+      "sha256": "da7c6d210d864bdced4da0e3752cf6c5033fdbefcea488ebdb0ab9ecf1145b6d"
+    },
+    {
+      "path": "assets/screens/chapter06/method-console.png",
+      "caption": "화면 6-23. PROPFIND 요청과 403 응답.",
+      "sha256": "ea678800d488425eed11f2a8ecc0cada4d2c21b445e4db8df3e930de96c5c339"
+    },
+    {
+      "path": "assets/screens/chapter06/method-headers.png",
+      "caption": "화면 6-24. PROPFIND 요청의 Headers.",
+      "sha256": "947d8c6c199ac135f64a980928aca5fc6e92abf08cc7cd8dfd573cdeb715680d"
+    },
+    {
+      "path": "assets/screens/chapter06/method-data.png",
+      "caption": "화면 6-25. PROPFIND 접속 기록.",
+      "sha256": "00c6df2a4eb4e17309a7a2c5b7eff2444e88c73c182ea796427bc750deb1b64b"
+    },
+    {
+      "path": "assets/screens/chapter06/method-waf-request-line.png",
+      "caption": "화면 6-26. WAF의 PROPFIND 요청 기록.",
+      "sha256": "d640d94c813620478251950a27b62920c355edcd7579563ab18d1f4e4171d0ea"
+    },
+    {
+      "path": "assets/screens/chapter06/method-waf-status.png",
+      "caption": "화면 6-27. WAF의 응답 코드.",
+      "sha256": "90edbc3fa73233d4b820a8cce83ee81b8bb859b0cb40efab6bd553f7af2f8cc8"
+    },
+    {
+      "path": "assets/screens/chapter06/method-waf-action.png",
+      "caption": "화면 6-28. 메서드 정책에 따른 차단.",
+      "sha256": "77ec45d250cec726ad50aec712813f81c875b14a093a3502b5f12eb9a1c6ce6a"
+    },
+    {
+      "path": "assets/screens/chapter06/admin.png",
+      "caption": "화면 6-29. 관리 경로 후보의 404 응답.",
+      "sha256": "196780af44e4dfbc8643314846d977dbd412c6ea109b76c5cea994c647d57553"
+    },
+    {
+      "path": "assets/screens/chapter06/admin-data.png",
+      "caption": "화면 6-30. 관리 경로 후보의 접속 기록.",
+      "sha256": "abd84bbc08960e163c07626a23287d852b5559dd01c405770c720c30523e5810"
+    },
+    {
+      "path": "assets/screens/chapter06/long-network.png",
+      "caption": "화면 6-31. 긴 URL 요청의 Network 기록.",
+      "sha256": "4b15c37027bf2769b6afb94562c972900e4b8adee8c67437615faeaf0ff44169"
+    },
+    {
+      "path": "assets/screens/chapter06/long-data.png",
+      "caption": "화면 6-32. 긴 요청의 200 응답 기록.",
+      "sha256": "4d670bcce1200112b93ef79e45a3ac8704c38cf6c2dfd55866b2702fac15a983"
+    },
+    {
+      "path": "assets/screens/chapter06/long-rule.png",
+      "caption": "화면 6-33. 긴 로그 이벤트의 경보.",
+      "sha256": "935ebc6aee1be0088463ee6a6223de8ce9b473dc295c696fb429dc953d97d0a0"
+    },
+    {
+      "path": "assets/figures/chapter06/length.png",
+      "caption": "도식 6-6. HTTP 요청 줄과 접속 로그의 길이.",
+      "sha256": "9732793837c2cc34b6bf3b4ad366a0e6ce4360e785e7d3be77bc905010ab8d73"
+    }
+  ],
+  "docx_sha256": "1c5281d84e7232f178c1e6574e94a8fda805c78c37f7cf2300a606f746a2d32a"
+}

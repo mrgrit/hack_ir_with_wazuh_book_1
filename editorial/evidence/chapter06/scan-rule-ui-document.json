@@ -1,0 +1,97 @@
+{
+  "_index": "wazuh-alerts-4.x-2026.11.01",
+  "_id": "M_kYl6EBEYWT20nnddVd",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "ip": "10.20.32.80",
+      "name": "web",
+      "id": "013"
+    },
+    "previous_output": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-10 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"\n192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-09 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"\n192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-08 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"\n192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-07 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"\n192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-06 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"\n192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-05 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"\n192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-04 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"\n192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-03 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"\n192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-02 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"\n192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-01 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"\n192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /admin/ HTTP/1.1\" 404 443 \"-\" \"book06-scan\"",
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "data": {
+      "protocol": "GET",
+      "srcip": "192.168.0.202",
+      "id": "404",
+      "url": "/book06-scan-11"
+    },
+    "rule": {
+      "firedtimes": 1,
+      "mail": false,
+      "level": 10,
+      "pci_dss": [
+        "6.5",
+        "11.4"
+      ],
+      "tsc": [
+        "CC6.6",
+        "CC7.1",
+        "CC8.1",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ],
+      "description": "Multiple web server 400 error codes from same source ip.",
+      "groups": [
+        "web",
+        "accesslog",
+        "web_scan",
+        "recon"
+      ],
+      "mitre": {
+        "technique": [
+          "Vulnerability Scanning"
+        ],
+        "id": [
+          "T1595.002"
+        ],
+        "tactic": [
+          "Reconnaissance"
+        ]
+      },
+      "id": "31151",
+      "nist_800_53": [
+        "SA.11",
+        "SI.4"
+      ],
+      "frequency": 14,
+      "gdpr": [
+        "IV_35.7.d"
+      ]
+    },
+    "location": "/var/log/apache2/dvwa_access.log",
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "id": "1793536322.153508321",
+    "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /book06-scan-11 HTTP/1.1\" 404 451 \"-\" \"book06-scan\"",
+    "timestamp": "2026-11-01T12:32:02.224+0000"
+  },
+  "fields": {
+    "timestamp": [
+      "2026-11-01T12:32:02.224Z"
+    ]
+  },
+  "highlight": {
+    "rule.id": [
+      "@opensearch-dashboards-highlighted-field@31151@/opensearch-dashboards-highlighted-field@"
+    ],
+    "agent.name": [
+      "@opensearch-dashboards-highlighted-field@web@/opensearch-dashboards-highlighted-field@"
+    ],
+    "full_log": [
+      "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /@opensearch-dashboards-highlighted-field@book06@/opensearch-dashboards-highlighted-field@-@opensearch-dashboards-highlighted-field@scan@/opensearch-dashboards-highlighted-field@-11 HTTP/1.1\" 404 451 \"-\" \"@opensearch-dashboards-highlighted-field@book06@/opensearch-dashboards-highlighted-field@-@opensearch-dashboards-highlighted-field@scan@/opensearch-dashboards-highlighted-field@\""
+    ]
+  },
+  "sort": [
+    1793536322224
+  ]
+}

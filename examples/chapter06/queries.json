@@ -1,0 +1,106 @@
+[
+  {
+    "type": "query",
+    "id": "Q06-01",
+    "text": "agent.name: \"web\"\nAND data.url: \"/book06-missing\"",
+    "why": "wazuh-alerts-*에서 실습 기간으로 좁힌다. AND는 두 조건을 모두 만족하는 기록을 찾는다.",
+    "result": "행을 펼쳐 data.id가 404, data.protocol이 GET인지 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-02",
+    "text": "agent.name: \"web\"\nAND full_log: \"book06-scan\"",
+    "why": "full_log는 원문이다. 명령에서 지정한 User-Agent 표식이 있는 기록을 찾는다.",
+    "result": "data.srcip이 공격자 VM 주소인지 확인하고 data.url과 data.id를 비교한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-03",
+    "text": "agent.name: \"web\" AND rule.id: \"31151\"\nAND full_log: \"book06-scan\"",
+    "why": "같은 표식의 기록 중 반복된 4xx 응답 경보를 찾는다. rule.id는 HTTP 응답 코드와 다르다.",
+    "result": "검증 환경에서 규칙 31151 한 건이 나왔다. 요청 목록 전체는 앞의 검색으로 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-04",
+    "text": "agent.name: \"web\" AND data.url: \"/book06-ua\"\nAND full_log: \"sqlmap\"",
+    "why": "URL과 원문의 sqlmap 문자열을 함께 찾는다. access 로그의 data.url이 있는 기록으로 한정한다.",
+    "result": "full_log 끝의 User-Agent와 data.id의 403을 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-05",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-ua*",
+    "why": "wazuh-archives-*에서 WAF 감사 파일과 요청 경로로 찾는다. 별표(*)는 임의 문자열에 일치한다.",
+    "result": "행을 펼쳐 요청 줄·응답·차단 결정·메시지를 대조한다.",
+    "where": "Windows · Discover · wazuh-archives-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-06",
+    "text": "agent.name: \"web\" AND data.protocol: \"POST\"\nAND data.url: \"/login.php\"",
+    "why": "아카이브에서 로그인 폼을 제출한 요청을 찾는다. 조회 기간을 세 후보를 입력한 시각으로 좁힌다.",
+    "result": "세 POST 요청의 출발지·시각·302 응답을 비교한다.",
+    "where": "Windows · Discover · wazuh-archives-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-07",
+    "text": "agent.name: \"web\"\nAND data.url: *vulnerabilities/brute/*\nAND data.url: *username=admin*",
+    "why": "아카이브에서 Brute Force 경로와 admin 입력을 함께 찾는다.",
+    "result": "세 후보의 URL과 200 응답을 대조한다. 인증 결과 문구는 브라우저에서 적은 기록과 비교한다.",
+    "where": "Windows · Discover · wazuh-archives-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-08",
+    "text": "agent.name: \"web\" AND data.protocol: \"PROPFIND\"\nAND data.url: \"/book06-method\"",
+    "why": "wazuh-alerts-*에서 메서드와 경로를 함께 지정한다.",
+    "result": "data.protocol의 PROPFIND와 data.id의 403을 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-09",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-method*",
+    "why": "아카이브에서 같은 메서드 시험의 WAF 감사 기록을 찾는다.",
+    "result": "메시지의 911100과 intercepted 값을 확인한다.",
+    "where": "Windows · Discover · wazuh-archives-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-10",
+    "text": "agent.name: \"web\"\nAND data.url: (\"/admin/\" OR \"/phpmyadmin/\"\nOR \"/wp-admin/\" OR \"/manager/html\")",
+    "why": "괄호는 경로 조건을 묶고 OR는 어느 하나에 일치하는 기록을 찾는다.",
+    "result": "네 경로의 data.srcip·data.id를 확인한다. 경보가 없으면 같은 식으로 아카이브를 검색한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-11",
+    "text": "agent.name: \"web\" AND rule.id: \"31115\"\nAND data.url: *book06-long*",
+    "why": "경보 인덱스에서 긴 URL 실습 표식과 규칙 번호로 찾는다.",
+    "result": "rule.id와 data.id를 구분하고 full_log의 요청 줄을 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-12",
+    "text": "agent.name: \"web\" AND data.url: *book06-curl-ua*",
+    "why": "curl로 보낸 User-Agent 시험 경로를 찾는다.",
+    "result": "출발지와 403 응답을 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-13",
+    "text": "agent.name: \"web\" AND data.url: *book06-curl-method*",
+    "why": "curl로 지정한 메서드의 시험 경로를 찾는다.",
+    "result": "data.protocol의 PROPFIND와 403 응답을 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  }
+]

@@ -1,0 +1,1 @@
+cat book06-paths.txt

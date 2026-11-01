@@ -1,0 +1,2 @@
+grep -nE 'GET|Welcome|incorrect' \
+  vulnerabilities/brute/source/low.php
