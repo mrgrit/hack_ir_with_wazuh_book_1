@@ -1,0 +1,67 @@
+{
+  "chapter": 2,
+  "title": "공격과 보안관제의 기초",
+  "editorial_direction": "구체적인 로그인 사례에서 출발. 필요 개념을 해당 증거와 연결. 편집 지시·설치 안내의 반복 제거.",
+  "reader_actions": [
+    "브라우저 UI에서 정상 문서 요청 선택",
+    "요청·응답 기록",
+    "합성 조사 자료에서 사실·가설·추가 확인 구분"
+  ],
+  "native_word_diagrams": 8,
+  "real_screenshots": 3,
+  "illustration": "기존 승인된 overview.png를 장 도입에 사용. 화풍·구도 변경 없음.",
+  "examples": "examples/chapter02/",
+  "source_links": [
+    {
+      "type": "source",
+      "text": "Wazuh · Architecture",
+      "url": "https://documentation.wazuh.com/current/getting-started/architecture.html"
+    },
+    {
+      "type": "source",
+      "text": "Wazuh · Data analysis",
+      "url": "https://documentation.wazuh.com/current/user-manual/ruleset/"
+    },
+    {
+      "type": "source",
+      "text": "Wazuh · Decoders",
+      "url": "https://documentation.wazuh.com/current/user-manual/ruleset/decoders/index.html"
+    },
+    {
+      "type": "source",
+      "text": "Chrome · Inspect network activity",
+      "url": "https://developer.chrome.com/docs/devtools/network/"
+    },
+    {
+      "type": "source",
+      "text": "Chrome · Network panel reference",
+      "url": "https://developer.chrome.com/docs/devtools/network/reference"
+    },
+    {
+      "type": "source",
+      "text": "MDN · HTTP response status codes",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status"
+    },
+    {
+      "type": "source",
+      "text": "OWASP · Authorization Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+    },
+    {
+      "type": "source",
+      "text": "kt66 · 기준 소스",
+      "url": "https://github.com/mrgrit/kt66/tree/63d4180b1d6866de986ef263a3bd831d6082b5d5"
+    }
+  ],
+  "verification": {
+    "live_browser": "기존 kt66에 정상 GET 요청을 보내고 Network·Headers·Response UI에서 결과 확인",
+    "screen_readability": "Network 필요 영역·Headers·Response를 별도 캡처해 B5 원고 너비로 배치",
+    "synthetic_evidence": "ssh-auth.log와 case-evidence.csv는 이 장을 위해 작성한 교육용 자료. 실측 성공을 주장하지 않음.",
+    "host_mutations": "없음. 환경 재설치·서비스 설정·공격 실행 없음.",
+    "chapter01": "원고 수정 보류; 기존 DOCX와 JSON 유지"
+  },
+  "pending": [
+    "독자용 Chrome의 버전별 메뉴 표현은 출판 전 재확인",
+    "브라우저 확인은 실습 웹 요청에 한정. Wazuh 기본 운용·수집 확인은 3장 범위"
+  ]
+}

@@ -1,7 +1,13 @@
 # 해킹·침해대응 실무 with Wazuh
 
 강의 자료와 분리한 집필용 저장소입니다. 1권 제목은 **시스템 침투와 SIEM 분석**입니다.
-현재 집필·검토본은 **목차·머리말·1장 DOCX**입니다. kt66 저장소의 설치 절차를 바탕으로
+현재 최신 집필·검토본은 **2장 — 공격과 보안관제의 기초**입니다. 1장 수정은 보류하고 2장을 별도 DOCX로 이어 작성했습니다.
+
+[2장 DOCX](manuscript/volume01-chapter02.docx) · [2장 예제 자료](examples/chapter02/) · [실제 화면 출처](editorial/chapter02-screenshots.json) · [2장 작성·검증 기록](editorial/chapter02-review.json)
+
+2장은 로그인 실패 뒤 성공 사례, 인증·권한, HTTP 요청·응답, 로그·경보, Wazuh 데이터 흐름과 조사 판단을 연결합니다. 브라우저 UI에서 정상 요청을 확인하는 실습과 실제 캡처, 사건 읽기용 합성 자료를 포함합니다.
+
+앞서 작성한 **목차·머리말·1장 DOCX**는 그대로 보존합니다. kt66 저장소의 설치 절차를 바탕으로
 초보자용 설명, 개별 명령, 확인 기준, 실패 시 점검 순서, 실제 화면을 넣을 자리를 작성했습니다.
 
 - [목차·머리말·1장 DOCX](manuscript/volume01-opening.docx)
@@ -17,8 +23,8 @@
 
 ## DOCX 편집
 
-`manuscript/volume01-opening.docx`를 Word 또는 LibreOffice Writer에서 직접 편집합니다.
-스크린샷 자리는 캡션·삽입 공간·촬영 지시를 포함합니다. 실제 촬영 화면으로 교체합니다.
+`manuscript/volume01-opening.docx`와 `manuscript/volume01-chapter02.docx`를 Word 또는 LibreOffice Writer에서 직접 편집합니다.
+1장의 스크린샷 자리는 캡션·삽입 공간·촬영 지시를 포함합니다. 실제 촬영 화면으로 교체합니다. 2장의 브라우저 실습에는 검증한 실제 캡처 3장을 삽입했습니다.
 새 환경에서 kt66 설치를 실행한 결과는 아직 검증하지 않았으며, 촬영하면서 확인할 항목은 검토 파일에 남겼습니다.
 Ubuntu 24.04 LTS·x86_64를 집필 기준으로 잡고, 가상화 프로그램별 화면은 촬영 환경에 맞춰 확정합니다.
 
@@ -34,6 +40,12 @@ python3 -m venv .venv-docx
 
 생성 사본은 `build/docx/volume01-opening.generated.docx`입니다. Noto Sans CJK KR와
 Noto Sans Mono CJK KR 글꼴을 사용하며, 글꼴 대체와 편집기 버전에 따라 쪽 나눔은 달라질 수 있습니다.
+2장 생성 사본은 다음 명령으로 만듭니다. 수동 편집한 원고 DOCX는 덮어쓰지 않습니다.
+
+```bash
+.venv-docx/bin/python tools/build_docx.py --source manuscript/volume01-chapter02.json --output build/docx/volume01-chapter02.generated.docx
+```
+
 신규 배포 형식은 DOCX이며 새 PDF는 배포하지 않습니다.
 
 ## 학습 원칙

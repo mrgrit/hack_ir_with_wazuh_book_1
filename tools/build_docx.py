@@ -43,6 +43,7 @@ def field(p,name):
 
 def build(source,target):
     data=json.loads(source.read_text());doc=Document();sec=doc.sections[0]
+    chapter=data.get('chapter',1)
     sec.page_width=Mm(182);sec.page_height=Mm(257)
     sec.top_margin=Mm(16);sec.bottom_margin=Mm(17);sec.left_margin=Mm(18);sec.right_margin=Mm(18)
     sec.header_distance=Mm(7);sec.footer_distance=Mm(8)
@@ -77,7 +78,7 @@ def build(source,target):
                 shade(t.cell(0,0),LIGHT);set_cell_text(t.cell(0,0),b['text'],'BookNote');no_split(t.rows[0]);doc.add_paragraph().paragraph_format.space_after=Pt(0)
             elif typ=='table':
                 t=doc.add_table(rows=1,cols=len(b['head']));t.alignment=WD_TABLE_ALIGNMENT.CENTER;t.autofit=False
-                widths=[48,98] if len(b['head'])==2 else [146/len(b['head'])]*len(b['head'])
+                widths=b.get('widths', [48,98] if len(b['head'])==2 else [146/len(b['head'])]*len(b['head']))
                 for col,w in zip(t.columns,widths):col.width=Mm(w)
                 for i,v in enumerate(b['head']):set_cell_text(t.rows[0].cells[i],v,'BookTable');shade(t.rows[0].cells[i],'DAE8EC');t.rows[0].cells[i].paragraphs[0].runs[0].bold=True
                 repeat=OxmlElement('w:tblHeader');t.rows[0]._tr.get_or_add_trPr().append(repeat)
@@ -87,7 +88,7 @@ def build(source,target):
                 doc.add_paragraph().paragraph_format.space_after=Pt(0)
             elif typ in ('cmd','code'):
                 if typ=='cmd':
-                    pp=doc.add_paragraph('C01-'+b['id']+'  |  '+b['where'],style='BookSmall');pp.paragraph_format.keep_with_next=True
+                    pp=doc.add_paragraph(f'C{chapter:02}-'+b['id']+'  |  '+b['where'],style='BookSmall');pp.paragraph_format.keep_with_next=True
                 else:
                     pp=doc.add_paragraph(b['label'],style='BookSmall');pp.paragraph_format.keep_with_next=True
                 cp=doc.add_paragraph(b['text'],style='BookCode')
@@ -97,10 +98,10 @@ def build(source,target):
                     doc.add_paragraph(b['why'])
                     pp=doc.add_paragraph();r=pp.add_run('확인  ');r.bold=True;pp.add_run(b['result'])
             elif typ=='shot':
-                cap=f'그림 1-{b["id"]}  {b["title"]}'
+                cap=f'그림 {chapter}-{b["id"]}  {b["title"]}'
                 doc.add_paragraph(cap,style='BookCaption')
                 t=doc.add_table(rows=1,cols=1);t.autofit=False;t.columns[0].width=Mm(146)
-                row=t.rows[0];row.height=Mm(60);row.height_rule=WD_ROW_HEIGHT_RULE.AT_LEAST;no_split(row)
+                row=t.rows[0];row.height=Mm(b.get('height_mm',60));row.height_rule=WD_ROW_HEIGHT_RULE.AT_LEAST;no_split(row)
                 c=t.cell(0,0);shade(c,'F4F5F7');c.vertical_alignment=WD_CELL_VERTICAL_ALIGNMENT.CENTER
                 pp=c.paragraphs[0];pp.style=doc.styles['BookNote'];pp.alignment=WD_ALIGN_PARAGRAPH.CENTER
                 pp.paragraph_format.keep_with_next=True
@@ -108,10 +109,31 @@ def build(source,target):
                 pp=c.add_paragraph('촬영 메모 · '+b['text'],style='BookSmall')
             elif typ=='source':
                 pp=doc.add_paragraph(style='BookNote');link(pp,b['text'],b['url'])
+            elif typ=='image':
+                pp=doc.add_paragraph();pp.paragraph_format.keep_with_next=True
+                pp.add_run().add_picture(str(ROOT/b['path']),width=Mm(b.get('width_mm',146)))
+                pp=doc.add_paragraph(b['caption'],style='BookSmall')
+            elif typ=='flow':
+                doc.add_paragraph(b['title'],style='BookCaption')
+                count=len(b['nodes']);arrow_width=5;node_width=(146-arrow_width*(count-1))/count
+                t=doc.add_table(rows=1,cols=count*2-1);t.autofit=False
+                row=t.rows[0];no_split(row)
+                for i,col in enumerate(t.columns):
+                    width=node_width if i%2==0 else arrow_width
+                    col.width=Mm(width);row.cells[i].width=Mm(width)
+                    if i%2:
+                        set_cell_text(row.cells[i],'→','BookTable')
+                        row.cells[i].paragraphs[0].alignment=WD_ALIGN_PARAGRAPH.CENTER
+                    else:
+                        title,detail=b['nodes'][i//2]
+                        set_cell_text(row.cells[i],title+'\n'+detail,'BookTable')
+                        row.cells[i].paragraphs[0].alignment=WD_ALIGN_PARAGRAPH.CENTER
+                        shade(row.cells[i],'DAE8EC' if i==0 else LIGHT)
+                doc.add_paragraph().paragraph_format.space_after=Pt(0)
             else:raise ValueError(typ)
-    doc.core_properties.title=data['title']+' — 목차·머리말·1장'
+    doc.core_properties.title=data['title']+' — '+data.get('document_label','목차·머리말·1장')
     doc.core_properties.subject=data['series'];doc.core_properties.author='집필팀';doc.core_properties.language='ko-KR'
-    doc.core_properties.comments='저장소 기반 집필 초안. 실제 설치·화면 촬영 검증 대기.'
+    doc.core_properties.comments=data.get('verification_note','저장소 기반 집필 초안. 실제 설치·화면 촬영 검증 대기.')
     target.parent.mkdir(parents=True,exist_ok=True);doc.save(target)
     print(target)
 

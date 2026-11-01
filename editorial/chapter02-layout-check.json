@@ -1,0 +1,15 @@
+{
+  "pages": 13,
+  "renderer": "LibreOffice Writer 7.3.7.2 / Noto CJK",
+  "docx_sha256": "3d301f523d737d1054c9485e95d46f4178fe412aefa87f985e6d7127f5b26dec",
+  "archive_xml": "passed",
+  "image_assets": 4,
+  "native_diagrams": 8,
+  "text_outside_page": "none",
+  "blank_pages": "none",
+  "chapter01_unchanged": true,
+  "examples": "CSV 6 records and JSON body parsed; synthetic origin explicitly labeled",
+  "visual_review": "실습 5·6쪽과 Wazuh 흐름 8쪽 확대 확인. 실제 캡처의 URL·메서드·상태 코드·HTML 글씨와 도식의 연결을 검토.",
+  "browser_validation": "정상 GET / → 200 OK → HTML을 실제 DevTools UI에서 확인",
+  "scope_limit": "SSH 사건은 합성 자료. 실제 침해 재현·Wazuh 탐지 검증 아님."
+}
