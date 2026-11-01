@@ -84,3 +84,11 @@ PAT는 저장소나 Git 설정에 저장하지 않았다.
 - [Logging](https://osquery.readthedocs.io/en/stable/deployment/logging/): 차이 로그, 첫 조회의 added, 결과 로그 경로.
 - [kt66 host-sensors.sh](https://github.com/mrgrit/kt66/blob/63d4180b1d6866de986ef263a3bd831d6082b5d5/deployment/host-sensors.sh): osquery 설치, 서비스 기동, run_daemon=no와 Wazuh 결과 로그 수집.
 - [kt66 osquery-linux.conf](https://github.com/mrgrit/kt66/blob/63d4180b1d6866de986ef263a3bd831d6082b5d5/deployment/osquery-linux.conf): 두 예약 조회의 이름·SQL·60초 간격, 분산 지연 설정.
+
+## 삽화 2차 개정: 옛 PC 게임풍과 자연스러운 시점
+
+- 사용자가 지정한 Naver 글의 구형 PC·실내 픽셀 그림을 실제로 열어 확인했다. 점무늬 음영과 제한된 선명한 색을 참고해 네 장을 새로 생성했다.
+- 공격자의 뒷모습과 방어자의 앞쪽 얼굴을 구분했다. 방어자 모니터의 뒷면을 자연스럽게 보이고, 내용 전달은 별도 설명에 맡겼다.
+- 랙 서버·타워·보안장비·스위치·구형 PC·단말기를 장면마다 구분했다. 그림 아래 설명도 공격 요청 → 대상 시스템의 기록 → 방어 분석에 맞춰 조정했다.
+- assets/illustrations/의 PNG와 assets/diagrams/의 조판 SVG, PDF를 갱신했다. 내장 imagegen의 최종 프롬프트와 화풍 출처는 illustration-prompts.json, 구도 기준은 ILLUSTRATION_STYLE.md에 있다.
+- PDF 1·5·11·20쪽을 직접 확인했고, HTML 29쪽의 내용 넘침과 이미지 로딩 검사도 통과했다. 본문 글자 크기와 페이지 수는 유지했다.

@@ -9,6 +9,7 @@
 - [실습별 복사 파일](examples/)
 - [제작·검증 현황](editorial/REVIEW.md)
 - [화면 출처](assets/screens/provenance.json)
+- [삽화 화풍·구도 기준](editorial/ILLUSTRATION_STYLE.md)
 
 ## 학습 원칙
 
