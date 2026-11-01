@@ -3,10 +3,10 @@
 강의 자료와 분리한 집필용 저장소입니다. 1권 제목은 **『시스템 침투와 SIEM 분석』**입니다.
 직접 공격을 실행하고, 흔적을 분석하며, 침해에 대응하는 과정을 초보자(대학 1~2학년) 눈높이로 다룹니다.
 
-현재 원고는 **머리말과 1장(kt66 실습 환경 준비)**까지입니다.
+현재 원고는 **머리말, 1장(kt66 실습 환경 준비), 2장(공격과 보안관제의 기초)**까지입니다.
 
-- [머리말·1장 DOCX](manuscript/volume01-opening.docx) — 부크크 B5 서식으로 조판
-- [원고 내용 소스(JSON)](manuscript/volume01-opening.json)
+- [머리말·1장 DOCX](manuscript/volume01-opening.docx) · [2장 DOCX](manuscript/volume01-chapter02.docx) — 부크크 B5 서식으로 조판
+- [1장 내용 소스(JSON)](manuscript/volume01-opening.json) · [2장 내용 소스(JSON)](manuscript/volume01-chapter02.json)
 - [1장 복사용 명령·설정 예시](examples/chapter01/)
 - [삽화 화풍·구도 기준](editorial/ILLUSTRATION_STYLE.md) · [삽화 원본](assets/illustrations/)
 
@@ -22,8 +22,10 @@
 ```bash
 python3 -m venv .venv-docx
 .venv-docx/bin/pip install -r tools/requirements-docx.txt
-.venv-docx/bin/python tools/build_opening_src.py                 # 내용 → manuscript/volume01-opening.json
+.venv-docx/bin/python tools/build_opening_src.py                 # 머리말·1장 내용 → JSON
 .venv-docx/bin/python tools/build_bookk.py                        # JSON → manuscript/volume01-opening.docx
+.venv-docx/bin/python tools/build_ch02_src.py                    # 2장 내용 → JSON
+.venv-docx/bin/python tools/build_bookk.py --source manuscript/volume01-chapter02.json --output manuscript/volume01-chapter02.docx
 ```
 
 부크크 명조/고딕 글꼴은 부크크 서식 배포본에 포함되어 있습니다(저자 PC에 설치). 이 저장소에는 글꼴을

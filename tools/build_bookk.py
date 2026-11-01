@@ -226,9 +226,12 @@ def render_blocks(doc, blocks, chapter):
             raise ValueError(typ)
 
 # 새 쪽에서 시작할 '주요' 제목
+import re as _re
+_CHAP = _re.compile(r'^\d+장')
+
 def wants_break(title, seen):
     t = title.strip()
-    if t.startswith("1장"): return True
+    if _CHAP.match(t): return True
     if t == "이 책을 읽는 방법": return True
     if t in ("목차", "머리말"):
         if t in seen: return False
@@ -260,7 +263,7 @@ def build(source, target):
             page_break(doc)
         seen.add(title.strip())
         # 제목 조판
-        if title.strip().startswith("1장"):
+        if _CHAP.match(title.strip()):
             add_p(doc, title, font=GOTHIK, size=18, bold=True, align='center', after=4, before=20)
             if pg['subtitle']:
                 add_p(doc, pg['subtitle'], font=GOTHIK, size=11, bold=True, align='center', color=GRAY, after=10)
