@@ -1,0 +1,27 @@
+{
+  "style_reference": "https://m.blog.naver.com/studygir/220961448822",
+  "style_observed": "선명한 픽셀, 제한된 색면, 점무늬 음영. 참고 페이지 그림은 원고에 복제하지 않음.",
+  "images": [
+    {
+      "name": "install",
+      "path": "assets/illustrations/chapter01/install.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: illustration-story. Asset: a small spot illustration for a Korean engineering manual, 45 mm wide when printed. Create one original retro Japanese PC-98 / early 1990s computer-game pixel-art office vignette. Adult junior security analyst with short dark hair, navy blue work jacket, cream shirt, neutral attentive face visible in front three-quarter view, seated at a small beige desktop computer and typing installation commands. Monitor screen faces the analyst; viewer sees its opaque back, physically correct perspective. One desk, keyboard, tower computer and one small disk case. Crisp deliberate square pixels, limited indigo, dusty lavender, muted cyan and soft rose palette, stippled checkerboard dithering, clear dark outlines, warm off-white highlights. Same modest realistic adult proportions throughout the book, not chibi. Compact single scene, generous transparent margin on all sides, no room background. No letters, no UI text, no speech balloon, no logos, no headset. Not smooth vector art, not photorealistic, not 3D render. Transparent background.",
+      "source": "/home/ccc/.codex/generated_images/01a1963a-4c4d-7911-a89f-726638e9a6ac/exec-ac28f834-8561-4e2e-af6a-47167b1cf600.png"
+    },
+    {
+      "name": "notes",
+      "path": "assets/illustrations/chapter01/notes.png",
+      "mode": "built-in image_gen",
+      "prompt": "Create a sibling illustration for the same engineering book. Keep this exact adult analyst identity, navy work jacket, cream shirt, short dark hair, face visible front three-quarter, same desk and opaque monitor back orientation, exact limited PC-98 palette, crisp square pixel edges and checkerboard dithering. Change the moment: analyst is holding a small open paper notebook beside the keyboard and comparing notes with the monitor, one hand holds notebook and the other a pencil, thoughtful neutral expression. Small compact spot vignette with ample transparent margin. Remove glow and all background haze completely. No text, no letters, no speech bubbles, no headset. Preserve coherent physical perspective. Transparent background.",
+      "source": "/home/ccc/.codex/generated_images/01a1963a-4c4d-7911-a89f-726638e9a6ac/exec-ab331201-17c2-42d4-89cd-91c0814bd881.png"
+    },
+    {
+      "name": "network",
+      "path": "assets/illustrations/chapter01/network.png",
+      "mode": "built-in image_gen",
+      "prompt": "Create a sibling illustration for the same engineering book. Keep this exact adult analyst identity, navy work jacket, cream shirt, short dark hair, face visible front three-quarter, same compact desk scene, exact limited PC-98 palette, crisp square pixel edges and checkerboard dithering. Change the moment: analyst leans slightly to inspect a cable plugged into a small network switch on the desk beside the same beige tower computer, one hand rests near the connector and other hand steadies switch. Monitor remains correctly oriented toward analyst with opaque back visible to viewer. Calm focused expression. Small compact spot vignette with generous transparent margin. Remove glow and all background haze completely. No text, no letters, no speech bubbles, no headset. Preserve coherent physical perspective. Transparent background.",
+      "source": "/home/ccc/.codex/generated_images/01a1963a-4c4d-7911-a89f-726638e9a6ac/exec-f6f1fe6f-64d8-453d-aab2-5ee9c49262ca.png"
+    }
+  ]
+}

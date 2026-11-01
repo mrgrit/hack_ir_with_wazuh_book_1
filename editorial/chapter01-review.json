@@ -1,20 +1,27 @@
 {
   "date": "2026-11-01",
-  "scope": "기존 원고 백지화 후 머리말·미리 안내·1장 신규 집필",
+  "scope": "머리말·미리 안내·1장 전체 문장 및 캡션 재검토, 공격자 VM 준비·도식·캐릭터 삽화 추가",
   "deliverable": "manuscript/volume01-chapter01.docx",
-  "pages": 27,
-  "command_files": 51,
+  "pages": 33,
+  "command_files": 54,
   "body_character_count": {
     "previous": 21819,
-    "new": 13991,
-    "reduction_percent": 35.9,
+    "new": 16066,
+    "reduction_percent": 26.4,
     "count_method": "p/h/code/command의 text+why+result. 표·캡션은 제외. 페이지 수 감소율이 아님."
   },
   "environment": {
     "reader_vm": "Ubuntu 22.04 LTS x86_64 on VMware Workstation, Bridged",
     "vm_memory_gb": 16,
     "virtual_disk_gb": 200,
-    "resource_limit_note": "사용자 지정 책의 기준. 신규 16GB VM의 전체 스택 성능은 미검증. kt66 교수용 안내의 출발점은 RAM 32GB이다."
+    "resource_limit_note": "사용자 지정 책의 기준. 신규 16GB VM의 전체 스택 성능은 미검증. kt66 교수용 안내의 출발점은 RAM 32GB이다.",
+    "attacker_vm": {
+      "os": "Ubuntu 22.04 Live Server x86_64",
+      "network": "Bridged · same lab network as kt66",
+      "resource_example": "2 vCPU / 2GB RAM / 25GB disk; authoring example, not measured minimum",
+      "first_use": "Chapter 5; optional preparation in section 1.12",
+      "validation": "User reports having tested Ubuntu 22.04 Live Server. Agent did not install a fresh attacker VM."
+    }
   },
   "kt66_commit": "63d4180b1d6866de986ef263a3bd831d6082b5d5",
   "source_files_checked": [
@@ -26,7 +33,10 @@
     "siem/Dockerfile",
     "wazuh-config/opensearch_dashboards.yml",
     "deployment/configure.py",
-    "deployment/host-sensors.sh"
+    "deployment/host-sensors.sh",
+    "kt66 docs/LAB-SENSORS.ko.md",
+    "lecture docs/강사_준비.md section 4",
+    "lecture docs/Module01_해설.md introduction"
   ],
   "source_findings": [
     "5601은 server.ssl.enabled: true이므로 HTTPS. 오래된 http 안내를 그대로 옮기지 않음.",
@@ -36,7 +46,11 @@
     "호스트 SSH 감시 경로가 /home/ccc/.ssh이므로 예시 Ubuntu 계정을 ccc로 지정.",
     "시작 도구가 Docker/Compose를 준비하며 별도 Wazuh 설치 명령은 제공하지 않음.",
     "메모리 매핑 값이 이미 262144 이상이면 변경 생략.",
-    "down은 컨테이너·네트워크 정리이며 호스트 설치 전체 원복이 아님. 전체 원복은 설치 전 VM 스냅샷으로 안내."
+    "down은 컨테이너·네트워크 정리이며 호스트 설치 전체 원복이 아님. 전체 원복은 설치 전 VM 스냅샷으로 안내.",
+    "외부 공격자는 별도 VM이며 docker-compose.yaml의 kt66-attacker는 내부 공격 컨테이너이다.",
+    "공격 도구 11개 패키지 목록은 강사_준비.md의 일괄 설치 명령에서 가져왔다. &&, -y, 줄 연결 설명을 제공한다.",
+    "grep 정규표현식은 주석·유사 변수명을 포함한 임시 .env로 실행해 네 설정값만 출력하는지 확인했다.",
+    "그림 7개는 개념·관계 도식이며 UI 화면 4개는 기존 촬영본을 유지한다."
   ],
   "newly_observed": [
     "기존 kt66 HTTP 80의 실제 랜딩 페이지",
@@ -51,17 +65,23 @@
     "Docker ps/서비스 상태 명령의 실제 실행 결과(현재 세션 docker.sock 접근 권한 없음; sudo는 암호 필요)",
     "kt66 down·재기동·스냅샷 복원",
     "호스트 패키지/설정 변경 및 센서 재설치",
-    "Microsoft Word의 최종 인쇄 및 실물 교정"
+    "Microsoft Word의 최종 인쇄 및 실물 교정",
+    "신규 공격자 VM 생성·도구 설치 및 해당 VM에서 kt66 연결. OS 선택의 테스트 근거는 사용자 확인이다."
   ],
   "graphics": {
     "screenshots": 4,
-    "diagram": 1,
+    "diagram": 7,
     "reused_illustrations": 1,
     "install_capture_slots": 2,
     "provenance": "assets/screens/chapter01/provenance.json",
     "illustration_source": "Git e12cd37:assets/illustrations/overview.png (기존 승인 그림 재사용)",
-    "diagram_source": "tools/diagram_chapter01.py",
-    "visual_review": "27쪽 전체 렌더 배열 확인, 명령·표·화면 지면을 확대 및 96dpi 판형 환산 렌더로 확인. 그래프·삽화의 내용과 실제 UI를 구분."
+    "diagram_source": [
+      "tools/diagram_chapter01.py",
+      "tools/diagrams_chapter01.py"
+    ],
+    "visual_review": "33쪽 전체 렌더 배열 확인. 네트워크·기록 흐름·설치 순서·설정 파일·포트·중지·문제 해결 도식과 캐릭터 삽화를 최종 판형 환산 렌더에서 확인. 명령의 자동 줄바꿈은 별도 검사.",
+    "new_character_illustrations": 3,
+    "illustration_generation": "built-in image_gen; prompts and file provenance: editorial/chapter01-illustrations.json"
   },
   "layout": {
     "template": "tools/assets/bookk-B5.docx",
@@ -78,13 +98,15 @@
     "report": "editorial/chapter01-layout-check.json"
   },
   "checks": [
-    "51개 명령 파일과 원고 manifest 일치",
-    "51개 셸 입력 bash -n 구문 검사(실행하지 않음)",
+    "54개 명령 파일과 원고 manifest 일치",
+    "54개 셸 입력 bash -n 구문 검사(실행하지 않음)",
     "모든 주 명령·설명·확인 문단이 같은 쪽에 있는지 검사",
     "본문 텍스트가 본문 영역 안에 있는지 검사",
     "판형·여백·테마 상속 확인",
     "명령 번호 참조 대조",
-    "DOCX 본문 문자 검정 및 지정 글꼴 확인"
+    "DOCX 본문 문자 검정 및 지정 글꼴 확인",
+    "복사용 명령 각 줄이 지면에서 임의로 줄바꿈되지 않는지 확인",
+    "C01-35 정규표현식 동작을 임시 파일로 확인"
   ],
   "sources": [
     {
@@ -106,12 +128,32 @@
     {
       "name": "kt66 기준 커밋",
       "url": "https://github.com/mrgrit/kt66/tree/63d4180b1d6866de986ef263a3bd831d6082b5d5"
+    },
+    {
+      "name": "Ubuntu Server 설치",
+      "url": "https://ubuntu.com/server/docs/tutorial/basic-installation/"
+    },
+    {
+      "name": "공격자 VM 도구 구성",
+      "url": "https://github.com/mrgrit/hack_ir_with_wazuh/blob/36897d0c3d72fcb0e8a00ad719934a83074a3e84/docs/강사_준비.md"
+    },
+    {
+      "name": "사용자 지정 픽셀 화풍 참고",
+      "url": "https://m.blog.naver.com/studygir/220961448822"
     }
   ],
   "repository_scope": "집필 저장소만 변경. kt66/강의 저장소는 읽기만 수행. 기존 원고 삭제 상태를 유지하고 새 1장만 작성.",
-  "docx_sha256": "5395a1e067aa1e760a6bff78074ef98b1d12eafd97f8d836baeedd5d8ae2bda1",
+  "docx_sha256": "7df619d37027fe1c1c2ba4d617c6ae071d0532afcdeba53730db3cf46356a5fc",
   "revisions": [
     "불필요한 삽화 주의문 삭제",
-    "Windows 선택 설명을 1권에서 사용하지 않으므로 N을 선택한다로 수정"
-  ]
+    "Windows 선택 설명을 1권에서 사용하지 않으므로 N을 선택한다로 수정",
+    "본문·표·캡션의 제작 과정 설명과 불필요한 부정문을 삭제하고 실행·확인 행동으로 교체",
+    "netplan 선택을 N → 현재 DHCP 유지로 수정",
+    "grep 옵션·기호·정규표현식·출력값 설명 추가",
+    "dpkg 조회를 -s와 Status 확인으로 수정",
+    "별도 공격자 VM과 일괄 설치 명령 추가",
+    "7개 도식과 3개 작은 캐릭터 삽화 반영",
+    "동일한 문체 오류를 막기 위한 집필·검토 지침을 AGENTS.md에 기록"
+  ],
+  "lecture_source_commit": "36897d0c3d72fcb0e8a00ad719934a83074a3e84"
 }

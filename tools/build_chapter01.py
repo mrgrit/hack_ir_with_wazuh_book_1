@@ -101,10 +101,10 @@ def build(output):
                 para(doc,b['text'],name=MONO,size=10,after=6)
             elif typ=='table':table(doc,b)
             elif typ=='image':
-                p=para(doc,'',after=3,keep=True,align=WD_ALIGN_PARAGRAPH.CENTER)
+                p=para(doc,'',after=3,keep=True,align=WD_ALIGN_PARAGRAPH.RIGHT if b.get('align')=='right' else WD_ALIGN_PARAGRAPH.CENTER)
                 p.paragraph_format.line_spacing=1
                 p.add_run().add_picture(str(ROOT/b['path']),width=Mm(b.get('width_mm',127)))
-                para(doc,b['caption'],size=9,after=7)
+                para(doc,b['caption'],size=9,after=7,align=WD_ALIGN_PARAGRAPH.RIGHT if b.get('align')=='right' else None)
             elif typ=='capture_slot':
                 t=doc.add_table(rows=1,cols=1);t.autofit=False;t.columns[0].width=Mm(127)
                 cell=t.cell(0,0);cell.width=Mm(127);border(cell._tc.get_or_add_tcPr(),'w:tcBorders')

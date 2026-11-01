@@ -8,8 +8,9 @@
 - [복사용 명령](examples/chapter01/) — 본문의 C01 번호와 대응
 - [집필 지침](AGENTS.md)
 - [검토·검증 기록](editorial/chapter01-review.json)
+- [캐릭터 삽화](assets/illustrations/chapter01/) · [생성 프롬프트·출처 기록](editorial/chapter01-illustrations.json)
 
-1장은 VMware·Ubuntu 준비, kt66 설치·기동, 웹·Wazuh 접속, 센서 확인, 중지·복구를 다룹니다. 1권 전체 범위는 Module 01 실습 01~30 및 62, 11장과 부록입니다. 이번 산출물에 2장 이후 본문은 없습니다.
+1장은 VMware·Ubuntu 준비, kt66 설치·기동, 웹·Wazuh 접속, 센서 확인, 중지·복구를 다룹니다. kt66과 공격자 VM의 브리지 구성도와 선택적 공격자 VM 준비 절차도 포함합니다. 공격자 VM은 Ubuntu 22.04 Live Server를 사용하며 5장부터 필요합니다. 도구 일괄 설치 명령은 C01-52입니다. 본문은 33쪽이며 설명 도식 7개와 작은 캐릭터 삽화 3개를 추가했습니다. 1권 전체 범위는 Module 01 실습 01~30 및 62, 11장과 부록입니다. 이번 산출물에 2장 이후 본문은 없습니다.
 
 ## 확인한 범위
 
@@ -24,6 +25,7 @@ DOCX를 직접 편집할 수 있습니다. 조판기는 기본적으로 `build/`
 ```bash
 .venv/bin/python tools/write_chapter01.py
 .venv/bin/python tools/diagram_chapter01.py
+.venv/bin/python tools/diagrams_chapter01.py
 .venv/bin/python tools/build_chapter01.py
 ```
 

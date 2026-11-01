@@ -1,1 +1,2 @@
-dpkg-query -W git curl openssl jq nano python3 python3-yaml gnupg ca-certificates openssh-client
+dpkg -s git curl openssl jq nano python3 \
+  python3-yaml gnupg ca-certificates openssh-client
