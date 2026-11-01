@@ -1,0 +1,2 @@
+agent.name: "web"
+AND (full_log: *jndi* OR data.url: *jndi*)

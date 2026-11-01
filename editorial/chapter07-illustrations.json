@@ -1,0 +1,17 @@
+{
+  "chapter": 7,
+  "new_generation": false,
+  "items": [
+    {
+      "asset": "assets/illustrations/chapter04/field-check.png",
+      "usage": "FIM file/source-record comparison",
+      "original_record": "editorial/chapter04-illustrations.json"
+    },
+    {
+      "asset": "assets/illustrations/chapter05/review.png",
+      "usage": "HTTP response/evidence review",
+      "original_record": "editorial/chapter05-illustrations.json"
+    }
+  ],
+  "note": "Existing concept illustrations, separate from slide-derived result screens."
+}

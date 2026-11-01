@@ -1,0 +1,78 @@
+<syscheck>
+    <disabled>no</disabled>
+
+    <!-- Frequency that syscheck is executed default every 12 hours -->
+    <frequency>43200</frequency>
+
+    <scan_on_start>yes</scan_on_start>
+
+    <!-- Directories to check  (perform all possible verifications) -->
+    <directories>/etc,/usr/bin,/usr/sbin</directories>
+    <directories>/bin,/sbin,/boot</directories>
+
+    <!-- Files/directories to ignore -->
+    <ignore>/etc/mtab</ignore>
+    <ignore>/etc/hosts.deny</ignore>
+    <ignore>/etc/mail/statistics</ignore>
+    <ignore>/etc/random-seed</ignore>
+    <ignore>/etc/random.seed</ignore>
+    <ignore>/etc/adjtime</ignore>
+    <ignore>/etc/httpd/logs</ignore>
+    <ignore>/etc/utmpx</ignore>
+    <ignore>/etc/wtmpx</ignore>
+    <ignore>/etc/cups/certs</ignore>
+    <ignore>/etc/dumpdates</ignore>
+    <ignore>/etc/svc/volatile</ignore>
+
+    <!-- File types to ignore -->
+    <ignore type="sregex">.log$|.swp$</ignore>
+
+    <!-- Check the file, but never compute the diff -->
+    <nodiff>/etc/ssl/private.key</nodiff>
+
+    <skip_nfs>yes</skip_nfs>
+    <skip_dev>yes</skip_dev>
+    <skip_proc>yes</skip_proc>
+    <skip_sys>yes</skip_sys>
+
+    <!-- Nice value for Syscheck process -->
+    <process_priority>10</process_priority>
+
+    <!-- Maximum output throughput -->
+    <max_eps>50</max_eps>
+
+    <!-- Database synchronization settings -->
+    <synchronization>
+      <enabled>yes</enabled>
+      <interval>5m</interval>
+      <max_eps>10</max_eps>
+    </synchronization>
+  </syscheck>
+<syscheck>
+    <disabled>no</disabled>
+    <frequency>300</frequency>
+    <scan_on_start>yes</scan_on_start>
+    <!-- 채점 관심사 = '변경'(modified). 초기 스캔의 기존 파일마다 알림(alert_new_files)을
+         켜면 CRS 등 다수 파일에서 첫 기동 시 알림 폭주 → no 로 둔다(기본값). -->
+    <directories realtime="yes" report_changes="yes" whodata="yes">/etc/apache2</directories>
+    <directories realtime="yes" report_changes="yes" whodata="yes">/etc/modsecurity</directories>
+    <directories realtime="yes" report_changes="yes">/usr/share/modsecurity-crs</directories>
+    <directories realtime="yes" report_changes="yes">/home/ccc</directories>
+    <!-- 지속성이 실제로 심기는 자리. /etc 전체는 12시간 주기 스캔이라 한 교시 안에
+         절대 안 뜬다. 흔적은 남겨 놓고 SIEM 이 조용하면 "SIEM 으로 찾는다"는 실습이
+         성립하지 않는다. 그래서 이 경로들만 실시간으로 본다. -->
+    <directories realtime="yes" report_changes="yes" whodata="yes">/etc/cron.d</directories>
+    <directories realtime="yes" report_changes="yes" whodata="yes">/etc/sudoers.d</directories>
+    <directories realtime="yes" report_changes="yes" whodata="yes">/etc/ld.so.preload</directories>
+    <directories realtime="yes" report_changes="yes" whodata="yes">/etc/passwd</directories>
+    <!-- 강의 보강 2: 계정·권한 파일, 사용자 crontab, 시스템 바이너리는 실시간. -->
+    <directories realtime="yes" report_changes="yes" whodata="yes">/etc/shadow</directories>
+    <directories realtime="yes" report_changes="yes" whodata="yes">/etc/sudoers</directories>
+    <directories realtime="yes" report_changes="yes" whodata="yes">/var/spool/cron</directories>
+    <directories realtime="yes">/usr/bin,/usr/sbin</directories>
+    <!-- /var/log 는 계속 커지므로 내용 변경은 보지 않고 파일 생성·삭제만 본다(로그 삭제 탐지). -->
+    <directories realtime="yes" check_all="no">/var/log</directories>
+    <directories realtime="yes" report_changes="yes">/var/tmp</directories>
+    <directories realtime="yes" report_changes="yes">/dev/shm</directories>
+    <directories realtime="yes" report_changes="yes">/var/www</directories>
+  </syscheck>

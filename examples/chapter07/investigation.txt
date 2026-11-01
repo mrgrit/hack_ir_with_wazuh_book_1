@@ -1,0 +1,12 @@
+사례·화면 번호:
+기록 시각·시간대:
+agent.name·agent.ip:
+data.srcip:
+data.protocol·data.url·data.id:
+syscheck.path:
+rule.id·rule.description:
+full_log·location(보이는 범위):
+화면에서 확인한 사실:
+추가로 필요한 자료와 이유:
+선택 조회의 인덱스·기간·검색식:
+검색 조건 복구:

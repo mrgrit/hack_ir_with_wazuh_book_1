@@ -1,0 +1,294 @@
+{
+  "source_file": "Module01_Wazuh_위협탐지_DQL_예시집.pptx",
+  "source_repository": "mrgrit/hack_ir_with_wazuh",
+  "source_directory": "slides",
+  "source_sha256": "b3550f87c2342a43e72ee5ac74c9a884de6aff38631b8c77a2364d0cf5d47099",
+  "provenance": "User-supplied slide images; capture method/date not independently verified. Visible records dated 2026-10-31. No new chapter07 screenshots or live experiment results.",
+  "assets": [
+    {
+      "asset": "assets/screens/chapter07/fim-event.png",
+      "pptx_slide": 227,
+      "pdf_page": 124,
+      "media": "ppt/media/image59.png",
+      "original": "assets/screens/chapter07/source/slide-227.png",
+      "original_sha256": "2ef8b058aa871eb1f9f329dff9cbe27d130a5ae92bd0f2c4c84b3e4f59f8cd8e",
+      "original_size": [
+        804,
+        236
+      ],
+      "crop_xyxy": [
+        0,
+        0,
+        450,
+        116
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/fim-path.png",
+      "pptx_slide": 227,
+      "pdf_page": 124,
+      "media": "ppt/media/image59.png",
+      "original": "assets/screens/chapter07/source/slide-227.png",
+      "original_sha256": "2ef8b058aa871eb1f9f329dff9cbe27d130a5ae92bd0f2c4c84b3e4f59f8cd8e",
+      "original_size": [
+        804,
+        236
+      ],
+      "crop_xyxy": [
+        0,
+        120,
+        390,
+        236
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/log4-rule.png",
+      "pptx_slide": 238,
+      "pdf_page": 135,
+      "media": "ppt/media/image63.png",
+      "original": "assets/screens/chapter07/source/slide-238.png",
+      "original_sha256": "5a102e75f1476bec7489fbb065a7759c9113ed5b83c45620027c1d85853b6d46",
+      "original_size": [
+        847,
+        242
+      ],
+      "crop_xyxy": [
+        0,
+        0,
+        445,
+        120
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/log4-raw.png",
+      "pptx_slide": 238,
+      "pdf_page": 135,
+      "media": "ppt/media/image63.png",
+      "original": "assets/screens/chapter07/source/slide-238.png",
+      "original_sha256": "5a102e75f1476bec7489fbb065a7759c9113ed5b83c45620027c1d85853b6d46",
+      "original_size": [
+        847,
+        242
+      ],
+      "crop_xyxy": [
+        170,
+        126,
+        750,
+        242
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/shell-rules.png",
+      "pptx_slide": 249,
+      "pdf_page": 146,
+      "media": "ppt/media/image67.png",
+      "original": "assets/screens/chapter07/source/slide-249.png",
+      "original_sha256": "81a572ce3a89d81ea8af0ff0e4abfd766d760c596558abd6c5258553da6e2add",
+      "original_size": [
+        861,
+        366
+      ],
+      "crop_xyxy": [
+        290,
+        0,
+        861,
+        182
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/shell-raw.png",
+      "pptx_slide": 249,
+      "pdf_page": 146,
+      "media": "ppt/media/image67.png",
+      "original": "assets/screens/chapter07/source/slide-249.png",
+      "original_sha256": "81a572ce3a89d81ea8af0ff0e4abfd766d760c596558abd6c5258553da6e2add",
+      "original_size": [
+        861,
+        366
+      ],
+      "crop_xyxy": [
+        165,
+        190,
+        735,
+        366
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/exec-rule.png",
+      "pptx_slide": 259,
+      "pdf_page": 156,
+      "media": "ppt/media/image71.png",
+      "original": "assets/screens/chapter07/source/slide-259.png",
+      "original_sha256": "15d42bd72eedfb6bbc0c08e61479e4f25d3dffe5e981ca0b527cad413fd0f387",
+      "original_size": [
+        865,
+        236
+      ],
+      "crop_xyxy": [
+        0,
+        0,
+        440,
+        116
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/exec-status.png",
+      "pptx_slide": 259,
+      "pdf_page": 156,
+      "media": "ppt/media/image71.png",
+      "original": "assets/screens/chapter07/source/slide-259.png",
+      "original_sha256": "15d42bd72eedfb6bbc0c08e61479e4f25d3dffe5e981ca0b527cad413fd0f387",
+      "original_size": [
+        865,
+        236
+      ],
+      "crop_xyxy": [
+        0,
+        120,
+        380,
+        236
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/exec-url.png",
+      "pptx_slide": 259,
+      "pdf_page": 156,
+      "media": "ppt/media/image71.png",
+      "original": "assets/screens/chapter07/source/slide-259.png",
+      "original_sha256": "15d42bd72eedfb6bbc0c08e61479e4f25d3dffe5e981ca0b527cad413fd0f387",
+      "original_size": [
+        865,
+        236
+      ],
+      "crop_xyxy": [
+        380,
+        120,
+        735,
+        236
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/ok-rule.png",
+      "pptx_slide": 267,
+      "pdf_page": 164,
+      "media": "ppt/media/image75.png",
+      "original": "assets/screens/chapter07/source/slide-267.png",
+      "original_sha256": "f8949afe7340cb53e78d95db6b095a6eb7d8180bbb3bba21debd3424d1005a6e",
+      "original_size": [
+        815,
+        236
+      ],
+      "crop_xyxy": [
+        0,
+        0,
+        430,
+        116
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/ok-status.png",
+      "pptx_slide": 267,
+      "pdf_page": 164,
+      "media": "ppt/media/image75.png",
+      "original": "assets/screens/chapter07/source/slide-267.png",
+      "original_sha256": "f8949afe7340cb53e78d95db6b095a6eb7d8180bbb3bba21debd3424d1005a6e",
+      "original_size": [
+        815,
+        236
+      ],
+      "crop_xyxy": [
+        100,
+        120,
+        475,
+        236
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/ok-url.png",
+      "pptx_slide": 267,
+      "pdf_page": 164,
+      "media": "ppt/media/image75.png",
+      "original": "assets/screens/chapter07/source/slide-267.png",
+      "original_sha256": "f8949afe7340cb53e78d95db6b095a6eb7d8180bbb3bba21debd3424d1005a6e",
+      "original_size": [
+        815,
+        236
+      ],
+      "crop_xyxy": [
+        475,
+        120,
+        815,
+        236
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/error-rule.png",
+      "pptx_slide": 275,
+      "pdf_page": 172,
+      "media": "ppt/media/image79.png",
+      "original": "assets/screens/chapter07/source/slide-275.png",
+      "original_sha256": "96243daecf7b52c2c3280a50839e942acd2c734f10ee47cc27e2df2f4f688888",
+      "original_size": [
+        854,
+        236
+      ],
+      "crop_xyxy": [
+        0,
+        0,
+        460,
+        116
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/error-status.png",
+      "pptx_slide": 275,
+      "pdf_page": 172,
+      "media": "ppt/media/image79.png",
+      "original": "assets/screens/chapter07/source/slide-275.png",
+      "original_sha256": "96243daecf7b52c2c3280a50839e942acd2c734f10ee47cc27e2df2f4f688888",
+      "original_size": [
+        854,
+        236
+      ],
+      "crop_xyxy": [
+        0,
+        120,
+        175,
+        236
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    },
+    {
+      "asset": "assets/screens/chapter07/error-url.png",
+      "pptx_slide": 275,
+      "pdf_page": 172,
+      "media": "ppt/media/image79.png",
+      "original": "assets/screens/chapter07/source/slide-275.png",
+      "original_sha256": "96243daecf7b52c2c3280a50839e942acd2c734f10ee47cc27e2df2f4f688888",
+      "original_size": [
+        854,
+        236
+      ],
+      "crop_xyxy": [
+        175,
+        120,
+        740,
+        236
+      ],
+      "operation": "crop only; source pixels and existing highlights unchanged"
+    }
+  ]
+}

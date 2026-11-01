@@ -1,0 +1,63 @@
+{
+  "chapter": 7,
+  "title": "웹 서버 침투와 실행 흔적",
+  "reviewed_at": "2026-11-01T13:23:15.551241+00:00",
+  "scope": "Module01 examples 07–12",
+  "deliverable": "manuscript/volume01-chapter07.docx",
+  "pages": 26,
+  "user_direction": "추가 실험 중단. 제공된 슬라이드로 집필하며 실험·검증 화면은 슬라이드의 기존 이미지만 사용.",
+  "counts": {
+    "slide_source_images": 6,
+    "screen_regions": 15,
+    "concept_diagrams": 7,
+    "reused_character_illustrations": 2,
+    "shell_commands": 0,
+    "DQL": 7
+  },
+  "sources": {
+    "pptx_file": "Module01_Wazuh_위협탐지_DQL_예시집.pptx",
+    "pptx_sha256": "b3550f87c2342a43e72ee5ac74c9a884de6aff38631b8c77a2364d0cf5d47099",
+    "pptx_range": [
+      219,
+      277
+    ],
+    "pdf_file": "Module01_Wazuh_위협탐지_DQL_예시집.pdf",
+    "pdf_sha256": "94aa42a029e0e1d85532ea0a33345558ba393e750490ff3f2be30f1410751b44",
+    "pdf_range": [
+      116,
+      174
+    ],
+    "screen_provenance": "assets/screens/chapter07/provenance.json",
+    "visible_event_date": "2026-10-31",
+    "capture_method": "Provided slide images; original capture process not independently verified."
+  },
+  "verified": {
+    "local_document": "26 rendered pages; template geometry/theme, typography, references, bounds and query/file parity pass. Entire page contact sheets and critical full-size screenshot pages visually inspected.",
+    "screen_integrity": "All 15 regions pixel-identical to crops of embedded PPTX images. Unmodified originals retained.",
+    "concept_diagrams": "All 7 rendered and visually inspected for clipping, overlap, labels and direction.",
+    "print_readability": "Final 127 mm widths inspected on pages 4,7,10,13,16,19. Smallest raw-log text approximately 9 pt equivalent; fields and values readable.",
+    "facts": "Compared supplied slides, already-collected Wazuh 4.10 web rules and DVWA Low handler, official Apache/Red Hat/OWASP/Wazuh sources."
+  },
+  "not_verified": [
+    "No new chapter07 result captures.",
+    "DQL Q07-01–Q07-07 not executed. No hit count is promised for the rewritten queries.",
+    "No attack success, remote code execution, or 5xx surge confirmed by this chapter.",
+    "Original slide record dataset not imported or replayed."
+  ],
+  "corrections": [
+    "File creation in web container is not an HTTP upload or proof of PHP execution; web FIM and DVWA storage are separate.",
+    "JNDI string and 403 establish a request/response observation, not Java execution. WAF cause needs a separate matching record.",
+    "Shellshock 31168/31169 depend on 31108 (simple 2xx/3xx requests); names/200 do not prove Bash execution.",
+    "DVWA Low handler requires POST Submit. A GET URL and a submitted POST form are not equivalent; POST values may be absent from access URL.",
+    "31106 identifies suspicious URL plus 200, not independently confirmed exploitation.",
+    "31152/31153/31154 are repeated SQLi/common web attack/XSS rules. 501/500/503 repeat rules are 31161/31162/31163.",
+    "Slide 275 shows SQLi rule31103 plus status500, not confirmed repeated500. Calculation table explicitly illustrative, not measured."
+  ],
+  "earlier_preparation": "Before the user changed scope, author inspected live forms and source files and ran a plain-text/fixed-output marker upload probe. Only plain text was stored and then removed after content check; PHP upload was rejected. These probes and their screenshots/results are not used as textbook evidence. Subsequent work used slides and local documentation only.",
+  "evidence_files": {
+    "web-rules.txt": "Previously collected installed Wazuh 4.10.0 rules, not a new runtime test.",
+    "web-fim.txt": "Previously collected web FIM config excerpt.",
+    "dvwa-exec.txt": "Previously collected installed DVWA Low command handler."
+  },
+  "unchanged": "Existing chapters01–06 and lecture/kt66 repositories were not edited."
+}

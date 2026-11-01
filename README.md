@@ -2,7 +2,7 @@
 
 1권 **시스템 침투와 SIEM 분석**의 집필 저장소입니다.
 
-기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2~6장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
+기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2~7장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
 
 - **[머리말·1장 DOCX](manuscript/volume01-chapter01.docx)** — 부크크 B5, 편집·검토용
 - **[2장 초안 DOCX](manuscript/volume01-chapter02.docx)** — 공격과 보안관제의 기초, 9쪽
@@ -10,6 +10,8 @@
 - **[4장 초안 DOCX](manuscript/volume01-chapter04.docx)** — 로그 수집과 탐지 규칙, 31쪽
 - **[5장 초안 DOCX](manuscript/volume01-chapter05.docx)** — 웹 공격의 시작과 입력값 검증, 55쪽
 - **[6장 초안 DOCX](manuscript/volume01-chapter06.docx)** — 웹 탐색과 인증 공격, 45쪽
+- **[7장 초안 DOCX](manuscript/volume01-chapter07.docx)** — 웹 서버 침투와 실행 흔적, 26쪽
+- [7장 복사용 검색식·조사 양식](examples/chapter07/)
 - [6장 복사용 입력·명령·검색식·실제 로그](examples/chapter06/)
 - [5장 복사용 명령·검색식·실제 로그](examples/chapter05/)
 - [4장 명령·검색식·규칙 파일](examples/chapter04/)
@@ -29,6 +31,8 @@
 6장은 Module 01 실습 04~06, 13~15를 다룹니다. 브라우저 경로 탐색, User-Agent 변경, 일반 로그인과 Brute Force 결과 비교, PROPFIND, 관리 경로, 긴 URL을 실제 kt66에서 확인했습니다. Gobuster는 공격자 VM에서 23행의 짧은 경로 목록으로 시험하며, curl 두 예제는 선택 실습입니다. **45쪽, 실제 화면 33개, 도식 6개, 새 삽화 2개**이며 복사용 명령 28개·DQL 13개·브라우저 입력 11개를 제공합니다.
 
 6장의 DQL 13개를 실제 Discover에서 검증했고, 수집된 access 기록 63개를 Apache 원문과 대조했습니다. 일반 로그인은 성공·실패 모두 302, Brute Force는 모두 200이므로 이동 주소·본문과 함께 읽도록 설명했습니다. WAF 차단 근거, 로그·코드 위치, 명령 옵션·기호, 문제 해결과 원상복구 절차를 포함했습니다. 새 VM 설치와 패키지 재설치는 수행하지 않았습니다.
+
+7장은 Module 01 실습 07~12의 **슬라이드 기반 사례 분석**입니다. 웹셸·Log4Shell·Shellshock·명령 삽입·200 응답·5xx 오류를 다룹니다. **26쪽, 기존 화면 6개에서 추출한 영역 15개, 도식 7개, 기존 삽화 2개, DQL 7개**를 수록했습니다. 사용자 지시에 따라 추가 실험을 중단했으며 본문의 결과 화면은 모두 제공된 PPTX에서 가져왔습니다. 검색식 7개는 실행 검증하지 않았습니다. 규칙 번호와 입력 처리 설명은 Wazuh 4.10 규칙·기존 소스 자료와 대조했습니다. 200 응답과 공격 성공, 파일 생성과 실행, 500 한 건과 오류 급증을 구분합니다.
 
 ## 확인한 범위
 
@@ -119,5 +123,17 @@ DOCX를 직접 편집할 수 있습니다. 조판기는 기본적으로 `build/`
 - [브라우저 촬영 기록](assets/screens/chapter06/provenance.json) · [추가 촬영 기록](assets/screens/chapter06/detail-provenance.json) · [Wazuh 촬영 기록](assets/screens/chapter06/wazuh-provenance.json)
 - 저자용 촬영: `tools/capture_chapter06.py`, `tools/capture_chapter06_details.py`, `tools/capture_chapter06_wazuh.py`
 - 저자용 조회 검증: `tools/verify_chapter06.py`
+
+7장 재생성:
+
+```bash
+.venv/bin/python tools/write_chapter07.py
+.venv/bin/python tools/diagrams_chapter07.py
+.venv/bin/python tools/build_chapter01.py --source manuscript/volume01-chapter07.json --output build/volume01-chapter07.docx
+```
+
+- [7장 검토 기록](editorial/chapter07-review.json) · [슬라이드 화면 출처](assets/screens/chapter07/provenance.json)
+- 화면 원본은 `assets/screens/chapter07/source/`에 보존했습니다. `tools/extract_chapter07.py`에 제공된 PPTX 경로를 인자로 주면 같은 영역을 다시 추출합니다. 실험·촬영 도구는 없습니다.
+- [기존 삽화 재사용 기록](editorial/chapter07-illustrations.json)
 
 PDF는 배포하지 않습니다. 임시 PDF·페이지 이미지는 DOCX 배치 검사용으로만 사용합니다. Consolas가 없는 환경에서는 대체 글꼴로 보일 수 있으므로 Word에서 최종 인쇄 크기를 재확인합니다.
