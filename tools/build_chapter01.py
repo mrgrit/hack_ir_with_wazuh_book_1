@@ -89,7 +89,7 @@ def build(output,source=None):
             typ=b['type']
             if typ=='p':para(doc,b['text'],align=WD_ALIGN_PARAGRAPH.CENTER if pg['kind']=='cover' else None)
             elif typ=='h':para(doc,b['text'],size=11.5,name=HEAD,after=5,keep=True)
-            elif typ=='command':
+            elif typ in ('command','query'):
                 para(doc,b['id']+'  |  '+b['where'],size=9,name=HEAD,after=2,keep=True)
                 # 역할·기호 → 입력 → 판정 순서. 한 명령 블록은 같은 쪽에 둔다.
                 para(doc,b['why'],after=3,keep=True)
@@ -116,6 +116,10 @@ def build(output,source=None):
                 p=para(doc,'',size=10,after=7)
                 link=OxmlElement('w:hyperlink');link.set(qn('r:id'),p.part.relate_to(b['url'],RT.HYPERLINK,is_external=True))
                 r=font(p.add_run(b['text']),BODY,10);p._p.remove(r._r);link.append(r._r);p._p.append(link)
+                p.paragraph_format.keep_with_next=True
+                urlpara=para(doc,'',name=MONO,size=10,after=9)
+                url_link=OxmlElement('w:hyperlink');url_link.set(qn('r:id'),p.part.relate_to(b['url'],RT.HYPERLINK,is_external=True))
+                r=font(urlpara.add_run(b['url']),MONO,10);urlpara._p.remove(r._r);url_link.append(r._r);urlpara._p.append(url_link)
             else:raise ValueError(typ)
     doc.core_properties.title=data['title'];doc.core_properties.subject=data['series'];doc.core_properties.language='ko-KR'
     doc.core_properties.author='';doc.core_properties.comments='신규 원고. 설치 절차는 문서·코드 대조 상태. 실제 UI는 기존 가동 환경에서 촬영.'

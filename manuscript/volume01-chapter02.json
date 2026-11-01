@@ -446,7 +446,13 @@
           "type": "link",
           "text": "0095-sshd_rules.xml · rule 5710",
           "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0095-sshd_rules.xml"
-        },
+        }
+      ]
+    },
+    {
+      "title": "2장 참고 자료 · 계속",
+      "kind": "body",
+      "blocks": [
         {
           "type": "h",
           "text": "[3] HTTP 상태 코드"

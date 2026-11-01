@@ -1,0 +1,163 @@
+{
+  "date": "2026-11-01T10:10:39.819292+00:00",
+  "deliverable": "manuscript/volume01-chapter03.docx",
+  "scope": "Discover에서 인덱스·기간·DQL을 지정하고 경보 필드·원문을 읽는 3장 초안",
+  "pages": 12,
+  "commands": 0,
+  "query_files": 3,
+  "screenshots": [
+    {
+      "path": "assets/screens/chapter03/absolute-time.png",
+      "sha256": "0fadb909a3b60ff3105139032eba9dbef11b680fe04b5952ad37a128d62774ee",
+      "pixels": [
+        840,
+        780
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 103,
+      "capture": "Playwright Chromium actual rendered UI; native panel resizing and viewport crop only",
+      "source": "https://192.168.0.189:5601/app/data-explorer/discover",
+      "record_type": "existing lab; read-only browsing"
+    },
+    {
+      "path": "assets/screens/chapter03/detail.png",
+      "sha256": "1afb41425fc00ed6de3e1dfe35914e2c9c7835956dc70b266f8ec28ba529c3e6",
+      "pixels": [
+        1060,
+        380
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "capture": "Playwright Chromium actual rendered UI; native panel resizing and viewport crop only",
+      "source": "https://192.168.0.189:5601/app/data-explorer/discover",
+      "record_type": "existing lab; read-only browsing"
+    },
+    {
+      "path": "assets/screens/chapter03/fields.png",
+      "sha256": "34a5025dd5ab87940d3f05584f541a8a5065c5a17f9ab702c39bc1d6739a6419",
+      "pixels": [
+        740,
+        440
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 104,
+      "capture": "Playwright Chromium actual rendered UI; native panel resizing and viewport crop only",
+      "source": "https://192.168.0.189:5601/app/data-explorer/discover",
+      "record_type": "existing lab; read-only browsing"
+    },
+    {
+      "path": "assets/screens/chapter03/index-pattern.png",
+      "sha256": "3259dad19bff5a7fb7d768c146dbbabf0ae97e4b01b6dfa44733addc065f1387",
+      "pixels": [
+        800,
+        480
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 110,
+      "capture": "Playwright Chromium actual rendered UI; native panel resizing and viewport crop only",
+      "source": "https://192.168.0.189:5601/app/data-explorer/discover",
+      "record_type": "existing lab; read-only browsing"
+    },
+    {
+      "path": "assets/screens/chapter03/menu.png",
+      "sha256": "c2838c2fccb2240a4139f959d1b26736fc77ea7af930512f452fad667b02f83d",
+      "pixels": [
+        720,
+        820
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 90,
+      "capture": "Playwright Chromium actual rendered UI; native panel resizing and viewport crop only",
+      "source": "https://192.168.0.189:5601/app/wazuh",
+      "record_type": "existing lab; read-only browsing"
+    },
+    {
+      "path": "assets/screens/chapter03/query.png",
+      "sha256": "3440e5d2aa5f2c62249262374f63c8ee8f46932d41a8ab76842cd7475224cddb",
+      "pixels": [
+        1100,
+        170
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "capture": "Playwright Chromium actual rendered UI; native panel resizing and viewport crop only",
+      "source": "https://192.168.0.189:5601/app/data-explorer/discover",
+      "record_type": "existing lab; read-only browsing"
+    },
+    {
+      "path": "assets/screens/chapter03/results.png",
+      "sha256": "d37b619fa83346baec53cf9d1429cca8ff55d01ec21f7b706393fcdc501be26c",
+      "pixels": [
+        990,
+        270
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "capture": "Playwright Chromium actual rendered UI; native panel resizing and viewport crop only",
+      "source": "https://192.168.0.189:5601/app/data-explorer/discover",
+      "record_type": "existing lab; read-only browsing"
+    },
+    {
+      "path": "assets/screens/chapter03/time-range.png",
+      "sha256": "74ed38ea6d70d8acd088bfa87e7b8dff763fe3a91f24c68c7e38552d45c2758d",
+      "pixels": [
+        852,
+        606
+      ],
+      "device_scale_factor": 2,
+      "print_width_mm": 108,
+      "capture": "Playwright Chromium actual rendered UI; native panel resizing and viewport crop only",
+      "source": "https://192.168.0.189:5601/app/data-explorer/discover",
+      "record_type": "existing lab; read-only browsing"
+    }
+  ],
+  "diagrams": 2,
+  "small_illustrations": 1,
+  "case": {
+    "record": "examples/chapter02/case-ssh.json",
+    "index": "wazuh-alerts-4.x-2026.11.01",
+    "id": "WfiPlaEBEYWT20nnUNlQ",
+    "range_kst": "2026-11-01 14:20:00–14:25:00",
+    "queries": "examples/chapter03/queries.json"
+  },
+  "newly_verified": {
+    "time_clip": {
+      "x": 225,
+      "y": 59,
+      "width": 426,
+      "height": 303
+    },
+    "query_clip": {
+      "x": 226,
+      "y": 98,
+      "width": 550,
+      "height": 85
+    },
+    "query1_hits": "15,287",
+    "query2_hits": "2",
+    "query3_hits": "2",
+    "json_has_id": true,
+    "json_has_index": true,
+    "remove_column_button": 1
+  },
+  "sources": [
+    "https://docs.opensearch.org/2.16/dashboards/discover/index-discover/",
+    "https://docs.opensearch.org/2.16/dashboards/dql/"
+  ],
+  "checks": [
+    "DQL 3개를 실제 Discover 검색창에서 실행. Q03-02·03 각각 2건.",
+    "JSON의 _index·_id 존재, 필드 추가·제거 버튼, Absolute 입력과 결과 대조.",
+    "12쪽 렌더 시각 검토. 검색식·설명·결과의 같은 쪽 배치 확인.",
+    "도식 글자 잘림·겹침 및 실제 화면의 인쇄 크기 가독성 확인.",
+    "기존 SSH 실패 두 경보를 조회했으며 새 공격을 실행하지 않음.",
+    "참고 URL 전체 문자열, 부크크 판형·여백·테마와 본문 영역 검사."
+  ],
+  "limitations": [
+    "독자의 새 환경에서 같은 과거 SSH 경보가 재현된다고 가정하지 않는다.",
+    "수집 설정 변경·새 공격·새 VMware 설치 검증은 수행하지 않았다.",
+    "검사 환경에 Consolas가 없어 DejaVu Sans Mono로 대체 렌더. Word 최종 교정 필요."
+  ],
+  "art_provenance": "editorial/chapter03-illustrations.json",
+  "docx_sha256": "cc9ba2fdfb58bd4700e9d3831b083481fa2c4ea50d14d468219e8d6341bb4670",
+  "authoring_boundary": "강의·kt66 저장소 무수정. PDF는 /tmp 검사용이며 배포하지 않음."
+}

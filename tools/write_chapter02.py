@@ -89,6 +89,8 @@ page('2장 참고 자료',
  {'type':'link','text':'Wazuh · Rules','url':'https://documentation.wazuh.com/current/user-manual/ruleset/rules/index.html'},
  h('[2] Wazuh 4.10.0 SSH 규칙'),
  {'type':'link','text':'0095-sshd_rules.xml · rule 5710','url':'https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0095-sshd_rules.xml'},
+)
+page('2장 참고 자료 · 계속',
  h('[3] HTTP 상태 코드'),
  {'type':'link','text':'RFC 9110 · HTTP Semantics · Section 15','url':'https://www.rfc-editor.org/rfc/rfc9110.html#section-15'},
  h('실습 설정'),

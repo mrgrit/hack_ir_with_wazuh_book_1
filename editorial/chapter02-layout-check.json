@@ -1,10 +1,12 @@
 {
-  "docx_pages": 8,
+  "docx_pages": 9,
   "command_files": 3,
   "command_syntax": "bash -n only; not executed",
   "template_page_size_and_margins_inherited": true,
   "template_theme_identical": true,
   "all_primary_commands_and_explanations_on_same_page": true,
   "body_text_within_page_bounds": true,
-  "no_implicit_command_line_wraps": true
+  "no_implicit_command_line_wraps": true,
+  "all_reference_urls_visible_in_print": true,
+  "query_files": 0
 }

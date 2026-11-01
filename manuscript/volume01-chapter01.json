@@ -1608,6 +1608,16 @@
           "url": "https://github.com/mrgrit/kt66/tree/63d4180b1d6866de986ef263a3bd831d6082b5d5"
         },
         {
+          "type": "p",
+          "text": "설치 코드의 기준 버전은 63d4180이다."
+        }
+      ]
+    },
+    {
+      "title": "1장 참고 자료 · 계속",
+      "kind": "body",
+      "blocks": [
+        {
           "type": "h",
           "text": "[4] Wazuh Docker 요구사항"
         },

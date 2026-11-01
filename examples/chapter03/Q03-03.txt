@@ -1,0 +1,2 @@
+agent.name: "bastion" AND rule.id: "5710"
+AND data.srcip: "10.20.30.254"

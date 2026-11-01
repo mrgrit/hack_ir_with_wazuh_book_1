@@ -288,6 +288,8 @@ page('1장 참고 자료',
     {'type':'link','text':'Ubuntu 공식 ISO 배포','url':'https://releases.ubuntu.com/22.04/'},
     h('[3] kt66 기준 소스'),
     {'type':'link','text':'kt66 · 기준 커밋 63d4180','url':'https://github.com/mrgrit/kt66/tree/'+COMMIT},
+    p('설치 코드의 기준 버전은 63d4180이다.'))
+page('1장 참고 자료 · 계속',
     h('[4] Wazuh Docker 요구사항'),
     {'type':'link','text':'Wazuh Docker deployment · 메모리 매핑 한도','url':'https://documentation.wazuh.com/current/deployment-options/docker/wazuh-container.html'},
     h('[5] 공격자 VM 도구 구성'),

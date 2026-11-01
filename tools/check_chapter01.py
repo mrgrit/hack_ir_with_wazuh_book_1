@@ -20,6 +20,11 @@ def main(pdf,chapter="01"):
         assert (ROOT/f'examples/chapter{chapter}'/f"{b['id']}.txt").read_text()==b['text']+'\n', b['id']
         subprocess.run(['bash','-n'],input=b['text'],text=True,check=True,capture_output=True)
         assert not re.search(r'docker\s+exec\s+(?!-it)',b['text'])
+    queries=[b for pg in data['pages'] for b in pg['blocks'] if b['type']=='query']
+    if queries:
+        assert queries==json.loads((ROOT/f'examples/chapter{chapter}/queries.json').read_text())
+        for b in queries:
+            assert (ROOT/f'examples/chapter{chapter}'/f"{b['id']}.txt").read_text()==b['text']+'\n'
     d=Document(ROOT/f'manuscript/volume01-chapter{chapter}.docx')
     src=Document(ROOT/'tools/assets/bookk-B5.docx')
     assert len(d.sections)==1
@@ -36,7 +41,9 @@ def main(pdf,chapter="01"):
         txt=compact(page.get_text())
         assert compact(pg['title']) in txt,pg['title']
         for b in pg['blocks']:
-            if b['type']=='command':
+            if b['type']=='link':
+                assert compact(b['url']) in txt,('URL not fully printed',b['url'])
+            if b['type'] in ('command','query'):
                 for key in ['id','text','why','result']:
                     assert compact(b[key]) in txt,(b['id'],key,'not wholly on expected page')
                 rendered_lines=[compact(line) for line in page.get_text().splitlines()]
@@ -50,7 +57,8 @@ def main(pdf,chapter="01"):
                     if span['bbox'][1]>660:continue # footer
                     assert span['bbox'][1]>=77 and span['bbox'][3]<=625,span
                     assert span['bbox'][0]>=75 and span['bbox'][2]<=460,span
-    report={'docx_pages':len(rendered),'command_files':len(cmds),'command_syntax':'bash -n only; not executed','template_page_size_and_margins_inherited':True,'template_theme_identical':True,'all_primary_commands_and_explanations_on_same_page':True,'body_text_within_page_bounds':True,'no_implicit_command_line_wraps':True}
+    report={'docx_pages':len(rendered),'command_files':len(cmds),'command_syntax':'bash -n only; not executed','template_page_size_and_margins_inherited':True,'template_theme_identical':True,'all_primary_commands_and_explanations_on_same_page':True,'body_text_within_page_bounds':True,'no_implicit_command_line_wraps':True,'all_reference_urls_visible_in_print':True}
+    report['query_files']=len(queries)
     (ROOT/f'editorial/chapter{chapter}-layout-check.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps(report,ensure_ascii=False))
 

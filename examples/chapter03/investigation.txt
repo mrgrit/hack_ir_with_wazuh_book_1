@@ -1,0 +1,14 @@
+검색 범위:
+시작·종료 시각과 시간대:
+DQL:
+화면 필터:
+_index:
+_id:
+agent.name:
+agent.ip:
+rule.id:
+rule.description:
+full_log:
+location:
+확인한 사실:
+추가 조사:

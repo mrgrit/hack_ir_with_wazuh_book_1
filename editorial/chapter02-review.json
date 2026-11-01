@@ -2,7 +2,7 @@
   "date": "2026-11-01T09:44:15.255958+00:00",
   "scope": "2장 초안: 구체적인 SSH 실패 기록 → 용어와 탐지 과정 → 직접 조회 → 관제·대응·기록 작성",
   "deliverable": "manuscript/volume01-chapter02.docx",
-  "pages": 8,
+  "pages": 9,
   "commands": 3,
   "diagrams": 3,
   "small_illustrations": 1,
@@ -54,5 +54,10 @@
   ],
   "authoring_boundary": "No lecture or kt66 repository edits. No PDF distribution.",
   "art_provenance": "editorial/chapter02-illustrations.json",
-  "docx_sha256": "2bd7571cf815ed3bc07e04f6a57f074db97165dba40e46d87de41362b0caf22c"
+  "docx_sha256": "ff783f1ef9269ed17b4a7b242ea0adb123dbbb4a1153afea3b46028816a4d716",
+  "print_reference_revision": {
+    "date": "2026-11-01T10:10:39.819292+00:00",
+    "scope": "참고 자료명 아래 전체 URL 인쇄. 주소 축약·추가 하이픈 없이 줄바꿈. 참고 자료를 2쪽으로 분리.",
+    "checks": "모든 URL의 원문과 PDF 추출 문자열 대조, 참고 자료 4쪽 시각 검토, 기존 명령·판형 검사 통과."
+  }
 }

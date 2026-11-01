@@ -1,0 +1,10 @@
+{
+  "mode": "built-in image_gen",
+  "images": [
+    {
+      "path": "assets/illustrations/chapter03/time.png",
+      "source": "/home/ccc/.codex/generated_images/01a1963a-4c4d-7911-a89f-726638e9a6ac/exec-04f7ad05-d5e6-4c08-8b9e-0233d6cb7ac1.png",
+      "prompt": "Create an original small spot illustration for a Korean engineering manual, printed 45mm wide. Retro PC-98 1990s pixel-art, clear square pixels, limited navy/lavender/muted cyan/dusty rose/cream colors, checkerboard dithering and dark outlines. A mature woman security analyst with a short silver bob and mustard cardigan at a compact standing workstation in a daylight monitoring office. She holds a paper calendar beside the keyboard and compares it to a single monitor that faces her; we see its opaque back from a front three-quarter view of her face. A small wall clock and a narrow shelf with labeled-by-color-only folders give a local background. Emphasis on choosing a log-search time range. Natural adult proportions, coherent perspective, no headset, no readable text, no fake UI, no logos, no speech balloons. Complete compact scene and ample transparent outside margin. Distinct from seated installation students, cable technicians and two-person night investigation scenes."
+    }
+  ]
+}
