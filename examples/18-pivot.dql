@@ -1,1 +1,0 @@
-rule.groups:sshd AND data.srcip:"<성공 기록의 출발지 IP>"

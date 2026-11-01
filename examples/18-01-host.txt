@@ -1,1 +1,0 @@
-read -rp 'kt66 호스트 주소: ' LAB_HOST

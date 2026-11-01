@@ -1,1 +1,1 @@
-timedatectl
+./kt66.sh up

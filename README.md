@@ -1,58 +1,36 @@
 # 해킹·침해대응 실무 with Wazuh
 
-강의 자료와 분리한 집필용 저장소입니다. 1권 제목은 **『시스템 침투와 SIEM 분석』**입니다.
-직접 공격을 실행하고, 흔적을 분석하며, 침해에 대응하는 과정을 초보자(대학 1~2학년) 눈높이로 다룹니다.
+1권 **시스템 침투와 SIEM 분석**의 집필 저장소입니다.
 
-현재 원고는 **머리말, 1장(kt66 실습 환경 준비), 2장(공격과 보안관제의 기초), 3장(Wazuh 기본 운용)**까지입니다.
+기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
 
-- [머리말·1장 DOCX](manuscript/volume01-opening.docx) · [2장 DOCX](manuscript/volume01-chapter02.docx) · [3장 DOCX](manuscript/volume01-chapter03.docx) — 부크크 B5 서식
-- 내용 소스(JSON): [1장](manuscript/volume01-opening.json) · [2장](manuscript/volume01-chapter02.json) · [3장](manuscript/volume01-chapter03.json)
-- 개념 도식은 `tools/illustrate.py`(Pillow)로 생성 → [assets/figures/](assets/figures/)
-- UI 화면(Discover·Dev Tools 등)은 실제 kt66 대시보드에서 캡처(`tools/capture_screens.py`) → [assets/screens/](assets/screens/)
-- [1장 복사용 명령·설정 예시](examples/chapter01/)
-- [삽화 화풍·구도 기준](editorial/ILLUSTRATION_STYLE.md) · [삽화 원본](assets/illustrations/)
+- **[새 원고 DOCX](manuscript/volume01-chapter01.docx)** — 부크크 B5, 편집·검토용
+- [복사용 명령](examples/chapter01/) — 본문의 C01 번호와 대응
+- [집필 지침](AGENTS.md)
+- [검토·검증 기록](editorial/chapter01-review.json)
 
-## 서식과 조판
+1장은 VMware·Ubuntu 준비, kt66 설치·기동, 웹·Wazuh 접속, 센서 확인, 중지·복구를 다룹니다. 1권 전체 범위는 Module 01 실습 01~30 및 62, 11장과 부록입니다. 이번 산출물에 2장 이후 본문은 없습니다.
 
-최종 산출물은 **부크크(Bookk) B5(46배판) Word 서식**을 그대로 따릅니다. 본문은 **부크크 명조 Light**,
-제목·강조는 **부크크 고딕 Light**, 명령·코드는 Consolas 를 쓰고, 색을 쓰지 않는 단순한 표로 조판합니다.
-페이지 크기·여백·테마는 서식 템플릿(`tools/assets/bookk-B5-template.docx`)을 base 로 열어 그대로 상속합니다.
+## 확인한 범위
 
-원고는 두 단계로 만듭니다. 내용을 `build_opening_src.py` 가 JSON 으로 쓰고, `build_bookk.py` 가 그 JSON 을
-부크크 서식 DOCX 로 조판합니다. 두 도구 모두 **저자용 조판 도구이며 kt66·Wazuh 에 접속하지 않습니다.**
+kt66 커밋 `63d4180b1d6866de986ef263a3bd831d6082b5d5`의 코드·설정과 공식 문서를 대조했습니다. 기존 가동 환경에서 웹 응답, 데모 계정 Wazuh 로그인, kt66-host 연결 상태를 확인하고 실제 화면을 촬영했습니다.
+
+**새 VMware VM에 대한 설치·중지·스냅샷 복원은 실행 검증 전입니다.** VMware·Ubuntu 설치 화면 두 곳은 저자 촬영 지시를 두었습니다. 나머지 그림은 실제 삽입했습니다. 강의·kt66 저장소는 수정하지 않았습니다.
+
+## 편집과 재생성
+
+DOCX를 직접 편집할 수 있습니다. 조판기는 기본적으로 `build/`에 출력하므로 검토 중인 원고를 덮어쓰지 않습니다. DOCX에서 고친 내용이 Python·JSON 원본에 자동 반영되지는 않습니다.
 
 ```bash
-python3 -m venv .venv-docx
-.venv-docx/bin/pip install -r tools/requirements-docx.txt
-.venv-docx/bin/python tools/build_opening_src.py                 # 머리말·1장 내용 → JSON
-.venv-docx/bin/python tools/build_bookk.py                        # JSON → manuscript/volume01-opening.docx
-.venv-docx/bin/python tools/build_ch02_src.py                    # 2장 내용 → JSON
-.venv-docx/bin/python tools/build_bookk.py --source manuscript/volume01-chapter02.json --output manuscript/volume01-chapter02.docx
+.venv/bin/python tools/write_chapter01.py
+.venv/bin/python tools/diagram_chapter01.py
+.venv/bin/python tools/build_chapter01.py
 ```
 
-부크크 명조/고딕 글꼴은 부크크 서식 배포본에 포함되어 있습니다(저자 PC에 설치). 이 저장소에는 글꼴을
-동봉하지 않습니다. 글꼴이 없는 환경에서 열면 Word 가 대체 글꼴로 표시하므로 쪽 나눔이 달라질 수 있습니다.
-신규 배포 형식은 DOCX 이며 PDF 는 배포하지 않습니다.
+- 내용 원본: `tools/write_chapter01.py` → `manuscript/volume01-chapter01.json`
+- 조판 원본: `tools/assets/bookk-B5.docx`의 첫 구역 판형·여백·테마 상속
+- 본문 10.5pt 부크크 명조 Light, 제목 부크크 고딕 Light, 코드 10pt Consolas
+- 저자용 의존성: `tools/requirements-docx.txt`
+- UI 촬영: `tools/capture_chapter01.py`; 기존 환경을 조회하며 설치 작업은 하지 않음
 
-## 집필 원칙
-
-자세한 기준은 [AGENTS.md](AGENTS.md) 에 있습니다. 요약하면,
-
-- 학습자는 화면을 보며 한 명령씩 입력하고, UI 를 클릭하고, 결과를 읽습니다. 실습 전체를 하나의 스크립트·
-  API 로 대체하지 않습니다. `examples/chapterNN/` 의 txt 는 명령을 한 줄씩 복사하는 파일이며 폴더를 통째로
-  실행하지 않습니다. 파일 이름의 C 번호가 본문 명령 번호와 같습니다.
-- 낯선 명령은 처음 등장할 때 역할·기본 구문·사용한 옵션과 기호·정상 결과를 함께 설명합니다.
-- 실제 화면 캡처와 레트로 픽셀오피스 삽화를 명시적으로 구분합니다. 설치 화면은 저자가 촬영해 삽입할
-  자리(캡션·촬영 지시 포함)를 본문에 마련했습니다. 검증하지 않은 성공을 주장하지 않습니다.
-- 1장 설치 절차는 kt66 저장소(기준 커밋 `63d4180`)의 문서·코드를 대조해 서술했습니다.
-
-## 범위
-
-1권은 강의 Module 01 의 실습 01~30 및 62 를 실습 기반으로 삼습니다(11장 + 부록). 머리말·1장을 먼저
-집필했고, 2장(공격과 보안관제 기초)부터 이어서 집필합니다.
-
-## 환경
-
-집필 저장소의 보존 위치는 `/home/ccc/hack_ir_with_wazuh_book_1`,
-원격 저장소는 https://github.com/mrgrit/hack_ir_with_wazuh_book_1 입니다.
-강의 레포의 파일을 수정·삭제하지 않습니다.
+PDF는 배포하지 않습니다. 임시 PDF·페이지 이미지는 DOCX 배치 검사용으로만 사용합니다. Consolas가 없는 환경에서는 대체 글꼴로 보일 수 있으므로 Word에서 최종 인쇄 크기를 재확인합니다.

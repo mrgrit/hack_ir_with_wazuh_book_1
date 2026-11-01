@@ -1,1 +1,1 @@
-node --version
+git clone https://github.com/mrgrit/kt66.git

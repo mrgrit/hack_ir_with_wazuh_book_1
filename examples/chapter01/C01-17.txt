@@ -1,1 +1,1 @@
-git switch --detach 63d4180b1d6866de986ef263a3bd831d6082b5d5
+git rev-parse --short=7 HEAD

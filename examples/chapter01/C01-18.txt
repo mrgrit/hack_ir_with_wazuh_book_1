@@ -1,1 +1,1 @@
-git rev-parse HEAD
+ls -l .env.example .env

@@ -1,0 +1,83 @@
+{
+  "captured_at": "2026-11-01T08:47:41.127917+00:00",
+  "host": "192.168.0.189",
+  "kind": "existing-running-environment",
+  "fresh_install_verified": false,
+  "observed_host_agent_status": "active",
+  "note": "기존 환경의 웹 응답·admin 로그인·에이전트 연결을 새로 확인. 신규 VMware 설치와 구분한다.",
+  "device_scale_factor": 2,
+  "captures": [
+    {
+      "file": "web.png",
+      "url": "http://192.168.0.189/",
+      "clip_css_px": {
+        "x": 0,
+        "y": 0,
+        "width": 560,
+        "height": 265
+      },
+      "viewport_css_px": {
+        "width": 560,
+        "height": 900
+      },
+      "width_mm": 127,
+      "smallest_required_text_css_px": 14,
+      "estimated_text_pt": 9.0,
+      "sha256": "748b2d61d6740f29d0e6f509813976ba44542f80e934dfbd2af258685b4a3081"
+    },
+    {
+      "file": "login.png",
+      "url": "https://192.168.0.189:5601/app/login?",
+      "clip_css_px": {
+        "x": 260,
+        "y": 160,
+        "width": 520,
+        "height": 430
+      },
+      "viewport_css_px": {
+        "width": 1040,
+        "height": 800
+      },
+      "width_mm": 110,
+      "smallest_required_text_css_px": 16,
+      "estimated_text_pt": 9.59,
+      "sha256": "345c1d8a314e999008142fd0e84be6fad87ecd69da8163ec696957437b0daf07"
+    },
+    {
+      "file": "home.png",
+      "url": "https://192.168.0.189:5601/app/wz-home#/overview/?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-24h,to:now))&_a=(filters:!(),query:(language:kuery,query:''))",
+      "clip_css_px": {
+        "x": 0,
+        "y": 0,
+        "width": 480,
+        "height": 315
+      },
+      "viewport_css_px": {
+        "width": 1040,
+        "height": 800
+      },
+      "width_mm": 127,
+      "smallest_required_text_css_px": 14,
+      "estimated_text_pt": 10.5,
+      "sha256": "84684d1b8e62394c596b822e8458be2bb7db78ef773294bf67e461724c344c50"
+    },
+    {
+      "file": "agents.png",
+      "url": "https://192.168.0.189:5601/app/endpoints-summary#/agents?tab=welcome&agent=005",
+      "clip_css_px": {
+        "x": 0,
+        "y": 0,
+        "width": 480,
+        "height": 260
+      },
+      "viewport_css_px": {
+        "width": 480,
+        "height": 900
+      },
+      "width_mm": 127,
+      "smallest_required_text_css_px": 12,
+      "estimated_text_pt": 9.0,
+      "sha256": "d5c6da7baad4cb9f33534054d8c5e4329141d02c76a259f66aa478a569615bef"
+    }
+  ]
+}

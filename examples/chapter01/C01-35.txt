@@ -1,1 +1,1 @@
-echo $?
+grep -E '^(WEB_HOST_IP|INT_HOST_IP|LAB_DOMAIN|WINDOWS_ENABLED)=' .env

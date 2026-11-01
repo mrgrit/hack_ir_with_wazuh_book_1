@@ -1,1 +1,1 @@
-./kt66.sh up
+sudo cat /etc/docker/daemon.json

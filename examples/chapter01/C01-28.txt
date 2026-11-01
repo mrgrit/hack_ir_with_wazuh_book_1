@@ -1,1 +1,1 @@
-sysctl vm.max_map_count
+ls -l /etc/docker/daemon.json

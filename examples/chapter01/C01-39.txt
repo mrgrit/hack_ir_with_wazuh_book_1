@@ -1,1 +1,1 @@
-id -nG
+systemctl is-active osqueryd

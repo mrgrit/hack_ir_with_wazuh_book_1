@@ -1,7 +1,7 @@
+.venv/
 __pycache__/
+build/
+*.pdf
 *.pyc
-build/page*.png
-
-.venv-docx/
-build/docx/
+*.lock
 ~$*.docx

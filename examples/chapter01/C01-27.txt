@@ -1,1 +1,1 @@
-docker ps
+sudo sysctl -p /etc/sysctl.d/99-wazuh-book.conf

@@ -1,1 +1,1 @@
-uname -m
+ip -4 -br address

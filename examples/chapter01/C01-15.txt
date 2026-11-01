@@ -1,1 +1,1 @@
-git clone https://github.com/mrgrit/kt66.git ~/work/kt66
+git status --short

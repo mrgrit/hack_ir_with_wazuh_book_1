@@ -1,1 +1,2 @@
-ip -4 route
+sudo apt-get install git curl ca-certificates openssl jq \
+  nano python3 python3-yaml gnupg openssh-client

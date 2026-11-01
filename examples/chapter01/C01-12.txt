@@ -1,1 +1,1 @@
-python3 --version
+ls -ld kt66

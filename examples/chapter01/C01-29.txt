@@ -1,1 +1,1 @@
-sudo nano /etc/sysctl.d/99-wazuh-max-map-count.conf
+sudo cat /etc/docker/daemon.json

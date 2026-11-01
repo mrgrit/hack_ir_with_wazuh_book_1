@@ -1,1 +1,0 @@
-rule.groups:osquery AND agent.name:kt66-host AND data.osquery.name:kt66_authorized_keys AND data.osquery.action:added

@@ -1,1 +1,0 @@
-read -rp 'SSH 실습 계정: ' LAB_USER

@@ -1,0 +1,1 @@
+cat /etc/sysctl.d/99-wazuh-book.conf

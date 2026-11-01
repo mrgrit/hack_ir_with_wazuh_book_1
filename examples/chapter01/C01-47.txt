@@ -1,1 +1,1 @@
-sudo systemctl status wazuh-agent --no-pager
+docker compose logs --tail 50 wazuh-indexer

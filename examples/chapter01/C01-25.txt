@@ -1,1 +1,1 @@
-docker --version
+ls -l /etc/sysctl.d/99-wazuh-book.conf

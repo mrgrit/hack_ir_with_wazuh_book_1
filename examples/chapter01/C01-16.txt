@@ -1,1 +1,1 @@
-cd ~/work/kt66
+git checkout --detach 63d4180

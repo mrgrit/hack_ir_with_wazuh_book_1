@@ -1,1 +1,1 @@
-systemctl is-active wazuh-agent
+docker compose ps -a

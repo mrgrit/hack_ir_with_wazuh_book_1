@@ -1,1 +1,1 @@
-curl -I https://github.com
+getent hosts github.com

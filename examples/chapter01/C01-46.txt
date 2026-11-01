@@ -1,1 +1,1 @@
-sudo ./deployment/host-sensors.sh
+docker compose logs --tail 50 wazuh-dashboard

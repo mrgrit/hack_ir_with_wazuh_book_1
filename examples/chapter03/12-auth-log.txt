@@ -1,2 +1,0 @@
-docker compose -f docker-compose.yaml exec bastion \
-  tail -n 30 /var/log/auth.log

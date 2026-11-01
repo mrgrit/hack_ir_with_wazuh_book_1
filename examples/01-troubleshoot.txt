@@ -1,1 +1,0 @@
-sudo docker exec kt66-web tail -n 20 /var/log/apache2/dvwa_port_access.log

@@ -1,1 +1,1 @@
-./kt66.sh install
+sysctl vm.max_map_count

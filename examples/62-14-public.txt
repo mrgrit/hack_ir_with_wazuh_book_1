@@ -1,1 +1,0 @@
-cat "$BOOK_KEY_DIR/demo.pub"

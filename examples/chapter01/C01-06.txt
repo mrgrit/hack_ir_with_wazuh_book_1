@@ -1,1 +1,1 @@
-free -h
+ip route

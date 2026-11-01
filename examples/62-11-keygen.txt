@@ -1,1 +1,0 @@
-ssh-keygen -t ed25519 -f "$BOOK_KEY_DIR/demo" -N "" -C book62-demo
