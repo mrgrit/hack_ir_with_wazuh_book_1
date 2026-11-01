@@ -1,0 +1,14 @@
+{
+  "pages": 22,
+  "renderer": "LibreOffice Writer 7.3 / Noto CJK; QA PDF temporary only",
+  "docx_sha256": "e4e8be951b6ce57b787db5c6014739cb4ebc65a006c641b7fdc2becbab985d67",
+  "archive_xml": "passed",
+  "text_outside_page": "none",
+  "blank_or_overflow_pages": "none; 22 logical pages = 22 rendered pages",
+  "real_screenshots": 7,
+  "native_diagrams": 4,
+  "visual_review": "全22쪽 축소표 확인. 경보 필드·코드·시간 선택·JSON 응답 확대 검토. 핵심 UI 영역을 분리해 B5에 배치.",
+  "prior_chapters_unchanged": "opening/chapter02 DOCX·JSON SHA256 일치",
+  "examples": "모든 JSON 파싱, HTTP 본문과 JSON 일치, 본문 개별 명령과 파일 일치",
+  "remaining": "Docker 조회 명령 실행과 콘솔 캡처는 관리자 접근 가능한 환경에서 추가 검증 필요"
+}

@@ -1,0 +1,85 @@
+{
+  "chapter": 3,
+  "title": "Wazuh 기본 운용",
+  "baseline": {
+    "kt66_commit": "63d4180b1d6866de986ef263a3bd831d6082b5d5",
+    "dashboard_help": "v4.10.0",
+    "bastion_agent": "v4.10.1",
+    "host": "192.168.0.189",
+    "ssh_host_port": 2204
+  },
+  "reader_flow": [
+    "에이전트 상태 확인",
+    "SSH 실패 1회 생성",
+    "DQL 검색·열 추가·문서 Table/JSON 읽기",
+    "Indexer Dev Tools 읽기 전용 검색",
+    "경로·설정·장애 점검"
+  ],
+  "verified": {
+    "ssh": "2026-11-01 14:22 KST, nonexistent book03_probe, one password, Permission denied",
+    "discover_marker_count": 3,
+    "discover_bastion_marker_count": 2,
+    "discover_bastion_user_count": 2,
+    "indexer_console": {
+      "http_status": 200,
+      "hits_total": 2,
+      "timed_out": false,
+      "failed_shards": 0
+    },
+    "bastion_events": [
+      "2026-11-01T05:22:22.998+0000 Invalid user",
+      "2026-11-01T05:22:36.778+0000 Failed password"
+    ],
+    "rule_id": "5710",
+    "rule_level": 5,
+    "observed_source_ip": "10.20.30.254",
+    "navigation": "UI 메뉴와 실제 표시값 대조",
+    "no_fabricated_screenshots": true
+  },
+  "limits": [
+    "Docker ps/exec는 현재 사용자 소켓 접근 거부. 08~13 진단 명령은 소스 대조이며 실행 성공을 주장하지 않음.",
+    "호스트 관리자 권한을 얻어 콘솔 상태·원본 파일 점검을 출판 전 촬영·검증해야 함.",
+    "현재 kt66 설치본의 end-to-end 검증. 신규 설치·다른 호스트에서 재현 완료를 뜻하지 않음."
+  ],
+  "mutations": "SSH 실패 기록·임시 브라우저 검색 상태·저자용 임시 known_hosts 생성. 계정 생성, 규칙 수정, 서비스 재시작, 합성 로그 주입 없음.",
+  "native_word_diagrams": 4,
+  "docx_real_screenshots": 7,
+  "sources": [
+    {
+      "type": "source",
+      "text": "kt66 · 이 장의 구성 기준 소스",
+      "url": "https://github.com/mrgrit/kt66/tree/63d4180b1d6866de986ef263a3bd831d6082b5d5"
+    },
+    {
+      "type": "source",
+      "text": "Wazuh · Dashboard 메뉴 안내",
+      "url": "https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/navigating-the-wazuh-dashboard.html"
+    },
+    {
+      "type": "source",
+      "text": "Wazuh · 경보 저장 수준",
+      "url": "https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/alerts.html"
+    },
+    {
+      "type": "source",
+      "text": "Wazuh · 출력·아카이브 설정",
+      "url": "https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/global.html"
+    },
+    {
+      "type": "source",
+      "text": "OpenSearch · DQL 검색 문법",
+      "url": "https://docs.opensearch.org/latest/dashboards/dql/"
+    },
+    {
+      "type": "source",
+      "text": "OpenSearch · Dev Tools 실행 방법",
+      "url": "https://docs.opensearch.org/latest/dashboards/getting-started/explore-dev-tools/"
+    },
+    {
+      "type": "source",
+      "text": "OpenSearch · 검색 요청과 응답",
+      "url": "https://docs.opensearch.org/latest/getting-started/search-data/"
+    }
+  ],
+  "chapter01_and_02": "보존, 내용 수정 없음"
+}

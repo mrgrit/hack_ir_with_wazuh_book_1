@@ -1,0 +1,64 @@
+{
+  "took": 8,
+  "timed_out": false,
+  "_shards": {
+    "total": 279,
+    "successful": 279,
+    "skipped": 276,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 2,
+      "relation": "eq"
+    },
+    "max_score": null,
+    "hits": [
+      {
+        "_index": "wazuh-alerts-4.x-2026.11.01",
+        "_id": "WfiPlaEBEYWT20nnUNlQ",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "name": "bastion"
+          },
+          "data": {
+            "srcuser": "book03_probe",
+            "srcip": "10.20.30.254"
+          },
+          "rule": {
+            "id": "5710"
+          },
+          "full_log": "Nov  1 14:22:35 bastion sshd[7249]: Failed password for invalid user book03_probe from 10.20.30.254 port 50964 ssh2",
+          "timestamp": "2026-11-01T05:22:36.778+0000"
+        },
+        "sort": [
+          1793510556778
+        ]
+      },
+      {
+        "_index": "wazuh-alerts-4.x-2026.11.01",
+        "_id": "TPiPlaEBEYWT20nnFdm3",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "name": "bastion"
+          },
+          "data": {
+            "srcuser": "book03_probe",
+            "srcip": "10.20.30.254",
+            "srcport": "50964"
+          },
+          "rule": {
+            "id": "5710"
+          },
+          "full_log": "Nov  1 14:22:22 bastion sshd[7249]: Invalid user book03_probe from 10.20.30.254 port 50964",
+          "timestamp": "2026-11-01T05:22:22.998+0000"
+        },
+        "sort": [
+          1793510542998
+        ]
+      }
+    ]
+  }
+}

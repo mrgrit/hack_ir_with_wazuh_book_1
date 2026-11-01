@@ -1,0 +1,2 @@
+docker compose -f docker-compose.yaml exec siem \
+  tail -n 50 /var/ossec/logs/ossec.log

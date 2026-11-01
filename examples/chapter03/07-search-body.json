@@ -1,0 +1,39 @@
+{
+  "size": 5,
+  "_source": [
+    "timestamp",
+    "agent.name",
+    "data",
+    "rule.id",
+    "full_log"
+  ],
+  "sort": [
+    {
+      "timestamp": "desc"
+    }
+  ],
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "agent.name": "bastion"
+          }
+        },
+        {
+          "match_phrase": {
+            "full_log": "book03_probe"
+          }
+        },
+        {
+          "range": {
+            "timestamp": {
+              "gte": "now-1h",
+              "lte": "now"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

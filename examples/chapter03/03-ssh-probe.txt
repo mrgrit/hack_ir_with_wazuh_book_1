@@ -1,0 +1,4 @@
+ssh -o NumberOfPasswordPrompts=1 \
+  -o PreferredAuthentications=password \
+  -o PubkeyAuthentication=no \
+  -p 2204 book03_probe@192.168.0.189
