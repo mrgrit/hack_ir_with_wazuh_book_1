@@ -34,6 +34,18 @@ GREY  = (150, 160, 172)
 
 def font(path, size): return ImageFont.truetype(path, size)
 
+def fit_font(d, text, path, max_w, size, min_size=22):
+    """텍스트가 max_w 를 넘지 않도록 글꼴 크기를 줄여 반환(테두리 겹침 방지)."""
+    s = size
+    while s > min_size and d.textlength(text, font=font(path, s)) > max_w:
+        s -= 2
+    return font(path, s)
+
+def ctext_fit(d, cx, cy, text, path, size, fill, max_w, line=1.25, min_size=22):
+    """한 줄 텍스트를 max_w 안에 맞춰(필요하면 축소) 가운데 정렬로 그린다."""
+    f = fit_font(d, text, path, max_w, size, min_size)
+    ctext(d, cx, cy, text, f, fill, line)
+
 def dither(d, box, color, step=6):
     """점무늬 음영 — 레트로 느낌."""
     x0, y0, x1, y1 = box
@@ -78,7 +90,7 @@ def fig_risk():
     im, d = canvas(W, H)
     fL = font(GB, 60); fS = font(GR, 42); fC = font(GB, 72)
     rrect(d, [40, 34, W - 40, 162], CREAM, NAVY, 7, 18)
-    ctext(d, W // 2, 98, "셋이 겹치는 곳에 위험이 커진다", font(GB, 56), INK)
+    ctext_fit(d, W // 2, 98, "셋이 겹치는 곳에 위험이 커진다", GB, 56, INK, W - 220)
     cx, r = W // 2, 250
     centers = {"자산": (cx, 440), "취약점": (cx - 215, 720), "위협": (cx + 215, 720)}
     fills = {"자산": (92, 142, 206, 115), "취약점": (46, 136, 142, 115), "위협": (223, 120, 150, 115)}
@@ -112,7 +124,7 @@ def fig_log_pipeline():
     im, d = canvas(W, H)
     fT = font(GB, 64); fS = font(GR, 40); fMono = font(GC, 42); fChip = font(GC, 40); fLbl = font(GB, 46)
     rrect(d, [40, 34, W - 40, 158], CREAM, NAVY, 7, 18)
-    ctext(d, W // 2, 96, "원본 로그가 이벤트와 경보가 되는 과정", font(GB, 56), INK)
+    ctext_fit(d, W // 2, 96, "원본 로그가 이벤트와 경보가 되는 과정", GB, 56, INK, W - 220)
     bw, bh, y0 = 490, 540, 270
     xs = [70, 615, 1160]
     cols = [BLUEF, TEALF, PINKF]
@@ -152,7 +164,7 @@ def fig_fpfn():
     im, d = canvas(W, H)
     fAx = font(GB, 48); fC = font(GB, 66); fS = font(GR, 40)
     rrect(d, [40, 34, W - 40, 150], CREAM, NAVY, 7, 18)
-    ctext(d, W // 2, 92, "공격 성공과 탐지 성공은 다른 사건이다", font(GB, 52), INK)
+    ctext_fit(d, W // 2, 92, "공격 성공과 탐지 성공은 다른 사건이다", GB, 52, INK, W - 220)
     gx, gy, cw, ch, gap = 380, 310, 490, 300, 26
     cells = [
         (0, 0, "정탐", "실제 공격 · 탐지됨\n→ 조사 대상", GREENF, GREEN),
@@ -185,7 +197,7 @@ def fig_components():
     W, H = 1760, 760
     im, d = canvas(W, H)
     rrect(d, [40, 34, W - 40, 158], CREAM, NAVY, 7, 18)
-    ctext(d, W // 2, 96, "네 구성요소와 실행 위치", font(GB, 56), INK)
+    ctext_fit(d, W // 2, 96, "네 구성요소와 실행 위치", GB, 56, INK, W - 220)
     items = [("Agent", "수집", "호스트", BLUEF, BLUE),
              ("Manager", "해석 · 규칙", "컨테이너", TEALF, TEAL),
              ("Indexer", "저장 · 검색", "컨테이너", AMBERF, AMBER),
@@ -207,23 +219,27 @@ def fig_components():
 
 
 def panel(d, box, title, items, tcol):
-    rrect(d, box, WHITE, NAVY, 7, 22)
+    PAD = 46
     x0, y0, x1, y1 = box
-    d.rounded_rectangle([x0, y0, x1, y0 + 96], radius=22, fill=tcol, outline=NAVY, width=7)
-    d.rectangle([x0, y0 + 60, x1, y0 + 96], fill=tcol)
-    ctext(d, (x0 + x1) / 2, y0 + 50, title, font(GB, 44), INK)
-    y = y0 + 150
+    rrect(d, box, WHITE, NAVY, 7, 22)
+    d.rounded_rectangle([x0, y0, x1, y0 + 100], radius=22, fill=tcol, outline=NAVY, width=7)
+    d.rectangle([x0 + 4, y0 + 62, x1 - 4, y0 + 100], fill=tcol)
+    ctext_fit(d, (x0 + x1) / 2, y0 + 50, title, GB, 42, INK, (x1 - x0) - 2 * PAD, min_size=28)
+    bullet_x = x0 + PAD; text_x = bullet_x + 46
+    max_w = x1 - text_x - PAD
+    y = y0 + 160
     for it in items:
-        d.text((x0 + 44, y), "•", font=font(GB, 40), fill=NAVY)
-        d.text((x0 + 90, y), it, font=font(GC, 38), fill=(50, 64, 84))
-        y += 82
+        f = fit_font(d, it, GC, max_w, 38, min_size=26)
+        d.text((bullet_x, y), "•", font=font(GB, 38), fill=NAVY)
+        d.text((text_x, y), it, font=f, fill=(50, 64, 84))
+        y += 80
 
 def fig_dirs():
     """호스트와 컨테이너의 디렉터리."""
     W, H = 1760, 940
     im, d = canvas(W, H)
     rrect(d, [40, 34, W - 40, 158], CREAM, NAVY, 7, 18)
-    ctext(d, W // 2, 96, "호스트와 컨테이너의 디렉터리", font(GB, 56), INK)
+    ctext_fit(d, W // 2, 96, "호스트와 컨테이너의 디렉터리", GB, 56, INK, W - 220)
     pw = 720
     panel(d, [60, 220, 60 + pw, 870], "호스트  ~/work/kt66", [
         "kt66.sh", "docker-compose.yaml", ".env", "wazuh-config/", "deployment/"], BLUEF)
@@ -241,7 +257,7 @@ def fig_discover():
     W, H = 1720, 1170
     im, d = canvas(W, H)
     rrect(d, [40, 34, W - 40, 158], CREAM, NAVY, 7, 18)
-    ctext(d, W // 2, 96, "Discover 화면의 구성", font(GB, 56), INK)
+    ctext_fit(d, W // 2, 96, "Discover 화면의 구성", GB, 56, INK, W - 220)
     # 브라우저 틀
     fx0, fy0, fx1, fy1 = 70, 210, W - 70, H - 70
     rrect(d, [fx0, fy0, fx1, fy1], WHITE, NAVY, 7, 20)
