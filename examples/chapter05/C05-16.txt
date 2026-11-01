@@ -1,1 +1,1 @@
-cd /var/log/apache2
+curl --version

@@ -1,1 +1,1 @@
-timedatectl status
+exit

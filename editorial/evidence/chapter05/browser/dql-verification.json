@@ -1,0 +1,79 @@
+[
+  {
+    "id": "Q05-01",
+    "index": "wazuh-archives-*",
+    "DQL": "agent.name: \"web\"\nAND data.url: \"/vulnerabilities/sqli/?id=1&Submit=Submit\"",
+    "hits": "1",
+    "range": {
+      "from": "2026-11-01T12:12:20.722898Z",
+      "to": "2026-11-01T12:12:32.210205Z"
+    },
+    "method": "Actual Discover DQL execution"
+  },
+  {
+    "id": "Q05-02",
+    "index": "wazuh-alerts-*",
+    "DQL": "agent.name: \"web\" AND data.url: *vulnerabilities/sqli/*\nAND data.url: *UNION*",
+    "hits": "1",
+    "range": {
+      "from": "2026-11-01T12:12:20.722898Z",
+      "to": "2026-11-01T12:12:32.210205Z"
+    },
+    "method": "Actual Discover DQL execution"
+  },
+  {
+    "id": "Q05-03",
+    "index": "wazuh-archives-*",
+    "DQL": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *UNION*",
+    "hits": "1",
+    "range": {
+      "from": "2026-11-01T12:12:20.722898Z",
+      "to": "2026-11-01T12:12:32.210205Z"
+    },
+    "method": "Actual Discover DQL execution"
+  },
+  {
+    "id": "Q05-04",
+    "index": "wazuh-alerts-*",
+    "DQL": "agent.name: \"web\" AND data.url: *vulnerabilities/xss_r/*\nAND rule.id: \"31105\"",
+    "hits": "1",
+    "range": {
+      "from": "2026-11-01T12:12:20.722898Z",
+      "to": "2026-11-01T12:12:32.210205Z"
+    },
+    "method": "Actual Discover DQL execution"
+  },
+  {
+    "id": "Q05-05",
+    "index": "wazuh-alerts-*",
+    "DQL": "agent.name: \"web\"\nAND data.url: *book05-browser-path*",
+    "hits": "2",
+    "range": {
+      "from": "2026-11-01T12:12:20.722898Z",
+      "to": "2026-11-01T12:12:32.210205Z"
+    },
+    "method": "Actual Discover DQL execution"
+  },
+  {
+    "id": "Q05-06",
+    "index": "wazuh-alerts-*",
+    "DQL": "agent.name: \"web\" AND\n(rule.id: \"31104\" OR data.url: *etc*passwd*)",
+    "hits": "2",
+    "range": {
+      "from": "2026-11-01T12:12:20.722898Z",
+      "to": "2026-11-01T12:12:32.210205Z"
+    },
+    "method": "Actual Discover DQL execution"
+  },
+  {
+    "id": "Q05-07",
+    "index": "wazuh-alerts-*",
+    "DQL": "agent.name: \"web\" AND data.srcip: \"10.20.30.254\"\nAND (rule.id: \"31104\" OR data.url: *etc*passwd*)",
+    "hits": "2",
+    "range": {
+      "from": "2026-11-01T12:12:20.722898Z",
+      "to": "2026-11-01T12:12:32.210205Z"
+    },
+    "method": "Actual Discover DQL execution"
+  }
+]

@@ -8,7 +8,7 @@
 - **[2장 초안 DOCX](manuscript/volume01-chapter02.docx)** — 공격과 보안관제의 기초, 9쪽
 - **[3장 초안 DOCX](manuscript/volume01-chapter03.docx)** — Wazuh 기본 운용, 12쪽
 - **[4장 초안 DOCX](manuscript/volume01-chapter04.docx)** — 로그 수집과 탐지 규칙, 31쪽
-- **[5장 초안 DOCX](manuscript/volume01-chapter05.docx)** — 웹 공격의 시작과 입력값 검증, 38쪽
+- **[5장 초안 DOCX](manuscript/volume01-chapter05.docx)** — 웹 공격의 시작과 입력값 검증, 55쪽
 - [5장 복사용 명령·검색식·실제 로그](examples/chapter05/)
 - [4장 명령·검색식·규칙 파일](examples/chapter04/)
 - [3장 복사용 검색식·조사 양식](examples/chapter03/)
@@ -18,7 +18,7 @@
 - [검토·검증 기록](editorial/chapter01-review.json)
 - [캐릭터 삽화](assets/illustrations/chapter01/) · [생성 프롬프트·출처 기록](editorial/chapter01-illustrations.json)
 
-1장은 VMware·Ubuntu 준비, kt66 설치·기동, 웹·Wazuh 접속, 센서 확인, 중지·복구를 다룹니다. kt66과 공격자 VM의 브리지 구성도와 선택적 공격자 VM 준비 절차도 포함합니다. 공격자 VM은 Ubuntu 22.04 Live Server를 사용하며 5장부터 필요합니다. 도구 일괄 설치 명령은 C01-52입니다. 머리말·1장은 35쪽이며 설명 도식 7개와 작은 캐릭터 삽화 3개를 수록합니다. 1장의 12개 절은 한 쪽의 학습 순서 도식으로 정리했습니다. 작은 삽화는 인물·장소·소품을 달리한 v2로 교체했습니다. 1권 전체 범위는 Module 01 실습 01~30 및 62, 11장과 부록입니다. 2장은 기존 kt66의 SSH 인증 실패 경보를 사례로 로그·탐지·판단·대응을 설명합니다. 새 공격을 실행하지 않고 기존 경보 조회와 시각·웹 응답 확인을 수행했습니다.
+1장은 VMware·Ubuntu 준비, kt66 설치·기동, 웹·Wazuh 접속, 센서 확인, 중지·복구를 다룹니다. kt66과 공격자 VM의 브리지 구성도와 선택적 공격자 VM 준비 절차도 포함합니다. 공격자 VM은 Ubuntu 22.04 Live Server를 사용하며 5장의 선택 curl 실습과 이후 터미널 실습에 필요합니다. 도구 일괄 설치 명령은 C01-52입니다. 머리말·1장은 35쪽이며 설명 도식 7개와 작은 캐릭터 삽화 3개를 수록합니다. 1장의 12개 절은 한 쪽의 학습 순서 도식으로 정리했습니다. 작은 삽화는 인물·장소·소품을 달리한 v2로 교체했습니다. 1권 전체 범위는 Module 01 실습 01~30 및 62, 11장과 부록입니다. 2장은 기존 kt66의 SSH 인증 실패 경보를 사례로 로그·탐지·판단·대응을 설명합니다. 새 공격을 실행하지 않고 기존 경보 조회와 시각·웹 응답 확인을 수행했습니다.
 
 3장은 Discover에서 인덱스·기간·DQL을 지정하고 경보의 필드·원문을 읽는 실습입니다. 실제 UI 화면 8개, 개념 도식 2개, 작은 삽화 1개를 수록했습니다. 기존 SSH 사례를 검색한 두 조건은 각각 2건을 반환했습니다. 모든 장의 참고 자료에는 제목과 전체 URL을 함께 인쇄합니다.
 
@@ -26,9 +26,11 @@
 
 ## 확인한 범위
 
-5장은 Module 01 실습 01~03의 SQL 인젝션·XSS·경로 조작을 다룹니다. 공격자 VM에서 요청을 한 건씩 보내고 HTTP 응답, Apache 접속 로그, WAF 감사 기록, Wazuh 경보를 대조합니다. 명령 37개, DQL 검색식 7개, 실제 화면 8개, 설명 도식 6개, 야외 캐릭터 삽화 2개를 수록했습니다. 명령의 역할·옵션·구문, 로그 필드의 뜻과 파일 위치, 실패 시 확인 순서와 원상복구 절차를 설명합니다.
+5장은 Module 01 실습 01~03의 SQL 인젝션·XSS·경로 조작을 **브라우저 중심**으로 진행합니다. Windows 웹 이름 등록 → DVWA 로그인 → 첫 DB 초기화 → Low 선택 → 실습 메뉴 → 입력·Submit → Network 응답 → Wazuh 기록 순서입니다. 브라우저와 Wazuh의 실제 화면 25개, 설명 도식 6개, 삽화 2개를 수록했습니다. 전체 55쪽이며 명령 37개, DQL 7개와 브라우저 복사용 입력 8개를 제공합니다.
 
-Ubuntu 22.04.5 공격자 VM의 curl 7.81.0으로 정상 입력·SQL 구문·스크립트·두 가지 경로 표기를 보냈습니다. 정상 입력은 로그인 페이지로 이동하는 302, 공격 입력은 WAF 차단으로 403을 받았습니다. 인코딩된 경로는 Wazuh 31101, 그대로 보낸 경로는 31104로 분류됐습니다. 이 실험에서 DB 자료 유출·브라우저 스크립트 실행·파일 내용 노출은 확인되지 않았습니다. 7개 검색식은 실제 Discover에서 검증했습니다. 기존 hosts·시각 동기화 설정은 이미 맞아 변경하지 않았습니다.
+기존 curl 명령은 **5.13 ‘다른 방법 · 같은 요청을 curl로 보내기’**로 옮겼습니다. --get·--data-urlencode·--data와 따옴표·변수·줄 연결을 실행 전에 설명합니다. 브라우저와 curl의 로그인 상태 차이도 구분했습니다.
+
+실제 Chromium에서 DB 초기화·로그인·Low 설정·입력·클릭·로그아웃을 확인했습니다. 로그인한 정상 조회는 사용자 1의 이름과 200을 반환했고, SQL·XSS·두 가지 경로 요청은 모두 WAF 차단으로 403을 받았습니다. Wazuh 규칙과 네 요청의 감사 기록을 대조했고 검색식 7개도 실제 Discover에서 검증했습니다. Windows hosts 편집은 공식 문서와 대조했으며 Windows에서 직접 실행한 것으로 주장하지 않습니다.
 
 kt66 커밋 `63d4180b1d6866de986ef263a3bd831d6082b5d5`의 코드·설정과 공식 문서를 대조했습니다. 기존 가동 환경에서 웹 응답, 데모 계정 Wazuh 로그인, kt66-host 연결 상태를 확인하고 실제 화면을 촬영했습니다.
 
@@ -95,6 +97,7 @@ DOCX를 직접 편집할 수 있습니다. 조판기는 기본적으로 `build/`
 
 - [5장 검토·검증 기록](editorial/chapter05-review.json)
 - [5장 삽화·생성 프롬프트](editorial/chapter05-illustrations.json)
-- [실제 화면 촬영 기록](assets/screens/chapter05/provenance.json)
+- [브라우저 화면 촬영 기록](assets/screens/chapter05/browser/provenance.json) · [대응하는 Wazuh 화면](assets/screens/chapter05/browser/wazuh-provenance.json)
+- [이전 curl 검증 기록](editorial/chapter05-curl-review.json)
 
 PDF는 배포하지 않습니다. 임시 PDF·페이지 이미지는 DOCX 배치 검사용으로만 사용합니다. Consolas가 없는 환경에서는 대체 글꼴로 보일 수 있으므로 Word에서 최종 인쇄 크기를 재확인합니다.

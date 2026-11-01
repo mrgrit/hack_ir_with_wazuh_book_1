@@ -1,1 +1,4 @@
-cd /var/ossec/ruleset/rules
+curl -sS -i --max-time 15 --get \
+  "$DVWA/vulnerabilities/xss_r/" \
+  --data-urlencode 'name=<script>alert(1)</script>' \
+  --data-urlencode 'bookcase=book05-xss'

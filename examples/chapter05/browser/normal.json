@@ -1,0 +1,52 @@
+{
+  "_index": "wazuh-archives-4.x-2026.11.01",
+  "_id": "sPkGl6EBEYWT20nngMK1",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "agent": {
+      "ip": "10.20.32.80",
+      "name": "web",
+      "id": "013"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "data": {
+      "protocol": "GET",
+      "srcip": "10.20.30.254",
+      "id": "200",
+      "url": "/vulnerabilities/sqli/?id=1&Submit=Submit"
+    },
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "full_log": "10.20.30.254 - - [01/Nov/2026:21:12:21 +0900] \"GET /vulnerabilities/sqli/?id=1&Submit=Submit HTTP/1.1\" 200 1792 \"http://dvwa.ccc.com/vulnerabilities/sqli/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36\"",
+    "input": {
+      "type": "log"
+    },
+    "@timestamp": "2026-11-01T12:12:23.175Z",
+    "location": "/var/log/apache2/dvwa_access.log",
+    "id": "1793535143.147198203",
+    "timestamp": "2026-11-01T12:12:23.175+0000"
+  },
+  "fields": {
+    "timestamp": [
+      "2026-11-01T12:12:23.175Z"
+    ],
+    "@timestamp": [
+      "2026-11-01T12:12:23.175Z"
+    ]
+  },
+  "highlight": {
+    "data.url": [
+      "@opensearch-dashboards-highlighted-field@/vulnerabilities/sqli/?id=1&Submit=Submit@/opensearch-dashboards-highlighted-field@"
+    ],
+    "agent.name": [
+      "@opensearch-dashboards-highlighted-field@web@/opensearch-dashboards-highlighted-field@"
+    ]
+  },
+  "sort": [
+    1793535143175
+  ]
+}

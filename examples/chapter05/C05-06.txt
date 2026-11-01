@@ -1,1 +1,1 @@
-getent hosts dvwa.kt66.lab
+docker exec -it kt66-web /bin/bash

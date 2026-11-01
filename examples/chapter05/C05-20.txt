@@ -1,5 +1,1 @@
-curl -sS -i --max-time 15 --get \
-  "$DVWA/vulnerabilities/sqli/" \
-  --data-urlencode "id=$PAYLOAD" \
-  --data-urlencode 'Submit=Submit' \
-  --data-urlencode 'bookcase=book05-sqli'
+getent hosts dvwa.kt66.lab

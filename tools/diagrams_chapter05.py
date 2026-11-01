@@ -3,11 +3,11 @@ import diagrams_chapter01 as drawing
 drawing.OUT=drawing.ROOT/'assets/figures/chapter05';drawing.OUT.mkdir(parents=True,exist_ok=True)
 Figure=drawing.Figure
 f=Figure(660)
-for x,y,t,c in [(35,35,'공격자 VM\ncurl · HTTP 요청',0),(535,35,'kt66 진입\nfw · ips',1),(1035,35,'web\nApache · WAF',2),(1035,365,'DVWA\n웹 애플리케이션',0),(535,365,'web의 Agent\n로그 수집',1),(35,365,'Wazuh Manager\n분석 · 경보',2)]:f.box((x,y,x+430,y+210),t,c,44)
+for x,y,t,c in [(35,35,'Windows PC\n브라우저 · 요청',0),(535,35,'kt66 진입\nfw · ips',1),(1035,35,'web\nApache · WAF',2),(1035,365,'DVWA\n웹 애플리케이션',0),(535,365,'web의 Agent\n로그 수집',1),(35,365,'Wazuh Manager\n분석 · 경보',2)]:f.box((x,y,x+430,y+210),t,c,44)
 f.arrow((475,140),(525,140));f.arrow((975,140),(1025,140));f.arrow((1250,255),(1250,355));f.arrow((1050,255),(900,355));f.arrow((525,470),(475,470));f.label((1035,585,1465,650),'허용한 요청 전달',35);f.save('request-log-path')
 f=Figure(400)
 f.box((35,35,510,200),'dvwa.kt66.lab\n이름',0,48);f.box((990,35,1465,200),'192.168.0.189\n접속할 주소',1,48)
-f.arrow((525,115),(975,115));f.label((530,20,970,100),'/etc/hosts',45)
+f.arrow((525,115),(975,115));f.label((530,20,970,100),'Windows hosts',43)
 f.box((35,260,1465,365),'HTTP Host: dvwa.kt66.lab → Apache가 DVWA 사이트 선택',2,43);f.save('name-and-host')
 f=Figure(450)
 f.box((35,35,465,230),'입력값 id\n숫자 · SQL 구문',0,46);f.box((535,35,965,230),'문자열 결합\nSQL 문장 생성',1,46);f.box((1035,35,1465,230),'데이터베이스\nSQL 해석 · 실행',2,46)

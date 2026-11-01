@@ -1,2 +1,5 @@
-grep -F -B 1 -A 1 'modsec_audit.log' \
-  /var/ossec/etc/ossec.conf
+curl -sS -i --max-time 15 --get \
+  "$DVWA/vulnerabilities/sqli/" \
+  --data-urlencode 'id=1' \
+  --data-urlencode 'Submit=Submit' \
+  --data-urlencode 'bookcase=book05-normal'

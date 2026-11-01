@@ -1,0 +1,147 @@
+{
+  "captured_at": "2026-11-01T12:12:43.348105+00:00",
+  "captures": [
+    {
+      "file": "normal-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:12:20.722898Z',to:'2026-11-01T12:12:32.210205Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20%22%2Fvulnerabilities%2Fsqli%2F%3Fid%3D1%26Submit%3DSubmit%22'))",
+      "clip_css": {
+        "x": 161,
+        "y": 502.65625,
+        "width": 530,
+        "height": 172.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "2424a4981db9837e24f6a15e6685839fd00d920a9c167e3530a9e2e46343ee22"
+    },
+    {
+      "file": "sqli-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:12:20.722898Z',to:'2026-11-01T12:12:32.210205Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20*vulnerabilities%2Fsqli%2F*%20AND%20data.url:%20*UNION*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 629.34375,
+        "width": 530,
+        "height": 176.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "50856f99e4d36bbd09c34e95844373031e98cabee103a0216b96dc60f644ff8d"
+    },
+    {
+      "file": "sqli-rule.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:12:20.722898Z',to:'2026-11-01T12:12:32.210205Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20*vulnerabilities%2Fsqli%2F*%20AND%20data.url:%20*UNION*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 502.625,
+        "width": 530,
+        "height": 86.0
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "7ebbcaab397379fce130f6bad96bcb2eab95f527bc509e6f68c82c2bf0f27f2b"
+    },
+    {
+      "file": "xss-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:12:20.722898Z',to:'2026-11-01T12:12:32.210205Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20*vulnerabilities%2Fxss_r%2F*%20AND%20rule.id:%20%2231105%22'))",
+      "clip_css": {
+        "x": 161,
+        "y": 722.90625,
+        "width": 530,
+        "height": 176.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "a6103a5e70705c1541c333a3431dbe70109af5a564c5d78cd08fe8179b96ea33"
+    },
+    {
+      "file": "path-data.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:12:20.722898Z',to:'2026-11-01T12:12:32.210205Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20data.url:%20*book05-browser-path*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 722.90625,
+        "width": 530,
+        "height": 176.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "6d8d0449c600bf76cc9c591296d4abaf31f187b6455fe920bc8d07823161f2da"
+    },
+    {
+      "file": "waf-action.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:12:20.722898Z',to:'2026-11-01T12:12:32.210205Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20location:%20%22%2Fvar%2Flog%2Fapache2%2Fmodsec_audit.log%22%20AND%20data.request.request_line:%20*UNION*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 775.3125,
+        "width": 530,
+        "height": 133.28125
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "dce289e3bf2e2ad816ecb0d36ed066746e6e3003369f10aa0eb35308db28a853"
+    },
+    {
+      "file": "waf-response.png",
+      "url": "https://192.168.0.189:5601/app/data-explorer/discover#?_a=(discover:(columns:!(data.srcip,rule.id,data.id),isDirty:!f,sort:!()),metadata:(indexPattern:'427f94d0-d50b-11f1-97db-bd4893d85037',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-01T12:12:20.722898Z',to:'2026-11-01T12:12:32.210205Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22web%22%20AND%20location:%20%22%2Fvar%2Flog%2Fapache2%2Fmodsec_audit.log%22%20AND%20data.request.request_line:%20*UNION*'))",
+      "clip_css": {
+        "x": 161,
+        "y": 502.671875,
+        "width": 530,
+        "height": 309.5625
+      },
+      "device_scale_factor": 2,
+      "print_width_mm": 127,
+      "minimum_css_font_px": 12,
+      "estimated_text_pt": 8.15,
+      "sha256": "4d43290bf91734c66377d63e61d39f44c9549bf3e75dd749170735b35b2f3178"
+    }
+  ],
+  "time_range": {
+    "from": "2026-11-01T12:12:20.722898Z",
+    "to": "2026-11-01T12:12:32.210205Z"
+  },
+  "DQL_verified": [
+    {
+      "name": "normal",
+      "index": "wazuh-archives-*",
+      "DQL": "agent.name: \"web\" AND data.url: \"/vulnerabilities/sqli/?id=1&Submit=Submit\"",
+      "hits": "1"
+    },
+    {
+      "name": "sqli",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND data.url: *vulnerabilities/sqli/* AND data.url: *UNION*",
+      "hits": "1"
+    },
+    {
+      "name": "xss",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND data.url: *vulnerabilities/xss_r/* AND rule.id: \"31105\"",
+      "hits": "1"
+    },
+    {
+      "name": "path",
+      "index": "wazuh-alerts-*",
+      "DQL": "agent.name: \"web\" AND data.url: *book05-browser-path*",
+      "hits": "2"
+    },
+    {
+      "name": "waf",
+      "index": "wazuh-archives-*",
+      "DQL": "agent.name: \"web\" AND location: \"/var/log/apache2/modsec_audit.log\" AND data.request.request_line: *UNION*",
+      "hits": "1"
+    }
+  ],
+  "source": "Actual running kt66 UI; viewport resize/crop only; no field values altered"
+}

@@ -1,1 +1,2 @@
-agent.name: "web" AND data.url: *book05-normal*
+agent.name: "web"
+AND data.url: "/vulnerabilities/sqli/?id=1&Submit=Submit"

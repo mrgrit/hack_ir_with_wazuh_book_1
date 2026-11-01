@@ -1,1 +1,2 @@
-echo "$DVWA"
+grep -n -E 'ServerName|SecRuleEngine' \
+  /etc/apache2/sites-enabled/020-dvwa.conf

@@ -1,2 +1,1 @@
-grep -F -B 1 -A 1 '*_access.log' \
-  /var/ossec/etc/ossec.conf
+curl -sS -i --max-time 15 "$DVWA/login.php"

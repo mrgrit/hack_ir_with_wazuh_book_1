@@ -63,7 +63,7 @@ page('kt66과 공격자 VM의 네트워크',
     p('kt66 VM은 공격 대상과 Wazuh를 실행한다. 공격자 VM은 kt66으로 요청을 보내는 별도 Ubuntu 시스템이다. 두 VM의 네트워크 어댑터를 Bridged로 설정해 같은 실습망에 연결한다.'),
     img('assets/figures/chapter01/environment.png','도식 1-3. kt66과 공격자 VM의 브리지 연결.'),
     p('그림의 주소는 예시이다. 두 VM에는 서로 다른 IP를 사용한다. Windows 브라우저에서는 kt66의 웹과 Wazuh에 접속한다.'),
-    p('공격자 VM은 5장의 첫 공격 실습에서 사용한다. 지금은 kt66 설치를 진행한다. 미리 준비하려면 1.12를 따른다.'))
+    p('5장 본문은 Windows 브라우저를 사용한다. 공격자 VM은 선택 curl 실습과 이후 터미널 실습에서 사용한다. 지금은 kt66 설치를 진행한다. 미리 준비하려면 1.12를 따른다.'))
 page('1.2  VMware 가상머신 만들기',
     p('실행 위치는 Windows PC이다. 인터넷 연결과 VM용 메모리·디스크를 확보한다. 브리지는 VM을 PC와 같은 물리 네트워크에 연결한다. 취약 서비스가 노출되므로 실습용 네트워크에서 진행한다.'),
     p('① Broadcom 공식 다운로드 안내에서 Windows용 VMware Workstation Pro를 받는다. 설치 파일을 관리자 권한으로 실행하고 화면의 안내에 따라 설치한다. 재시작을 요구하면 Windows를 재시작한다. [1]'),
@@ -246,7 +246,7 @@ page('센서가 연결되지 않을 때',
     p('wazuh-agent나 osqueryd가 없으면 up 출력의 host-sensors 실패 지점을 확인한다. 패키지 다운로드 오류를 해결한 뒤 기존 센서 상태를 기록하고 아래 명령을 실행한다.'),
     c('sudo ./deployment/host-sensors.sh','호스트 센서를 설치·재설정한다. /var/ossec/etc/ossec.conf, auditd·Sysmon·osquery 설정과 관련 서비스를 변경한다.','C01-38·39와 Wazuh 목록을 다시 확인한다. 전체 변경을 취소하려면 ubuntu-clean 스냅샷을 복원한다.','kt66 VM · ~/kt66'))
 page('1.12  공격자 VM 사전 준비',
-    p('공격자 VM은 5장부터 필요하다. 저자가 테스트한 Ubuntu 22.04 Live Server를 사용한다. kt66과 같은 PC의 VMware에 별도 VM을 만든다.'),
+    p('공격자 VM은 5장의 선택 curl 실습과 이후 터미널 실습에 필요하다. 저자가 테스트한 Ubuntu 22.04 Live Server를 사용한다. kt66과 같은 PC의 VMware에 별도 VM을 만든다.'),
     tab(['항목','설정'],[
         ['이름','attacker'],['설치 ISO','ubuntu-22.04.5-live-server-amd64.iso'],
         ['자원 예시','CPU 2개 · 메모리 2GB · 디스크 25GB'],
@@ -277,7 +277,7 @@ page('공격자 VM 준비 확인',
       'HTTP 응답 코드가 표시되면 kt66 웹 서버에 연결된 것이다.','공격자 VM · 터미널'),
     p('패키지 설치가 실패하면 오류 문구 → 인터넷 연결 → 패키지 미러 순서로 확인한다. kt66 연결이 실패하면 두 VM의 IP → VMware 브리지 연결 → kt66 기동 상태 순서로 확인한다.'),
     p('확인을 마치면 VM을 종료하고 attacker-ready 스냅샷을 만든다. 이후 실습 변경을 되돌릴 때 이 스냅샷을 사용한다.'),
-    p('웹 이름 설정과 시각 동기화는 5장에서 준비한다. 계정·암호 목록은 이후 인증 공격 실습에서 만든다.'),
+    p('Windows의 웹 이름은 5.2에서, 공격자 VM의 웹 이름과 시각은 선택 실습인 5.13에서 확인한다. 계정·암호 목록은 이후 인증 공격 실습에서 만든다.'),
     spot('network-v2','삽화. 연결 점검.'))
 page('1장 참고 자료',
     p('kt66 코드 기준: 63d4180. 설치·기동은 kt66.sh, 서비스·포트·버전은 docker-compose.yaml, HTTPS는 wazuh-config/opensearch_dashboards.yml, 호스트 센서는 deployment/host-sensors.sh와 대조했다.'),

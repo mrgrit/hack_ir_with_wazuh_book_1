@@ -1,1 +1,1 @@
-ip -br -4 address
+docker exec -it kt66-web /bin/bash

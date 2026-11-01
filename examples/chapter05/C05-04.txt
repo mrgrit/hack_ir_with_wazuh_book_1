@@ -1,1 +1,2 @@
-grep -n -F 'dvwa.' /etc/hosts
+grep -F '/vulnerabilities/sqli/?id=1&Submit=Submit' \
+  dvwa_access.log

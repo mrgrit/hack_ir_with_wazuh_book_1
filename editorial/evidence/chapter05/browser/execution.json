@@ -1,0 +1,54 @@
+{
+  "captured_at": "2026-11-01T12:12:24.491244+00:00",
+  "original_security": "low",
+  "restored_security": "low",
+  "logged_out": true,
+  "events": [
+    {
+      "case": "normal",
+      "time_utc": "2026-11-01T12:12:21.722898+00:00",
+      "method": "GET",
+      "url": "http://dvwa.ccc.com/vulnerabilities/sqli/?id=1&Submit=Submit",
+      "status": 200,
+      "location": null,
+      "browser": "156.0.8078.4"
+    },
+    {
+      "case": "sqli",
+      "time_utc": "2026-11-01T12:12:22.888025+00:00",
+      "method": "GET",
+      "url": "http://dvwa.ccc.com/vulnerabilities/sqli/?id=1%27+UNION+SELECT+user%2Cpassword+FROM+users--+&Submit=Submit",
+      "status": 403,
+      "location": null,
+      "browser": "156.0.8078.4"
+    },
+    {
+      "case": "xss",
+      "time_utc": "2026-11-01T12:12:23.887702+00:00",
+      "method": "GET",
+      "url": "http://dvwa.ccc.com/vulnerabilities/xss_r/?name=%3Cscript%3Ealert%281%29%3C%2Fscript%3E",
+      "status": 403,
+      "location": null,
+      "browser": "156.0.8078.4"
+    },
+    {
+      "case": "path-raw",
+      "time_utc": "2026-11-01T12:12:24.145472+00:00",
+      "method": "GET",
+      "url": "http://dvwa.ccc.com/vulnerabilities/fi/?page=../../../../../etc/passwd&bookcase=book05-browser-path-raw",
+      "status": 403,
+      "location": null,
+      "browser": "156.0.8078.4"
+    },
+    {
+      "case": "path",
+      "time_utc": "2026-11-01T12:12:24.210205+00:00",
+      "method": "GET",
+      "url": "http://dvwa.ccc.com/vulnerabilities/fi/?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-browser-path",
+      "status": 403,
+      "location": null,
+      "browser": "156.0.8078.4"
+    }
+  ],
+  "notes": "Browser UI interaction. Address-bar equivalent navigation for the two file-path requests. Response records omit cookies and tokens. Author browser on Linux; Windows setup instructions are document-checked, not executed on Windows."
+}
