@@ -29,7 +29,8 @@ page('4.2  수집 파일 확인',
  code('<log_format>syslog</log_format>\n<location>/var/log/auth.log</location>\n</localfile>'),
  p('log_format은 해석할 로그 형식, location은 읽을 파일이다. XML은 <이름>과 </이름> 사이에 값을 적는다. localfile은 수집 대상 하나를 묶는 항목이다. [2]'))
 page('4.3  확인 문구 기록',
- p('logger는 문장을 시스템 로그로 보내는 명령이다. rsyslog는 시스템 로그를 받아 파일에 저장하는 프로그램이다. kt66은 둘을 bastion에 준비하고 인증 관련 메시지를 auth.log에 저장하도록 설정한다.'),
+ p('logger는 터미널에서 지정한 메시지를 시스템 로그로 남기는 리눅스 명령이다. 이 실습에서는 book04-collection-01이라는 시험용 로그를 만들어 Wazuh의 수집 여부를 확인한다. [9]'),
+ p('이 실습에서는 로그 저장 프로그램 rsyslog가 메시지를 /var/log/auth.log에 저장하고, Wazuh 에이전트가 이를 읽어 Manager로 전송한다. 두 프로그램과 수집 설정은 kt66이 bastion에 준비해 둔다.'),
  c(findlog,'기록하기 전에 같은 확인 문구가 있는지 찾는다. 작은따옴표는 공백을 포함한 문자열을 하나의 인자로 묶는다.','처음 실행하면 출력이 없다. 이미 기록이 있으면 마지막 시각을 적는다.'),
  c(marker,'기본 구문은 logger [옵션] 메시지이다. 아래 옵션으로 인증 로그에 확인 문구를 보낸다. [9]','보통 화면 출력 없이 끝난다. 4.3의 다음 페이지에서 auth.log에 저장된 행을 확인한다.'),
  tab(['옵션·구문','뜻'],[
