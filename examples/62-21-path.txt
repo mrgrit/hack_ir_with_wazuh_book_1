@@ -1,0 +1,1 @@
+printf "%s\n" "$BOOK_KEY_DIR"

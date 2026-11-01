@@ -1,0 +1,1 @@
+sed -i '/ book62-demo$/d' ~/.ssh/authorized_keys

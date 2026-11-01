@@ -1,0 +1,1 @@
+curl -sS -o /dev/null -w "HTTP %{http_code}\n" "$DVWA_URL/"

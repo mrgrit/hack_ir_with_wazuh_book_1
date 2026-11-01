@@ -1,0 +1,1 @@
+rule.groups:osquery AND agent.name:kt66-host AND data.osquery.action:removed

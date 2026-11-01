@@ -1,0 +1,1 @@
+rmdir -- "$BOOK_KEY_DIR"

@@ -1,0 +1,1 @@
+read -rp 'DVWA 주소(예: http://실습호스트:8002): ' DVWA_URL

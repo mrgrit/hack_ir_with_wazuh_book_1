@@ -1,0 +1,1 @@
+ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o NumberOfPasswordPrompts=1 -p "$LAB_SSH_PORT" "$LAB_USER@$LAB_HOST"

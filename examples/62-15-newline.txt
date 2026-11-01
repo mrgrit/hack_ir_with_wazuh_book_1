@@ -1,0 +1,1 @@
+printf '\n' >> ~/.ssh/authorized_keys

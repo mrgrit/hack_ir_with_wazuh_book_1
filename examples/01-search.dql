@@ -1,0 +1,1 @@
+rule.id:(31103 or 31161) OR data.url:(*union* or *select* or *%27* or *1=1* or *sleep\(*)

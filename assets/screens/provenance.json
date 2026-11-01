@@ -1,0 +1,142 @@
+[
+  {
+    "file": "assets/screens/menu.png",
+    "source_slide": 7,
+    "source_image": "ppt/media/image2.png",
+    "pixels": [
+      780,
+      371
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/discover.png",
+    "source_slide": 8,
+    "source_image": "ppt/media/image3.png",
+    "pixels": [
+      780,
+      371
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/index.png",
+    "source_slide": 9,
+    "source_image": "ppt/media/image6.png",
+    "pixels": [
+      780,
+      371
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/time.png",
+    "source_slide": 10,
+    "source_image": "ppt/media/image7.png",
+    "pixels": [
+      780,
+      492
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/fields.png",
+    "source_slide": 13,
+    "source_image": "ppt/media/image11.png",
+    "pixels": [
+      780,
+      371
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/column.png",
+    "source_slide": 14,
+    "source_image": "ppt/media/image12.png",
+    "pixels": [
+      885,
+      421
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/sqli-count.png",
+    "source_slide": 59,
+    "source_image": "ppt/media/image26.png",
+    "pixels": [
+      1245,
+      446
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/sqli-row.png",
+    "source_slide": 60,
+    "source_image": "ppt/media/image27.png",
+    "pixels": [
+      733,
+      380
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/sqli-response.png",
+    "source_slide": 61,
+    "source_image": "ppt/media/image28.png",
+    "pixels": [
+      862,
+      380
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/sqli-detail.png",
+    "source_slide": 62,
+    "source_image": "ppt/media/image29.png",
+    "pixels": [
+      1040,
+      300
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/ssh-row.png",
+    "source_slide": 227,
+    "source_image": "ppt/media/image106.png",
+    "pixels": [
+      818,
+      236
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/ssh-detail.png",
+    "source_slide": 228,
+    "source_image": "ppt/media/image107.png",
+    "pixels": [
+      1040,
+      300
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/osquery-row.png",
+    "source_slide": 633,
+    "source_image": "ppt/media/image309.png",
+    "pixels": [
+      848,
+      360
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  },
+  {
+    "file": "assets/screens/osquery-detail.png",
+    "source_slide": 634,
+    "source_image": "ppt/media/image310.png",
+    "pixels": [
+      1040,
+      300
+    ],
+    "verification": "기존 강의 촬영 화면. 새 원고 절차 재촬영 전."
+  }
+]

@@ -1,0 +1,1 @@
+grep -n 'book62-demo' ~/.ssh/authorized_keys
