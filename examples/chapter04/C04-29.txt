@@ -1,1 +1,1 @@
-/var/ossec/bin/wazuh-analysisd -t
+/var/ossec/bin/wazuh-control status

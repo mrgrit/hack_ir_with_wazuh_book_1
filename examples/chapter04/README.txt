@@ -1,6 +1,6 @@
 4장 복사용 자료
 
-C04-01~37.txt: 본문의 개별 터미널 명령. 실행 위치는 manifest.json과 본문에 표시한다.
+C04-01~47.txt: 본문의 개별 터미널 명령. 실행 위치는 manifest.json과 본문에 표시한다.
 Q04-01~02.txt: Discover의 DQL 검색식.
 book04_rules.xml: kt66-siem의 nano에 입력할 사용자 규칙.
 ssh-failed.log: 기존 SSH 인증 실패 원문.

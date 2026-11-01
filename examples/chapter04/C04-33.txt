@@ -1,1 +1,2 @@
-exit
+grep -F 'book04: book04-collection-01' \
+  /var/log/auth.log

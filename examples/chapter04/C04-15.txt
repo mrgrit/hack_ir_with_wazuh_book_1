@@ -1,1 +1,2 @@
-ls -l /var/ossec/etc/rules/book04_rules.xml
+grep -n -A 3 '<rule id="5700"' \
+  0095-sshd_rules.xml

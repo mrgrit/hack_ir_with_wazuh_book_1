@@ -1,1 +1,1 @@
-grep -A 2 'archives:' /etc/filebeat/filebeat.yml
+cat /var/ossec/etc/rules/book04_rules.xml

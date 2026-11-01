@@ -1,1 +1,2 @@
-exit
+grep -R -n '100410' /var/ossec/etc/rules \
+  /var/ossec/ruleset/rules

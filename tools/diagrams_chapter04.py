@@ -1,4 +1,4 @@
-"""4장: 수집 경로, 저장 분기, 규칙 조건, 적용·원복."""
+"""4장: 수집 경로, 저장 분기, 규칙 조건, 적용·원상복구."""
 import diagrams_chapter01 as drawing
 drawing.OUT=drawing.ROOT/'assets/figures/chapter04';drawing.OUT.mkdir(parents=True,exist_ok=True)
 Figure=drawing.Figure
@@ -19,5 +19,13 @@ f.box((350,340,1150,500),'규칙 100410 · 수준 5',2,53);f.save('rule-conditio
 f=Figure(680)
 for x,y,t,c in [(35,35,'새 규칙 저장',0),(850,35,'구문·Ruleset test',1),(850,380,'Manager 재시작',2),(35,380,'새 로그 발생·검색',0)]:f.box((x,y,x+615,y+180),t,c,48)
 f.arrow((665,125),(835,125));f.arrow((1155,225),(1155,365));f.arrow((835,470),(665,470))
-f.label((35,585,1465,665),'원복: 실습 규칙 삭제 → 구문 검사 → Manager 재시작',43);f.save('apply')
-print('4 chapter 4 diagrams')
+f.label((35,585,1465,665),'원상복구: 실습 규칙 삭제 → 구문 검사 → Manager 재시작',43);f.save('apply')
+f=Figure(450)
+f.label((35,5,1465,95),r'regex: (\S+) from (\S+)',52)
+for y,value,capture,field in [(115,'book03_probe','첫째 괄호','srcuser'),(285,'10.20.30.254','둘째 괄호','srcip')]:
+ f.box((35,y,550,y+130),value,0,49)
+ f.box((650,y,1000,y+130),capture,1,46)
+ f.box((1100,y,1465,y+130),field,2,49)
+ f.arrow((565,y+65),(635,y+65));f.arrow((1015,y+65),(1085,y+65))
+f.save('decoder-fields')
+print('5 chapter 4 diagrams')

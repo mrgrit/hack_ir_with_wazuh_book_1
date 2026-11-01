@@ -1,2 +1,2 @@
-grep -F 'book04: book04-collection-01' \
-  /var/log/auth.log
+chown root:wazuh \
+  /var/ossec/etc/rules/book04_rules.xml

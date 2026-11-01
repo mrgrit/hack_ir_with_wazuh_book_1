@@ -54,10 +54,15 @@
   ],
   "authoring_boundary": "No lecture or kt66 repository edits. No PDF distribution.",
   "art_provenance": "editorial/chapter02-illustrations.json",
-  "docx_sha256": "ff783f1ef9269ed17b4a7b242ea0adb123dbbb4a1153afea3b46028816a4d716",
+  "docx_sha256": "5165ddc9b4d6de4f98cbc07ca4a0e485052618d41df95bdbdabbcc0577c00b7c",
   "print_reference_revision": {
     "date": "2026-11-01T10:10:39.819292+00:00",
     "scope": "참고 자료명 아래 전체 URL 인쇄. 주소 축약·추가 하이픈 없이 줄바꿈. 참고 자료를 2쪽으로 분리.",
     "checks": "모든 URL의 원문과 PDF 추출 문자열 대조, 참고 자료 4쪽 시각 검토, 기존 명령·판형 검사 통과."
+  },
+  "terminology_revision": {
+    "date": "2026-11-01T11:01:26.407814+00:00",
+    "change": "본문·제목·표·도식에서 원상복구로 용어 통일. 집필 지침 반영.",
+    "checks": "변경 DOCX의 판형·명령·참고 URL·페이지 넘침 검사 및 변경 지면 시각 검토."
   }
 }

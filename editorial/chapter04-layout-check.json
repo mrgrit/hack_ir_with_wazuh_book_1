@@ -1,6 +1,6 @@
 {
-  "docx_pages": 24,
-  "command_files": 37,
+  "docx_pages": 31,
+  "command_files": 47,
   "command_syntax": "bash -n only; not executed",
   "template_page_size_and_margins_inherited": true,
   "template_theme_identical": true,

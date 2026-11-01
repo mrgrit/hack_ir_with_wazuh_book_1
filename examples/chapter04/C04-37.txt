@@ -1,1 +1,1 @@
-exit
+rm /var/ossec/etc/rules/book04_rules.xml

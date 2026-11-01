@@ -1,1 +1,1 @@
-/var/ossec/bin/wazuh-control restart
+docker exec -it kt66-siem /bin/bash

@@ -1,1 +1,1 @@
-ls -l /var/ossec/etc/rules/book04_rules.xml
+cd /var/ossec/ruleset/decoders

@@ -1,1 +1,2 @@
-/var/ossec/bin/wazuh-analysisd -t
+grep -n -A 3 '<rule id="5710"' \
+  0095-sshd_rules.xml

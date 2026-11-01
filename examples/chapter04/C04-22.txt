@@ -1,2 +1,1 @@
-logger -p authpriv.notice -t book04 \
-  'book04-collection-01'
+cat /var/ossec/etc/rules/book04_rules.xml

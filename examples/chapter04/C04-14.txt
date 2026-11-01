@@ -1,1 +1,1 @@
-chmod 640 /var/ossec/etc/rules/book04_rules.xml
+cd /var/ossec/ruleset/rules

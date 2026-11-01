@@ -341,7 +341,7 @@
         },
         {
           "type": "p",
-          "text": "Ubuntu 메뉴에서 전원을 끈다. VMware의 VM → Snapshot → Take Snapshot을 선택하고 ubuntu-clean으로 저장한다. 스냅샷은 VM을 저장 시점으로 되돌리는 기능이다. 이후 kt66 설치 전체를 원복할 때 사용한다. 다시 VM을 켠다."
+          "text": "Ubuntu 메뉴에서 전원을 끈다. VMware의 VM → Snapshot → Take Snapshot을 선택하고 ubuntu-clean으로 저장한다. 스냅샷은 VM을 저장 시점으로 되돌리는 기능이다. 이후 kt66 설치 전체를 원상복구할 때 사용한다. 다시 VM을 켠다."
         },
         {
           "type": "image",
@@ -1189,7 +1189,7 @@
       ]
     },
     {
-      "title": "1.10  중지·재기동·원복",
+      "title": "1.10  중지·재기동·원상복구",
       "kind": "body",
       "blocks": [
         {
@@ -1232,7 +1232,7 @@
         },
         {
           "type": "h",
-          "text": "변경 전체 원복"
+          "text": "변경 전체 원상복구"
         },
         {
           "type": "p",

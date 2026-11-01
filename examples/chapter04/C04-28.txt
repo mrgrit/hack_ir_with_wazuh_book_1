@@ -1,1 +1,1 @@
-ls -l /var/ossec/etc/rules/book04_rules.xml
+/var/ossec/bin/wazuh-control restart

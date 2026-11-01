@@ -1,0 +1,30 @@
+[
+  {
+    "command_id": "C04-10",
+    "command": "grep -n -A 2 '<decoder name=\"sshd\">' \\\n  0310-ssh_decoders.xml",
+    "directory": "/var/ossec/ruleset/decoders",
+    "stdout": "54:<decoder name=\"sshd\">\n55-  <program_name>^sshd</program_name>\n56-</decoder>\n",
+    "exit_code": 0
+  },
+  {
+    "command_id": "C04-11",
+    "command": "grep -n -A 5 '<decoder name=\"ssh-invfailed\">' \\\n  0310-ssh_decoders.xml",
+    "directory": "/var/ossec/ruleset/decoders",
+    "stdout": "88:<decoder name=\"ssh-invfailed\">\n89-  <parent>sshd</parent>\n90-  <prematch>^Failed \\S+ for invalid user|^Failed \\S+ for illegal user</prematch>\n91-  <regex offset=\"after_prematch\">(\\S+) from (\\S+)</regex>\n92-  <order>srcuser,srcip</order>\n93-</decoder>\n",
+    "exit_code": 0
+  },
+  {
+    "command_id": "C04-15",
+    "command": "grep -n -A 3 '<rule id=\"5700\"' \\\n  0095-sshd_rules.xml",
+    "directory": "/var/ossec/ruleset/rules",
+    "stdout": "11:  <rule id=\"5700\" level=\"0\" noalert=\"1\">\n12-    <decoded_as>sshd</decoded_as>\n13-    <description>SSHD messages grouped.</description>\n14-  </rule>\n",
+    "exit_code": 0
+  },
+  {
+    "command_id": "C04-16",
+    "command": "grep -n -A 3 '<rule id=\"5710\"' \\\n  0095-sshd_rules.xml",
+    "directory": "/var/ossec/ruleset/rules",
+    "stdout": "89:  <rule id=\"5710\" level=\"5\">\n90-    <if_sid>5700</if_sid>\n91-    <match>illegal user|invalid user</match>\n92-    <description>sshd: Attempt to login using a non-existent user</description>\n",
+    "exit_code": 0
+  }
+]
