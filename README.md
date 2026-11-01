@@ -3,10 +3,11 @@
 강의 자료와 분리한 집필용 저장소입니다. 1권 제목은 **『시스템 침투와 SIEM 분석』**입니다.
 직접 공격을 실행하고, 흔적을 분석하며, 침해에 대응하는 과정을 초보자(대학 1~2학년) 눈높이로 다룹니다.
 
-현재 원고는 **머리말, 1장(kt66 실습 환경 준비), 2장(공격과 보안관제의 기초)**까지입니다.
+현재 원고는 **머리말, 1장(kt66 실습 환경 준비), 2장(공격과 보안관제의 기초), 3장(Wazuh 기본 운용)**까지입니다.
 
-- [머리말·1장 DOCX](manuscript/volume01-opening.docx) · [2장 DOCX](manuscript/volume01-chapter02.docx) — 부크크 B5 서식으로 조판
-- [1장 내용 소스(JSON)](manuscript/volume01-opening.json) · [2장 내용 소스(JSON)](manuscript/volume01-chapter02.json)
+- [머리말·1장 DOCX](manuscript/volume01-opening.docx) · [2장 DOCX](manuscript/volume01-chapter02.docx) · [3장 DOCX](manuscript/volume01-chapter03.docx) — 부크크 B5 서식
+- 내용 소스(JSON): [1장](manuscript/volume01-opening.json) · [2장](manuscript/volume01-chapter02.json) · [3장](manuscript/volume01-chapter03.json)
+- 개념 도식은 `tools/illustrate.py`(Pillow)로 생성 → [assets/figures/](assets/figures/)
 - [1장 복사용 명령·설정 예시](examples/chapter01/)
 - [삽화 화풍·구도 기준](editorial/ILLUSTRATION_STYLE.md) · [삽화 원본](assets/illustrations/)
 

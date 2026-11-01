@@ -179,8 +179,110 @@ def fig_fpfn():
     save(im, "ch02/fpfn.png")
 
 
+# ───────────────────────── 3장 ─────────────────────────
+def fig_components():
+    """네 구성요소가 어디서 도는가."""
+    W, H = 1760, 760
+    im, d = canvas(W, H)
+    rrect(d, [40, 34, W - 40, 158], CREAM, NAVY, 7, 18)
+    ctext(d, W // 2, 96, "네 구성요소와 실행 위치", font(GB, 56), INK)
+    items = [("Agent", "수집", "호스트", BLUEF, BLUE),
+             ("Manager", "해석 · 규칙", "컨테이너", TEALF, TEAL),
+             ("Indexer", "저장 · 검색", "컨테이너", AMBERF, AMBER),
+             ("Dashboard", "조회 · 5601", "컨테이너", PINKF, PINK)]
+    bw, bh, y0 = 372, 380, 250
+    xs = [60 + i * (bw + 46) for i in range(4)]
+    for i, (t, role, where, fill, oc) in enumerate(items):
+        x = xs[i]
+        rrect(d, [x, y0, x + bw, y0 + bh], fill, NAVY, 7, 22)
+        ctext(d, x + bw / 2, y0 + 78, t, font(GB, 58), INK)
+        ctext(d, x + bw / 2, y0 + 168, role, font(GR, 42), (66, 82, 100))
+        # 실행 위치 알약
+        pw = 220; px = x + bw / 2 - pw / 2; py = y0 + 250
+        d.rounded_rectangle([px, py, px + pw, py + 66], radius=33, fill=WHITE, outline=oc, width=5)
+        ctext(d, x + bw / 2, py + 33, where, font(GB, 40), oc)
+        if i < 3:
+            arrow(d, x + bw + 6, y0 + bh / 2, xs[i + 1] - 6, y0 + bh / 2, w=9, head=22)
+    save(im, "ch03/components.png")
+
+
+def panel(d, box, title, items, tcol):
+    rrect(d, box, WHITE, NAVY, 7, 22)
+    x0, y0, x1, y1 = box
+    d.rounded_rectangle([x0, y0, x1, y0 + 96], radius=22, fill=tcol, outline=NAVY, width=7)
+    d.rectangle([x0, y0 + 60, x1, y0 + 96], fill=tcol)
+    ctext(d, (x0 + x1) / 2, y0 + 50, title, font(GB, 44), INK)
+    y = y0 + 150
+    for it in items:
+        d.text((x0 + 44, y), "•", font=font(GB, 40), fill=NAVY)
+        d.text((x0 + 90, y), it, font=font(GC, 38), fill=(50, 64, 84))
+        y += 82
+
+def fig_dirs():
+    """호스트와 컨테이너의 디렉터리."""
+    W, H = 1760, 940
+    im, d = canvas(W, H)
+    rrect(d, [40, 34, W - 40, 158], CREAM, NAVY, 7, 18)
+    ctext(d, W // 2, 96, "호스트와 컨테이너의 디렉터리", font(GB, 56), INK)
+    pw = 720
+    panel(d, [60, 220, 60 + pw, 870], "호스트  ~/work/kt66", [
+        "kt66.sh", "docker-compose.yaml", ".env", "wazuh-config/", "deployment/"], BLUEF)
+    panel(d, [W - 60 - pw, 220, W - 60, 870], "컨테이너 kt66-siem  /var/ossec", [
+        "etc/ossec.conf", "etc/rules/local_rules.xml", "logs/ossec.log",
+        "logs/alerts/alerts.json", "bin/wazuh-control"], TEALF)
+    arrow(d, 60 + pw + 10, 545, W - 60 - pw - 10, 545, w=10, head=24)
+    ctext(d, W // 2, 500, "docker exec", font(GB, 44), PINK)
+    ctext(d, W // 2, 905, "호스트의 저장소 파일과 컨테이너 내부 /var/ossec 은 다른 위치다", font(GR, 38), (70, 86, 104))
+    save(im, "ch03/dirs.png")
+
+
+def fig_discover():
+    """Discover 화면의 구성."""
+    W, H = 1720, 1170
+    im, d = canvas(W, H)
+    rrect(d, [40, 34, W - 40, 158], CREAM, NAVY, 7, 18)
+    ctext(d, W // 2, 96, "Discover 화면의 구성", font(GB, 56), INK)
+    # 브라우저 틀
+    fx0, fy0, fx1, fy1 = 70, 210, W - 70, H - 70
+    rrect(d, [fx0, fy0, fx1, fy1], WHITE, NAVY, 7, 20)
+    # 검색창
+    d.rounded_rectangle([fx0 + 30, fy0 + 30, fx1 - 420, fy0 + 118], radius=14, fill=PAPER, outline=TEAL, width=5)
+    d.text((fx0 + 56, fy0 + 52), "rule.level >= 5", font=font(GC, 44), fill=(50, 70, 80))
+    ctext(d, (fx0 + fx1 - 420) / 2, fy0 + 160, "① DQL 검색창", font(GB, 40), TEAL)
+    # 시간 범위
+    d.rounded_rectangle([fx1 - 390, fy0 + 30, fx1 - 30, fy0 + 118], radius=14, fill=AMBERF, outline=AMBER, width=5)
+    ctext(d, fx1 - 225, fy0 + 74, "Last 24 hours", font(GB, 38), (120, 80, 20))
+    _tx = fx1 - 78; _ty = fy0 + 74
+    d.polygon([(_tx - 16, _ty - 8), (_tx + 16, _ty - 8), (_tx, _ty + 14)], fill=(120, 80, 20))
+    ctext(d, fx1 - 210, fy0 + 160, "② 시간 범위", font(GB, 40), AMBER)
+    # 필드 목록
+    lcx0 = fx0 + 30; lcy0 = fy0 + 220
+    d.rounded_rectangle([lcx0, lcy0, lcx0 + 360, fy1 - 30], radius=14, fill=BLUEF, outline=BLUE, width=5)
+    ctext(d, lcx0 + 180, lcy0 + 46, "③ 필드 목록", font(GB, 40), BLUE)
+    for j, f in enumerate(["timestamp", "agent.name", "rule.level", "rule.description", "data.srcip"]):
+        d.text((lcx0 + 34, lcy0 + 110 + j * 76), f, font=font(GC, 34), fill=(50, 64, 84))
+    # 문서 표
+    tcx0 = lcx0 + 400
+    d.rounded_rectangle([tcx0, lcy0, fx1 - 30, lcy0 + 300], radius=14, fill=PAPER, outline=GREY, width=5)
+    ctext(d, (tcx0 + fx1 - 30) / 2, lcy0 + 46, "④ 문서 표 (시간순 경보)", font(GB, 40), INK)
+    for j in range(3):
+        yy = lcy0 + 104 + j * 62
+        d.line([tcx0 + 30, yy, fx1 - 60, yy], fill=GREY, width=3)
+        d.text((tcx0 + 40, yy + 8), "10:1%d  kt66-host  level 7  ..." % (2 + j), font=font(GC, 30), fill=(70, 84, 102))
+    # 펼친 문서
+    d.rounded_rectangle([tcx0, lcy0 + 330, fx1 - 30, fy1 - 30], radius=14, fill=GREENF, outline=GREEN, width=5)
+    ctext(d, (tcx0 + fx1 - 30) / 2, lcy0 + 376, "⑤ 문서 펼치기 — 필드와 값", font(GB, 40), GREEN)
+    for j, kv in enumerate(["rule.description = 관리경로 접근", "data.srcip = 203.0.113.10", "rule.level = 7"]):
+        d.text((tcx0 + 40, lcy0 + 430 + j * 62), kv, font=font(GC, 32), fill=(50, 70, 60))
+    save(im, "ch03/discover.png")
+
+
 if __name__ == "__main__":
-    fig_risk()
-    fig_log_pipeline()
-    fig_fpfn()
+    import sys
+    only = sys.argv[1:]
+    allf = {"risk": fig_risk, "log": fig_log_pipeline, "fpfn": fig_fpfn,
+            "components": fig_components, "dirs": fig_dirs, "discover": fig_discover}
+    for k, fn in allf.items():
+        if not only or k in only:
+            fn()
     print("done")
