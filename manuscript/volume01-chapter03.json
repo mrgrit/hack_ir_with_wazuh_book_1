@@ -55,21 +55,29 @@
         },
         {
           "type": "p",
-          "text": "docker exec 는 실행 중인 컨테이너 안에서 명령을 실행한다. 형식은 docker exec ⟨컨테이너 이름⟩ ⟨명령⟩ 이다. 아래에서는 kt66-siem 컨테이너 안의 파일 목록을 조회한다."
+          "text": "컨테이너 안을 살펴볼 때는 docker exec 로 컨테이너에 접속해, 그 안에서 평소처럼 명령을 입력한다. docker exec 에 -it 를 붙이면 대화형(interactive)으로 셸에 접속한다. i 는 입력을 연결하고, t 는 터미널을 할당한다. 접속하면 프롬프트가 컨테이너 내부로 바뀌며, 이후 입력하는 명령은 컨테이너 안에서 실행된다."
         },
         {
           "type": "cmd",
           "id": "02",
           "where": "kt66 호스트 터미널 · ~/work/kt66",
-          "text": "docker exec kt66-siem ls /var/ossec/etc",
-          "why": "kt66-siem 컨테이너 안의 /var/ossec/etc 디렉터리 내용을 출력한다. Manager의 설정이 있는 위치이다.",
-          "result": "ossec.conf, rules, decoders 등이 보인다. 이 파일들은 호스트의 저장소가 아니라 컨테이너 안에 있다."
+          "text": "docker exec -it kt66-siem /bin/bash",
+          "why": "kt66-siem 컨테이너에 접속해 그 안의 셸(bash)을 연다. 이후 명령은 컨테이너 안에서 실행한다.",
+          "result": "프롬프트가 root@wazuh.manager:/# 형태로 바뀐다. 여기서부터 컨테이너 안이다."
         },
         {
           "type": "cmd",
           "id": "03",
-          "where": "kt66 호스트 터미널 · ~/work/kt66",
-          "text": "docker exec kt66-siem /var/ossec/bin/wazuh-control status",
+          "where": "kt66-siem 컨테이너 안",
+          "text": "ls /var/ossec/etc",
+          "why": "컨테이너 안의 /var/ossec/etc 디렉터리 내용을 출력한다. Manager의 설정이 있는 위치이다.",
+          "result": "ossec.conf, rules, decoders 등이 보인다. 이 파일들은 호스트가 아니라 컨테이너 안에 있다."
+        },
+        {
+          "type": "cmd",
+          "id": "04",
+          "where": "kt66-siem 컨테이너 안",
+          "text": "/var/ossec/bin/wazuh-control status",
           "why": "Manager 내부의 각 데몬(프로세스) 상태를 출력한다. wazuh-control 은 Wazuh 서비스를 제어·조회하는 명령이다.",
           "result": "wazuh-analysisd·wazuh-remoted 등 여러 데몬이 is running 으로 보인다. 일부만 떠 있으면 로그를 확인한다."
         },
@@ -119,31 +127,39 @@
         },
         {
           "type": "p",
-          "text": "설정 파일은 길다. 전체를 한 번에 출력하기보다 필요한 부분만 확인한다. head 는 파일의 앞부분만, tail 은 끝부분만 출력하는 명령이다. -n 뒤의 숫자가 줄 수이다."
+          "text": "앞 절에서 컨테이너 안에 접속했으므로, 아래 명령은 그대로 컨테이너 안에서 입력한다. 설정 파일은 길다. 전체를 한 번에 출력하기보다 필요한 부분만 확인한다. head 는 파일의 앞부분만, tail 은 끝부분만 출력하는 명령이며, -n 뒤의 숫자가 줄 수이다."
         },
         {
           "type": "cmd",
-          "id": "04",
-          "where": "kt66 호스트 터미널 · ~/work/kt66",
-          "text": "docker exec kt66-siem head -n 20 /var/ossec/etc/ossec.conf",
+          "id": "05",
+          "where": "kt66-siem 컨테이너 안",
+          "text": "head -n 20 /var/ossec/etc/ossec.conf",
           "why": "ossec.conf 의 앞 20줄을 출력한다. 설정이 XML 형식으로 되어 있음을 확인한다.",
           "result": "<ossec_config> 로 시작하는 XML 설정의 앞부분이 보인다."
         },
         {
           "type": "cmd",
-          "id": "05",
-          "where": "kt66 호스트 터미널 · ~/work/kt66",
-          "text": "docker exec kt66-siem tail -n 5 /var/ossec/logs/ossec.log",
+          "id": "06",
+          "where": "kt66-siem 컨테이너 안",
+          "text": "tail -n 5 /var/ossec/logs/ossec.log",
           "why": "Manager 동작 로그의 마지막 5줄을 출력한다. 기동·오류 메시지가 여기에 남는다.",
           "result": "시각과 함께 INFO·WARNING 등의 로그 줄이 보인다. ERROR 가 반복되면 그 메시지를 조사한다."
         },
         {
           "type": "cmd",
-          "id": "06",
-          "where": "kt66 호스트 터미널 · ~/work/kt66",
-          "text": "docker exec kt66-siem tail -n 2 /var/ossec/logs/alerts/alerts.json",
+          "id": "07",
+          "where": "kt66-siem 컨테이너 안",
+          "text": "tail -n 2 /var/ossec/logs/alerts/alerts.json",
           "why": "최근 경보 2건을 JSON 형태로 출력한다. 경보 한 건이 하나의 JSON 객체로 저장된다.",
           "result": "rule·agent·timestamp 등을 담은 JSON 이 보인다. 아직 공격을 만들지 않았다면 경보가 적거나 없을 수 있다."
+        },
+        {
+          "type": "cmd",
+          "id": "08",
+          "where": "kt66-siem 컨테이너 안",
+          "text": "exit",
+          "why": "컨테이너 셸을 종료하고 호스트 터미널로 돌아온다. 컨테이너 안에서의 확인을 마치면 반드시 호스트로 나온다.",
+          "result": "프롬프트가 다시 호스트(ccc@…:~/work/kt66$)로 돌아온다. 이후 명령은 호스트에서 실행한다."
         },
         {
           "type": "note",
@@ -162,7 +178,7 @@
         },
         {
           "type": "cmd",
-          "id": "07",
+          "id": "09",
           "where": "kt66 호스트 터미널 · ~/work/kt66",
           "text": "systemctl is-active wazuh-agent",
           "why": "호스트에 설치된 Wazuh Agent 서비스의 실행 여부를 확인한다. 1장에서도 사용했다.",
@@ -170,7 +186,7 @@
         },
         {
           "type": "cmd",
-          "id": "08",
+          "id": "10",
           "where": "kt66 호스트 터미널 · ~/work/kt66",
           "text": "docker compose -f docker-compose.yaml logs --tail 20 siem",
           "why": "Manager(siem) 컨테이너의 최근 로그 20줄을 출력한다. 컨테이너가 반복 재시작하거나 응답이 없을 때 확인한다.",

@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "manuscript" / "volume01-chapter03.json"
 WHERE_H = "kt66 호스트 터미널 · ~/work/kt66"
+WHERE_C = "kt66-siem 컨테이너 안"
 
 def P(t): return {"type": "p", "text": t}
 def H(t): return {"type": "h", "text": t}
@@ -53,14 +54,18 @@ pages.append(page("호스트와 컨테이너의 디렉터리", "3.2  두 위치�
       "아래에 있다. 이 둘은 서로 다른 위치이므로, 호스트에서 바로 보이지 않는 파일은 컨테이너 안으로 들어가 확인한다."),
     IMG("assets/figures/ch03/dirs.png",
         "그림 3-2. 호스트의 저장소 파일과 컨테이너 내부 /var/ossec 은 다른 위치다. docker exec 로 컨테이너 안을 조회한다.", 127),
-    P("docker exec 는 실행 중인 컨테이너 안에서 명령을 실행한다. 형식은 docker exec ⟨컨테이너 이름⟩ ⟨명령⟩ 이다. "
-      "아래에서는 kt66-siem 컨테이너 안의 파일 목록을 조회한다."),
-    CMD("02", "docker exec kt66-siem ls /var/ossec/etc",
-        "kt66-siem 컨테이너 안의 /var/ossec/etc 디렉터리 내용을 출력한다. Manager의 설정이 있는 위치이다.",
-        "ossec.conf, rules, decoders 등이 보인다. 이 파일들은 호스트의 저장소가 아니라 컨테이너 안에 있다."),
-    CMD("03", "docker exec kt66-siem /var/ossec/bin/wazuh-control status",
+    P("컨테이너 안을 살펴볼 때는 docker exec 로 컨테이너에 접속해, 그 안에서 평소처럼 명령을 입력한다. docker exec "
+      "에 -it 를 붙이면 대화형(interactive)으로 셸에 접속한다. i 는 입력을 연결하고, t 는 터미널을 할당한다. 접속하면 "
+      "프롬프트가 컨테이너 내부로 바뀌며, 이후 입력하는 명령은 컨테이너 안에서 실행된다."),
+    CMD("02", "docker exec -it kt66-siem /bin/bash",
+        "kt66-siem 컨테이너에 접속해 그 안의 셸(bash)을 연다. 이후 명령은 컨테이너 안에서 실행한다.",
+        "프롬프트가 root@wazuh.manager:/# 형태로 바뀐다. 여기서부터 컨테이너 안이다."),
+    CMD("03", "ls /var/ossec/etc",
+        "컨테이너 안의 /var/ossec/etc 디렉터리 내용을 출력한다. Manager의 설정이 있는 위치이다.",
+        "ossec.conf, rules, decoders 등이 보인다. 이 파일들은 호스트가 아니라 컨테이너 안에 있다.", WHERE_C),
+    CMD("04", "/var/ossec/bin/wazuh-control status",
         "Manager 내부의 각 데몬(프로세스) 상태를 출력한다. wazuh-control 은 Wazuh 서비스를 제어·조회하는 명령이다.",
-        "wazuh-analysisd·wazuh-remoted 등 여러 데몬이 is running 으로 보인다. 일부만 떠 있으면 로그를 확인한다."),
+        "wazuh-analysisd·wazuh-remoted 등 여러 데몬이 is running 으로 보인다. 일부만 떠 있으면 로그를 확인한다.", WHERE_C),
     NOTE("이 장에서는 설정 파일을 읽기만 하고 수정하지 않는다. 규칙·디코더를 편집하고 wazuh-logtest 로 시험하는 작업은 "
          "4장에서 다룬다. 지금 수정하면 이후 실습의 기준이 흔들린다."),
 ]))
@@ -74,17 +79,21 @@ pages.append(page("주요 설정과 로그 파일", "3.3  무엇이 어디에 �
         ["logs/alerts/alerts.json", "생성된 경보가 JSON 한 줄씩 쌓이는 파일"],
         ["bin/wazuh-control", "서비스 상태 조회·재시작 명령"],
     ], [3.1, 5.5]),
-    P("설정 파일은 길다. 전체를 한 번에 출력하기보다 필요한 부분만 확인한다. head 는 파일의 앞부분만, tail 은 "
-      "끝부분만 출력하는 명령이다. -n 뒤의 숫자가 줄 수이다."),
-    CMD("04", "docker exec kt66-siem head -n 20 /var/ossec/etc/ossec.conf",
+    P("앞 절에서 컨테이너 안에 접속했으므로, 아래 명령은 그대로 컨테이너 안에서 입력한다. 설정 파일은 길다. 전체를 "
+      "한 번에 출력하기보다 필요한 부분만 확인한다. head 는 파일의 앞부분만, tail 은 끝부분만 출력하는 명령이며, "
+      "-n 뒤의 숫자가 줄 수이다."),
+    CMD("05", "head -n 20 /var/ossec/etc/ossec.conf",
         "ossec.conf 의 앞 20줄을 출력한다. 설정이 XML 형식으로 되어 있음을 확인한다.",
-        "<ossec_config> 로 시작하는 XML 설정의 앞부분이 보인다."),
-    CMD("05", "docker exec kt66-siem tail -n 5 /var/ossec/logs/ossec.log",
+        "<ossec_config> 로 시작하는 XML 설정의 앞부분이 보인다.", WHERE_C),
+    CMD("06", "tail -n 5 /var/ossec/logs/ossec.log",
         "Manager 동작 로그의 마지막 5줄을 출력한다. 기동·오류 메시지가 여기에 남는다.",
-        "시각과 함께 INFO·WARNING 등의 로그 줄이 보인다. ERROR 가 반복되면 그 메시지를 조사한다."),
-    CMD("06", "docker exec kt66-siem tail -n 2 /var/ossec/logs/alerts/alerts.json",
+        "시각과 함께 INFO·WARNING 등의 로그 줄이 보인다. ERROR 가 반복되면 그 메시지를 조사한다.", WHERE_C),
+    CMD("07", "tail -n 2 /var/ossec/logs/alerts/alerts.json",
         "최근 경보 2건을 JSON 형태로 출력한다. 경보 한 건이 하나의 JSON 객체로 저장된다.",
-        "rule·agent·timestamp 등을 담은 JSON 이 보인다. 아직 공격을 만들지 않았다면 경보가 적거나 없을 수 있다."),
+        "rule·agent·timestamp 등을 담은 JSON 이 보인다. 아직 공격을 만들지 않았다면 경보가 적거나 없을 수 있다.", WHERE_C),
+    CMD("08", "exit",
+        "컨테이너 셸을 종료하고 호스트 터미널로 돌아온다. 컨테이너 안에서의 확인을 마치면 반드시 호스트로 나온다.",
+        "프롬프트가 다시 호스트(ccc@…:~/work/kt66$)로 돌아온다. 이후 명령은 호스트에서 실행한다.", WHERE_C),
     NOTE("1장에서 공격을 생성하지 않았으므로 alerts.json 은 비어 있거나 설치 과정의 기록만 담을 수 있다. 경보가 없다는 "
          "것이 오류는 아니다. 5장에서 공격을 재현하면 이 파일과 Discover에 기록이 쌓인다."),
 ]))
@@ -93,10 +102,10 @@ pages.append(page("주요 설정과 로그 파일", "3.3  무엇이 어디에 �
 pages.append(page("서비스 상태 확인", "3.4  어느 층이 멈췄는지 가른다", [
     P("문제가 생기면 네 구성요소 중 어디가 멈췄는지부터 가른다. 호스트의 Agent는 systemctl 로, 컨테이너의 세 "
       "구성요소는 docker compose 와 wazuh-control 로 확인한다."),
-    CMD("07", "systemctl is-active wazuh-agent",
+    CMD("09", "systemctl is-active wazuh-agent",
         "호스트에 설치된 Wazuh Agent 서비스의 실행 여부를 확인한다. 1장에서도 사용했다.",
         "active 이면 호스트 센서가 동작 중이다."),
-    CMD("08", "docker compose -f docker-compose.yaml logs --tail 20 siem",
+    CMD("10", "docker compose -f docker-compose.yaml logs --tail 20 siem",
         "Manager(siem) 컨테이너의 최근 로그 20줄을 출력한다. 컨테이너가 반복 재시작하거나 응답이 없을 때 확인한다.",
         "기동 메시지가 보이고 오류 반복이 없으면 정상이다."),
     TAB(["확인 대상", "명령과 정상 신호"], [
