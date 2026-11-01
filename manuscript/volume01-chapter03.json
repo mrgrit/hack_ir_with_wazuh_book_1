@@ -249,7 +249,7 @@
         {
           "type": "image",
           "path": "assets/screens/ch03/discover-searchbar.png",
-          "caption": "그림 3-4. 검색창(DQL)과 시간 범위. 왼쪽 색인 패턴, 가운데 검색창, 오른쪽 시간 범위(Last 24 hours).",
+          "caption": "그림 3-4. 검색창에 rule.level >= 7 을 입력하고 시간 범위(Last 24 hours)를 고른 모습. 위에 결과 건수(2,574 hits)와 히스토그램, 왼쪽에 필드 목록이 함께 보인다.",
           "width_mm": 127
         },
         {
