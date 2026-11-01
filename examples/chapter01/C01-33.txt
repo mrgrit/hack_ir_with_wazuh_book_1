@@ -1,0 +1,1 @@
+docker compose -f docker-compose.yaml logs --tail 50 wazuh-indexer

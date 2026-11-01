@@ -1,15 +1,40 @@
 # 해킹·침해대응 실무 with Wazuh
 
-강의 자료와 분리한 집필용 로컬 Git 저장소입니다. 1권 제목 제안 **시스템 침투와 SIEM 분석**을 시범 표지에 적용했습니다.
-시범 원고는 SQL 인젝션·SSH 인증 기록·osquery 상태 조사의 세 사례를 B5 29쪽으로 구성합니다.
+강의 자료와 분리한 집필용 저장소입니다. 1권 제목은 **시스템 침투와 SIEM 분석**입니다.
+현재 집필·검토본은 **목차·머리말·1장 DOCX**입니다. kt66 저장소의 설치 절차를 바탕으로
+초보자용 설명, 개별 명령, 확인 기준, 실패 시 점검 순서, 실제 화면을 넣을 자리를 작성했습니다.
 
-- [브라우저로 읽기](preview.html)
-- [PDF 시범 원고](build/volume01-sample.pdf)
-- [원고 원본](manuscript/sample.json)
-- [실습별 복사 파일](examples/)
-- [제작·검증 현황](editorial/REVIEW.md)
-- [화면 출처](assets/screens/provenance.json)
+- [목차·머리말·1장 DOCX](manuscript/volume01-opening.docx)
+- [1장 복사용 명령·설정 예시](examples/chapter01/)
+- [1장 촬영 위치와 지시](editorial/chapter01-screenshots.json)
+- [1장 작성 근거·검증 상태·편집 안내](editorial/chapter01-review.json)
+- [DOCX 초기 조판 원본](manuscript/volume01-opening.json)
 - [삽화 화풍·구도 기준](editorial/ILLUSTRATION_STYLE.md)
+
+기존 29쪽 시범본은 표현 방식 참고용으로 보존합니다. 이번 집필 원고와 구분합니다.
+[기존 HTML](preview.html) · [기존 PDF](build/volume01-sample.pdf) ·
+[기존 원고 원본](manuscript/sample.json) · [기존 검토 기록](editorial/REVIEW.md)
+
+## DOCX 편집
+
+`manuscript/volume01-opening.docx`를 Word 또는 LibreOffice Writer에서 직접 편집합니다.
+스크린샷 자리는 캡션·삽입 공간·촬영 지시를 포함합니다. 실제 촬영 화면으로 교체합니다.
+새 환경에서 kt66 설치를 실행한 결과는 아직 검증하지 않았으며, 촬영하면서 확인할 항목은 검토 파일에 남겼습니다.
+Ubuntu 24.04 LTS·x86_64를 집필 기준으로 잡고, 가상화 프로그램별 화면은 촬영 환경에 맞춰 확정합니다.
+
+`volume01-opening.json`은 이번 초안의 초기 조판 원본입니다. DOCX를 수동 수정한 뒤 재생성하면
+그 수정 사항이 JSON으로 자동 반영되지 않습니다. 기본 출력 경로를 별도로 두어 편집 원고를 보호합니다.
+저자용 재생성 명령은 다음과 같습니다. 실습 환경에 접속하거나 설치 명령을 실행하지 않습니다.
+
+```bash
+python3 -m venv .venv-docx
+.venv-docx/bin/pip install -r tools/requirements-docx.txt
+.venv-docx/bin/python tools/build_docx.py
+```
+
+생성 사본은 `build/docx/volume01-opening.generated.docx`입니다. Noto Sans CJK KR와
+Noto Sans Mono CJK KR 글꼴을 사용하며, 글꼴 대체와 편집기 버전에 따라 쪽 나눔은 달라질 수 있습니다.
+신규 배포 형식은 DOCX이며 새 PDF는 배포하지 않습니다.
 
 ## 학습 원칙
 
@@ -21,12 +46,12 @@
 
 ## 환경과 변경 범위
 
-쓰기 허용 범위 때문에 현재 저장소 위치는 `/tmp/wazuh-ir-books`입니다. /tmp는 임시 저장 영역이므로
-후속 작업 전에 보존할 작업 위치로 이동해야 합니다. 원격 저장소는 https://github.com/mrgrit/hack_ir_with_wazuh_book_1 입니다.
+집필 저장소의 보존 위치는 `/home/ccc/hack_ir_with_wazuh_book_1`입니다.
+원격 저장소는 https://github.com/mrgrit/hack_ir_with_wazuh_book_1 입니다.
 강의 레포의 기존 파일을 수정·삭제하지 않았고, 기존 이미지의 사본만 사용했습니다.
 현재 시범본은 신규 공격을 실행하거나 kt66 설정을 변경하지 않고 제작했습니다.
 
-## 편집과 출력
+## 기존 시범본의 HTML·PDF 출력
 
 `manuscript/sample.json`의 title/body가 페이지별 편집 원본입니다. HTML 본문은 복사 가능한
 텍스트와 그림 경로를 포함합니다. 원고를 수정한 뒤 아래 제작 명령을 한 줄씩 실행합니다.

@@ -1,0 +1,1 @@
+sudo sysctl -p /etc/sysctl.d/99-wazuh-max-map-count.conf

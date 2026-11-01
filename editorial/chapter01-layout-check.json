@@ -1,0 +1,16 @@
+{
+  "docx_sha256": "072424bee88cea6e49446c4a28eb769944336e73ae8f645f1b71914af32b7524",
+  "rendered_pages": 48,
+  "renderer": "LibreOffice Writer 7.3.7.2, Noto CJK fonts",
+  "source_units": 37,
+  "individual_commands": 51,
+  "screenshot_placeholders": 12,
+  "xml_archive_check": "passed",
+  "docx_source_command_match": "passed",
+  "shell_syntax_only": "51 passed; commands not executed",
+  "blank_pages": "none",
+  "text_outside_page": "none",
+  "live_install_validation": "not performed",
+  "new_pdf_deliverable": false,
+  "visual_review": "48쪽 전체 축소 배치와 대표 본문·명령·설정·화면 자리 확대 검토. 긴 명령의 단어 중간 줄바꿈, 분리된 캡션, 불필요한 빈 쪽 수정."
+}

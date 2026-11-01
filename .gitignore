@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 build/page*.png
+
+.venv-docx/
+build/docx/
+~$*.docx

@@ -1,0 +1,1 @@
+sudo ./kt66-net.sh
