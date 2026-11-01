@@ -22,7 +22,24 @@ def font(style,name,size,color=INK):
     lang=OxmlElement('w:lang');lang.set(qn('w:val'),'en-US');lang.set(qn('w:eastAsia'),'ko-KR');rpr.append(lang)
 
 def shade(cell,fill):
-    sh=OxmlElement('w:shd');sh.set(qn('w:fill'),fill);cell._tc.get_or_add_tcPr().append(sh)
+    tcPr=cell._tc.get_or_add_tcPr()
+    for old in tcPr.findall(qn('w:shd')):tcPr.remove(old)
+    sh=OxmlElement('w:shd');sh.set(qn('w:val'),'clear');sh.set(qn('w:color'),'auto');sh.set(qn('w:fill'),fill)
+    ref=None
+    for tag in ('w:noWrap','w:tcMar','w:textDirection','w:tcFit','w:vAlign','w:hideMark'):
+        el=tcPr.find(qn(tag))
+        if el is not None:ref=el;break
+    (ref.addprevious(sh) if ref is not None else tcPr.append(sh))
+
+def shade_para(p,fill):
+    pPr=p.get_or_add_pPr()
+    for old in pPr.findall(qn('w:shd')):pPr.remove(old)
+    sh=OxmlElement('w:shd');sh.set(qn('w:val'),'clear');sh.set(qn('w:color'),'auto');sh.set(qn('w:fill'),fill)
+    ref=None
+    for tag in ('w:tabs','w:suppressAutoHyphens','w:kinsoku','w:spacing','w:ind','w:jc','w:textAlignment','w:rPr'):
+        el=pPr.find(qn(tag))
+        if el is not None:ref=el;break
+    (ref.addprevious(sh) if ref is not None else pPr.append(sh))
 
 def set_cell_text(cell,text,style):
     cell.text='';p=cell.paragraphs[0];p.style=style;p.add_run(text)
@@ -43,6 +60,10 @@ def field(p,name):
 
 def build(source,target):
     data=json.loads(source.read_text());doc=Document();sec=doc.sections[0]
+    _z=doc.settings.element.find(qn('w:zoom'))
+    if _z is None:
+        _z=OxmlElement('w:zoom');doc.settings.element.insert(0,_z)
+    _z.set(qn('w:percent'),'100')
     chapter=data.get('chapter',1)
     sec.page_width=Mm(182);sec.page_height=Mm(257)
     sec.top_margin=Mm(16);sec.bottom_margin=Mm(17);sec.left_margin=Mm(18);sec.right_margin=Mm(18)
@@ -92,7 +113,7 @@ def build(source,target):
                 else:
                     pp=doc.add_paragraph(b['label'],style='BookSmall');pp.paragraph_format.keep_with_next=True
                 cp=doc.add_paragraph(b['text'],style='BookCode')
-                pp=cp._p.get_or_add_pPr();sh=OxmlElement('w:shd');sh.set(qn('w:fill'),LIGHT);pp.append(sh)
+                shade_para(cp._p,LIGHT)
                 if typ=='cmd':
                     cp.paragraph_format.keep_with_next=True
                     doc.add_paragraph(b['why'])
@@ -107,6 +128,17 @@ def build(source,target):
                 pp.paragraph_format.keep_with_next=True
                 pp.add_run('[실제 화면 삽입 자리]\n').bold=True;pp.add_run('촬영 후 이 문구를 지우고 그림을 삽입합니다.\n최종 크기에서 글자가 읽히도록 화면을 나누어 사용합니다.')
                 pp=c.add_paragraph('촬영 메모 · '+b['text'],style='BookSmall')
+            elif typ=='art':
+                cap=f'그림 {chapter}-{b["id"]} · 삽화  {b["title"]}'
+                doc.add_paragraph(cap,style='BookCaption')
+                t=doc.add_table(rows=1,cols=1);t.autofit=False;t.columns[0].width=Mm(146)
+                row=t.rows[0];row.height=Mm(b.get('height_mm',52));row.height_rule=WD_ROW_HEIGHT_RULE.AT_LEAST;no_split(row)
+                c=t.cell(0,0);shade(c,'EEF1FB');c.vertical_alignment=WD_CELL_VERTICAL_ALIGNMENT.CENTER
+                pp=c.paragraphs[0];pp.style=doc.styles['BookNote'];pp.alignment=WD_ALIGN_PARAGRAPH.CENTER
+                pp.paragraph_format.keep_with_next=True
+                pp.add_run('[레트로 픽셀오피스 삽화 자리]\n').bold=True
+                pp.add_run('이 화풍으로 생성한 뒤 안내를 지우고 삽화를 넣습니다. 실제 화면 캡처와 구분합니다.')
+                pp=c.add_paragraph('연출 지시 · '+b['text'],style='BookSmall')
             elif typ=='source':
                 pp=doc.add_paragraph(style='BookNote');link(pp,b['text'],b['url'])
             elif typ=='image':
