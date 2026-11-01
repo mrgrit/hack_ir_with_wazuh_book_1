@@ -1,18 +1,20 @@
 {
   "chapter": 7,
   "title": "웹 서버 침투와 실행 흔적",
-  "reviewed_at": "2026-11-01T13:23:15.551241+00:00",
+  "reviewed_at": "2026-11-01T14:02:09.919417+00:00",
   "scope": "Module01 examples 07–12",
   "deliverable": "manuscript/volume01-chapter07.docx",
-  "pages": 26,
-  "user_direction": "추가 실험 중단. 제공된 슬라이드로 집필하며 실험·검증 화면은 슬라이드의 기존 이미지만 사용.",
+  "pages": 40,
+  "user_direction": "공격 절차와 Wazuh 데이터 생성 방법을 반드시 포함한다. 실제 실행이 제한되면 슬라이드의 절차·결과로 교재를 완성하며 공격 과정 자체를 생략하지 않는다.",
   "counts": {
     "slide_source_images": 6,
     "screen_regions": 15,
     "concept_diagrams": 7,
     "reused_character_illustrations": 2,
-    "shell_commands": 0,
-    "DQL": 7
+    "shell_commands": 16,
+    "DQL": 7,
+    "browser_inputs": 9,
+    "additional_query_files": 1
   },
   "sources": {
     "pptx_file": "Module01_Wazuh_위협탐지_DQL_예시집.pptx",
@@ -32,7 +34,7 @@
     "capture_method": "Provided slide images; original capture process not independently verified."
   },
   "verified": {
-    "local_document": "26 rendered pages; template geometry/theme, typography, references, bounds and query/file parity pass. Entire page contact sheets and critical full-size screenshot pages visually inspected.",
+    "local_document": "40 rendered pages; automated template/geometry/bounds/query parity/shell syntax checks passed; all page contact sheets visually reviewed.",
     "screen_integrity": "All 15 regions pixel-identical to crops of embedded PPTX images. Unmodified originals retained.",
     "concept_diagrams": "All 7 rendered and visually inspected for clipping, overlap, labels and direction.",
     "print_readability": "Final 127 mm widths inspected on pages 4,7,10,13,16,19. Smallest raw-log text approximately 9 pt equivalent; fields and values readable.",
@@ -59,5 +61,6 @@
     "web-fim.txt": "Previously collected web FIM config excerpt.",
     "dvwa-exec.txt": "Previously collected installed DVWA Low command handler."
   },
-  "unchanged": "Existing chapters01–06 and lecture/kt66 repositories were not edited."
+  "unchanged": "Existing chapters01–06 and lecture/kt66 repositories were not edited.",
+  "revision": "Added preparation, file creation, browser attack input for all six cases, optional curl equivalents, pre/post checks and cleanup. New procedure not live-validated; existing slide screenshots retained. Vim confirmed in kt66-web Dockerfile."
 }

