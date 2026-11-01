@@ -1,94 +1,54 @@
 # 해킹·침해대응 실무 with Wazuh
 
-강의 자료와 분리한 집필용 저장소입니다. 1권 제목은 **시스템 침투와 SIEM 분석**입니다.
-현재 최신 집필·검토본은 **3장 — Wazuh 기본 운용**입니다. 1장 수정은 보류하고 장별 DOCX로 이어 작성합니다.
+강의 자료와 분리한 집필용 저장소입니다. 1권 제목은 **『시스템 침투와 SIEM 분석』**입니다.
+직접 공격을 실행하고, 흔적을 분석하며, 침해에 대응하는 과정을 초보자(대학 1~2학년) 눈높이로 다룹니다.
 
-[3장 DOCX](manuscript/volume01-chapter03.docx) · [3장 복사용 예제](examples/chapter03/) · [실제 화면 출처](editorial/chapter03-screenshots.json) · [작성·검증 기록](editorial/chapter03-review.json)
+현재 원고는 **머리말과 1장(kt66 실습 환경 준비)**까지입니다.
 
-3장은 에이전트 상태 확인, SSH 접속 실패 1회 생성, Discover 검색·필드·원문 읽기, Dev Tools JSON 조회,
-Wazuh 디렉터리·설정과 장애 점검을 다룹니다. 실제 bastion 경보 2건과 UI 조회를 검증했습니다.
-Docker 내부 점검 명령은 현재 집필 계정의 권한 부족으로 실행 검증을 보류하고 본문·검토 기록에 명시했습니다.
-
-[2장 DOCX](manuscript/volume01-chapter02.docx) · [2장 예제 자료](examples/chapter02/) · [2장 검증 기록](editorial/chapter02-review.json)
-
-2장은 로그인 실패 뒤 성공 사례, 인증·권한, HTTP 요청·응답, 로그·경보, Wazuh 데이터 흐름과 조사 판단을 연결합니다.
-
-앞서 작성한 **목차·머리말·1장 DOCX**는 그대로 보존합니다. kt66 저장소의 설치 절차를 바탕으로
-초보자용 설명, 개별 명령, 확인 기준, 실패 시 점검 순서, 실제 화면을 넣을 자리를 작성했습니다.
-
-- [목차·머리말·1장 DOCX](manuscript/volume01-opening.docx)
+- [머리말·1장 DOCX](manuscript/volume01-opening.docx) — 부크크 B5 서식으로 조판
+- [원고 내용 소스(JSON)](manuscript/volume01-opening.json)
 - [1장 복사용 명령·설정 예시](examples/chapter01/)
-- [1장 촬영 위치와 지시](editorial/chapter01-screenshots.json)
-- [1장 작성 근거·검증 상태·편집 안내](editorial/chapter01-review.json)
-- [DOCX 초기 조판 원본](manuscript/volume01-opening.json)
-- [삽화 화풍·구도 기준](editorial/ILLUSTRATION_STYLE.md)
+- [삽화 화풍·구도 기준](editorial/ILLUSTRATION_STYLE.md) · [삽화 원본](assets/illustrations/)
 
-기존 29쪽 시범본은 표현 방식 참고용으로 보존합니다. 이번 집필 원고와 구분합니다.
-[기존 HTML](preview.html) · [기존 PDF](build/volume01-sample.pdf) ·
-[기존 원고 원본](manuscript/sample.json) · [기존 검토 기록](editorial/REVIEW.md)
+## 서식과 조판
 
-## DOCX 편집
+최종 산출물은 **부크크(Bookk) B5(46배판) Word 서식**을 그대로 따릅니다. 본문은 **부크크 명조 Light**,
+제목·강조는 **부크크 고딕 Light**, 명령·코드는 Consolas 를 쓰고, 색을 쓰지 않는 단순한 표로 조판합니다.
+페이지 크기·여백·테마는 서식 템플릿(`tools/assets/bookk-B5-template.docx`)을 base 로 열어 그대로 상속합니다.
 
-`manuscript/`의 opening·chapter02·chapter03 DOCX를 Word 또는 LibreOffice Writer에서 직접 편집합니다.
-1장의 스크린샷 자리는 캡션·삽입 공간·촬영 지시를 포함합니다. 실제 촬영 화면으로 교체합니다. 2장의 브라우저 실습에는 검증한 실제 캡처 3장을 삽입했습니다.
-새 환경에서 kt66 설치를 실행한 결과는 아직 검증하지 않았으며, 촬영하면서 확인할 항목은 검토 파일에 남겼습니다.
-Ubuntu 24.04 LTS·x86_64를 집필 기준으로 잡고, 가상화 프로그램별 화면은 촬영 환경에 맞춰 확정합니다.
-
-`volume01-opening.json`은 이번 초안의 초기 조판 원본입니다. DOCX를 수동 수정한 뒤 재생성하면
-그 수정 사항이 JSON으로 자동 반영되지 않습니다. 기본 출력 경로를 별도로 두어 편집 원고를 보호합니다.
-저자용 재생성 명령은 다음과 같습니다. 실습 환경에 접속하거나 설치 명령을 실행하지 않습니다.
+원고는 두 단계로 만듭니다. 내용을 `build_opening_src.py` 가 JSON 으로 쓰고, `build_bookk.py` 가 그 JSON 을
+부크크 서식 DOCX 로 조판합니다. 두 도구 모두 **저자용 조판 도구이며 kt66·Wazuh 에 접속하지 않습니다.**
 
 ```bash
 python3 -m venv .venv-docx
 .venv-docx/bin/pip install -r tools/requirements-docx.txt
-.venv-docx/bin/python tools/build_docx.py
+.venv-docx/bin/python tools/build_opening_src.py                 # 내용 → manuscript/volume01-opening.json
+.venv-docx/bin/python tools/build_bookk.py                        # JSON → manuscript/volume01-opening.docx
 ```
 
-생성 사본은 `build/docx/volume01-opening.generated.docx`입니다. Noto Sans CJK KR와
-Noto Sans Mono CJK KR 글꼴을 사용하며, 글꼴 대체와 편집기 버전에 따라 쪽 나눔은 달라질 수 있습니다.
-2장 생성 사본은 다음 명령으로 만듭니다. 수동 편집한 원고 DOCX는 덮어쓰지 않습니다.
+부크크 명조/고딕 글꼴은 부크크 서식 배포본에 포함되어 있습니다(저자 PC에 설치). 이 저장소에는 글꼴을
+동봉하지 않습니다. 글꼴이 없는 환경에서 열면 Word 가 대체 글꼴로 표시하므로 쪽 나눔이 달라질 수 있습니다.
+신규 배포 형식은 DOCX 이며 PDF 는 배포하지 않습니다.
 
-```bash
-.venv-docx/bin/python tools/build_docx.py --source manuscript/volume01-chapter02.json --output build/docx/volume01-chapter02.generated.docx
-```
+## 집필 원칙
 
-3장도 다음 명령으로 생성 사본을 만들 수 있습니다.
+자세한 기준은 [AGENTS.md](AGENTS.md) 에 있습니다. 요약하면,
 
-```bash
-.venv-docx/bin/python tools/build_docx.py --source manuscript/volume01-chapter03.json --output build/docx/volume01-chapter03.generated.docx
-```
+- 학습자는 화면을 보며 한 명령씩 입력하고, UI 를 클릭하고, 결과를 읽습니다. 실습 전체를 하나의 스크립트·
+  API 로 대체하지 않습니다. `examples/chapterNN/` 의 txt 는 명령을 한 줄씩 복사하는 파일이며 폴더를 통째로
+  실행하지 않습니다. 파일 이름의 C 번호가 본문 명령 번호와 같습니다.
+- 낯선 명령은 처음 등장할 때 역할·기본 구문·사용한 옵션과 기호·정상 결과를 함께 설명합니다.
+- 실제 화면 캡처와 레트로 픽셀오피스 삽화를 명시적으로 구분합니다. 설치 화면은 저자가 촬영해 삽입할
+  자리(캡션·촬영 지시 포함)를 본문에 마련했습니다. 검증하지 않은 성공을 주장하지 않습니다.
+- 1장 설치 절차는 kt66 저장소(기준 커밋 `63d4180`)의 문서·코드를 대조해 서술했습니다.
 
-신규 배포 형식은 DOCX이며 새 PDF는 배포하지 않습니다.
+## 범위
 
-## 학습 원칙
+1권은 강의 Module 01 의 실습 01~30 및 62 를 실습 기반으로 삼습니다(11장 + 부록). 머리말·1장을 먼저
+집필했고, 2장(공격과 보안관제 기초)부터 이어서 집필합니다.
 
-한 단계에서 한 가지 행위만 수행합니다. 터미널 명령은 직접 입력하고, 결과를 읽은 다음
-다음 단계로 이동합니다. 로그 검색은 Discover의 메뉴·검색창·필드·문서 펼치기로 진행합니다.
-실습 전체를 실행하는 스크립트, 자동 로그인, 일괄 API 조회는 학습 경로에 넣지 않습니다.
-예제 txt는 실행 스크립트가 아닌 개별 명령의 복사용 파일입니다. 전체 폴더를 실행하지 않습니다.
-꺾쇠괄호 자리표시자는 자신의 환경에서 확인한 값으로 바꿉니다.
+## 환경
 
-## 환경과 변경 범위
-
-집필 저장소의 보존 위치는 `/home/ccc/hack_ir_with_wazuh_book_1`입니다.
+집필 저장소의 보존 위치는 `/home/ccc/hack_ir_with_wazuh_book_1`,
 원격 저장소는 https://github.com/mrgrit/hack_ir_with_wazuh_book_1 입니다.
-강의 레포의 기존 파일을 수정·삭제하지 않았고, 기존 이미지의 사본만 사용했습니다.
-현재 시범본은 신규 공격을 실행하거나 kt66 설정을 변경하지 않고 제작했습니다.
-
-## 기존 시범본의 HTML·PDF 출력
-
-`manuscript/sample.json`의 title/body가 페이지별 편집 원본입니다. HTML 본문은 복사 가능한
-텍스트와 그림 경로를 포함합니다. 원고를 수정한 뒤 아래 제작 명령을 한 줄씩 실행합니다.
-이 명령들은 **저자용 조판 도구**이며 kt66이나 Wazuh에 접속하지 않습니다.
-
-```bash
-python3 tools/build.py
-python3 tools/typeset_pdf.py
-```
-
-PDF 출력에는 Python Pillow, 시스템 Cairo·Pango·librsvg, Noto Sans CJK KR 글꼴이 필요합니다.
-PDF는 Cairo/Pango로 출력했습니다. Chromium으로 HTML 29쪽의 넘침과 이미지 로딩도 확인했습니다.
-브라우저 기반 출력 도구 render_pdf.py는 별도 출력 방식입니다.
-`tools/draft_sample.py`는 최초 시범본 생성 기록이며 다시 실행하면 원고 편집 내용을 덮어씁니다.
-`tools/diagrams.py`는 생성형 픽셀오피스 삽화에 한글 설명을 별도 조판하는 SVG 구성 도구입니다.
-삽화 원본은 `assets/illustrations/`, 내장 imagegen 도구의 최종 프롬프트는 `editorial/illustration-prompts.json`에 있습니다. 실제 화면 캡처와 구분합니다.
+강의 레포의 파일을 수정·삭제하지 않습니다.
