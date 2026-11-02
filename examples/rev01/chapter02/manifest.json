@@ -1,0 +1,83 @@
+[
+  {
+    "type": "command",
+    "id": "C02-01",
+    "where": "kt66 VM · 터미널",
+    "purpose": "존재하지 않는 계정으로 bastion에 SSH 로그인을 한 번 시도해 실패 기록을 남긴다.",
+    "text": "ssh book02_probe@10.20.30.201",
+    "syntax": "ssh는 1장에서 설치한 OpenSSH 클라이언트로, 원격 서버에 SSH로 로그인한다. @ 앞은 로그인 계정, 뒤는 접속할 주소이다. 포트를 지정하지 않으면 SSH 기본 포트 22로 접속한다.",
+    "result": "처음 접속하면 Are you sure you want to continue connecting (yes/no/[fingerprint])?가 나온다. yes를 입력하면 Warning: Permanently added …가 나오고 bastion의 키가 ~/.ssh/known_hosts에 저장된다. password:에서 아무 암호나 입력한다. 입력한 글자는 화면에 표시되지 않는다. Permission denied, please try again.이 나오면 **Ctrl+C**를 눌러 끝낸다. 실행한 시각을 사건 노트에 적는다."
+  },
+  {
+    "type": "command",
+    "id": "C02-02",
+    "where": "kt66 VM · 터미널",
+    "purpose": "bastion 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-bastion /bin/bash",
+    "syntax": "docker exec는 실행 중인 컨테이너 안에서 프로그램을 실행한다. -i는 키보드 입력을 연결하고 -t는 터미널을 할당한다. kt66-bastion은 컨테이너 이름, /bin/bash는 실행할 셸이다.",
+    "result": "프롬프트가 root@bastion:/# 형태로 바뀐다. 이후 명령은 컨테이너 안에서 실행된다."
+  },
+  {
+    "type": "command",
+    "id": "C02-03",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "purpose": "C02-01에서 남긴 로그인 실패 기록을 찾는다.",
+    "text": "grep \"book02_probe\" /var/log/auth.log",
+    "syntax": "grep은 파일에서 지정한 문자열이 들어간 줄을 출력한다. 큰따옴표 안의 book02_probe가 찾을 문자열이고, 마지막 인자가 읽을 파일이다.",
+    "result": "Invalid user book02_probe from … 줄과 Failed password for invalid user book02_probe from … 줄이 나온다. 아무것도 나오지 않으면 C02-01의 계정 이름과 실행 여부를 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "C02-04",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "purpose": "컨테이너 셸에서 나와 kt66 VM 터미널로 돌아간다.",
+    "text": "exit",
+    "syntax": "exit는 현재 셸을 끝낸다. 셸을 끝내도 컨테이너는 계속 실행된다.",
+    "result": "프롬프트가 kt66 VM 계정의 프롬프트로 돌아온다."
+  },
+  {
+    "type": "command",
+    "id": "C02-05",
+    "where": "kt66 VM · 터미널",
+    "purpose": "(선택) known_hosts에 추가된 bastion의 키를 확인하고 지운 뒤 다시 확인한다.",
+    "text": "ssh-keygen -F 10.20.30.201\nssh-keygen -R 10.20.30.201\nssh-keygen -F 10.20.30.201",
+    "syntax": "ssh-keygen은 SSH 키를 만들고 관리한다. -F는 known_hosts에서 지정한 서버의 키를 찾아 출력하고, -R은 그 키를 지운다.",
+    "result": "첫 -F는 # Host 10.20.30.201 found로 시작하는 줄을 출력한다. -R은 known_hosts updated와 원래 내용을 known_hosts.old로 남겼다는 메시지를 출력한다. 마지막 -F는 아무것도 출력하지 않는다."
+  },
+  {
+    "type": "command",
+    "id": "C02-06",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66 VM의 현재 시각과 시간대 설정을 확인한다.",
+    "text": "timedatectl",
+    "syntax": "timedatectl은 시스템의 시각·시간대 설정을 조회하거나 바꾼다. 옵션 없이 실행하면 설정을 바꾸지 않고 현재 상태만 출력한다.",
+    "result": "Local time, Universal time, Time zone 줄을 읽는다. 설치 때 서울을 골랐다면 Time zone: Asia/Seoul (KST, +0900)이 나온다."
+  },
+  {
+    "type": "command",
+    "id": "C02-07",
+    "where": "kt66 VM · 터미널",
+    "purpose": "같은 순간을 KST와 UTC로 출력해 9시간 차이를 확인한다.",
+    "text": "date -Is\ndate -u -Is",
+    "syntax": "date는 현재 시각을 출력한다. -I는 ISO 8601 형식이며 바로 뒤의 s는 초 단위까지 표시한다. -u는 UTC로 출력한다.",
+    "result": "첫 줄은 +09:00, 둘째 줄은 +00:00으로 끝나고 시각이 9시간 차이 난다."
+  },
+  {
+    "type": "command",
+    "id": "C02-08",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66 웹 서버 첫 화면의 상태 코드를 확인한다.",
+    "text": "curl -I --max-time 15 http://192.168.0.189/",
+    "syntax": "curl은 HTTP 요청을 보내고 응답을 출력한다. -I는 본문 없이 응답 헤더만 요청하는 HEAD 방식이다. --max-time 15는 최대 실행 시간을 15초로 제한한다.",
+    "result": "첫 줄에서 HTTP 버전과 상태 코드를 읽는다. 기존 kt66의 첫 화면은 HTTP/1.1 200 OK를 반환했다."
+  },
+  {
+    "type": "command",
+    "id": "C02-09",
+    "where": "kt66 VM · 터미널",
+    "purpose": "없는 경로를 요청해 응답 코드가 어떻게 달라지는지 확인한다.",
+    "text": "curl -I --max-time 15 http://192.168.0.189/book02-none",
+    "syntax": "주소 뒤의 /book02-none이 요청할 경로이다. 나머지 옵션은 C02-08과 같다.",
+    "result": "첫 줄의 상태 코드를 읽고 아래 표에서 뜻을 찾는다. 없는 자원을 요청하면 일반적으로 404 Not Found가 나온다."
+  }
+]

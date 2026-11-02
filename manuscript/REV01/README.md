@@ -1,6 +1,6 @@
-# REV01 — 1장 재작성본
+# REV01 — 재작성본 (1장·부록 A·2장)
 
-기존 `manuscript/volume01-chapter01.*`은 그대로 두고, 재작성본을 이 디렉터리에 둔다. 검토 후 채택하면 기존 파일을 교체한다.
+기존 `manuscript/volume01-chapter0N.*`은 그대로 두고, 재작성본을 이 디렉터리에 둔다. 검토 후 채택하면 기존 파일을 교체한다.
 
 ## 파일
 
@@ -8,9 +8,12 @@
 |---|---|
 | `volume01-chapter01.json` / `.docx` | 표지·머리말·일러두기·목차 + 1장 (렌더 41쪽) |
 | `volume01-appendix-a.json` / `.docx` | 부록 A 설치 상세와 문제 해결 (렌더 8쪽) |
+| `volume01-chapter02.json` / `.docx` | 2장 공격과 보안관제의 기초 (렌더 23쪽) |
 | `../../examples/rev01/chapter01/` | C01-01~26 복사용 명령, `manifest.json`, `casebook.txt`(사건 노트 양식) |
 | `../../examples/rev01/appendix-a/` | CA-01~08 복사용 명령, `manifest.json` |
+| `../../examples/rev01/chapter02/` | C02-01~09 복사용 명령, `manifest.json`, 사례(`case-ssh.json`·`.log`), `investigation.txt` |
 | `../../assets/figures/chapter01/rev01-*.png` | 1장 로드맵(도식 1-1), 사건 노트 흐름(도식 1-8) |
+| `../../assets/figures/chapter02/rev01-*.png` | 2장 로드맵(2-1), SSH 출발지 경로(2-2), 원문→필드(2-4) |
 
 ## 기존 1장 대비 변경
 
@@ -21,6 +24,16 @@
 5. **사건 노트** — 1.8에서 "공격 일지"와 "조사 기록" 두 칸을 만든다. 11장에서 두 기록을 대조해 탐지 공백을 찾는 흐름의 시작점이다.
 6. **목차** — 장마다 "조사 질문" 열을 둔다.
 7. **일러두기** — 표기 원칙 표와 예시값(IP·계정·경로) 표를 모았다.
+
+## 기존 2장 대비 변경
+
+1. **장 도입·정리** — 1장과 같은 형식(시나리오, 학습 목표, 로드맵, 준비와 완료 기준 / 핵심 정리, 확인 문제, 더 읽을거리).
+2. **2.2 직접 남기기 (신규)** — kt66 VM에서 `ssh book02_probe@10.20.30.201`로 실패 기록을 남기고 `kt66-bastion`의 auth.log에서 찾는다. 출발지가 VM의 ext망 주소 10.20.30.254로 기록되는 이유로 "출발지 IP = 경로의 단서"를 설명한다. 2.1 사례의 출발지도 같은 주소라는 점을 조사 기록에 반영했다.
+3. **2.3 디코더·규칙 원문** — Wazuh v4.10.0의 `ssh-invfailed` 디코더와 규칙 5700/5710 정의를 보여 주고 prematch·regex·order·if_sid·match를 설명한다. 경보 필드를 출처(원문/수집기/규칙)로 나눈 표, rule.mitre는 판단이 아니라 규칙의 분류라는 점, 5712(반복) 규칙을 추가했다.
+4. **보이지 않는 것** — sshd는 암호를 기록하지 않음, 수준 3 미만·규칙 없는 기록은 wazuh-alerts-*에 없음(kt66은 wazuh-archives-* 활성), 5710만 검색하면 5760·5715가 빠짐.
+5. **2.4 시각** — syslog 원문에 연도·시간대가 없다는 점, kt66 컨테이너는 VM 시간대와 무관하게 Asia/Seoul이라는 점(compose 소스), `timedatectl` 추가.
+6. **2.5 웹 응답** — 302(이동 주소 확인) 추가, 없는 경로 요청(C02-09)을 "먼저 예측"으로 실행.
+7. **2.7 조사 기록** — 사실/판단 구분 표, 사건 노트 조사 기록 한 줄 예시, `_index`·`_id` 기록.
 
 ## 새 조판 규칙 (`tools/build_chapter01.py` 확장, 기존 장과 호환)
 
@@ -43,6 +56,9 @@ python3 tools/write_chapter01_rev01.py
 python3 tools/write_appendix_a_rev01.py
 python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter01.json --output manuscript/REV01/volume01-chapter01.docx
 python3 tools/build_chapter01.py --source manuscript/REV01/volume01-appendix-a.json --output manuscript/REV01/volume01-appendix-a.docx
+python3 tools/diagrams_chapter02_rev01.py
+python3 tools/write_chapter02_rev01.py
+python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter02.json --output manuscript/REV01/volume01-chapter02.docx
 ```
 
 `tools/check_chapter01.py`는 "JSON 1쪽 = 렌더 1쪽"을 검사하므로 흐름 조판인 REV01에는 맞지 않는다. REV01은 명령↔예제 파일 일치, `bash -n`, 줄 길이 60자 이하, 판형·글꼴·색을 따로 확인했다.
@@ -57,9 +73,12 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-appendix-a.j
 | 5장 | "1.12의 일괄 설치", "1.12의 Ubuntu" | 1.9 (VM 생성은 부록 A.3) |
 | 6장 | "1.12" 4곳 (도구 준비·공격자 VM hosts) | 1.9 |
 | 7장 | "1.12" 2곳 (도구 설치) | 1.9 |
+| 3장 | `examples/chapter02/case-ssh.json`, "2장에서 제공한 SSH 실패 기록" | `examples/rev01/chapter02/`. 2.2에서 독자가 남긴 book02_probe 기록 검색을 함께 넣는다 |
 
 ## 미검증·작가 작업
 
 - 새 VM에서 처음부터 설치하는 절차는 실행 검증하지 않았다(기존 kt66 화면과 명령 문법만 확인).
 - 부록 A의 캡처 자리 2곳(VMware 설정 요약, Ubuntu 설치 첫 화면)은 저자가 직접 촬영해 넣는다.
+- 2장 2.2(C02-01~05)는 새 VM에서 실행 검증하지 않았다. 출발지 10.20.30.254는 기존 kt66 기록(book03_probe)과 kt66 소스(ext망 게이트웨이 .254, bastion 10.20.30.201)로 대조한 예상 결과이다. 실행 후 화면을 촬영해 넣는다.
+- 2장 C02-09(없는 경로)의 응답 코드는 확인하지 않았다. 본문은 "먼저 예측" 후 표에서 읽도록 썼다.
 - 렌더 쪽수는 LibreOffice 대체 글꼴 기준이다. 부크크 글꼴이 있는 Word에서 쪽 나눔을 다시 확인한다.
