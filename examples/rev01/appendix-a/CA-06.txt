@@ -1,0 +1,2 @@
+sudo systemctl status wazuh-agent --no-pager
+sudo journalctl -u wazuh-agent -n 50 --no-pager

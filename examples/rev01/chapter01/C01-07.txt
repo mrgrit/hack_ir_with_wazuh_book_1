@@ -1,0 +1,5 @@
+cd ~
+ls -ld kt66
+git clone https://github.com/mrgrit/kt66.git
+cd kt66
+pwd

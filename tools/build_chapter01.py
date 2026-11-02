@@ -23,14 +23,21 @@ def font(r,name=BODY,size=10.5):
     rf.set(qn('w:eastAsia'),BODY if name==MONO else name)
     return r
 
-def para(parent,text='',size=10.5,name=BODY,after=6,keep=False,align=None):
+def runs(p,text,name,size):
+    # **강조**는 제목·강조용 고딕으로 표시한다. 화면의 메뉴·버튼 이름에 쓴다.
+    if '**' not in text or name==MONO:
+        font(p.add_run(text),name,size);return
+    for n,part in enumerate(text.split('**')):
+        if part:font(p.add_run(part),HEAD if n%2 else name,size)
+
+def para(parent,text='',size=10.5,name=BODY,after=6,keep=False,align=None,indent=0,hanging=0):
     p=parent.add_paragraph()
     pf=p.paragraph_format;pf.space_before=Pt(0);pf.space_after=Pt(after);pf.line_spacing=1.35
-    pf.first_line_indent=Mm(0);pf.left_indent=Mm(0);pf.right_indent=Mm(0)
+    pf.first_line_indent=Mm(-hanging);pf.left_indent=Mm(indent);pf.right_indent=Mm(0)
     pf.keep_with_next=keep;pf.keep_together=True;pf.widow_control=True
     p.alignment=align or WD_ALIGN_PARAGRAPH.LEFT
     snap=OxmlElement('w:snapToGrid');snap.set(qn('w:val'),'0');p._p.get_or_add_pPr().append(snap)
-    font(p.add_run(text),name,size)
+    runs(p,text,name,size)
     return p
 
 def border(pr,tag='w:pBdr'):
@@ -58,8 +65,36 @@ def table(doc,block):
             pr.append(mar)
             old=cell.paragraphs[0]
             cell._tc.remove(old._p)
-            para(cell,txt,size=10,name=HEAD if n==0 else BODY,after=0)
+            # keep=True인 표는 마지막 행 전까지 다음 행과 같은 쪽에 둔다.
+            para(cell,txt,size=10,name=HEAD if n==0 else BODY,after=0,keep=bool(block.get('keep')) and n<len(block['rows']))
     para(doc,'',size=1,after=3).paragraph_format.line_spacing=1
+
+BOX_LABEL={'predict':'먼저 예측','caution':'주의','blind':'보이지 않는 것','field':'현장 노트','answer':'해설'}
+
+def box(doc,block):
+    """상자 4종: 먼저 예측·주의·보이지 않는 것·현장 노트. 한 칸 표로 만들어 한 쪽에 둔다."""
+    t=doc.add_table(rows=1,cols=1);t.autofit=False;t.alignment=WD_TABLE_ALIGNMENT.CENTER;t.columns[0].width=Mm(127)
+    row=t.rows[0];row._tr.get_or_add_trPr().append(OxmlElement('w:cantSplit'))
+    cell=t.cell(0,0);cell.width=Mm(127);pr=cell._tc.get_or_add_tcPr();border(pr,'w:tcBorders')
+    mar=OxmlElement('w:tcMar')
+    for k,v in [('top',90),('bottom',70),('left',140),('right',140)]:
+        e=OxmlElement('w:'+k);e.set(qn('w:w'),str(v));e.set(qn('w:type'),'dxa');mar.append(e)
+    pr.append(mar)
+    cell._tc.remove(cell.paragraphs[0]._p)
+    label=block.get('title') or BOX_LABEL[block['kind']]
+    para(cell,label,name=HEAD,size=10,after=3,keep=True)
+    texts=block['text'] if isinstance(block.get('text'),list) else ([block['text']] if block.get('text') else [])
+    for n,txt in enumerate(texts):para(cell,txt,size=10,after=3 if n<len(texts)-1 or block.get('items') else 1)
+    for n,item in enumerate(block.get('items',[])):
+        para(cell,'• '+item,size=10,after=2,indent=4,hanging=4)
+    para(doc,'',size=1,after=5).paragraph_format.line_spacing=1
+
+def items(doc,block):
+    numbered=block.get('style')=='number'
+    for n,item in enumerate(block['items']):
+        mark=f'{n+1}. ' if numbered else '• '
+        # 네 항목 이하의 짧은 목록만 한 쪽에 묶는다. 긴 목록은 쪽 사이에서 나뉠 수 있다.
+        para(doc,mark+item,after=3 if n<len(block['items'])-1 else 7,indent=5,hanging=5,keep=len(block['items'])<=4 and n<len(block['items'])-1)
 
 def build(output,source=None):
     data=json.loads((source or ROOT/'manuscript/volume01-chapter01.json').read_text())
@@ -80,8 +115,12 @@ def build(output,source=None):
     normal=doc.styles['Normal'];normal.font.name=BODY;normal.font.size=Pt(10.5)
     normal.paragraph_format.space_after=Pt(6)
     for idx,pg in enumerate(data['pages']):
-        title=para(doc,pg['title'],size=25 if pg['kind']=='cover' else 16,name=HEAD,after=13,keep=True)
-        title.paragraph_format.page_break_before=idx>0
+        # break=False인 쪽은 앞 내용에 이어 조판한다. level=section은 절 제목 크기로 표시한다.
+        brk=pg.get('break',True);section=pg.get('level')=='section'
+        size=25 if pg['kind']=='cover' else (13.5 if section else 16)
+        title=para(doc,pg['title'],size=size,name=HEAD,after=8 if section else 13,keep=True)
+        title.paragraph_format.page_break_before=idx>0 and brk
+        if section and not brk:title.paragraph_format.space_before=Pt(14)
         if pg['kind']=='cover':
             title.paragraph_format.space_before=Pt(120)
             title.alignment=WD_ALIGN_PARAGRAPH.CENTER
@@ -89,6 +128,15 @@ def build(output,source=None):
             typ=b['type']
             if typ=='p':para(doc,b['text'],align=WD_ALIGN_PARAGRAPH.CENTER if pg['kind']=='cover' else None)
             elif typ=='h':para(doc,b['text'],size=11.5,name=HEAD,after=5,keep=True)
+            elif typ in ('command','query') and 'purpose' in b:
+                # 번호·위치 → 목적 → 입력 → 구문 → 확인. 한 블록은 같은 쪽에 둔다.
+                para(doc,b['id']+'  |  '+b['where'],size=9,name=HEAD,after=2,keep=True)
+                para(doc,'**목적**  '+b['purpose'],after=3,keep=True)
+                p=para(doc,b['text'],size=10,name=MONO,after=4,keep=True)
+                p.paragraph_format.line_spacing=1.15
+                border(p._p.get_or_add_pPr())
+                if b.get('syntax'):para(doc,'**구문**  '+b['syntax'],after=3,keep=True)
+                para(doc,'**확인**  '+b['result'],after=9)
             elif typ in ('command','query'):
                 para(doc,b['id']+'  |  '+b['where'],size=9,name=HEAD,after=2,keep=True)
                 # 역할·기호 → 입력 → 판정 순서. 한 명령 블록은 같은 쪽에 둔다.
@@ -100,6 +148,8 @@ def build(output,source=None):
             elif typ=='code':
                 para(doc,b['text'],name=MONO,size=10,after=6)
             elif typ=='table':table(doc,b)
+            elif typ=='box':box(doc,b)
+            elif typ=='list':items(doc,b)
             elif typ=='image':
                 p=para(doc,'',after=3,keep=True,align=WD_ALIGN_PARAGRAPH.RIGHT if b.get('align')=='right' else WD_ALIGN_PARAGRAPH.CENTER)
                 p.paragraph_format.line_spacing=1
@@ -122,7 +172,7 @@ def build(output,source=None):
                 r=font(urlpara.add_run(b['url']),MONO,10);urlpara._p.remove(r._r);url_link.append(r._r);urlpara._p.append(url_link)
             else:raise ValueError(typ)
     doc.core_properties.title=data['title'];doc.core_properties.subject=data['series'];doc.core_properties.language='ko-KR'
-    doc.core_properties.author='';doc.core_properties.comments='신규 원고. 설치 절차는 문서·코드 대조 상태. 실제 UI는 기존 가동 환경에서 촬영.'
+    doc.core_properties.author='';doc.core_properties.comments=data.get('comments','신규 원고. 설치 절차는 문서·코드 대조 상태. 실제 UI는 기존 가동 환경에서 촬영.')
     output.parent.mkdir(parents=True,exist_ok=True);doc.save(output)
     print(output)
 

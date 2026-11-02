@@ -1,0 +1,2 @@
+ls -l /etc/docker/daemon.json
+sudo cat /etc/docker/daemon.json

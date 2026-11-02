@@ -1,0 +1,2 @@
+systemctl is-active wazuh-agent
+systemctl is-active osqueryd

@@ -1,0 +1,4 @@
+ls -l .env.example .env
+cp .env.example .env
+chmod 600 .env
+ls -l .env
