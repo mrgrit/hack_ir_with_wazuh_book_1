@@ -1,4 +1,4 @@
-# REV01 — 재작성본 (1장·부록 A·2장)
+# REV01 — 재작성본 (1~3장·부록 A)
 
 기존 `manuscript/volume01-chapter0N.*`은 그대로 두고, 재작성본을 이 디렉터리에 둔다. 검토 후 채택하면 기존 파일을 교체한다.
 
@@ -9,11 +9,14 @@
 | `volume01-chapter01.json` / `.docx` | 표지·머리말·일러두기·목차 + 1장 (렌더 41쪽) |
 | `volume01-appendix-a.json` / `.docx` | 부록 A 설치 상세와 문제 해결 (렌더 8쪽) |
 | `volume01-chapter02.json` / `.docx` | 2장 공격과 보안관제의 기초 (렌더 23쪽) |
+| `volume01-chapter03.json` / `.docx` | 3장 Wazuh 기본 운용 (렌더 20쪽) |
 | `../../examples/rev01/chapter01/` | C01-01~26 복사용 명령, `manifest.json`, `casebook.txt`(사건 노트 양식) |
 | `../../examples/rev01/appendix-a/` | CA-01~08 복사용 명령, `manifest.json` |
 | `../../examples/rev01/chapter02/` | C02-01~09 복사용 명령, `manifest.json`, 사례(`case-ssh.json`·`.log`), `investigation.txt` |
 | `../../assets/figures/chapter01/rev01-*.png` | 1장 로드맵(도식 1-1), 사건 노트 흐름(도식 1-8) |
 | `../../assets/figures/chapter02/rev01-*.png` | 2장 로드맵(2-1), SSH 출발지 경로(2-2), 원문→필드(2-4) |
+| `../../examples/rev01/chapter03/` | Q03-01~06 검색식, `queries.json`, `investigation.txt` |
+| `../../assets/figures/chapter03/rev01-*.png` | 3장 로드맵(3-1), 조건을 하나씩 더하는 검색(3-3) |
 
 ## 기존 1장 대비 변경
 
@@ -34,6 +37,16 @@
 5. **2.4 시각** — syslog 원문에 연도·시간대가 없다는 점, kt66 컨테이너는 VM 시간대와 무관하게 Asia/Seoul이라는 점(compose 소스), `timedatectl` 추가.
 6. **2.5 웹 응답** — 302(이동 주소 확인) 추가, 없는 경로 요청(C02-09)을 "먼저 예측"으로 실행.
 7. **2.7 조사 기록** — 사실/판단 구분 표, 사건 노트 조사 기록 한 줄 예시, `_index`·`_id` 기록.
+
+## 기존 3장 대비 변경
+
+1. **장 도입·정리** — 1·2장과 같은 형식. 조사 질문 "원하는 기록을 어떻게 찾는가"를 검색 대상·시간 범위·검색 조건 세 가지와 0건의 의미로 풀었다.
+2. **3.2 인덱스 패턴 표** — wazuh-alerts-*(경보, 수준 3 이상)와 wazuh-archives-*(전체 기록, kt66이 활성화)를 구분한다.
+3. **3.4 DQL 연산자 표** — AND·OR·NOT·괄호·`필드: *`·범위, 계산 순서(NOT→AND→OR). OpenSearch Dashboards 2.16 문서와 대조했다.
+4. **보이지 않는 것** — 필드 조건은 그 필드가 없는 기록(예: message repeated 요약 줄)을 뺀다.
+5. **3.6 경보 건수 ≠ 시도 횟수** — 한 접속의 Invalid user·Failed password·연결 종료 줄이 각각 5710이 된다. 2026-11-02 실제 kt66 경보(8장 증거 `editorial/evidence/chapter08/2026-11-02/authentication-alerts.json`)로 확인한 동작이다.
+6. **3.7 직접 남긴 기록 찾기 (신규)** — 2.2의 book02_probe를 data.srcuser, full_log, 같은 출발지의 실패·성공(5710·5760·5715) 순으로 찾는다. 결과가 없을 때 아카이브로 넘어가는 판단을 현장 노트로 넣었다.
+7. **3.8** — 아카이브 확인 단계를 추가하고 "검색 상태 원상복구"로 이름을 맞췄다. 절 번호 3.8·3.9는 기존과 같다.
 
 ## 새 조판 규칙 (`tools/build_chapter01.py` 확장, 기존 장과 호환)
 
@@ -59,6 +72,9 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-appendix-a.j
 python3 tools/diagrams_chapter02_rev01.py
 python3 tools/write_chapter02_rev01.py
 python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter02.json --output manuscript/REV01/volume01-chapter02.docx
+python3 tools/diagrams_chapter03_rev01.py
+python3 tools/write_chapter03_rev01.py
+python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter03.json --output manuscript/REV01/volume01-chapter03.docx
 ```
 
 `tools/check_chapter01.py`는 "JSON 1쪽 = 렌더 1쪽"을 검사하므로 흐름 조판인 REV01에는 맞지 않는다. REV01은 명령↔예제 파일 일치, `bash -n`, 줄 길이 60자 이하, 판형·글꼴·색을 따로 확인했다.
@@ -73,7 +89,8 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter02.js
 | 5장 | "1.12의 일괄 설치", "1.12의 Ubuntu" | 1.9 (VM 생성은 부록 A.3) |
 | 6장 | "1.12" 4곳 (도구 준비·공격자 VM hosts) | 1.9 |
 | 7장 | "1.12" 2곳 (도구 설치) | 1.9 |
-| 3장 | `examples/chapter02/case-ssh.json`, "2장에서 제공한 SSH 실패 기록" | `examples/rev01/chapter02/`. 2.2에서 독자가 남긴 book02_probe 기록 검색을 함께 넣는다 |
+| 3장 | `examples/chapter02/case-ssh.json`, "2장에서 제공한 SSH 실패 기록" | REV01 3장에서 반영함 |
+| 4장 | `examples/chapter02/case-ssh.json` | `examples/rev01/chapter02/case-ssh.json` |
 
 ## 미검증·작가 작업
 
@@ -81,4 +98,6 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter02.js
 - 부록 A의 캡처 자리 2곳(VMware 설정 요약, Ubuntu 설치 첫 화면)은 저자가 직접 촬영해 넣는다.
 - 2장 2.2(C02-01~05)는 새 VM에서 실행 검증하지 않았다. 출발지 10.20.30.254는 기존 kt66 기록(book03_probe)과 kt66 소스(ext망 게이트웨이 .254, bastion 10.20.30.201)로 대조한 예상 결과이다. 실행 후 화면을 촬영해 넣는다.
 - 2장 C02-09(없는 경로)의 응답 코드는 확인하지 않았다. 본문은 "먼저 예측" 후 표에서 읽도록 썼다.
+- 3장 3.7(Q03-04~06)은 2.2를 실행한 VM에서 검색 검증하지 않았다. 결과 설명은 5710 동작(8장 증거)과 2.2의 예상 출발지에 근거한다. Connection closed by invalid user 줄의 필드 추출 여부는 확인하지 않아 "일 수 있다"로 썼다. 실행 후 화면을 촬영해 넣는다.
+- 3장 화면 3-1~3-8은 기존 kt66(에이전트 ID 010 시기)의 화면이다. 현재 환경의 bastion 에이전트 ID는 001이다.
 - 렌더 쪽수는 LibreOffice 대체 글꼴 기준이다. 부크크 글꼴이 있는 Word에서 쪽 나눔을 다시 확인한다.

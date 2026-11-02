@@ -24,7 +24,7 @@
     "purpose": "C02-01에서 남긴 로그인 실패 기록을 찾는다.",
     "text": "grep \"book02_probe\" /var/log/auth.log",
     "syntax": "grep은 파일에서 지정한 문자열이 들어간 줄을 출력한다. 큰따옴표 안의 book02_probe가 찾을 문자열이고, 마지막 인자가 읽을 파일이다.",
-    "result": "Invalid user book02_probe from … 줄과 Failed password for invalid user book02_probe from … 줄이 나온다. 아무것도 나오지 않으면 C02-01의 계정 이름과 실행 여부를 확인한다."
+    "result": "Invalid user book02_probe from … 줄과 Failed password for invalid user book02_probe from … 줄이 나온다. 연결을 끊은 줄(Connection closed by invalid user … 등)도 함께 나올 수 있다. 아무것도 나오지 않으면 C02-01의 계정 이름과 실행 여부를 확인한다."
   },
   {
     "type": "command",

@@ -1,0 +1,56 @@
+[
+  {
+    "type": "query",
+    "id": "Q03-01",
+    "where": "Windows · Discover 검색창",
+    "purpose": "kt66 VM 자신의 에이전트가 보낸 경보만 고른다.",
+    "text": "agent.name: \"kt66-host\"",
+    "syntax": "기본 구문은 필드명: 값이다. 콜론(:) 앞이 필드, 뒤가 찾을 값이다. 큰따옴표로 감싼 값은 하나의 구문으로 찾는다. kt66-host는 1.7에서 확인한 kt66 VM의 수집기 이름이다. 입력 후 Enter를 누른다.",
+    "result": "결과에 kt66-host의 경보만 나온다. 결과 위의 hits는 세 조건을 만족한 기록의 건수이다."
+  },
+  {
+    "type": "query",
+    "id": "Q03-02",
+    "where": "Windows · Discover 검색창",
+    "purpose": "bastion의 경보 중 없는 계정 로그인 시도(5710)만 고른다.",
+    "text": "agent.name: \"bastion\" AND rule.id: \"5710\"",
+    "syntax": "AND는 양쪽 조건을 모두 만족하는 기록을 찾는다. 규칙 번호도 문자열로 저장되므로 큰따옴표로 감싼다.",
+    "result": "사례의 5분 구간에서는 두 건이 나왔다."
+  },
+  {
+    "type": "query",
+    "id": "Q03-03",
+    "where": "Windows · Discover 검색창",
+    "purpose": "같은 출발지의 기록만 남긴다.",
+    "text": "agent.name: \"bastion\" AND rule.id: \"5710\"\nAND data.srcip: \"10.20.30.254\"",
+    "syntax": "data.srcip는 디코더가 원문에서 꺼낸 접속 출발지이다. 앞의 검색식 뒤에 줄을 바꿔 조건을 더한다. 두 줄을 함께 입력한다.",
+    "result": "사례에서는 두 건이 모두 남았다. 건수가 줄면 빠진 기록에 data.srcip가 있는지 확인한다(3.4)."
+  },
+  {
+    "type": "query",
+    "id": "Q03-04",
+    "where": "Windows · Discover 검색창",
+    "purpose": "디코더가 계정 이름을 book02_probe로 꺼낸 경보를 찾는다.",
+    "text": "data.srcuser: \"book02_probe\"",
+    "syntax": "data.srcuser는 없는 계정으로 시도한 경우 디코더가 원문에서 꺼낸 계정 이름이다(2.3).",
+    "result": "agent.name은 bastion, rule.id는 5710, data.srcip는 10.20.30.254인 경보가 나온다. 각 행을 펼쳐 full_log가 어느 줄인지 확인한다."
+  },
+  {
+    "type": "query",
+    "id": "Q03-05",
+    "where": "Windows · Discover 검색창",
+    "purpose": "계정 이름이 원문에 들어간 기록을 필드 추출과 관계없이 찾는다.",
+    "text": "agent.name: \"bastion\" AND full_log: \"book02_probe\"",
+    "syntax": "full_log는 원문 전체이다. 원문 안의 단어를 찾으므로 data.srcuser가 없는 기록도 고른다.",
+    "result": "건수를 Q03-04와 비교한다. 늘어난 행은 계정 이름이 data.srcuser로 추출되지 않은 기록이다. Ctrl+C로 끊은 연결의 기록(Connection closed by invalid user …)이 이런 경우일 수 있다."
+  },
+  {
+    "type": "query",
+    "id": "Q03-06",
+    "where": "Windows · Discover 검색창",
+    "purpose": "같은 출발지의 인증 실패와 성공을 함께 확인한다.",
+    "text": "agent.name: \"bastion\" AND\ndata.srcip: \"10.20.30.254\" AND\n(rule.id: \"5710\" OR rule.id: \"5760\" OR rule.id: \"5715\")",
+    "syntax": "괄호 안의 OR로 세 규칙 중 하나에 해당하는 기록을 고르고, 바깥의 AND로 에이전트와 출발지를 제한한다. 5760은 있는 계정의 실패, 5715는 로그인 성공이다(2.5).",
+    "result": "kt66 VM에서 다른 SSH 접속을 하지 않았다면 5710만 나오고 5715는 없다. 5715가 있으면 그 행의 시각과 계정을 사건 노트의 자신의 행동과 대조한다."
+  }
+]

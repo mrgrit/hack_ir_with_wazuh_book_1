@@ -1,0 +1,1 @@
+agent.name: "bastion" AND full_log: "book02_probe"
