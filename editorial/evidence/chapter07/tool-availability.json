@@ -1,0 +1,12 @@
+{
+  "host": "192.168.0.107",
+  "container": "kt66-siem",
+  "check": "command -v less",
+  "stdout": "",
+  "exit": 1,
+  "stderr": "",
+  "mode": "read only; no attack or DQL",
+  "date": "2026-11-02",
+  "interpretation": "less was not found in the Manager container; reader procedure uses grep instead.",
+  "scope": "Read-only executable lookup only. No attack, HTTP request, DQL, or rule edit."
+}

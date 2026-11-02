@@ -1,66 +1,110 @@
 {
   "chapter": 7,
   "title": "웹 서버 침투와 실행 흔적",
-  "reviewed_at": "2026-11-01T14:02:09.919417+00:00",
-  "scope": "Module01 examples 07–12",
+  "reviewed_at": "2026-11-02",
+  "scope": "Module 01 실습 07–12를 새로 집필. 8장 및 REV01 제외.",
   "deliverable": "manuscript/volume01-chapter07.docx",
-  "pages": 40,
-  "user_direction": "공격 절차와 Wazuh 데이터 생성 방법을 반드시 포함한다. 실제 실행이 제한되면 슬라이드의 절차·결과로 교재를 완성하며 공격 과정 자체를 생략하지 않는다.",
+  "pages": 58,
+  "user_direction": "원본 슬라이드 발췌와 기존 설정·공식 문서 대조로 공격–방어 절차를 완성한다. 공격 실행·신규 UI 촬영·DQL 실서버 검증을 하지 않는다.",
   "counts": {
-    "slide_source_images": 6,
-    "screen_regions": 15,
-    "concept_diagrams": 7,
+    "slide_source_images": 9,
+    "screen_regions": 19,
+    "concept_diagrams": 8,
     "reused_character_illustrations": 2,
-    "shell_commands": 16,
-    "DQL": 7,
-    "browser_inputs": 9,
-    "additional_query_files": 1
+    "shell_commands": 30,
+    "DQL": 11,
+    "browser_and_hosts_inputs": 12,
+    "PHP_file_inputs": 1
   },
   "sources": {
-    "pptx_file": "Module01_Wazuh_위협탐지_DQL_예시집.pptx",
+    "pptx_url": "https://docs.google.com/presentation/d/1o0H_2DDHBp8p2HvlSnEPbx6-jdURYzew/edit",
+    "pptx_file": "Module01_Wazuh_위협탐지_DQL.pptx",
     "pptx_sha256": "b3550f87c2342a43e72ee5ac74c9a884de6aff38631b8c77a2364d0cf5d47099",
-    "pptx_range": [
-      219,
-      277
-    ],
-    "pdf_file": "Module01_Wazuh_위협탐지_DQL_예시집.pdf",
-    "pdf_sha256": "94aa42a029e0e1d85532ea0a33345558ba393e750490ff3f2be30f1410751b44",
-    "pdf_range": [
+    "presentation_slides": [
       116,
       174
     ],
+    "slide_numbering": "presentation order, not XML part number",
     "screen_provenance": "assets/screens/chapter07/provenance.json",
-    "visible_event_date": "2026-10-31",
-    "capture_method": "Provided slide images; original capture process not independently verified."
+    "coverage": "editorial/chapter07-source-coverage.json",
+    "event_date_visible_in_screens": "2026-10-31",
+    "capture_method": "제공된 슬라이드의 기존 이미지. 최초 촬영 방식은 독립 검증하지 않음."
   },
-  "verified": {
-    "local_document": "40 rendered pages; automated template/geometry/bounds/query parity/shell syntax checks passed; all page contact sheets visually reviewed.",
-    "screen_integrity": "All 15 regions pixel-identical to crops of embedded PPTX images. Unmodified originals retained.",
-    "concept_diagrams": "All 7 rendered and visually inspected for clipping, overlap, labels and direction.",
-    "print_readability": "Final 127 mm widths inspected on pages 4,7,10,13,16,19. Smallest raw-log text approximately 9 pt equivalent; fields and values readable.",
-    "facts": "Compared supplied slides, already-collected Wazuh 4.10 web rules and DVWA Low handler, official Apache/Red Hat/OWASP/Wazuh sources."
+  "previous_work_reviewed": {
+    "chapters": "01–06의 문체·명령 소개·브라우저 우선 흐름·원상복구·B5 템플릿과 삽화 배치를 비교함. 내용과 산출물은 수정하지 않음.",
+    "prior_chapter07_review": "Git d88c79784819f51ea09b84b438041794a43d884c:editorial/chapter07-review.json에 이전 40쪽 원고와 과거 작업 이력 보존. 이번 집필의 수행 이력과 구분함.",
+    "later_modules": [
+      "Module 02 집계 기초",
+      "Module 03 90일 자료 기반 집계·침해대응"
+    ],
+    "later_modules_use": "후속 시리즈 범위만 참고. 이 장의 공격·결과 근거로 사용하지 않음."
+  },
+  "verified_this_session": {
+    "static_content": "모든 실습 07–12의 원본 입력 변형·상태·규칙을 대응표로 대조. Wazuh 4.10 규칙, DVWA Low 처리기, FIM·라우팅 자료와 공식 문서 확인.",
+    "copy_files": "30개 명령·11개 DQL은 본문과 복사용 파일 일치. 12개 브라우저/hosts 입력과 PHP 파일 별도 제공.",
+    "shell_syntax": "Git Bash bash -n만 실행. 예제 명령의 동작을 실행하지 않음.",
+    "screen_integrity": "19개 화면 모두 원본 내장 이미지 crop과 픽셀 일치. 원본 9개 보존.",
+    "render": "Word COM 임시 PDF와 pypdfium2 전 페이지 PNG로 모든 지면을 확인. 최종 변경된 47·55·56쪽을 재확인했으며 나머지 55쪽은 직전 검토 렌더와 픽셀 동일.",
+    "fonts": "실제 부크크 명조 Light·부크크 고딕 Light·Consolas 적용 확인.",
+    "template": "188×263mm B5 원본의 구역·여백·gutter·테마 보존. 본문 약 127×192mm.",
+    "references": "9개 전체 URL이 PDF 추출문과 일치. 주소 중간에 새 하이픈을 넣지 않음.",
+    "readonly_VM_use": "글꼴 파일 위치 검색과 kt66-siem의 less 존재 여부만 읽기 전용 SSH로 확인. Docker 권한 거부 후 sudo로 존재 여부를 재조회함. less 없음(exit 1)을 확인해 본문 규칙 조회를 grep으로 변경. 공격·웹 입력·예제 로그 생성·설정 변경·DQL 실행 없음."
   },
   "not_verified": [
-    "No new chapter07 result captures.",
-    "DQL Q07-01–Q07-07 not executed. No hit count is promised for the rewritten queries.",
-    "No attack success, remote code execution, or 5xx surge confirmed by this chapter.",
-    "Original slide record dataset not imported or replayed."
+    "수정·신규 명령의 실제 동작과 설치 상태",
+    "새 DQL의 실서버 검색 결과·건수",
+    "슬라이드 데이터의 현재 VM 존재 여부",
+    "원본 자료의 원격 명령 실행·DB 노출·브라우저 XSS 성공"
   ],
-  "corrections": [
-    "File creation in web container is not an HTTP upload or proof of PHP execution; web FIM and DVWA storage are separate.",
-    "JNDI string and 403 establish a request/response observation, not Java execution. WAF cause needs a separate matching record.",
-    "Shellshock 31168/31169 depend on 31108 (simple 2xx/3xx requests); names/200 do not prove Bash execution.",
-    "DVWA Low handler requires POST Submit. A GET URL and a submitted POST form are not equivalent; POST values may be absent from access URL.",
-    "31106 identifies suspicious URL plus 200, not independently confirmed exploitation.",
-    "31152/31153/31154 are repeated SQLi/common web attack/XSS rules. 501/500/503 repeat rules are 31161/31162/31163.",
-    "Slide 275 shows SQLi rule31103 plus status500, not confirmed repeated500. Calculation table explicitly illustrative, not measured."
-  ],
-  "earlier_preparation": "Before the user changed scope, author inspected live forms and source files and ran a plain-text/fixed-output marker upload probe. Only plain text was stored and then removed after content check; PHP upload was rejected. These probes and their screenshots/results are not used as textbook evidence. Subsequent work used slides and local documentation only.",
-  "evidence_files": {
-    "web-rules.txt": "Previously collected installed Wazuh 4.10.0 rules, not a new runtime test.",
-    "web-fim.txt": "Previously collected web FIM config excerpt.",
-    "dvwa-exec.txt": "Previously collected installed DVWA Low command handler."
+  "renderer_note": "번들 render_docx.py 시도는 Windows soffice.exe 부재로 실패. 설치된 Microsoft Word의 읽기 전용 열기와 ExportAsFixedFormat으로 검수 렌더를 생성. 임시 PDF·PNG는 build에만 보관하고 배포하지 않음.",
+  "design": {
+    "concepts": "기존 픽셀 삽화 2개와 제한색 도식 7개 재사용, 수집 경로 도식 1개 추가. UI는 코드로 생성하지 않음.",
+    "style_reference": "https://m.blog.naver.com/studygir/220961448822",
+    "style_reference_access": "해당 페이지는 도구에서 열리지 않아 직접 새로 확인하지 못함. 사용자가 명시한 픽셀·제한색·점무늬 지침과 기존 승인 삽화 사용.",
+    "illustrations_record": "editorial/chapter07-illustrations.json"
   },
-  "unchanged": "Existing chapters01–06 and lecture/kt66 repositories were not edited.",
-  "revision": "Added preparation, file creation, browser attack input for all six cases, optional curl equivalents, pre/post checks and cleanup. New procedure not live-validated; existing slide screenshots retained. Vim confirmed in kt66-web Dockerfile."
+  "evidence_status": {
+    "web-rules.txt": "기존에 수집된 규칙 파일. 신규 실행 검증 아님.",
+    "web-fim.txt": "기존 FIM 설정 자료. 신규 실행 검증 아님.",
+    "dvwa-exec.txt": "기존 DVWA 처리기 자료. 신규 실행 검증 아님.",
+    "apache-routing-reference.txt": "작업 시작 전에 있던 로컬 설정 기록에서 관련 vhost만 발췌. 원본 파일은 보존.",
+    "tool-availability.json": "이번 집필에서 수행한 도구 존재 여부 조회. 공격 절차의 실행 검증과 구분."
+  },
+  "corrections": [
+    {
+      "exercise": "07",
+      "correction": "직접 생성은 HTTP 업로드가 아니다. 기본 DocumentRoot와 생성 위치가 다르므로 404를 PHP 미설치만으로 설명하지 않는다. 셸 변수 치환을 피하도록 Vim에 PHP 원문을 입력한다."
+    },
+    {
+      "exercise": "08",
+      "correction": "첫 명령의 헤더·URL 목적지 포트를 일치시켰다. 변형의 닫는 중괄호와 LDAP 포트를 보완했다. 기존 302는 수정 구문의 실행 결과가 아니다. 고정된 2.17 이상을 모든 환경의 안전 기준으로 삼지 않는다."
+    },
+    {
+      "exercise": "09",
+      "correction": "31168/31169는 31108의 2xx/3xx 요청 조건에 연결된다. 규칙 이름이나 200만으로 Bash 실행 성공을 판정하지 않는다."
+    },
+    {
+      "exercise": "10",
+      "correction": "DVWA 처리기는 POST Submit 조건으로 진입한다. 단순 GET과 인증 없는 POST의 상태를 로그인한 폼 실행과 같게 해석하지 않는다."
+    },
+    {
+      "exercise": "11",
+      "correction": "DetectionOnly와 HTTP 200은 취약점 악용 성공의 증거가 아니다. UNION 입력의 500을 성공으로 바꾸지 않고 실제 관찰값대로 설명한다."
+    },
+    {
+      "exercise": "12",
+      "correction": "31152/31153/31154는 반복 SQLi/웹 공격/XSS이다. 501/500/503 반복은 31161/31162/31163이다. 원본 표 한 건을 20회 집계로 해석하지 않으며 오류율 예시는 실측값과 구분한다."
+    }
+  ],
+  "layout_check": "editorial/chapter07-layout-check.json",
+  "unchanged": [
+    "manuscript/volume01-chapter01–06.*",
+    "REV01",
+    "강의·kt66 저장소",
+    "작업 전부터 존재한 editorial/evidence/chapter07/2026-11-02/"
+  ],
+  "artifact_sha256": {
+    "docx": "43e46e3482d0c2d75ebd022fe23eb5d167093ad81022955aa60b002efcf949b6",
+    "manuscript_json": "be1aff3836017866c1e373778b507b8b419525bb1c3338128bfd9698de4f57e5"
+  }
 }

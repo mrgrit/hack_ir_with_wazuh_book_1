@@ -1,2 +1,0 @@
-agent.name: "web"
-AND data.url: *book07-shell.php*

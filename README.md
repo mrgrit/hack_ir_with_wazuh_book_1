@@ -10,8 +10,8 @@
 - **[4장 초안 DOCX](manuscript/volume01-chapter04.docx)** — 로그 수집과 탐지 규칙, 31쪽
 - **[5장 초안 DOCX](manuscript/volume01-chapter05.docx)** — 웹 공격의 시작과 입력값 검증, 55쪽
 - **[6장 초안 DOCX](manuscript/volume01-chapter06.docx)** — 웹 탐색과 인증 공격, 45쪽
-- **[7장 초안 DOCX](manuscript/volume01-chapter07.docx)** — 웹 서버 침투와 실행 흔적, 40쪽
-- [7장 복사용 검색식·조사 양식](examples/chapter07/)
+- **[7장 초안 DOCX](manuscript/volume01-chapter07.docx)** — 웹 서버 침투와 실행 흔적, 58쪽
+- [7장 복사용 입력·명령·검색식·조사 양식](examples/chapter07/)
 - [6장 복사용 입력·명령·검색식·실제 로그](examples/chapter06/)
 - [5장 복사용 명령·검색식·실제 로그](examples/chapter05/)
 - [4장 명령·검색식·규칙 파일](examples/chapter04/)
@@ -32,7 +32,9 @@
 
 6장의 DQL 13개를 실제 Discover에서 검증했고, 수집된 access 기록 63개를 Apache 원문과 대조했습니다. 일반 로그인은 성공·실패 모두 302, Brute Force는 모두 200이므로 이동 주소·본문과 함께 읽도록 설명했습니다. WAF 차단 근거, 로그·코드 위치, 명령 옵션·기호, 문제 해결과 원상복구 절차를 포함했습니다. 새 VM 설치와 패키지 재설치는 수행하지 않았습니다.
 
-7장은 Module 01 실습 07~12를 다룹니다. **공격 준비 → 파일 생성·브라우저 공격 입력 → 응답 → Wazuh 조회 → 원상복구** 순서로 보완했습니다. **40쪽, 슬라이드 화면 영역 15개, 도식 7개, 삽화 2개, 명령 16개, DQL 7개와 별도 파일 요청 검색식, 브라우저 입력 9개**를 제공합니다. curl은 대체 방법으로 설명합니다. 결과 화면은 제공된 PPTX의 기존 기록이며, 추가한 절차와 검색식은 새로 실행 검증한 것으로 주장하지 않습니다.
+7장은 Module 01 실습 07~12를 바탕으로 2026-11-02에 다시 집필했습니다. 공격 준비와 입력, HTTP 응답, Wazuh 수집·검색, 조사·대응, 원상복구를 연결합니다. **58쪽, 슬라이드 화면 영역 19개, 도식 8개, 삽화 2개, 명령 30개, DQL 11개, 브라우저·hosts 입력 12개와 PHP 파일 예제 1개**를 제공합니다. 브라우저 입력을 먼저 설명하고 헤더·POST·반복문의 curl 예제는 7.9에 모았습니다.
+
+7장의 결과 화면은 제공된 PPTX에 수록된 기존 기록입니다. 이번 집필에서는 **공격 실행·신규 UI 촬영·DQL 실서버 검증을 하지 않았습니다.** 원본 공격 입력의 변형과 응답을 빠짐없이 대조하고, 웹셸 파일 생성과 업로드, 탐지 규칙과 실제 실행 성공을 구분했습니다. 수정 구문은 정적으로 검사했으며 모든 지면·전체 참고 URL·화면 원본 픽셀·복사용 파일을 확인했습니다. 초안과 검토 기록은 일반 원고 경로에 저장했고 REV01은 수정하지 않았습니다.
 
 ## 확인한 범위
 
@@ -127,13 +129,16 @@ DOCX를 직접 편집할 수 있습니다. 조판기는 기본적으로 `build/`
 7장 재생성:
 
 ```bash
-.venv/bin/python tools/write_chapter07.py
-.venv/bin/python tools/diagrams_chapter07.py
-.venv/bin/python tools/build_chapter01.py --source manuscript/volume01-chapter07.json --output build/volume01-chapter07.docx
+python -m pip install -r tools/requirements-chapter07.txt
+python tools/write_chapter07.py
+python tools/build_chapter07.py --output build/volume01-chapter07.docx
 ```
 
-- [7장 검토 기록](editorial/chapter07-review.json) · [슬라이드 화면 출처](assets/screens/chapter07/provenance.json)
-- 화면 원본은 `assets/screens/chapter07/source/`에 보존했습니다. `tools/extract_chapter07.py`에 제공된 PPTX 경로를 인자로 주면 같은 영역을 다시 추출합니다. 실험·촬영 도구는 없습니다.
+- [7장 검토 기록](editorial/chapter07-review.json) · [원본 슬라이드와 공격·방어 대응표](editorial/chapter07-source-coverage.json)
+- [7장 정적·조판 검사](editorial/chapter07-layout-check.json) · [슬라이드 화면 출처](assets/screens/chapter07/provenance.json)
+- 화면 원본 9개는 `assets/screens/chapter07/source/`에 보존했습니다. `python tools/extract_chapter07.py "원본.pptx"`로 19개 영역을 추출합니다. 출처의 슬라이드 번호는 실제 발표 순서이며 내부 XML 파일 번호와 구분합니다.
+- 그림은 저장소의 PNG를 사용합니다. 새 수집 경로 도식만 다시 만들 때는 `python tools/chapter07_collection.py --font "부크크고딕_파일.ttf"`를 사용합니다.
+- `tools/check_chapter07.py DOCX경로 임시PDF경로 --bash Bash실행파일경로`로 템플릿·글꼴·참고 URL·화면 픽셀·복사용 명령·셸 구문을 검사합니다. `bash -n` 구문 분석만 수행하며 예제 명령과 DQL은 실행하지 않습니다. Word로 렌더한 임시 PDF에서 전체 지면을 별도로 확인합니다.
 - [기존 삽화 재사용 기록](editorial/chapter07-illustrations.json)
 
 PDF는 배포하지 않습니다. 임시 PDF·페이지 이미지는 DOCX 배치 검사용으로만 사용합니다. Consolas가 없는 환경에서는 대체 글꼴로 보일 수 있으므로 Word에서 최종 인쇄 크기를 재확인합니다.

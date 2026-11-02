@@ -1,1 +1,1 @@
-cat /var/www/html/uploads/book07-shell.php
+ls -ld /var/www/html/uploads

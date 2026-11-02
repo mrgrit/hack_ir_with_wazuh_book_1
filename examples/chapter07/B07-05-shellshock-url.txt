@@ -1,1 +1,0 @@
-http://juice.kt66.lab/cgi-bin/test.cgi

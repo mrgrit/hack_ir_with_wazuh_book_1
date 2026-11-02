@@ -1,2 +1,3 @@
-agent.name: "web"
-AND rule.id: (31161 OR 31162 OR 31163)
+agent.name: "web" AND data.url:
+(*%3Bid* OR *;id* OR *%7Ccat* OR *cat%20*
+ OR *whoami* OR *%24%28*)

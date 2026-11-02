@@ -1,2 +1,3 @@
 agent.name: "web"
-AND data.url: *vulnerabilities/exec/*
+AND (full_log: *jndi* OR full_log: *lower*
+     OR data.url: *%24%7B*)

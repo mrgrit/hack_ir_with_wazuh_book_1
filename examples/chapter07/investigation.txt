@@ -1,12 +1,14 @@
-사례·화면 번호:
-기록 시각·시간대:
-agent.name·agent.ip:
-data.srcip:
-data.protocol·data.url·data.id:
-syscheck.path:
-rule.id·rule.description:
-full_log·location(보이는 범위):
-화면에서 확인한 사실:
-추가로 필요한 자료와 이유:
-선택 조회의 인덱스·기간·검색식:
-검색 조건 복구:
+사례·시각·시간대:
+실행 호스트 또는 컨테이너:
+원본 슬라이드 기록 또는 자신의 기록:
+사이트·URL·메서드·입력 위치:
+정상 입력과 공격 입력:
+HTTP 상태·Location·본문:
+agent.name·data.srcip·location:
+인덱스·문서 ID·검색 기간·DQL:
+rule.id·WAF 규칙·원문 대응:
+파일·프로세스·통신・DB 증거:
+요청 수·5xx 수·검색 문서 수:
+확인한 사실・판단・추가 증거:
+대응 대상·조치·정상화 결과:
+파일・브라우저・hosts 원상복구:

@@ -1,1 +1,1 @@
-ls -ld /var/www/html/uploads
+tail -n 20 /var/log/apache2/dvwa_access.log

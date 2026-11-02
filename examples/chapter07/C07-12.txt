@@ -1,1 +1,1 @@
-exit
+cat /var/www/html/uploads/book07-shell.php

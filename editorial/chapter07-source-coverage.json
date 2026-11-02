@@ -1,0 +1,215 @@
+{
+  "review_date": "2026-11-02",
+  "source_url": "https://docs.google.com/presentation/d/1o0H_2DDHBp8p2HvlSnEPbx6-jdURYzew/edit",
+  "source_sha256": "b3550f87c2342a43e72ee5ac74c9a884de6aff38631b8c77a2364d0cf5d47099",
+  "slide_numbering": "presentation.xml의 순서, 1부터 시작. XML part 번호와 다름.",
+  "range": [
+    116,
+    174
+  ],
+  "common_flow": [
+    "선행 조건·정상 입력",
+    "공격 입력·구문 설명",
+    "HTTP 상태·이동 주소·본문",
+    "로그 경로·수집 조건",
+    "DQL·필드·원문 해석",
+    "영향 조사·대응",
+    "원상복구·실패 시 확인"
+  ],
+  "shared_sections": {
+    "7.1": "주소·로그인·Low·Network·Wazuh·수집 경로",
+    "7.8": "컨테이너별 로그·라우팅·처리기·규칙 원본 조회",
+    "7.9": "curl 선택 실습과 모든 원본 헤더·POST·반복 변형",
+    "7.10": "비교·조사 기록·원상복구·확인 문제"
+  },
+  "cases": [
+    {
+      "exercise": "07",
+      "slides": [
+        116,
+        126
+      ],
+      "section": "7.2",
+      "title": "웹셸 파일과 요청",
+      "attack_inputs": [
+        "관리자 셸에서 PHP 파일 생성",
+        "GET /uploads/book07-shell.php?cmd=id"
+      ],
+      "copy_files": [
+        "C07-04–C07-13",
+        "F07-webshell.txt",
+        "B07-02-webshell.txt",
+        "Q07-01–Q07-02"
+      ],
+      "existing_evidence": [
+        "슬라이드 119–120: 직접 파일 생성, 요청 404와 Not Found",
+        "슬라이드 124: FIM 554와 /var/www/html/uploads/shell.php"
+      ],
+      "defense": [
+        "FIM 경로·생성 시각과 접속 기록 연결",
+        "작성 주체·파일 내용·URL 매핑·실행 기록 조사",
+        "증거 보존, 접근 제한, 업로드 파일 실행 방지"
+      ],
+      "restoration": "내용 확인 후 rm -i, 삭제 확인, 이번에 만든 빈 폴더만 rmdir, 삭제 경보 조회",
+      "correction": "직접 생성은 HTTP 업로드가 아니다. 기본 DocumentRoot와 생성 위치가 다르므로 404를 PHP 미설치만으로 설명하지 않는다. 셸 변수 치환을 피하도록 Vim에 PHP 원문을 입력한다."
+    },
+    {
+      "exercise": "08",
+      "slides": [
+        127,
+        137
+      ],
+      "section": "7.3, 7.9",
+      "title": "Log4Shell",
+      "attack_inputs": [
+        "User-Agent와 q의 LDAP 조회 문자열",
+        "X-Api-Version의 lower 변형",
+        "User-Agent의 RMI 조회 문자열"
+      ],
+      "copy_files": [
+        "B07-03-jndi-agent.txt",
+        "B07-04-jndi-url.txt",
+        "C07-25–C07-26",
+        "Q07-03–Q07-04"
+      ],
+      "existing_evidence": [
+        "슬라이드 131: 첫 요청 403, 변형 요청 302",
+        "슬라이드 135: 31101, URL·User-Agent의 조회 문자열"
+      ],
+      "defense": [
+        "입력 위치와 인코딩 대응",
+        "access·WAF·아카이브 수집 차이",
+        "Java·Log4j 버전과 로그 처리 경로, 외부 통신·하위 프로세스 조사",
+        "지원 버전 수정과 불필요한 외부 조회 제한"
+      ],
+      "restoration": "User-Agent 기본값 복원과 정상 요청 확인; curl 헤더는 요청별 적용",
+      "correction": "첫 명령의 헤더·URL 목적지 포트를 일치시켰다. 변형의 닫는 중괄호와 LDAP 포트를 보완했다. 기존 302는 수정 구문의 실행 결과가 아니다. 고정된 2.17 이상을 모든 환경의 안전 기준으로 삼지 않는다."
+    },
+    {
+      "exercise": "09",
+      "slides": [
+        138,
+        148
+      ],
+      "section": "7.4, 7.9",
+      "title": "Shellshock",
+      "attack_inputs": [
+        "Juice /cgi-bin/test.cgi, User-Agent의 id 구문",
+        "DVWA /cgi-bin/status, Referer의 cat /etc/passwd 구문"
+      ],
+      "copy_files": [
+        "B07-05-shellshock-agent.txt",
+        "B07-06-shellshock-url.txt",
+        "C07-27–C07-28",
+        "Q07-05"
+      ],
+      "existing_evidence": [
+        "슬라이드 142: 두 요청의 200·403",
+        "슬라이드 146: 31168·31166과 헤더 원문"
+      ],
+      "defense": [
+        "요청 헤더·CGI 환경변수·Bash 호출 경로 조사",
+        "31166–31169의 상위 조건 대조",
+        "CGI 최소화와 Bash 패치, 실행·통신 흔적 보존"
+      ],
+      "restoration": "User-Agent 기본값 복원, 정상 헤더·응답 확인",
+      "correction": "31168/31169는 31108의 2xx/3xx 요청 조건에 연결된다. 규칙 이름이나 200만으로 Bash 실행 성공을 판정하지 않는다."
+    },
+    {
+      "exercise": "10",
+      "slides": [
+        149,
+        158
+      ],
+      "section": "7.5, 7.8, 7.9",
+      "title": "OS 명령 삽입",
+      "attack_inputs": [
+        "로그인한 DVWA Low 폼의 ip=127.0.0.1;id와 Submit",
+        "Juice /rest/track-order/1%3Bid",
+        "DVWA GET의 인코딩된 파이프와 파일 읽기",
+        "인증 쿠키 없는 curl POST"
+      ],
+      "copy_files": [
+        "B07-07-command-form.txt",
+        "B07-08-command-juice.txt",
+        "B07-09-command-dvwa.txt",
+        "C07-19–C07-21",
+        "C07-29",
+        "Q07-06–Q07-08"
+      ],
+      "existing_evidence": [
+        "슬라이드 152: Juice GET 200, DVWA GET 403, POST 302",
+        "슬라이드 156: 31104·403·DVWA GET URL"
+      ],
+      "defense": [
+        "GET URL와 POST Form Data 구분",
+        "DVWA low.php의 Submit·ip·shell_exec 대조",
+        "access와 WAF 본문 저장·수집 확인",
+        "셸 호출 제거, 입력 허용 목록, 최소 권한"
+      ],
+      "restoration": "정상 IP 재입력, DVWA 단계·브라우저 설정 복원과 로그아웃",
+      "correction": "DVWA 처리기는 POST Submit 조건으로 진입한다. 단순 GET과 인증 없는 POST의 상태를 로그인한 폼 실행과 같게 해석하지 않는다."
+    },
+    {
+      "exercise": "11",
+      "slides": [
+        159,
+        166
+      ],
+      "section": "7.6",
+      "title": "의심 요청의 200 응답",
+      "attack_inputs": [
+        "Juice의 XSS 형태 q 입력",
+        "원본 UNION SELECT 요청"
+      ],
+      "copy_files": [
+        "B07-10-xss.txt",
+        "B07-11-union.txt",
+        "Q07-09"
+      ],
+      "existing_evidence": [
+        "슬라이드 160: XSS 형태 요청 200, UNION 요청 500",
+        "슬라이드 164: 31106·200·XSS URL"
+      ],
+      "defense": [
+        "상태·응답 HTML·브라우저 실행·DB 기록 구분",
+        "31106의 부모 조건과 data.id 확인",
+        "영향 기능 우선 조사, 출력 처리·입력 처리 보완"
+      ],
+      "restoration": "공격 쿼리를 제거하고 정상 페이지·상품 검색 응답 확인",
+      "correction": "DetectionOnly와 HTTP 200은 취약점 악용 성공의 증거가 아니다. UNION 입력의 500을 성공으로 바꾸지 않고 실제 관찰값대로 설명한다."
+    },
+    {
+      "exercise": "12",
+      "slides": [
+        167,
+        174
+      ],
+      "section": "7.7, 7.9",
+      "title": "반복 서버 오류",
+      "attack_inputs": [
+        "q=%27 뒤 숫자 1–20을 수동으로 변경",
+        "원본 for 반복문, 최대 20회와 요청별 시간 제한"
+      ],
+      "copy_files": [
+        "B07-12-error.txt",
+        "C07-30",
+        "Q07-10–Q07-11"
+      ],
+      "existing_evidence": [
+        "슬라이드 168: 터미널의 500 응답 20개",
+        "슬라이드 172: 별도 UNION URL·31103·500"
+      ],
+      "defense": [
+        "같은 기간·사이트·출발지·로그 종류의 요청 수와 5xx 수 대조",
+        "개별·반복 규칙 연결",
+        "서비스 영향·앱·DB·자원·배포 변경 조사와 정상화 확인"
+      ],
+      "restoration": "반복 종료, 정상 상품 검색과 초기 응답 비교, 로그 보존",
+      "correction": "31152/31153/31154는 반복 SQLi/웹 공격/XSS이다. 501/500/503 반복은 31161/31162/31163이다. 원본 표 한 건을 20회 집계로 해석하지 않으며 오류율 예시는 실측값과 구분한다."
+    }
+  ],
+  "new_attack_execution": false,
+  "new_ui_capture": false,
+  "new_live_DQL_validation": false
+}

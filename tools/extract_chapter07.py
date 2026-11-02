@@ -22,7 +22,24 @@ def main(source):
   media=posixpath.normpath('ppt/slides/'+rel[rid]);blob=z.read(media);original=originals/f'slide-{n}.png';original.write_bytes(blob)
   im=Image.open(original);im.crop(crop).save(out/f'{name}.png')
   records.append({'asset':f'assets/screens/chapter07/{name}.png','pptx_slide':n,'pdf_page':n-103,'media':media,'original':str(original.relative_to(ROOT)),'original_sha256':hashlib.sha256(blob).hexdigest(),'original_size':im.size,'crop_xyxy':crop,'operation':'crop only; source pixels and existing highlights unchanged'})
- data={'source_file':source.name,'source_repository':'mrgrit/hack_ir_with_wazuh','source_directory':'slides','source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'provenance':'User-supplied slide images; capture method/date not independently verified. Visible records dated 2026-10-31. No new chapter07 screenshots or live experiment results.','assets':records}
- (out/'provenance.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n');print(len(records),'screen crops')
+ # XML part numbers are not presentation-order slide numbers in this deck.
+ rels={x.get('Id'):x.get('Target') for x in E.fromstring(z.read('ppt/_rels/presentation.xml.rels'))}
+ order=[posixpath.normpath('ppt/'+rels[x.get('{'+NS['r']+'}id')]) for x in E.fromstring(z.read('ppt/presentation.xml')).findall('.//p:sldId',NS)]
+ for rec in records:
+  part=f"ppt/slides/slide{rec['pptx_slide']}.xml"
+  rec['slide_xml_part']=part;rec['slide_number']=order.index(part)+1
+  del rec['pptx_slide'];del rec['pdf_page']
+ # Additional response excerpts are crops of the supplied slide pictures, never new UI.
+ for name,number,crop in [('file-response',120,(20,225,850,380)),('union-response',160,(20,230,400,277)),('error-series-a',168,(20,280,720,325)),('error-series-b',168,(720,280,1435,325))]:
+  part=order[number-1];root=E.fromstring(z.read(part));pic=root.find('.//p:pic',NS)
+  rid=pic.find('.//a:blip',NS).get('{'+NS['r']+'}embed')
+  relpart=posixpath.dirname(part)+'/_rels/'+posixpath.basename(part)+'.rels'
+  rel={x.get('Id'):x.get('Target') for x in E.fromstring(z.read(relpart))}
+  media=posixpath.normpath(posixpath.dirname(part)+'/'+rel[rid]);blob=z.read(media)
+  original=originals/f'deck-slide-{number}.png';original.write_bytes(blob)
+  im=Image.open(original);im.crop(crop).save(out/f'{name}.png')
+  records.append({'asset':f'assets/screens/chapter07/{name}.png','slide_number':number,'slide_xml_part':part,'media':media,'original':str(original.relative_to(ROOT)).replace('\\','/'),'original_sha256':hashlib.sha256(blob).hexdigest(),'original_size':im.size,'crop_xyxy':crop,'operation':'crop only; source pixels unchanged'})
+ data={'source_file':'Module01_Wazuh_위협탐지_DQL.pptx','source_url':'https://docs.google.com/presentation/d/1o0H_2DDHBp8p2HvlSnEPbx6-jdURYzew/edit','source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'provenance':'Provided slide evidence dated 2026-10-31; original capture method not independently verified. No new attack execution or UI capture in the 2026-11-02 rewrite. slide_number is presentation order, not the XML part number.','assets':records}
+ (out/'provenance.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print(len(records),'screen crops')
 if __name__=='__main__':
  ap=argparse.ArgumentParser();ap.add_argument('source',type=Path);main(ap.parse_args().source)

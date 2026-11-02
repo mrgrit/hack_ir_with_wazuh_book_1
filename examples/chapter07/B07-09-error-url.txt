@@ -1,1 +1,0 @@
-http://juice.kt66.lab/rest/products/search?q=%27

