@@ -1,0 +1,2 @@
+agent.name: "bastion" AND
+(rule.id: "5760" OR rule.id: "5763")

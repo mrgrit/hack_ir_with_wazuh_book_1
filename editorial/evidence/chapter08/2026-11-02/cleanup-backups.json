@@ -1,0 +1,7 @@
+{
+  "command": "docker exec kt66-bastion bash -c 'cmp /etc/ssh/sshd_config /root/book08-sshd_config.before && passwd -S root && rm /root/book08-sshd_config.before /root/book08-shadow.before && test ! -e /root/book08-shadow.before'",
+  "stdout": "root L 10/20/2026 0 99999 7 -1\n",
+  "stderr": "",
+  "status": 0,
+  "recorded_at": "2026-11-02T11:41:48.816786+00:00"
+}

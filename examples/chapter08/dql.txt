@@ -1,0 +1,60 @@
+# Q08-01 | Windows · Discover · wazuh-alerts-*
+# DQL은 저장된 문서를 조건으로 고르는 검색식이다. 필드 뒤 콜론(:)은 값 조건, 큰따옴표는 값의 범위, AND는 두 조건을 모두 만족함을 뜻한다. 줄바꿈 대신 공백을 넣어 한 줄로 입력해도 된다.
+agent.name: "bastion" AND
+location: "/var/log/auth.log"
+# 확인: bastion의 인증 파일에서 수집한 경보가 나온다. 전체 이벤트가 아니라 경보 인덱스의 결과이다.
+
+# Q08-02 | Windows · Discover · wazuh-alerts-*
+# OR는 둘 중 하나 이상의 조건이며 괄호로 규칙 조건을 묶는다. 5760은 개별 암호 인증 실패, 5763은 같은 출발지의 실패를 연관한 규칙이다.
+agent.name: "bastion" AND
+(rule.id: "5760" OR rule.id: "5763")
+# 확인: 실습 시간의 Failed password 원문과 srcip·dstuser를 확인한다. 규칙 적용 결과에 따라 개별 실패 대신 상위 연관 경보가 표시될 수 있다.
+
+# Q08-03 | Windows · Discover · wazuh-alerts-*
+# full_log에서 반복 요약 문구를 찾는다. 큰따옴표로 여러 단어를 묶는다.
+agent.name: "bastion" AND
+full_log: "message repeated"
+# 확인: 해당 기록이 있으면 앞뒤의 원래 실패 줄과 묶어 읽는다. 요약 줄 한 건을 실패 한 번으로 세지 않는다.
+
+# Q08-04 | Windows · Discover · wazuh-alerts-*
+# 5710은 잘못된 계정 이름을 포함한 SSH 기록, 5712는 같은 출발지의 해당 기록을 연관한 규칙이다.
+agent.name: "bastion" AND
+(rule.id: "5710" OR rule.id: "5712")
+# 확인: 이번 짧은 목록에서는 5710 경보를 확인했다. 5712 발생 여부는 실제 결과로 확인하며, 3개 이름에 반드시 연관 경보가 생긴다고 기대하지 않는다.
+
+# Q08-05 | Windows · Discover · wazuh-alerts-*
+# 같은 출발지의 암호 실패와 인증 성공을 고른다. 결과를 시간 오름차순으로 읽고 계정과 출발지 포트도 비교한다.
+agent.name: "bastion" AND
+data.srcip: "192.168.0.108" AND
+(rule.id: "5760" OR rule.id: "5715")
+# 확인: 촬영 기록에서는 20:37:04 실패 뒤 20:37:12에 ccc 성공이 나타났다. 같은 연결의 포트는 42688이다.
+
+# Q08-06 | Windows · Discover · wazuh-alerts-*
+# 인증 성공 경보 중 대상 계정이 root인 것을 찾는다.
+agent.name: "bastion" AND
+rule.id: "5715" AND data.dstuser: "root"
+# 확인: full_log의 Accepted password for root, 출발지 .108과 인증 방식을 확인한다.
+
+# Q08-07 | Windows · Discover · wazuh-alerts-*
+# 5402는 root 대상 sudo 실행, 5403은 Wazuh의 첫 관찰 조건과 관련된 규칙이다. 두 규칙을 함께 조회하고 full_log를 읽는다.
+agent.name: "bastion" AND
+(rule.id: "5402" OR rule.id: "5403")
+# 확인: ccc가 USER=root로 요청한 COMMAND를 찾는다. 이번 sudo -i id에는 5403, cat에는 5402가 적용됐다.
+
+# Q08-08 | Windows · Discover · wazuh-alerts-*
+# 새 사용자 생성 규칙을 조회한다.
+agent.name: "bastion" AND
+rule.id: "5902"
+# 확인: full_log의 new user 문구와 name, UID, GID, home, shell을 getent 결과와 대조한다.
+
+# Q08-09 | Windows · Discover · wazuh-alerts-*
+# sudo가 기록한 그룹 변경 명령을 찾는다. 명령의 인수까지 포함해 이번 대상 계정으로 좁힌다.
+agent.name: "bastion" AND
+data.command: "/usr/sbin/usermod -aG sudo book08-user"
+# 확인: 실행 요청의 srcuser는 ccc, dstuser는 root이다. 이것만으로 그룹 변경 성공을 확정하지 않고 id·getent와 원문을 확인한다.
+
+# Q08-10 | Windows · Discover · wazuh-alerts-*
+# 사용자 또는 그룹 삭제 규칙을 조회한다.
+agent.name: "bastion" AND
+rule.id: "5903"
+# 확인: full_log의 delete user와 삭제된 이름을 확인한다. 관련 그룹 삭제 기록이 함께 잡히는지는 원문별로 확인한다.

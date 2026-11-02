@@ -1,0 +1,7 @@
+{
+  "command": "docker exec kt66-bastion bash -c 'cp -p /root/book08-sshd_config.before /etc/ssh/sshd_config && cp -p /root/book08-shadow.before /etc/shadow && cmp /etc/ssh/sshd_config /root/book08-sshd_config.before && cmp /etc/shadow /root/book08-shadow.before && /usr/sbin/sshd -t && service ssh reload && passwd -S root && /usr/sbin/sshd -T | grep permitrootlogin'",
+  "stdout": " * Reloading OpenBSD Secure Shell server's configuration sshd\n   ...done.\nroot L 10/20/2026 0 99999 7 -1\npermitrootlogin no\n",
+  "stderr": "",
+  "status": 0,
+  "recorded_at": "2026-11-02T11:38:04.803498+00:00"
+}

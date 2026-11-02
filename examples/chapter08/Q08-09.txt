@@ -1,0 +1,2 @@
+agent.name: "bastion" AND
+data.command: "/usr/sbin/usermod -aG sudo book08-user"

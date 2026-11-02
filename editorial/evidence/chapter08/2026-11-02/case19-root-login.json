@@ -1,0 +1,11 @@
+{
+  "command": "ssh -p 2204 -o ConnectTimeout=8 -o NumberOfPasswordPrompts=1 -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/home/att/book08/known_hosts root@192.168.0.107 'whoami; id'",
+  "from": "attacker 192.168.0.108",
+  "to": "kt66-bastion via 192.168.0.107:2204",
+  "start_utc": "2026-11-02T11:38:04.383784+00:00",
+  "stdout": "\rroot@192.168.0.107's password: \r\nroot\r\nuid=0(root) gid=0(root) groups=0(root)\r\n",
+  "status": 0,
+  "timed_out": false,
+  "password_persisted": false,
+  "recorded_at": "2026-11-02T11:38:04.684999+00:00"
+}

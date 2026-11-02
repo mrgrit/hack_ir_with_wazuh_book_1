@@ -1,0 +1,5 @@
+ls -l /root/book08-sshd_config.before \
+/root/book08-shadow.before
+cp -p /root/book08-sshd_config.before \
+/etc/ssh/sshd_config
+cp -p /root/book08-shadow.before /etc/shadow

@@ -1,0 +1,6 @@
+getent passwd book08-user
+echo $?
+getent group book08-user
+echo $?
+ls -ld /home/book08-user
+getent group sudo

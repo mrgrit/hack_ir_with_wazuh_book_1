@@ -1,0 +1,7 @@
+{
+  "command": "author-only temporary root authentication setup; password omitted",
+  "stdout": " * Reloading OpenBSD Secure Shell server's configuration sshd\n   ...done.\npermitrootlogin yes\npasswordauthentication yes\nroot P 11/02/2026 0 99999 7 -1\n",
+  "stderr": "",
+  "status": 0,
+  "recorded_at": "2026-11-02T11:38:04.223898+00:00"
+}

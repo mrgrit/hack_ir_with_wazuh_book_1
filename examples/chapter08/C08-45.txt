@@ -1,0 +1,3 @@
+getent passwd book08-user
+getent group book08-user
+ls -ld /home/book08-user

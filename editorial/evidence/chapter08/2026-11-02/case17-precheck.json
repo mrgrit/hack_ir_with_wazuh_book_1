@@ -1,0 +1,7 @@
+{
+  "command": "docker exec kt66-bastion getent passwd book08-none1 book08-none2 book08-none3",
+  "stdout": "",
+  "stderr": "",
+  "status": 2,
+  "recorded_at": "2026-11-02T11:36:10.573724+00:00"
+}

@@ -1,0 +1,8 @@
+printf '%s\n' \
+book08-wrong01 book08-wrong02 book08-wrong03 \
+book08-wrong04 book08-wrong05 book08-wrong06 \
+book08-wrong07 book08-wrong08 book08-wrong09 \
+book08-wrong10 book08-wrong11 book08-wrong12 \
+> pw-fail.txt
+cat pw-fail.txt
+wc -l pw-fail.txt

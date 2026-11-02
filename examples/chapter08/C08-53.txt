@@ -1,0 +1,2 @@
+grep -n -A 6 -B 2 '<command>firewall-drop' \
+/var/ossec/etc/ossec.conf

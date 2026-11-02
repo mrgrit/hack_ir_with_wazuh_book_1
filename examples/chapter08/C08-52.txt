@@ -1,0 +1,2 @@
+exit
+docker exec -it kt66-siem /bin/bash

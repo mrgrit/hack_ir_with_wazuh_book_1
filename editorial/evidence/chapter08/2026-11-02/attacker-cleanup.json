@@ -1,0 +1,13 @@
+{
+  "target": "/home/att/book08",
+  "removed_own_files": [
+    "pw-success.txt",
+    "users-invalid.txt",
+    "known_hosts",
+    "pw-fail.txt"
+  ],
+  "remaining": [],
+  "directory_removed": true,
+  "hydra_retained": true,
+  "recorded_at": "2026-11-02T12:04:38.980772+00:00"
+}

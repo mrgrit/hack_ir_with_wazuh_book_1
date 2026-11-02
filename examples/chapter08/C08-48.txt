@@ -1,0 +1,1 @@
+sudo grep -F 'book08-user' /var/log/auth.log

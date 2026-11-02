@@ -1,0 +1,5 @@
+cd ~/book08
+ls -l pw-success.txt
+printf '%s\n' book08-bad1 book08-bad2 \
+book08-bad3 ccc > pw-success.txt
+cat pw-success.txt

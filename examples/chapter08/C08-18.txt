@@ -1,0 +1,2 @@
+tail -n 25 /var/ossec/logs/active-responses.log
+iptables -S

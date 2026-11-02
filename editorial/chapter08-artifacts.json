@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-02",
+  "pages": 58,
+  "visual_review": "All 58 pages reviewed; 21 changed pages reviewed again after final changes; 37 unchanged pages pixel-identical.",
+  "artifacts": [
+    {
+      "path": "manuscript/volume01-chapter08.docx",
+      "sha256": "649cd65be3104b5a876f12dcd8e565558b9cc3227c9931008ee84f42a5c691d5"
+    },
+    {
+      "path": "manuscript/volume01-chapter08.json",
+      "sha256": "596366cb648269c354154f59b1a1a04b0877cd25cd71824588693691bfe0d38a"
+    },
+    {
+      "path": "assets/illustrations/chapter04/field-check.png",
+      "sha256": "46a5ffbdfa2e9d5cca7900bb773bf012e12d8b9272b0c436251ad59978b0e024"
+    },
+    {
+      "path": "assets/illustrations/chapter06/log-review.png",
+      "sha256": "11ccdd8f14c6b3cf4427e9ce1b14215aa1d41bca09f90dad312e9f7d1beeb679"
+    }
+  ],
+  "qa_pdf_distributed": false
+}

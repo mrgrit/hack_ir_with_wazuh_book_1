@@ -141,4 +141,18 @@ python tools/build_chapter07.py --output build/volume01-chapter07.docx
 - `tools/check_chapter07.py DOCX경로 임시PDF경로 --bash Bash실행파일경로`로 템플릿·글꼴·참고 URL·화면 픽셀·복사용 명령·셸 구문을 검사합니다. `bash -n` 구문 분석만 수행하며 예제 명령과 DQL은 실행하지 않습니다. Word로 렌더한 임시 PDF에서 전체 지면을 별도로 확인합니다.
 - [기존 삽화 재사용 기록](editorial/chapter07-illustrations.json)
 
+8장 초안:
+
+- [8장 Word 원고](manuscript/volume01-chapter08.docx) · [본문 JSON](manuscript/volume01-chapter08.json)
+- Module 01 실습 16~21: SSH 인증 실패·성공, root 직접 로그인, sudo 실행, 계정 생성·그룹 변경·삭제.
+- [복사용 명령·DQL·목록 파일](examples/chapter08/README.md) · [저자용 검토 기록](editorial/chapter08-review.md)
+- [슬라이드 대응표](editorial/chapter08-source-coverage.json) · [검사 결과](editorial/chapter08-validation.json) · [실제 화면 출처](assets/screens/chapter08/provenance.json)
+
+```bash
+python tools/write_chapter08.py
+python tools/build_chapter08.py --output build/volume01-chapter08.docx
+```
+
+UTF-8 모드와 `python-docx`, `Pillow`, `pypdf`를 갖춘 환경에서 실행합니다. Windows에서는 실행 전 `$env:PYTHONUTF8='1'`을 지정합니다. 저장소의 그림을 그대로 사용하며, 도식 재생성 시 `BOOK_DIAGRAM_FONT`에 부크크 고딕 Light 글꼴 파일 경로를 지정하고 `tools/diagrams_chapter08.py`를 실행합니다. `tools/check_chapter08.py DOCX경로 임시PDF경로 --bash Bash실행파일경로`는 정적 검사를 수행하며 실습 명령을 실행하지 않습니다. 실습 시험과 검색 결과는 저자용 기록에 별도로 보존했습니다. 이번 초안은 REV01에 저장하지 않았습니다.
+
 PDF는 배포하지 않습니다. 임시 PDF·페이지 이미지는 DOCX 배치 검사용으로만 사용합니다. Consolas가 없는 환경에서는 대체 글꼴로 보일 수 있으므로 Word에서 최종 인쇄 크기를 재확인합니다.

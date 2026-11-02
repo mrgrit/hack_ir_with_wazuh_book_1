@@ -1,0 +1,2 @@
+docker ps
+docker port kt66-bastion

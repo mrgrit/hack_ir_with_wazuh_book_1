@@ -1,0 +1,11 @@
+{
+  "command": "ssh -p 2204 -o ConnectTimeout=8 -o NumberOfPasswordPrompts=1 -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/home/att/book08/known_hosts ccc@192.168.0.107 'id; sudo -l; sudo -i id; sudo cat /etc/shadow > /dev/null; echo $?; id'",
+  "from": "attacker 192.168.0.108",
+  "to": "kt66-bastion via 192.168.0.107:2204",
+  "start_utc": "2026-11-02T11:38:35.200385+00:00",
+  "stdout": "\rccc@192.168.0.107's password: \r\nuid=1000(ccc) gid=1000(ccc) groups=1000(ccc),27(sudo),999(docker)\r\nMatching Defaults entries for ccc on bastion:\r\n    env_reset, mail_badpass, secure_path=/usr/local/sbin\\:/usr/local/bin\\:/usr/sbin\\:/usr/bin\\:/sbin\\:/bin\\:/snap/bin, use_pty\r\n\r\nUser ccc may run the following commands on bastion:\r\n    (ALL : ALL) ALL\r\n    (ALL) NOPASSWD: ALL\r\nuid=0(root) gid=0(root) groups=0(root)\r\n0\r\nuid=1000(ccc) gid=1000(ccc) groups=1000(ccc),27(sudo),999(docker)\r\n",
+  "status": 0,
+  "timed_out": false,
+  "password_persisted": false,
+  "recorded_at": "2026-11-02T11:38:35.651509+00:00"
+}

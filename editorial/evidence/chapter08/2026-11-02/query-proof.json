@@ -1,0 +1,82 @@
+[
+  {
+    "id": "Q08-01",
+    "text": "agent.name: \"bastion\" AND\nlocation: \"/var/log/auth.log\"",
+    "hits": "95",
+    "noResults": false,
+    "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20location:%20%22%2Fvar%2Flog%2Fauth.log%22'))",
+    "at": "2026-11-02T12:00:17.398Z"
+  },
+  {
+    "id": "Q08-02",
+    "text": "agent.name: \"bastion\" AND\n(rule.id: \"5760\" OR rule.id: \"5763\")",
+    "hits": "16",
+    "noResults": false,
+    "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20(rule.id:%20%225760%22%20OR%20rule.id:%20%225763%22)'))",
+    "at": "2026-11-02T12:00:20.219Z"
+  },
+  {
+    "id": "Q08-03",
+    "text": "agent.name: \"bastion\" AND\nfull_log: \"message repeated\"",
+    "hits": "3",
+    "noResults": false,
+    "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20full_log:%20%22message%20repeated%22'))",
+    "at": "2026-11-02T12:00:22.906Z"
+  },
+  {
+    "id": "Q08-04",
+    "text": "agent.name: \"bastion\" AND\n(rule.id: \"5710\" OR rule.id: \"5712\")",
+    "hits": "8",
+    "noResults": false,
+    "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20(rule.id:%20%225710%22%20OR%20rule.id:%20%225712%22)'))",
+    "at": "2026-11-02T12:00:25.806Z"
+  },
+  {
+    "id": "Q08-05",
+    "text": "agent.name: \"bastion\" AND\ndata.srcip: \"192.168.0.108\" AND\n(rule.id: \"5760\" OR rule.id: \"5715\")",
+    "hits": "22",
+    "noResults": false,
+    "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20data.srcip:%20%22192.168.0.108%22%20AND%20(rule.id:%20%225760%22%20OR%20rule.id:%20%225715%22)'))",
+    "at": "2026-11-02T12:00:28.578Z"
+  },
+  {
+    "id": "Q08-06",
+    "text": "agent.name: \"bastion\" AND\nrule.id: \"5715\" AND data.dstuser: \"root\"",
+    "hits": "1",
+    "noResults": false,
+    "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20rule.id:%20%225715%22%20AND%20data.dstuser:%20%22root%22'))",
+    "at": "2026-11-02T12:00:31.629Z"
+  },
+  {
+    "id": "Q08-07",
+    "text": "agent.name: \"bastion\" AND\n(rule.id: \"5402\" OR rule.id: \"5403\")",
+    "hits": "7",
+    "noResults": false,
+    "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20(rule.id:%20%225402%22%20OR%20rule.id:%20%225403%22)'))",
+    "at": "2026-11-02T12:00:34.583Z"
+  },
+  {
+    "id": "Q08-08",
+    "text": "agent.name: \"bastion\" AND\nrule.id: \"5902\"",
+    "hits": "1",
+    "noResults": false,
+    "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20rule.id:%20%225902%22'))",
+    "at": "2026-11-02T12:00:37.211Z"
+  },
+  {
+    "id": "Q08-09",
+    "text": "agent.name: \"bastion\" AND\ndata.command: \"/usr/sbin/usermod -aG sudo book08-user\"",
+    "hits": "1",
+    "noResults": false,
+    "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20data.command:%20%22%2Fusr%2Fsbin%2Fusermod%20-aG%20sudo%20book08-user%22'))",
+    "at": "2026-11-02T12:00:39.867Z"
+  },
+  {
+    "id": "Q08-10",
+    "text": "agent.name: \"bastion\" AND\nrule.id: \"5903\"",
+    "hits": "1",
+    "noResults": false,
+    "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20rule.id:%20%225903%22'))",
+    "at": "2026-11-02T12:00:42.527Z"
+  }
+]

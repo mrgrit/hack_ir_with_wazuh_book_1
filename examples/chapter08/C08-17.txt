@@ -1,0 +1,2 @@
+timeout 45s hydra -l ccc -P pw-fail.txt \
+-t 4 -w 5 ssh://192.168.0.107:2204

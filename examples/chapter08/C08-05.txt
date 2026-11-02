@@ -1,0 +1,3 @@
+passwd -S root
+/var/ossec/bin/wazuh-control status
+tail -n 10 /var/log/auth.log

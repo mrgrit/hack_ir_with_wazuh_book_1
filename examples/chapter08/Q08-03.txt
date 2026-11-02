@@ -1,0 +1,2 @@
+agent.name: "bastion" AND
+full_log: "message repeated"

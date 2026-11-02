@@ -1,0 +1,6817 @@
+[
+  {
+    "timestamp": "2026-11-02T11:28:13.009+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793618893.12588194",
+    "full_log": "Nov  2 20:28:12 bastion sshd[2445]: Accepted password for ccc from 192.168.0.108 port 51380 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:28:12",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "51380",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:28:13.054+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793618893.12588647",
+    "full_log": "Nov  2 20:28:12 bastion sshd[2445]: pam_unix(sshd:session): session opened for user ccc(uid=1000) by (uid=0)",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:28:12",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc(uid=1000)",
+      "uid": "0"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:28:14.950+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793618894.12589794",
+    "full_log": "Nov  2 20:28:13 bastion sshd[2445]: pam_unix(sshd:session): session closed for user ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:28:13",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:29:35.026+0000",
+    "rule": {
+      "level": 5,
+      "description": "PAM: User login failed.",
+      "id": "5503",
+      "mitre": {
+        "id": [
+          "T1110.001"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Password Guessing"
+        ]
+      },
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793618975.12590173",
+    "full_log": "Nov  2 20:29:34 bastion sshd[2461]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108  user=ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:29:34",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "pam"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "dstuser": "ccc",
+      "uid": "0",
+      "euid": "0",
+      "tty": "ssh"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:29:36.982+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793618976.12590707",
+    "full_log": "Nov  2 20:29:36 bastion sshd[2461]: Failed password for ccc from 192.168.0.108 port 53002 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:29:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "53002",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:29:54.998+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793618994.12591186",
+    "full_log": "Nov  2 20:29:52 bastion sshd[2461]: message repeated 5 times: [ Failed password for ccc from 192.168.0.108 port 53002 ssh2]",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:29:52",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "sshd"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:29:55.038+0000",
+    "rule": {
+      "level": 8,
+      "description": "Maximum authentication attempts exceeded.",
+      "id": "5758",
+      "mitre": {
+        "id": [
+          "T1110"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Brute Force"
+        ]
+      },
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gpg13": [
+        "7.1"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793618995.12591646",
+    "full_log": "Nov  2 20:29:53 bastion sshd[2461]: error: maximum authentication attempts exceeded for ccc from 192.168.0.108 port 53002 ssh2 [preauth]",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:29:53",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "53002",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:29:55.038+0000",
+    "rule": {
+      "level": 7,
+      "description": "[Sigma] sshd 에 대한 반복적인 비밀번호 실패 — 무차별 대입 시도 가능성",
+      "id": "200001",
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "sigma",
+        "kt66",
+        "sigma",
+        "linux",
+        "sshd"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793618995.12592031",
+    "full_log": "Nov  2 20:29:53 bastion sshd[2461]: Disconnecting authenticating user ccc 192.168.0.108 port 53002: Too many authentication failures [preauth]",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:29:53",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "sshd"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:29:55.038+0000",
+    "rule": {
+      "level": 10,
+      "description": "syslog: User missed the password more than one time",
+      "id": "2502",
+      "mitre": {
+        "id": [
+          "T1110"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Brute Force"
+        ]
+      },
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "access_control",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793618995.12592413",
+    "full_log": "Nov  2 20:29:53 bastion sshd[2461]: PAM 5 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108  user=ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:29:53",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:29:57.000+0000",
+    "rule": {
+      "level": 5,
+      "description": "PAM: User login failed.",
+      "id": "5503",
+      "mitre": {
+        "id": [
+          "T1110.001"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Password Guessing"
+        ]
+      },
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793618997.12592954",
+    "full_log": "Nov  2 20:29:55 bastion sshd[2463]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108  user=ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:29:55",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "pam"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "dstuser": "ccc",
+      "uid": "0",
+      "euid": "0",
+      "tty": "ssh"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:29:59.002+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 3,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793618999.12593488",
+    "full_log": "Nov  2 20:29:58 bastion sshd[2463]: Failed password for ccc from 192.168.0.108 port 33800 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:29:58",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "33800",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:30:17.122+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 4,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619017.12593967",
+    "full_log": "Nov  2 20:30:15 bastion sshd[2463]: message repeated 5 times: [ Failed password for ccc from 192.168.0.108 port 33800 ssh2]",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:30:15",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "sshd"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:30:17.166+0000",
+    "rule": {
+      "level": 10,
+      "description": "syslog: User missed the password more than one time",
+      "id": "2502",
+      "mitre": {
+        "id": [
+          "T1110"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Brute Force"
+        ]
+      },
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "access_control",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619017.12594427",
+    "full_log": "Nov  2 20:30:17 bastion sshd[2463]: PAM 5 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108  user=ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:30:17",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:30:17.166+0000",
+    "rule": {
+      "level": 7,
+      "description": "[Sigma] sshd 에 대한 반복적인 비밀번호 실패 — 무차별 대입 시도 가능성",
+      "id": "200001",
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "sigma",
+        "kt66",
+        "sigma",
+        "linux",
+        "sshd"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619017.12594968",
+    "full_log": "Nov  2 20:30:17 bastion sshd[2463]: Disconnecting authenticating user ccc 192.168.0.108 port 33800: Too many authentication failures [preauth]",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:30:17",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "sshd"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:30:17.166+0000",
+    "rule": {
+      "level": 8,
+      "description": "Maximum authentication attempts exceeded.",
+      "id": "5758",
+      "mitre": {
+        "id": [
+          "T1110"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Brute Force"
+        ]
+      },
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gpg13": [
+        "7.1"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619017.12595350",
+    "full_log": "Nov  2 20:30:17 bastion sshd[2463]: error: maximum authentication attempts exceeded for ccc from 192.168.0.108 port 33800 ssh2 [preauth]",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:30:17",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "33800",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:30:19.023+0000",
+    "rule": {
+      "level": 5,
+      "description": "PAM: User login failed.",
+      "id": "5503",
+      "mitre": {
+        "id": [
+          "T1110.001"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Password Guessing"
+        ]
+      },
+      "firedtimes": 3,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619019.12595735",
+    "full_log": "Nov  2 20:30:18 bastion sshd[2475]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108  user=ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:30:18",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "pam"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "dstuser": "ccc",
+      "uid": "0",
+      "euid": "0",
+      "tty": "ssh"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:30:23.026+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 5,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619023.12596269",
+    "full_log": "Nov  2 20:30:21 bastion sshd[2475]: Failed password for ccc from 192.168.0.108 port 53532 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:30:21",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "53532",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:31:33.122+0000",
+    "rule": {
+      "level": 5,
+      "description": "PAM: User login failed.",
+      "id": "5503",
+      "mitre": {
+        "id": [
+          "T1110.001"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Password Guessing"
+        ]
+      },
+      "firedtimes": 4,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619093.12596748",
+    "full_log": "Nov  2 20:31:32 bastion sshd[2487]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108  user=ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:31:32",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "pam"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "dstuser": "ccc",
+      "uid": "0",
+      "euid": "0",
+      "tty": "ssh"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:31:33.122+0000",
+    "rule": {
+      "level": 5,
+      "description": "PAM: User login failed.",
+      "id": "5503",
+      "mitre": {
+        "id": [
+          "T1110.001"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Password Guessing"
+        ]
+      },
+      "firedtimes": 5,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619093.12597282",
+    "full_log": "Nov  2 20:31:32 bastion sshd[2485]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108  user=ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:31:32",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "pam"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "dstuser": "ccc",
+      "uid": "0",
+      "euid": "0",
+      "tty": "ssh"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:31:33.122+0000",
+    "rule": {
+      "level": 5,
+      "description": "PAM: User login failed.",
+      "id": "5503",
+      "mitre": {
+        "id": [
+          "T1110.001"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Password Guessing"
+        ]
+      },
+      "firedtimes": 6,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619093.12597816",
+    "full_log": "Nov  2 20:31:32 bastion sshd[2488]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108  user=ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:31:32",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "pam"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "dstuser": "ccc",
+      "uid": "0",
+      "euid": "0",
+      "tty": "ssh"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:31:33.122+0000",
+    "rule": {
+      "level": 5,
+      "description": "PAM: User login failed.",
+      "id": "5503",
+      "mitre": {
+        "id": [
+          "T1110.001"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Password Guessing"
+        ]
+      },
+      "firedtimes": 7,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619093.12598350",
+    "full_log": "Nov  2 20:31:32 bastion sshd[2486]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108  user=ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:31:32",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "pam"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "dstuser": "ccc",
+      "uid": "0",
+      "euid": "0",
+      "tty": "ssh"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:31:35.104+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 6,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619095.12598884",
+    "full_log": "Nov  2 20:31:34 bastion sshd[2486]: Failed password for ccc from 192.168.0.108 port 44268 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:31:34",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "44268",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:31:35.146+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 7,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619095.12599363",
+    "full_log": "Nov  2 20:31:34 bastion sshd[2487]: Failed password for ccc from 192.168.0.108 port 44292 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:31:34",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "44292",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:31:35.146+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 9,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619095.12599842",
+    "full_log": "Nov  2 20:31:34 bastion sshd[2488]: Failed password for ccc from 192.168.0.108 port 44300 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:31:34",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "44300",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:31:35.146+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 8,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619095.12600321",
+    "full_log": "Nov  2 20:31:34 bastion sshd[2485]: Failed password for ccc from 192.168.0.108 port 44270 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:31:34",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "44270",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:31:37.080+0000",
+    "rule": {
+      "level": 10,
+      "description": "sshd: brute force trying to get access to the system. Authentication failed.",
+      "id": "5763",
+      "mitre": {
+        "id": [
+          "T1110"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Brute Force"
+        ]
+      },
+      "frequency": 8,
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failures"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "SI.4",
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "11.4",
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619097.12600800",
+    "previous_output": "Nov  2 20:31:34 bastion sshd[2485]: Failed password for ccc from 192.168.0.108 port 44270 ssh2\nNov  2 20:31:34 bastion sshd[2488]: Failed password for ccc from 192.168.0.108 port 44300 ssh2\nNov  2 20:31:34 bastion sshd[2487]: Failed password for ccc from 192.168.0.108 port 44292 ssh2\nNov  2 20:31:34 bastion sshd[2486]: Failed password for ccc from 192.168.0.108 port 44268 ssh2\nNov  2 20:30:21 bastion sshd[2475]: Failed password for ccc from 192.168.0.108 port 53532 ssh2\nNov  2 20:29:58 bastion sshd[2463]: Failed password for ccc from 192.168.0.108 port 33800 ssh2\nNov  2 20:29:36 bastion sshd[2461]: Failed password for ccc from 192.168.0.108 port 53002 ssh2",
+    "full_log": "Nov  2 20:31:36 bastion sshd[2487]: Failed password for ccc from 192.168.0.108 port 44292 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:31:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "44292",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:31:37.080+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619097.12602015",
+    "full_log": "Nov  2 20:31:36 bastion sshd[2488]: Failed password for ccc from 192.168.0.108 port 44300 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:31:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "44300",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:31:37.082+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 10,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619097.12602494",
+    "full_log": "Nov  2 20:31:36 bastion sshd[2486]: Failed password for ccc from 192.168.0.108 port 44268 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:31:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "44268",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:31:37.130+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 11,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619097.12602973",
+    "full_log": "Nov  2 20:31:36 bastion sshd[2485]: Failed password for ccc from 192.168.0.108 port 44270 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:31:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "44270",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:36:11.277+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: Attempt to login using a non-existent user",
+      "id": "5710",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed",
+        "invalid_login"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AU.6"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5",
+        "10.6.1"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619371.12639121",
+    "full_log": "Nov  2 20:36:11 bastion sshd[2517]: Invalid user book08-none1 from 192.168.0.108 port 39606",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:36:11",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "39606",
+      "srcuser": "book08-none1"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:36:11.318+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: Attempt to login using a non-existent user",
+      "id": "5710",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed",
+        "invalid_login"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AU.6"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5",
+        "10.6.1"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619371.12639653",
+    "full_log": "Nov  2 20:36:11 bastion sshd[2517]: Disconnected from invalid user book08-none1 192.168.0.108 port 39606 [preauth]",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:36:11",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "39606",
+      "srcuser": "book08-none1"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:36:11.375+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: Attempt to login using a non-existent user",
+      "id": "5710",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 3,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed",
+        "invalid_login"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AU.6"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5",
+        "10.6.1"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619371.12640208",
+    "full_log": "Nov  2 20:36:11 bastion sshd[2520]: Invalid user book08-none1 from 192.168.0.108 port 39614",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:36:11",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "39614",
+      "srcuser": "book08-none1"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:36:11.375+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: Attempt to login using a non-existent user",
+      "id": "5710",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 4,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed",
+        "invalid_login"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AU.6"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5",
+        "10.6.1"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619371.12640740",
+    "full_log": "Nov  2 20:36:11 bastion sshd[2519]: Invalid user book08-none2 from 192.168.0.108 port 39612",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:36:11",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "39612",
+      "srcuser": "book08-none2"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:36:11.378+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: Attempt to login using a non-existent user",
+      "id": "5710",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 5,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed",
+        "invalid_login"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AU.6"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5",
+        "10.6.1"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619371.12641272",
+    "full_log": "Nov  2 20:36:11 bastion sshd[2521]: Invalid user book08-none3 from 192.168.0.108 port 39638",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:36:11",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "39638",
+      "srcuser": "book08-none3"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:36:11.407+0000",
+    "rule": {
+      "level": 5,
+      "description": "PAM: User login failed.",
+      "id": "5503",
+      "mitre": {
+        "id": [
+          "T1110.001"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Password Guessing"
+        ]
+      },
+      "firedtimes": 8,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619371.12641804",
+    "full_log": "Nov  2 20:36:11 bastion sshd[2521]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108 ",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:36:11",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "pam"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "uid": "0",
+      "euid": "0",
+      "tty": "ssh"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:36:11.411+0000",
+    "rule": {
+      "level": 5,
+      "description": "PAM: User login failed.",
+      "id": "5503",
+      "mitre": {
+        "id": [
+          "T1110.001"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Password Guessing"
+        ]
+      },
+      "firedtimes": 9,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619371.12642319",
+    "full_log": "Nov  2 20:36:11 bastion sshd[2519]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108 ",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:36:11",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "pam"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "uid": "0",
+      "euid": "0",
+      "tty": "ssh"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:36:11.416+0000",
+    "rule": {
+      "level": 5,
+      "description": "PAM: User login failed.",
+      "id": "5503",
+      "mitre": {
+        "id": [
+          "T1110.001"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Password Guessing"
+        ]
+      },
+      "firedtimes": 10,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619371.12642834",
+    "full_log": "Nov  2 20:36:11 bastion sshd[2520]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108 ",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:36:11",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "pam"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "uid": "0",
+      "euid": "0",
+      "tty": "ssh"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:36:15.288+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: Attempt to login using a non-existent user",
+      "id": "5710",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 6,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed",
+        "invalid_login"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AU.6"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5",
+        "10.6.1"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619375.12643349",
+    "full_log": "Nov  2 20:36:13 bastion sshd[2521]: Failed password for invalid user book08-none3 from 192.168.0.108 port 39638 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:36:13",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcuser": "book08-none3"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:36:15.330+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: Attempt to login using a non-existent user",
+      "id": "5710",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 7,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed",
+        "invalid_login"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AU.6"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5",
+        "10.6.1"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619375.12643890",
+    "full_log": "Nov  2 20:36:13 bastion sshd[2519]: Failed password for invalid user book08-none2 from 192.168.0.108 port 39612 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:36:13",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcuser": "book08-none2"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:36:15.330+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: Attempt to login using a non-existent user",
+      "id": "5710",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 8,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed",
+        "invalid_login"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AU.6"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5",
+        "10.6.1"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619375.12644431",
+    "full_log": "Nov  2 20:36:13 bastion sshd[2520]: Failed password for invalid user book08-none1 from 192.168.0.108 port 39614 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:36:13",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcuser": "book08-none1"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:37:03.370+0000",
+    "rule": {
+      "level": 5,
+      "description": "PAM: User login failed.",
+      "id": "5503",
+      "mitre": {
+        "id": [
+          "T1110.001"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Password Guessing"
+        ]
+      },
+      "firedtimes": 11,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619423.12644972",
+    "full_log": "Nov  2 20:37:02 bastion sshd[2537]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108  user=ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:37:02",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "pam"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "dstuser": "ccc",
+      "uid": "0",
+      "euid": "0",
+      "tty": "ssh"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:37:05.325+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 12,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619425.12645506",
+    "full_log": "Nov  2 20:37:04 bastion sshd[2537]: Failed password for ccc from 192.168.0.108 port 42688 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:37:04",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "42688",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:37:13.330+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 13,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619433.12645985",
+    "full_log": "Nov  2 20:37:11 bastion sshd[2537]: message repeated 2 times: [ Failed password for ccc from 192.168.0.108 port 42688 ssh2]",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:37:11",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "sshd"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:37:13.330+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619433.12646445",
+    "full_log": "Nov  2 20:37:12 bastion sshd[2537]: Accepted password for ccc from 192.168.0.108 port 42688 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:37:12",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "42688",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:37:13.333+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619433.12646898",
+    "full_log": "Nov  2 20:37:12 bastion sshd[2537]: pam_unix(sshd:session): session opened for user ccc(uid=1000) by (uid=0)",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:37:12",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc(uid=1000)",
+      "uid": "0"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:37:13.337+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619433.12647338",
+    "full_log": "Nov  2 20:37:12 bastion sshd[2537]: pam_unix(sshd:session): session closed for user ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:37:12",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:37:13.453+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 3,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619433.12647717",
+    "full_log": "Nov  2 20:37:13 bastion sshd[2549]: pam_unix(sshd:session): session opened for user ccc(uid=1000) by (uid=0)",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:37:13",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc(uid=1000)",
+      "uid": "0"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:37:13.453+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 3,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619433.12648157",
+    "full_log": "Nov  2 20:37:13 bastion sshd[2549]: Accepted password for ccc from 192.168.0.108 port 55920 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:37:13",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "55920",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:37:15.374+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 3,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619435.12648610",
+    "full_log": "Nov  2 20:37:13 bastion sshd[2549]: pam_unix(sshd:session): session closed for user ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:37:13",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:05.370+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: User changed password.",
+      "id": "5555",
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "8.1.2",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "4.13",
+        "7.10"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.a.2.I",
+        "164.312.a.2.II",
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AC.2",
+        "IA.4",
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619485.12650421",
+    "full_log": "Nov  2 20:38:04 bastion chpasswd[2582]: pam_unix(chpasswd:chauthtok): password changed for root",
+    "predecoder": {
+      "program_name": "chpasswd",
+      "timestamp": "Nov  2 20:38:04",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:05.389+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 4,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619485.12650916",
+    "full_log": "Nov  2 20:38:04 bastion sshd[2599]: pam_unix(sshd:session): session opened for user root(uid=0) by (uid=0)",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:04",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root(uid=0)",
+      "uid": "0"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:05.389+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 4,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619485.12651352",
+    "full_log": "Nov  2 20:38:04 bastion sshd[2599]: Accepted password for root from 192.168.0.108 port 46726 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:04",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "46726",
+      "dstuser": "root"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:05.389+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 4,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619485.12651807",
+    "full_log": "Nov  2 20:38:04 bastion sshd[2599]: pam_unix(sshd:session): session closed for user root",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:04",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:05.431+0000",
+    "rule": {
+      "level": 5,
+      "description": "PAM: User login failed.",
+      "id": "5503",
+      "mitre": {
+        "id": [
+          "T1110.001"
+        ],
+        "tactic": [
+          "Credential Access"
+        ],
+        "technique": [
+          "Password Guessing"
+        ]
+      },
+      "firedtimes": 12,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_failed"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619485.12652188",
+    "full_log": "Nov  2 20:38:05 bastion sshd[2635]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.108  user=root",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:05",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "pam"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "dstuser": "root",
+      "uid": "0",
+      "euid": "0",
+      "tty": "ssh"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:07.394+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 14,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619487.12652724",
+    "full_log": "Nov  2 20:38:07 bastion sshd[2635]: Failed password for root from 192.168.0.108 port 46734 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:07",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "46734",
+      "dstuser": "root"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:11.377+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 5,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619491.12653205",
+    "full_log": "Nov  2 20:38:09 bastion sshd[2637]: Accepted password for ccc from 192.168.0.108 port 46736 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:09",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "46736",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:11.377+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 5,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619491.12653658",
+    "full_log": "Nov  2 20:38:09 bastion sshd[2637]: pam_unix(sshd:session): session opened for user ccc(uid=1000) by (uid=0)",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:09",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc(uid=1000)",
+      "uid": "0"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:11.386+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 5,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619491.12654098",
+    "full_log": "Nov  2 20:38:09 bastion sshd[2637]: pam_unix(sshd:session): session closed for user ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:09",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:35.459+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 6,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619515.12654477",
+    "full_log": "Nov  2 20:38:35 bastion sshd[2651]: Accepted password for ccc from 192.168.0.108 port 38900 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:35",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "38900",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:35.502+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 6,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619515.12654930",
+    "full_log": "Nov  2 20:38:35 bastion sshd[2651]: pam_unix(sshd:session): session opened for user ccc(uid=1000) by (uid=0)",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:35",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc(uid=1000)",
+      "uid": "0"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:35.502+0000",
+    "rule": {
+      "level": 4,
+      "description": "First time user executed sudo.",
+      "id": "5403",
+      "mitre": {
+        "id": [
+          "T1548.003"
+        ],
+        "tactic": [
+          "Privilege Escalation",
+          "Defense Evasion"
+        ],
+        "technique": [
+          "Sudo and Sudo Caching"
+        ]
+      },
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sudo"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619515.12655370",
+    "full_log": "Nov  2 20:38:35 bastion sudo:      ccc : PWD=/root ; USER=root ; COMMAND=/bin/bash --login -c id",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:35",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sudo",
+      "name": "sudo",
+      "ftscomment": "First time user executed the sudo command"
+    },
+    "data": {
+      "srcuser": "ccc",
+      "dstuser": "root",
+      "pwd": "/root",
+      "command": "/bin/bash --login -c id"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:35.502+0000",
+    "rule": {
+      "level": 4,
+      "description": "First time user executed sudo.",
+      "id": "5403",
+      "mitre": {
+        "id": [
+          "T1548.003"
+        ],
+        "tactic": [
+          "Privilege Escalation",
+          "Defense Evasion"
+        ],
+        "technique": [
+          "Sudo and Sudo Caching"
+        ]
+      },
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sudo"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619515.12656384",
+    "full_log": "Nov  2 20:38:35 bastion sudo: pam_limits(sudo-i:session): Could not set limit for 'core' to soft=-1, hard=-1: Operation not permitted; uid=1000,euid=0",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:35",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sudo",
+      "name": "sudo",
+      "ftscomment": "First time user executed the sudo command"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:35.507+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 7,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619515.12656692",
+    "full_log": "Nov  2 20:38:35 bastion sudo: pam_unix(sudo-i:session): session opened for user root(uid=0) by (uid=1000)",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:35",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root(uid=0)",
+      "uid": "1000"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:35.526+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 6,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619515.12657130",
+    "full_log": "Nov  2 20:38:35 bastion sudo: pam_unix(sudo-i:session): session closed for user root",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:35",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:35.526+0000",
+    "rule": {
+      "level": 3,
+      "description": "Successful sudo to ROOT executed.",
+      "id": "5402",
+      "mitre": {
+        "id": [
+          "T1548.003"
+        ],
+        "tactic": [
+          "Privilege Escalation",
+          "Defense Evasion"
+        ],
+        "technique": [
+          "Sudo and Sudo Caching"
+        ]
+      },
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sudo"
+      ],
+      "pci_dss": [
+        "10.2.5",
+        "10.2.2"
+      ],
+      "gpg13": [
+        "7.6",
+        "7.8",
+        "7.13"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AC.6"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619515.12657507",
+    "full_log": "Nov  2 20:38:35 bastion sudo:      ccc : PWD=/home/ccc ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:35",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sudo",
+      "name": "sudo",
+      "ftscomment": "First time user executed the sudo command"
+    },
+    "data": {
+      "srcuser": "ccc",
+      "dstuser": "root",
+      "pwd": "/home/ccc",
+      "command": "/usr/bin/cat /etc/shadow"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:35.534+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 8,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619515.12658001",
+    "full_log": "Nov  2 20:38:35 bastion sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:35",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root(uid=0)",
+      "uid": "1000"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:35.536+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 7,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619515.12658437",
+    "full_log": "Nov  2 20:38:35 bastion sudo: pam_unix(sudo:session): session closed for user root",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:35",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:35.544+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 8,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619515.12658812",
+    "full_log": "Nov  2 20:38:35 bastion sshd[2651]: pam_unix(sshd:session): session closed for user ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:35",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.401+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 7,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12660548",
+    "full_log": "Nov  2 20:38:36 bastion sshd[2672]: Accepted password for ccc from 192.168.0.108 port 38916 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "38916",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.401+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 9,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12661001",
+    "full_log": "Nov  2 20:38:36 bastion sshd[2672]: pam_unix(sshd:session): session opened for user ccc(uid=1000) by (uid=0)",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc(uid=1000)",
+      "uid": "0"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.411+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 9,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12661441",
+    "full_log": "Nov  2 20:38:36 bastion sshd[2672]: pam_unix(sshd:session): session closed for user ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.414+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 8,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12661820",
+    "full_log": "Nov  2 20:38:36 bastion sshd[2687]: Accepted password for ccc from 192.168.0.108 port 38920 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "38920",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.416+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 10,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12662273",
+    "full_log": "Nov  2 20:38:36 bastion sshd[2687]: pam_unix(sshd:session): session opened for user ccc(uid=1000) by (uid=0)",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc(uid=1000)",
+      "uid": "0"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.421+0000",
+    "rule": {
+      "level": 3,
+      "description": "Successful sudo to ROOT executed.",
+      "id": "5402",
+      "mitre": {
+        "id": [
+          "T1548.003"
+        ],
+        "tactic": [
+          "Privilege Escalation",
+          "Defense Evasion"
+        ],
+        "technique": [
+          "Sudo and Sudo Caching"
+        ]
+      },
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sudo"
+      ],
+      "pci_dss": [
+        "10.2.5",
+        "10.2.2"
+      ],
+      "gpg13": [
+        "7.6",
+        "7.8",
+        "7.13"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AC.6"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12662713",
+    "full_log": "Nov  2 20:38:36 bastion sudo:      ccc : PWD=/home/ccc ; USER=root ; COMMAND=/usr/sbin/useradd -m -s /bin/bash book08-user",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sudo",
+      "name": "sudo",
+      "ftscomment": "First time user executed the sudo command"
+    },
+    "data": {
+      "srcuser": "ccc",
+      "dstuser": "root",
+      "pwd": "/home/ccc",
+      "command": "/usr/sbin/useradd -m -s /bin/bash book08-user"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.428+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 11,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12663249",
+    "full_log": "Nov  2 20:38:36 bastion sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root(uid=0)",
+      "uid": "1000"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.431+0000",
+    "rule": {
+      "level": 8,
+      "description": "New group added to the system.",
+      "id": "5901",
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "adduser"
+      ],
+      "pci_dss": [
+        "10.2.7",
+        "10.2.5",
+        "8.1.2"
+      ],
+      "gpg13": [
+        "4.13"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b",
+        "164.312.a.2.I",
+        "164.312.a.2.II"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AC.2",
+        "IA.4"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12663685",
+    "full_log": "Nov  2 20:38:36 bastion useradd[2701]: new group: name=book08-user, GID=1001",
+    "predecoder": {
+      "program_name": "useradd",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "useradd"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.433+0000",
+    "rule": {
+      "level": 8,
+      "description": "New user added to the system.",
+      "id": "5902",
+      "mitre": {
+        "id": [
+          "T1136"
+        ],
+        "tactic": [
+          "Persistence"
+        ],
+        "technique": [
+          "Create Account"
+        ]
+      },
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "adduser"
+      ],
+      "pci_dss": [
+        "10.2.7",
+        "10.2.5",
+        "8.1.2"
+      ],
+      "gpg13": [
+        "4.13"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b",
+        "164.312.a.2.I",
+        "164.312.a.2.II"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AC.2",
+        "IA.4"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12664161",
+    "full_log": "Nov  2 20:38:36 bastion useradd[2701]: new user: name=book08-user, UID=1001, GID=1001, home=/home/book08-user, shell=/bin/bash, from=none",
+    "predecoder": {
+      "program_name": "useradd",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "useradd",
+      "name": "useradd"
+    },
+    "data": {
+      "dstuser": "book08-user",
+      "uid": "1001",
+      "gid": "1001",
+      "home": "/home/book08-user",
+      "shell": "/bin/bash,"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.435+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 10,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12664777",
+    "full_log": "Nov  2 20:38:36 bastion sudo: pam_unix(sudo:session): session closed for user root",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.438+0000",
+    "rule": {
+      "level": 3,
+      "description": "Successful sudo to ROOT executed.",
+      "id": "5402",
+      "mitre": {
+        "id": [
+          "T1548.003"
+        ],
+        "tactic": [
+          "Privilege Escalation",
+          "Defense Evasion"
+        ],
+        "technique": [
+          "Sudo and Sudo Caching"
+        ]
+      },
+      "firedtimes": 3,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sudo"
+      ],
+      "pci_dss": [
+        "10.2.5",
+        "10.2.2"
+      ],
+      "gpg13": [
+        "7.6",
+        "7.8",
+        "7.13"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AC.6"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12665152",
+    "full_log": "Nov  2 20:38:36 bastion sudo:      ccc : PWD=/home/ccc ; USER=root ; COMMAND=/usr/bin/passwd -S book08-user",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sudo",
+      "name": "sudo",
+      "ftscomment": "First time user executed the sudo command"
+    },
+    "data": {
+      "srcuser": "ccc",
+      "dstuser": "root",
+      "pwd": "/home/ccc",
+      "command": "/usr/bin/passwd -S book08-user"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.445+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 12,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12665658",
+    "full_log": "Nov  2 20:38:36 bastion sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root(uid=0)",
+      "uid": "1000"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.447+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 11,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12666094",
+    "full_log": "Nov  2 20:38:36 bastion sudo: pam_unix(sudo:session): session closed for user root",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.454+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 12,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12666469",
+    "full_log": "Nov  2 20:38:36 bastion sshd[2687]: pam_unix(sshd:session): session closed for user ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:36",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.456+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 9,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12666848",
+    "full_log": "Nov  2 20:38:37 bastion sshd[2714]: Accepted password for ccc from 192.168.0.108 port 38922 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "38922",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.459+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 13,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12667301",
+    "full_log": "Nov  2 20:38:37 bastion sshd[2714]: pam_unix(sshd:session): session opened for user ccc(uid=1000) by (uid=0)",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc(uid=1000)",
+      "uid": "0"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.463+0000",
+    "rule": {
+      "level": 3,
+      "description": "Successful sudo to ROOT executed.",
+      "id": "5402",
+      "mitre": {
+        "id": [
+          "T1548.003"
+        ],
+        "tactic": [
+          "Privilege Escalation",
+          "Defense Evasion"
+        ],
+        "technique": [
+          "Sudo and Sudo Caching"
+        ]
+      },
+      "firedtimes": 4,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sudo"
+      ],
+      "pci_dss": [
+        "10.2.5",
+        "10.2.2"
+      ],
+      "gpg13": [
+        "7.6",
+        "7.8",
+        "7.13"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AC.6"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12667741",
+    "full_log": "Nov  2 20:38:37 bastion sudo:      ccc : PWD=/home/ccc ; USER=root ; COMMAND=/usr/sbin/usermod -aG sudo book08-user",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sudo",
+      "name": "sudo",
+      "ftscomment": "First time user executed the sudo command"
+    },
+    "data": {
+      "srcuser": "ccc",
+      "dstuser": "root",
+      "pwd": "/home/ccc",
+      "command": "/usr/sbin/usermod -aG sudo book08-user"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.471+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 14,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12668263",
+    "full_log": "Nov  2 20:38:37 bastion sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root(uid=0)",
+      "uid": "1000"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.478+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 13,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12668699",
+    "full_log": "Nov  2 20:38:37 bastion sudo: pam_unix(sudo:session): session closed for user root",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:37.485+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 14,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619517.12669074",
+    "full_log": "Nov  2 20:38:37 bastion sshd[2714]: pam_unix(sshd:session): session closed for user ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:39.401+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 10,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619519.12669453",
+    "full_log": "Nov  2 20:38:37 bastion sshd[2736]: Accepted password for ccc from 192.168.0.108 port 38924 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "38924",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:39.402+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 15,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619519.12669906",
+    "full_log": "Nov  2 20:38:37 bastion sshd[2736]: pam_unix(sshd:session): session opened for user ccc(uid=1000) by (uid=0)",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc(uid=1000)",
+      "uid": "0"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:39.406+0000",
+    "rule": {
+      "level": 3,
+      "description": "Successful sudo to ROOT executed.",
+      "id": "5402",
+      "mitre": {
+        "id": [
+          "T1548.003"
+        ],
+        "tactic": [
+          "Privilege Escalation",
+          "Defense Evasion"
+        ],
+        "technique": [
+          "Sudo and Sudo Caching"
+        ]
+      },
+      "firedtimes": 5,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sudo"
+      ],
+      "pci_dss": [
+        "10.2.5",
+        "10.2.2"
+      ],
+      "gpg13": [
+        "7.6",
+        "7.8",
+        "7.13"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AC.6"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619519.12670346",
+    "full_log": "Nov  2 20:38:37 bastion sudo:      ccc : PWD=/home/ccc ; USER=root ; COMMAND=/usr/sbin/userdel -r book08-user",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sudo",
+      "name": "sudo",
+      "ftscomment": "First time user executed the sudo command"
+    },
+    "data": {
+      "srcuser": "ccc",
+      "dstuser": "root",
+      "pwd": "/home/ccc",
+      "command": "/usr/sbin/userdel -r book08-user"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:39.414+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session opened.",
+      "id": "5501",
+      "mitre": {
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ],
+        "technique": [
+          "Valid Accounts"
+        ]
+      },
+      "firedtimes": 16,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog",
+        "authentication_success"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619519.12670856",
+    "full_log": "Nov  2 20:38:37 bastion sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root(uid=0)",
+      "uid": "1000"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:39.416+0000",
+    "rule": {
+      "level": 3,
+      "description": "Group (or user) deleted from the system.",
+      "id": "5903",
+      "mitre": {
+        "id": [
+          "T1531"
+        ],
+        "tactic": [
+          "Impact"
+        ],
+        "technique": [
+          "Account Access Removal"
+        ]
+      },
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "adduser"
+      ],
+      "pci_dss": [
+        "10.2.7",
+        "10.2.5",
+        "8.1.2"
+      ],
+      "gpg13": [
+        "4.13"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b",
+        "164.312.a.2.I",
+        "164.312.a.2.II"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AC.2",
+        "IA.4"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619519.12671292",
+    "full_log": "Nov  2 20:38:37 bastion userdel[2750]: delete user 'book08-user'",
+    "predecoder": {
+      "program_name": "userdel",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "name": "open-userdel"
+    },
+    "data": {
+      "srcuser": "book08-user"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:39.428+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 15,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619519.12671766",
+    "full_log": "Nov  2 20:38:37 bastion sudo: pam_unix(sudo:session): session closed for user root",
+    "predecoder": {
+      "program_name": "sudo",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "root"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T11:38:39.436+0000",
+    "rule": {
+      "level": 3,
+      "description": "PAM: Login session closed.",
+      "id": "5502",
+      "firedtimes": 16,
+      "mail": false,
+      "groups": [
+        "pam",
+        "syslog"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "gpg13": [
+        "7.8",
+        "7.9"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619519.12672141",
+    "full_log": "Nov  2 20:38:37 bastion sshd[2736]: pam_unix(sshd:session): session closed for user ccc",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:38:37",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "pam",
+      "name": "pam"
+    },
+    "data": {
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  }
+]

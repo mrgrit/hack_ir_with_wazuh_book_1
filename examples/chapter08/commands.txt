@@ -1,0 +1,364 @@
+# C08-01 | Windows · 터미널
+# ssh의 기본 구문은 ssh 사용자@주소이다. @ 앞은 원격 계정, 뒤는 서버 주소이며 포트를 생략하면 22를 사용한다.
+ssh ccc@192.168.0.107
+# 확인: kt66 VM의 ccc 셸이 열린다.
+
+# C08-02 | kt66 VM · ccc 호스트 셸
+# docker ps는 실행 중인 컨테이너를, docker port는 공개한 포트 연결을 표시한다.
+docker ps
+docker port kt66-bastion
+# 확인: kt66-bastion과 kt66-siem이 실행 중이고 bastion의 22/tcp가 호스트 2204로 연결된다.
+
+# C08-03 | kt66 VM · ccc 호스트 셸
+# docker exec는 실행 중인 컨테이너에서 프로그램을 시작한다. -i는 입력 유지, -t는 터미널 할당이며 /bin/bash는 대화형 셸이다.
+docker exec -it kt66-bastion /bin/bash
+# 확인: bastion의 root 셸이 열린다. 이후 명령을 VM 호스트에서 실행하지 않도록 hostname으로 위치를 확인한다.
+
+# C08-04 | kt66-bastion · root 셸
+# hostname은 시스템 이름, sshd -T는 유효 설정을 출력한다. 파이프(|)는 출력을 grep에 전달한다. grep -E는 확장 정규표현식으로 줄을 고른다. 작은따옴표는 검색식의 셸 해석을 막는다. ^는 줄 시작, 괄호는 묶음, 괄호 안의 |는 또는(OR)이다. 끝 공백은 항목 이름을 구분한다. 줄 끝 역슬래시(\)는 다음 줄을 같은 명령으로 잇는다.
+hostname
+/usr/sbin/sshd -T | grep -E \
+'^(port|permitrootlogin|passwordauthentication|maxauthtries) '
+# 확인: hostname은 bastion이며 port 22, permitrootlogin no, passwordauthentication yes, maxauthtries 6을 확인한다. 값이 다르면 이후 실습 조건과 먼저 대조한다.
+
+# C08-05 | kt66-bastion · root 셸
+# passwd는 암호와 계정의 암호 상태를 관리한다. -S는 상태만 표시하며 암호를 바꾸지 않는다. wazuh-control status는 에이전트 프로세스 상태를 확인한다. tail -n 10은 파일 끝 10줄을 읽는다.
+passwd -S root
+/var/ossec/bin/wazuh-control status
+tail -n 10 /var/log/auth.log
+# 확인: root 상태 L은 암호 잠금이다. 에이전트 프로세스가 실행 중이고 auth.log에 sshd 기록이 있어야 한다.
+
+# C08-06 | Windows · 별도 터미널
+# 공격자 VM의 att 계정으로 접속한다.
+ssh att@192.168.0.108
+# 확인: att 셸이 열리면 이후 Hydra 명령을 이 창에서 실행한다.
+
+# C08-07 | 공격자 VM · att 셸
+# command -v는 현재 셸에서 실행할 명령의 위치를 찾는다.
+command -v ssh
+command -v hydra
+# 확인: ssh와 hydra의 경로가 나오면 준비된 상태이다. Hydra 경로가 없을 때만 아래 설치를 진행한다.
+
+# C08-08 | 공격자 VM · att 셸
+# sudo는 허용된 관리자 권한으로 명령을 실행한다. apt-get은 Ubuntu 패키지 관리 도구이다. update는 목록 갱신, install은 설치, -y는 설치 확인에 자동 동의한다. hydra -h는 도움말을 표시한다.
+sudo apt-get update
+sudo apt-get install -y hydra
+hydra -h
+# 확인: 설치 오류가 없어야 한다. 촬영 환경에서는 Hydra 9.2를 사용했다. update가 실패하면 VM의 인터넷·DNS 연결부터 확인한다.
+
+# C08-09 | 공격자 VM · att 셸
+# 물결표(~)는 현재 계정의 홈 디렉터리이다. 먼저 실습 디렉터리가 있는지 확인한다.
+ls -ld ~/book08
+# 확인: 없다는 메시지가 나오면 다음 명령으로 만든다. 이미 있으면 파일을 확인하고 기존 목록을 덮어쓰지 않는다.
+
+# C08-10 | 공격자 VM · att 셸
+# 새로 준비한 환경에서 실습 디렉터리를 만든다. 이미 만든 독자는 cd와 pwd만 실행한다.
+mkdir ~/book08
+cd ~/book08
+pwd
+# 확인: /home/att/book08이 표시된다.
+
+# C08-11 | 공격자 VM · att 셸
+# -p 2204는 접속할 서버 포트를 지정한다. 이 접속은 VM 관리용 계정이 아니라 bastion의 ccc 계정이다. 첫 접속이면 다음 지면의 방법으로 서버 키 지문을 대조한다.
+ssh -p 2204 ccc@192.168.0.107
+# 확인: bastion의 기본 암호 ccc로 로그인한다. 실패하면 주소·포트·공개 포트·암호 순서로 확인한다.
+
+# C08-12 | kt66-bastion · root 셸
+# ssh-keygen은 SSH 키를 관리하는 도구이다. -l은 키 지문 표시, -f는 읽을 파일이다. bastion 관리 창에서 공개 키를 읽어 공격자 창의 첫 접속 안내와 대조한다.
+ssh-keygen -lf \
+/var/lib/bastion/ssh-host-keys/ssh_host_ed25519_key.pub
+# 확인: 두 창의 SHA256 지문이 같아야 한다. 다르면 승인하지 말고 대상 VM과 포트를 확인한다.
+
+# C08-13 | kt66-bastion · SSH로 접속한 ccc 셸
+# hostname은 접속한 시스템 이름, whoami는 현재 유효 사용자 이름, id는 사용자·그룹 번호를 표시한다. exit는 현재 셸을 닫는다.
+hostname
+whoami
+id
+exit
+# 확인: bastion, ccc, uid=1000(ccc)를 확인한 뒤 공격자 VM으로 돌아간다. sudo·docker 그룹은 이 환경의 ccc 권한이며 일반 사용자에게 당연히 주어지는 권한이 아니다.
+
+# C08-14 | kt66-bastion · root 셸
+# bastion 관리 창에서 방금 접속한 인증 로그를 읽는다.
+tail -n 20 /var/log/auth.log
+# 확인: Accepted password for ccc, 출발지 .108과 임시 출발지 포트를 찾는다. sshd 뒤 대괄호는 프로세스 ID이다.
+
+# C08-15 | 공격자 VM · att 셸
+# 실습 위치와 대상 파일을 확인한다.
+cd ~/book08
+ls -l pw-fail.txt
+# 확인: pw-fail.txt가 없을 때 다음 입력을 진행한다. 이미 있으면 cat으로 내용을 확인하고 자신이 만든 목록인지 확인한다.
+
+# C08-16 | 공격자 VM · att 셸
+# cat은 파일 내용을 출력한다. wc -l은 줄 수를 센다.
+printf '%s\n' \
+book08-wrong01 book08-wrong02 book08-wrong03 \
+book08-wrong04 book08-wrong05 book08-wrong06 \
+book08-wrong07 book08-wrong08 book08-wrong09 \
+book08-wrong10 book08-wrong11 book08-wrong12 \
+> pw-fail.txt
+cat pw-fail.txt
+wc -l pw-fail.txt
+# 확인: 틀린 암호 후보 12개가 보이고 줄 수는 12이다. 실제 ccc 암호를 이 목록에 넣지 않는다.
+
+# C08-17 | 공격자 VM · att 셸
+# timeout은 뒤 명령의 실행 시간을 제한한다. 45s는 45초이며 시간 만료 종료 코드는 124이다. Hydra -l은 계정 하나, -P는 암호 파일, -t 4는 최대 병렬 작업 수, -w 5는 응답 대기 시간(초)이다. ssh:// 뒤에 대상 주소와 포트를 붙인다.
+timeout 45s hydra -l ccc -P pw-fail.txt \
+-t 4 -w 5 ssh://192.168.0.107:2204
+# 확인: 이번 실행은 12개 후보를 시험하고 0 valid password found로 끝났다. 접속 오류나 시간 만료는 암호 후보 전체가 거부됐다는 뜻이 아니다. 오류가 나면 중단하고 서버 로그를 확인한다.
+
+# C08-18 | kt66-bastion · root 셸
+# bastion 관리 창에서 대응 기록과 현재 방화벽 규칙을 읽는다. iptables는 Linux 패킷 필터 규칙을 관리하는 도구이며 -S는 규칙을 출력한다. 여기서는 규칙을 변경하지 않는다.
+tail -n 25 /var/ossec/logs/active-responses.log
+iptables -S
+# 확인: firewall-drop의 command가 add인지 delete인지, parameters 안의 출발지 주소가 .108인지 확인한다. 규칙 목록에서도 해당 출발지의 DROP 조건을 대조한다.
+
+# C08-19 | kt66-bastion · root 셸
+# getent는 시스템의 이름 서비스 설정에 따라 계정·그룹 정보를 조회한다. passwd 뒤에는 조회할 계정 이름을 쓴다.
+getent passwd book08-none1
+getent passwd book08-none2
+getent passwd book08-none3
+# 확인: 세 이름 모두 출력이 없어야 한다. 이미 존재하는 이름이 있으면 공격 목록에 넣지 않고 새 이름을 정해 동일하게 확인한다.
+
+# C08-20 | 공격자 VM · att 셸
+# ls에서 파일이 없거나 이번 실습에서 만든 파일임을 확인한 후 printf를 실행한다.
+cd ~/book08
+ls -l users-invalid.txt
+printf '%s\n' book08-none1 book08-none2 \
+book08-none3 > users-invalid.txt
+cat users-invalid.txt
+# 확인: 서로 다른 계정 이름 3개가 한 줄씩 저장된다.
+
+# C08-21 | 공격자 VM · att 셸
+# -L은 계정 목록, 소문자 -p는 공통 암호 하나이다. 최대 3개 작업으로 짧은 목록을 시험하고 30초를 넘기면 중단한다.
+timeout 30s hydra -L users-invalid.txt \
+-p book08-wrong -t 3 -w 5 \
+ssh://192.168.0.107:2204
+# 확인: 이번 실행은 유효 암호를 찾지 못했다. 존재하지 않는 계정인지 여부는 서버의 Invalid user 원문과 사전 getent 결과로 확인한다.
+
+# C08-22 | 공격자 VM · att 셸
+# 파일이 없거나 자신이 만든 실습 파일임을 확인한 뒤 후보 네 개를 저장한다. 마지막 ccc는 bastion의 기본 실습 암호이다.
+cd ~/book08
+ls -l pw-success.txt
+printf '%s\n' book08-bad1 book08-bad2 \
+book08-bad3 ccc > pw-success.txt
+cat pw-success.txt
+# 확인: 네 줄을 확인한다. 기본 암호를 바꾼 환경에서는 마지막 줄만 자신의 실습 암호로 바꾼다.
+
+# C08-23 | 공격자 VM · att 셸
+# -t 1은 한 작업으로 후보를 순서대로 시험한다. -f는 이 대상에서 유효한 계정·암호를 찾으면 중단한다.
+timeout 35s hydra -l ccc -P pw-success.txt \
+-t 1 -w 5 -f ssh://192.168.0.107:2204
+# 확인: 이번 실행은 ccc / ccc 한 쌍을 찾고 종료했다. 성공 출력에는 암호가 포함되므로 조사 보고서에는 암호 자체를 복사하지 않는다.
+
+# C08-24 | 공격자 VM · att 셸
+# 발견한 실습 암호로 직접 접속해 인증 이후 상태를 확인한다.
+ssh -p 2204 ccc@192.168.0.107
+# 확인: bastion 셸이 열리면 아래 명령을 한 줄씩 실행한다.
+
+# C08-25 | kt66-bastion · SSH로 접속한 ccc 셸
+# 서버 이름과 유효 계정·그룹을 확인하고 접속을 종료한다.
+hostname
+whoami
+id
+exit
+# 확인: bastion과 ccc가 확인되며 공격자 VM으로 돌아간다.
+
+# C08-26 | kt66-bastion · root 셸
+# 백업 경로에 기존 파일이 없는지 확인하고 root의 초기 상태를 적는다. 기존 백업이 있으면 덮어쓰지 말고 이전 실습의 복구 여부부터 확인한다.
+ls -l /root/book08-sshd_config.before \
+/root/book08-shadow.before
+passwd -S root
+# 확인: 두 백업이 없고 기본 환경의 root 상태가 L이어야 한다. 상태가 다르면 그 상태를 별도로 기록한 뒤 복구 기준을 정한다.
+
+# C08-27 | kt66-bastion · root 셸
+# cp는 파일 복사, -p는 권한·소유자·시각 보존이다. chmod는 권한을 바꾸며 600은 소유자만 읽고 쓸 수 있게 한다. shadow에는 암호 해시가 있으므로 백업도 root만 읽게 한다.
+cp -p /etc/ssh/sshd_config \
+/root/book08-sshd_config.before
+cp -p /etc/shadow /root/book08-shadow.before
+chmod 600 /root/book08-shadow.before
+# 확인: 백업 두 개가 생긴다. shadow 내용은 화면·보고서·저장소에 복사하지 않는다.
+
+# C08-28 | kt66-bastion · root 셸
+# cmp는 두 파일의 바이트를 비교한다. 각 명령 바로 다음에 echo $?를 입력하면 종료 코드를 볼 수 있다. echo는 값을 출력하고 $?는 직전 명령의 종료 코드이다.
+cmp /etc/ssh/sshd_config \
+/root/book08-sshd_config.before
+cmp /etc/shadow /root/book08-shadow.before
+# 확인: 출력이 없고 각각 종료 코드 0이면 내용이 같다. 차이가 있으면 설정 변경을 진행하지 않고 백업을 다시 확인한다.
+
+# C08-29 | kt66-bastion · root 셸
+# vim은 터미널의 텍스트 편집기이다. Esc 뒤 /^PermitRootLogin no$와 Enter로 활성 줄을 찾는다. ^는 줄 시작, $는 줄 끝이다. cc로 그 줄을 교체하는 입력 모드를 열고 PermitRootLogin yes를 입력한다. Esc 뒤 :wq와 Enter로 저장·종료한다. 취소는 Esc 뒤 :q!와 Enter이다.
+vim /etc/ssh/sshd_config
+# 확인: PermitRootLogin yes가 유효 설정으로 적용되는지는 다음 지면에서 확인한다. 같은 항목을 파일 끝에 중복 추가하지 않는다.
+
+# C08-30 | kt66-bastion · root 셸
+# passwd 뒤 root를 지정하면 root 암호를 변경한다. New password와 재입력 프롬프트에 이 실습에서만 쓸 임시 암호를 입력한다.
+passwd root
+# 확인: 암호 변경 성공 안내를 확인한다. 예시는 Kt66Root!를 사용하며 원상복구 후에는 사용할 수 없어야 한다.
+
+# C08-31 | kt66-bastion · root 셸
+# 소문자 -t는 설정 구문과 키의 유효성을 검사한다. 대문자 -T는 유효 설정을 출력하며 -C는 Match 판정에 사용할 접속 조건이다. user는 대상 계정, addr는 접속자 주소, host는 접속자 호스트 이름이다. 실제 환경의 Match Host 조건이 있으면 서버가 인식하는 이름으로 대조한다.
+/usr/sbin/sshd -t
+/usr/sbin/sshd -T -C \
+user=root,addr=192.168.0.108,host=attacker \
+| grep -E '^(permitrootlogin|passwordauthentication) '
+# 확인: -t가 오류 없이 끝나고 permitrootlogin yes, passwordauthentication yes를 확인한다. 오류가 있으면 reload하지 않고 설정을 고친다.
+
+# C08-32 | kt66-bastion · root 셸
+# service는 서비스 제어 명령을 호출한다. ssh reload는 SSH 서버에 설정을 다시 읽게 한다. 기존 관리 셸은 유지한 채 새 접속으로 적용 여부를 확인한다.
+service ssh reload
+passwd -S root
+# 확인: reload 성공 안내와 root의 암호 설정 상태 P를 확인한다.
+
+# C08-33 | 공격자 VM · att 셸
+# bastion의 root 계정으로 새 SSH 연결을 열고 방금 정한 임시 암호를 입력한다.
+ssh -p 2204 root@192.168.0.107
+# 확인: root 셸이 열리면 whoami와 id를 실행한다. root와 uid=0(root)를 확인한 뒤 exit로 즉시 접속을 종료한다.
+
+# C08-34 | kt66-bastion · root 셸
+# 백업 두 개가 있는지 확인한 뒤 설정과 암호 데이터 파일을 변경 전 내용으로 되돌린다. 이 구간에서 다른 계정·암호 변경을 하지 않았다는 조건이 필요하다.
+ls -l /root/book08-sshd_config.before \
+/root/book08-shadow.before
+cp -p /root/book08-sshd_config.before \
+/etc/ssh/sshd_config
+cp -p /root/book08-shadow.before /etc/shadow
+# 확인: 복사 오류가 없어야 한다. root를 잠그는 것만으로 임시 암호 해시가 이전 상태로 돌아오는 것은 아니므로 백업 내용까지 복구한다.
+
+# C08-35 | kt66-bastion · root 셸
+# 두 파일이 원본 백업과 일치하는지 확인한 뒤 구문 검사와 reload를 진행한다. 각 cmp는 출력 없음·종료 코드 0이어야 한다.
+cmp /etc/ssh/sshd_config \
+/root/book08-sshd_config.before
+cmp /etc/shadow /root/book08-shadow.before
+/usr/sbin/sshd -t
+service ssh reload
+# 확인: 복구된 설정으로 reload가 성공한다. 어느 단계든 오류가 있으면 관리 셸을 닫지 말고 해당 파일부터 확인한다.
+
+# C08-36 | kt66-bastion · root 셸
+# root 암호 상태와 유효 SSH 정책을 읽는다. 여기서 grep은 permitrootlogin 문자열이 있는 줄을 선택한다.
+passwd -S root
+/usr/sbin/sshd -T | grep permitrootlogin
+# 확인: 초기에 기록한 root 상태 L과 permitrootlogin no로 돌아와야 한다.
+
+# C08-37 | 공격자 VM · att 셸
+# -o는 SSH 설정 항목을 명령행에서 지정한다. NumberOfPasswordPrompts=1은 암호 질문을 한 번으로 제한한다. 임시 암호로 root 접속을 한 번 확인한다.
+ssh -p 2204 -o NumberOfPasswordPrompts=1 \
+root@192.168.0.107
+# 확인: 복구한 기본 환경에서는 Permission denied로 거부된다. 공개 키가 별도로 등록된 환경이라면 인증 방식과 유효 설정도 함께 확인한다.
+
+# C08-38 | 공격자 VM · att 셸
+# 일반 실습 계정의 기존 인증이 유지되는지 새 연결로 확인한다.
+ssh -p 2204 ccc@192.168.0.107
+# 확인: ccc로 접속되면 hostname과 id로 bastion·ccc를 확인하고 exit로 나온다.
+
+# C08-39 | kt66-bastion · root 셸
+# rm은 파일을 삭제하며 -i는 파일마다 확인을 묻는다. 설정·암호 상태와 새 접속 확인을 모두 마친 후 이번에 만든 백업만 삭제한다.
+rm -i /root/book08-sshd_config.before \
+/root/book08-shadow.before
+# 확인: 각 경로를 읽고 y로 확인한다. ls -l로 두 경로를 다시 조회했을 때 없어야 한다.
+
+# C08-40 | 공격자 VM · att 셸
+# root 설정의 원상복구를 마친 뒤 일반 계정으로 접속한다.
+ssh -p 2204 ccc@192.168.0.107
+# 확인: bastion의 ccc 셸이 열린다.
+
+# C08-41 | kt66-bastion · SSH로 접속한 ccc 셸
+# sudo -l은 현재 사용자가 실행할 수 있는 명령을 나열한다. 실행 전 계정과 허용 정책을 확인한다.
+id
+sudo -l
+# 확인: 촬영 환경의 ccc에는 (ALL) NOPASSWD: ALL이 있다. 이는 암호 재입력 없이 허용된 대상 계정으로 모든 명령을 실행할 수 있는 실습용 설정이다.
+
+# C08-42 | kt66-bastion · SSH로 접속한 ccc 셸
+# sudo -i는 대상 사용자의 로그인 환경을 사용한다. 뒤에 id를 붙였으므로 해당 명령을 실행한 뒤 돌아온다. 명령 없는 sudo -i는 대화형 셸을 열어 exit가 필요하다.
+sudo -i id
+id
+# 확인: 첫 id는 uid=0(root), 다음 id는 uid=1000(ccc)이다. sudo -i id 실행 뒤 계속 root 셸에 머문다고 해석하지 않는다.
+
+# C08-43 | kt66-bastion · SSH로 접속한 ccc 셸
+# shadow는 암호 해시와 암호 만료 정보를 담는 보호된 파일이다. ls로 존재와 권한을 확인한 뒤 root 권한의 cat으로 읽는다. >는 cat의 출력을 /dev/null로 보내고 /dev/null은 받은 데이터를 버린다. 해시는 화면에 표시하지 않는다.
+ls -l /etc/shadow
+sudo cat /etc/shadow > /dev/null
+echo $?
+# 확인: echo $?가 0이면 읽기 명령이 성공했다. 실제 내용 확인·복사는 하지 않아도 sudo 실행 기록은 남는다.
+
+# C08-44 | 공격자 VM · att 셸
+# 공격자 창에서 bastion의 일반 실습 계정으로 들어간다.
+ssh -p 2204 ccc@192.168.0.107
+# 확인: hostname과 id로 위치·계정을 확인한다.
+
+# C08-45 | kt66-bastion · SSH로 접속한 ccc 셸
+# 계정·동명 그룹·홈 디렉터리의 사전 존재 여부를 확인한다. group 데이터베이스는 그룹 번호와 구성원을 보여 준다.
+getent passwd book08-user
+getent group book08-user
+ls -ld /home/book08-user
+# 확인: 계정·그룹 조회는 출력이 없고 홈은 없다는 메시지가 나와야 한다. 하나라도 기존 항목이 있으면 여기서 중단하고 별도 이름을 정한다.
+
+# C08-46 | kt66-bastion · SSH로 접속한 ccc 셸
+# useradd는 로컬 계정을 만든다. -m은 홈 디렉터리 생성, -s는 로그인 셸 지정이다. 앞 지면에서 대상 이름·경로가 없는 것을 확인한 뒤 실행한다.
+sudo useradd -m -s /bin/bash book08-user
+getent passwd book08-user
+id book08-user
+sudo passwd -S book08-user
+# 확인: 이번 환경은 UID·GID 1001, 홈 /home/book08-user, 셸 /bin/bash로 생성됐다. passwd -S의 L은 암호 잠금이다. 번호는 시스템 상태에 따라 달라진다.
+
+# C08-47 | kt66-bastion · SSH로 접속한 ccc 셸
+# usermod는 기존 계정 속성을 변경한다. -G는 보조 그룹 목록, -a는 기존 보조 그룹에 추가한다는 뜻이다. -a를 빼고 -G만 사용하면 기존 목록을 교체할 수 있다.
+sudo usermod -aG sudo book08-user
+id book08-user
+getent group sudo
+# 확인: id에 27(sudo)가 추가되고 sudo 그룹 구성원에 book08-user가 보인다. 그룹 번호는 환경별로 다를 수 있다.
+
+# C08-48 | kt66-bastion · SSH로 접속한 ccc 셸
+# grep -F는 검색어를 정규표현식이 아닌 고정 문자열로 찾는다. 작은따옴표는 하이픈 등을 포함한 이름을 한 인수로 전달한다. auth.log를 읽을 권한 때문에 sudo를 사용한다.
+sudo grep -F 'book08-user' /var/log/auth.log
+# 확인: useradd의 new user와 usermod의 add 문구를 찾는다. 이 조회 명령 자체도 sudo 기록으로 남으므로 조사자의 활동 시각을 기록한다.
+
+# C08-49 | kt66-bastion · SSH로 접속한 ccc 셸
+# 삭제할 대상이 이번 실습 계정인지 다시 확인한다. userdel은 계정을 삭제하고 -r은 홈과 메일 스풀도 제거한다. 기존 사용자나 기존 자료에 적용하지 않는다.
+getent passwd book08-user
+id book08-user
+sudo userdel -r book08-user
+# 확인: 계정 삭제가 완료된다. 이번 환경에서는 메일 스풀이 없다는 안내가 나왔으므로 아래 상태 조회로 실제 삭제 결과를 확인했다.
+
+# C08-50 | kt66-bastion · SSH로 접속한 ccc 셸
+# getent 조회의 종료 코드 2는 지정한 키를 찾지 못했음을 뜻한다. 홈과 sudo 그룹에서도 잔여 항목을 확인한다.
+getent passwd book08-user
+echo $?
+getent group book08-user
+echo $?
+ls -ld /home/book08-user
+getent group sudo
+# 확인: 계정과 동명 그룹 조회는 출력 없음·코드 2, 홈은 없음, sudo 그룹에는 기존 ccc만 남아야 한다. 결과가 다르면 열린 세션·프로세스와 삭제 오류를 확인한다.
+
+# C08-51 | kt66-bastion · root 셸
+# bastion root 관리 셸에서 auth.log 수집 항목을 찾는다. grep -n은 줄 번호, -A 3은 일치 뒤 3줄, -B 2는 앞 2줄을 함께 출력한다. 작은따옴표 안의 경로를 검색한다.
+grep -n -A 3 -B 2 '/var/log/auth.log' \
+/var/ossec/etc/ossec.conf
+# 확인: localfile 안에 location=/var/log/auth.log와 log_format=syslog가 있는지 확인한다. 설정을 바꾸기 전에 에이전트 상태와 실제 파일 기록부터 대조한다.
+
+# C08-52 | bastion 관리 셸 → kt66 VM 호스트
+# bastion 관리 셸에서 exit로 호스트에 나온 뒤 Manager 컨테이너에 들어간다.
+exit
+docker exec -it kt66-siem /bin/bash
+# 확인: 프롬프트와 hostname으로 kt66-siem 내부인지 확인한다.
+
+# C08-53 | kt66-siem · root 셸
+# Manager의 Active Response 설정에서 firewall-drop 연결 항목과 앞뒤 문맥을 읽는다. 꺾쇠를 작은따옴표 안에 넣어 셸의 입출력 기호로 해석되지 않게 한다.
+grep -n -A 6 -B 2 '<command>firewall-drop' \
+/var/ossec/etc/ossec.conf
+# 확인: active-response 안의 location=local, rules_id=5712,5763, timeout=180을 확인한다. 설치가 다르면 그 값을 기준으로 해석한다.
+
+# C08-54 | kt66-siem · root 셸
+# Manager의 확인 작업을 마친다.
+exit
+# 확인: kt66 VM 호스트 셸로 돌아간다.
+
+# C08-55 | 공격자 VM · att 셸
+# 정리할 디렉터리와 목록을 확인한다. ls -a는 숨김 파일도 포함하고 -l은 자세한 정보를 표시한다.
+cd ~/book08
+pwd
+ls -la
+# 확인: /home/att/book08과 자신이 만든 목록 파일을 확인한다. 다른 자료가 있으면 함께 삭제하지 않는다.
+
+# C08-56 | 공격자 VM · att 셸
+# 이번 실습에서 만든 후보 목록만 삭제한다. -i의 질문마다 경로를 확인한 뒤 y로 답한다.
+rm -i pw-fail.txt users-invalid.txt pw-success.txt
+# 확인: ls -l로 파일이 사라졌는지 확인한다. Hydra 중단으로 hydra.restore가 생겼다면 내용을 재실행하지 말고 자신의 중단 기록인지 확인한 뒤 rm -i hydra.restore로 삭제한다.

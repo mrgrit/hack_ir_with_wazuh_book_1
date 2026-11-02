@@ -1,0 +1,3 @@
+cmp /etc/ssh/sshd_config \
+/root/book08-sshd_config.before
+cmp /etc/shadow /root/book08-shadow.before

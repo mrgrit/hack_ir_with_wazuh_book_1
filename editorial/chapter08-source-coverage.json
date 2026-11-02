@@ -1,0 +1,458 @@
+{
+  "chapter": 8,
+  "source_url": "https://docs.google.com/presentation/d/1o0H_2DDHBp8p2HvlSnEPbx6-jdURYzew/edit",
+  "source_pptx_sha256": "b3550f87c2342a43e72ee5ac74c9a884de6aff38631b8c77a2364d0cf5d47099",
+  "numbering": "presentation order, not slide XML part suffix",
+  "scope": [
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "intro": {
+    "presentation_slides": [
+      200,
+      201,
+      202,
+      203
+    ],
+    "section": "8.1",
+    "logical_page_indexes": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      46,
+      47
+    ],
+    "titles": [
+      "8.1  실행 위치와 접속 주소",
+      "8.1  SSH 요청과 로그의 경로",
+      "8.1  컨테이너와 수집 상태 확인",
+      "8.1  서버의 초기 상태 기록",
+      "8.1  공격자 VM에 Hydra 준비",
+      "8.1  목록 파일과 정상 로그인 준비",
+      "8.1  서버 확인과 정상 인증 기록",
+      "8.1  Discover에서 인증 로그 검색",
+      "8.1  원문과 추출 필드를 연결하기",
+      "8.10  확인 문제",
+      "8.10  확인 문제 해설"
+    ],
+    "commands": [
+      "C08-01",
+      "C08-02",
+      "C08-03",
+      "C08-04",
+      "C08-05",
+      "C08-06",
+      "C08-07",
+      "C08-08",
+      "C08-09",
+      "C08-10",
+      "C08-11",
+      "C08-12",
+      "C08-13",
+      "C08-14"
+    ],
+    "queries": [
+      "Q08-01"
+    ]
+  },
+  "sudo_intro": {
+    "presentation_slides": [
+      239
+    ],
+    "used_in": [
+      "8.6",
+      "8.7"
+    ]
+  },
+  "exercises": [
+    {
+      "exercise": 16,
+      "presentation_slides": [
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212
+      ],
+      "section": "8.2",
+      "logical_page_indexes": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "titles": [
+        "8.2  같은 계정에 암호 대입하기",
+        "8.2  인증 시도와 응답 읽기",
+        "8.2  반복 실패 경보의 근거",
+        "8.2  로그 압축으로 필드가 비는 경우",
+        "8.2  자동 대응의 실행 여부 확인",
+        "8.2  조사와 원상복구"
+      ],
+      "commands": [
+        "C08-15",
+        "C08-16",
+        "C08-17",
+        "C08-18"
+      ],
+      "queries": [
+        "Q08-02",
+        "Q08-03"
+      ],
+      "attack": "같은 계정에 잘못된 암호 12개 대입",
+      "collection_investigation_response": "5760·5763, 이전 시험 포함 여부·반복 요약·Active Response add/delete·정상 접속",
+      "correction": "후보 수와 경보 수·공격자 수 구분; 제한 시간과 복구 확인 추가",
+      "source_parts": {
+        "204": "ppt/slides/slide307.xml",
+        "205": "ppt/slides/slide308.xml",
+        "206": "ppt/slides/slide309.xml",
+        "207": "ppt/slides/slide310.xml",
+        "208": "ppt/slides/slide311.xml",
+        "209": "ppt/slides/slide312.xml",
+        "210": "ppt/slides/slide313.xml",
+        "211": "ppt/slides/slide314.xml",
+        "212": "ppt/slides/slide315.xml"
+      }
+    },
+    {
+      "exercise": 17,
+      "presentation_slides": [
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221
+      ],
+      "section": "8.3",
+      "logical_page_indexes": [
+        17,
+        18,
+        19
+      ],
+      "titles": [
+        "8.3  존재하지 않는 계정 대입하기",
+        "8.3  잘못된 계정의 응답과 경보",
+        "8.3  계정 탐색과 방어 판단"
+      ],
+      "commands": [
+        "C08-19",
+        "C08-20",
+        "C08-21"
+      ],
+      "queries": [
+        "Q08-04"
+      ],
+      "attack": "부재를 확인한 세 계정 이름으로 인증 시도",
+      "collection_investigation_response": "5710의 srcuser·srcip와 원문, 5712는 본 시험에서 미관찰",
+      "correction": "원본의 흔한 이름 목록을 실제 부재 확인이 가능한 실습 이름으로 변경",
+      "source_parts": {
+        "213": "ppt/slides/slide316.xml",
+        "214": "ppt/slides/slide317.xml",
+        "215": "ppt/slides/slide318.xml",
+        "216": "ppt/slides/slide319.xml",
+        "217": "ppt/slides/slide320.xml",
+        "218": "ppt/slides/slide321.xml",
+        "219": "ppt/slides/slide322.xml",
+        "220": "ppt/slides/slide323.xml",
+        "221": "ppt/slides/slide324.xml"
+      }
+    },
+    {
+      "exercise": 18,
+      "presentation_slides": [
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229
+      ],
+      "section": "8.4",
+      "logical_page_indexes": [
+        20,
+        21,
+        22,
+        23
+      ],
+      "titles": [
+        "8.4  실패 뒤의 인증 성공 찾기",
+        "8.4  성공 뒤 셸과 기록 확인",
+        "8.4  성공 기록의 연결 정보",
+        "8.4  계정 탈취 판단에 필요한 증거"
+      ],
+      "commands": [
+        "C08-22",
+        "C08-23",
+        "C08-24",
+        "C08-25"
+      ],
+      "queries": [
+        "Q08-05"
+      ],
+      "attack": "틀린 후보 세 개 뒤 기본 실습 암호 인증",
+      "collection_investigation_response": "5760·5715와 출발지 포트·원문·승인 내역·후속 행위",
+      "correction": "사설 IP 제외 제거; 실패 뒤 성공을 탈취로 단정하지 않음",
+      "source_parts": {
+        "222": "ppt/slides/slide325.xml",
+        "223": "ppt/slides/slide326.xml",
+        "224": "ppt/slides/slide327.xml",
+        "225": "ppt/slides/slide328.xml",
+        "226": "ppt/slides/slide329.xml",
+        "227": "ppt/slides/slide330.xml",
+        "228": "ppt/slides/slide331.xml",
+        "229": "ppt/slides/slide332.xml"
+      }
+    },
+    {
+      "exercise": 19,
+      "presentation_slides": [
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238
+      ],
+      "section": "8.5",
+      "logical_page_indexes": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "titles": [
+        "8.5  root 직접 로그인의 조건",
+        "8.5  설정과 암호 상태 백업",
+        "8.5  root 인증을 임시로 허용",
+        "8.5  유효 설정 검사와 재적용",
+        "8.5  직접 로그인과 Wazuh 확인",
+        "8.5  root 설정과 암호 원상복구",
+        "8.5  복구 뒤 새 연결로 확인"
+      ],
+      "commands": [
+        "C08-26",
+        "C08-27",
+        "C08-28",
+        "C08-29",
+        "C08-30",
+        "C08-31",
+        "C08-32",
+        "C08-33",
+        "C08-34",
+        "C08-35",
+        "C08-36",
+        "C08-37",
+        "C08-38",
+        "C08-39"
+      ],
+      "queries": [
+        "Q08-06"
+      ],
+      "attack": "root 직접 인증을 잠깐 허용하고 즉시 복구",
+      "collection_investigation_response": "5715 dstuser=root, uid=0, 설정·shadow 복구 비교·새 root 거부·ccc 접속",
+      "correction": "service ssh reload 사용; 암호 잠금만 하는 복구를 원래 상태 복구로 보완",
+      "source_parts": {
+        "230": "ppt/slides/slide333.xml",
+        "231": "ppt/slides/slide334.xml",
+        "232": "ppt/slides/slide335.xml",
+        "233": "ppt/slides/slide336.xml",
+        "234": "ppt/slides/slide337.xml",
+        "235": "ppt/slides/slide338.xml",
+        "236": "ppt/slides/slide339.xml",
+        "237": "ppt/slides/slide340.xml",
+        "238": "ppt/slides/slide341.xml"
+      }
+    },
+    {
+      "exercise": 20,
+      "presentation_slides": [
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248
+      ],
+      "section": "8.6",
+      "logical_page_indexes": [
+        31,
+        32,
+        33,
+        34
+      ],
+      "titles": [
+        "8.6  sudo 권한과 실행자 조사",
+        "8.6  root 권한 명령 실행",
+        "8.6  sudo 원문과 필드 해석",
+        "8.6  sudo 관찰의 범위와 대응"
+      ],
+      "commands": [
+        "C08-40",
+        "C08-41",
+        "C08-42",
+        "C08-43"
+      ],
+      "queries": [
+        "Q08-07"
+      ],
+      "attack": "ccc에서 sudo -i id 및 보호 파일 읽기",
+      "collection_investigation_response": "5402·5403의 COMMAND·srcuser·dstuser·PWD, 종료 코드·복귀 계정",
+      "correction": "해시 출력 폐기; sudo -i id와 지속 root 셸 구분; FTS 해석 수정",
+      "source_parts": {
+        "240": "ppt/slides/slide343.xml",
+        "241": "ppt/slides/slide344.xml",
+        "242": "ppt/slides/slide345.xml",
+        "243": "ppt/slides/slide346.xml",
+        "244": "ppt/slides/slide347.xml",
+        "245": "ppt/slides/slide348.xml",
+        "246": "ppt/slides/slide349.xml",
+        "247": "ppt/slides/slide350.xml",
+        "248": "ppt/slides/slide351.xml"
+      }
+    },
+    {
+      "exercise": 21,
+      "presentation_slides": [
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257
+      ],
+      "section": "8.7",
+      "logical_page_indexes": [
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "titles": [
+        "8.7  새 계정과 권한 변경 조사",
+        "8.7  계정 생성과 암호 상태",
+        "8.7  생성 필드와 그룹 추가",
+        "8.7  실행 요청과 변경 결과 대조",
+        "8.7  계정 삭제와 원상복구",
+        "8.7  삭제 기록의 계정 필드"
+      ],
+      "commands": [
+        "C08-44",
+        "C08-45",
+        "C08-46",
+        "C08-47",
+        "C08-48",
+        "C08-49",
+        "C08-50"
+      ],
+      "queries": [
+        "Q08-08",
+        "Q08-09",
+        "Q08-10"
+      ],
+      "attack": "새 계정 생성·sudo 그룹 추가·삭제",
+      "collection_investigation_response": "5902·5903·sudo COMMAND와 auth.log, getent·id·홈 부재",
+      "correction": "5904 삭제 해석을 5903으로 정정; 잠긴 새 계정과 실제 재접속 가능성 구분",
+      "source_parts": {
+        "249": "ppt/slides/slide352.xml",
+        "250": "ppt/slides/slide353.xml",
+        "251": "ppt/slides/slide354.xml",
+        "252": "ppt/slides/slide355.xml",
+        "253": "ppt/slides/slide356.xml",
+        "254": "ppt/slides/slide357.xml",
+        "255": "ppt/slides/slide358.xml",
+        "256": "ppt/slides/slide359.xml",
+        "257": "ppt/slides/slide360.xml"
+      }
+    }
+  ],
+  "synthesis": [
+    {
+      "section": "8.8",
+      "logical_page_indexes": [
+        41,
+        42
+      ],
+      "titles": [
+        "8.8  인증에서 계정 변경까지 조사",
+        "8.8  경보 수와 판단의 구분"
+      ],
+      "commands": [],
+      "queries": []
+    },
+    {
+      "section": "8.9",
+      "logical_page_indexes": [
+        43,
+        44,
+        45
+      ],
+      "titles": [
+        "8.9  접속 또는 검색이 실패할 때",
+        "8.9  수집 설정과 대응 설정 읽기",
+        "8.9  실습 파일과 세션 원상복구"
+      ],
+      "commands": [
+        "C08-51",
+        "C08-52",
+        "C08-53",
+        "C08-54",
+        "C08-55",
+        "C08-56"
+      ],
+      "queries": []
+    },
+    {
+      "section": "8.10",
+      "logical_page_indexes": [
+        46,
+        47
+      ],
+      "titles": [
+        "8.10  확인 문제",
+        "8.10  확인 문제 해설"
+      ],
+      "commands": [],
+      "queries": []
+    }
+  ],
+  "all_slides_200_to_257_accounted_for": true,
+  "screens": "New actual lab UI; assets/screens/chapter08/provenance.json",
+  "verification": "editorial/chapter08-review.md",
+  "source_images_reused_in_chapter": false
+}

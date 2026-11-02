@@ -1,0 +1,175 @@
+{
+  "assets": [
+    {
+      "asset": "assets/screens/chapter08/root-fields.png",
+      "original": "assets/screens/chapter08/source/root-full.png",
+      "original_sha256": "87cf3cabf239b7090fea0de03fa8589951c3b2f314749c3ff72f3072ea31a1e2",
+      "crop_xyxy": [
+        420,
+        591,
+        950,
+        847
+      ],
+      "capture_context": {
+        "name": "root",
+        "rect": {
+          "x": 420,
+          "y": 591,
+          "width": 530,
+          "height": 256
+        },
+        "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20rule.id:%20%225715%22%20AND%20data.dstuser:%20%22root%22'))",
+        "captured_at": "2026-11-02T11:44:11.539Z"
+      },
+      "source": "actual kt66 Wazuh UI; user completed certificate handoff",
+      "browser_time_range": "2026-11-02 20:25:00 to 21:00:00 Asia/Seoul"
+    },
+    {
+      "asset": "assets/screens/chapter08/useradd-fields.png",
+      "original": "assets/screens/chapter08/source/useradd-full.png",
+      "original_sha256": "783c330093670ab60f18dc290119f62875581da5c1cb271f64c6ba32f5053f55",
+      "crop_xyxy": [
+        420,
+        88,
+        950,
+        430
+      ],
+      "capture_context": {
+        "name": "useradd",
+        "rect": {
+          "x": 420,
+          "y": 88,
+          "width": 600,
+          "height": 342
+        },
+        "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20rule.id:%20%225902%22'))",
+        "captured_at": "2026-11-02T11:45:11.210Z"
+      },
+      "source": "actual kt66 Wazuh UI; user completed certificate handoff",
+      "browser_time_range": "2026-11-02 20:25:00 to 21:00:00 Asia/Seoul"
+    },
+    {
+      "asset": "assets/screens/chapter08/userdel-fields.png",
+      "original": "assets/screens/chapter08/source/userdel-full.png",
+      "original_sha256": "97fa5690ab39d8ef32923473ca5797268597fb452bdb1fb3cafc6164db675fd0",
+      "crop_xyxy": [
+        420,
+        591,
+        950,
+        718
+      ],
+      "capture_context": {
+        "name": "userdel",
+        "rect": {
+          "x": 420,
+          "y": 591,
+          "width": 530,
+          "height": 127
+        },
+        "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20rule.id:%20%225903%22'))",
+        "captured_at": "2026-11-02T11:49:25.152Z"
+      },
+      "source": "actual kt66 Wazuh UI; user completed certificate handoff",
+      "browser_time_range": "2026-11-02 20:25:00 to 21:00:00 Asia/Seoul"
+    },
+    {
+      "asset": "assets/screens/chapter08/sudo-fields.png",
+      "original": "assets/screens/chapter08/source/sudo-full.png",
+      "original_sha256": "ec7e015a815df32222f958f04bd8c5ad863fa4a06fdbc6e7e2405c5ae8c68704",
+      "crop_xyxy": [
+        420,
+        88,
+        950,
+        430
+      ],
+      "capture_context": {
+        "name": "sudo",
+        "rect": {
+          "x": 420,
+          "y": 88,
+          "width": 740,
+          "height": 342
+        },
+        "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20rule.id:%20%225402%22%20AND%20data.command:%20%22%2Fusr%2Fbin%2Fcat%20%2Fetc%2Fshadow%22'))",
+        "captured_at": "2026-11-02T11:49:58.957Z"
+      },
+      "source": "actual kt66 Wazuh UI; user completed certificate handoff",
+      "browser_time_range": "2026-11-02 20:25:00 to 21:00:00 Asia/Seoul"
+    },
+    {
+      "asset": "assets/screens/chapter08/success-fields.png",
+      "original": "assets/screens/chapter08/source/success-full.png",
+      "original_sha256": "1f99de0e79f6de0d504bbbb2163eeb1b6644a4a76cf9c495d94bd5568d1fbf15",
+      "crop_xyxy": [
+        420,
+        591,
+        950,
+        847
+      ],
+      "capture_context": {
+        "name": "success",
+        "rect": {
+          "x": 420,
+          "y": 591,
+          "width": 530,
+          "height": 256
+        },
+        "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20rule.id:%20%225715%22%20AND%20data.srcport:%20%2242688%22'))",
+        "captured_at": "2026-11-02T11:54:53.161Z"
+      },
+      "source": "actual kt66 Wazuh UI; user completed certificate handoff",
+      "browser_time_range": "2026-11-02 20:25:00 to 21:00:00 Asia/Seoul"
+    },
+    {
+      "asset": "assets/screens/chapter08/5710-fields.png",
+      "original": "assets/screens/chapter08/source/5710-full.png",
+      "original_sha256": "8c935f74ed3f6a8ed902b460571719e3147b843fb6257c6a2c9f291656611651",
+      "crop_xyxy": [
+        420,
+        591,
+        950,
+        761
+      ],
+      "capture_context": {
+        "name": "5710",
+        "rect": {
+          "x": 420,
+          "y": 591,
+          "width": 530,
+          "height": 170
+        },
+        "url": "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(rule.id,data.srcip,data.dstuser),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T11:25:00.000Z',to:'2026-11-02T12:00:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%20%22bastion%22%20AND%20rule.id:%20%225710%22'))",
+        "captured_at": "2026-11-02T11:58:34.731Z"
+      },
+      "source": "actual kt66 Wazuh UI; user completed certificate handoff",
+      "browser_time_range": "2026-11-02 20:25:00 to 21:00:00 Asia/Seoul"
+    },
+    {
+      "asset": "assets/screens/chapter08/5763-fields.png",
+      "original": "assets/screens/chapter08/source/5763-full.png",
+      "original_sha256": "6988376ef372233fcefbb2533ad01ea20e42488a86d826048f62ed3b927fda6a",
+      "crop_xyxy": [
+        420,
+        90,
+        950,
+        347
+      ],
+      "capture_context": {
+        "name": "5763",
+        "rect": {
+          "x": 420,
+          "y": 90,
+          "width": 530,
+          "height": 257
+        },
+        "url": "https://192.168.0.107:5601/app/data-explorer/discover",
+        "query": "agent.name: \"bastion\" AND rule.id: \"5763\"",
+        "captured_at": "2026-11-02T11:40:48.886647+00:00",
+        "time_precision": "original full screenshot file modification time"
+      },
+      "source": "actual kt66 Wazuh UI; user completed certificate handoff",
+      "browser_time_range": "2026-11-02 20:25:00 to 21:00:00 Asia/Seoul"
+    }
+  ],
+  "processing": "Pixel-preserving crop of original screenshots; no UI reconstruction. Screenshot clip API ignored x/y, so final crops use the saved full viewport originals."
+}

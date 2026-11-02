@@ -1,0 +1,41 @@
+{
+  "pages": 58,
+  "geometry_mm": {
+    "page_width": 188.03,
+    "page_height": 263.03,
+    "left_margin": 28.01,
+    "right_margin": 28.01,
+    "top_margin": 28.01,
+    "bottom_margin": 43.0,
+    "gutter": 5.01
+  },
+  "commands": 56,
+  "DQL": 10,
+  "screens": 7,
+  "images_inserted": 16,
+  "copy_parity": true,
+  "bash_syntax_only": true,
+  "actual_DQL_results": {
+    "Q08-01": "95",
+    "Q08-02": "16",
+    "Q08-03": "3",
+    "Q08-04": "8",
+    "Q08-05": "22",
+    "Q08-06": "1",
+    "Q08-07": "7",
+    "Q08-08": "1",
+    "Q08-09": "1",
+    "Q08-10": "1"
+  },
+  "source_pixel_integrity": true,
+  "template_theme_equal": true,
+  "full_reference_urls": true,
+  "fonts": [
+    "/BCDEEE+BookkMyungjo-Lt",
+    "/BCDFEE+BookkGothic-Lt",
+    "/BCDGEE+BookkGothic-Lt",
+    "/BCDHEE+BookkMyungjo-Lt",
+    "/BCDIEE+Consolas",
+    "/BCDJEE+SegoeUISymbol"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "command": "cd /home/att/book08 && printf '%s\\n' book08-none1 book08-none2 book08-none3 > users-invalid.txt && timeout 30s hydra -L users-invalid.txt -p book08-wrong -t 3 -w 5 ssh://192.168.0.107:2204",
+  "stdout": "Hydra v9.2 (c) 2021 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).\n\nHydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2026-11-02 11:36:11\n[DATA] max 3 tasks per 1 server, overall 3 tasks, 3 login tries (l:3/p:1), ~1 try per task\n[DATA] attacking ssh://192.168.0.107:2204/\n1 of 1 target completed, 0 valid password found\nHydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-11-02 11:36:15\n",
+  "stderr": "",
+  "status": 0,
+  "recorded_at": "2026-11-02T11:36:15.586462+00:00"
+}
