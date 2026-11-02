@@ -1,0 +1,3 @@
+ss -ltn 'sport = :8000 or sport = :4444'
+ls -l ~/book09/book09_key ~/book09/book09_key.pub \
+~/book09/www/x.sh ~/book09/www/a.sh

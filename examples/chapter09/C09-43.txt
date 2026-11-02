@@ -1,0 +1,2 @@
+mkfifo /tmp/book09.fifo
+ls -l /tmp/book09.fifo

@@ -1,0 +1,2 @@
+service cron stop
+service cron status

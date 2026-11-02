@@ -1,0 +1,42 @@
+{
+  "pages": 67,
+  "geometry_mm": {
+    "page_width": 188.03,
+    "page_height": 263.03,
+    "left_margin": 28.01,
+    "right_margin": 28.01,
+    "top_margin": 28.01,
+    "bottom_margin": 43.0,
+    "gutter": 5.01
+  },
+  "commands": 69,
+  "DQL": 12,
+  "screens": 8,
+  "images_inserted": 18,
+  "copy_parity": true,
+  "bash_syntax_only": true,
+  "actual_DQL_results": {
+    "Q09-01": 3,
+    "Q09-02": 1,
+    "Q09-03": 2,
+    "Q09-04": 1,
+    "Q09-05": 2,
+    "Q09-06": 1,
+    "Q09-07": 7,
+    "Q09-08": 2,
+    "Q09-09": 3,
+    "Q09-10": 2,
+    "Q09-11": 1,
+    "Q09-12": 1
+  },
+  "source_pixel_integrity": true,
+  "template_theme_equal": true,
+  "full_reference_urls": true,
+  "fonts": [
+    "/BCDEEE+BookkMyungjo-Lt",
+    "/BCDFEE+BookkGothic-Lt",
+    "/BCDGEE+BookkGothic-Lt",
+    "/BCDHEE+BookkMyungjo-Lt",
+    "/BCDIEE+Consolas"
+  ]
+}

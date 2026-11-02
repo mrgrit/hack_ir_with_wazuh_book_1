@@ -1,0 +1,2 @@
+sed -n '/<rule id="591"/,/<\/rule>/p' \
+/var/ossec/ruleset/rules/0015-ossec_rules.xml

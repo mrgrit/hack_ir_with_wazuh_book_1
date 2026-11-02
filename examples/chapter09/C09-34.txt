@@ -1,0 +1,3 @@
+cat /tmp/book09-cron-result
+sudo rm /tmp/book09-cron-result
+ls -l /tmp/book09-cron-result

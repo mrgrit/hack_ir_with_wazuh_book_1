@@ -1,0 +1,3 @@
+date -Is
+ls -l /tmp/book09-cron-result
+cat /tmp/book09-cron-result

@@ -1,0 +1,4 @@
+stat -c "%a %U %G %n" \
+/home/ccc/.ssh/authorized_keys
+rm /root/book09-authorized_keys.before
+ls -l /root/book09-authorized_keys.before

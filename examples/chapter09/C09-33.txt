@@ -1,0 +1,3 @@
+cat /etc/cron.d/book09-lab
+sudo rm /etc/cron.d/book09-lab
+ls -l /etc/cron.d/book09-lab

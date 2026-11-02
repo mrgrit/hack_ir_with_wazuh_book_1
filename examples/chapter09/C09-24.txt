@@ -1,0 +1,5 @@
+command -v cron
+command -v curl
+service cron status
+ls -l /etc/cron.d/book09-lab \
+/tmp/book09-cron-result

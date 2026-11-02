@@ -1,0 +1,4 @@
+cp -p /home/ccc/.ssh/authorized_keys \
+/root/book09-authorized_keys.before
+sha256sum /home/ccc/.ssh/authorized_keys \
+/root/book09-authorized_keys.before

@@ -1,0 +1,1 @@
+agent.name: "web" AND rule.id: "550" AND syscheck.path: "/usr/bin/yes"

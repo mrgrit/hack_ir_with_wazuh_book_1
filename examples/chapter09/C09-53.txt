@@ -1,0 +1,4 @@
+rm ~/book09/book09_key ~/book09/book09_key.pub \
+~/book09/www/x.sh ~/book09/www/a.sh
+rmdir ~/book09/www ~/book09
+ls -ld ~/book09

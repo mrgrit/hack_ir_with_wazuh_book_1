@@ -1,0 +1,86 @@
+[
+  {
+    "id": "Q09-01",
+    "hits": 3,
+    "text": "agent.name: \"bastion\" AND rule.groups: \"syscheck\" AND syscheck.path: \"/etc/sudoers.d/99-book09-lab\"",
+    "range_KST": "2026-11-03 07:45:00–08:05:00",
+    "screenshot": "query-01.png"
+  },
+  {
+    "id": "Q09-02",
+    "hits": 1,
+    "text": "agent.name: \"bastion\" AND syscheck.path: \"/etc/sudoers.d/99-book09-lab\" AND syscheck.event: \"modified\"",
+    "range_KST": "2026-11-03 07:45:00–08:05:00",
+    "screenshot": "query-02.png"
+  },
+  {
+    "id": "Q09-03",
+    "hits": 2,
+    "text": "agent.name: \"bastion\" AND rule.groups: \"syscheck\" AND syscheck.path: \"/home/ccc/.ssh/authorized_keys\"",
+    "range_KST": "2026-11-03 07:45:00–08:05:00",
+    "screenshot": "query-03.png"
+  },
+  {
+    "id": "Q09-04",
+    "hits": 1,
+    "text": "agent.name: \"bastion\" AND rule.id: \"5715\" AND data.dstuser: \"ccc\" AND data.srcip: \"192.168.0.108\" AND full_log: \"Accepted publickey\"",
+    "range_KST": "2026-11-03 07:45:00–08:05:00",
+    "screenshot": "query-04.png"
+  },
+  {
+    "id": "Q09-05",
+    "hits": 2,
+    "text": "agent.name: \"bastion\" AND syscheck.path: \"/etc/cron.d/book09-lab\"",
+    "range_KST": "2026-11-03 07:45:00–08:05:00",
+    "screenshot": "query-05.png"
+  },
+  {
+    "id": "Q09-06",
+    "hits": 1,
+    "text": "agent.name: \"kt66-host\" AND rule.groups: \"audit_command\" AND data.audit.execve.a0: \"nc\"",
+    "range_KST": "2026-11-03 07:45:00–08:05:00",
+    "screenshot": "query-06.png"
+  },
+  {
+    "id": "Q09-07",
+    "hits": 7,
+    "text": "agent.name: \"kt66-host\" AND rule.groups: \"audit_command\" AND data.audit.session: \"82\" AND (data.audit.pid: \"172435\" OR data.audit.ppid: \"172435\")",
+    "range_KST": "2026-11-03 07:45:00–08:05:00",
+    "screenshot": "query-07.png"
+  },
+  {
+    "id": "Q09-08",
+    "hits": 2,
+    "text": "agent.name: \"kt66-host\" AND rule.groups: \"audit_command\" AND data.audit.execve.a0: \"curl\"",
+    "range_KST": "2026-11-03 07:45:00–08:05:00",
+    "screenshot": "query-08.png"
+  },
+  {
+    "id": "Q09-09",
+    "hits": 3,
+    "text": "agent.name: \"kt66-host\" AND rule.groups: \"audit_command\" AND data.audit.session: \"87\" AND (data.audit.pid: \"172868\" OR data.audit.ppid: \"172868\")",
+    "range_KST": "2026-11-03 07:45:00–08:05:00",
+    "screenshot": "query-09.png"
+  },
+  {
+    "id": "Q09-10",
+    "hits": 2,
+    "text": "agent.name: \"web\" AND rule.id: \"550\" AND syscheck.path: \"/usr/bin/yes\"",
+    "range_KST": "2026-11-03 07:45:00–08:05:00",
+    "screenshot": "query-10.png"
+  },
+  {
+    "id": "Q09-11",
+    "hits": 1,
+    "text": "agent.name: \"bastion\" AND rule.id: \"553\" AND syscheck.path: \"/var/log/book09-btmp\"",
+    "range_KST": "2026-11-03 07:45:00–08:05:00",
+    "screenshot": "query-11.png"
+  },
+  {
+    "id": "Q09-12",
+    "hits": 1,
+    "text": "agent.name: \"bastion\" AND syscheck.path: \"/home/ccc/book09-history/.bash_history\" AND syscheck.event: \"modified\"",
+    "range_KST": "2026-11-03 07:45:00–08:05:00",
+    "screenshot": "query-12.png"
+  }
+]

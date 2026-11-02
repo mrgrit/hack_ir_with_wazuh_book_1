@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-03",
+  "source": "Actual local Wazuh Discover UI, 192.168.0.107:5601; captured through cua_repl. Crops are unaltered pixels.",
+  "assets": [
+    {
+      "asset": "assets/screens/chapter09/sudoers-fields.png",
+      "original": "editorial/evidence/chapter09/2026-11-03/sudoers-full.png",
+      "original_sha256": "e12f8ab52667b6d03e40dab6e23564f4c39c9b117c66fa671fdb59fdae83986c",
+      "crop_xyxy": [
+        420,
+        324,
+        880,
+        585
+      ]
+    },
+    {
+      "asset": "assets/screens/chapter09/publickey-fields.png",
+      "original": "editorial/evidence/chapter09/2026-11-03/publickey-full.png",
+      "original_sha256": "b5b3a2f4044cf36ffd4d0317a1d6fe828bfea83337c8713de792d2dc5e88b207",
+      "crop_xyxy": [
+        420,
+        109,
+        765,
+        367
+      ]
+    },
+    {
+      "asset": "assets/screens/chapter09/cron-fields.png",
+      "original": "editorial/evidence/chapter09/2026-11-03/cron-full.png",
+      "original_sha256": "696ba213ac2412acb6fc4800f52110d13d5adba455b42d986a362d6934bf2304",
+      "crop_xyxy": [
+        420,
+        65,
+        850,
+        451
+      ]
+    },
+    {
+      "asset": "assets/screens/chapter09/reverse-fields.png",
+      "original": "editorial/evidence/chapter09/2026-11-03/reverse-full.png",
+      "original_sha256": "bcf62ca8d18ecfbc5ced0744b987234bdc3ccb25f00c498281c3af5ad9d37766",
+      "crop_xyxy": [
+        420,
+        65,
+        760,
+        540
+      ]
+    },
+    {
+      "asset": "assets/screens/chapter09/download-fields.png",
+      "original": "editorial/evidence/chapter09/2026-11-03/download-full.png",
+      "original_sha256": "3ccfd6891b7ea31775e25518fdea63d31eb9494cd29f05cdf61df18332056bd8",
+      "crop_xyxy": [
+        420,
+        65,
+        860,
+        451
+      ]
+    },
+    {
+      "asset": "assets/screens/chapter09/binary-fields.png",
+      "original": "editorial/evidence/chapter09/2026-11-03/binary-full.png",
+      "original_sha256": "2efd1f83bf4dbeea96981dbbcf9b7c1796ce26e4394ec24a225adb6428378ecc",
+      "crop_xyxy": [
+        420,
+        409,
+        865,
+        625
+      ]
+    },
+    {
+      "asset": "assets/screens/chapter09/logdelete-fields.png",
+      "original": "editorial/evidence/chapter09/2026-11-03/logdelete-full.png",
+      "original_sha256": "4874511358d06331c9989d1ce10b7fbbc32384cf2a93c825c20cb1c794e905cd",
+      "crop_xyxy": [
+        420,
+        538,
+        855,
+        711
+      ]
+    },
+    {
+      "asset": "assets/screens/chapter09/history-fields.png",
+      "original": "editorial/evidence/chapter09/2026-11-03/history-full.png",
+      "original_sha256": "d6c8c16119d7210191e51848858c4674568ff0e8c2da3e5eb4a6005307d51c9f",
+      "crop_xyxy": [
+        420,
+        495,
+        860,
+        711
+      ]
+    }
+  ]
+}

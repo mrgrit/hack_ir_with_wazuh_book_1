@@ -1,0 +1,5 @@
+ls -ld /home/ccc/.ssh
+ls -l /home/ccc/.ssh/authorized_keys
+ls -l /root/book09-authorized_keys.before
+stat -c "%a %U %G %n" \
+/home/ccc/.ssh /home/ccc/.ssh/authorized_keys

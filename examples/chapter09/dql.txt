@@ -1,0 +1,59 @@
+# Q09-01 | Windows · Discover · wazuh-alerts-*
+# bastion의 실습 권한 파일에 관한 FIM 경보를 찾는다.
+agent.name: "bastion" AND rule.groups: "syscheck" AND syscheck.path: "/etc/sudoers.d/99-book09-lab"
+# 확인: 추가 직후 added와 규칙 554를 확인한다. 본문 촬영 구간 전체에는 추가·수정·삭제 3건이 있다.
+
+# Q09-02 | Windows · Discover · wazuh-alerts-*
+# 수정 경보를 골라 changed_attributes와 diff를 읽는다.
+agent.name: "bastion" AND syscheck.path: "/etc/sudoers.d/99-book09-lab" AND syscheck.event: "modified"
+# 확인: 촬영 구간 1건. 크기 27→44, 규칙 550, diff의 주석 추가를 확인한다.
+
+# Q09-03 | Windows · Discover · wazuh-alerts-*
+# 키 목록 변경 경보를 찾는다.
+agent.name: "bastion" AND rule.groups: "syscheck" AND syscheck.path: "/home/ccc/.ssh/authorized_keys"
+# 확인: 키 추가와 원상복구의 modified 2건을 구분한다. FIM은 키로 로그인했는지까지 판정하지 않는다.
+
+# Q09-04 | Windows · Discover · wazuh-alerts-*
+# 공개 키 인증 성공을 원문 문구까지 제한해 찾는다.
+agent.name: "bastion" AND rule.id: "5715" AND data.dstuser: "ccc" AND data.srcip: "192.168.0.108" AND full_log: "Accepted publickey"
+# 확인: 촬영 구간 1건. 시각 07:50:27.428의 경보 원문에는 07:50:25 인증이 기록되었다.
+
+# Q09-05 | Windows · Discover · wazuh-alerts-*
+# 예약 파일의 생성과 제거를 찾는다.
+agent.name: "bastion" AND syscheck.path: "/etc/cron.d/book09-lab"
+# 확인: 촬영 구간 added·554와 deleted·553의 2건이다.
+
+# Q09-06 | Windows · Discover · wazuh-alerts-*
+# 호스트의 감사 명령 경보에서 nc 인자를 찾는다.
+agent.name: "kt66-host" AND rule.groups: "audit_command" AND data.audit.execve.a0: "nc"
+# 확인: 촬영 구간 1건. 규칙 80792, auid=1000, pid=172438, ppid=172435를 확인한다.
+
+# Q09-07 | Windows · Discover · wazuh-alerts-*
+# 같은 감사 세션에서 부모와 그 직접 자식의 실행 이벤트를 찾는다. 자신의 결과의 번호로 바꿔 입력한다.
+agent.name: "kt66-host" AND rule.groups: "audit_command" AND data.audit.session: "82" AND (data.audit.pid: "172435" OR data.audit.ppid: "172435")
+# 확인: 촬영 구간 7건. 같은 PID가 다른 프로그램을 exec하면 여러 이벤트가 생기므로 7개 독립 프로세스로 세지 않는다.
+
+# Q09-08 | Windows · Discover · wazuh-alerts-*
+# 호스트에서 실행한 curl 경보를 찾고 인자 전체를 읽는다.
+agent.name: "kt66-host" AND rule.groups: "audit_command" AND data.audit.execve.a0: "curl"
+# 확인: 촬영 구간 2건은 사전 본문 조회와 파이프 실행이다. 같은 URL을 조회했다고 모두 셸 실행은 아니다.
+
+# Q09-09 | Windows · Discover · wazuh-alerts-*
+# 촬영한 파이프 실행의 부모와 직접 자식을 연결한다.
+agent.name: "kt66-host" AND rule.groups: "audit_command" AND data.audit.session: "87" AND (data.audit.pid: "172868" OR data.audit.ppid: "172868")
+# 확인: 3건은 부모 bash와 curl, sh이다. PID·세션은 자신의 이벤트에 맞춰 바꾼다.
+
+# Q09-10 | Windows · Discover · wazuh-alerts-*
+# web의 yes 수정 경보를 찾는다.
+agent.name: "web" AND rule.id: "550" AND syscheck.path: "/usr/bin/yes"
+# 확인: 촬영 구간 2건. 07:53:20.516은 변조, 07:53:25.827은 원상복구이다.
+
+# Q09-11 | Windows · Discover · wazuh-alerts-*
+# 실습 복사본의 삭제를 찾는다.
+agent.name: "bastion" AND rule.id: "553" AND syscheck.path: "/var/log/book09-btmp"
+# 확인: 1건. syscheck.event=deleted와 원문 경로를 확인한다.
+
+# Q09-12 | Windows · Discover · wazuh-alerts-*
+# 모의 이력 파일을 비운 변경을 찾는다.
+agent.name: "bastion" AND syscheck.path: "/home/ccc/book09-history/.bash_history" AND syscheck.event: "modified"
+# 확인: 1건. 규칙 550이며 크기가 20에서 0으로 바뀐다.

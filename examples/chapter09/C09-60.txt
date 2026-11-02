@@ -1,0 +1,4 @@
+dpkg -V coreutils | grep -F -- '/usr/bin/yes'
+rm /root/book09-yes.before
+ls -l /root/book09-yes.before
+exit

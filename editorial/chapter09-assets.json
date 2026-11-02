@@ -1,0 +1,115 @@
+{
+  "assets": [
+    {
+      "path": "assets/figures/chapter09/roadmap.png",
+      "caption": "도식 9-1. 권한·접속·실행·파일 변경의 조사 범위",
+      "sha256": "4c5e06bd9ed549b89e3ee420f17d1abc287e7a43ce3008fee8d28ee2577d855f",
+      "kind": "relationship diagram"
+    },
+    {
+      "path": "assets/figures/chapter09/fim.png",
+      "caption": "도식 9-2. 파일 변경과 Wazuh 경보의 경로",
+      "sha256": "8b91186a5b6284d9ad348cf2ce1d000a51853a869b1fdae1ebdee5a46a8d93c8",
+      "kind": "relationship diagram"
+    },
+    {
+      "path": "assets/illustrations/chapter04/field-check.png",
+      "caption": "삽화 9-1. 수집 경로 점검",
+      "sha256": "46a5ffbdfa2e9d5cca7900bb773bf012e12d8b9272b0c436251ad59978b0e024",
+      "kind": "reused existing pixel illustration"
+    },
+    {
+      "path": "assets/screens/chapter09/sudoers-fields.png",
+      "caption": "화면 9-1. sudoers 실습 파일의 내용 차이",
+      "sha256": "d3499428f6dc8a2da8ee97a5a179e3fe56f86baf14dc172612533b09f43e03df",
+      "kind": "actual UI crop"
+    },
+    {
+      "path": "assets/figures/chapter09/key.png",
+      "caption": "도식 9-3. 공개 키 등록·인증·제거의 확인 대상",
+      "sha256": "ddfea07ea76b90a39c2083f21233698aef7bc9e665a8144dd0f5892564267241",
+      "kind": "relationship diagram"
+    },
+    {
+      "path": "assets/screens/chapter09/publickey-fields.png",
+      "caption": "화면 9-2. 공개 키 인증의 계정과 출발지",
+      "sha256": "b9fa9f73eecbb7ca930b95dcf98e9df6c94154a71593228d08dfeafd305c30e3",
+      "kind": "actual UI crop"
+    },
+    {
+      "path": "assets/figures/chapter09/cron.png",
+      "caption": "도식 9-4. 작업 등록과 실제 실행을 나누어 확인하는 순서",
+      "sha256": "95b42208c0cd21224a2b190e4bb17a122d637e72ee034625996aeca60273eb6c",
+      "kind": "relationship diagram"
+    },
+    {
+      "path": "assets/screens/chapter09/cron-fields.png",
+      "caption": "화면 9-3. cron 실습 파일 제거 경보",
+      "sha256": "b01eea6ff8be9fd62aae3692309f3d4103abff14010379827b0ee97a54f6a93a",
+      "kind": "actual UI crop"
+    },
+    {
+      "path": "assets/figures/chapter09/reverse.png",
+      "caption": "도식 9-5. 연결 방향과 셸 입력·출력의 흐름",
+      "sha256": "32c8f28b039c81e1f4d9640a7a362d966b154fd4e584b023b7fc315cccd694ef",
+      "kind": "relationship diagram"
+    },
+    {
+      "path": "assets/screens/chapter09/reverse-fields.png",
+      "caption": "화면 9-4. nc 실행 파일과 연결 목적지 인자",
+      "sha256": "5016e729ca74b1daa30b464dc48c89789b330b3965a825bba3a0ae42fae06817",
+      "kind": "actual UI crop"
+    },
+    {
+      "path": "assets/figures/chapter09/download.png",
+      "caption": "도식 9-6. HTTP 응답·셸 입력·실행 결과의 관계",
+      "sha256": "59cffff0b42f1b911fb0ad180f34159f139e427d7d2e7b4a3f598c6c09906530",
+      "kind": "relationship diagram"
+    },
+    {
+      "path": "assets/screens/chapter09/download-fields.png",
+      "caption": "화면 9-5. curl 옵션과 a4에 기록된 URL",
+      "sha256": "54e9e906bbf27e3860def161c393409760b2787e4a70db0c325008f075978126",
+      "kind": "actual UI crop"
+    },
+    {
+      "path": "assets/figures/chapter09/binary.png",
+      "caption": "도식 9-7. 기준 파일·변조·원상복구의 비교",
+      "sha256": "f0f00bc061cc829533b928cf9e9d924a10055c1edfb0ff46b3ca4a288eb602c1",
+      "kind": "relationship diagram"
+    },
+    {
+      "path": "assets/screens/chapter09/binary-fields.png",
+      "caption": "화면 9-6. yes 원상복구 경보의 크기·소유자·시각",
+      "sha256": "4fae23924b1e98717bfb7e16331406547923466b78ac06ef82af010760e35bca",
+      "kind": "actual UI crop"
+    },
+    {
+      "path": "assets/figures/chapter09/logs.png",
+      "caption": "도식 9-8. 내용 비우기와 파일 삭제의 차이",
+      "sha256": "e6a6252722ff2d307b3b9e06dcf6da52e9ae406679c4209dd8c3e095ae5004a4",
+      "kind": "relationship diagram"
+    },
+    {
+      "path": "assets/screens/chapter09/logdelete-fields.png",
+      "caption": "화면 9-7. btmp 복사본의 삭제 경보",
+      "sha256": "4bab36f57a716ba17b0452b89eb2528f48350441e9e5a3f49f27d35e3350aad1",
+      "kind": "actual UI crop"
+    },
+    {
+      "path": "assets/screens/chapter09/history-fields.png",
+      "caption": "화면 9-8. 모의 이력 파일의 크기 0 변경",
+      "sha256": "e4a45660d685925095818b676a332509b7af301197d8f761091af732ef226cec",
+      "kind": "actual UI crop"
+    },
+    {
+      "path": "assets/illustrations/chapter02/evidence.png",
+      "caption": "삽화 9-2. 변경 전후 기록 대조",
+      "sha256": "162cdf4780d61ca4751ea1b77f006913ceed84267cca9d2af55008c3c7559fec",
+      "kind": "reused existing pixel illustration"
+    }
+  ],
+  "style_reference": "https://m.blog.naver.com/studygir/220961448822",
+  "new_character_generation": false,
+  "template_sha256": "2506e3b2036c3bfa18f84a1f3b6185bff52c0273d4c2c526dd3c68d9adb5b18b"
+}

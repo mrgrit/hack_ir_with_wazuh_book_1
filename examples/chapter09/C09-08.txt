@@ -1,0 +1,2 @@
+sudo -l
+ls -l /etc/sudoers.d/99-book09-lab

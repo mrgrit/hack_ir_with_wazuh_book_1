@@ -1,0 +1,4 @@
+sudo journalctl -t sysmon \
+--since "2026-11-03 07:52:25" \
+--until "2026-11-03 07:52:28" --no-pager | \
+grep -F '172438'

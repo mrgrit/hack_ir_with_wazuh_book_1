@@ -1,0 +1,3 @@
+command -v python3
+ls -ld ~/book09/www
+mkdir ~/book09/www

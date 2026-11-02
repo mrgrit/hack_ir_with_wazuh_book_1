@@ -1,0 +1,580 @@
+{
+  "chapter": 9,
+  "source_url": "https://docs.google.com/presentation/d/1o0H_2DDHBp8p2HvlSnEPbx6-jdURYzew/edit",
+  "source_pptx_sha256": "b3550f87c2342a43e72ee5ac74c9a884de6aff38631b8c77a2364d0cf5d47099",
+  "numbering": "presentation order, not slide XML part suffix",
+  "concept_slides": [
+    258,
+    268,
+    269,
+    286,
+    287
+  ],
+  "exercises": [
+    {
+      "exercise": 22,
+      "presentation_slides": [
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267
+      ],
+      "section": "9.2",
+      "logical_page_indexes": [
+        7,
+        8,
+        9
+      ],
+      "command_ids": [
+        "C09-08",
+        "C09-09",
+        "C09-10",
+        "C09-11"
+      ],
+      "query_ids": [
+        "Q09-01",
+        "Q09-02"
+      ],
+      "corrections": "sudoers 전용 파일·주석 추가로 554/550/553 비교; 기존 ccc 허용 정책 중복과 useradd 시간 상관의 한계 설명",
+      "coverage": [
+        "준비",
+        "입력",
+        "응답",
+        "수집·검색",
+        "조사·대응",
+        "원상복구"
+      ]
+    },
+    {
+      "exercise": 23,
+      "presentation_slides": [
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277
+      ],
+      "section": "9.3",
+      "logical_page_indexes": [
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "command_ids": [
+        "C09-12",
+        "C09-13",
+        "C09-14",
+        "C09-15",
+        "C09-16",
+        "C09-17",
+        "C09-18",
+        "C09-19",
+        "C09-20",
+        "C09-21",
+        "C09-22",
+        "C09-23"
+      ],
+      "query_ids": [
+        "Q09-03",
+        "Q09-04"
+      ],
+      "corrections": "기존 키 백업·복원·공개 키 전용 재접속 시험·지문 대조·신규 키 거부 확인 추가",
+      "coverage": [
+        "준비",
+        "입력",
+        "응답",
+        "수집·검색",
+        "조사·대응",
+        "원상복구"
+      ]
+    },
+    {
+      "exercise": 24,
+      "presentation_slides": [
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285
+      ],
+      "section": "9.4",
+      "logical_page_indexes": [
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "command_ids": [
+        "C09-24",
+        "C09-25",
+        "C09-26",
+        "C09-27",
+        "C09-28",
+        "C09-29",
+        "C09-30",
+        "C09-31",
+        "C09-32",
+        "C09-33",
+        "C09-34",
+        "C09-35"
+      ],
+      "query_ids": [
+        "Q09-05"
+      ],
+      "corrections": "실제 cron 미설치 확인 후 설치·시작; x.sh 내용 제공; 등록과 실행 증거 분리",
+      "coverage": [
+        "준비",
+        "입력",
+        "응답",
+        "수집·검색",
+        "조사·대응",
+        "원상복구"
+      ]
+    },
+    {
+      "exercise": 25,
+      "presentation_slides": [
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296
+      ],
+      "section": "9.5",
+      "logical_page_indexes": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "command_ids": [
+        "C09-36",
+        "C09-37",
+        "C09-38",
+        "C09-39",
+        "C09-40",
+        "C09-41",
+        "C09-42",
+        "C09-43",
+        "C09-44",
+        "C09-45",
+        "C09-46",
+        "C09-47",
+        "C09-48"
+      ],
+      "query_ids": [
+        "Q09-06",
+        "Q09-07"
+      ],
+      "corrections": "nc OpenBSD 옵션·FIFO·실행 위치·audit 수집 준비·Sysmon 보강·연결 증거와 호출 성공 분리",
+      "coverage": [
+        "준비",
+        "입력",
+        "응답",
+        "수집·검색",
+        "조사·대응",
+        "원상복구"
+      ]
+    },
+    {
+      "exercise": 26,
+      "presentation_slides": [
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304
+      ],
+      "section": "9.6",
+      "logical_page_indexes": [
+        27,
+        28,
+        29,
+        30
+      ],
+      "command_ids": [
+        "C09-49",
+        "C09-50",
+        "C09-51",
+        "C09-52",
+        "C09-53"
+      ],
+      "query_ids": [
+        "Q09-08",
+        "Q09-09"
+      ],
+      "corrections": "a.sh 내용 확인·curl 옵션·a4 URL·PIPESTATUS·부모/세션 상관·HTTP 정리",
+      "coverage": [
+        "준비",
+        "입력",
+        "응답",
+        "수집·검색",
+        "조사·대응",
+        "원상복구"
+      ]
+    },
+    {
+      "exercise": 27,
+      "presentation_slides": [
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312
+      ],
+      "section": "9.7",
+      "logical_page_indexes": [
+        31,
+        32,
+        33,
+        34
+      ],
+      "command_ids": [
+        "C09-54",
+        "C09-55",
+        "C09-56",
+        "C09-57",
+        "C09-58",
+        "C09-59",
+        "C09-60"
+      ],
+      "query_ids": [
+        "Q09-10"
+      ],
+      "corrections": "변조 전 백업·cp -p 복원; 7바이트 입력; dpkg MD5·기존 missing 구분",
+      "coverage": [
+        "준비",
+        "입력",
+        "응답",
+        "수집·검색",
+        "조사·대응",
+        "원상복구"
+      ]
+    },
+    {
+      "exercise": 28,
+      "presentation_slides": [
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321
+      ],
+      "section": "9.8",
+      "logical_page_indexes": [
+        35,
+        36,
+        37,
+        38
+      ],
+      "command_ids": [
+        "C09-61",
+        "C09-62",
+        "C09-63",
+        "C09-64"
+      ],
+      "query_ids": [
+        "Q09-11",
+        "Q09-12"
+      ],
+      "corrections": "실제 로그 대신 전용 이력/복사본; truncate와 delete 구분; 정상 회전 판단·원본 보존",
+      "coverage": [
+        "준비",
+        "입력",
+        "응답",
+        "수집·검색",
+        "조사·대응",
+        "원상복구"
+      ]
+    }
+  ],
+  "slide_parts": [
+    {
+      "slide": 258,
+      "part": "ppt/slides/slide361.xml"
+    },
+    {
+      "slide": 259,
+      "part": "ppt/slides/slide362.xml"
+    },
+    {
+      "slide": 260,
+      "part": "ppt/slides/slide363.xml"
+    },
+    {
+      "slide": 261,
+      "part": "ppt/slides/slide364.xml"
+    },
+    {
+      "slide": 262,
+      "part": "ppt/slides/slide365.xml"
+    },
+    {
+      "slide": 263,
+      "part": "ppt/slides/slide366.xml"
+    },
+    {
+      "slide": 264,
+      "part": "ppt/slides/slide367.xml"
+    },
+    {
+      "slide": 265,
+      "part": "ppt/slides/slide368.xml"
+    },
+    {
+      "slide": 266,
+      "part": "ppt/slides/slide369.xml"
+    },
+    {
+      "slide": 267,
+      "part": "ppt/slides/slide370.xml"
+    },
+    {
+      "slide": 268,
+      "part": "ppt/slides/slide371.xml"
+    },
+    {
+      "slide": 269,
+      "part": "ppt/slides/slide372.xml"
+    },
+    {
+      "slide": 270,
+      "part": "ppt/slides/slide373.xml"
+    },
+    {
+      "slide": 271,
+      "part": "ppt/slides/slide374.xml"
+    },
+    {
+      "slide": 272,
+      "part": "ppt/slides/slide375.xml"
+    },
+    {
+      "slide": 273,
+      "part": "ppt/slides/slide376.xml"
+    },
+    {
+      "slide": 274,
+      "part": "ppt/slides/slide377.xml"
+    },
+    {
+      "slide": 275,
+      "part": "ppt/slides/slide378.xml"
+    },
+    {
+      "slide": 276,
+      "part": "ppt/slides/slide379.xml"
+    },
+    {
+      "slide": 277,
+      "part": "ppt/slides/slide380.xml"
+    },
+    {
+      "slide": 278,
+      "part": "ppt/slides/slide381.xml"
+    },
+    {
+      "slide": 279,
+      "part": "ppt/slides/slide382.xml"
+    },
+    {
+      "slide": 280,
+      "part": "ppt/slides/slide383.xml"
+    },
+    {
+      "slide": 281,
+      "part": "ppt/slides/slide384.xml"
+    },
+    {
+      "slide": 282,
+      "part": "ppt/slides/slide385.xml"
+    },
+    {
+      "slide": 283,
+      "part": "ppt/slides/slide386.xml"
+    },
+    {
+      "slide": 284,
+      "part": "ppt/slides/slide387.xml"
+    },
+    {
+      "slide": 285,
+      "part": "ppt/slides/slide388.xml"
+    },
+    {
+      "slide": 286,
+      "part": "ppt/slides/slide389.xml"
+    },
+    {
+      "slide": 287,
+      "part": "ppt/slides/slide390.xml"
+    },
+    {
+      "slide": 288,
+      "part": "ppt/slides/slide391.xml"
+    },
+    {
+      "slide": 289,
+      "part": "ppt/slides/slide392.xml"
+    },
+    {
+      "slide": 290,
+      "part": "ppt/slides/slide393.xml"
+    },
+    {
+      "slide": 291,
+      "part": "ppt/slides/slide394.xml"
+    },
+    {
+      "slide": 292,
+      "part": "ppt/slides/slide395.xml"
+    },
+    {
+      "slide": 293,
+      "part": "ppt/slides/slide396.xml"
+    },
+    {
+      "slide": 294,
+      "part": "ppt/slides/slide397.xml"
+    },
+    {
+      "slide": 295,
+      "part": "ppt/slides/slide398.xml"
+    },
+    {
+      "slide": 296,
+      "part": "ppt/slides/slide399.xml"
+    },
+    {
+      "slide": 297,
+      "part": "ppt/slides/slide400.xml"
+    },
+    {
+      "slide": 298,
+      "part": "ppt/slides/slide401.xml"
+    },
+    {
+      "slide": 299,
+      "part": "ppt/slides/slide402.xml"
+    },
+    {
+      "slide": 300,
+      "part": "ppt/slides/slide403.xml"
+    },
+    {
+      "slide": 301,
+      "part": "ppt/slides/slide404.xml"
+    },
+    {
+      "slide": 302,
+      "part": "ppt/slides/slide405.xml"
+    },
+    {
+      "slide": 303,
+      "part": "ppt/slides/slide406.xml"
+    },
+    {
+      "slide": 304,
+      "part": "ppt/slides/slide407.xml"
+    },
+    {
+      "slide": 305,
+      "part": "ppt/slides/slide408.xml"
+    },
+    {
+      "slide": 306,
+      "part": "ppt/slides/slide409.xml"
+    },
+    {
+      "slide": 307,
+      "part": "ppt/slides/slide410.xml"
+    },
+    {
+      "slide": 308,
+      "part": "ppt/slides/slide411.xml"
+    },
+    {
+      "slide": 309,
+      "part": "ppt/slides/slide412.xml"
+    },
+    {
+      "slide": 310,
+      "part": "ppt/slides/slide413.xml"
+    },
+    {
+      "slide": 311,
+      "part": "ppt/slides/slide414.xml"
+    },
+    {
+      "slide": 312,
+      "part": "ppt/slides/slide415.xml"
+    },
+    {
+      "slide": 313,
+      "part": "ppt/slides/slide416.xml"
+    },
+    {
+      "slide": 314,
+      "part": "ppt/slides/slide417.xml"
+    },
+    {
+      "slide": 315,
+      "part": "ppt/slides/slide418.xml"
+    },
+    {
+      "slide": 316,
+      "part": "ppt/slides/slide419.xml"
+    },
+    {
+      "slide": 317,
+      "part": "ppt/slides/slide420.xml"
+    },
+    {
+      "slide": 318,
+      "part": "ppt/slides/slide421.xml"
+    },
+    {
+      "slide": 319,
+      "part": "ppt/slides/slide422.xml"
+    },
+    {
+      "slide": 320,
+      "part": "ppt/slides/slide423.xml"
+    },
+    {
+      "slide": 321,
+      "part": "ppt/slides/slide424.xml"
+    }
+  ]
+}

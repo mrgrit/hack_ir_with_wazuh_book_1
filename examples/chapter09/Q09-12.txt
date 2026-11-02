@@ -1,0 +1,1 @@
+agent.name: "bastion" AND syscheck.path: "/home/ccc/book09-history/.bash_history" AND syscheck.event: "modified"

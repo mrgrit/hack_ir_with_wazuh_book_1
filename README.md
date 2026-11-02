@@ -2,7 +2,7 @@
 
 1권 **시스템 침투와 SIEM 분석**의 집필 저장소입니다.
 
-기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2~7장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
+기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2~9장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
 
 - **[머리말·1장 DOCX](manuscript/volume01-chapter01.docx)** — 부크크 B5, 편집·검토용
 - **[2장 초안 DOCX](manuscript/volume01-chapter02.docx)** — 공격과 보안관제의 기초, 9쪽
@@ -11,6 +11,9 @@
 - **[5장 초안 DOCX](manuscript/volume01-chapter05.docx)** — 웹 공격의 시작과 입력값 검증, 55쪽
 - **[6장 초안 DOCX](manuscript/volume01-chapter06.docx)** — 웹 탐색과 인증 공격, 45쪽
 - **[7장 초안 DOCX](manuscript/volume01-chapter07.docx)** — 웹 서버 침투와 실행 흔적, 58쪽
+- **[8장 초안 DOCX](manuscript/volume01-chapter08.docx)** — SSH 인증 공격과 계정 권한 조사, 58쪽
+- **[9장 초안 DOCX](manuscript/volume01-chapter09.docx)** — 지속성 확보와 시스템 변경 탐지, 67쪽
+- [9장 복사용 명령·검색식·스크립트·조사 양식](examples/chapter09/)
 - [7장 복사용 입력·명령·검색식·조사 양식](examples/chapter07/)
 - [6장 복사용 입력·명령·검색식·실제 로그](examples/chapter06/)
 - [5장 복사용 명령·검색식·실제 로그](examples/chapter05/)
@@ -154,5 +157,20 @@ python tools/build_chapter08.py --output build/volume01-chapter08.docx
 ```
 
 UTF-8 모드와 `python-docx`, `Pillow`, `pypdf`를 갖춘 환경에서 실행합니다. Windows에서는 실행 전 `$env:PYTHONUTF8='1'`을 지정합니다. 저장소의 그림을 그대로 사용하며, 도식 재생성 시 `BOOK_DIAGRAM_FONT`에 부크크 고딕 Light 글꼴 파일 경로를 지정하고 `tools/diagrams_chapter08.py`를 실행합니다. `tools/check_chapter08.py DOCX경로 임시PDF경로 --bash Bash실행파일경로`는 정적 검사를 수행하며 실습 명령을 실행하지 않습니다. 실습 시험과 검색 결과는 저자용 기록에 별도로 보존했습니다. 이번 초안은 REV01에 저장하지 않았습니다.
+
+9장 초안:
+
+- Module 01 실습 22~28: sudoers 변경, SSH 공개 키, cron 예약, 리버스 셸, 다운로드 실행, 바이너리 변조, 로그 삭제·내용 비우기.
+- 67쪽, 명령 69개, DQL 12개, 실제 화면 8개, 도식 8개, 재사용 삽화 2개. 로그 훼손은 원본을 보존하고 실습 전용 복사본으로 확인했습니다.
+- [Word 원고](manuscript/volume01-chapter09.docx) · [본문 JSON](manuscript/volume01-chapter09.json) · [복사용 예제](examples/chapter09/README.md)
+- [저자용 검토 기록](editorial/chapter09-review.md) · [슬라이드 대응표](editorial/chapter09-source-coverage.json) · [검사 결과](editorial/chapter09-validation.json) · [화면 출처](assets/screens/chapter09/provenance.json)
+- 실제 일곱 실습의 결과와 원상복구, Discover 검색 12개를 확인했습니다. 조건부 초기 파일 생성 등 수행하지 않은 경로와 저자용 자동 접속·독자용 대화형 절차의 차이는 검토 기록에 명시했습니다. 호스트 수집은 정상화해 유지하고, 임시 접근 키·HTTP 서버·셸 연결·실습 파일은 정리했습니다.
+
+```bash
+python tools/write_chapter09.py
+python tools/build_chapter09.py --output build/volume01-chapter09.docx
+```
+
+9장도 위와 같은 Python 의존성과 글꼴을 사용합니다. 도식 재생성은 `tools/diagrams_chapter09.py`, 정적 검사는 `tools/check_chapter09.py DOCX경로 임시PDF경로 --bash Bash실행파일경로`입니다. 검사는 명령을 실행하지 않습니다. 일반 원고 경로에 초안을 저장했으며 REV01은 수정하지 않았습니다.
 
 PDF는 배포하지 않습니다. 임시 PDF·페이지 이미지는 DOCX 배치 검사용으로만 사용합니다. Consolas가 없는 환경에서는 대체 글꼴로 보일 수 있으므로 Word에서 최종 인쇄 크기를 재확인합니다.

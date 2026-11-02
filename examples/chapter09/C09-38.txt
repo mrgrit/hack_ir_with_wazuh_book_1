@@ -1,0 +1,3 @@
+sudo wc -l /var/ossec/etc/client.keys
+sudo grep -n -A 5 '<server>' \
+/var/ossec/etc/ossec.conf

@@ -1,0 +1,6 @@
+sha256sum /root/book09-authorized_keys.before
+cp -p /root/book09-authorized_keys.before \
+/home/ccc/.ssh/authorized_keys
+cmp /root/book09-authorized_keys.before \
+/home/ccc/.ssh/authorized_keys
+printf "cmp status=%s\n" "$?"

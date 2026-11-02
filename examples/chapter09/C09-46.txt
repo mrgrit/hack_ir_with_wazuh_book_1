@@ -1,0 +1,4 @@
+ls -l /tmp/book09.fifo
+rm /tmp/book09.fifo
+ls -l /tmp/book09.fifo
+ss -tn 'dport = :4444'

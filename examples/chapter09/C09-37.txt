@@ -1,0 +1,4 @@
+sudo /var/ossec/bin/wazuh-control status
+sudo grep -n -A 4 -B 2 \
+'audit' /var/ossec/etc/ossec.conf
+sudo tail -n 20 /var/ossec/logs/ossec.log

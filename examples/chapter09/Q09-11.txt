@@ -1,0 +1,1 @@
+agent.name: "bastion" AND rule.id: "553" AND syscheck.path: "/var/log/book09-btmp"

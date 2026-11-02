@@ -1,0 +1,3 @@
+ssh -p 2204 ccc@192.168.0.107
+hostname
+id

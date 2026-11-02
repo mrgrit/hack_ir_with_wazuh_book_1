@@ -1,0 +1,56 @@
+"""9장 관계·흐름 도식. 실제 UI나 실행 결과를 합성하지 않는다."""
+import math,os
+from pathlib import Path
+from PIL import Image,ImageDraw,ImageFont
+ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'assets/figures/chapter09';OUT.mkdir(parents=True,exist_ok=True)
+FONT=os.environ.get('BOOK_DIAGRAM_FONT',str(Path(os.environ.get('LOCALAPPDATA',''))/'Microsoft/Windows/Fonts/BookkGothic_Light.ttf'))
+INK='#202638';PAPER='#fffdf8';PAL=['#e9dfd3','#dce7e4','#e1e3ef']
+class Figure:
+ def __init__(self,h):self.im=Image.new('RGB',(1500,h),PAPER);self.d=ImageDraw.Draw(self.im)
+ def box(self,r,t,c=0,size=46):
+  self.d.rectangle(r,fill=PAL[c],outline=INK,width=5)
+  font=ImageFont.truetype(FONT,size);b=self.d.multiline_textbbox((0,0),t,font=font,spacing=12,align='center');x,y,z,w=r
+  assert b[2]-b[0]<z-x-30,(t,'width');assert b[3]-b[1]<w-y-20,(t,'height')
+  self.d.multiline_text(((x+z-b[2]+b[0])/2,(y+w-b[3]+b[1])/2-b[1]),t,font=font,spacing=12,align='center',fill=INK)
+ def arrow(self,a,b):
+  x,y=b;t=math.atan2(y-a[1],x-a[0]);self.d.line((*a,x,y),fill=INK,width=7)
+  self.d.polygon([(x,y),(x-24*math.cos(t)+13*math.sin(t),y-24*math.sin(t)-13*math.cos(t)),(x-24*math.cos(t)-13*math.sin(t),y-24*math.sin(t)+13*math.cos(t))],fill=INK)
+ def save(self,n):self.im.save(OUT/(n+'.png'))
+
+f=Figure(660)
+for x,y,t,c in [(35,35,'22 권한 파일\nsudoers',0),(535,35,'23 공개 키\n재접속 조건',1),(1035,35,'24 cron\n반복 실행',2),(35,340,'25 · 26 실행\n연결 · 다운로드',0),(535,340,'27 실행 파일\n내용 변조',1),(1035,340,'28 로그\n삭제 · 비우기',2)]:f.box((x,y,x+430,y+220),t,c)
+for a,b in [((475,145),(525,145)),((975,145),(1025,145)),((1250,265),(1250,300)),((1250,300),(250,300)),((250,300),(250,330)),((475,450),(525,450)),((975,450),(1025,450))]:f.arrow(a,b)
+f.save('roadmap')
+f=Figure(650)
+f.box((35,35,680,240),'이전 상태\n경로 · 내용 · 속성',0);f.box((820,35,1465,240),'현재 상태\n크기 · 해시 · 권한',1)
+f.arrow((350,250),(550,330));f.arrow((1150,250),(950,330))
+f.box((150,345,1350,590),'에이전트 syscheck 비교\nManager 규칙 · 저장 · Discover\n변경 사실 확인 후 승인·행위자 조사',2,45);f.save('fim')
+f=Figure(650)
+for x,t,c in [(35,'공개 키 추가\nauthorized_keys',0),(535,'새 SSH 연결\n개인 키로 인증',1),(1035,'공개 키 제거\n새 연결 거부',2)]:f.box((x,35,x+430,260),t,c,42)
+f.arrow((475,145),(525,145));f.arrow((975,145),(1025,145))
+f.box((35,365,1465,590),'FIM: 목록 변경  /  auth.log: 사용한 키 지문\n이미 인증한 세션은 별도로 조사·종료',0,46);f.save('key')
+f=Figure(650)
+for x,t,c in [(35,'파일 등록\n/etc/cron.d',0),(535,'cron 서비스\n시각 · 사용자',1),(1035,'작업 실행\nHTTP · 셸',2)]:f.box((x,35,x+430,260),t,c,44)
+f.arrow((475,145),(525,145));f.arrow((975,145),(1025,145))
+f.box((35,365,680,590),'FIM 경보\n추가 · 수정 · 삭제',0,46);f.box((820,365,1465,590),'실행 증거\nHTTP 응답 · 결과 파일',2,44)
+f.arrow((250,270),(250,355));f.arrow((1250,270),(1250,355));f.save('cron')
+f=Figure(850)
+f.box((35,35,680,250),'kt66 호스트 .107\nccc 셸 · nc',0);f.box((820,35,1465,250),'공격자 .108:4444\nnc 연결 대기',1)
+f.arrow((690,140),(810,140))
+f.box((35,360,465,570),'연결에서 받은 입력\nFIFO · cat',1,38);f.box((535,360,965,570),'bash -i\n명령 처리',2,44);f.box((1035,360,1465,570),'표준 출력·오류\nnc로 응답',0,42)
+f.arrow((475,460),(525,460));f.arrow((975,460),(1025,460))
+f.box((35,675,1465,800),'성공 기준: 연결 기록 + hostname·id 응답\n감사 execve 성공만으로 연결 성공을 대신하지 않음',2,43);f.save('reverse')
+f=Figure(650)
+for x,t,c in [(35,'curl\nHTTP 본문 수신',0),(535,'파이프\nsh 표준 입력',1),(1035,'sh 실행\nid · hostname',2)]:f.box((x,35,x+430,260),t,c,44)
+f.arrow((475,145),(525,145));f.arrow((975,145),(1025,145))
+f.box((35,365,1465,595),'같은 부모·세션의 프로세스와 원문 대조\nHTTP 200 + 두 종료 코드 + 실행 결과 확인',0,46);f.save('download')
+f=Figure(650)
+for x,t,c in [(35,'기준 파일\n31,112바이트\n백업 확인',0),(535,'7바이트 추가\n31,119바이트\n해시 변경',1),(1035,'백업 복원\n31,112바이트\n초기 해시',2)]:f.box((x,35,x+430,310),t,c,43)
+f.arrow((475,170),(525,170));f.arrow((975,170),(1025,170))
+f.box((35,410,1465,600),'변조와 원상복구에 각각 modified 경보\n실습 전·후 패키지 검사 차이도 비교',0,46);f.save('binary')
+f=Figure(690)
+f.box((35,35,680,235),'내용 비우기\n모의 .bash_history',0);f.box((820,35,1465,235),'파일 삭제\nbtmp 복사본',1)
+f.arrow((350,245),(350,335));f.arrow((1150,245),(1150,335))
+f.box((35,345,680,565),'파일 존재 · 크기 0\nmodified · 550',2);f.box((820,345,1465,565),'파일 항목 없음\ndeleted · 553',2)
+f.box((35,600,1465,665),'원본 로그 보존 · 승인된 회전 작업과 대조',0,40);f.save('logs')
+print('8 chapter09 diagrams')

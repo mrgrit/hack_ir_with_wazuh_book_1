@@ -1,0 +1,4 @@
+sudo /var/ossec/bin/agent-auth \
+-m 10.20.32.100 -A kt66-host
+sudo systemctl start wazuh-agent
+sudo /var/ossec/bin/wazuh-control status

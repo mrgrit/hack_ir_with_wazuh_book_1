@@ -1,0 +1,2 @@
+command -v nc
+nc -h

