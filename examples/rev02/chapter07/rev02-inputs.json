@@ -321,7 +321,7 @@
   },
   {
     "document": "volume01-chapter07.json",
-    "section": "원본 반복문의 구문",
+    "section": "20회 HTTP 요청과 응답 코드 확인",
     "id": "C07-30",
     "where": "공격자 VM · 터미널",
     "file": "examples/rev02/chapter07/C07-30.txt",

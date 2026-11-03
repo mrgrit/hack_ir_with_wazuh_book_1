@@ -104,7 +104,7 @@ DQL은 저장된 문서를 조건으로 고르는 검색식이다. 필드 뒤 �
 
 agent.name: "bastion" AND
 location: "/var/log/auth.log"
-확인: bastion의 인증 파일에서 수집한 경보가 나온다. 전체 이벤트가 아니라 경보 인덱스의 결과이다.
+확인: bastion의 인증 파일을 분석해 경보 인덱스에 저장한 문서가 나온다. 경보로 저장되지 않은 인증 기록은 원본 인증 파일과 아카이브 수집 상태를 확인한다.
 
 [C08-15] 공격자 VM · att 셸
 실습 위치와 대상 파일을 확인한다.
@@ -131,7 +131,7 @@ timeout은 뒤 명령의 실행 시간을 제한한다. 45s는 45초이며 시�
 
 timeout 45s hydra -l ccc -P pw-fail.txt \
 -t 4 -w 5 ssh://192.168.0.107:2204
-확인: 이번 실행은 12개 후보를 시험하고 0 valid password found로 끝났다. 접속 오류나 시간 만료는 암호 후보 전체가 거부됐다는 뜻이 아니다. 오류가 나면 중단하고 서버 로그를 확인한다.
+확인: 이번 실행은 12개 후보를 시험하고 0 valid password found로 끝났다. 접속 오류나 시간 만료가 발생하면 시험을 중단하고 서버 로그에서 실제로 처리된 인증 요청과 결과를 확인한다.
 
 [Q08-02] Windows · Discover · wazuh-alerts-*
 OR는 둘 중 하나 이상의 조건이며 괄호로 규칙 조건을 묶는다. 5760은 개별 암호 인증 실패, 5763은 같은 출발지의 실패를 연관한 규칙이다.
@@ -301,7 +301,7 @@ ls -l /root/book08-sshd_config.before \
 cp -p /root/book08-sshd_config.before \
 /etc/ssh/sshd_config
 cp -p /root/book08-shadow.before /etc/shadow
-확인: 복사 오류가 없어야 한다. root를 잠그는 것만으로 임시 암호 해시가 이전 상태로 돌아오는 것은 아니므로 백업 내용까지 복구한다.
+확인: 복사 오류가 없어야 한다. root 계정의 잠금 상태와 암호 해시를 모두 초기 상태로 되돌리도록 백업 내용을 복구한다.
 
 [C08-35] kt66-bastion · root 셸
 두 파일이 원본 백업과 일치하는지 확인한 뒤 구문 검사와 reload를 진행한다. 각 cmp는 출력 없음·종료 코드 0이어야 한다.
@@ -418,7 +418,7 @@ sudo가 기록한 그룹 변경 명령을 찾는다. 명령의 인수까지 포�
 
 agent.name: "bastion" AND
 data.command: "/usr/sbin/usermod -aG sudo book08-user"
-확인: 실행 요청의 srcuser는 ccc, dstuser는 root이다. 이것만으로 그룹 변경 성공을 확정하지 않고 id·getent와 원문을 확인한다.
+확인: 실행 요청의 srcuser는 ccc, dstuser는 root이다. 그룹 변경 결과는 id·getent의 현재 상태와 변경 원문을 대조해 확인한다.
 
 [C08-48] kt66-bastion · SSH로 접속한 ccc 셸
 grep -F는 검색어를 정규표현식이 아닌 고정 문자열로 찾는다. 작은따옴표는 하이픈 등을 포함한 이름을 한 인수로 전달한다. auth.log를 읽을 권한 때문에 sudo를 사용한다.

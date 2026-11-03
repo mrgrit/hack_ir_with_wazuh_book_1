@@ -16,7 +16,7 @@ agent.name: "bastion" AND rule.groups: "syscheck" AND syscheck.path: "/home/ccc/
 
 [Q11-03] Windows · Discover · wazuh-alerts-*
 공개 키 인증 성공만 원문 문구까지 지정해 찾는다.
-srcip는 접속한 컴퓨터의 주소이며 키 소유자의 신원을 자동으로 증명하지 않는다.
+srcip는 서버가 기록한 접속 출발지 주소이다. 키를 사용한 사람은 인증 계정·키 지문·등록 내역·승인된 작업을 대조해 조사한다.
 agent.name: "bastion" AND rule.id: "5715" AND data.dstuser: "ccc" AND data.srcip: "192.168.0.108" AND full_log: "Accepted publickey"
 확인: 07:50:27.428 KST의 경보 원문에서 07:50:25의 Accepted publickey와 키 지문을 읽는다.
 
@@ -32,7 +32,7 @@ AND (full_log:*31337* OR previous_output:*31337*)
 
 agent.name:"kt66-host" AND rule.id:4151
 AND data.srcip:"192.168.0.108"
-확인: full_log의 한 목적지 포트와 previous_output의 일부 행이 스캔 전체 목록은 아니다.
+확인: full_log에는 해당 이벤트의 목적지 포트가, previous_output에는 상관 분석에 사용한 이전 기록 일부가 들어 있다. 스캔 범위는 실행 일지의 대상 포트와 도구 출력을 함께 대조한다.
 
 [Q11-06] Windows · Discover · wazuh-archives-*
 검색 패턴을 wazuh-archives-*로 바꿔 개별 수집 기록을 찾는다.

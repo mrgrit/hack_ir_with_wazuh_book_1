@@ -227,7 +227,7 @@ volume01-chapter07.json,JNDI 변형 헤더,C07-26,공격자 VM · 터미널,exam
 volume01-chapter07.json,Shellshock의 두 헤더,C07-27,공격자 VM · 터미널,examples/rev02/chapter07/C07-27.txt
 volume01-chapter07.json,Shellshock의 두 헤더,C07-28,공격자 VM · 터미널,examples/rev02/chapter07/C07-28.txt
 volume01-chapter07.json,POST 본문과 인증 상태,C07-29,공격자 VM · 터미널,examples/rev02/chapter07/C07-29.txt
-volume01-chapter07.json,원본 반복문의 구문,C07-30,공격자 VM · 터미널,examples/rev02/chapter07/C07-30.txt
+volume01-chapter07.json,20회 HTTP 요청과 응답 코드 확인,C07-30,공격자 VM · 터미널,examples/rev02/chapter07/C07-30.txt
 volume01-chapter08.json,컨테이너와 수집 상태 확인,C08-01,Windows · 터미널,examples/rev02/chapter08/C08-01.txt
 volume01-chapter08.json,컨테이너와 수집 상태 확인,C08-02,kt66 VM · ccc 호스트 셸,examples/rev02/chapter08/C08-02.txt
 volume01-chapter08.json,컨테이너와 수집 상태 확인,C08-03,kt66 VM · ccc 호스트 셸,examples/rev02/chapter08/C08-03.txt
