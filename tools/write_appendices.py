@@ -29,7 +29,7 @@ page('A.3  주소와 계정 기록표',
 page('A.4  실습 전 점검',
  table(['확인','완료 기준'],[['실행 위치','올바른 VM·컨테이너·계정임을 확인'],['시각','시간대와 현재 시각을 기록'],['접속','관리 콘솔과 기존 정상 접속 유지'],['도구','필요한 명령의 경로·버전 확인'],['수집','에이전트·센서·최근 기록 검색 확인'],['백업','변경할 파일과 권한·해시·서비스 초기 상태 보존'],['범위','대상 주소·포트·실행 횟수·종료 조건 확인']]),
  p('준비 확인에서 실패하면 공격 입력부터 반복하지 않는다. 도구가 없으면 설치 주체와 명령을 해당 장에서 확인하고, 수집이 중단됐다면 원본 로그와 에이전트를 먼저 점검한다. 파일을 바꿀 때는 기존 파일이 있는 경우와 처음 만드는 경우의 원상복구가 다르다.'),
- image('assets/illustrations/chapter04/field-check.png','부록 그림 A-1  수집 경로 확인',55))
+ image('assets/illustrations/diversity/v1-app-route.png','부록 그림 A-1  수집 경로 확인',55))
 page('A.5  수집 위치 빠른 참조',
  table(['대상','경로와 용도'],[['에이전트 또는 Manager','/var/ossec/etc/ossec.conf\n역할별 수집·모듈·관리 설정'],['에이전트 또는 Manager','/var/ossec/logs/ossec.log\nWazuh 자체 동작과 오류'],['Manager · kt66-siem','/var/ossec/logs/alerts/alerts.json\n규칙 조건에 따른 경보'],['Manager · kt66-siem','/var/ossec/logs/archives/archives.json\n설정에 따라 수신 이벤트 저장'],['kt66 호스트','/var/log/kern.log\n방화벽 LOG 등 커널 기록'],['kt66 호스트','/var/log/osquery/osqueryd.results.log\n예약 SQL 결과']]),
  p('Manager와 에이전트는 같은 설정 파일 이름을 사용해도 적용 범위가 다르다. Apache·WAF·인증 로그의 실제 경로는 컨테이너의 설정과 각 장의 원본 조회 절차를 따른다. 기록이 회전하면 현재 파일 대신 날짜 디렉터리의 압축 파일에 과거 자료가 있을 수 있다.'),

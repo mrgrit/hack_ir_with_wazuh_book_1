@@ -1191,6 +1191,13 @@
         {
           "type": "p",
           "text": "URL의 %3Cscript%3E는 <script>이다. %28과 %29는 소괄호, %2F는 닫는 태그의 슬래시이다. 인코딩을 읽어 입력한 값과 대조한다."
+        },
+        {
+          "type": "image",
+          "path": "assets/illustrations/diversity/v1-c05-response.png",
+          "caption": "삽화. 응답과 탐지 기록 대조.",
+          "width_mm": 55,
+          "align": "right"
         }
       ]
     },
@@ -1238,13 +1245,6 @@
         {
           "type": "p",
           "text": "애플리케이션은 입력값을 HTML의 문자로 표시하도록 출력 위치에 맞게 처리해야 한다. 예를 들어 HTML 본문에서 <를 &lt;로 출력하면 태그 시작으로 해석되지 않는다. HTML 속성·JavaScript·URL은 각각 다른 처리가 필요하다. [8]"
-        },
-        {
-          "type": "image",
-          "path": "assets/illustrations/chapter05/review.png",
-          "caption": "삽화. 응답과 탐지 기록 대조.",
-          "width_mm": 55,
-          "align": "right"
         }
       ]
     },

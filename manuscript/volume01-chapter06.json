@@ -273,7 +273,7 @@
         },
         {
           "type": "image",
-          "path": "assets/illustrations/chapter06/path-test.png",
+          "path": "assets/illustrations/diversity/v1-c06-path.png",
           "caption": "삽화. 실습 경로 목록 확인.",
           "width_mm": 55,
           "align": "right"
@@ -704,7 +704,7 @@
         },
         {
           "type": "image",
-          "path": "assets/illustrations/chapter06/log-review.png",
+          "path": "assets/illustrations/diversity/v1-c06-logs.png",
           "caption": "삽화. 요청 기록과 차단 근거 대조.",
           "width_mm": 55,
           "align": "right"

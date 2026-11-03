@@ -1,4 +1,5 @@
 """7장 신규 원고와 복사용 입력 생성. 네트워크 요청·실습 명령 실행 없음."""
+from illustration_assets import resolve_path
 import json
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
@@ -10,7 +11,7 @@ def tab(head,rows,widths): return {'type':'table','head':head,'rows':rows,'width
 def page(title,*blocks): pages.append({'title':title,'kind':'body','blocks':list(blocks)})
 def fig(name,caption): return {'type':'image','path':'assets/figures/chapter07/'+name+'.png','caption':caption,'width_mm':127}
 def sc(name,caption,width=127): return {'type':'image','path':'assets/screens/chapter07/'+name+'.png','caption':'화면 7-0. '+caption,'width_mm':width}
-def spot(ch,name,caption): return {'type':'image','path':f'assets/illustrations/chapter{ch}/{name}.png','caption':'삽화. '+caption,'width_mm':55,'align':'right'}
+def spot(ch,name,caption): return {'type':'image','path':resolve_path('07',f'assets/illustrations/chapter{ch}/{name}.png'),'caption':'삽화. '+caption,'width_mm':55,'align':'right'}
 def c(text,why,result,where='kt66-web · 컨테이너 셸'):
  b={'type':'command','id':f'C07-{len(commands)+1:02d}','where':where,'text':text,'why':why,'result':result};commands.append(b);return b
 def q(text,why,result,index='wazuh-alerts-*'):

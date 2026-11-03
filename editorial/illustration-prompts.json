@@ -1,0 +1,154 @@
+{
+  "date": "2026-11-03",
+  "engine": "built-in image_gen",
+  "style": "Retro 1990s PC adventure-game pixel illustration. Crisp visible pixel clusters, limited colors, stippled shadows, no smooth painterly gradients. Small book vignette, landscape 3:2, isolated with a transparent outer margin while preserving a concrete background fragment. No text, logos, readable UI, floating symbols, headsets, or comic metaphors. Physical equipment and hands must be plausible. Defender faces visible in front three-quarter view; attacker seen from behind in a dark hood. Screen faces the person using it. Different compositions, people, props and places for each scene.",
+  "scenes": [
+    {
+      "id": "v1-c05-response",
+      "book": 1,
+      "chapter": "05",
+      "old": "assets/illustrations/chapter05/review.png",
+      "scene": "Inside a small university web testing lab, a middle-aged East Asian woman with cropped grey hair and round glasses stands at a rolling cart holding a printed response log. She compares it with a beige tower computer and a single monitor angled toward her. Back of monitor visible to viewer. Cork board, cable basket and window with rain. Ochre, muted teal, warm grey. Wide left-to-right composition; no desk sitting scene."
+    },
+    {
+      "id": "v1-c06-path",
+      "book": 1,
+      "chapter": "06",
+      "old": "assets/illustrations/chapter06/path-test.png",
+      "scene": "An authorized attack-lab vignette in a converted basement workshop. A dark hooded adult seen from behind at a steel workbench pauses over a laptop, comparing a short paper checklist of test paths. Pegboard with coiled cables, a rugged equipment case and small concrete window. Moss green, dark charcoal and amber. Side-rear view, no outdoor trees or campus bench."
+    },
+    {
+      "id": "v1-c06-logs",
+      "book": 1,
+      "chapter": "06",
+      "old": "assets/illustrations/chapter06/log-review.png",
+      "scene": "A young Black male defender with short curls and rust-orange work shirt, face visible three-quarter, stands in a narrow server maintenance aisle reading a clipboard beside a wheeled terminal cart. He compares two paper log strips on the clipboard. One closed rack front, patch leads on hooks, concrete floor. Olive, rust, cream and dark blue. No open desktop PC, no glass building entrance."
+    },
+    {
+      "id": "v1-c07-file",
+      "book": 1,
+      "chapter": "07",
+      "old": "assets/illustrations/chapter04/field-check.png",
+      "scene": "A silver-haired East Asian male defender in blue coveralls kneels beside a lab tower server on a low maintenance trolley, inspecting a removable drive label while referencing an inventory sheet clipped to the trolley. A brick-walled repair bay, anti-static mat and labeled-without-readable-text storage boxes. Side-front three-quarter view, face visible. Warm brick, muted navy and pale cream. Illustrate file-change evidence checking, not physical hacking."
+    },
+    {
+      "id": "v1-c07-response",
+      "book": 1,
+      "chapter": "07",
+      "old": "assets/illustrations/chapter05/review.png",
+      "scene": "Two defenders in a compact incident-review room: a South Asian woman with dark curly bob stands pointing at two printed request and response timelines pinned on a wall; an older bald man sits sideways taking notes on a small folding stool. Printer with paper tray and storage cabinets, no computers on a desk. Visible faces, natural poses. Sandstone, burgundy and desaturated teal. Wall markings are abstract rows, no legible text."
+    },
+    {
+      "id": "v1-c08-auth",
+      "book": 1,
+      "chapter": "08",
+      "old": "assets/illustrations/chapter04/field-check.png",
+      "scene": "A male East Asian defender wearing a green cardigan sits at a long security operations counter in side-front three-quarter view, comparing a printed account list to a terminal monitor facing him. A wall clock and two numbered-without-readable-text key cabinets provide context for access records. Cool morning light, olive, cream and slate blue. One person, close horizontal composition, not a laptop outside."
+    },
+    {
+      "id": "v1-c08-changes",
+      "book": 1,
+      "chapter": "08",
+      "old": "assets/illustrations/chapter06/log-review.png",
+      "scene": "A wheelchair-using female defender with short brown hair works at an accessible review station in a campus IT service room, comparing two printed user-account change sheets on a vertical document stand. A colleague with dark skin and a neat beard stands beside a printer handing over a fresh sheet. Monitor is off to the side facing the seated user; its rear is visible. Pale wood, green, cream and copper. Respectful natural depiction, no headset."
+    },
+    {
+      "id": "v1-c09-fim",
+      "book": 1,
+      "chapter": "09",
+      "old": "assets/illustrations/chapter04/field-check.png",
+      "scene": "A young woman defender with a braided bun, indigo jacket and orange tool pouch checks a compact network appliance in an equipment alcove inside a railway maintenance depot. She stands facing three-quarter toward viewer with a rugged tablet angled toward herself. Cable conduit, equipment inventory folder and service lamp; no train controls or active sabotage. Steel grey, burnt orange, pale blue. Physical collection-route inspection, different from a street telecom cabinet."
+    },
+    {
+      "id": "v1-c09-compare",
+      "book": 1,
+      "chapter": "09",
+      "old": "assets/illustrations/chapter02/evidence.png",
+      "scene": "Inside a quiet digital evidence preparation room, an older Black woman defender with grey braids and a beige lab coat sits on a tall stool comparing before-and-after printouts on two clipboards. A sealed evidence drive case, magnifier laid flat and a small write-blocker device on the counter. Face visible three-quarter. Cream, plum, dark brown, muted green. No partner leaning over her, no magnifier held theatrically, no screens."
+    },
+    {
+      "id": "v1-c10-process",
+      "book": 1,
+      "chapter": "10",
+      "old": "assets/illustrations/chapter02/evidence.png",
+      "scene": "A young East Asian male defender with wavy hair and a mustard shirt uses a fold-out terminal in a network testing laboratory, looking from a printed socket/process inventory to a compact network switch mounted on a bench frame. Monitor back faces viewer and screen faces him. Coiled Ethernet leads and a network test instrument are clearly separate from a tower computer. Slate, ochre and cream. Standing diagonal composition."
+    },
+    {
+      "id": "v1-c10-sensor",
+      "book": 1,
+      "chapter": "10",
+      "old": "assets/illustrations/chapter04/field-check.png",
+      "scene": "A stocky middle-aged woman technician with short red hair checks a sensor appliance in a sheltered industrial loading-bay equipment station. She opens a hinged weatherproof enclosure and writes on a clipboard resting on a narrow ledge. Face visible three-quarter, safety vest over navy clothing, cable reels and metal conduit in background. Muted yellow, rust, steel grey. Show nonhazardous maintenance with no exposed power wiring."
+    },
+    {
+      "id": "v1-c11-evidence",
+      "book": 1,
+      "chapter": "11",
+      "old": "assets/illustrations/chapter02/evidence.png",
+      "scene": "At an incident-response handover board in a modest operations meeting room, three diverse adults stand apart comparing an evidence folder with a chronological paper strip on a wall. Lead is a middle-aged East Asian woman with chin-length hair in dark plum jacket, side colleague is a young man with glasses holding an evidence case, third older woman holds a notebook. No pointing guns, no huge screens, no desks. Muted teal, plum, cream. Natural discussion in front three-quarter view."
+    },
+    {
+      "id": "v1-app-route",
+      "book": 1,
+      "chapter": "appendices",
+      "old": "assets/illustrations/chapter04/field-check.png",
+      "scene": "In an orderly electronics workshop, a female technician in grey overalls and a young male student in a green sweater stand on either side of a freestanding patch panel, tracing a network cable with their fingers while checking a laminated routing sheet. Faces visible front three-quarter. Storage shelves, rolled cables and a portable tester. Warm wood, sage green, dark brown. No street cabinet, no repeated laptop pose."
+    },
+    {
+      "id": "v2-c01-evidence",
+      "book": 2,
+      "chapter": "01",
+      "old": "assets/illustrations/chapter01/evidence.png",
+      "scene": "A young South Asian female analyst with tied-back curly hair and round glasses compares a printed Windows event record with a screen at a small public-library IT workroom. She stands at a tall shared workstation; monitor faces her, rear toward viewer. Shelves of manuals, mechanical wall clock and a simple file tray. Terracotta, cream, dark teal. Only one person; focused reading, no magnifying glass."
+    },
+    {
+      "id": "v2-c01-sensors",
+      "book": 2,
+      "chapter": "01",
+      "old": "assets/illustrations/chapter01/field-check.png",
+      "scene": "A grey-haired male technician with a trimmed beard and a navy work vest checks a compact Windows lab tower at a classroom equipment trolley. He sits sideways on a low rolling stool and notes service readiness on a clipboard, face visible three-quarter. Tower computer, monitor rear, spare keyboard and neatly tied power leads; sunlit classroom wall with a window and plant. Warm grey, sage, amber. Equipment is a tower computer, not a server rack."
+    },
+    {
+      "id": "v2-c02-failure",
+      "book": 2,
+      "chapter": "02",
+      "scene": "In an isolated training lab attic with sloping rafters, a dark hooded adult attacker seen from behind pauses at a rugged laptop after a failed test login and marks a small paper test checklist. A basic router and closed equipment case sit on separate shelves, skylight above. Indigo, brick red and pale tan. No dramatic skulls or readable UI. Compact side-rear composition, grounded educational test environment."
+    },
+    {
+      "id": "v2-c02-response",
+      "book": 2,
+      "chapter": "02",
+      "scene": "A short-haired East Asian woman defender and an older Black man with glasses stand at a service-desk wall board comparing account lockout times with a printed login report. She holds a clipboard and he points to one row while holding an account inventory folder. Nearby telephone remains on its cradle, a small clock and empty visitor chairs. Muted forest green, ochre, cream. Faces visible three-quarter, no headset, no giant glowing display."
+    },
+    {
+      "id": "v2-c03-identity",
+      "scene": "A middle-aged East Asian female incident investigator with short wavy dark hair and a maroon rain jacket, standing under the awning of a campus network maintenance cabin, compares a printed login source record with equipment inventory on a small rugged handheld tablet. Concrete steps, an open wall telecom cabinet containing neat patch leads and a compact network switch, wet cobblestone street and brick facade fragment. Natural front three-quarter face, tablet screen faces her. No desk, no chair, no huge server rack. She is checking which device originated an event, not doing physical intrusion. Muted burgundy, slate blue, moss and cream. Wide view with figure on left and cabinet on right.",
+      "book": 2,
+      "chapter": "03",
+      "style": "Retro 1990s PC adventure-game pixel illustration. Crisp visible pixel clusters, limited colors, stippled shadows, no smooth painterly gradients. Small book vignette, landscape 3:2, isolated with a transparent outer margin while preserving a concrete background fragment. No text, logos, readable UI, floating symbols, headsets, or comic metaphors. Physical equipment and hands must be plausible. Defender faces visible in front three-quarter view; screen faces the person using it.",
+      "path": "assets/illustrations/diversity/v2-c03-identity.png",
+      "generation_file": "exec-b6a52a5d-de01-480e-bb1c-c223493d82e3.png",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "manuscript": "volume02-chapter03",
+      "sha256": "6f9c68461010297c6a8b5e3657d52b6cd8a5c7bb5e0200be9c0beda76f2573e4"
+    },
+    {
+      "id": "v2-c03-permission",
+      "scene": "An elderly South Asian male defender with a white moustache, turban and mustard vest, and a young East Asian woman in navy coveralls, jointly compare a printed administrator-group membership list and an approved change ticket beside a waist-high filing trolley in a university equipment storeroom. The older man stands frontal three-quarter holding the membership sheet, the woman faces him pointing at one row on her clipboard. Open shelving with beige tower PCs, labeled-but-unreadable spare drive boxes, one rolled cable, a stool unused. No computer monitors, no desk. Warm cream, ochre, dark blue and faded green. Credible calm access review, distinct people and props.",
+      "book": 2,
+      "chapter": "03",
+      "style": "Retro 1990s PC adventure-game pixel illustration. Crisp visible pixel clusters, limited colors, stippled shadows, no smooth painterly gradients. Small book vignette, landscape 3:2, isolated with a transparent outer margin while preserving a concrete background fragment. No text, logos, readable UI, floating symbols, headsets, or comic metaphors. Physical equipment and hands must be plausible. Defender faces visible in front three-quarter view; screen faces the person using it.",
+      "path": "assets/illustrations/diversity/v2-c03-permission.png",
+      "generation_file": "exec-96102d2b-17de-4430-8d34-19654c9308cb.png",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "manuscript": "volume02-chapter03",
+      "sha256": "42139ae7be32a927c264015155861a05176ab5ce1805b989eb1844470248f976"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 """6장: 웹 탐색과 인증 공격. 실제 요청·응답·로그를 대조하는 수동 실습."""
+from illustration_assets import resolve_path
 import json
 from pathlib import Path
 from write_chapter01 import p,h,tab,img,code
@@ -11,7 +12,7 @@ def q(text,why,result,index='wazuh-alerts-*'):
  b={'type':'query','id':f'Q06-{len(queries)+1:02d}','text':text,'why':why,'result':result,'where':'Windows · Discover · '+index};queries.append(b);return b
 def sc(n,caption,width=127):return img('assets/screens/chapter06/'+n+'.png','화면 6-0. '+caption,width)
 def fig(n,caption):return img('assets/figures/chapter06/'+n+'.png',caption)
-def spot(n,caption):return {'type':'image','path':'assets/illustrations/chapter06/'+n+'.png','caption':'삽화. '+caption,'width_mm':55,'align':'right'}
+def spot(n,caption):return {'type':'image','path':resolve_path('06','assets/illustrations/chapter06/'+n+'.png'),'caption':'삽화. '+caption,'width_mm':55,'align':'right'}
 def bi(name,text,display=None):
  browser_inputs.append({'file':name+'.txt','text':text});return code(display or text)
 def ref(text,url):return {'type':'link','text':text,'url':url}

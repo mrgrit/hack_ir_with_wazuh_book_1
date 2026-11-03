@@ -479,7 +479,7 @@
         },
         {
           "type": "image",
-          "path": "assets/illustrations/chapter04/field-check.png",
+          "path": "assets/illustrations/diversity/v1-c07-file.png",
           "caption": "삽화. 파일 변경과 서버 기록 비교",
           "width_mm": 55,
           "align": "right"
@@ -1264,7 +1264,7 @@
         },
         {
           "type": "image",
-          "path": "assets/illustrations/chapter05/review.png",
+          "path": "assets/illustrations/diversity/v1-c07-response.png",
           "caption": "삽화. 요청과 처리 결과의 증거 대조",
           "width_mm": 55,
           "align": "right"

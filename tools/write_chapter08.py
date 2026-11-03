@@ -1,4 +1,5 @@
 """8장 원고·복사용 예제 생성. 실습 명령을 실행하지 않는다."""
+from illustration_assets import resolve_path
 import json
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
@@ -10,7 +11,7 @@ def table(head,rows,widths=[39,88]):return {'type':'table','head':head,'rows':ro
 def page(t,*b):pages.append({'title':t,'kind':'body','blocks':list(b)})
 def fig(n,t):return {'type':'image','path':f'assets/figures/chapter08/{n}.png','caption':t,'width_mm':127}
 def screen(n,t):return {'type':'image','path':f'assets/screens/chapter08/{n}-fields.png','caption':t,'width_mm':127}
-def spot(ch,n,t):return {'type':'image','path':f'assets/illustrations/chapter{ch}/{n}.png','caption':t,'width_mm':55,'align':'right'}
+def spot(ch,n,t):return {'type':'image','path':resolve_path('08',f'assets/illustrations/chapter{ch}/{n}.png'),'caption':t,'width_mm':55,'align':'right'}
 def c(t,why,result,where='공격자 VM · att 셸'):
  b={'type':'command','id':f'C08-{len(commands)+1:02d}','where':where,'text':t,'why':why,'result':result};commands.append(b);return b
 def q(t,why,result):

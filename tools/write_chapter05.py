@@ -1,4 +1,5 @@
 """5장: HTTP 요청 한 건을 보내고 웹 로그·WAF·Wazuh 결과를 대조한다."""
+from illustration_assets import resolve_path
 import json
 from pathlib import Path
 from write_chapter01 import p,h,tab,img,code
@@ -16,7 +17,7 @@ def bi(name,text):
  browser_inputs.append({'file':name+'.txt','text':text})
  return code(text)
 def fig(n,caption):return img('assets/figures/chapter05/'+n+'.png',caption)
-def spot(n,caption):return {'type':'image','path':'assets/illustrations/chapter05/'+n+'.png','caption':caption,'width_mm':55,'align':'right'}
+def spot(n,caption):return {'type':'image','path':resolve_path('05','assets/illustrations/chapter05/'+n+'.png'),'caption':caption,'width_mm':55,'align':'right'}
 def req(endpoint,*values):
  return 'curl -sS -i --max-time 15 --get \\\n  "$DVWA/vulnerabilities/'+endpoint+'/" \\\n  '+' \\\n  '.join(values)
 page('5장  웹 공격의 시작과 입력값 검증',
@@ -192,14 +193,14 @@ page('5.7  이름 입력란에 스크립트 보내기',
 page('5.7  XSS 요청의 경보 읽기',
  q('agent.name: "web" AND data.url: *vulnerabilities/xss_r/*\nAND rule.id: "31105"','wazuh-alerts-*에서 실습 시간의 XSS 경보를 찾는다.','출발지·시각·name 값을 대조하고 data.id의 403을 읽는다.'),
  bs('xss-data','화면 5-16. 스크립트 입력의 수집 기록.'),
- p('URL의 %3Cscript%3E는 <script>이다. %28과 %29는 소괄호, %2F는 닫는 태그의 슬래시이다. 인코딩을 읽어 입력한 값과 대조한다.'))
+ p('URL의 %3Cscript%3E는 <script>이다. %28과 %29는 소괄호, %2F는 닫는 태그의 슬래시이다. 인코딩을 읽어 입력한 값과 대조한다.'),
+spot('review','삽화. 응답과 탐지 기록 대조.'))
 
 page('5.7  XSS · 판정과 대응',
  p('31105의 설명은 XSS (Cross Site Scripting) attempt.이다. 이 규칙은 URL의 script 관련 문자열 등을 검사한다. 브라우저에서 코드가 실행됐다는 뜻은 아니다. [6]'),
  tab(['관찰','판정·다음 확인'],[['요청 URL에 스크립트가 있다','XSS 입력을 전송했다.'],['403과 WAF intercepted: true','같은 요청을 WAF가 차단했다.'],['응답이 200이다','응답 HTML에서 입력이 어떻게 들어갔는지 확인한다.'],['브라우저에서 시험 코드가 실행된다','그 페이지에서의 XSS 실행 근거가 된다.']],[57,70]),
  p('5.6의 감사 로그 검색에서 마지막 조건을 data.request.request_line: *xss_r*로 바꾼다. request_line과 response.status, action.intercepted를 확인한다.'),
- p('애플리케이션은 입력값을 HTML의 문자로 표시하도록 출력 위치에 맞게 처리해야 한다. 예를 들어 HTML 본문에서 <를 &lt;로 출력하면 태그 시작으로 해석되지 않는다. HTML 속성·JavaScript·URL은 각각 다른 처리가 필요하다. [8]'),
- spot('review','삽화. 응답과 탐지 기록 대조.'))
+ p('애플리케이션은 입력값을 HTML의 문자로 표시하도록 출력 위치에 맞게 처리해야 한다. 예를 들어 HTML 본문에서 <를 &lt;로 출력하면 태그 시작으로 해석되지 않는다. HTML 속성·JavaScript·URL은 각각 다른 처리가 필요하다. [8]'))
 page('5.8  경로 조작과 파일 포함',
  p('DVWA의 파일 포함 실습은 page 값으로 읽을 파일을 고른다. 디렉터리 트래버설은 ../ 같은 경로 표현으로 허용한 디렉터리 밖의 파일에 접근하려는 공격이다. [9]'),
  p('LFI(Local File Inclusion)는 웹 애플리케이션이 입력값에 따라 서버 내부 파일을 포함하는 취약점이다. 이 실습에서는 파일 포함 기능에 상위 경로를 넣는다.'),

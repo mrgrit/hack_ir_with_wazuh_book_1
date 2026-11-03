@@ -1019,7 +1019,7 @@
         },
         {
           "type": "image",
-          "path": "assets/illustrations/chapter02/evidence.png",
+          "path": "assets/illustrations/diversity/v1-c10-process.png",
           "caption": "그림 10-10  프로세스와 수집 기록의 대조",
           "width_mm": 55,
           "align": "right"
@@ -1184,7 +1184,7 @@
         },
         {
           "type": "image",
-          "path": "assets/illustrations/chapter04/field-check.png",
+          "path": "assets/illustrations/diversity/v1-c10-sensor.png",
           "caption": "그림 10-12  센서 설정과 수집 상태 확인",
           "width_mm": 55,
           "align": "right"
