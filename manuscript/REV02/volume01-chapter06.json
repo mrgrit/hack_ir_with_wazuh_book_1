@@ -202,6 +202,10 @@
         {
           "type": "p",
           "text": "네트워크 주소 변환(NAT)이 있으면 data.srcip이 PC 주소와 다를 수 있다. 자신의 요청 한 건을 찾은 뒤 그 출발지 값을 이후 검색에 쓴다."
+        },
+        {
+          "type": "p",
+          "text": "각 실습에서는 요청 시각을 기록한 뒤 해당 시각 앞뒤 1분을 **Absolute**로 지정한다. 여러 요청을 보내는 실습은 첫 요청 전부터 마지막 요청 후까지 포함한다. 검색창 전체를 해당 Q06 검색식으로 교체하고 기존 필터 칩을 지운 뒤 Enter를 누른다. 인덱스는 검색식 위의 wazuh-alerts-* 또는 wazuh-archives-* 표기를 따른다. 행 왼쪽 화살표를 눌러 **Table**·**JSON**을 열고 URL·응답·출발지·원문 시각과 _index·_id를 기록한다(5.4)."
         }
       ],
       "break": false,
@@ -482,6 +486,26 @@
       "level": "subsection"
     },
     {
+      "title": "탐색 요청 전체와 응답 비교",
+      "kind": "body",
+      "break": false,
+      "level": "subsection",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Gobuster 실행을 마치면 시작·종료 시각을 조회 범위로 지정한다. 먼저 wazuh-archives-*에서 Q06-14로 정상 응답과 없는 경로의 응답을 함께 읽는다."
+        },
+        {
+          "type": "query",
+          "id": "Q06-14",
+          "where": "Windows · Discover · wazuh-archives-*",
+          "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/dvwa_access.log\"\nAND full_log: \"book06-scan\"",
+          "why": "탐색 표식이 들어 있는 접속 원문을 검색한다. 규칙 번호나 404 조건을 넣지 않아 다른 응답도 함께 읽는다.",
+          "result": "data.url·data.id·data.srcip 열을 추가하고 요청 목록과 대조한다. 시간·경로·응답 코드를 기록한 뒤 wazuh-alerts-*로 바꾸어 Q06-02·03을 실행한다."
+        }
+      ]
+    },
+    {
       "title": "반복 요청 검색",
       "kind": "body",
       "blocks": [
@@ -509,7 +533,7 @@
           "type": "query",
           "id": "Q06-03",
           "text": "agent.name: \"web\" AND rule.id: \"31151\"\nAND full_log: \"book06-scan\"",
-          "result": "규칙 31151의 경보와 원문을 확인한다. 요청 목록 전체는 Q06-02의 검색으로 확인한다.",
+          "result": "규칙 31151의 경보와 원문을 확인한다. 요청 목록 전체는 Q06-14의 검색으로 확인한다.",
           "where": "Windows · Discover · wazuh-alerts-*",
           "purpose": "같은 표식의 기록 중 반복된 4xx 응답 경보를 찾는다.",
           "syntax": "rule.id는 HTTP 응답 코드와 다르다."
@@ -523,6 +547,10 @@
         {
           "type": "p",
           "text": "오류 경로 여러 개와 짧은 시간 간격은 경로 탐색의 근거이다. 자동 점검 도구나 잘못된 링크도 원인이 될 수 있으므로 점검 일정·요청 경로·출발지를 대조한다."
+        },
+        {
+          "type": "p",
+          "text": "Q06-14는 수집된 접속 기록, Q06-02·03은 생성된 경보를 조회한다. 반복 경보의 previous_output에는 앞선 기록 일부가 들어 있다. 기간 전체의 요청 목록은 Q06-14의 URL과 원문을 기준으로 정리한다."
         }
       ],
       "break": false,
@@ -724,6 +752,10 @@
       "title": "WAF 차단 규칙 확인",
       "kind": "body",
       "blocks": [
+        {
+          "type": "p",
+          "text": "**Discover**를 wazuh-archives-*로 바꾸고 방금 보낸 요청의 시간 범위를 유지한다. 기존 필터 칩을 지우고 Q06-05를 실행한다. 행을 펼쳐 **JSON**에서 request_line·transaction.time·remote_address를 접속 기록과 맞춘다. audit_data.messages에서 검사 규칙을 읽고 action.intercepted와 response.status를 대조한다."
+        },
         {
           "type": "query",
           "id": "Q06-05",
@@ -975,10 +1007,10 @@
         {
           "type": "query",
           "id": "Q06-06",
-          "text": "agent.name: \"web\" AND data.protocol: \"POST\"\nAND data.url: \"/login.php\"",
-          "result": "세 POST 요청의 출발지·시각·302 응답을 비교한다.",
+          "text": "agent.name: \"web\"\nAND data.url: (\"/login.php\" OR \"/index.php\")",
+          "result": "Time 열을 오름차순으로 정렬한다. data.protocol이 POST인 세 요청의 출발지·시각·302 응답을 비교하고, 각 POST 뒤에 이어진 GET의 URL을 읽는다.",
           "where": "Windows · Discover · wazuh-archives-*",
-          "purpose": "아카이브에서 로그인 폼을 제출한 요청을 찾는다.",
+          "purpose": "아카이브에서 로그인 폼 제출과 이동 뒤 페이지 요청을 함께 찾는다.",
           "syntax": "조회 기간을 세 후보를 입력한 시각으로 좁힌다."
         },
         {
@@ -1002,6 +1034,10 @@
         {
           "type": "p",
           "text": "처리 코드는 kt66-dvwa의 /var/www/html/login.php에 있다. 입력 처리와 결과 분기를 확인하는 명령은 6.8에 모았다."
+        },
+        {
+          "type": "p",
+          "text": "실패 요청과 성공 요청을 한 번씩 보낼 때마다 전송 시각, POST /login.php의 상태 코드·Location, 이동 뒤 URL·본문을 한 행에 적는다. Q06-06에서 같은 시각의 POST 기록을 찾고 뒤따른 GET을 별도 행으로 읽는다. 접속 로그에 없는 로그인 입력값과 화면의 성공·실패 결과는 이 브라우저 기록에서 대조한다."
         }
       ],
       "break": false,
@@ -1325,6 +1361,10 @@
       "kind": "body",
       "blocks": [
         {
+          "type": "p",
+          "text": "**Discover**를 wazuh-archives-*로 바꾸고 방금 보낸 요청의 시간 범위를 유지한다. 기존 필터 칩을 지우고 Q06-09를 실행한다. 행을 펼쳐 **JSON**에서 request_line·transaction.time·remote_address를 접속 기록과 맞춘다. audit_data.messages에서 검사 규칙을 읽고 action.intercepted와 response.status를 대조한다."
+        },
+        {
           "type": "query",
           "id": "Q06-09",
           "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-method*",
@@ -1478,6 +1518,10 @@
         {
           "type": "p",
           "text": "요청이 들어온 네트워크 구간과 실제 출발지를 확인하고, 해당 경로의 접근 정책에서 허용한 장비인지 대조한다."
+        },
+        {
+          "type": "p",
+          "text": "경보가 0건이면 같은 기간에 인덱스를 wazuh-archives-*로 바꾸고 rule.id 조건을 뺀다. agent.name: \"web\"과 해당 요청의 data.url 조건으로 접속 기록을 찾는다. URL·응답·원문 길이를 읽은 뒤 적용된 규칙을 확인한다. 원문도 없으면 6.8의 파일 조회부터 수행한다."
         }
       ],
       "break": false,
@@ -1573,6 +1617,10 @@
         {
           "type": "p",
           "text": "로그인하지 않았다면 긴 요청 뒤에 302로 login.php로 이동할 수 있다. 긴 URL을 보낸 첫 요청과 뒤의 로그인 페이지 GET을 구분한다."
+        },
+        {
+          "type": "p",
+          "text": "경보가 0건이면 같은 기간에 인덱스를 wazuh-archives-*로 바꾸고 rule.id 조건을 뺀다. agent.name: \"web\"과 해당 요청의 data.url 조건으로 접속 기록을 찾는다. URL·응답·원문 길이를 읽은 뒤 적용된 규칙을 확인한다. 원문도 없으면 6.8의 파일 조회부터 수행한다."
         }
       ],
       "break": false,
@@ -1858,6 +1906,14 @@
         {
           "type": "p",
           "text": "브라우저의 6.3과 같은 헤더 시험이다. 요청 도구와 출발지 IP는 다르므로 새 실습 시각과 data.srcip을 기록한다. 이 옵션은 해당 curl 요청에만 적용된다."
+        },
+        {
+          "type": "query",
+          "id": "Q06-15",
+          "where": "Windows · Discover · wazuh-archives-*",
+          "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-curl-ua*",
+          "why": "Q06-12의 시간 범위를 유지하고 인덱스를 아카이브로 바꾸어 User-Agent 시험의 WAF 기록을 찾는다.",
+          "result": "요청 경로·시각·출발지를 맞추고 response.status=403, action.intercepted=true와 messages의 913100을 확인한다."
         }
       ],
       "break": false,
@@ -1894,6 +1950,14 @@
         {
           "type": "p",
           "text": "curl은 브라우저의 로그인 세션을 자동으로 공유하지 않는다. 이 두 요청은 로그인 없이 검사할 수 있는 경로이므로 세션 값을 복사할 필요가 없다."
+        },
+        {
+          "type": "query",
+          "id": "Q06-16",
+          "where": "Windows · Discover · wazuh-archives-*",
+          "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-curl-method*",
+          "why": "Q06-13의 시간 범위를 유지하고 인덱스를 아카이브로 바꾸어 PROPFIND 요청의 WAF 기록을 찾는다.",
+          "result": "request_line의 PROPFIND, response.status=403, action.intercepted=true와 messages의 911100을 확인한다."
         }
       ],
       "break": false,

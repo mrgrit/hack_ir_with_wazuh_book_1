@@ -1,0 +1,12 @@
+{
+  "case_b_roundtrip": 3,
+  "case_c_count": 9,
+  "case_a_ids": [
+    "A-001",
+    "A-002"
+  ],
+  "case_c_roundtrip": 9,
+  "case_b_count": 3,
+  "scope": "Read-only queries against supplied original case JSON; commands use analysis copies in manuscript",
+  "case_a_selected": 2
+}

@@ -40,6 +40,14 @@
     "text": "ssh-keygen -F 10.20.30.201"
   },
   {
+    "id": "C02-P6",
+    "file": "examples/rev02/chapter02/C02-P6.txt",
+    "where": "kt66 VM · 터미널",
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "text": "date -Is"
+  },
+  {
     "document": "volume01-chapter02.json",
     "section": "2.2  SSH 인증 실패 재현",
     "id": "C02-01",

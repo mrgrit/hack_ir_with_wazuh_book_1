@@ -83,3 +83,31 @@ $caseA[0].agent | Format-List *
 $caseA[0].data | Format-List *
 $caseA[0].full_log
 확인: 원문에서 계정·IP·포트를 찾아 추출 필드와 대조한다. 원문에 없는 값을 분석자가 보충했다면 관찰값과 구분해 적는다.
+
+[C11-06] Windows · PowerShell · 저장소 루트
+Where-Object는 중괄호 안 조건에 맞는 객체를 고른다. $_는 현재 객체, -in은 배열 @()에 포함되는지의 비교이다. Sort-Object는 시각 순서로 정렬하고 Select-Object는 출력 속성을 고른다.
+
+$caseA | Where-Object {
+  $_.rule.id -in @('5760', '5715')
+} | Sort-Object timestamp |
+  Select-Object evidence_id,timestamp,full_log |
+  Format-List
+확인: A의 증거 번호·경보 시각·인증 원문을 읽고 11.4의 계정·출발지 포트와 대조한다.
+
+[C11-07] Windows · PowerShell · 저장소 루트
+사례 B를 별도 변수로 읽는다. ConvertTo-Json은 중첩 객체를 JSON으로 표시하고 -Depth 12는 표시할 중첩 깊이를 지정한다.
+
+$caseB = Get-Content -Raw `
+  .\book11-analysis\case-b.json | ConvertFrom-Json
+$caseB | Sort-Object timestamp |
+  ConvertTo-Json -Depth 12
+확인: 키 파일 변경 두 건과 공개 키 인증 기록을 읽는다. syscheck의 경로·변경값과 full_log의 지문을 11.5에 따라 대조한다.
+
+[C11-08] Windows · PowerShell · 저장소 루트
+사례 C를 읽어 시각순으로 표시한다. A·B 변수를 덮어쓰지 않아 세 실습을 나누어 조사할 수 있다.
+
+$caseC = Get-Content -Raw `
+  .\book11-analysis\case-c.json | ConvertFrom-Json
+$caseC | Sort-Object timestamp |
+  ConvertTo-Json -Depth 12
+확인: audit·533·4151·osquery의 증거 번호와 관찰 대상을 구분한다. 11.6의 시간표와 대조하고, 발췌본에 포함되지 않은 자료는 미확인으로 기록한다.

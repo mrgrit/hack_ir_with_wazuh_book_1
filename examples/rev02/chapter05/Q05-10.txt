@@ -1,0 +1,4 @@
+agent.name: "web"
+AND location: "/var/log/apache2/dvwa_access.log"
+AND data.url: (*book05-normal* OR *book05-sqli*
+OR *book05-xss* OR *book05-path*)

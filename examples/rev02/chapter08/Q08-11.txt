@@ -1,0 +1,3 @@
+agent.name: "bastion"
+AND location: "/var/log/auth.log"
+AND full_log: "book08-user"

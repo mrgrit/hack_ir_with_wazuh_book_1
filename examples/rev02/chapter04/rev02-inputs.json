@@ -288,6 +288,14 @@
     "text": "agent.name: \"bastion\" AND rule.id: \"100410\""
   },
   {
+    "id": "Q04-03",
+    "file": "examples/rev02/chapter04/Q04-03.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter04.json",
+    "section": "경보 필드와 원문 대조",
+    "text": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND predecoder.program_name: \"book04\"\nAND full_log: \"book04-collection-01\""
+  },
+  {
     "document": "volume01-chapter04.json",
     "section": "4.10  실습 규칙 원상복구",
     "id": "C04-35",

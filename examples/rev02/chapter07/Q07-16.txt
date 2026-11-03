@@ -1,0 +1,4 @@
+agent.name: "web"
+AND location: "/var/log/apache2/juice_access.log"
+AND data.url: *rest/products/search*
+AND data.id: 5*

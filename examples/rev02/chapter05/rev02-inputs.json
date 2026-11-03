@@ -69,7 +69,15 @@
     "id": "Q05-04",
     "where": "Windows · Discover · wazuh-alerts-*",
     "file": "examples/rev02/chapter05/Q05-04.txt",
-    "text": "agent.name: \"web\" AND data.url: *vulnerabilities/xss_r/*\nAND rule.id: \"31105\""
+    "text": "agent.name: \"web\"\nAND data.url: *vulnerabilities/xss_r/*"
+  },
+  {
+    "id": "Q05-08",
+    "file": "examples/rev02/chapter05/Q05-08.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter05.json",
+    "section": "XSS · 판정과 대응",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *vulnerabilities/xss_r/*"
   },
   {
     "document": "volume01-chapter05.json",
@@ -78,6 +86,14 @@
     "where": "Windows · Discover · wazuh-alerts-*",
     "file": "examples/rev02/chapter05/Q05-05.txt",
     "text": "agent.name: \"web\"\nAND data.url: *book05-browser-path*"
+  },
+  {
+    "id": "Q05-09",
+    "file": "examples/rev02/chapter05/Q05-09.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter05.json",
+    "section": "파일 접근 결과 판정",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book05-browser-path*"
   },
   {
     "document": "volume01-chapter05.json",
@@ -318,6 +334,22 @@
     "where": "공격자 VM · 터미널",
     "file": "examples/rev02/chapter05/C05-33.txt",
     "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/fi/\" \\\n  --data 'page=../../../../../etc/passwd' \\\n  --data 'bookcase=book05-path-raw'"
+  },
+  {
+    "id": "Q05-10",
+    "file": "examples/rev02/chapter05/Q05-10.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter05.json",
+    "section": "curl 요청의 Wazuh 분석",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/dvwa_access.log\"\nAND data.url: (*book05-normal* OR *book05-sqli*\nOR *book05-xss* OR *book05-path*)"
+  },
+  {
+    "id": "Q05-11",
+    "file": "examples/rev02/chapter05/Q05-11.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter05.json",
+    "section": "curl 요청의 Wazuh 분석",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: (*book05-sqli*\nOR *book05-xss* OR *book05-path*)"
   },
   {
     "document": "volume01-chapter05.json",

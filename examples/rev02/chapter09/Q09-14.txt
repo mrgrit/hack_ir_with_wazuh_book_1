@@ -1,0 +1,4 @@
+agent.name: "bastion"
+AND location: "/var/log/auth.log"
+AND predecoder.program_name: "sudo"
+AND full_log: *99-book09-lab*

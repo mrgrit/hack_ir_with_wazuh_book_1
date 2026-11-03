@@ -86,5 +86,29 @@
     "where": "Windows · PowerShell · 저장소 루트",
     "file": "examples/rev02/chapter11/C11-05.txt",
     "text": "$caseA[0].agent | Format-List *\n$caseA[0].data | Format-List *\n$caseA[0].full_log"
+  },
+  {
+    "id": "C11-06",
+    "file": "examples/rev02/chapter11/C11-06.txt",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "document": "volume01-chapter11.json",
+    "section": "사례 파일에서 필요한 기록 조회",
+    "text": "$caseA | Where-Object {\n  $_.rule.id -in @('5760', '5715')\n} | Sort-Object timestamp |\n  Select-Object evidence_id,timestamp,full_log |\n  Format-List"
+  },
+  {
+    "id": "C11-07",
+    "file": "examples/rev02/chapter11/C11-07.txt",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "document": "volume01-chapter11.json",
+    "section": "사례 파일에서 필요한 기록 조회",
+    "text": "$caseB = Get-Content -Raw `\n  .\\book11-analysis\\case-b.json | ConvertFrom-Json\n$caseB | Sort-Object timestamp |\n  ConvertTo-Json -Depth 12"
+  },
+  {
+    "id": "C11-08",
+    "file": "examples/rev02/chapter11/C11-08.txt",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "document": "volume01-chapter11.json",
+    "section": "사례 파일에서 필요한 기록 조회",
+    "text": "$caseC = Get-Content -Raw `\n  .\\book11-analysis\\case-c.json | ConvertFrom-Json\n$caseC | Sort-Object timestamp |\n  ConvertTo-Json -Depth 12"
   }
 ]

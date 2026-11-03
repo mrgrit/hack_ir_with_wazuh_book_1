@@ -618,25 +618,62 @@
       "level": "subsection"
     },
     {
+      "title": "정상 요청의 Wazuh 검색 준비",
+      "kind": "body",
+      "break": false,
+      "level": "subsection",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "사용자 번호 1의 응답을 기록한 뒤 Wazuh에서 같은 요청을 찾는다. DVWA 탭을 열어 둔 채 새 탭에서 https://192.168.0.107:5601/에 로그인한다. 아래 순서는 이후 SQL 인젝션·XSS·경로 조작에서도 사용한다."
+        },
+        {
+          "type": "list",
+          "items": [
+            "왼쪽 위 메뉴에서 **Explore → Discover**를 연다. 검색창 오른쪽 언어가 **DQL**인지 확인한다.",
+            "왼쪽 인덱스 목록에서 **wazuh-archives-***를 선택한다. 정상 응답까지 포함한 접속 기록을 찾을 때 사용하는 패턴이다. 목록에 없으면 3.2의 아카이브 검색 패턴 준비를 따른다."
+          ]
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter03/index-pattern.png",
+          "caption": "화면 5-11. Discover의 검색 패턴 선택. 정상 요청을 포함한 수집 기록은 wazuh-archives-*에서 조회한다.",
+          "width_mm": 110
+        },
+        {
+          "type": "list",
+          "items": [
+            "검색창 아래의 기존 필터 칩을 ×로 지운다. 오른쪽 시간 선택기에서 **Show dates**를 누르고 시작·종료 값을 각각 열어 **Absolute**로 정한다. 정상 요청 시각 앞뒤 1분을 포함하고 **Update**를 누른다.",
+            "다음 Q05-01 전체를 검색창에 입력하고 Enter를 누른다. 검색창이 자동으로 갱신되지 않으면 **Refresh**를 누른다.",
+            "결과 행 왼쪽의 펼침 화살표(>)를 누른다. **Table**에서 필드 이름과 값을 읽고, **JSON** 탭에서 _index·_id와 _source 아래의 원문을 확인한다."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "시간 선택기는 브라우저의 표시 시간대를 따른다. Windows의 시간대를 서울로 맞추고 요청 시각을 KST로 기록한다. 원문에 +0000 또는 Z가 붙은 시각은 UTC이므로 9시간을 더해 대조한다. 책의 브라우저 사례는 2026년 11월 1일 21:12경에 실행됐다. 직접 실습할 때는 방금 요청한 시각으로 조회한다."
+        }
+      ]
+    },
+    {
       "title": "정상 요청의 아카이브 기록",
       "kind": "body",
       "blocks": [
         {
           "type": "p",
-          "text": "Windows의 **Discover**에서 wazuh-archives-*와 **Last 24 hours**를 선택한다. 정상 입력은 경보가 없어도 아카이브에 수집될 수 있다."
+          "text": "Windows의 **Discover**에서 wazuh-archives-*와 앞에서 지정한 정상 요청의 조회 기간을 유지한다. 정상 입력은 경보가 없어도 아카이브에 수집될 수 있다."
         },
         {
           "type": "query",
           "id": "Q05-01",
           "text": "agent.name: \"web\"\nAND data.url: \"/vulnerabilities/sqli/?id=1&Submit=Submit\"",
           "why": "agent.name은 수집 에이전트이다. web이 수집한 URL 중 정상 조회 경로와 입력값이 일치하는 기록을 찾는다.",
-          "result": "실습 시각의 행을 펼쳐 data.id의 200과 data.url을 확인한다. data.srcip은 요청을 보낸 PC의 출발지 IP이다.",
+          "result": "행을 펼쳐 location=/var/log/apache2/dvwa_access.log, data.protocol=GET, data.id=200과 id=1이 들어 있는 data.url을 확인한다. full_log의 요청 시각을 브라우저 기록과 대조한다.",
           "where": "Windows · Discover · wazuh-archives-*"
         },
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/normal-data.png",
-          "caption": "화면 5-11. 정상 입력의 수집 기록.",
+          "caption": "화면 5-12. 정상 입력의 수집 기록.",
           "width_mm": 127
         },
         {
@@ -650,6 +687,14 @@
         {
           "type": "p",
           "text": "location은 /var/log/apache2/dvwa_access.log이다. 결과가 없으면 다음 절차에서 원본 파일부터 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "왼쪽 **Search field names**에서 data.url을 찾아 +로 열에 추가한다. data.id·data.srcip·location도 같은 방법으로 추가한다. 결과가 여러 건이면 **Time** 열로 정렬해 정상 요청 한 건을 고른다. 로그인 화면·이미지·스크립트의 요청과 사용자 번호 조회 요청을 URL로 구분한다."
+        },
+        {
+          "type": "p",
+          "text": "결과가 0건이면 시간 범위와 필터 칩부터 확인한다. 같은 인덱스에서 검색창을 agent.name: \"web\"으로 바꾸어 조회하고, location과 full_log에서 DVWA 요청을 찾는다. web 기록도 없으면 5.10의 원본 로그·에이전트·수집 설정 순서로 확인한다. 정상 요청 기록을 찾은 뒤 공격 입력으로 진행한다."
         }
       ],
       "break": false,
@@ -925,7 +970,7 @@
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/sqli-input.png",
-          "caption": "화면 5-12. User ID에 SQL 구문 입력.",
+          "caption": "화면 5-13. User ID에 SQL 구문 입력.",
           "width_mm": 127
         },
         {
@@ -935,7 +980,7 @@
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/sqli-blocked.png",
-          "caption": "화면 5-13. SQL 요청의 거부 응답.",
+          "caption": "화면 5-14. SQL 요청의 거부 응답.",
           "width_mm": 127
         },
         {
@@ -951,9 +996,13 @@
       "kind": "body",
       "blocks": [
         {
+          "type": "p",
+          "text": "브라우저에서 SQL 요청의 전송 시각·URL·403 응답을 적은 뒤 Wazuh 탭으로 이동한다. 인덱스를 wazuh-alerts-*로 바꾸고 검색창과 필터 칩을 비운다. 전송 시각 앞뒤 1분을 지정하고 Q05-02를 실행한다."
+        },
+        {
           "type": "image",
           "path": "assets/screens/chapter05/browser/sqli-headers.png",
-          "caption": "화면 5-14. SQL 요청의 URL과 응답 코드.",
+          "caption": "화면 5-15. SQL 요청의 URL과 응답 코드.",
           "width_mm": 127,
           "crop_px": [
             0,
@@ -973,6 +1022,10 @@
         {
           "type": "p",
           "text": "200이나 302가 나왔다면 본문·로그인 상태·입력값·WAF 설정 순서로 확인한다. DB 자료가 반환됐는지까지 읽어야 실행 결과를 판단할 수 있다."
+        },
+        {
+          "type": "p",
+          "text": "결과 행의 **Table**에서 data.url·data.id·data.srcip·rule.id·location을 읽는다. **JSON**의 full_log에서 같은 URL과 403을 찾고 _index·_id를 기록한다. URL의 UNION과 브라우저가 보낸 id 값을 대조한 뒤 5.6에서 이 요청의 차단 근거를 조사한다."
         }
       ],
       "break": false,
@@ -985,13 +1038,13 @@
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/sqli-data.png",
-          "caption": "화면 5-15. SQL 입력과 응답 코드.",
+          "caption": "화면 5-16. SQL 입력과 응답 코드.",
           "width_mm": 127
         },
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/sqli-rule.png",
-          "caption": "화면 5-16. SQL 인젝션 탐지 설명.",
+          "caption": "화면 5-17. SQL 인젝션 탐지 설명.",
           "width_mm": 127
         },
         {
@@ -1049,6 +1102,10 @@
       "blocks": [
         {
           "type": "p",
+          "text": "같은 요청을 WAF 감사 로그에서 찾는다. **Discover**의 인덱스를 wazuh-archives-*로 바꾸고 SQL 요청의 시간 범위는 유지한다. 검색창 전체를 Q05-03으로 교체하고 남아 있는 rule.id 필터 칩을 지운 뒤 Enter를 누른다."
+        },
+        {
+          "type": "p",
           "text": "403 응답을 받은 요청의 ModSecurity 감사 기록을 찾는다. 같은 시각·출발지·URL의 기록에서 intercepted 값, 차단 메시지, 적용 규칙 번호를 확인한다."
         },
         {
@@ -1062,7 +1119,7 @@
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/waf-action.png",
-          "caption": "화면 5-17. ModSecurity의 차단 결정.",
+          "caption": "화면 5-18. ModSecurity의 차단 결정.",
           "width_mm": 127
         },
         {
@@ -1093,6 +1150,14 @@
         {
           "type": "p",
           "text": "화면의 전체 필드 이름은 data.audit_data.action으로 시작한다. action은 처리 결정, intercepted는 가로막았는지를 나타낸다."
+        },
+        {
+          "type": "p",
+          "text": "행을 펼쳐 **JSON**을 선택한다. _source.data.request.request_line의 경로·SQL 입력과 data.transaction.remote_address를 앞서 읽은 access 로그의 data.url·data.srcip에 대조한다. data.transaction.time도 확인해 같은 요청을 고른다. 브라우저가 보낸 쿠키나 인증 헤더는 조사 기록에 복사하지 않는다."
+        },
+        {
+          "type": "p",
+          "text": "책의 SQL·XSS·두 경로 요청에 대한 감사 기록은 examples/rev02/chapter05/browser/waf-cases.json에 있다. Windows 메모장으로 열어 records 배열의 request_line으로 사례를 고르고 data 아래의 응답·차단 필드를 대조한다. 이 파일을 읽은 결과는 직접 실행한 요청의 Wazuh 조회 결과와 나누어 기록한다."
         }
       ],
       "break": false,
@@ -1105,7 +1170,7 @@
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/waf-response.png",
-          "caption": "화면 5-18. 감사 기록의 응답과 접속 정보.",
+          "caption": "화면 5-19. 감사 기록의 응답과 접속 정보.",
           "width_mm": 127
         },
         {
@@ -1176,6 +1241,10 @@
         {
           "type": "p",
           "text": "시각·출발지·요청 URL이 같은지 대조한 뒤 “SQL 인젝션 입력을 WAF가 차단했다”로 기록한다."
+        },
+        {
+          "type": "p",
+          "text": "이 요청의 조사 기록에는 access 로그의 규칙 31103, HTTP 403, WAF action.intercepted=true, 차단 단계와 messages의 규칙 번호를 적는다. 각 값 옆에 사용한 문서의 _index·_id를 남긴다. 차단 필드가 없는 요청은 응답 코드와 감사 로그의 실제 메시지를 기록하고 5.10에서 WAF 설정을 확인한다."
         }
       ],
       "break": false,
@@ -1247,13 +1316,13 @@
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/xss-input.png",
-          "caption": "화면 5-19. 이름 입력란의 스크립트.",
+          "caption": "화면 5-20. 이름 입력란의 스크립트.",
           "width_mm": 127
         },
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/xss-blocked.png",
-          "caption": "화면 5-20. XSS 요청의 거부 응답.",
+          "caption": "화면 5-21. XSS 요청의 거부 응답.",
           "width_mm": 127
         },
         {
@@ -1269,17 +1338,21 @@
       "kind": "body",
       "blocks": [
         {
+          "type": "p",
+          "text": "스크립트 요청의 전송 시각과 403 응답을 기록한다. Wazuh에서 인덱스를 wazuh-alerts-*로 되돌리고 SQL 검색식과 필터 칩을 지운다. XSS 요청 시각 앞뒤 1분을 지정해 Q05-04를 실행한다."
+        },
+        {
           "type": "query",
           "id": "Q05-04",
-          "text": "agent.name: \"web\" AND data.url: *vulnerabilities/xss_r/*\nAND rule.id: \"31105\"",
-          "why": "wazuh-alerts-*에서 실습 시간의 XSS 경보를 찾는다.",
-          "result": "출발지·시각·name 값을 대조하고 data.id의 403을 읽는다.",
+          "text": "agent.name: \"web\"\nAND data.url: *vulnerabilities/xss_r/*",
+          "why": "XSS 메뉴의 요청을 먼저 모아 실제 적용된 규칙을 읽는다.",
+          "result": "name 값에 script와 alert가 들어 있는 요청을 고른다. 사례의 data.id는 403, rule.id는 31105이다. 정상 메뉴 열기 요청은 URL에 공격 입력이 없다.",
           "where": "Windows · Discover · wazuh-alerts-*"
         },
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/xss-data.png",
-          "caption": "화면 5-21. 스크립트 입력의 수집 기록.",
+          "caption": "화면 5-22. 스크립트 입력의 수집 기록.",
           "width_mm": 127
         },
         {
@@ -1304,6 +1377,22 @@
         {
           "type": "p",
           "text": "31105의 설명은 XSS (Cross Site Scripting) attempt.이다. 이 규칙은 URL의 script 관련 문자열 등을 검사한다. 코드 실행 여부는 브라우저의 응답 HTML과 실행 결과에서 확인한다. [5-6]"
+        },
+        {
+          "type": "p",
+          "text": "인덱스를 wazuh-archives-*로 바꾸고 XSS 전송 시각을 유지한다. Q05-08 전체를 입력해 WAF 감사 기록을 찾는다."
+        },
+        {
+          "type": "query",
+          "id": "Q05-08",
+          "where": "Windows · Discover · wazuh-archives-*",
+          "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *vulnerabilities/xss_r/*",
+          "why": "XSS 경로에 대한 WAF 감사 기록을 찾는다. 경보 규칙 번호는 검색 조건에서 뺀다.",
+          "result": "request_line의 name 입력, transaction의 시각·출발지, response.status를 대조한다. JSON의 audit_data.action.intercepted와 messages를 읽는다."
+        },
+        {
+          "type": "p",
+          "text": "사례 기록에는 응답 403, intercepted=true, phase=2와 XSS 규칙 941100·941110·941160, 차단 규칙 949110이 있다. 31105는 Wazuh가 접속 로그에 적용한 규칙이고, 941xxx는 WAF가 요청을 검사한 규칙이다. 두 종류의 번호와 근거 문서를 구분해 기록한다."
         },
         {
           "type": "table",
@@ -1333,10 +1422,6 @@
             57,
             70
           ]
-        },
-        {
-          "type": "p",
-          "text": "5.6의 감사 로그 검색에서 마지막 조건을 data.request.request_line: *xss_r*로 바꾼다. request_line과 response.status, action.intercepted를 확인한다."
         },
         {
           "type": "p",
@@ -1412,7 +1497,7 @@
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/file-menu.png",
-          "caption": "화면 5-22. File Inclusion의 파일 선택.",
+          "caption": "화면 5-23. File Inclusion의 파일 선택.",
           "width_mm": 127
         },
         {
@@ -1422,7 +1507,7 @@
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/file-normal.png",
-          "caption": "화면 5-23. file1.php를 선택한 결과.",
+          "caption": "화면 5-24. file1.php를 선택한 결과.",
           "width_mm": 127
         },
         {
@@ -1443,6 +1528,10 @@
       "blocks": [
         {
           "type": "p",
+          "text": "File Inclusion의 정상 파일 응답을 확인한 뒤 아래의 원문 경로 요청을 보낸다. 요청 시각·주소창 URL·상태 코드를 기록한다. Wazuh에서 wazuh-alerts-*를 선택하고 이 시각 앞뒤 1분을 지정해 Q05-05를 실행한다."
+        },
+        {
+          "type": "p",
           "text": "① 주소창에서 물음표 뒤의 page=file1.php를 아래 값으로 바꾼다. 앞의 http 주소·이름·/vulnerabilities/fi/는 그대로 둔다."
         },
         {
@@ -1460,7 +1549,7 @@
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/path-blocked.png",
-          "caption": "화면 5-24. 파일 경로 요청의 거부 응답.",
+          "caption": "화면 5-25. 파일 경로 요청의 거부 응답.",
           "width_mm": 127
         },
         {
@@ -1520,12 +1609,16 @@
         {
           "type": "image",
           "path": "assets/screens/chapter05/browser/path-data.png",
-          "caption": "화면 5-25. 경로 조작 요청의 수집 기록.",
+          "caption": "화면 5-26. 경로 조작 요청의 수집 기록.",
           "width_mm": 127
         },
         {
           "type": "p",
           "text": "기본 규칙 31104에는 ../.. 등의 문자열 조건이 있다. 서버에서 같은 경로로 해석해도 URL에 남은 문자열에 따라 분류가 달라진다. [5-6]"
+        },
+        {
+          "type": "p",
+          "text": "인코딩한 요청의 응답을 확인한 뒤 Q05-05의 기간을 두 요청 시각이 모두 포함되도록 넓히고 Refresh를 누른다. book05-browser-path-raw와 book05-browser-path를 각각 찾아 URL·응답·규칙을 두 행으로 적는다."
         }
       ],
       "break": false,
@@ -1535,6 +1628,22 @@
       "title": "파일 접근 결과 판정",
       "kind": "body",
       "blocks": [
+        {
+          "type": "p",
+          "text": "접속 로그의 두 URL을 비교한 다음 인덱스를 wazuh-archives-*로 바꾼다. 같은 시간 범위에서 Q05-09를 실행한다."
+        },
+        {
+          "type": "query",
+          "id": "Q05-09",
+          "where": "Windows · Discover · wazuh-archives-*",
+          "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book05-browser-path*",
+          "why": "raw 표식이 붙은 요청과 인코딩한 요청의 WAF 감사 기록을 함께 찾는다.",
+          "result": "request_line의 bookcase 값을 보고 두 요청을 나눈다. 각각 response.status=403, audit_data.action.intercepted=true와 phase=2를 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "각 행을 펼쳐 **JSON**의 audit_data.messages를 읽는다. 사례의 두 감사 기록에는 경로 탐색·파일 접근 관련 930100·930110·930120과 차단 규칙 949110이 있다. 원문 경로와 인코딩 경로의 access 규칙이 달라도 WAF 차단 여부는 각 감사 기록에서 따로 확인한다. 시각·출발지·요청 줄을 맞춘 문서의 _index·_id를 두 행으로 기록한다."
+        },
         {
           "type": "p",
           "text": "제시한 사례의 두 요청은 WAF에서 차단되었다. 파일 내용이 반환된 기록은 없다. 다음과 같이 근거를 나누어 적는다."
@@ -1723,6 +1832,10 @@
         {
           "type": "p",
           "text": "조건을 고친 뒤 요청 한 건을 다시 보내고 새 시각으로 찾는다. 기존 경보는 바뀐 요청의 결과를 보여 주지 않는다."
+        },
+        {
+          "type": "p",
+          "text": "access 기록은 있으나 WAF 검색이 0건이면 인덱스가 wazuh-archives-*인지 먼저 확인한다. 같은 기간에 agent.name: \"web\" AND location: \"/var/log/apache2/modsec_audit.log\"만 입력한다. 결과가 있으면 request_line의 실제 경로·인코딩을 읽고 조건을 고친다. 이 조회도 0건이면 C05-06~11에서 WAF와 감사 로그 수집 설정을 확인한다."
         }
       ],
       "break": false,
@@ -2231,7 +2344,7 @@
         },
         {
           "type": "p",
-          "text": "브라우저와 같은 SQL 입력을 보냈다. **Discover**에서 data.url: *book05-sqli*로 찾고 같은 시각의 WAF 기록을 대조한다."
+          "text": "Q05-10에서 book05-sqli 요청의 URL·403·규칙을 읽고 Q05-11에서 같은 요청의 WAF 감사 기록을 대조한다. 두 검색의 입력 순서는 아래의 ‘curl 요청의 Wazuh 분석’과 같다."
         }
       ],
       "break": false,
@@ -2251,7 +2364,7 @@
         },
         {
           "type": "p",
-          "text": "curl은 응답 내용을 출력하며 JavaScript를 실행하지 않는다. 이 요청에서는 HTTP 응답과 WAF 차단 기록을 확인한다. **Discover**에서 data.url: *book05-xss*로 찾는다."
+          "text": "curl은 응답 내용을 출력한다. Q05-10에서 book05-xss 요청의 URL·403·규칙을 확인하고, Q05-11에서 같은 요청의 차단 필드와 WAF 메시지를 읽는다."
         }
       ],
       "break": false,
@@ -2316,11 +2429,43 @@
         },
         {
           "type": "p",
-          "text": "**Discover**에서 data.url: *book05-path*로 두 요청을 찾는다. 5.8에서 비교한 ../와 ..%2F의 차이를 읽는다. WAF 차단은 해당 요청의 감사 기록에서 확인한다."
+          "text": "Q05-10의 결과에서 book05-path와 book05-path-raw를 구분한다. 각각 ../와 ..%2F, 403 응답, Wazuh 규칙을 기록한다. Q05-11에서는 두 요청의 WAF 차단 근거를 따로 확인한다."
         }
       ],
       "break": false,
       "level": "subsection"
+    },
+    {
+      "title": "curl 요청의 Wazuh 분석",
+      "kind": "body",
+      "break": false,
+      "level": "subsection",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "각 curl 요청 직후 응답의 상태 줄·Location·본문과 실행 시각을 적고 다음 검색을 수행한다. **Discover**의 인덱스를 wazuh-archives-*로 선택하고 기존 필터를 지운다. 해당 curl 요청 시각의 앞뒤 1분을 지정한다."
+        },
+        {
+          "type": "query",
+          "id": "Q05-10",
+          "where": "Windows · Discover · wazuh-archives-*",
+          "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/dvwa_access.log\"\nAND data.url: (*book05-normal* OR *book05-sqli*\nOR *book05-xss* OR *book05-path*)",
+          "why": "정상 값과 공격 입력의 접속 기록을 같은 수집원에서 찾는다. 괄호의 OR는 표식 중 하나가 포함된 URL을 고른다.",
+          "result": "bookcase별 URL·data.id·data.srcip·rule.id를 읽는다. book05-normal은 302이고, SQL·XSS·두 경로 요청은 403이다. 로그인 이동 주소는 curl의 Location 출력과 대조한다."
+        },
+        {
+          "type": "query",
+          "id": "Q05-11",
+          "where": "Windows · Discover · wazuh-archives-*",
+          "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: (*book05-sqli*\nOR *book05-xss* OR *book05-path*)",
+          "why": "SQL·XSS·경로 조작의 표식으로 WAF 감사 기록을 찾는다.",
+          "result": "각 request_line의 표식을 확인한다. 시각·출발지·403을 접속 기록과 맞춘 뒤 audit_data.action과 messages를 읽는다."
+        },
+        {
+          "type": "p",
+          "text": "SQL·XSS·원문 경로·인코딩 경로를 각각 한 행으로 정리한다. 응답과 차단 근거를 대조하는 방법은 5.6~5.8과 같다. 해당 시각에 결과가 없으면 5.10의 아카이브·원본 파일 점검을 수행한다. 분석을 마친 뒤 아래 원상복구로 진행한다."
+        }
+      ]
     },
     {
       "title": "curl 실습 원상복구",

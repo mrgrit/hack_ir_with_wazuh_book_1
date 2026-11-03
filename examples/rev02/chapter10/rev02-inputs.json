@@ -448,6 +448,14 @@
     "text": "sudo journalctl -u osqueryd -n 30 --no-pager\nsudo tail -n 30 /var/ossec/logs/ossec.log"
   },
   {
+    "id": "Q10-11",
+    "file": "examples/rev02/chapter10/Q10-11.txt",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "document": "volume01-chapter10.json",
+    "section": "10.9  결과가 다를 때의 확인 순서",
+    "text": "agent.name: \"kt66-host\"\nAND location: \"osquery\""
+  },
+  {
     "document": "volume01-chapter10.json",
     "section": "원문·디코더·규칙 대조",
     "id": "C10-43",

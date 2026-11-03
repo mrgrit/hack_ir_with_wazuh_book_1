@@ -1,2 +1,2 @@
-agent.name: "web" AND data.protocol: "POST"
-AND data.url: "/login.php"
+agent.name: "web"
+AND data.url: ("/login.php" OR "/index.php")

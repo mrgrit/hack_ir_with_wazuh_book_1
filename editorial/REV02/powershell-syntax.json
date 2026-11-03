@@ -1,12 +1,15 @@
 {
-  "errors": [],
   "scope": "PowerShell parse only; no commands executed",
-  "checked": 5,
+  "checked": 8,
   "ids": [
     "C11-01",
     "C11-02",
     "C11-03",
     "C11-04",
-    "C11-05"
-  ]
+    "C11-05",
+    "C11-06",
+    "C11-07",
+    "C11-08"
+  ],
+  "errors": []
 }

@@ -1,2 +1,3 @@
 agent.name: "web"
-AND data.url: (*vulnerabilities/exec/* OR *track-order*)
+AND location: "/var/log/apache2/dvwa_access.log"
+AND data.url: *vulnerabilities/exec/*

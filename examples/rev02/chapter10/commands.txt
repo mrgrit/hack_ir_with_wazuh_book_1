@@ -454,6 +454,13 @@ sudo journalctl -u osqueryd -n 30 --no-pager
 sudo tail -n 30 /var/ossec/logs/ossec.log
 확인: 서비스가 active인지 확인하고, 로그에서 SQL 오류·권한 오류·파일 경로·수집 시작 메시지를 읽는다. 오류가 있으면 해당 설정과 파일 접근 권한을 점검한다.
 
+[Q10-11] Windows · Discover · wazuh-alerts-*
+포트·키 주석·action 조건을 제거해 해당 호스트에서 수집된 osquery 결과를 찾는다.
+
+agent.name: "kt66-host"
+AND location: "osquery"
+확인: data.osquery.name·action·columns와 timestamp를 읽는다. 예약 이름이 다르면 C10-04의 설정과 대조하고, 데이터 자체가 없으면 C10-06~09·42로 서비스·결과 파일·수집을 점검한다.
+
 [C10-43] kt66 VM · ccc 호스트 셸
 kt66-siem 컨테이너 안에서 다음 작업을 수행할 셸을 연다.
 docker exec -it와 /bin/bash의 역할은 C02-P1에서 설명했다. 컨테이너 이름을 대조한 뒤 입력한다.

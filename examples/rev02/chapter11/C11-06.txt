@@ -1,0 +1,5 @@
+$caseA | Where-Object {
+  $_.rule.id -in @('5760', '5715')
+} | Sort-Object timestamp |
+  Select-Object evidence_id,timestamp,full_log |
+  Format-List

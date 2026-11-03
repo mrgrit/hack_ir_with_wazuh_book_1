@@ -227,6 +227,14 @@ data.srcip: "192.168.0.108" AND
 (rule.id: "5760" OR rule.id: "5715")
 확인: 제시한 사례에서는 20:37:04 실패 뒤 20:37:12에 ccc 성공이 나타났다. 같은 연결의 포트는 42688이다.
 
+[Q08-12] Windows · Discover · wazuh-archives-*
+인증 서버의 원문을 규칙 번호와 추출된 계정 필드로 제한하지 않고 찾는다.
+
+agent.name: "bastion"
+AND location: "/var/log/auth.log"
+AND predecoder.program_name: "sshd"
+확인: Failed password·Accepted password·연결 종료 원문의 계정·출발지 포트·sshd 프로세스 번호를 대조한다. 작업자가 유지한 관리 접속도 시각과 포트로 분리한다.
+
 [C08-26] kt66-bastion · root 셸
 백업 경로에 기존 파일이 없는지 확인하고 root의 초기 상태를 적는다. 기존 백업이 있으면 덮어쓰지 말고 이전 실습의 복구 여부부터 확인한다.
 
@@ -451,6 +459,14 @@ getent group sudo
 agent.name: "bastion" AND
 rule.id: "5903"
 확인: full_log의 delete user와 삭제된 이름을 확인한다. 관련 그룹 삭제 기록이 함께 잡히는지는 원문별로 확인한다.
+
+[Q08-11] Windows · Discover · wazuh-archives-*
+계정 이름이 들어 있는 인증 원문을 규칙 번호로 제한하지 않고 모은다.
+
+agent.name: "bastion"
+AND location: "/var/log/auth.log"
+AND full_log: "book08-user"
+확인: useradd·usermod·userdel 원문과 sudo의 COMMAND를 시간순으로 읽는다. sudo의 요청 계정과 변경 대상 book08-user를 구분하고, id·getent 결과를 대조한다.
 
 [C08-51] kt66-bastion · root 셸
 bastion root 관리 셸에서 auth.log 수집 항목을 찾는다.

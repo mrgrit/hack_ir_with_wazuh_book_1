@@ -120,6 +120,14 @@
     "text": "rm -i /var/www/html/uploads/shell.php"
   },
   {
+    "id": "Q07-12",
+    "file": "examples/rev02/chapter07/Q07-12.txt",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "document": "volume01-chapter07.json",
+    "section": "실습 파일 원상복구",
+    "text": "agent.name: \"web\"\nAND rule.id: \"553\"\nAND syscheck.path: \"/var/www/html/uploads/shell.php\""
+  },
+  {
     "document": "volume01-chapter07.json",
     "section": "원문에서 입력 찾기",
     "id": "Q07-03",
@@ -136,6 +144,14 @@
     "text": "agent.name: \"web\"\nAND (full_log: *jndi* OR full_log: *lower*\n     OR data.url: *%24%7B*)"
   },
   {
+    "id": "Q07-13",
+    "file": "examples/rev02/chapter07/Q07-13.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter07.json",
+    "section": "Log4Shell 요청의 WAF 감사 기록",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND (full_log: *jndi* OR full_log: *lower*)"
+  },
+  {
     "document": "volume01-chapter07.json",
     "section": "Shellshock 규칙 검색",
     "id": "Q07-05",
@@ -144,12 +160,20 @@
     "text": "agent.name: \"web\"\nAND (rule.id: (31166 OR 31167 OR 31168 OR 31169)\n     OR rule.description: *Shellshock*)"
   },
   {
+    "id": "Q07-14",
+    "file": "examples/rev02/chapter07/Q07-14.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter07.json",
+    "section": "Shellshock 규칙 검색",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *cgi-bin*"
+  },
+  {
     "document": "volume01-chapter07.json",
     "section": "접속 기록의 필드 해석",
     "id": "Q07-06",
-    "where": "Windows · Discover · wazuh-alerts-*",
+    "where": "Windows · Discover · wazuh-archives-*",
     "file": "examples/rev02/chapter07/Q07-06.txt",
-    "text": "agent.name: \"web\"\nAND data.url: (*vulnerabilities/exec/* OR *track-order*)"
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/dvwa_access.log\"\nAND data.url: *vulnerabilities/exec/*"
   },
   {
     "document": "volume01-chapter07.json",
@@ -176,12 +200,28 @@
     "text": "agent.name: \"web\"\nAND (rule.id: \"31106\"\n OR (rule.groups: \"attack\" AND data.id: \"200\"))"
   },
   {
+    "id": "Q07-15",
+    "file": "examples/rev02/chapter07/Q07-15.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter07.json",
+    "section": "200 경보의 우선 조사",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/juice_access.log\"\nAND data.url: *rest/products/search*"
+  },
+  {
     "document": "volume01-chapter07.json",
     "section": "SQL 인젝션 경보의 500",
     "id": "Q07-10",
     "where": "Windows · Discover · wazuh-alerts-*",
     "file": "examples/rev02/chapter07/Q07-10.txt",
     "text": "agent.name: \"web\" AND data.id: 5*"
+  },
+  {
+    "id": "Q07-16",
+    "file": "examples/rev02/chapter07/Q07-16.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter07.json",
+    "section": "시간 분포와 오류 비율",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/juice_access.log\"\nAND data.url: *rest/products/search*\nAND data.id: 5*"
   },
   {
     "document": "volume01-chapter07.json",

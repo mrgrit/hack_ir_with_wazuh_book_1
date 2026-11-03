@@ -81,6 +81,14 @@
   },
   {
     "type": "query",
+    "id": "Q06-14",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/dvwa_access.log\"\nAND full_log: \"book06-scan\"",
+    "why": "탐색 표식이 들어 있는 접속 원문을 검색한다. 규칙 번호나 404 조건을 넣지 않아 다른 응답도 함께 읽는다.",
+    "result": "data.url·data.id·data.srcip 열을 추가하고 요청 목록과 대조한다. 시간·경로·응답 코드를 기록한 뒤 wazuh-alerts-*로 바꾸어 Q06-02·03을 실행한다."
+  },
+  {
+    "type": "query",
     "id": "Q06-02",
     "text": "agent.name: \"web\"\nAND full_log: \"book06-scan\"",
     "why": "full_log는 원문이다. 명령에서 지정한 User-Agent 표식이 있는 기록을 찾는다.",
@@ -91,7 +99,7 @@
     "type": "query",
     "id": "Q06-03",
     "text": "agent.name: \"web\" AND rule.id: \"31151\"\nAND full_log: \"book06-scan\"",
-    "result": "규칙 31151의 경보와 원문을 확인한다. 요청 목록 전체는 Q06-02의 검색으로 확인한다.",
+    "result": "규칙 31151의 경보와 원문을 확인한다. 요청 목록 전체는 Q06-14의 검색으로 확인한다.",
     "where": "Windows · Discover · wazuh-alerts-*",
     "purpose": "같은 표식의 기록 중 반복된 4xx 응답 경보를 찾는다.",
     "syntax": "rule.id는 HTTP 응답 코드와 다르다."
@@ -151,10 +159,10 @@
   {
     "type": "query",
     "id": "Q06-06",
-    "text": "agent.name: \"web\" AND data.protocol: \"POST\"\nAND data.url: \"/login.php\"",
-    "result": "세 POST 요청의 출발지·시각·302 응답을 비교한다.",
+    "text": "agent.name: \"web\"\nAND data.url: (\"/login.php\" OR \"/index.php\")",
+    "result": "Time 열을 오름차순으로 정렬한다. data.protocol이 POST인 세 요청의 출발지·시각·302 응답을 비교하고, 각 POST 뒤에 이어진 GET의 URL을 읽는다.",
     "where": "Windows · Discover · wazuh-archives-*",
-    "purpose": "아카이브에서 로그인 폼을 제출한 요청을 찾는다.",
+    "purpose": "아카이브에서 로그인 폼 제출과 이동 뒤 페이지 요청을 함께 찾는다.",
     "syntax": "조회 기간을 세 후보를 입력한 시각으로 좁힌다."
   },
   {
@@ -324,6 +332,14 @@
     "where": "Windows · Discover · wazuh-alerts-*"
   },
   {
+    "type": "query",
+    "id": "Q06-15",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-curl-ua*",
+    "why": "Q06-12의 시간 범위를 유지하고 인덱스를 아카이브로 바꾸어 User-Agent 시험의 WAF 기록을 찾는다.",
+    "result": "요청 경로·시각·출발지를 맞추고 response.status=403, action.intercepted=true와 messages의 913100을 확인한다."
+  },
+  {
     "type": "command",
     "id": "C06-28",
     "text": "curl -i --max-time 15 -X PROPFIND \\\n  http://dvwa.ccc.com/book06-curl-method",
@@ -338,5 +354,13 @@
     "why": "curl로 지정한 메서드의 시험 경로를 찾는다.",
     "result": "data.protocol의 PROPFIND와 403 응답을 확인한다.",
     "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-16",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-curl-method*",
+    "why": "Q06-13의 시간 범위를 유지하고 인덱스를 아카이브로 바꾸어 PROPFIND 요청의 WAF 기록을 찾는다.",
+    "result": "request_line의 PROPFIND, response.status=403, action.intercepted=true와 messages의 911100을 확인한다."
   }
 ]

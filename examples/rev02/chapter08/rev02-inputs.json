@@ -240,6 +240,14 @@
     "text": "agent.name: \"bastion\" AND\ndata.srcip: \"192.168.0.108\" AND\n(rule.id: \"5760\" OR rule.id: \"5715\")"
   },
   {
+    "id": "Q08-12",
+    "file": "examples/rev02/chapter08/Q08-12.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter08.json",
+    "section": "성공 뒤 셸과 기록 확인",
+    "text": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND predecoder.program_name: \"sshd\""
+  },
+  {
     "document": "volume01-chapter08.json",
     "section": "설정과 암호 상태 백업",
     "id": "C08-26",
@@ -478,6 +486,14 @@
     "where": "Windows · Discover · wazuh-alerts-*",
     "file": "examples/rev02/chapter08/Q08-10.txt",
     "text": "agent.name: \"bastion\" AND\nrule.id: \"5903\""
+  },
+  {
+    "id": "Q08-11",
+    "file": "examples/rev02/chapter08/Q08-11.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter08.json",
+    "section": "삭제 기록의 계정 필드",
+    "text": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND full_log: \"book08-user\""
   },
   {
     "document": "volume01-chapter08.json",

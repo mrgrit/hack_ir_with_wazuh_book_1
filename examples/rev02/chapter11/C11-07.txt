@@ -1,0 +1,4 @@
+$caseB = Get-Content -Raw `
+  .\book11-analysis\case-b.json | ConvertFrom-Json
+$caseB | Sort-Object timestamp |
+  ConvertTo-Json -Depth 12

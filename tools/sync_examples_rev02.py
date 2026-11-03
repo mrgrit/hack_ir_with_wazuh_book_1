@@ -12,15 +12,25 @@ def write(path, obj):
     path.write_text(json.dumps(obj, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
 
 def main():
-    index = json.loads((OUT / 'input-index.json').read_text('utf8'))
+    previous = {row['id']:row for row in json.loads((OUT / 'input-index.json').read_text('utf8'))}
     blocks = {}
     locations = {}
     for src in sorted((ROOT / 'manuscript/REV02').glob('*.json')):
         for page in json.loads(src.read_text('utf8'))['pages']:
             for block in page['blocks']:
                 if block['type'] in ('command', 'query'):
+                    if block['id'] in blocks:
+                        raise ValueError('duplicate input id: '+block['id'])
                     blocks[block['id']] = block
                     locations[block['id']] = (src.name, page['title'])
+    index = []
+    for ident, block in blocks.items():
+        folder = 'appendix-a' if ident.startswith('CA-') else 'chapter'+ident[1:3]
+        item = dict(previous.get(ident, {'id':ident, 'file':f'examples/rev02/{folder}/{ident}.txt'}))
+        item['where'] = block['where']
+        item['document'], item['section'] = locations[ident]
+        (ROOT/item['file']).parent.mkdir(parents=True,exist_ok=True)
+        index.append(item)
     groups = {}
     for item in index:
         item['text']=blocks[item['id']]['text']

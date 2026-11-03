@@ -102,6 +102,10 @@
         {
           "type": "p",
           "text": "아래의 암호는 실습 환경의 기본값이다. 변경한 환경에서는 해당 암호를 쓴다. 공격 명령의 대상은 자신의 bastion 주소와 포트로 한정한다."
+        },
+        {
+          "type": "p",
+          "text": "Wazuh는 **Explore → Discover**에서 연다. 각 Q08 검색식에 적힌 인덱스를 고르고 이전 필터 칩을 지운다. SSH 또는 명령 실행의 시작·종료 시각을 포함하도록 **Absolute**를 지정하고 검색식 전체를 입력한 뒤 Enter를 누른다. 결과 행을 펼쳐 **JSON**의 full_log·agent·data·rule과 _index·_id를 기록한다. 실패·성공을 비교할 때는 같은 시간 범위를 유지한다."
         }
       ],
       "major": true,
@@ -812,6 +816,18 @@
         {
           "type": "p",
           "text": "중간의 message repeated 2 times에는 srcip가 추출되지 않아 위 검색에서 빠졌다. 8.2의 반복 요약 검색으로 보완한다. 별도의 직접 로그인은 다른 출발지 포트로 기록된다. Hydra의 인증 성공과 이후 조사자가 실행한 접속을 구분해 기록한다."
+        },
+        {
+          "type": "p",
+          "text": "경보에 포함되지 않은 연결 종료·인증 관련 원문까지 확인할 때는 wazuh-archives-*로 전환한다. 이전 규칙·출발지 필터를 지우고 같은 실행 기간에서 Q08-12를 실행한다."
+        },
+        {
+          "type": "query",
+          "id": "Q08-12",
+          "where": "Windows · Discover · wazuh-archives-*",
+          "text": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND predecoder.program_name: \"sshd\"",
+          "why": "인증 서버의 원문을 규칙 번호와 추출된 계정 필드로 제한하지 않고 찾는다.",
+          "result": "Failed password·Accepted password·연결 종료 원문의 계정·출발지 포트·sshd 프로세스 번호를 대조한다. 작업자가 유지한 관리 접속도 시각과 포트로 분리한다."
         }
       ],
       "major": false,
@@ -1437,6 +1453,22 @@
         {
           "type": "p",
           "text": "실습 완료 뒤 exit로 ccc 셸을 닫는다. 성공 기준은 삭제 경보 한 건뿐 아니라 계정·그룹·홈의 원상복구 확인까지이다."
+        },
+        {
+          "type": "p",
+          "text": "계정 생성·그룹 변경·삭제의 요청 주체를 조사하려면 wazuh-archives-*로 바꾸고 해당 작업 전체의 시작·종료 시각을 지정한다."
+        },
+        {
+          "type": "query",
+          "id": "Q08-11",
+          "where": "Windows · Discover · wazuh-archives-*",
+          "text": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND full_log: \"book08-user\"",
+          "why": "계정 이름이 들어 있는 인증 원문을 규칙 번호로 제한하지 않고 모은다.",
+          "result": "useradd·usermod·userdel 원문과 sudo의 COMMAND를 시간순으로 읽는다. sudo의 요청 계정과 변경 대상 book08-user를 구분하고, id·getent 결과를 대조한다."
+        },
+        {
+          "type": "p",
+          "text": "계정 원상복구가 끝나면 Q08-11의 기간을 삭제 이후까지 넓혀 userdel 및 sudo 원문을 확인한다. 이미 수집한 생성 경보는 그대로 보존하고, 현재 계정의 부재는 getent·id 결과로 기록한다."
         }
       ],
       "major": false,

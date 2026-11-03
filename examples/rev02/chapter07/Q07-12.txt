@@ -1,0 +1,3 @@
+agent.name: "web"
+AND rule.id: "553"
+AND syscheck.path: "/var/www/html/uploads/shell.php"

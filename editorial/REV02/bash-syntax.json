@@ -1,5 +1,5 @@
 {
-  "checked": 359,
+  "checked": 360,
   "errors": [],
   "scope": "Bash parse only; no commands executed",
   "ids": [
@@ -42,6 +42,7 @@
     "C02-P3",
     "C02-P4",
     "C02-P5",
+    "C02-P6",
     "C02-01",
     "C02-02",
     "C02-03",

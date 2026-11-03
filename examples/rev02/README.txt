@@ -18,3 +18,8 @@ input-index.csv에서 문서·절·입력 번호·실행 위치·파일 경로�
 
 기존 manifest와 README에 있는 검증 일자는 해당 원본 시험의 이력이다.
 REV02가 새로 실행했다는 뜻은 아니다. 최종 입력 위치는 input-index.csv를 따른다.
+
+2026-11-04 전권 절차 보완
+walkthrough-record.csv: 부록 E의 입력·응답·검색·근거·원상복구 기록 양식(UTF-8 BOM).
+chapter05/browser/waf-cases.json: 기존 SQL·XSS·원문/인코딩 경로 요청의 WAF 기록 네 건.
+현재 번호 입력은 467개이며 새 입력도 input-index.csv에서 실제 문서·절·위치를 확인한다.

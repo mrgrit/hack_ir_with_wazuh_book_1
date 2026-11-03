@@ -1,0 +1,3 @@
+agent.name: "web"
+AND location: "/var/log/apache2/dvwa_access.log"
+AND full_log: "book06-scan"

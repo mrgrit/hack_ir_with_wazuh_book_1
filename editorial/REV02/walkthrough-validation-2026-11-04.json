@@ -1,0 +1,87 @@
+{
+  "fixture": {
+    "source": "editorial/evidence/chapter05/browser/four-browser-blocks.json",
+    "copy": "examples/rev02/chapter05/browser/waf-cases.json",
+    "sha256": "e23ee1d28a3a4ae30acdb9e0cc9fc282e49439855c4228e511dc230b0595bf80",
+    "records": [
+      {
+        "id": "r_kGl6EBEYWT20nngMKn",
+        "request": "GET /vulnerabilities/sqli/?id=1%27+UNION+SELECT+user%2Cpassword+FROM+users--+&Submit=Submit HTTP/1.1",
+        "status": "403",
+        "phase": "2",
+        "intercepted": "true",
+        "waf_rule_ids": [
+          "942100",
+          "942190",
+          "942270",
+          "942360",
+          "949110",
+          "980130"
+        ]
+      },
+      {
+        "id": "1PkGl6EBEYWT20nngMK1",
+        "request": "GET /vulnerabilities/xss_r/?name=%3Cscript%3Ealert%281%29%3C%2Fscript%3E HTTP/1.1",
+        "status": "403",
+        "phase": "2",
+        "intercepted": "true",
+        "waf_rule_ids": [
+          "941100",
+          "941110",
+          "941160",
+          "949110",
+          "980130"
+        ]
+      },
+      {
+        "id": "1vkGl6EBEYWT20nngMK1",
+        "request": "GET /vulnerabilities/fi/?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-browser-path HTTP/1.1",
+        "status": "403",
+        "phase": "2",
+        "intercepted": "true",
+        "waf_rule_ids": [
+          "930100",
+          "930110",
+          "930120",
+          "932160",
+          "949110",
+          "980130"
+        ]
+      },
+      {
+        "id": "1fkGl6EBEYWT20nngMK1",
+        "request": "GET /vulnerabilities/fi/?page=../../../../../etc/passwd&bookcase=book05-browser-path-raw HTTP/1.1",
+        "status": "403",
+        "phase": "2",
+        "intercepted": "true",
+        "waf_rule_ids": [
+          "930100",
+          "930110",
+          "930120",
+          "932160",
+          "949110",
+          "980130"
+        ]
+      }
+    ]
+  },
+  "live_dql": {
+    "queries": 15,
+    "errors": 0,
+    "record": "editorial/REV02/walkthrough-dql-ui-2026-11-04.json",
+    "scope": "Read-only searches, no attack replay; chapter07 excluded"
+  },
+  "saved_evidence_powershell": {
+    "case_b_roundtrip": 3,
+    "case_c_count": 9,
+    "case_a_ids": [
+      "A-001",
+      "A-002"
+    ],
+    "case_c_roundtrip": 9,
+    "case_b_count": 3,
+    "scope": "Read-only queries against supplied original case JSON; commands use analysis copies in manuscript",
+    "case_a_selected": 2
+  },
+  "current_dvwa": "Login redirected to /setup.php; no database reset or attack request performed. End-to-end replay pending database preparation."
+}

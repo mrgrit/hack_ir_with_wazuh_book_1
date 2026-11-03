@@ -98,7 +98,7 @@
     "text": "agent.name: \"web\"\nAND data.url: *shell.php*",
     "result": "FIM 경로와 URL을 시각으로 연결한다. 요청이 없으면 landing_access.log를 확인한다.",
     "purpose": "파일 요청은 접속 로그의 URL 조건으로 따로 찾는다.",
-    "syntax": "기존 사례는 파일명을 shell.php로 바꾼다."
+    "syntax": "URL의 shell.php를 업로드한 파일명과 대조한다."
   },
   {
     "type": "command",
@@ -127,6 +127,14 @@
   },
   {
     "type": "query",
+    "id": "Q07-12",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "text": "agent.name: \"web\"\nAND rule.id: \"553\"\nAND syscheck.path: \"/var/www/html/uploads/shell.php\"",
+    "why": "삭제 직전부터 직후까지의 기간에서 실습 웹셸의 삭제 경보를 찾는다.",
+    "result": "syscheck.event=deleted와 경로를 확인한다. 파일 부재는 앞의 ls 결과와 대조한다. 0건이면 7.2의 감시 경로·검사 방식·에이전트 상태를 확인한다."
+  },
+  {
+    "type": "query",
     "id": "Q07-03",
     "where": "Windows · Discover · wazuh-alerts-*",
     "text": "agent.name: \"web\"\nAND (full_log: *jndi* OR data.url: *jndi*)",
@@ -144,6 +152,14 @@
   },
   {
     "type": "query",
+    "id": "Q07-13",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND (full_log: *jndi* OR full_log: *lower*)",
+    "why": "WAF 감사 원문에서 직접 JNDI 문자열과 lower 표현식을 찾는다.",
+    "result": "JSON의 요청 줄과 헤더에서 입력 위치를 확인한다. 응답·차단 동작·messages를 읽고 403 응답 및 전송 시각과 대조한다."
+  },
+  {
+    "type": "query",
     "id": "Q07-05",
     "where": "Windows · Discover · wazuh-alerts-*",
     "text": "agent.name: \"web\"\nAND (rule.id: (31166 OR 31167 OR 31168 OR 31169)\n     OR rule.description: *Shellshock*)",
@@ -153,12 +169,20 @@
   },
   {
     "type": "query",
+    "id": "Q07-14",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *cgi-bin*",
+    "why": "CGI 경로 요청의 WAF 감사 기록을 찾는다.",
+    "result": "요청 헤더의 Shellshock 입력, transaction의 시각·출발지, response.status와 audit_data.action·messages를 대조한다. CGI 경로가 같아도 다른 시각의 요청은 분리한다."
+  },
+  {
+    "type": "query",
     "id": "Q07-06",
-    "where": "Windows · Discover · wazuh-alerts-*",
-    "text": "agent.name: \"web\"\nAND data.url: (*vulnerabilities/exec/* OR *track-order*)",
-    "result": "정상 입력과 공격 입력의 메서드·상태·시각을 기록한다. POST 본문은 URL에서 찾지 않는다.",
-    "purpose": "두 요청 경로를 먼저 찾는다.",
-    "syntax": "특정 공격 문자열보다 경로 조건을 넓게 사용해 정상 요청·POST도 함께 비교한다."
+    "where": "Windows · Discover · wazuh-archives-*",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/dvwa_access.log\"\nAND data.url: *vulnerabilities/exec/*",
+    "result": "메뉴를 연 GET과 입력을 보낸 POST·GET을 data.protocol·data.url·시각으로 나눈다. POST 본문 입력은 접속 로그에 없으므로 브라우저의 Payload 및 Q07-08의 감사 기록과 대조한다.",
+    "purpose": "Command Injection 메뉴의 정상 요청과 POST·GET 공격 요청을 같은 접속 로그에서 비교한다.",
+    "syntax": "AND는 세 조건을 모두 만족하는 기록을 찾는다. 접속 로그의 location을 지정해 WAF 감사 기록과 구분한다."
   },
   {
     "type": "query",
@@ -188,12 +212,28 @@
   },
   {
     "type": "query",
+    "id": "Q07-15",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/juice_access.log\"\nAND data.url: *rest/products/search*",
+    "why": "Juice Shop 검색 기능의 접속 기록을 응답·규칙 조건 없이 모은다.",
+    "result": "URL의 q 값과 시각으로 정상·SQL 입력을 구분한다. data.id와 브라우저 응답을 대조한 뒤 rule.id를 읽는다. SQL 오류 응답은 7.7에서 이어서 조사한다."
+  },
+  {
+    "type": "query",
     "id": "Q07-10",
     "where": "Windows · Discover · wazuh-alerts-*",
     "text": "agent.name: \"web\" AND data.id: 5*",
     "result": "data.url·data.srcip·rule.id 열을 추가하고 시간 분포를 확인한다.",
     "purpose": "문자열로 저장된 HTTP 상태에서 5로 시작하는 값을 찾는다.",
     "syntax": "rule.id와 독립적으로 상태를 검색한다."
+  },
+  {
+    "type": "query",
+    "id": "Q07-16",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/juice_access.log\"\nAND data.url: *rest/products/search*\nAND data.id: 5*",
+    "why": "Q07-15와 같은 수집원·경로에서 5xx 응답만 고른다. 5*는 5로 시작하는 상태 코드이다.",
+    "result": "Q07-16 건수를 Q07-15 건수로 나누어 오류 비율을 계산한다. 두 검색의 기간·필터와 원본 로그 수집 상태를 함께 기록한다."
   },
   {
     "type": "query",

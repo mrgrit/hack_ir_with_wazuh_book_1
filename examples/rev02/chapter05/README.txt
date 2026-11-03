@@ -8,8 +8,8 @@ B05-05·07은 물음표 뒤 쿼리 값, B05-06·08은 전체 URL이다.
 DVWA 주소는 http://dvwa.ccc.com이며 kt66 VM은 192.168.0.107이다.
 
 C05-01~37.txt: 터미널 명령. 실행 위치와 설명은 manifest.json과 본문을 따른다.
-Q05-01~07.txt: Discover DQL 검색식. 인덱스 패턴은 queries.json에 있다.
-browser/: 기존 브라우저 실습에서 수집한 접속 로그·Wazuh 문서·SQL WAF 기록의 교육용 사본.
+Q05-01~11.txt: Discover DQL 검색식. 인덱스 패턴은 queries.json에 있다.
+browser/: 기존 브라우저 실습에서 수집한 접속 로그·Wazuh 문서·SQL·XSS·경로 탐색 WAF 기록의 교육용 사본.
 investigation.txt: 실습 결과 기록 양식.
 
 book05-*.log / .json: 앞서 검증한 curl 요청의 원문·Wazuh 기록. 선택 실습의 참고 자료이다.
@@ -21,3 +21,5 @@ WAF 자료는 세션 식별자가 포함된 헤더와 원문을 제외하고 분
 REV02 자료 관리: 책의 고정 실습 주소와 도메인에 맞춰 예제의 해당 문자열을 통일했다.
 통일 전 원문과 변경 해시는 editorial/REV02/original-example-values 및 example-value-provenance.json에 보존한다.
 주소 통일은 편집 변환이며 새 실습 실행 결과를 의미하지 않는다.
+
+2026-11-04 절차 보완: Q05-08은 XSS WAF, Q05-09는 두 경로 탐색 WAF, Q05-10·11은 선택 curl의 접속·WAF 조회이다. browser/waf-cases.json의 records에는 기존 네 브라우저 공격 사례가 있다. 이 파일은 메모장 등에서 원문을 읽는 자료이며 SIEM 가져오기 파일은 아니다. 현재 VM에서 공격을 다시 실행한 결과는 추가하지 않았다.

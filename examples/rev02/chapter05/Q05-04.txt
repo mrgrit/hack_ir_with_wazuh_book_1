@@ -1,2 +1,2 @@
-agent.name: "web" AND data.url: *vulnerabilities/xss_r/*
-AND rule.id: "31105"
+agent.name: "web"
+AND data.url: *vulnerabilities/xss_r/*

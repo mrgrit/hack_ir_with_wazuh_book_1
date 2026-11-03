@@ -80,6 +80,14 @@
     "text": "gobuster -m dir \\\n  -u http://dvwa.ccc.com/ \\\n  -w book06-paths.txt -t 1 -a book06-scan"
   },
   {
+    "id": "Q06-14",
+    "file": "examples/rev02/chapter06/Q06-14.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter06.json",
+    "section": "탐색 요청 전체와 응답 비교",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/dvwa_access.log\"\nAND full_log: \"book06-scan\""
+  },
+  {
     "document": "volume01-chapter06.json",
     "section": "반복 요청 검색",
     "id": "Q06-02",
@@ -149,7 +157,7 @@
     "id": "Q06-06",
     "where": "Windows · Discover · wazuh-archives-*",
     "file": "examples/rev02/chapter06/Q06-06.txt",
-    "text": "agent.name: \"web\" AND data.protocol: \"POST\"\nAND data.url: \"/login.php\""
+    "text": "agent.name: \"web\"\nAND data.url: (\"/login.php\" OR \"/index.php\")"
   },
   {
     "document": "volume01-chapter06.json",
@@ -312,6 +320,14 @@
     "text": "agent.name: \"web\" AND data.url: *book06-curl-ua*"
   },
   {
+    "id": "Q06-15",
+    "file": "examples/rev02/chapter06/Q06-15.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter06.json",
+    "section": "6.10  curl의 헤더 지정(선택)",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-curl-ua*"
+  },
+  {
     "document": "volume01-chapter06.json",
     "section": "curl의 메서드 지정(선택)",
     "id": "C06-28",
@@ -326,5 +342,13 @@
     "where": "Windows · Discover · wazuh-alerts-*",
     "file": "examples/rev02/chapter06/Q06-13.txt",
     "text": "agent.name: \"web\" AND data.url: *book06-curl-method*"
+  },
+  {
+    "id": "Q06-16",
+    "file": "examples/rev02/chapter06/Q06-16.txt",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "document": "volume01-chapter06.json",
+    "section": "curl의 메서드 지정(선택)",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-curl-method*"
   }
 ]

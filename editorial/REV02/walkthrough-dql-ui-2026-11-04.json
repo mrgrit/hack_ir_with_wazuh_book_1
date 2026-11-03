@@ -1,0 +1,140 @@
+{
+  "method": "Read-only Discover query execution; result counts do not verify attack replay. Chapter 07 intentionally excluded.",
+  "queries": [
+    {
+      "id": "Q04-03",
+      "index": "wazuh-archives-*",
+      "query": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND predecoder.program_name: \"book04\"\nAND full_log: \"book04-collection-01\"",
+      "time": "Last 7 days",
+      "hits": "0",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:58:58.227Z"
+    },
+    {
+      "id": "Q05-04",
+      "index": "wazuh-alerts-*",
+      "query": "agent.name: \"web\"\nAND data.url: *vulnerabilities/xss_r/*",
+      "time": "Last 7 days",
+      "hits": "0",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:58:58.556Z"
+    },
+    {
+      "id": "Q05-08",
+      "index": "wazuh-archives-*",
+      "query": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *vulnerabilities/xss_r/*",
+      "time": "Last 7 days",
+      "hits": "0",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:58:58.865Z"
+    },
+    {
+      "id": "Q05-09",
+      "index": "wazuh-archives-*",
+      "query": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book05-browser-path*",
+      "time": "Last 7 days",
+      "hits": "0",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:58:59.173Z"
+    },
+    {
+      "id": "Q05-10",
+      "index": "wazuh-archives-*",
+      "query": "agent.name: \"web\"\nAND location: \"/var/log/apache2/dvwa_access.log\"\nAND data.url: (*book05-normal* OR *book05-sqli*\nOR *book05-xss* OR *book05-path*)",
+      "time": "Last 7 days",
+      "hits": "0",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:58:59.482Z"
+    },
+    {
+      "id": "Q05-11",
+      "index": "wazuh-archives-*",
+      "query": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: (*book05-sqli*\nOR *book05-xss* OR *book05-path*)",
+      "time": "Last 7 days",
+      "hits": "0",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:58:59.793Z"
+    },
+    {
+      "id": "Q06-14",
+      "index": "wazuh-archives-*",
+      "query": "agent.name: \"web\"\nAND location: \"/var/log/apache2/dvwa_access.log\"\nAND full_log: \"book06-scan\"",
+      "time": "Last 7 days",
+      "hits": "0",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:59:00.102Z"
+    },
+    {
+      "id": "Q06-15",
+      "index": "wazuh-archives-*",
+      "query": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-curl-ua*",
+      "time": "Last 7 days",
+      "hits": "0",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:59:00.410Z"
+    },
+    {
+      "id": "Q06-16",
+      "index": "wazuh-archives-*",
+      "query": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-curl-method*",
+      "time": "Last 7 days",
+      "hits": "0",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:59:00.719Z"
+    },
+    {
+      "id": "Q08-12",
+      "index": "wazuh-archives-*",
+      "query": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND predecoder.program_name: \"sshd\"",
+      "time": "Last 7 days",
+      "hits": "167",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:59:01.205Z"
+    },
+    {
+      "id": "Q08-11",
+      "index": "wazuh-archives-*",
+      "query": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND full_log: \"book08-user\"",
+      "time": "Last 7 days",
+      "hits": "13",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:59:01.594Z"
+    },
+    {
+      "id": "Q09-14",
+      "index": "wazuh-archives-*",
+      "query": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND predecoder.program_name: \"sudo\"\nAND full_log: *99-book09-lab*",
+      "time": "Last 7 days",
+      "hits": "0",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:59:01.906Z"
+    },
+    {
+      "id": "Q09-13",
+      "index": "wazuh-alerts-*",
+      "query": "agent.name: \"bastion\"\nAND syscheck.event: \"added\"\nAND syscheck.path: (\"/var/log/book09-btmp\"\nOR \"/home/ccc/book09-history/.bash_history\")",
+      "time": "Last 7 days",
+      "hits": "2",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:59:02.234Z"
+    },
+    {
+      "id": "Q10-11",
+      "index": "wazuh-alerts-*",
+      "query": "agent.name: \"kt66-host\"\nAND location: \"osquery\"",
+      "time": "Last 7 days",
+      "hits": "118",
+      "ui_error": "",
+      "checked_at": "2026-11-03T22:59:02.658Z"
+    },
+    {
+      "id": "Q06-06",
+      "index": "wazuh-archives-*",
+      "query": "agent.name: \"web\"\nAND data.url: (\"/login.php\" OR \"/index.php\")",
+      "time": "Last 7 days",
+      "hits": "5",
+      "ui_error": "",
+      "checked_at": "2026-11-03T23:14:35.765Z"
+    }
+  ]
+}

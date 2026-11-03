@@ -1,0 +1,3 @@
+agent.name: "web"
+AND location: "/var/log/apache2/modsec_audit.log"
+AND (full_log: *jndi* OR full_log: *lower*)

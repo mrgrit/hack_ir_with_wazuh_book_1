@@ -1,0 +1,4 @@
+agent.name: "bastion"
+AND syscheck.event: "added"
+AND syscheck.path: ("/var/log/book09-btmp"
+OR "/home/ccc/book09-history/.bash_history")

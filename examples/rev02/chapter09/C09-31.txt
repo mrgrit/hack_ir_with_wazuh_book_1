@@ -3,3 +3,4 @@ printf '%s\n' \
 | sudo tee /etc/cron.d/book09-lab
 sudo chmod 0644 /etc/cron.d/book09-lab
 cat /etc/cron.d/book09-lab
+sudo stat -c "%a %U %G %n" /etc/cron.d/book09-lab

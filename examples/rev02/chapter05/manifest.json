@@ -12,7 +12,7 @@
     "id": "Q05-01",
     "text": "agent.name: \"web\"\nAND data.url: \"/vulnerabilities/sqli/?id=1&Submit=Submit\"",
     "why": "agent.name은 수집 에이전트이다. web이 수집한 URL 중 정상 조회 경로와 입력값이 일치하는 기록을 찾는다.",
-    "result": "실습 시각의 행을 펼쳐 data.id의 200과 data.url을 확인한다. data.srcip은 요청을 보낸 PC의 출발지 IP이다.",
+    "result": "행을 펼쳐 location=/var/log/apache2/dvwa_access.log, data.protocol=GET, data.id=200과 id=1이 들어 있는 data.url을 확인한다. full_log의 요청 시각을 브라우저 기록과 대조한다.",
     "where": "Windows · Discover · wazuh-archives-*"
   },
   {
@@ -68,10 +68,18 @@
   {
     "type": "query",
     "id": "Q05-04",
-    "text": "agent.name: \"web\" AND data.url: *vulnerabilities/xss_r/*\nAND rule.id: \"31105\"",
-    "why": "wazuh-alerts-*에서 실습 시간의 XSS 경보를 찾는다.",
-    "result": "출발지·시각·name 값을 대조하고 data.id의 403을 읽는다.",
+    "text": "agent.name: \"web\"\nAND data.url: *vulnerabilities/xss_r/*",
+    "why": "XSS 메뉴의 요청을 먼저 모아 실제 적용된 규칙을 읽는다.",
+    "result": "name 값에 script와 alert가 들어 있는 요청을 고른다. 사례의 data.id는 403, rule.id는 31105이다. 정상 메뉴 열기 요청은 URL에 공격 입력이 없다.",
     "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q05-08",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *vulnerabilities/xss_r/*",
+    "why": "XSS 경로에 대한 WAF 감사 기록을 찾는다. 경보 규칙 번호는 검색 조건에서 뺀다.",
+    "result": "request_line의 name 입력, transaction의 시각·출발지, response.status를 대조한다. JSON의 audit_data.action.intercepted와 messages를 읽는다."
   },
   {
     "type": "query",
@@ -81,6 +89,14 @@
     "where": "Windows · Discover · wazuh-alerts-*",
     "purpose": "wazuh-alerts-*에서 경로 요청의 표식을 찾는다.",
     "syntax": "다음 인코딩 비교 요청도 같은 검색에 포함된다."
+  },
+  {
+    "type": "query",
+    "id": "Q05-09",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book05-browser-path*",
+    "why": "raw 표식이 붙은 요청과 인코딩한 요청의 WAF 감사 기록을 함께 찾는다.",
+    "result": "request_line의 bookcase 값을 보고 두 요청을 나눈다. 각각 response.status=403, audit_data.action.intercepted=true와 phase=2를 확인한다."
   },
   {
     "type": "query",
@@ -330,6 +346,22 @@
     "why": "page도 --data로 전달한다. --get과 함께 사용하므로 슬래시가 그대로 URL 쿼리에 들어간다. 공백이 없는 경로이며, raw 표식으로 앞 요청과 구분한다.",
     "result": "기존 검증에서는 403과 Wazuh 규칙 31104가 나왔다.",
     "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "query",
+    "id": "Q05-10",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/dvwa_access.log\"\nAND data.url: (*book05-normal* OR *book05-sqli*\nOR *book05-xss* OR *book05-path*)",
+    "why": "정상 값과 공격 입력의 접속 기록을 같은 수집원에서 찾는다. 괄호의 OR는 표식 중 하나가 포함된 URL을 고른다.",
+    "result": "bookcase별 URL·data.id·data.srcip·rule.id를 읽는다. book05-normal은 302이고, SQL·XSS·두 경로 요청은 403이다. 로그인 이동 주소는 curl의 Location 출력과 대조한다."
+  },
+  {
+    "type": "query",
+    "id": "Q05-11",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: (*book05-sqli*\nOR *book05-xss* OR *book05-path*)",
+    "why": "SQL·XSS·경로 조작의 표식으로 WAF 감사 기록을 찾는다.",
+    "result": "각 request_line의 표식을 확인한다. 시각·출발지·403을 접속 기록과 맞춘 뒤 audit_data.action과 messages를 읽는다."
   },
   {
     "type": "command",

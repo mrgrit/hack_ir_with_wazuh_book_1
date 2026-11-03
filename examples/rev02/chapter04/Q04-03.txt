@@ -1,0 +1,4 @@
+agent.name: "bastion"
+AND location: "/var/log/auth.log"
+AND predecoder.program_name: "book04"
+AND full_log: "book04-collection-01"

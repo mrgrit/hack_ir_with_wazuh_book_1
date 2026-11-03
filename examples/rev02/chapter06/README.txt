@@ -12,3 +12,5 @@ investigation.txt: 실습 결과 기록 양식.
 REV02 자료 관리: 책의 고정 실습 주소와 도메인에 맞춰 예제의 해당 문자열을 통일했다.
 통일 전 원문과 변경 해시는 editorial/REV02/original-example-values 및 example-value-provenance.json에 보존한다.
 주소 통일은 편집 변환이며 새 실습 실행 결과를 의미하지 않는다.
+
+2026-11-04 절차 보완: Q06-06은 /login.php와 /index.php의 POST·GET을 함께 조회한다. Q06-14는 Gobuster 전체 접속 아카이브, Q06-15·16은 curl User-Agent·PROPFIND의 WAF 원문 검색이다. 검색마다 실행 위치에 표시된 인덱스 패턴으로 바꾸고 해당 입력의 시각을 지정한다.
