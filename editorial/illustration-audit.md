@@ -29,3 +29,8 @@
 새 이미지는 built-in image_gen으로 생성했다. 전체 프롬프트는 illustration-prompts.json, 생성 파일·해시·배치 크기는 illustration-refresh.json에 있다. tools/illustration_assets.py와 장별 생성기를 함께 수정해 재생성 시 교체 그림을 사용하게 했다. 기존 프레임은 비율을 유지해 맞추며 그림을 늘려 찌그러뜨리지 않는다.
 
 2권 3장에는 통신함 앞에서 출발지 기록을 비교하는 조사자(v2-c03-identity), 장비 보관실에서 구성원 목록과 승인서를 대조하는 두 담당자(v2-c03-permission)를 추가했다.
+
+
+## 인체·시점 재검토
+
+이전 육안 검수에서 팔·문서 방향 오류를 놓쳤다. 2026-11-03 사용자 지적 후 27개를 다시 확인해 15개를 교정했다. 현재 인체·시점 판정과 렌더 비교 결과는 [삽화 인체·시점 재검토](illustration-physical-review.md)와 illustration-physical-review.json을 따른다.

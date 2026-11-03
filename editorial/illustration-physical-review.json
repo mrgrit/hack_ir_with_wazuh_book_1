@@ -1,0 +1,687 @@
+{
+  "date": "2026-11-03",
+  "engine": "built-in image_gen",
+  "review_type": "anatomy, perspective, paper and display orientation, support and transparency",
+  "placement_count": 27,
+  "corrected": 15,
+  "retained": 12,
+  "placements": [
+    {
+      "volume": 1,
+      "manuscript": "volume01-appendices",
+      "path": "assets/illustrations/diversity/v1-app-route.png",
+      "caption": "부록 그림 A-1  수집 경로 확인",
+      "sha256": "ccb1032fd3e1814d5e50cc9123c0856d08ca13332857f762db10820b9c766203",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "강사의 클립보드 앞면을 강사 쪽으로 돌렸다. 강사와 학생의 네 팔, 포트 지시와 작업대 지지 동작을 확인했다.",
+      "embedded_media": "word/media/image1.png",
+      "previous_sha256": "d61623827c5d03d5f03e99e4999fad756e0ed4783f8a10738201264437975ad5",
+      "generation_file": "exec-c311d6af-89e1-45c5-a9cd-5b2464732da8.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Keep instructor, student, patch panels, training room and their two pointing gestures. Correct instructor's held chart: angle it naturally toward her torso and eyes, camera sees plain grey BACK COVER and top clip, no table or print on reverse. The chart front is for her to consult, not for viewer. She has two arms: one holding clipboard and other points at ports; student has two arms: one points and other rests on bench. Four arms total.",
+      "transparency_prompt": "Edit the FIRST image only to restore transparency at the outermost border. The second image is its original transparency reference. Keep ALL interior content and corrected human anatomy/object orientations from the FIRST image pixel-for-pixel: do not revert to second image poses, paper fronts or extra arms. Preserve same 1536x1024 canvas, crisp pixel art, interior colors and shading. Preserve the concrete interior background (walls, equipment, floor) from the first image. Make only its thin outer empty margin transparent, with a modest pixel-edged vignette boundary like the second reference. No added white, black or grey opaque backdrop. Do not change faces, hands, papers, objects, framing, text or the scene."
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter01",
+      "path": "assets/illustrations/overview.png",
+      "caption": "삽화. 공격 실습과 로그 분석.",
+      "sha256": "3342fe0e2d3e2fbba423c0e46e71739fae143874343153e893872c799c986a42",
+      "status": "retained",
+      "inspection": "공격자는 뒤에서, 방어자는 앞쪽에서 보인다. 각 화면은 사용자 쪽이고 책상·모니터에 가려진 팔 외에 중복된 팔다리가 없다.",
+      "embedded_media": "word/media/image1.png"
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter01",
+      "path": "assets/illustrations/chapter01/install-v2.png",
+      "caption": "삽화. 설치 준비.",
+      "sha256": "73b09a90e2d8cb75dfee3263cad62f3a9a0716f6c168b609932762d10c0dbf0c",
+      "status": "retained",
+      "inspection": "두 팔이 USB를 잡는 손과 노트북 입력 손으로 연결된다. 화면 뒷면이 관찰자 쪽이다.",
+      "embedded_media": "word/media/image5.png"
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter01",
+      "path": "assets/illustrations/chapter01/notes-v2.png",
+      "caption": "삽화. 접속 주소 확인.",
+      "sha256": "d92672402813dc13e41d1b9670f58e1cb455953781ca67aeb7aa76154718d115",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "노트의 빈 뒷표지를 관찰자 쪽으로 돌렸다. 노트와 노트북을 대조하는 두 팔을 유지하고 검은 외곽 잔상을 제거했다.",
+      "embedded_media": "word/media/image8.png",
+      "previous_sha256": "3b3aa4383bf609133a875b5c6e1247ab87ee3d60f82918fbf3f35b4bd29324c5",
+      "generation_file": "exec-4d38c38c-c8b6-44bc-84cf-ab83221b0a27.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Keep the same man, pose, laptop, notebook, room and camera. Correct ONLY the notebook orientation: its paper front must face the man, so the camera sees a completely plain unmarked off-white BACK COVER with spiral binding at top, no printed lines on visible back. His left hand grips notebook naturally; right points at laptop as before. He is looking between notebook and laptop. No other arms.",
+      "transparency_prompt": "Remove the ENTIRE black smoky vignette background surrounding this pixel-art book illustration. There must be absolutely NO black corner triangles, no black clouds, no grey halo, no rectangular matte. Keep the central person, correctly blank BACK cover of notebook, desk/laptop or monitor, and the immediate window/clock/plant scene props exactly as they are. Create a clean irregular pixel-edged cutout silhouette around these retained scene elements on a fully TRANSPARENT exterior. All empty canvas and all former black/grey smoke around these scene elements must have alpha=0. Preserve the entire central figure and two arms, same landscape canvas and relative scale. Do not add a new background or rewrite the notebook. Pixel-art illustration for placement directly on white paper."
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter01",
+      "path": "assets/illustrations/chapter01/network-v2.png",
+      "caption": "삽화. 연결 점검.",
+      "sha256": "02ec8b61e4adf1f3c7ce66ed85e481da73bb80deed4c6d658a252b318ec42040",
+      "status": "retained",
+      "inspection": "한 손은 케이블 연결을 확인하고 다른 팔은 몸 가까이에 놓인다. 무릎과 노트북·랙의 방향이 양립한다.",
+      "embedded_media": "word/media/image15.png"
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter02",
+      "path": "assets/illustrations/chapter02/evidence.png",
+      "caption": "삽화. 기록 대조.",
+      "sha256": "162cdf4780d61ca4751ea1b77f006913ceed84267cca9d2af55008c3c7559fec",
+      "status": "retained",
+      "inspection": "두 인물의 네 팔이 책상 지지·문서 지시·돋보기·필기로 연결된다. 종이는 작업대에 놓여 있다.",
+      "embedded_media": "word/media/image4.png"
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter03",
+      "path": "assets/illustrations/chapter03/time.png",
+      "caption": "삽화. 조사 시각 확인.",
+      "sha256": "499cddf0fa6c6b5aa61d6c99285b5233a88089a8ff14d7b52cb95fe5f7192f06",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "조사 시각 노트의 앞면을 인물 쪽으로 돌렸다. 관찰자에게 뒷표지가 보이며 펜을 든 팔과 노트를 든 팔이 분리된다. 검은 외곽 잔상을 제거했다.",
+      "embedded_media": "word/media/image11.png",
+      "previous_sha256": "f1a9157c4ae102bc83aae389943409529afe94e2a147c7d93e84dc8754753e43",
+      "generation_file": "exec-45164b8f-8d48-48f5-820b-7e8babc66912.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Keep same woman, monitor back, office, clock, cardigan and camera. Correct the calendar/notepad she holds: turn its FRONT toward her so the camera sees a solid plain blue-grey BACK COVER, spiral at top. Printed calendar grid must NOT be on the visible back. She keeps the pen near chin in right hand, other hand holds notebook near lower chest. Exactly two arms. Monitor display still faces her.",
+      "transparency_prompt": "Remove the ENTIRE black smoky vignette background surrounding this pixel-art book illustration. There must be absolutely NO black corner triangles, no black clouds, no grey halo, no rectangular matte. Keep the central person, correctly blank BACK cover of notebook, desk/laptop or monitor, and the immediate window/clock/plant scene props exactly as they are. Create a clean irregular pixel-edged cutout silhouette around these retained scene elements on a fully TRANSPARENT exterior. All empty canvas and all former black/grey smoke around these scene elements must have alpha=0. Preserve the entire central figure and two arms, same landscape canvas and relative scale. Do not add a new background or rewrite the notebook. Pixel-art illustration for placement directly on white paper."
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter04",
+      "path": "assets/illustrations/chapter04/field-check.png",
+      "caption": "삽화. 현장 장비의 로그 수집 점검.",
+      "sha256": "bfc78234ea9cee8537c1a26d31c60fe6fd137fa94aca0e9e4857b657b0b2d472",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "종이의 앞면을 현장 담당자 쪽으로 돌렸다. 태블릿과 종이를 잡는 두 팔, 통신함과 케이블의 배치를 확인했다.",
+      "embedded_media": "word/media/image2.png",
+      "previous_sha256": "46a5ffbdfa2e9d5cca7900bb773bf012e12d8b9272b0c436251ad59978b0e024",
+      "generation_file": "exec-b5910d4e-1587-41c3-b59e-3b5ec84c5d7e.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Keep woman and outdoor telecom-cabinet scene and colors unchanged. Correct the small loose paper: PRINTED FACE TOWARDS HER EYES, camera sees only its plain blank unprinted BACK. Keep her two hands, one supporting tablet with screen toward her and back toward camera, one gripping sheet. Retain portrait geometry of objects and overall composition. Preserve transparent outside margin. Match original canvas aspect if possible.",
+      "transparency_prompt": null
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter05",
+      "path": "assets/illustrations/chapter05/request.png",
+      "caption": "삽화. 웹 요청 시험.",
+      "sha256": "494638eac7a567d80d6c3b02888f140ca6c745da2ee9723deaaacd98001e6256",
+      "status": "retained",
+      "inspection": "뒤쪽 시점에서 무릎 위 노트북의 화면이 사용자와 같은 쪽으로 보인다. 여분의 팔·손이 없다.",
+      "embedded_media": "word/media/image12.png"
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter05",
+      "path": "assets/illustrations/diversity/v1-c05-response.png",
+      "caption": "삽화. 응답과 탐지 기록 대조.",
+      "sha256": "bb0a5fe7c5c50986b20d69fb0fd37d62f28b752d46aa7af2145798b4de395fbc",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "세 번째 팔을 제거했다. 두 팔은 종이를 잡는 손과 키보드 위 손에 각각 연결된다. 종이의 빈 뒷면과 모니터 뒷면이 관찰자 쪽이다.",
+      "embedded_media": "word/media/image26.png",
+      "previous_sha256": "3d1a8eb2c2f80816b88777cee3368ac9f26aab09dfb00d855aab05d32e767f55",
+      "generation_file": "exec-dc7569e2-bb02-49e0-9879-27366439feb7.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Repair the older woman with grey short hair and glasses. She currently has THREE arms. Rebuild her anatomy with ONLY TWO arms: her left arm holds one sheet naturally at lower chest height with the PRINTED FACE TOWARD HER EYES, so the camera sees the PLAIN BLANK BACK of the sheet. Her right forearm reaches the keyboard, mostly behind the monitor, hand on keys. Completely remove the extra arm/hand resting on the front cart handle; that handle must be unoccupied. Exactly one shoulder-to-hand chain per side. Preserve rainy window, monitor BACK facing camera with display towards woman, tower PC and trolley. She is a Korean older IT analyst. Keep same 3:2 canvas.",
+      "transparency_prompt": "Edit the FIRST image only to restore transparency at the outermost border. The second image is its original transparency reference. Keep ALL interior content and corrected human anatomy/object orientations from the FIRST image pixel-for-pixel: do not revert to second image poses, paper fronts or extra arms. Preserve same 1536x1024 canvas, crisp pixel art, interior colors and shading. Preserve the concrete interior background (walls, equipment, floor) from the first image. Make only its thin outer empty margin transparent, with a modest pixel-edged vignette boundary like the second reference. No added white, black or grey opaque backdrop. Do not change faces, hands, papers, objects, framing, text or the scene."
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter06",
+      "path": "assets/illustrations/diversity/v1-c06-path.png",
+      "caption": "삽화. 실습 경로 목록 확인.",
+      "sha256": "834d1f25c52d32173bec22d8b1c84eb10c6dc1d8db8d9840af1b24eaf7041773",
+      "status": "retained",
+      "inspection": "뒤쪽 시점에서 종이와 노트북 화면이 인물 시선 쪽이다. 두 손은 종이와 키보드에 각각 놓인다.",
+      "embedded_media": "word/media/image7.png"
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter06",
+      "path": "assets/illustrations/diversity/v1-c06-logs.png",
+      "caption": "삽화. 요청 기록과 차단 근거 대조.",
+      "sha256": "59a9ae753235abea9b3b379216cdf1c721adcfd50156ae7c16a9fef3a658ac3f",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "클립보드의 앞면을 읽는 인물 쪽으로 돌렸다. 두 손이 가장자리와 아래쪽을 받치고 시선이 안쪽 종이를 향한다.",
+      "embedded_media": "word/media/image17.png",
+      "previous_sha256": "bf2348e430b77d61bcd06a46a86b79c814c27134022063b586884d2020c1395c",
+      "generation_file": "exec-17e18d36-d1f9-4c7b-8c5f-27d91f1fd54e.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Fix clipboard-reading geometry. Keep server aisle and terminal trolley, orange work shirt and man. He holds clipboard with left hand from underneath at waist height, tilted UP TOWARDS HIS FACE like a normal reader, not presented to camera. Camera sees primarily the plain dark BACK of clipboard, edge and top of paper only; no print on back. His right hand rests on top edge while he looks down at paper. Exactly two coherent arms. Preserve aisle and monitor angle.",
+      "transparency_prompt": "Edit the FIRST image only to restore transparency at the outermost border. The second image is its original transparency reference. Keep ALL interior content and corrected human anatomy/object orientations from the FIRST image pixel-for-pixel: do not revert to second image poses, paper fronts or extra arms. Preserve same 1536x1024 canvas, crisp pixel art, interior colors and shading. Preserve the concrete interior background (walls, equipment, floor) from the first image. Make only its thin outer empty margin transparent, with a modest pixel-edged vignette boundary like the second reference. No added white, black or grey opaque backdrop. Do not change faces, hands, papers, objects, framing, text or the scene."
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter07",
+      "path": "assets/illustrations/diversity/v1-c07-file.png",
+      "caption": "삽화. 파일 변경과 서버 기록 비교",
+      "sha256": "220c4daaf37d0691071264d46e7e67483ffcdbac311a846a1518edbf474ec9fd",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "검사 중인 카트리지의 라벨 면을 기술자 쪽으로 돌렸다. 관찰자에게 뒷면이 보인다. 다른 손은 카트 위 문서를 짚는다.",
+      "embedded_media": "word/media/image7.png",
+      "previous_sha256": "c3435a792146168348f9fdff722e510c5201dcf8303e4ffbe3881e04445e3d1b",
+      "generation_file": "exec-373206c2-aeb5-4ab3-87ea-9488662af6e6.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Keep kneeling grey-haired technician, workstation, brick wall, tower, trolley. Correct handheld cartridge he is inspecting: rotate it so label faces HIS EYES; camera sees a plain charcoal BACK with tiny molded ribs, NO cream label on visible rear. Do not alter clipboard flat on trolley, it is correctly supported. Retain exact two arms and natural hands.",
+      "transparency_prompt": "Edit the FIRST image only to restore transparency at the outermost border. The second image is its original transparency reference. Keep ALL interior content and corrected human anatomy/object orientations from the FIRST image pixel-for-pixel: do not revert to second image poses, paper fronts or extra arms. Preserve same 1536x1024 canvas, crisp pixel art, interior colors and shading. Preserve the concrete interior background (walls, equipment, floor) from the first image. Make only its thin outer empty margin transparent, with a modest pixel-edged vignette boundary like the second reference. No added white, black or grey opaque backdrop. Do not change faces, hands, papers, objects, framing, text or the scene."
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter07",
+      "path": "assets/illustrations/diversity/v1-c07-response.png",
+      "caption": "삽화. 요청과 처리 결과의 증거 대조",
+      "sha256": "53378d32f983a674fe34860101e849a4275f7f96cd6fc26cfe7926d74ee6b276",
+      "status": "retained",
+      "inspection": "서 있는 담당자는 벽의 시간표를 가리킨다. 손에 든 종이는 읽는 동작이 아니며, 앉은 담당자의 노트는 무릎 위에서 위를 향한다. 네 팔을 확인했다.",
+      "embedded_media": "word/media/image23.png"
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter08",
+      "path": "assets/illustrations/diversity/v1-c08-auth.png",
+      "caption": "삽화. 인증 기록의 출발지와 계정을 대조하는 분석자",
+      "sha256": "f01dce49e19d628221ddf9387b8a9b1ff9146cd0fdec9a71dc7cabcb73eacb9b",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "보고서의 앞면을 분석자 쪽으로 돌렸다. 한 손은 종이를 잡고 다른 손은 키보드를 사용한다.",
+      "embedded_media": "word/media/image5.png",
+      "previous_sha256": "9e8018c3fc0d0b684856a995ade8c1026406a5038f1d1c010ab987180d98c5c2",
+      "generation_file": "exec-9f61ced4-0fd2-4828-a427-d750f37cd870.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Keep seated man, green cardigan, CRT, key cabinet, keyboard. Correct the sheet: he holds it facing himself to read, so the camera sees the PLAIN BLANK REVERSE, with no grey printed rows on the visible side. Right hand types on keyboard, left hand holds paper. Two arms. CRT remains facing man, consistent side angle.",
+      "transparency_prompt": "Edit the FIRST image only to restore transparency at the outermost border. The second image is its original transparency reference. Keep ALL interior content and corrected human anatomy/object orientations from the FIRST image pixel-for-pixel: do not revert to second image poses, paper fronts or extra arms. Preserve same 1536x1024 canvas, crisp pixel art, interior colors and shading. Preserve the concrete interior background (walls, equipment, floor) from the first image. Make only its thin outer empty margin transparent, with a modest pixel-edged vignette boundary like the second reference. No added white, black or grey opaque backdrop. Do not change faces, hands, papers, objects, framing, text or the scene."
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter08",
+      "path": "assets/illustrations/diversity/v1-c08-changes.png",
+      "caption": "삽화. 인증 결과와 변경 기록을 비교하는 분석자",
+      "sha256": "dd946fd29e0e8eb1a8446123360d7f83e970803294a89fae52e9e85c4bd8e763",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "문서 받침을 앉은 분석자 쪽으로 돌렸다. 관찰자에게 받침 뒷면이 보인다. 두 인물 사이 종이 전달과 네 팔의 연결을 확인했다.",
+      "embedded_media": "word/media/image16.png",
+      "previous_sha256": "2fd845e74dcec02fd5afd00848e9d5a1a0c90da9da97ae59d95f320232ec2400",
+      "generation_file": "exec-5b46b4cb-b968-4dbe-999a-f89897777eaf.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Correct the document stand beside seated wheelchair user: pivot entire black two-document stand to face the seated woman's face like the adjacent monitor does. Camera sees its opaque dark BACK, stand stem and perhaps very thin paper edges, never the printed faces aimed away from reader. Preserve wheelchair, both people, paper handover, printer, office, monitor orientation. Handover sheet stays at natural shallow diagonal shared between their hands. Four total arms. No need for readable documents.",
+      "transparency_prompt": "Edit the FIRST image only to restore transparency at the outermost border. The second image is its original transparency reference. Keep ALL interior content and corrected human anatomy/object orientations from the FIRST image pixel-for-pixel: do not revert to second image poses, paper fronts or extra arms. Preserve same 1536x1024 canvas, crisp pixel art, interior colors and shading. Preserve the concrete interior background (walls, equipment, floor) from the first image. Make only its thin outer empty margin transparent, with a modest pixel-edged vignette boundary like the second reference. No added white, black or grey opaque backdrop. Do not change faces, hands, papers, objects, framing, text or the scene."
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter09",
+      "path": "assets/illustrations/diversity/v1-c09-fim.png",
+      "caption": "삽화 9-1. 수집 경로 점검",
+      "sha256": "afce770f38e82eb9babbf431dd63878d49040261d258a49d2c50058bdd8987b7",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "태블릿 뒤를 누르던 손을 가장자리를 받치는 자세로 바꿨다. 두 손으로 잡고 자신을 향한 화면을 읽는다.",
+      "embedded_media": "word/media/image3.png",
+      "previous_sha256": "0e73d2c706ef1694229b7c8510080078fd25c8a1d7c7334911aaf0e0310c9704",
+      "generation_file": "exec-eb5a810c-97b8-4ec5-bb05-12b7d611da71.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Keep woman, depot and cabinet. Fix hand touching tablet BACK. Change action to simply READING tablet supported in BOTH hands along its lower LEFT and RIGHT edges. Neither finger taps back; both thumbs curl around edge toward hidden screen. Tablet opaque protective rear faces camera; screen points toward her eyes. She has only two arms with natural wrists. Keep orange binder and network switch.",
+      "transparency_prompt": "Edit the FIRST image only to restore transparency at the outermost border. The second image is its original transparency reference. Keep ALL interior content and corrected human anatomy/object orientations from the FIRST image pixel-for-pixel: do not revert to second image poses, paper fronts or extra arms. Preserve same 1536x1024 canvas, crisp pixel art, interior colors and shading. Preserve the concrete interior background (walls, equipment, floor) from the first image. Make only its thin outer empty margin transparent, with a modest pixel-edged vignette boundary like the second reference. No added white, black or grey opaque backdrop. Do not change faces, hands, papers, objects, framing, text or the scene."
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter09",
+      "path": "assets/illustrations/diversity/v1-c09-compare.png",
+      "caption": "삽화 9-2. 변경 전후 기록 대조",
+      "sha256": "2270f1c17380300f503bf96ce9fe161ab6e1b9480be07abcda522db71cef2118",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "두 클립보드를 작업대에 나란히 놓고 위를 향한 인쇄면을 내려다보며 비교한다. 한 손은 종이를 고정하고 다른 손은 연필로 기록한다.",
+      "embedded_media": "word/media/image18.png",
+      "previous_sha256": "f1be2aa018f2dd3eabb62f8b1d217f32defdb5361bbdd803cd819ccd7a1c20aa",
+      "generation_file": "exec-f9b3d199-7223-4fac-b858-ed2e63d31ecb.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Recompose the document comparison into a physically natural work posture. A Korean woman in her late fifties, salt-and-pepper hair tied low, cream lab coat and plum blouse, sits at the same forensic workbench. Put BOTH clipboards FLAT on the horizontal tabletop, side by side, with printed sides facing UP, short top edges farther from her and aligned for HER reading direction. She leans forward naturally, eyes downward to papers. Left hand rests on one paper edge; right hand holds a pencil touching the second paper. Both elbows and forearms follow ordinary anatomy, total two arms. Camera is slightly elevated front-left oblique so her three-quarter face and foreshortened paper surfaces are naturally visible together, no raised papers aimed at camera. Keep sealed case, shelves, small black device, magnifier laid down. No documents held upright. Same 3:2 canvas.",
+      "transparency_prompt": "Edit the FIRST image only to restore transparency at the outermost border. The second image is its original transparency reference. Keep ALL interior content and corrected human anatomy/object orientations from the FIRST image pixel-for-pixel: do not revert to second image poses, paper fronts or extra arms. Preserve same 1536x1024 canvas, crisp pixel art, interior colors and shading. Preserve the concrete interior background (walls, equipment, floor) from the first image. Make only its thin outer empty margin transparent, with a modest pixel-edged vignette boundary like the second reference. No added white, black or grey opaque backdrop. Do not change faces, hands, papers, objects, framing, text or the scene."
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter10",
+      "path": "assets/illustrations/diversity/v1-c10-process.png",
+      "caption": "그림 10-10  프로세스와 수집 기록의 대조",
+      "sha256": "07c0c56c18ea87767985e815b87cfb5ba1b5a9ed840e58237f366a782b57a470",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "표가 인쇄된 면을 기술자 쪽으로 돌렸다. 다른 손의 스위치 지시 동작과 노트북 방향을 유지했다.",
+      "embedded_media": "word/media/image10.png",
+      "previous_sha256": "4116c869a03299930742ddfd0fb68361cb9c94b06ac9a3cca180b5218bb7c73c",
+      "generation_file": "exec-1c1f41e7-d0ba-43aa-988a-7443e7eab5ca.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Keep young man, workshop, laptop and pointing at switch. Correct his held paper orientation: he holds report facing HIMSELF so camera sees a completely PLAIN BLANK REVERSE with no rows or grid on visible side. His one other hand points at switch, total two arms. No other change.",
+      "transparency_prompt": "Edit the FIRST image only to restore transparency at the outermost border. The second image is its original transparency reference. Keep ALL interior content and corrected human anatomy/object orientations from the FIRST image pixel-for-pixel: do not revert to second image poses, paper fronts or extra arms. Preserve same 1536x1024 canvas, crisp pixel art, interior colors and shading. Preserve the concrete interior background (walls, equipment, floor) from the first image. Make only its thin outer empty margin transparent, with a modest pixel-edged vignette boundary like the second reference. No added white, black or grey opaque backdrop. Do not change faces, hands, papers, objects, framing, text or the scene."
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter10",
+      "path": "assets/illustrations/diversity/v1-c10-sensor.png",
+      "caption": "그림 10-12  센서 설정과 수집 상태 확인",
+      "sha256": "7df6ed7b5e304076d473329be00484a10d5c898b631eb519c4479b587ad5678f",
+      "status": "retained",
+      "inspection": "두 팔은 열린 함 문을 잡는 손과 작업대 위 필기 손으로 연결된다. 클립보드는 작업대가 받친다.",
+      "embedded_media": "word/media/image12.png"
+    },
+    {
+      "volume": 1,
+      "manuscript": "volume01-chapter11",
+      "path": "assets/illustrations/diversity/v1-c11-evidence.png",
+      "caption": "그림 11-10  증거와 조사 결론의 대조",
+      "sha256": "2e91e020679773106a7d155b6336bb8c843943aa540e20e75398048a2ea34456",
+      "status": "retained",
+      "inspection": "세 인물의 여섯 팔이 상자 지지·파일 읽기·노트 필기에 각각 연결된다. 파일과 노트의 표지가 관찰자 쪽이다.",
+      "embedded_media": "word/media/image10.png"
+    },
+    {
+      "volume": 2,
+      "manuscript": "volume02-chapter01",
+      "path": "assets/illustrations/diversity/v2-c01-evidence.png",
+      "caption": "그림 1-1  조사 기록과 수집 자료의 대조",
+      "sha256": "e07b206036f0138c80ab8799a137eb1bbdfeb1b16903de75b780f99e4a5c9eb6",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "이벤트 기록의 앞면을 분석자 쪽으로 돌렸다. 두 팔은 종이 읽기와 키보드 입력에 각각 사용한다.",
+      "embedded_media": "word/media/image1.png",
+      "previous_sha256": "9289567480189f913d336cdcef24085a12dc29c564cfb7b42f3d7e68c754384d",
+      "generation_file": "exec-4b39d1a6-38ab-4569-b522-d93569c905d3.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Keep same librarian/analyst, glasses, monitor back, keyboard, library scene, colors. Correct held event sheet: printed face toward HER EYES, visible camera side is plain blank paper reverse with no logo or rows. One hand holds paper, the other types on keyboard. Exactly two arms. Paper may partially obscure shirt naturally.",
+      "transparency_prompt": "Edit the FIRST image only to restore transparency at the outermost border. The second image is its original transparency reference. Keep ALL interior content and corrected human anatomy/object orientations from the FIRST image pixel-for-pixel: do not revert to second image poses, paper fronts or extra arms. Preserve same 1536x1024 canvas, crisp pixel art, interior colors and shading. Preserve the concrete interior background (walls, equipment, floor) from the first image. Make only its thin outer empty margin transparent, with a modest pixel-edged vignette boundary like the second reference. No added white, black or grey opaque backdrop. Do not change faces, hands, papers, objects, framing, text or the scene."
+    },
+    {
+      "volume": 2,
+      "manuscript": "volume02-chapter01",
+      "path": "assets/illustrations/diversity/v2-c01-sensors.png",
+      "caption": "그림 1-6  수집 상태를 확인하고 조사 기록에 남기는 작업",
+      "sha256": "460ab944e7064920b8b883f47382c6d6462acd7d389c8e2fd28a97dc90a1ec41",
+      "status": "retained",
+      "inspection": "클립보드는 무릎과 손이 받치고 인쇄면은 필기하는 기술자 쪽이다. 두 팔과 모니터 방향을 확인했다.",
+      "embedded_media": "word/media/image6.png"
+    },
+    {
+      "volume": 2,
+      "manuscript": "volume02-chapter02",
+      "path": "assets/illustrations/diversity/v2-c02-failure.png",
+      "caption": "그림 2-3  제한된 입력 목록과 인증 응답의 확인",
+      "sha256": "3c264ea0b1f1ee292a60bf115deedb45a93b9938a29e4ececd635f6f18df3b0c",
+      "status": "retained",
+      "inspection": "뒤쪽 시점에서 화면과 체크리스트가 인물 쪽을 향한다. 두 팔이 키보드 입력과 종이 필기로 연결된다.",
+      "embedded_media": "word/media/image3.png"
+    },
+    {
+      "volume": 2,
+      "manuscript": "volume02-chapter02",
+      "path": "assets/illustrations/diversity/v2-c02-response.png",
+      "caption": "그림 2-5  잠금 시각과 정상 업무 기록의 대조",
+      "sha256": "430ca2a37e1435018ce4c84a37dad74d18a03f1ef0a63efb123d4830551ef1ae",
+      "status": "retained",
+      "inspection": "두 사람 모두 벽의 기록을 보며 한 사람이 지시한다. 들고 있는 클립보드의 뒷면이 관찰자 쪽이다. 네 팔과 손의 연결을 확인했다.",
+      "embedded_media": "word/media/image9.png"
+    },
+    {
+      "volume": 2,
+      "manuscript": "volume02-chapter03",
+      "path": "assets/illustrations/diversity/v2-c03-identity.png",
+      "caption": "그림 3-3  로그온 출발지와 장비 목록의 대조",
+      "sha256": "f501198b1eb57223d4833fc677cd8c9609f687c3444544c719a8eb0e7f6d4e4b",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "출발지 기록의 앞면을 조사자 쪽으로 돌렸다. 다른 손이 태블릿 아랫부분을 받치고 두 물체 모두 조사자 시선 방향이다.",
+      "embedded_media": "word/media/image6.png",
+      "previous_sha256": "6f9c68461010297c6a8b5e3657d52b6cd8a5c7bb5e0200be9c0beda76f2573e4",
+      "generation_file": "exec-b6be9408-006f-4099-ab49-7a6e8c6d51a3.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Keep same Korean woman, maroon raincoat, wet campus, cabinet and tablet orientation. Correct loose record sheet so printed side faces her and camera sees only its plain blank reverse; she holds both objects naturally angled towards her eyes. Exactly two arms, one hand sheet edge, one hand tablet lower edge. Do not expose print to camera or add hands. Tablet rear remains opaque.",
+      "transparency_prompt": "Edit the FIRST image only to restore transparency at the outermost border. The second image is its original transparency reference. Keep ALL interior content and corrected human anatomy/object orientations from the FIRST image pixel-for-pixel: do not revert to second image poses, paper fronts or extra arms. Preserve same 1536x1024 canvas, crisp pixel art, interior colors and shading. Preserve the concrete interior background (walls, equipment, floor) from the first image. Make only its thin outer empty margin transparent, with a modest pixel-edged vignette boundary like the second reference. No added white, black or grey opaque backdrop. Do not change faces, hands, papers, objects, framing, text or the scene."
+    },
+    {
+      "volume": 2,
+      "manuscript": "volume02-chapter03",
+      "path": "assets/illustrations/diversity/v2-c03-permission.png",
+      "caption": "그림 3-5  관리자 그룹 구성원과 승인 내역의 대조",
+      "sha256": "bddf175b5d40db0b9022cd5e59fdb4ea32210693ab1793be3f1978c871ae9355",
+      "physical_review": "corrected 2026-11-03",
+      "status": "corrected",
+      "inspection": "터번 인물을 평상 작업복의 한국 장년 기술자로 바꿨다. 두 담당자가 카트 위의 두 문서를 내려다본다. 네 팔과 네 손이 각각 고정·지시 동작으로 연결된다.",
+      "embedded_media": "word/media/image9.png",
+      "previous_sha256": "42139ae7be32a927c264015155861a05176ab5ce1805b989eb1844470248f976",
+      "generation_file": "exec-b32693b2-0994-4bd0-9a4c-728b02497dcf.png",
+      "prompt": "Edit this exact book illustration. Preserve its retro 1990s PC-game pixel art, limited colors, stippled shadows, landscape canvas, setting and equipment. Prioritize physically coherent human anatomy and object orientation. Each person has exactly two arms, two hands; trace each shoulder to elbow to wrist. Do not add any readable text. Documents need not face the reader of the book. No two-sided screens or transparent objects. Replace the turbaned character with an older KOREAN male technician, short salt-and-pepper hair, clean shaven, ordinary ochre work vest over cream shirt. Keep young Korean woman in navy coveralls. Redesign their joint document review: clear the trolley upper surface and lay TWO sheets FLAT ON IT, both printed faces upward. Move its file box to lower shelf. They stand side by side behind trolley, facing diagonally inward, look DOWN at these papers. Older man's left hand rests on trolley edge, right hand lightly pins left paper. Woman's left hand rests on right paper corner, her right index finger points down to a row ON THE FLAT PAPER. Exactly four arms total, natural shoulder-elbow-wrist chains. Slightly elevated front three-quarter camera naturally sees their faces and foreshortened trolley top. No hand-held upright paper, no clipboard aimed towards viewer, no headgear. Preserve ordinary Korean university equipment storeroom with beige PCs, spare boxes, cable and stool. Same 3:2 canvas.",
+      "transparency_prompt": "Edit the FIRST image only to restore transparency at the outermost border. The second image is its original transparency reference. Keep ALL interior content and corrected human anatomy/object orientations from the FIRST image pixel-for-pixel: do not revert to second image poses, paper fronts or extra arms. Preserve same 1536x1024 canvas, crisp pixel art, interior colors and shading. Preserve the concrete interior background (walls, equipment, floor) from the first image. Make only its thin outer empty margin transparent, with a modest pixel-edged vignette boundary like the second reference. No added white, black or grey opaque backdrop. Do not change faces, hands, papers, objects, framing, text or the scene."
+    }
+  ],
+  "render_checks": [
+    {
+      "manuscript": "volume01-chapter05",
+      "pages_before": 76,
+      "pages_after": 76,
+      "text_identical": true,
+      "unchanged_pages": 75,
+      "changed_pages": [
+        {
+          "page": 40,
+          "changed_box_px": [
+            482,
+            767,
+            746,
+            942
+          ],
+          "render": "volume01-chapter05-040.png"
+        }
+      ],
+      "changed_docx_parts": [
+        "word/media/image26.png"
+      ],
+      "docx_sha256": "db22124d993c1833cff0f0fb705948c14d315018bdf4e066ba4450d7b89f821e",
+      "changed_pages_visually_reviewed": true
+    },
+    {
+      "manuscript": "volume01-chapter09",
+      "pages_before": 67,
+      "pages_after": 67,
+      "text_identical": true,
+      "unchanged_pages": 65,
+      "changed_pages": [
+        {
+          "page": 8,
+          "changed_box_px": [
+            482,
+            473,
+            748,
+            650
+          ],
+          "render": "volume01-chapter09-008.png"
+        },
+        {
+          "page": 60,
+          "changed_box_px": [
+            482,
+            780,
+            748,
+            957
+          ],
+          "render": "volume01-chapter09-060.png"
+        }
+      ],
+      "changed_docx_parts": [
+        "word/media/image3.png",
+        "word/media/image18.png"
+      ],
+      "docx_sha256": "df980bab07ccef20cd10bb6b62794fdedfa0c4ea6a565497aa80451c7a38996d",
+      "changed_pages_visually_reviewed": true
+    },
+    {
+      "manuscript": "volume02-chapter03",
+      "pages_before": 41,
+      "pages_after": 41,
+      "text_identical": true,
+      "unchanged_pages": 39,
+      "changed_pages": [
+        {
+          "page": 14,
+          "changed_box_px": [
+            291,
+            198,
+            591,
+            395
+          ],
+          "render": "volume02-chapter03-014.png"
+        },
+        {
+          "page": 22,
+          "changed_box_px": [
+            291,
+            478,
+            591,
+            678
+          ],
+          "render": "volume02-chapter03-022.png"
+        }
+      ],
+      "changed_docx_parts": [
+        "word/media/image6.png",
+        "word/media/image9.png"
+      ],
+      "docx_sha256": "e38126d7bf0ec417cc346579c9289623246dc05980d9a48afe72932ad044f3b5",
+      "changed_pages_visually_reviewed": true
+    },
+    {
+      "manuscript": "volume01-chapter04",
+      "pages_before": 53,
+      "pages_after": 53,
+      "text_identical": true,
+      "unchanged_pages": 52,
+      "changed_pages": [
+        {
+          "page": 7,
+          "changed_box_px": [
+            472,
+            791,
+            772,
+            1003
+          ],
+          "render": "volume01-chapter04-007.png"
+        }
+      ],
+      "changed_docx_parts": [
+        "word/document.xml",
+        "word/media/image2.png"
+      ],
+      "docx_sha256": "9858a1d59d46969a9f0d1fadbb6031a666fb430b34f7f14a0170570ff4456b6f",
+      "changed_pages_visually_reviewed": true
+    },
+    {
+      "manuscript": "volume01-chapter06",
+      "pages_before": 70,
+      "pages_after": 70,
+      "text_identical": true,
+      "unchanged_pages": 69,
+      "changed_pages": [
+        {
+          "page": 27,
+          "changed_box_px": [
+            506,
+            807,
+            772,
+            985
+          ],
+          "render": "volume01-chapter06-027.png"
+        }
+      ],
+      "changed_docx_parts": [
+        "word/media/image17.png"
+      ],
+      "docx_sha256": "3a0ddba57b92fa804ef79f440aa9c891c4ed1062fae355ec9df49668c0a06b78",
+      "changed_pages_visually_reviewed": true
+    },
+    {
+      "manuscript": "volume01-chapter07",
+      "pages_before": 58,
+      "pages_after": 58,
+      "text_identical": true,
+      "unchanged_pages": 57,
+      "changed_pages": [
+        {
+          "page": 14,
+          "changed_box_px": [
+            482,
+            612,
+            748,
+            790
+          ],
+          "render": "volume01-chapter07-014.png"
+        }
+      ],
+      "changed_docx_parts": [
+        "word/media/image7.png"
+      ],
+      "docx_sha256": "563029b24ec0dac4340e031c05be84bdc6e5367dd9ce9d1f1d94dfccea256873",
+      "changed_pages_visually_reviewed": true
+    },
+    {
+      "manuscript": "volume01-chapter08",
+      "pages_before": 58,
+      "pages_after": 58,
+      "text_identical": true,
+      "unchanged_pages": 56,
+      "changed_pages": [
+        {
+          "page": 19,
+          "changed_box_px": [
+            506,
+            625,
+            772,
+            799
+          ],
+          "render": "volume01-chapter08-019.png"
+        },
+        {
+          "page": 50,
+          "changed_box_px": [
+            482,
+            140,
+            748,
+            318
+          ],
+          "render": "volume01-chapter08-050.png"
+        }
+      ],
+      "changed_docx_parts": [
+        "word/media/image5.png",
+        "word/media/image16.png"
+      ],
+      "docx_sha256": "0cfaf0d6eb4bc96e0614f735252427e9b57a496333a91bb679d2b0787c09c81a",
+      "changed_pages_visually_reviewed": true
+    },
+    {
+      "manuscript": "volume01-chapter10",
+      "pages_before": 55,
+      "pages_after": 55,
+      "text_identical": true,
+      "unchanged_pages": 54,
+      "changed_pages": [
+        {
+          "page": 40,
+          "changed_box_px": [
+            485,
+            780,
+            745,
+            952
+          ],
+          "render": "volume01-chapter10-040.png"
+        }
+      ],
+      "changed_docx_parts": [
+        "word/media/image10.png"
+      ],
+      "docx_sha256": "f51edfcdba5bffa2a6603d9cd987b9048cfa2b87746e2bdff523c7a0c772cc59",
+      "changed_pages_visually_reviewed": true
+    },
+    {
+      "manuscript": "volume01-appendices",
+      "pages_before": 27,
+      "pages_after": 27,
+      "text_identical": true,
+      "unchanged_pages": 26,
+      "changed_pages": [
+        {
+          "page": 5,
+          "changed_box_px": [
+            332,
+            836,
+            599,
+            1014
+          ],
+          "render": "volume01-appendices-005.png"
+        }
+      ],
+      "changed_docx_parts": [
+        "word/media/image1.png"
+      ],
+      "docx_sha256": "f017ba5de11cbf48c7c893a8c6dbbb47de160586c3f517a53b215475ce5b1434",
+      "changed_pages_visually_reviewed": true
+    },
+    {
+      "manuscript": "volume02-chapter01",
+      "pages_before": 30,
+      "pages_after": 30,
+      "text_identical": true,
+      "unchanged_pages": 29,
+      "changed_pages": [
+        {
+          "page": 2,
+          "changed_box_px": [
+            306,
+            810,
+            577,
+            991
+          ],
+          "render": "volume02-chapter01-002.png"
+        }
+      ],
+      "changed_docx_parts": [
+        "word/media/image1.png"
+      ],
+      "docx_sha256": "f750cdcb5395a7dd9ba77610ece052ab25d5507e8fac96639c9eab021b69e14c",
+      "changed_pages_visually_reviewed": true
+    },
+    {
+      "manuscript": "volume01-chapter01",
+      "pages_before": 61,
+      "pages_after": 61,
+      "text_identical": true,
+      "unchanged_pages": 60,
+      "changed_pages": [
+        {
+          "page": 39,
+          "changed_box_px": [
+            561,
+            137,
+            769,
+            278
+          ],
+          "render": "volume01-chapter01-039.png"
+        }
+      ],
+      "changed_docx_parts": [
+        "word/media/image8.png"
+      ],
+      "docx_sha256": "93a832f4463b0e9497005e1e0563ede759edf8958aea91c375335305f8ccaaca",
+      "changed_pages_visually_reviewed": true
+    },
+    {
+      "manuscript": "volume01-chapter03",
+      "pages_before": 17,
+      "pages_after": 17,
+      "text_identical": true,
+      "unchanged_pages": 16,
+      "changed_pages": [
+        {
+          "page": 14,
+          "changed_box_px": [
+            507,
+            788,
+            731,
+            955
+          ],
+          "render": "volume01-chapter03-014.png"
+        }
+      ],
+      "changed_docx_parts": [
+        "word/media/image11.png"
+      ],
+      "docx_sha256": "e3338c64a8bc4610d8e65dee829442173b529d5ac390dbac66502072826ef6e9",
+      "changed_pages_visually_reviewed": true
+    }
+  ],
+  "total_pages_compared": 613,
+  "unchanged_page_pixels": 598,
+  "changed_pages_visually_reviewed": 15,
+  "renderer": "Packaged render_docx.py failed because soffice.exe was not installed. Hidden Microsoft Word COM exported temporary PDFs; pypdfium2 compared all pages at 1.7x. PDFs are QA-only.",
+  "known_preexisting_layout_items": [
+    "volume01-chapter01 page 39 contains only the illustration and caption; it was already present in the before snapshot. Page restructuring is deferred to the requested chapter-by-chapter proofreading.",
+    "volume01-chapter03 page 14 retains the original table border spacing. This image-only revision does not represent complete chapter proofreading."
+  ]
+}

@@ -16,7 +16,8 @@
       "manuscript": "volume01-appendices",
       "path": "assets/illustrations/diversity/v1-app-route.png",
       "caption": "부록 그림 A-1  수집 경로 확인",
-      "sha256": "d61623827c5d03d5f03e99e4999fad756e0ed4783f8a10738201264437975ad5"
+      "sha256": "ccb1032fd3e1814d5e50cc9123c0856d08ca13332857f762db10820b9c766203",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 1,
@@ -37,7 +38,8 @@
       "manuscript": "volume01-chapter01",
       "path": "assets/illustrations/chapter01/notes-v2.png",
       "caption": "삽화. 접속 주소 확인.",
-      "sha256": "3b3aa4383bf609133a875b5c6e1247ab87ee3d60f82918fbf3f35b4bd29324c5"
+      "sha256": "d92672402813dc13e41d1b9670f58e1cb455953781ca67aeb7aa76154718d115",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 1,
@@ -58,14 +60,16 @@
       "manuscript": "volume01-chapter03",
       "path": "assets/illustrations/chapter03/time.png",
       "caption": "삽화. 조사 시각 확인.",
-      "sha256": "f1a9157c4ae102bc83aae389943409529afe94e2a147c7d93e84dc8754753e43"
+      "sha256": "499cddf0fa6c6b5aa61d6c99285b5233a88089a8ff14d7b52cb95fe5f7192f06",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 1,
       "manuscript": "volume01-chapter04",
       "path": "assets/illustrations/chapter04/field-check.png",
       "caption": "삽화. 현장 장비의 로그 수집 점검.",
-      "sha256": "46a5ffbdfa2e9d5cca7900bb773bf012e12d8b9272b0c436251ad59978b0e024"
+      "sha256": "bfc78234ea9cee8537c1a26d31c60fe6fd137fa94aca0e9e4857b657b0b2d472",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 1,
@@ -79,7 +83,8 @@
       "manuscript": "volume01-chapter05",
       "path": "assets/illustrations/diversity/v1-c05-response.png",
       "caption": "삽화. 응답과 탐지 기록 대조.",
-      "sha256": "3d1a8eb2c2f80816b88777cee3368ac9f26aab09dfb00d855aab05d32e767f55"
+      "sha256": "bb0a5fe7c5c50986b20d69fb0fd37d62f28b752d46aa7af2145798b4de395fbc",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 1,
@@ -93,14 +98,16 @@
       "manuscript": "volume01-chapter06",
       "path": "assets/illustrations/diversity/v1-c06-logs.png",
       "caption": "삽화. 요청 기록과 차단 근거 대조.",
-      "sha256": "bf2348e430b77d61bcd06a46a86b79c814c27134022063b586884d2020c1395c"
+      "sha256": "59a9ae753235abea9b3b379216cdf1c721adcfd50156ae7c16a9fef3a658ac3f",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 1,
       "manuscript": "volume01-chapter07",
       "path": "assets/illustrations/diversity/v1-c07-file.png",
       "caption": "삽화. 파일 변경과 서버 기록 비교",
-      "sha256": "c3435a792146168348f9fdff722e510c5201dcf8303e4ffbe3881e04445e3d1b"
+      "sha256": "220c4daaf37d0691071264d46e7e67483ffcdbac311a846a1518edbf474ec9fd",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 1,
@@ -114,35 +121,40 @@
       "manuscript": "volume01-chapter08",
       "path": "assets/illustrations/diversity/v1-c08-auth.png",
       "caption": "삽화. 인증 기록의 출발지와 계정을 대조하는 분석자",
-      "sha256": "9e8018c3fc0d0b684856a995ade8c1026406a5038f1d1c010ab987180d98c5c2"
+      "sha256": "f01dce49e19d628221ddf9387b8a9b1ff9146cd0fdec9a71dc7cabcb73eacb9b",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 1,
       "manuscript": "volume01-chapter08",
       "path": "assets/illustrations/diversity/v1-c08-changes.png",
       "caption": "삽화. 인증 결과와 변경 기록을 비교하는 분석자",
-      "sha256": "2fd845e74dcec02fd5afd00848e9d5a1a0c90da9da97ae59d95f320232ec2400"
+      "sha256": "dd946fd29e0e8eb1a8446123360d7f83e970803294a89fae52e9e85c4bd8e763",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 1,
       "manuscript": "volume01-chapter09",
       "path": "assets/illustrations/diversity/v1-c09-fim.png",
       "caption": "삽화 9-1. 수집 경로 점검",
-      "sha256": "0e73d2c706ef1694229b7c8510080078fd25c8a1d7c7334911aaf0e0310c9704"
+      "sha256": "afce770f38e82eb9babbf431dd63878d49040261d258a49d2c50058bdd8987b7",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 1,
       "manuscript": "volume01-chapter09",
       "path": "assets/illustrations/diversity/v1-c09-compare.png",
       "caption": "삽화 9-2. 변경 전후 기록 대조",
-      "sha256": "f1be2aa018f2dd3eabb62f8b1d217f32defdb5361bbdd803cd819ccd7a1c20aa"
+      "sha256": "2270f1c17380300f503bf96ce9fe161ab6e1b9480be07abcda522db71cef2118",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 1,
       "manuscript": "volume01-chapter10",
       "path": "assets/illustrations/diversity/v1-c10-process.png",
       "caption": "그림 10-10  프로세스와 수집 기록의 대조",
-      "sha256": "4116c869a03299930742ddfd0fb68361cb9c94b06ac9a3cca180b5218bb7c73c"
+      "sha256": "07c0c56c18ea87767985e815b87cfb5ba1b5a9ed840e58237f366a782b57a470",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 1,
@@ -163,7 +175,8 @@
       "manuscript": "volume02-chapter01",
       "path": "assets/illustrations/diversity/v2-c01-evidence.png",
       "caption": "그림 1-1  조사 기록과 수집 자료의 대조",
-      "sha256": "9289567480189f913d336cdcef24085a12dc29c564cfb7b42f3d7e68c754384d"
+      "sha256": "e07b206036f0138c80ab8799a137eb1bbdfeb1b16903de75b780f99e4a5c9eb6",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 2,
@@ -191,14 +204,16 @@
       "manuscript": "volume02-chapter03",
       "path": "assets/illustrations/diversity/v2-c03-identity.png",
       "caption": "그림 3-3  로그온 출발지와 장비 목록의 대조",
-      "sha256": "6f9c68461010297c6a8b5e3657d52b6cd8a5c7bb5e0200be9c0beda76f2573e4"
+      "sha256": "f501198b1eb57223d4833fc677cd8c9609f687c3444544c719a8eb0e7f6d4e4b",
+      "physical_review": "corrected 2026-11-03"
     },
     {
       "volume": 2,
       "manuscript": "volume02-chapter03",
       "path": "assets/illustrations/diversity/v2-c03-permission.png",
       "caption": "그림 3-5  관리자 그룹 구성원과 승인 내역의 대조",
-      "sha256": "42139ae7be32a927c264015155861a05176ab5ce1805b989eb1844470248f976"
+      "sha256": "bddf175b5d40db0b9022cd5e59fdb4ea32210693ab1793be3f1978c871ae9355",
+      "physical_review": "corrected 2026-11-03"
     }
   ],
   "render_checks": [
@@ -421,5 +436,6 @@
     }
   ],
   "review": "19 generated originals and 15 changed illustration pages visually inspected; chapter05 moved illustration and following page re-inspected. All 472 original pages compared against first replacement render: text identical and pixel changes limited to illustration regions. Final chapter05 removes one orphan illustration page.",
-  "new_chapter03_illustrations": 2
+  "new_chapter03_illustrations": 2,
+  "physical_review_record": "illustration-physical-review.json"
 }
