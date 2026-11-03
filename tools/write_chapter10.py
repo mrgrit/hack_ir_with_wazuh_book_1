@@ -1,0 +1,247 @@
+"""10장 원고와 복사용 예제 생성. 실습 명령은 실행하지 않는다."""
+import json,re
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+pages=[];commands=[];queries=[];sql=[]
+H='kt66 VM · ccc 호스트 셸';A='공격자 VM · att 셸';M='kt66-siem · root 셸'
+def p(t):return {'type':'p','text':t}
+def code(t):return {'type':'code','text':t}
+def table(head,rows,widths=[39,88]):return {'type':'table','head':head,'rows':rows,'widths':widths,'keep':len(rows)<=7}
+def page(t,*b):pages.append({'title':t,'kind':'body','blocks':list(b)})
+def fig(n,t):return {'type':'image','path':f'assets/figures/chapter10/{n}.png','caption':t,'width_mm':127}
+def screen(n,t):return {'type':'image','path':f'assets/screens/chapter10/{n}.png','caption':t,'width_mm':90 if n=='archives' else 105 if n=='firewall' else 127}
+def spot(ch,n,t):return {'type':'image','path':f'assets/illustrations/chapter{ch}/{n}.png','caption':t,'width_mm':55,'align':'right'}
+def c(t,why,result,where=H):
+ b={'type':'command','id':f'C10-{len(commands)+1:02d}','where':where,'text':t,'why':why,'result':result};commands.append(b);return b
+def q(t,why,result,index='wazuh-alerts-*'):
+ b={'type':'query','id':f'Q10-{len(queries)+1:02d}','where':'Windows · Discover · '+index,'text':t,'why':why,'result':result};queries.append(b);return b
+def s(t,why,result):
+ b={'type':'query','id':f'S10-{len(sql)+1:02d}','where':'kt66 VM · sudo osqueryi의 osquery> 프롬프트','text':t,'why':why,'result':result};sql.append(b);return b
+def ref(t,u):return {'type':'link','text':t,'url':u}
+
+page('10장  네트워크 흔적과 현재 상태 조사',
+ p('9장에서 프로세스 실행과 파일 변경을 조사했다. 이번에는 서버가 연결을 기다리는 포트, 방화벽이 버린 패킷, 현재 등록된 SSH 공개 키를 확인한다. Module 01 실습 29·30·62를 통해 네트워크 관찰과 호스트 상태를 연결한다.'),
+ p('같은 포트라도 서버 안에서 보이는 상태와 외부에서 보이는 응답이 다를 수 있다. 포트 번호와 시각만 맞추지 말고 주소·프로세스·수집 위치를 함께 대조한다. 실습을 마치면 새 포트와 키를 제거하고 다음 조회에서 사라졌는지 확인한다.'),
+ fig('roadmap','그림 10-1  네트워크 기록과 호스트 상태의 조사 순서'))
+page('10.1  조사 대상과 실행 위치',
+ table(['위치','역할'],[['kt66 VM · 192.168.0.107','nc 리스너·osquery·방화벽 실행\nWazuh 에이전트 이름 kt66-host'],['공격자 VM · 192.168.0.108','Nmap 스캔과 실습용 키 생성\nkt66 내부 attacker 컨테이너와 별도'],['Windows 브라우저','https://192.168.0.107:5601\nDiscover에서 저장된 기록 검색'],['kt66-siem 컨테이너','탐지 규칙·디코더와 아카이브 확인']]),
+ p('이 장의 대상은 Ubuntu 호스트이다. SSH 기본 포트 22로 접속한다. 8·9장에서 사용한 2204는 bastion 컨테이너이므로 구분한다. 예제의 주소는 자신의 VM 주소로 바꾼다. kt66 VM의 VMware 콘솔과 별도 터미널 두 개를 준비한다.'),
+ c('hostname\ndate -Is\ncommand -v nc ss netstat osqueryi\nsystemctl is-active wazuh-agent osqueryd','hostname은 현재 컴퓨터 이름, date -Is는 시간대가 포함된 시각을 출력한다. command -v는 명령의 위치를 찾는다. systemctl is-active는 서비스의 현재 실행 상태를 확인한다.','호스트 이름과 주소를 대조한다. 필요한 명령 경로와 두 서비스의 active를 확인한다. inactive 또는 명령 누락은 10.2에서 준비한다.'))
+page('10.1  세 종류의 기록',
+ fig('layers','그림 10-2  소켓 목록과 패킷 기록과 SQL 조회의 관계'),
+ p('리스닝(listening)은 프로세스가 지정한 주소와 포트에서 새 연결을 기다리는 상태이다. ss와 netstat는 이 소켓 목록을 읽는다. 방화벽은 도착한 패킷의 주소·포트·상태에 따라 처리한다. osquery는 운영체제 정보를 SQL로 조회할 수 있는 표로 제공한다.'),
+ p('Wazuh의 명령 모니터링은 명령 출력의 변화를 비교한다. 방화벽 규칙은 개별 DROP 기록을 묶는다. osquery 수집은 예약 조회 결과를 읽는다. 어느 방식도 포트 번호 하나만으로 프로그램의 악성 여부를 판정하지 않는다.'))
+page('10.2  수집 준비와 사전 기록',
+ p('kt66의 host-sensors 설정에는 netstat 명령 모니터링, osquery 예약 조회, kern.log 수집과 경계 방화벽이 포함된다. 설치가 중단됐거나 설정이 달라졌다면 준비 상태가 서로 다를 수 있다. 먼저 파일과 서비스 상태를 기록한다. 기존 설정이 정상이라면 아래의 보완 작업은 건너뛴다. [1]'),
+ c('ls -ld ~/book10-state\nsudo ls -l /etc/osquery\nsystemctl is-enabled osqueryd wazuh-agent\nsudo iptables -S INPUT\nsudo iptables -S KT66-PERIMETER','ls -ld는 디렉터리 자체의 존재·권한을 본다. is-enabled는 부팅 시 자동 시작 설정을 확인하며 active와 별개이다. iptables -S는 패킷 처리 규칙을 읽는다. INPUT은 호스트로 들어오는 패킷의 체인, KT66-PERIMETER는 kt66의 사용자 체인이다.','book10-state가 있으면 기존 기록을 확인하고 새 이름을 정한다. 체인이 없을 때의 오류와 서비스·파일의 초기 상태를 적는다.'),
+ c('mkdir -m 700 ~/book10-state\nsudo cp -p /var/ossec/etc/ossec.conf \\\n~/book10-state/ossec.conf.before\nsudo sha256sum /var/ossec/etc/ossec.conf','mkdir는 디렉터리를 만들며 -m 700은 소유자만 접근하도록 한다. cp -p는 파일과 권한·시각을 보존해 복사한다. sha256sum은 내용의 SHA-256 해시를 출력한다. 줄 끝 역슬래시(\\)는 다음 줄을 같은 명령으로 잇는다.','백업 파일이 생성됐는지 ls -l로 확인하고 해시를 기록한다. 이후 설정을 바꾼 경우에만 이 백업으로 원상복구한다.'))
+page('10.2  osquery 예약 조회 준비',
+ p('osqueryi는 터미널에서 직접 질문하는 프로그램이고 osqueryd는 예약된 SQL을 반복 실행하는 서비스이다. 직접 조회한 결과는 그 터미널에 출력된다. Wazuh에서 찾을 결과는 osqueryd의 결과 로그에 남아야 한다. [2][3]'),
+ c('sudo cat /etc/osquery/osquery.conf\ncat ~/kt66/deployment/osquery-linux.conf','cat은 파일 내용을 표준 출력으로 읽는다. 첫 파일은 적용 중인 설정, 두 번째는 책의 기준 커밋에 포함된 설정 원본이다.','schedule 안의 kt66_listening_ports와 kt66_authorized_keys, interval 60을 확인한다. 첫 파일이 없을 때만 다음 복사를 수행한다.'),
+ c('sudo install -m 0644 \\\n~/kt66/deployment/osquery-linux.conf \\\n/etc/osquery/osquery.conf\nsudo osqueryi \\\n--config_path=/etc/osquery/osquery.conf --config_check','install은 지정한 권한으로 파일을 복사한다. 0644는 소유자 읽기·쓰기, 나머지 읽기 권한이다. --config_path는 검사할 설정, --config_check는 설정 검사이다.','검사가 오류 없이 끝나야 한다. 기존 설정 파일이 있는 환경에서는 먼저 별도로 백업하고 필요한 schedule 항목만 병합한다.'),
+ p('osqueryi나 netstat가 없으면 1장의 호스트 센서 설치 절차부터 확인한다. 이 절은 이미 설치된 osquery와 net-tools를 사용한다. 기존 설정 전체를 무조건 덮어쓰면 다른 예약 조회가 사라질 수 있다.'))
+page('10.2  Wazuh 수집 설정 확인',
+ c("sudo sed -n '/<wodle name=\"osquery\">/,/<\\/wodle>/p' \\\n/var/ossec/etc/ossec.conf\nsudo grep -n -F '/var/log/kern.log' \\\n/var/ossec/etc/ossec.conf",'sed는 텍스트에서 지정 범위를 출력한다. -n은 자동 출력을 끄고, 쉼표 앞뒤 검색식이 시작·끝 줄이며 p는 출력이다. 작은따옴표는 셸 해석을 막고 \\/는 검색식 안의 슬래시 문자이다. grep -n은 줄 번호, -F는 정규표현식 없이 문자열 그대로 찾는 옵션이다.','osquery 블록은 disabled=no, run_daemon=no여야 한다. kern.log를 읽는 localfile도 확인한다.'),
+ p('osqueryd는 systemd로 실행한다. 따라서 Wazuh의 run_daemon은 no로 두어 Wazuh가 두 번째 데몬을 기동하지 않게 한다. log_path는 예약 조회 결과 파일, config_path는 설정 파일의 경로이다. [4]'),
+ c('sudo nano /var/ossec/etc/ossec.conf','nano는 터미널 파일 편집기이다. 기존 osquery 블록을 아래 내용과 대조하여 수정한다. kern.log localfile이 없으면 ossec_config의 닫는 태그 앞에 추가한다. Ctrl+O와 Enter로 저장하고 Ctrl+X로 닫는다.','같은 osquery 블록이나 kern.log 수집 항목을 중복으로 추가하지 않는다. 주소·등록 정보 등 나머지 설정은 유지한다.'))
+page('10.2  수집 항목과 적용 확인',
+ code('<wodle name="osquery">\n  <disabled>no</disabled>\n  <run_daemon>no</run_daemon>\n  <log_path>/var/log/osquery/osqueryd.results.log</log_path>\n  <config_path>/etc/osquery/osquery.conf</config_path>\n  <add_labels>yes</add_labels>\n</wodle>\n<localfile>\n  <log_format>syslog</log_format>\n  <location>/var/log/kern.log</location>\n</localfile>'),
+ p('add_labels는 에이전트의 라벨 정보를 결과에 붙이는 설정이다. kern.log는 호스트 커널 로그이며 컨테이너의 웹 로그와 다른 수집원이다.'),
+ c('sudo /var/ossec/bin/wazuh-logcollector -t\nsudo /var/ossec/bin/wazuh-modulesd -t\nsudo systemctl start osqueryd\nsudo systemctl restart wazuh-agent\nsystemctl is-active osqueryd wazuh-agent','두 Wazuh 실행 파일의 -t는 설정 검사이다. 모두 오류 없이 끝난 뒤 start로 osqueryd를 시작하고 restart로 에이전트를 재시작한다.','두 서비스가 active인지 확인한다. 설정 검사 실패 시 재시작을 멈추고 표시된 태그·경로를 고친다. 재시작 직후에는 초기 조회가 끝나도록 기다린다.'))
+page('10.2  결과 파일과 조회 주기',
+ c('sudo tail -n 3 /var/log/osquery/osqueryd.results.log\nsudo grep -n -E \\\n\'netstat|<alias>|<frequency>\' \\\n/var/ossec/etc/ossec.conf','tail -n 3은 파일 끝의 세 줄을 읽는다. grep -E는 확장 정규표현식이며 작은따옴표 안의 파이프(|)는 세 검색식 중 또는(OR)이다. 셸 명령 사이의 출력 전달 기호와 구분한다.','JSON의 name·columns·action과 갱신 시각을 확인한다. netstat listening ports 별칭과 frequency 360을 확인한다.'),
+ p('360초는 6분이다. 명령 모니터링은 에이전트가 정한 주기에 실행되므로 포트를 열자마자 경보가 뜨지 않을 수 있다. osquery의 두 실습 조회는 interval 60이고, 기준 설정의 schedule_splay_percent 10은 조회 간격을 분산한다. 정확히 매 분 00초에 실행된다고 가정하지 않는다.'),
+ p('초기 조회 때는 기존 결과도 added로 기록될 수 있다. 시험 대상을 만들기 전에 결과 파일이 갱신되는지 확인해 기준 상태를 확보한다. 아직 경보가 없으면 대상 변경부터 반복하지 말고 서비스·결과 파일·수집 설정 순서로 점검한다.'))
+page('10.3  새 리스닝 포트 만들기',
+ p('실습 29는 새 포트가 목록에 나타나는 변화를 만든다. nc는 TCP 연결을 열거나 기다리는 도구이다. 여기서는 입력을 실행하는 셸을 연결하지 않고 연결 대기 상태만 만든다. [5] kt66 호스트에서 터미널 A와 B를 연다.'),
+ c("sudo ss -lntp 'sport = :31337'",'ss는 소켓 정보를 보여 준다. -l은 리스닝, -n은 주소·포트를 숫자로 표시, -t는 TCP, -p는 프로세스 정보이다. 작은따옴표의 sport = :31337은 로컬 포트 조건이다.','표 머리글만 나오면 해당 포트의 TCP 리스너가 없다. 기존 프로세스가 나오면 종료하지 말고 다른 빈 실습 포트를 정한다.'),
+ c('nc -lk 192.168.0.107 31337','-l은 연결 대기, -k는 연결이 끝나도 계속 대기하는 옵션이다. IP는 연결을 받을 로컬 주소, 31337은 포트이다. 터미널 A에서 실행한 채 둔다.','프롬프트가 돌아오지 않는 상태가 정상이다. Address already in use는 포트 충돌이다. 새 명령은 터미널 B에서 입력한다.',H+' · 터미널 A'),
+ c("sudo ss -lntp 'sport = :31337'",'터미널 B에서 같은 소켓 조회를 반복해 생성 전후를 대조한다.','LISTEN, 192.168.0.107:31337, nc와 PID를 기록한다. 10.7의 비교가 끝날 때까지 터미널 A를 유지한다.',H+' · 터미널 B'))
+page('10.3  현재 프로세스와 주소 읽기',
+ table(['항목','판단에 사용할 내용'],[['LISTEN','새 TCP 연결을 기다리는 상태'],['192.168.0.107:31337','특정 VM 주소에서 대기하는 포트'],['0.0.0.0:31337','모든 로컬 IPv4 주소에서 대기'],['127.0.0.1:31337','같은 호스트의 루프백 연결만 수신'],['users와 pid','소켓에 연결된 프로그램과 프로세스 번호']]),
+ p('0.0.0.0은 공격자 주소가 아니다. 외부 접속 가능 여부에는 방화벽·라우팅도 영향을 준다. 호스트의 ss와 컨테이너 안의 ss는 서로 다른 네트워크 공간을 볼 수 있으므로 실행 위치를 조사 기록에 적는다.'),
+ c('ps -p 181571 -o pid,ppid,user,lstart,args','ps는 프로세스 정보를 읽는다. -p 뒤를 방금 확인한 PID로 바꾼다. -o는 출력 열로, pid·ppid는 자신과 부모 번호, user는 사용자, lstart는 시작 시각, args는 명령줄이다.','촬영 환경에서는 ccc가 실행한 nc였다. PID는 재사용되므로 다른 시점의 같은 번호를 같은 프로세스라고 단정하지 않는다.'),
+ p('슬라이드의 nc -lk 31337 &에서 앰퍼샌드(&)는 백그라운드 실행을 뜻한다. 위 절차는 종료 대상을 알아보기 쉽게 전경에서 실행한다. 두 방식 모두 리스너를 만들지만 종료 방법은 다르다.'))
+page('10.3  Wazuh에서 목록 변화 찾기',
+ p('Windows에서 Wazuh에 로그인한 뒤 메뉴의 Explore에서 Discover를 연다. 인덱스는 wazuh-alerts-*를 선택하고 검색 언어가 DQL인지 확인한다. 실습 직후에는 Last 15 minutes를 사용하되, 오래 기다렸다면 시작 시각부터 현재까지 넓힌다. 이 장의 화면은 한국 시각 2026년 11월 3일 08:35~09:30을 조회한다.'),
+ q('agent.name:"kt66-host" AND rule.id:533','콜론(:)은 필드 조건이고 AND는 두 조건을 모두 만족하는 기록을 찾는다. 에이전트 이름은 자기 환경의 값으로 바꾼다.','6분 주기가 한 번 이상 지난 뒤 Refresh한다. 행을 펼쳐 full_log와 previous_output을 비교한다.'),
+ screen('ports','그림 10-3  리스닝 목록 변경 경보의 nc 행'),
+ p('533은 netstat listening ports라는 별칭의 출력이 이전과 달라졌을 때 발생한다. 포트 추가·제거뿐 아니라 출력에 포함된 PID 등 다른 값의 변화도 비교 대상이다. 한 경보가 새 포트 한 개를 뜻하지 않는다. [6]'))
+page('10.3  전후 목록과 실행 흔적 연결',
+ q('agent.name:"kt66-host" AND rule.id:533\nAND (full_log:*31337* OR previous_output:*31337*)','별표(*)는 앞뒤에 다른 문자가 있어도 31337이 포함된 값을 찾는다. 괄호 안의 OR는 현재 또는 이전 출력 중 하나에 포트가 있는 조건이다.','현재 출력에만 있으면 새로 관찰된 리스너, 이전 출력에만 있으면 사라진 리스너 후보이다. 주변 행의 주소와 프로토콜도 대조한다.'),
+ p('이 기록의 현재 목록은 full_log, 비교 대상 목록은 previous_output에 담긴다. data.extra_data가 항상 존재한다고 가정하지 않는다. 출력은 전체 목록일 수 있으므로 두 목록에서 동일한 주소·포트를 직접 비교한다.'),
+ q('agent.name:"kt66-host"\nAND rule.groups:audit_command\nAND data.audit.command:nc','9장에서 다룬 audit의 명령 실행 경보를 같은 기간에 찾는다.','EXECVE의 인수와 PID·PPID·auid를 읽어 소켓의 PID와 대조한다. execve 성공은 nc 실행에 관한 정보이며 포트 연결 성공이나 악성 판정은 별도로 확인한다.'),
+ p('리스너가 잠깐 열렸다 닫혀 두 점검 사이에 사라졌다면 533에 남지 않을 수 있다. 실행 이벤트·서비스 등록·방화벽 기록을 함께 보존한다. 실습 종료는 10.8에서 두 리스너를 함께 정리한다.'))
+
+page('10.4  방화벽 드롭과 포트 스캔',
+ p('실습 30은 공격자 VM에서 kt66의 TCP 포트를 조사하고, 같은 출발지에서 반복된 DROP 기록을 찾는다. Nmap은 포트별 응답을 비교해 외부에서 관찰한 상태를 표시한다. 연결을 맺는 TCP connect 스캔(-sT)을 사용한다. SYN 스캔(-sS)은 직접 SYN을 보내며 정상적인 TCP 연결을 완성하지 않는 방식이다. [7]'),
+ fig('scan','그림 10-4  TCP 스캔 응답과 방화벽 기록'),
+ p('open은 연결을 받을 수 있는 상태, closed는 접근했으나 리스너가 없는 상태, filtered는 필터 등의 영향으로 열림 여부를 판정하기 어려운 상태이다. 응답 없음이나 일부 ICMP 오류가 filtered로 분류될 수 있다. filtered만 보고 어느 장비가 버렸는지 정하지 말고 대상의 로그와 대조한다. [8]'))
+page('10.4  kt66 경계 방화벽 확인',
+ c('sudo iptables -S INPUT\nsudo iptables -S KT66-PERIMETER\nip -4 route get 192.168.0.108\ncat ~/kt66/deployment/perimeter.sh','iptables -S로 INPUT에서 사용자 체인으로 이동하는 규칙과 체인 내부 순서를 읽는다. ip -4 route get은 상대 주소로 나갈 IPv4 경로를 표시한다. dev 뒤는 네트워크 인터페이스이다. cat으로 실행할 kt66 스크립트 내용을 먼저 확인한다.','기준 코드의 체인은 기존 연결과 적용 당시의 리스닝 포트를 RETURN 처리하고 나머지 TCP SYN을 LOG 뒤 DROP한다. 예시 인터페이스는 ens33이다.'),
+ p('RETURN은 현재 체인을 빠져나가 원래 체인의 다음 규칙으로 돌아간다. 그 자체가 최종 허용 판정은 아니다. LOG는 기록만 남기므로 뒤의 DROP 규칙도 확인한다. 이 스크립트의 포트 예외 목록은 적용 순간의 ss 출력으로 만든다. 이후 새로 열린 포트를 매 패킷마다 다시 조사하는 구조가 아니다. [1][9]'),
+ p('Docker 게시 포트로 전달되는 패킷은 DNAT 뒤 FORWARD를 지날 수 있다. 호스트 INPUT의 이 체인 하나가 Docker의 모든 통신을 통제한다고 해석하지 않는다.'))
+page('10.4  누락된 경계 방화벽 준비',
+ p('KT66-PERIMETER 체인이 처음부터 있는 환경은 이 페이지의 생성·제거 작업을 건너뛴다. 체인이 없고 1장의 기준 kt66 실습망인 경우에만 아래 스크립트를 적용한다. 호스트로 들어오는 신규 연결에 영향을 주므로 VMware 콘솔을 열고 현재 SSH 리스너와 인터페이스를 먼저 확인한다.'),
+ c('sudo iptables-save > ~/book10-state/iptables.before\nsudo bash ~/kt66/deployment/perimeter.sh\nsudo iptables -S INPUT\nsudo iptables -S KT66-PERIMETER','iptables-save는 현재 규칙을 텍스트로 출력한다. 꺾쇠(>)는 그 출력을 파일에 저장하며 같은 이름이 있으면 덮어쓴다. bash는 확인한 스크립트를 실행한다.','현재 SSH 포트가 RETURN 예외에 있는지, LOG의 접두 문자열이 DROP 인지, 마지막 SYN DROP이 있는지 확인한다. 적용 시각과 새로 만든 체인임을 적는다.'),
+ p('로그 제한은 평균 초당 100건, 초기 burst 200이다. 이 수치는 접속 허용량이 아니라 LOG 규칙의 기록 제한이다. 제한을 넘은 패킷도 뒤의 DROP 규칙에서 버릴 수 있다. 따라서 로그 행 수와 전체 패킷 수는 같지 않을 수 있다.'),
+ c('systemctl is-active rsyslog\nsudo tail -n 3 /var/log/kern.log','rsyslog는 시스템 메시지를 파일로 기록하는 서비스이다. tail로 커널 로그 파일을 읽을 수 있는지도 확인한다.','rsyslog가 active이고 파일이 존재해야 한다. 파일에 DROP이 아직 없는 것은 스캔 전이라면 정상일 수 있다.'))
+page('10.4  공격자 VM에서 스캔하기',
+ c('command -v nmap\nnmap --version','공격자 VM에 Nmap이 준비됐는지 확인한다. --version은 버전을 출력한다.','촬영 환경은 Nmap 7.80이다. 명령이 없을 때만 다음 설치를 수행한다.',A),
+ c('sudo apt-get update\nsudo apt-get install nmap','apt-get은 Ubuntu 패키지를 관리한다. update는 패키지 목록을 갱신하고 install은 지정한 프로그램과 의존 패키지를 설치한다. 설치 질문에서 목록을 확인한 뒤 진행한다.','설치 뒤 nmap --version이 정상 출력되어야 한다. kt66 VM이 아니라 공격자 VM에 설치한다.',A),
+ c('date -Is\nnmap -sT -Pn -n -p 1-1000 \\\n--max-retries 1 192.168.0.107','-sT는 TCP 연결 스캔, -Pn은 별도 호스트 발견 검사를 생략하고 대상이 응답한다고 가정하는 옵션이다. -n은 이름 조회를 생략한다. -p 1-1000은 포트 범위, --max-retries 1은 탐색 재전송의 상한이다.','Nmap 종료 때까지 기다린다. 이 실습에서 허가된 대상 한 대의 주소인지 확인한다. -Pn의 Host is up 표시를 독립적인 생존 확인 결과로 읽지 않는다.',A))
+page('10.4  스캔 응답과 커널 원문',
+ code('Not shown: 993 filtered ports\nPORT    STATE SERVICE\n22/tcp  open  ssh\n25/tcp  open  smtp\n53/tcp  open  domain\n80/tcp  open  http\n443/tcp open  https\n587/tcp open  submission\n993/tcp open  imaps'),
+ p('위 결과에서는 조사한 1,000개 중 7개가 open, 나머지가 filtered이다. SERVICE 열은 기본 포트 이름 표에 따른 표시이며 이 명령은 서비스 버전을 검증하지 않는다. closed가 많다면 방화벽 체인·인터페이스·수집 경로를 확인한다. open 포트가 달라도 자신의 서비스 구성과 맞는지부터 판단한다.'),
+ c("sudo grep -F 'SRC=192.168.0.108 ' \\\n/var/log/kern.log | tail -n 5",'grep -F는 출발지 문자열을 그대로 찾는다. 뒤 공백까지 넣어 주소 경계를 구분한다. 셸의 파이프(|)는 검색 출력을 tail 입력으로 전달하며 -n 5는 마지막 다섯 줄이다.','스캔 시각의 DROP, SRC, DST, SPT, DPT, PROTO와 SYN을 기록한다. 공격자 터미널이 UTC이면 그 시각에 9시간을 더해 한국 시각과 맞춘다.'),
+ p('실제 커널 기록에는 SRC=192.168.0.108, DST=192.168.0.107과 여러 DPT가 나타났다. 동일한 DPT의 반복은 재전송일 수 있다. 목적지 포트 종류와 원문 행 수를 분리해 센다.'))
+page('10.5  반복 차단 경보 읽기',
+ q('agent.name:"kt66-host" AND rule.id:4151\nAND data.srcip:"192.168.0.108"','실습 대상의 반복 방화벽 드롭 경보를 출발지로 좁힌다.','행을 펼치고 data.action·srcip·dstip·srcport·dstport, location, full_log를 읽는다.'),
+ screen('firewall','그림 10-5  방화벽 반복 드롭 경보의 주소와 포트'),
+ table(['원문','경보 필드와 해석'],[['SRC=192.168.0.108','data.srcip · 패킷의 출발지'],['DST=192.168.0.107','data.dstip · 패킷의 목적지'],['SPT=37018','data.srcport · 출발지 포트'],['DPT=565','data.dstport · 이 원문의 목적지 포트'],['PROTO=TCP · DROP','data.protocol · data.action']]),
+ p('agent.ip은 Wazuh 수집기의 등록 주소이다. 이 환경에서는 10.20.32.254이며 패킷의 목적지 주소와 다르다. 4151의 data.dstport는 경보를 만든 현재 이벤트의 값이다. 스캔한 전체 포트 목록을 대표하지 않는다.'))
+page('10.5  규칙 조건과 누락 범위',
+ p('Manager의 0900-firewall_rules.xml에서 4101은 action DROP을 분류하며 no_log가 설정돼 있다. 개별 이벤트는 상관 분석에 쓰이지만 기본 alerts 검색에 모두 저장되지는 않는다. 4151은 같은 출발지의 4101을 모으고 frequency=18, timeframe=45, ignore=240을 사용한다. [10]'),
+ p('frequency와 timeframe은 반복 조건, ignore는 경보 뒤 같은 규칙의 재발생을 억제하는 초 단위 시간이다. 경보 건수는 스캔 포트 수나 패킷 수가 아니다. 반복 실습을 바로 실행해도 ignore 구간에서는 새 경보가 보이지 않을 수 있다.'),
+ p('rule.groups에는 4151의 firewall·multiple_drops가 표시된다. 4101에 있는 firewall_drop 그룹만 조건으로 삼으면 원하는 반복 경보를 놓칠 수 있다. 경보의 previous_output에는 상관 분석에 사용된 앞선 기록 일부가 담기며 전체 스캔의 완전한 목록은 아니다.'),
+ c('docker exec -it kt66-siem /bin/bash','호스트의 Docker는 컨테이너를 관리한다. exec -it는 실행 중인 kt66-siem 안에 대화형 Bash 셸을 연다.','프롬프트가 컨테이너로 바뀐 뒤 다음 파일을 읽는다.'),
+ c("sed -n '1,40p' \\\n/var/ossec/ruleset/rules/0900-firewall_rules.xml\nexit",'sed -n과 1,40p는 1~40행만 출력한다. exit는 컨테이너 셸을 닫는다.','설치된 4101·4151의 no_log·frequency·timeframe·ignore·그룹 조건을 확인한다.',M))
+page('10.5  개별 차단 기록으로 범위 조사',
+ p('4장에서 설정한 wazuh-archives-*에는 Manager가 받은 개별 로그를 조회할 수 있다. Discover 왼쪽 인덱스를 archives로 바꾸고 같은 시간 범위를 유지한다. 목록에 없다면 먼저 Manager 아카이브 저장과 Filebeat 전송을 4장의 순서로 점검한다. 실제 archives 인덱스가 있다면 Dashboard management의 Dashboards Management → Index patterns → Create index pattern에서 wazuh-archives-*를 입력한다. Next step에서 Time field를 timestamp로 선택해 생성한다. 기본 alerts 패턴은 유지한다.'),
+ q('agent.name:"kt66-host"\nAND location:"/var/log/kern.log"\nAND data.action:DROP\nAND data.srcip:"192.168.0.108"','수집 위치와 출발지를 함께 지정해 커널의 DROP 기록을 찾는다. alerts의 rule.id:4151 조건은 제거한다.','data.dstport 열을 추가해 여러 목적지 포트를 확인한다. 이 결과도 LOG 제한이나 수집 손실이 있는 전체 패킷의 복제본은 아니다.','wazuh-archives-*'),
+ screen('archives','그림 10-6  아카이브에 수집된 개별 DROP 기록'),
+ p('Search field names에서 data.dstport를 찾아 +로 열에 추가한다. 필드 이름을 눌러 값 분포를 보면 반환된 표본의 상위 값을 볼 수 있다. 기본 표본의 상위 값과 전체 범위의 정확한 집계를 구분한다. 기간·원문·로그 제한과 함께 조사 범위를 적는다.'))
+page('10.5  추가 조사와 방화벽 원상복구',
+ p('같은 출발지가 8장의 SSH 실패·성공 기록에도 보이는지 조사한다. 일치하는 IP만으로 같은 사람임을 특정하지 않는다. 시간대, 대상, 인증 계정, 명령 실행과 승인된 점검 작업을 함께 대조한다. 정상 취약점 점검도 다수의 DROP을 만들 수 있다.'),
+ p('실제 사건에서는 원문과 경보를 보존한 뒤 출발지 차단 범위·서비스 영향을 검토한다. 아래 제거는 이번 실습에서 처음 만든 체인을 원래 없던 상태로 되돌리는 절차이다. 처음부터 존재한 kt66 방화벽 체인은 유지한다.'),
+ c('sudo iptables -S INPUT\nsudo iptables -D INPUT -i ens33 -j KT66-PERIMETER\nsudo iptables -F KT66-PERIMETER\nsudo iptables -X KT66-PERIMETER\nsudo iptables -S INPUT','INPUT에서 이번에 추가한 정확한 규칙을 먼저 확인한다. -D는 그 규칙 삭제, -i는 들어오는 인터페이스, -j는 이동 대상이다. -F는 지정 체인의 규칙 비우기, -X는 비어 있고 참조되지 않는 사용자 체인 삭제이다. ens33은 자기 환경 값으로 바꾼다.','INPUT이 사전 기록과 같은지 확인한다. 다른 체인 이름을 넣거나 체인 이름을 생략해 전체 규칙을 비우지 않는다.'),
+ p('Nmap 스캔은 끝나면 연결 시도를 종료한다. 생성된 커널 로그와 Wazuh 기록은 조사 자료로 보존한다. 설치한 Nmap은 다음 실습에서도 사용할 도구이므로 유지 여부를 준비 기록에 적는다.'))
+page('10.6  SQL로 현재 상태 직접 조회',
+ p('osquery의 listening_ports는 소켓, processes는 프로세스 정보를 담는 표이다. 같은 pid를 연결하면 어느 프로그램이 포트를 열었는지 확인할 수 있다. SQL은 표에서 열과 행을 선택하는 언어이다. Discover의 DQL은 이미 수집한 문서를 찾는 검색식이므로 입력 위치와 목적이 다르다.'),
+ c('sudo osqueryi','osqueryi를 관리자 권한으로 열어 다른 사용자의 프로세스와 키 파일도 읽는다.','osquery> 프롬프트가 나타난다. 아래 SQL은 이 프롬프트에 입력하며 리눅스 셸이나 Discover에 넣지 않는다.'),
+ s('SELECT p.pid, p.name, p.path, l.address, l.port\nFROM listening_ports l\nJOIN processes p USING (pid)\nWHERE l.port IN (31337,31338);','SELECT는 출력 열, FROM은 조사 표이다. l과 p는 표의 짧은 이름이다. JOIN ... USING(pid)는 pid가 같은 두 행을 연결한다. WHERE는 조건, IN은 괄호 안 값 중 하나를 선택한다. 세미콜론(;)은 SQL 문장의 끝이다.','현재 열어 둔 31337 행의 nc·실행 파일 경로·주소·PID를 ss와 대조한다. 31338은 10.7에서 만든 뒤 다시 조회한다.'),
+ p('listening_ports의 path는 유닉스 소켓 경로일 수 있다. 실행 파일 경로는 processes에서 가져온 p.path를 읽는다. 관리자 조회라도 프로세스가 종료되는 순간에는 두 표의 행이 일치하지 않아 JOIN 결과에서 빠질 수 있다.'))
+page('10.6  예약 SQL의 범위 읽기',
+ code("SELECT p.name, p.path, l.port, l.address\nFROM listening_ports l\nJOIN processes p USING (pid)\nWHERE l.protocol = 6\nAND l.address NOT IN\n('127.0.0.1','::1','127.0.0.53')\nAND p.name NOT IN ('docker-proxy');"),
+ p('위는 kt66_listening_ports 예약 SQL이다. protocol 6은 TCP, NOT IN은 나열한 값을 제외한다. p.name은 프로세스 이름이다. 출력 열에는 PID가 없으므로 Wazuh의 이 결과만으로 PID를 알 수 없다. 직접 조회에 PID를 추가한 이유가 여기에 있다.'),
+ p('세 루프백 주소 문자열과 docker-proxy라는 이름을 제외하는 조건일 뿐, 모든 루프백 범위나 모든 컨테이너 포트를 제외하는 조건은 아니다. 호스트에서 보이는 컨테이너 프로세스도 결과에 섞일 수 있다. 외부 노출 여부는 호스트의 ss·방화벽·Docker 게시 설정과 대조한다.'),
+ s('.schema authorized_keys\n.schema users','마침표로 시작하는 .schema는 SQL 문장이 아니라 osqueryi의 표 구조 확인 명령이다. 뒤에는 표 이름을 넣는다.','authorized_keys의 uid·algorithm·key·options·comment·key_file, users의 uid·username을 확인한다.'))
+page('10.6  공개 키와 사용자 연결',
+ s('SELECT u.username, k.key_file,\n       k.algorithm, k.comment\nFROM users u\nCROSS JOIN authorized_keys k USING (uid)\nWHERE u.uid >= 1000 OR u.uid = 0;','u와 k는 users와 authorized_keys의 별칭이다. 이 조회의 CROSS JOIN과 USING(uid)는 각 사용자 uid에 해당하는 키를 읽도록 연결한다. >=는 이상, OR는 둘 중 하나이다. 따라서 UID 1000 이상 계정과 UID 0을 선택한다.','현재 조회에서는 등록된 키의 사용자·파일·알고리즘·주석을 읽는다. 10.7의 등록 뒤 book10-key@attacker 행을 찾는다.'),
+ p('key_file은 조사한 파일 경로이고 comment는 공개 키 끝의 주석이다. 주석은 작성자가 바꿀 수 있으므로 실제 공격자 신원을 보장하지 않는다. UID는 파일을 가진 계정과 연결되며 이 행을 추가한 행위자의 UID라는 뜻은 아니다.'),
+ p('kt66_authorized_keys는 key와 options 열을 선택하지 않는다. 같은 사용자·파일·알고리즘·주석을 유지한 채 키 본문만 바뀌면 이 투영 결과가 같을 수 있다. FIM·파일 원문·키 지문을 추가로 대조한다. authorized_keys 표에서 보인다는 사실과 sshd가 실제로 인증에 사용한다는 사실도 구분한다. [11]'),
+ s('.quit','osqueryi의 .quit는 조회 셸을 닫는다.','리눅스 셸 프롬프트로 돌아온다.'))
+page('10.6  예약 조회와 차이 기록',
+ fig('osquery','그림 10-7  직접 SQL 조회와 예약 결과 수집'),
+ p('osqueryd는 schedule의 SQL을 실행하고 이전 결과와 비교한다. 새 행은 added, 사라진 행은 removed이다. 첫 실행이나 비교 기준 재설정 뒤의 added는 오래전부터 있던 상태일 수 있다. 조회 사이에 생겼다 사라진 상태는 잡히지 않을 수 있다. [2]'),
+ p('결과 파일의 name은 예약 조회의 이름이다. Wazuh는 JSON을 osquery 아래에 넣어 data.osquery.name으로 저장한다. columns는 SELECT가 반환한 열이며 data.osquery.columns.*로 표시된다. location은 osquery, decoder.name은 json, 기본 결과 규칙은 24010이다. 규칙의 no_full_log 설정 때문에 경보에 full_log가 없을 수 있다. [12]'),
+ p('결과의 calendarTime·unixTime은 조회 시각, 경보 timestamp는 Wazuh 처리 시각이다. 서비스 정지·전송 지연이 있으면 차이가 커진다. counter·epoch와 설정 변경도 함께 확인하며 removed 한 건만으로 실제 파일 삭제를 단정하지 않는다.'))
+
+page('10.7  새 포트와 공개 키 관찰',
+ p('실습 62는 31338 포트와 공개 키를 추가한 뒤 예약 조회가 기록한 변화를 찾는다. 9장의 bastion 키 실습과 달리 대상은 kt66 호스트의 ccc 계정이다. 처음부터 등록된 키를 잃지 않도록 사전 백업을 확인한다. 개인 키는 공격자 VM에만 보관한다.'),
+ c('ls -l ~/book10-key.pub ~/book10-authorized_keys.before','전송받을 공개 키와 백업 이름이 비어 있는지 kt66 호스트에서 먼저 확인한다.','둘 중 하나가 있으면 내용을 확인하고 이전 실습을 정리하거나 새 파일명을 정한다. 기존 파일 위에 전송·백업하지 않는다.'),
+ c('ls -l ~/book10-key ~/book10-key.pub\nssh-keygen -t ed25519 -N \'\' \\\n-C book10-key@attacker -f ~/book10-key\nssh-keygen -lf ~/book10-key.pub','ssh-keygen은 키 쌍을 생성하고 지문을 확인하는 도구이다. 두 파일이 없을 때만 생성한다. -t는 알고리즘, -N 뒤 빈 작은따옴표는 실습 키의 빈 암호문, -C는 주석, -f는 저장 경로이다. -l과 -f는 지정한 공개 키의 지문 출력이다.','기존 파일이 있으면 덮어쓰지 않는다. .pub가 공개 키이며 지문과 주석을 기록한다.',A),
+ c('scp ~/book10-key.pub \\\nccc@192.168.0.107:book10-key.pub','scp는 SSH 연결로 파일을 복사한다. 콜론 앞은 대상 계정·주소, 뒤는 원격 홈 기준 저장 이름이다. 서버 호스트 키 지문을 kt66 콘솔에서 확인한 값과 대조한 뒤 ccc의 호스트 로그인 암호를 입력한다.','kt66 호스트의 /home/ccc/book10-key.pub에 공개 키만 전송됐는지 확인한다. 개인 키 파일은 전송하지 않는다.',A))
+page('10.7  키 파일 사전 확인과 백업',
+ c('ls -ld ~/.ssh\nls -l ~/.ssh/authorized_keys ~/book10-key.pub\nssh-keygen -lf ~/book10-key.pub\nsha256sum ~/.ssh/authorized_keys','ls로 대상과 소유자를 확인한다. 전송한 키의 지문을 공격자 VM의 출력과 비교하고 authorized_keys의 초기 해시를 기록한다.','기존 authorized_keys가 있으면 다음 백업을 수행한다. 파일이 없으면 초기 상태를 “없음”으로 기록하고 아래 준비를 먼저 수행한다.'),
+ c('mkdir -p ~/.ssh\nchmod 700 ~/.ssh\ntouch ~/.ssh/authorized_keys\nchmod 600 ~/.ssh/authorized_keys','authorized_keys가 없는 경우에만 수행한다. mkdir -p는 없는 디렉터리를 만들고 touch는 없는 파일을 빈 파일로 만든다. chmod는 권한을 설정한다. 700은 소유자만 디렉터리 접근, 600은 소유자만 파일 읽기·쓰기를 허용한다. 기존 .ssh의 권한은 먼저 기록한다.','ls -ld ~/.ssh와 ls -l ~/.ssh/authorized_keys로 ccc 소유·권한을 확인한다. 빈 파일을 만들기 전 초기 상태가 없음이었다는 기록을 남긴다.'),
+ c('ls -l ~/book10-authorized_keys.before\ncp -p ~/.ssh/authorized_keys \\\n~/book10-authorized_keys.before\ncmp ~/.ssh/authorized_keys \\\n~/book10-authorized_keys.before','백업 이름이 없는 것을 확인한 뒤 cp -p로 원본을 보존한다. cmp는 두 파일의 바이트를 비교한다.','cmp가 출력 없이 종료 코드 0으로 끝나면 내용이 같다. 기존 백업이 있으면 작업을 멈추고 이전 실습의 복구 여부를 확인한다.'))
+page('10.7  제한된 실습 키 등록',
+ c('printf \'\\n%s \' \'restrict,from="192.168.0.108"\' \\\n>> ~/.ssh/authorized_keys\ncat ~/book10-key.pub >> ~/.ssh/authorized_keys\nssh-keygen -lf ~/.ssh/authorized_keys','printf는 지정 형식으로 문자열을 출력한다. \\n은 줄바꿈, %s는 문자열, 뒤 공백은 키 앞 구분자이다. 첫 줄바꿈은 기존 마지막 행과 새 키 행을 분리한다. >>는 기존 파일 끝에 추가한다. restrict는 포워딩·PTY 등 부가 기능을 제한하고 from은 이 키를 사용할 출발지 주소를 제한한다. 다음 cat이 공개 키 본문과 주석을 같은 행에 붙인다. [13]','추가된 키 지문과 주석을 확인한다. 기존 키 행이 보존됐는지 백업과 대조한다.'),
+ c("sudo ss -lntp 'sport = :31338'\nnc -lk 192.168.0.107 31338",'31338이 비어 있는지 확인한 뒤 별도 터미널 C에서 연결을 기다린다. -l·-k와 주소의 뜻은 10.3과 같다.','터미널 C를 유지하고 터미널 B에서 SQL을 다시 조회한다. 같은 컴퓨터의 31337·31338을 구분한다.',H+' · 터미널 C'),
+ p('키 주석은 book10-key@attacker로 구분한다. 이것은 등록 상태를 관찰하는 실습이다. SSH 인증 성공을 조사하려면 실제 접속의 Accepted publickey 기록과 지문을 9장의 방법으로 추가 확인한다.'))
+page('10.7  예약 결과에서 추가 행 찾기',
+ q('agent.name:"kt66-host" AND rule.groups:osquery\nAND data.osquery.name:\n(kt66_listening_ports OR kt66_authorized_keys)\nAND data.osquery.action:added','두 예약 조회의 추가 결과를 한 번에 검색한다. 괄호는 조회 이름 두 개를 OR로 묶는다.','초기 수집의 다른 행도 나올 수 있다. 아래처럼 포트·키 주석으로 좁힌다. 시간 범위에 등록 시각과 다음 예약 실행 시각이 포함돼야 한다.'),
+ q('agent.name:"kt66-host"\nAND data.osquery.name:kt66_listening_ports\nAND data.osquery.columns.port:31338\nAND data.osquery.action:added','예약 조회 이름과 결과 열의 port로 새 리스너를 찾는다.','data.osquery.columns.name=nc, path=/usr/bin/nc.openbsd, address=192.168.0.107을 확인한다.'),
+ screen('osquery-port','그림 10-8  osquery가 수집한 새 TCP 리스너'),
+ p('규칙 수준 3인 정상 형식의 조회 결과도 조사에 유용하다. 24010이라는 번호 자체가 백도어 탐지나 차단을 뜻하지 않는다. 프로그램 경로·실행 사용자·승인된 서비스와 대조한다.'))
+page('10.7  공개 키 결과의 의미',
+ q('agent.name:"kt66-host"\nAND data.osquery.name:kt66_authorized_keys\nAND data.osquery.columns.comment:\n"book10-key@attacker"\nAND data.osquery.action:added','키 조회의 주석을 지정해 이번에 추가한 행을 찾는다. 큰따옴표는 주석 전체를 한 값으로 지정한다.','username=ccc, key_file=/home/ccc/.ssh/authorized_keys, algorithm=ssh-ed25519를 확인한다.'),
+ screen('osquery-key','그림 10-9  osquery가 수집한 공개 키 등록 상태'),
+ p('같은 SELECT를 osqueryi에서 다시 실행해 현재 행이 남아 있는지 대조한다. 과거 added가 저장돼 있어도 현재는 키가 제거됐을 수 있다. 반대로 현재 키가 보여도 서비스 중단 때문에 added 기록이 없을 수 있다.'),
+ p('원문 결과 파일은 /var/log/osquery/osqueryd.results.log이다. Wazuh 경보의 data.osquery.columns.comment는 이 파일의 columns.comment에서 온다. 예약 이름과 실제 표 이름을 혼동하지 않는다. kt66_authorized_keys는 설정에 붙인 이름이고 authorized_keys는 읽은 표이다.'))
+page('10.7  추가 조사와 판단',
+ table(['관찰한 사실','다음 확인'],[['nc 리스닝 행 추가','ss·ps로 현재 PID·사용자·시작 시각 확인\naudit·Sysmon으로 실행 이력 대조'],['공개 키 행 추가','원본 키 지문·소유자·권한·승인 내역 확인\nsshd의 인증 기록과 지문 대조'],['added 시각이 최초 수집 부근','서비스 시작·비교 기준 재설정 여부 확인'],['조회 결과가 없음','SQL 조건·권한·네트워크 공간·서비스 상태 확인']]),
+ p('실제 사건에서는 종료·키 제거 전에 필요한 증거를 확보한다. 소켓·프로세스·명령줄·키 지문과 경보 식별자를 기록한 뒤 승인되지 않은 접속 경로를 차단한다. 프로세스를 종료해도 cron이나 서비스가 다시 시작할 수 있으므로 9장의 지속성 경로도 조사한다.'),
+ spot('02','evidence','그림 10-10  프로세스와 수집 기록의 대조'))
+page('10.8  실습 포트와 키 원상복구',
+ p('nc가 실행 중인 터미널 A와 C로 각각 돌아가 Ctrl+C를 누른다. 이는 해당 전경 프로그램에 중단 신호를 보내는 동작이다. 터미널을 잃었다면 ss·ps로 이번 실습의 PID와 명령줄을 확인한 뒤 그 PID만 kill한다. 이름이 nc인 모든 프로세스를 일괄 종료하지 않는다.'),
+ c("sudo ss -lntp \\\n'( sport = :31337 or sport = :31338 )'",'괄호 안의 or는 두 로컬 포트 중 하나를 선택한다. 작은따옴표로 ss의 검색식을 그대로 전달한다.','머리글만 나오면 두 리스너가 사라진 것이다. 행이 남으면 PID·사용자·명령줄을 확인해 실습 프로세스인지 다시 대조한다.'),
+ c('cp -p ~/book10-authorized_keys.before \\\n~/.ssh/authorized_keys\ncmp ~/book10-authorized_keys.before \\\n~/.ssh/authorized_keys\nsha256sum ~/.ssh/authorized_keys','실습 중 다른 정당한 키 변경이 없는 것을 확인한 뒤 백업을 복원한다. cmp와 해시로 원본 내용이 돌아왔는지 대조한다.','내용 일치와 원래 소유자·권한을 확인한다. 다른 키가 추가된 경우 전체 덮어쓰기 대신 이번 키의 정확한 행만 제거한 뒤 대조한다.'),
+ p('처음부터 authorized_keys가 없었던 경우에는 아래 조건부 정리를 이어서 수행한다. 원래 존재한 빈 파일은 유지한다. 키 제거는 이미 인증된 SSH 세션을 끝내지 않는다.'))
+page('10.8  처음 만든 키 파일 정리',
+ c('wc -c ~/.ssh/authorized_keys\nrm ~/.ssh/authorized_keys\nls -l ~/.ssh/authorized_keys','초기 상태가 없음이었고 백업 복원을 끝낸 경우에만 수행한다. wc -c는 바이트 수를 센다. 0인지 확인한 뒤 이번에 만든 빈 파일만 rm으로 지운다.','No such file or directory가 나오면 파일이 제거된 것이다. 0이 아니면 다른 키가 남아 있는지 확인하고 삭제를 멈춘다.'),
+ c('ls -la ~/.ssh\nrmdir ~/.ssh\nls -ld ~/.ssh','디렉터리도 처음에 없었던 경우에만 수행한다. ls -la는 숨김 항목과 권한을 보여 준다. 점(.)과 두 점(..) 외에 항목이 없을 때 rmdir로 빈 디렉터리를 지운다.','기존 .ssh나 다른 파일이 생긴 디렉터리는 유지한다. 기존 .ssh의 권한을 바꿨다면 chmod에 처음 기록한 숫자 권한을 넣어 되돌리고 ls -ld로 대조한다.'))
+page('10.8  사라진 행과 현재 상태 대조',
+ q('agent.name:"kt66-host"\nAND data.osquery.name:kt66_listening_ports\nAND data.osquery.columns.port:(31337 OR 31338)\nAND data.osquery.action:removed','종료한 두 리스너의 제거 결과를 검색한다.','다음 예약 조회 뒤 두 포트의 removed를 확인한다. 현재 SQL·ss에 행이 없는 사실과 함께 원상복구 결과를 기록한다.'),
+ q('agent.name:"kt66-host"\nAND data.osquery.name:kt66_authorized_keys\nAND data.osquery.columns.comment:\n"book10-key@attacker"\nAND data.osquery.action:removed','백업 복원 후 조회 결과에서 사라진 키 행을 찾는다.','removed와 현재 키 파일의 해시를 함께 확인한다.'),
+ screen('removed','그림 10-11  예약 조회에서 사라진 공개 키 행'),
+ p('설정을 바꾸거나 조회 권한을 잃어도 결과 행이 사라질 수 있다. 이 실습에서는 설정을 유지한 상태에서 리스너 종료·키 복원을 먼저 수행한다. 533도 다음 6분 점검 뒤 previous_output에만 포트가 남는지 확인한다.'))
+page('10.8  임시 파일과 수집 준비 원상복구',
+ c('ls -l ~/book10-key.pub ~/book10-authorized_keys.before\nrm ~/book10-key.pub ~/book10-authorized_keys.before\nls -l ~/book10-key.pub ~/book10-authorized_keys.before','rm은 지정한 파일을 삭제한다. 키 파일 복원·해시 대조가 끝난 뒤 이번에 만든 전송용 공개 키와 백업만 지운다.','두 파일에 No such file or directory가 표시되는지 확인한다. 조사 기록과 Wazuh 경보는 보존한다.'),
+ c('ls -l ~/book10-key ~/book10-key.pub\nrm ~/book10-key ~/book10-key.pub\nls -l ~/book10-key ~/book10-key.pub','공격자 VM에서 이번 실습용 개인 키와 공개 키를 확인한 뒤 제거한다.','파일이 없어졌는지 확인한다. 개인 키를 예제 저장소나 조사 보고서에 붙이지 않는다.',A),
+ p('10.2에서 보완한 수집 설정을 유지하려면 변경 경로와 서비스 상태를 기록한다. 초기 상태로 되돌리려면 removed와 533 수집을 먼저 마친 뒤 다음 절차를 수행한다. 시작 전부터 정상 수집 중이던 환경은 그대로 유지한다.'),
+ c('sudo cp -p ~/book10-state/ossec.conf.before \\\n/var/ossec/etc/ossec.conf\nsudo cmp ~/book10-state/ossec.conf.before \\\n/var/ossec/etc/ossec.conf\nsudo /var/ossec/bin/wazuh-logcollector -t\nsudo /var/ossec/bin/wazuh-modulesd -t\nsudo systemctl restart wazuh-agent','이번 절에서 설정을 수정한 경우에만 백업을 복원한다. 다른 작업이 설정을 바꿨다면 먼저 차이를 대조한다.','내용·설정 검사와 서비스 active를 확인한다. 이 동작은 실습 전에 없던 osquery·kern.log 수집을 다시 끌 수 있으므로 현재 상태를 명시한다.'))
+page('10.8  서비스와 설정 파일 정리',
+ c('sudo systemctl stop osqueryd\nsystemctl is-active osqueryd\nsudo ls -l /etc/osquery/osquery.conf \\\n/etc/osquery/osquery.flags','시작 전 inactive였고 이번에 시작한 서비스만 stop한다. 파일 목록을 초기 기록과 대조한다.','처음에 없던 파일과 기존 파일을 구분한다. enable을 수행하지 않았다면 부팅 설정도 초기와 같은지 is-enabled로 확인한다.'),
+ c('sudo rm /etc/osquery/osquery.conf \\\n/etc/osquery/osquery.flags\nsudo ls -l /etc/osquery','두 파일이 시작 전에 없었고 이번에 생성된 경우에만 삭제한다. service가 만든 빈 flags 파일도 사전 기록과 대조한다.','기존 설정이 있던 환경은 삭제하지 말고 자신의 백업을 복원한다. 결과 로그와 osquery 상태 데이터는 증거로 보존한다.'),
+ p('상태 데이터베이스를 남긴 채 나중에 서비스를 재시작하면 이전 비교 상태가 사용될 수 있다. 재개 시점의 첫 결과를 무조건 새 변경이라고 읽지 않는다. 정상 수집을 계속할지 실습 전 상태로 되돌릴지는 작업 기록에 명시한다.'),
+ spot('04','field-check','그림 10-12  센서 설정과 수집 상태 확인'))
+page('10.9  결과가 다를 때의 확인 순서',
+ table(['증상','확인 순서'],[['31337이 표시되지 않음','실행 호스트·바인드 주소·포트 충돌·nc 오류'],['ss에는 있고 533은 없음','netstat 설치·별칭·frequency·기준 출력·기간'],['스캔에서 closed가 많음','대상 IP·입력 인터페이스·체인 순서·DROP 규칙'],['kern.log는 있고 4151은 없음','수집 경로·원문 디코딩·반복 조건·ignore·기간'],['직접 SQL만 결과가 있음','예약 SQL·osqueryd·결과 파일·Wazuh 모듈'],['added나 removed가 예상과 다름','초기 기준·조회 조건·선택 열·권한·조회 간격']]),
+ p('증상이 나타나면 한 단계씩 확인하고 결과를 기록한다. 스캔을 반복하거나 설정 전체를 다시 설치하면 원래 원인을 구분하기 어려워진다. 서비스 로그는 아래 명령으로 확인한다.'),
+ c('sudo journalctl -u osqueryd -n 30 --no-pager\nsudo tail -n 30 /var/ossec/logs/ossec.log','journalctl은 systemd 저널을 읽는다. -u는 서비스, -n 30은 마지막 30건, --no-pager는 별도 페이지 탐색기 없이 출력하는 옵션이다. tail은 Wazuh 에이전트 로그의 끝을 읽는다.','SQL 오류·권한 오류·파일 경로·수집 시작 메시지를 확인한다. 단순히 active인지만 확인하고 끝내지 않는다.'))
+page('10.9  원문과 정의 연결하기',
+ c('docker exec -it kt66-siem /bin/bash','Manager 컨테이너에 들어가 실제 설치된 정의를 읽는다.','다음 명령은 파일을 수정하지 않는다.'),
+ c("sed -n '1,65p' \\\n/var/ossec/ruleset/decoders/0140-kernel_decoders.xml\nsed -n '/id=\"530\"/,/id=\"534\"/p' \\\n/var/ossec/ruleset/rules/0015-ossec_rules.xml\nsed -n '1,40p' \\\n/var/ossec/ruleset/rules/0545-osquery_rules.xml\nexit",'첫·세 번째 sed는 줄 범위, 두 번째는 530의 시작부터 534의 시작 줄까지 출력해 530과 533을 함께 확인한다. 작은따옴표와 \\/의 뜻은 10.2와 같다.','kernel 부모와 iptables 하위의 order, 533의 check_diff, 24010의 json·no_full_log를 확인하고 호스트로 나온다.',M),
+ p('커널 원문은 predecoder.program_name=kernel로 들어온다. iptables 하위 정의가 주소·포트를 추출해도 이 기록의 decoder.name과 decoder.parent는 kernel이다. 이 하위 정의에는 use_own_name이 없어 부모 이름이 표시된다. 원문의 프로그램 이름과 디코더의 부모 이름이 모두 kernel이어도 역할은 다르다. [14][15]'),
+ p('530은 ossec: output:으로 시작하는 명령 출력의 부모 규칙이다. 533은 if_sid로 530을 참조하고 netstat 별칭에 맞는 출력의 차이를 check_diff로 검사한다. 24000은 수집 위치가 osquery로 끝나는 기록을 묶고, 하위 24010은 JSON으로 해석된 조회 결과를 처리한다. 규칙의 location 검색식에서 달러($)는 문자열 끝을 뜻한다. [6][12]'))
+page('10.10  조사 결과 작성',
+ fig('decision','그림 10-13  관찰 결과에서 대응 판단까지'),
+ p('조사 기록에는 호스트·에이전트·네트워크 공간, 시각·시간대·조회 기간, 주소·포트·프로세스·사용자, 원문 경로와 규칙, 직접 SQL과 DQL을 적는다. 확인한 사실과 추가로 확인할 내용을 나누고 승인된 작업과의 대조 결과를 남긴다.'),
+ p('예를 들어 “08:37에 31337의 nc 행이 추가됐고 08:42의 netstat 출력에도 같은 주소·PID가 보였다”는 관찰이다. “외부 접속이 성공했다” 또는 “백도어가 설치됐다”는 판단에는 추가 증거가 필요하다. 원상복구는 현재 소켓 없음·키 내용 복원·removed 수집·준비 설정 처리까지 기록한다.'),
+ p('11장에서는 앞 장들의 경보를 시간순으로 연결해 사건을 재구성하고 대응 범위를 결정한다.'))
+page('참고자료 1',
+ ref('[1] kt66 기준 코드 · 호스트 센서와 예약 조회 설정','https://github.com/mrgrit/kt66/tree/63d4180b1d6866de986ef263a3bd831d6082b5d5/deployment'),
+ ref('[2] osquery 결과 로그와 차이 기록','https://osquery.readthedocs.io/en/stable/deployment/logging/'),
+ ref('[3] osquery 예약 조회 설정','https://osquery.readthedocs.io/en/stable/deployment/configuration/'),
+ ref('[4] Wazuh osquery 모듈 설정','https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/wodle-osquery.html'))
+page('참고자료 2',
+ ref('[5] OpenBSD nc 사용 설명','https://man.openbsd.org/nc.1'),
+ ref('[6] Wazuh 4.10.0 시스템·명령 모니터링 규칙','https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0015-ossec_rules.xml'),
+ ref('[7] Nmap 포트 스캔 방식','https://nmap.org/book/man-port-scanning-techniques.html'),
+ ref('[8] Nmap 포트 상태의 의미','https://nmap.org/book/man-port-scanning-basics.html'))
+page('참고자료 3',
+ ref('[9] iptables 사용 설명','https://man7.org/linux/man-pages/man8/iptables.8.html'),
+ ref('[10] Wazuh 4.10.0 방화벽 규칙','https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0900-firewall_rules.xml'),
+ ref('[11] osquery 5.24.0 authorized_keys 표 정의','https://github.com/osquery/osquery/blob/5.24.0/specs/posix/authorized_keys.table'),
+ ref('[12] Wazuh 4.10.0 osquery 규칙','https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0545-osquery_rules.xml'))
+page('참고자료 4',
+ ref('[13] OpenSSH 공개 키 옵션','https://man.openbsd.org/sshd.8'),
+ ref('[14] Wazuh 4.10.0 커널 디코더','https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/decoders/0140-kernel_decoders.xml'),
+ ref('[15] Wazuh 디코더의 부모와 표시 이름','https://documentation.wazuh.com/current/user-manual/ruleset/ruleset-xml-syntax/decoders.html'),
+ ref('Module 01 강의 자료 · 실습 29·30·62','https://docs.google.com/presentation/d/1o0H_2DDHBp8p2HvlSnEPbx6-jdURYzew/edit'),
+ p('절차와 필드는 kt66 기준 커밋, Manager 4.10.0·에이전트 4.10.1·osquery 5.24.0의 설정과 실제 기록을 대조했다. 온라인 문서의 최신 설명과 설치된 버전의 차이는 실제 정의·출력으로 확인한다.'))
+
+def main():
+ seen=set()
+ for pg in pages:
+  m=re.match(r'(10\.\d+) ',pg['title'])
+  if m:
+   pg['major']=m[1] not in seen;pg['break']=m[1]=='10.1' and pg['major']
+   if not pg['major']:pg['level']='section'
+   seen.add(m[1])
+ data={'title':'네트워크 흔적과 현재 상태 조사','series':'해킹·침해대응 실무 with Wazuh · 시스템 침투와 SIEM 분석','comments':'Module01 실습29·30·62 기반 초안. 검증 범위는 editorial/chapter10-review.md 참조.','pages':pages}
+ (ROOT/'manuscript/volume01-chapter10.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+ d=ROOT/'examples/chapter10';d.mkdir(parents=True,exist_ok=True)
+ for b in commands+queries+sql:(d/(b['id']+'.txt')).write_text(b['text']+'\n',encoding='utf8')
+ for name,bs in [('commands',commands),('dql',queries),('sql',sql)]:
+  (d/(name+'.txt')).write_text('\n\n'.join('# '+b['id']+' | '+b['where']+'\n# '+b['why']+'\n'+b['text']+'\n# 확인: '+b['result'] for b in bs)+'\n',encoding='utf8')
+ for pg in pages:
+  for b in pg['blocks']:
+   if b['type']=='code' and b['text'].startswith('<wodle'):(d/'collector-fragment.xml').write_text(b['text']+'\n',encoding='utf8')
+   if b['type']=='code' and b['text'].startswith('SELECT'):(d/'scheduled-listening-ports.sql').write_text(b['text']+'\n',encoding='utf8')
+ (d/'README.md').write_text('# 10장 복사용 예제\n\nC10은 호스트·공격자·컨테이너 명령, Q10은 Discover DQL, S10은 osqueryi 입력이다. commands.txt는 전체 자동 실행 스크립트가 아니다. 각 블록의 사전 확인·위치·결과·원상복구를 읽고 한 번씩 입력한다.\n\ncollector-fragment.xml은 기존 ossec_config 내부의 수집 항목 조각이며 전체 설정을 대체하지 않는다. scheduled-listening-ports.sql은 예약 조회의 범위 설명용이다.\n\nQ10-05만 wazuh-archives-*를 사용한다. 나머지는 wazuh-alerts-*이다. SQL은 osquery>에서 실행한다. IP·기간·에이전트·PID는 자신의 값으로 바꾼다. 스캔 대상은 허가된 kt66 VM 한 대이다. 기존 키·설정·방화벽을 먼저 기록하고 조건부 준비와 원상복구를 구분한다.\n\n실제 개인 키는 제공하지 않는다. 실행·조회 증거와 검증하지 않은 조건은 editorial/chapter10-review.md에 기록한다. 초안은 REV01에 저장하지 않는다.\n',encoding='utf8')
+ (d/'investigation-template.txt').write_text('대상 호스트·컨테이너·네트워크 공간:\n시각·시간대·검색 범위:\n실행 명령·직접 SQL·DQL:\n로컬 주소·포트·PID·프로세스·사용자:\n패킷 SRC·DST·SPT·DPT·수집 위치:\n예약 조회 이름·선택 열·action·조회 시각:\n원문 파일·경보 id·index:\n승인된 작업과 대조:\n확인 사실 / 미확인 사항:\n증거 보존·차단·추가 조사:\n원상복구 전후 대조·유지한 준비 변경:\n',encoding='utf8')
+ print(len(pages),'sections',len(commands),'commands',len(queries),'DQL',len(sql),'SQL inputs')
+if __name__=='__main__':main()

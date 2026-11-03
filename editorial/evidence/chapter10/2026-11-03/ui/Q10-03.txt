@@ -1,0 +1,421 @@
+Browser tab: 4, Title: "Discover - Wazuh", URL: "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(_source),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T23:35:00.000Z',to:'2026-11-03T00:30:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%22kt66-host%22%0AAND%20rule.groups:audit_command%0AAND%20data.audit.command:nc'))".
+1 AXWebArea Discover - Wazuh, URL: 192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(_source),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T23:35:00.000Z',to:'2026-11-03T00:30:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%22kt66-host%22%0AAND%20rule.groups:audit_command%0AAND%20data.audit.command:nc'))
+	2 container
+		3 container opensearch-dashboards-body
+			4 container
+				5 checkbox (collapsed) Description: Toggle primary navigation, Value: 0, Secondary Actions: Expand
+					6 image Menu
+				7 link Description: Go to home page, Value: 192.168.0.107:5601/app/wz-home
+				8 container breadcrumb
+					9 button Discover
+				10 container App navigation
+					11 button New Search
+					12 button Save search
+					13 button Open Saved Search
+					14 button Share search
+					15 button Reporting, ID: downloadReport
+					16 button Open Inspector for search
+				17 button admin, ID: user-icon-btn
+					18 container admin
+				19 pop up button (collapsed) Description: Help menu, Secondary Actions: Expand
+			20 container app-wrapper
+				21 container
+					22 container resizable-panel_bcf9f200-d718-11f1-b04b-83502d6e80cb
+						23 container
+							24 combo box (collapsed) Secondary Actions: Expand
+								25 container
+									10357 text wazuh-alerts-*
+									27 text field (settable)
+									28 button Open list of options
+								29 button sourceRefresh
+							30 container Index and fields
+								31 container
+									32 search text field (settable) Description: Search field names, Value: data.dstport
+									10344 button Clear input
+								33 button Show field filter settings
+									34 text Filter by type
+									35 container $0 $active filters
+										36 text 0
+								10345 button Selected fields
+								10346 button Available fields
+								10358 button String field data.​dstport View data.dstport summary Add data.dstport to table
+									10359 image String field
+									10360 text data.​dstport
+									10361 button View data.dstport summary
+									10362 button Add data.dstport to table
+						708 button Press to toggle this panel
+					709 button Description: Press left or right to adjust panels size, ID: resizable-button_bcfa8e40-d718-11f1-b04b-83502d6e80cb
+					710 container
+						711 button See saved queries
+						712 combo box (collapsed) Description: Search and filter the discover page, Secondary Actions: Expand
+							713 text entry area (settable) Description: Start typing to search and filter the discover page, ID: ibd1234f1-d718-11f1-b04b-83502d6e80cb, Value: agent.name:"kt66-host"
+AND rule.groups:audit_command
+AND data.audit.command:nc
+						714 button Change query language
+						16940 container
+							16941 button Date quick select
+							16942 button Nov 3, 2026 @ 08:35:00.000, Help: 2026-11-02T23:35:00.000Z
+							16943 text →
+							16944 button Nov 3, 2026 @ 09:30:00.000, Help: 2026-11-03T00:30:00.000Z
+						720 button Submit query
+						721 container GlobalFilterGroup
+							722 button Change all filters
+							723 button Add filter
+						724 container
+							725 text 2 hits
+						726 button Options for discover
+						727 text Nov 3, 2026 @ 08:35:00.000 - Nov 3, 2026 @ 09:30:00.000 per
+						728 container
+							729 pop up button (collapsed, settable) Description: Time interval, Value: Auto, ID: dscResultsIntervalSelector, Secondary Actions: Expand
+								730 menu
+									731 (selected) Auto
+									732 Millisecond
+									733 Second
+									734 Minute
+									735 Hour
+									736 Day
+									737 Week
+									738 Month
+									739 Year
+						740 container Histogram of found documents
+							741 container
+								742 container
+									743 definition list
+										744 container Chart type:
+											745 text Chart type:
+										746 text bar chart
+									747 image
+						748 table
+							749 row
+								750 cell Discover table column: timestamp
+									751 text Time
+									752 button Sort timestamp ascending
+								10363 cell Discover table column: _source
+									10364 text _source
+							16945 row
+								16946 cell
+									16947 button Toggle row details
+								16948 cell
+									16949 text Nov 3, 2026 @ 08:38:19.532
+									16950 button Filter for value
+									16951 button Filter out value
+								16952 cell
+									16953 definition list
+										16954 container input.type:
+											16955 text input.type:
+										16956 text log
+										16957 container agent.ip:
+											16958 text agent.ip:
+										16959 text 10.20.32.254
+										16960 container agent.name:
+											16961 text agent.name:
+										16962 text kt66-host
+										16963 container agent.id:
+											16964 text agent.id:
+										16965 text 006
+										16966 container manager.name:
+											16967 text manager.name:
+										16968 text wazuh.manager
+										16969 container data.audit.syscall:
+											16970 text data.audit.syscall:
+										16971 text 59
+										16972 container data.audit.gid:
+											16973 text data.audit.gid:
+										16974 text 1000
+										16975 container data.audit.fsgid:
+											16976 text data.audit.fsgid:
+										16977 text 1000
+										16978 container data.audit.session:
+											16979 text data.audit.session:
+										16980 text 128
+										16981 container data.audit.pid:
+											16982 text data.audit.pid:
+										16983 text 182078
+										16984 container data.audit.suid:
+											16985 text data.audit.suid:
+										16986 text 1000
+										16987 container data.audit.type:
+											16988 text data.audit.type:
+										16989 text SYSCALL
+										16990 container data.audit.uid:
+											16991 text data.audit.uid:
+										16992 text 1000
+										16993 container data.audit.egid:
+											16994 text data.audit.egid:
+										16995 text 1000
+										16996 container data.audit.exe:
+											16997 text data.audit.exe:
+										16998 text /usr/bin/nc
+										16999 container data.audit.file.inode:
+											17000 text data.audit.file.inode:
+										17001 text 1442613
+										17002 container data.audit.file.mode:
+											17003 text data.audit.file.mode:
+										17004 text 0100755
+										17005 container data.audit.file.name:
+											17006 text data.audit.file.name:
+										17007 text /usr/bin/nc
+										17008 container data.audit.sgid:
+											17009 text data.audit.sgid:
+										17010 text 1000
+										17011 container data.audit.id:
+											17012 text data.audit.id:
+										17013 text 10012
+										17014 container data.audit.key:
+											17015 text data.audit.key:
+										17016 text audit-wazuh-c
+										17017 container data.audit.auid:
+											17018 text data.audit.auid:
+										17019 text 1000
+										17020 container data.audit.execve.a1:
+											17021 text data.audit.execve.a1:
+										17022 text -lk
+										17023 container data.audit.execve.a2:
+											17024 text data.audit.execve.a2:
+										17025 text 192.168.0.107
+										17026 container data.audit.execve.a3:
+											17027 text data.audit.execve.a3:
+										17028 text 31338
+										17029 container data.audit.execve.a0:
+											17030 text data.audit.execve.a0:
+										17031 text nc
+										17032 container data.audit.euid:
+											17033 text data.audit.euid:
+										17034 text 1000
+										17035 container data.audit.command:
+											17036 text data.audit.command:
+										17037 text nc
+										17038 container data.audit.ppid:
+											17039 text data.audit.ppid:
+										17040 text 1
+										17041 container data.audit.fsuid:
+											17042 text data.audit.fsuid:
+										17043 text 1000
+										17044 container data.audit.exit:
+											17045 text data.audit.exit:
+										17046 text 0
+										17047 container data.audit.cwd:
+											17048 text data.audit.cwd:
+										17049 text /home/ccc
+										17050 container data.audit.success:
+											17051 text data.audit.success:
+										17052 text yes
+										17053 container data.audit.tty:
+											17054 text data.audit.tty:
+										17055 text (none)
+										17056 container data.audit.arch:
+											17057 text data.audit.arch:
+										17058 text c000003e
+										17059 container rule.firedtimes:
+											17060 text rule.firedtimes:
+										17061 text 1,680
+										17062 container rule.mail:
+											17063 text rule.mail:
+										17064 text false
+										17065 container rule.level:
+											17066 text rule.level:
+										17067 text 3
+										17068 container rule.description:
+											17069 text rule.description:
+										17070 text Audit: Command: /usr/bin/nc.
+										17071 container rule.groups:
+											17072 text rule.groups:
+										17073 container
+											17074 text audit,  audit_command
+										17075 container rule.id:
+											17076 text rule.id:
+										17077 text 80792
+										17078 container rule.gdpr:
+											17079 text rule.gdpr:
+										17080 text IV_30.1.g
+										17081 container location:
+											17082 text location:
+										17083 text /var/log/audit/audit.log
+										17084 container decoder.parent:
+											17085 text decoder.parent:
+										17086 text auditd
+										17087 container decoder.name:
+											17088 text decoder.name:
+										17089 text auditd
+										17090 container id:
+											17091 text id:
+										17092 text 1793662699.25337446
+										17093 container full_log:
+											17094 text full_log:
+										17095 text type=SYSCALL msg=audit(1793662699.121:10012): arch=c000003e syscall=59 success=yes exit=0 a0=7ffe8f661860 a1=7ffe8f661af0 a2=7ffe8f661b18 a3=8 items=2 ppid=1 pid=182078 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=128 comm="nc" exe="/usr/bin/nc.openbsd" subj=unconfined key="audit-wazuh-c"
+ARCH=x86_64 SYSCALL=execve AUID="ccc" UID="ccc" GID="ccc" EUID="ccc" SUID="ccc" FSUID="ccc" EGID="ccc" SGID="ccc" FSGID="ccc" type=EXECVE msg=audit(1793662699.121:10012): argc=4 a0="nc" a1="-lk" a2="192.168.0.107" a3="31338" type=CWD msg=audit(1793662699.121:10012): cwd="/home/ccc" type=PATH msg=audit(1793662699.121:10012): item=0 name="/usr/bin/nc" inode=1442613 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0
+OUID="root" OGID="root" type=PATH msg=audit(1793662699.121:10012): item=1 name="/lib64/ld-linux-x86-64.so.2" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0
+OUID="root" OGID="root" type=PROCTITLE msg=audit(1793662699.121:10012): proctitle=6E6F687570006E63002D6C6B003139322E3136382E302E313037003331333338
+										17096 container timestamp:
+											17097 text timestamp:
+										17098 text Nov 3, 2026 @ 08:38:19.532
+										17099 container _index:
+											17100 text _index:
+										17101 text wazuh-alerts-4.x-2026.11.02
+							17102 row
+								17103 cell
+									17104 button Toggle row details
+								17105 cell
+									17106 text Nov 3, 2026 @ 08:36:55.461
+									17107 button Filter for value
+									17108 button Filter out value
+								17109 cell
+									17110 definition list
+										17111 container input.type:
+											17112 text input.type:
+										17113 text log
+										17114 container agent.ip:
+											17115 text agent.ip:
+										17116 text 10.20.32.254
+										17117 container agent.name:
+											17118 text agent.name:
+										17119 text kt66-host
+										17120 container agent.id:
+											17121 text agent.id:
+										17122 text 006
+										17123 container manager.name:
+											17124 text manager.name:
+										17125 text wazuh.manager
+										17126 container data.audit.syscall:
+											17127 text data.audit.syscall:
+										17128 text 59
+										17129 container data.audit.gid:
+											17130 text data.audit.gid:
+										17131 text 1000
+										17132 container data.audit.fsgid:
+											17133 text data.audit.fsgid:
+										17134 text 1000
+										17135 container data.audit.session:
+											17136 text data.audit.session:
+										17137 text 123
+										17138 container data.audit.pid:
+											17139 text data.audit.pid:
+										17140 text 181571
+										17141 container data.audit.suid:
+											17142 text data.audit.suid:
+										17143 text 1000
+										17144 container data.audit.type:
+											17145 text data.audit.type:
+										17146 text SYSCALL
+										17147 container data.audit.uid:
+											17148 text data.audit.uid:
+										17149 text 1000
+										17150 container data.audit.egid:
+											17151 text data.audit.egid:
+										17152 text 1000
+										17153 container data.audit.exe:
+											17154 text data.audit.exe:
+										17155 text /usr/bin/nc
+										17156 container data.audit.file.inode:
+											17157 text data.audit.file.inode:
+										17158 text 1442613
+										17159 container data.audit.file.mode:
+											17160 text data.audit.file.mode:
+										17161 text 0100755
+										17162 container data.audit.file.name:
+											17163 text data.audit.file.name:
+										17164 text /usr/bin/nc
+										17165 container data.audit.sgid:
+											17166 text data.audit.sgid:
+										17167 text 1000
+										17168 container data.audit.id:
+											17169 text data.audit.id:
+										17170 text 9554
+										17171 container data.audit.key:
+											17172 text data.audit.key:
+										17173 text audit-wazuh-c
+										17174 container data.audit.auid:
+											17175 text data.audit.auid:
+										17176 text 1000
+										17177 container data.audit.execve.a1:
+											17178 text data.audit.execve.a1:
+										17179 text -lk
+										17180 container data.audit.execve.a2:
+											17181 text data.audit.execve.a2:
+										17182 text 192.168.0.107
+										17183 container data.audit.execve.a3:
+											17184 text data.audit.execve.a3:
+										17185 text 31337
+										17186 container data.audit.execve.a0:
+											17187 text data.audit.execve.a0:
+										17188 text nc
+										17189 container data.audit.euid:
+											17190 text data.audit.euid:
+										17191 text 1000
+										17192 container data.audit.command:
+											17193 text data.audit.command:
+										17194 text nc
+										17195 container data.audit.ppid:
+											17196 text data.audit.ppid:
+										17197 text 181570
+										17198 container data.audit.fsuid:
+											17199 text data.audit.fsuid:
+										17200 text 1000
+										17201 container data.audit.exit:
+											17202 text data.audit.exit:
+										17203 text 0
+										17204 container data.audit.cwd:
+											17205 text data.audit.cwd:
+										17206 text /home/ccc
+										17207 container data.audit.success:
+											17208 text data.audit.success:
+										17209 text yes
+										17210 container data.audit.tty:
+											17211 text data.audit.tty:
+										17212 text (none)
+										17213 container data.audit.arch:
+											17214 text data.audit.arch:
+										17215 text c000003e
+										17216 container rule.firedtimes:
+											17217 text rule.firedtimes:
+										17218 text 1,331
+										17219 container rule.mail:
+											17220 text rule.mail:
+										17221 text false
+										17222 container rule.level:
+											17223 text rule.level:
+										17224 text 3
+										17225 container rule.description:
+											17226 text rule.description:
+										17227 text Audit: Command: /usr/bin/nc.
+										17228 container rule.groups:
+											17229 text rule.groups:
+										17230 container
+											17231 text audit,  audit_command
+										17232 container rule.id:
+											17233 text rule.id:
+										17234 text 80792
+										17235 container rule.gdpr:
+											17236 text rule.gdpr:
+										17237 text IV_30.1.g
+										17238 container location:
+											17239 text location:
+										17240 text /var/log/audit/audit.log
+										17241 container decoder.parent:
+											17242 text decoder.parent:
+										17243 text auditd
+										17244 container decoder.name:
+											17245 text decoder.name:
+										17246 text auditd
+										17247 container id:
+											17248 text id:
+										17249 text 1793662615.24607604
+										17250 container full_log:
+											17251 text full_log:
+										17252 text type=SYSCALL msg=audit(1793662613.505:9554): arch=c000003e syscall=59 success=yes exit=0 a0=7ffecda8a060 a1=7ffecda8a2f0 a2=7ffecda8a318 a3=8 items=2 ppid=181570 pid=181571 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=123 comm="nc" exe="/usr/bin/nc.openbsd" subj=unconfined key="audit-wazuh-c"
+ARCH=x86_64 SYSCALL=execve AUID="ccc" UID="ccc" GID="ccc" EUID="ccc" SUID="ccc" FSUID="ccc" EGID="ccc" SGID="ccc" FSGID="ccc" type=EXECVE msg=audit(1793662613.505:9554): argc=4 a0="nc" a1="-lk" a2="192.168.0.107" a3="31337" type=CWD msg=audit(1793662613.505:9554): cwd="/home/ccc" type=PATH msg=audit(1793662613.505:9554): item=0 name="/usr/bin/nc" inode=1442613 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0
+OUID="root" OGID="root" type=PATH msg=audit(1793662613.505:9554): item=1 name="/lib64/ld-linux-x86-64.so.2" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0
+OUID="root" OGID="root" type=PROCTITLE msg=audit(1793662613.505:9554): proctitle=6E6F687570006E63002D6C6B003139322E3136382E302E313037003331333337
+										17253 container timestamp:
+											17254 text timestamp:
+										17255 text Nov 3, 2026 @ 08:36:55.461
+										17256 container _index:
+											17257 text _index:
+										17258 text wazuh-alerts-4.x-2026.11.02
+		4763 container Notification message list
+		16938 container Add field as column, ID: idbe04115-d718-11f1-b04b-83502d6e80cb
+			16939 text Add field as column
+
+The focused UI element is 713 text entry area (settable) Description: Start typing to search and filter the discover page, ID: ibd1234f1-d718-11f1-b04b-83502d6e80cb, Value: agent.name:"kt66-host"
+AND rule.groups:audit_command
+AND data.audit.command:nc

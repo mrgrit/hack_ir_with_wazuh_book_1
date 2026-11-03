@@ -1,0 +1,3 @@
+ls -l ~/book10-key.pub ~/book10-authorized_keys.before
+rm ~/book10-key.pub ~/book10-authorized_keys.before
+ls -l ~/book10-key.pub ~/book10-authorized_keys.before

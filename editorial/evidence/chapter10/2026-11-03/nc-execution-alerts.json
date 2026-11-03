@@ -1,0 +1,142 @@
+[
+  {
+    "timestamp": "2026-11-02T23:36:55.461+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/nc.",
+      "id": "80792",
+      "firedtimes": 1331,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793662615.24607604",
+    "full_log": "type=SYSCALL msg=audit(1793662613.505:9554): arch=c000003e syscall=59 success=yes exit=0 a0=7ffecda8a060 a1=7ffecda8a2f0 a2=7ffecda8a318 a3=8 items=2 ppid=181570 pid=181571 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=123 comm=\"nc\" exe=\"/usr/bin/nc.openbsd\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=EXECVE msg=audit(1793662613.505:9554): argc=4 a0=\"nc\" a1=\"-lk\" a2=\"192.168.0.107\" a3=\"31337\" type=CWD msg=audit(1793662613.505:9554): cwd=\"/home/ccc\" type=PATH msg=audit(1793662613.505:9554): item=0 name=\"/usr/bin/nc\" inode=1442613 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PATH msg=audit(1793662613.505:9554): item=1 name=\"/lib64/ld-linux-x86-64.so.2\" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PROCTITLE msg=audit(1793662613.505:9554): proctitle=6E6F687570006E63002D6C6B003139322E3136382E302E313037003331333337",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "9554",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "yes",
+        "exit": "0",
+        "ppid": "181570",
+        "pid": "181571",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "123",
+        "command": "nc",
+        "exe": "/usr/bin/nc",
+        "key": "audit-wazuh-c",
+        "execve": {
+          "a0": "nc",
+          "a1": "-lk",
+          "a2": "192.168.0.107",
+          "a3": "31337"
+        },
+        "cwd": "/home/ccc",
+        "file": {
+          "name": "/usr/bin/nc",
+          "inode": "1442613",
+          "mode": "0100755"
+        }
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  },
+  {
+    "timestamp": "2026-11-02T23:38:19.532+0000",
+    "rule": {
+      "level": 3,
+      "description": "Audit: Command: /usr/bin/nc.",
+      "id": "80792",
+      "firedtimes": 1680,
+      "mail": false,
+      "groups": [
+        "audit",
+        "audit_command"
+      ],
+      "gdpr": [
+        "IV_30.1.g"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793662699.25337446",
+    "full_log": "type=SYSCALL msg=audit(1793662699.121:10012): arch=c000003e syscall=59 success=yes exit=0 a0=7ffe8f661860 a1=7ffe8f661af0 a2=7ffe8f661b18 a3=8 items=2 ppid=1 pid=182078 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=(none) ses=128 comm=\"nc\" exe=\"/usr/bin/nc.openbsd\" subj=unconfined key=\"audit-wazuh-c\"\u001dARCH=x86_64 SYSCALL=execve AUID=\"ccc\" UID=\"ccc\" GID=\"ccc\" EUID=\"ccc\" SUID=\"ccc\" FSUID=\"ccc\" EGID=\"ccc\" SGID=\"ccc\" FSGID=\"ccc\" type=EXECVE msg=audit(1793662699.121:10012): argc=4 a0=\"nc\" a1=\"-lk\" a2=\"192.168.0.107\" a3=\"31338\" type=CWD msg=audit(1793662699.121:10012): cwd=\"/home/ccc\" type=PATH msg=audit(1793662699.121:10012): item=0 name=\"/usr/bin/nc\" inode=1442613 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PATH msg=audit(1793662699.121:10012): item=1 name=\"/lib64/ld-linux-x86-64.so.2\" inode=1451894 dev=fd:00 mode=0100755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0\u001dOUID=\"root\" OGID=\"root\" type=PROCTITLE msg=audit(1793662699.121:10012): proctitle=6E6F687570006E63002D6C6B003139322E3136382E302E313037003331333338",
+    "decoder": {
+      "parent": "auditd",
+      "name": "auditd"
+    },
+    "data": {
+      "audit": {
+        "type": "SYSCALL",
+        "id": "10012",
+        "arch": "c000003e",
+        "syscall": "59",
+        "success": "yes",
+        "exit": "0",
+        "ppid": "1",
+        "pid": "182078",
+        "auid": "1000",
+        "uid": "1000",
+        "gid": "1000",
+        "euid": "1000",
+        "suid": "1000",
+        "fsuid": "1000",
+        "egid": "1000",
+        "sgid": "1000",
+        "fsgid": "1000",
+        "tty": "(none)",
+        "session": "128",
+        "command": "nc",
+        "exe": "/usr/bin/nc",
+        "key": "audit-wazuh-c",
+        "execve": {
+          "a0": "nc",
+          "a1": "-lk",
+          "a2": "192.168.0.107",
+          "a3": "31338"
+        },
+        "cwd": "/home/ccc",
+        "file": {
+          "name": "/usr/bin/nc",
+          "inode": "1442613",
+          "mode": "0100755"
+        }
+      }
+    },
+    "location": "/var/log/audit/audit.log"
+  }
+]

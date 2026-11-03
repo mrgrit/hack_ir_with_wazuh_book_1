@@ -1,0 +1,265 @@
+Browser tab: 4, Title: "Discover - Wazuh", URL: "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(_source),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T23:35:00.000Z',to:'2026-11-03T00:30:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%22kt66-host%22%20AND%20rule.id:533'))".
+1 AXWebArea Discover - Wazuh, URL: 192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(_source),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T23:35:00.000Z',to:'2026-11-03T00:30:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%22kt66-host%22%20AND%20rule.id:533'))
+	2 container
+		3 container opensearch-dashboards-body
+			4 container
+				5 checkbox (collapsed) Description: Toggle primary navigation, Value: 0, Secondary Actions: Expand
+					6 image Menu
+				7 link Description: Go to home page, Value: 192.168.0.107:5601/app/wz-home
+				8 container breadcrumb
+					9 button Discover
+				10 container App navigation
+					11 button New Search
+					12 button Save search
+					13 button Open Saved Search
+					14 button Share search
+					15 button Reporting, ID: downloadReport
+					16 button Open Inspector for search
+				17 button admin, ID: user-icon-btn
+					18 container admin
+				19 pop up button (collapsed) Description: Help menu, Secondary Actions: Expand
+			20 container app-wrapper
+				21 container
+					22 container resizable-panel_bcf9f200-d718-11f1-b04b-83502d6e80cb
+						23 container
+							24 combo box (collapsed) Secondary Actions: Expand
+								25 container
+									10357 text wazuh-alerts-*
+									27 text field (settable)
+									28 button Open list of options
+								29 button sourceRefresh
+							30 container Index and fields
+								31 container
+									32 search text field (settable) Description: Search field names, Value: data.dstport
+									10344 button Clear input
+								33 button Show field filter settings
+									34 text Filter by type
+									35 container $0 $active filters
+										36 text 0
+								10345 button Selected fields
+								10346 button Available fields
+								10358 button String field data.​dstport View data.dstport summary Add data.dstport to table
+									10359 image String field
+									10360 text data.​dstport
+									10361 button View data.dstport summary
+									10362 button Add data.dstport to table
+						708 button Press to toggle this panel
+					709 button Description: Press left or right to adjust panels size, ID: resizable-button_bcfa8e40-d718-11f1-b04b-83502d6e80cb
+					710 container
+						711 button See saved queries
+						712 combo box (collapsed) Description: Search and filter the discover page, Secondary Actions: Expand
+							713 text entry area (settable) Description: Start typing to search and filter the discover page, Value: agent.name:"kt66-host" AND rule.id:533, ID: ibd1234f1-d718-11f1-b04b-83502d6e80cb
+						714 button Change query language
+						16940 container
+							16941 button Date quick select
+							16942 button Nov 3, 2026 @ 08:35:00.000, Help: 2026-11-02T23:35:00.000Z
+							16943 text →
+							16944 button Nov 3, 2026 @ 09:30:00.000, Help: 2026-11-03T00:30:00.000Z
+						720 button Submit query
+						721 container GlobalFilterGroup
+							722 button Change all filters
+							723 button Add filter
+						724 container
+							725 text 2 hits
+						726 button Options for discover
+						727 text Nov 3, 2026 @ 08:35:00.000 - Nov 3, 2026 @ 09:30:00.000 per
+						728 container
+							729 pop up button (collapsed, settable) Description: Time interval, Value: Auto, ID: dscResultsIntervalSelector, Secondary Actions: Expand
+								730 menu
+									731 (selected) Auto
+									732 Millisecond
+									733 Second
+									734 Minute
+									735 Hour
+									736 Day
+									737 Week
+									738 Month
+									739 Year
+						740 container Histogram of found documents
+							741 container
+								742 container
+									743 definition list
+										744 container Chart type:
+											745 text Chart type:
+										746 text bar chart
+									747 image
+						748 table
+							749 row
+								750 cell Discover table column: timestamp
+									751 text Time
+									752 button Sort timestamp ascending
+								10363 cell Discover table column: _source
+									10364 text _source
+							16945 row
+								16946 cell
+									16947 button Toggle row details
+								16948 cell
+									16957 text Nov 3, 2026 @ 08:48:21.986
+									16949 button Filter for value
+									16950 button Filter out value
+								16958 cell
+									16959 definition list
+										16960 container previous_log:
+											16961 text previous_log:
+										16962 text ossec: output: 'netstat listening ports': tcp 0.0.0.0:22 0.0.0.0:* /usr tcp6 :::22 :::* /usr tcp 192.168.0.107:25 0.0.0.0:* 4239/dockerd tcp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve tcp 192.168.0.107:53 0.0.0.0:* 4239/dockerd udp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve udp 192.168.0.107:53 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:80 0.0.0.0:* 4239/dockerd udp 192.168.0.107:123 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:443 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:587 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:993 0.0.0.0:* 4239/dockerd tcp 0.0.0.0:2202 0.0.0.0:* 4239/dockerd tcp 0.0.0.0:2204 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:5601 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8000 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8001 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8002 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8003 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8004 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8005 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8006 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8007 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8010 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8020 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8030 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8050 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8060 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8070 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8081 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8082 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8083 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8090 0.0.0.0:* 79458/nginx tcp 192.168.0.107:8091 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:9100 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:31337 0.0.0.0:* 181571/nc tcp 192.168.0.107:31338 0.0.0.0:* 182078/nc
+										16963 container input.type:
+											16964 text input.type:
+										16965 text log
+										16966 container agent.ip:
+											16967 text agent.ip:
+										16968 text 10.20.32.254
+										16969 container agent.name:
+											16970 text agent.name:
+										16971 text kt66-host
+										16972 container agent.id:
+											16973 text agent.id:
+										16974 text 006
+										16975 container previous_output:
+											16976 text previous_output:
+										16977 text Previous output: ossec: output: 'netstat listening ports': tcp 0.0.0.0:22 0.0.0.0:* /usr tcp6 :::22 :::* /usr tcp 192.168.0.107:25 0.0.0.0:* 4239/dockerd tcp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve tcp 192.168.0.107:53 0.0.0.0:* 4239/dockerd udp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve udp 192.168.0.107:53 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:80 0.0.0.0:* 4239/dockerd udp 192.168.0.107:123 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:443 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:587 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:993 0.0.0.0:* 4239/dockerd tcp 0.0.0.0:2202 0.0.0.0:* 4239/dockerd tcp 0.0.0.0:2204 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:5601 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8000 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8001 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8002 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8003 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8004 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8005 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8006 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8007 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8010 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8020 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8030 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8050 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8060 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8070 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8081 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8082 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8083 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8090 0.0.0.0:* 79458/nginx tcp 192.168.0.107:8091 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:9100 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:31337 0.0.0.0:* 181571/nc tcp 192.168.0.107:31338 0.0.0.0:* 182078/nc
+										16978 container manager.name:
+											16979 text manager.name:
+										16980 text wazuh.manager
+										16981 container rule.firedtimes:
+											16982 text rule.firedtimes:
+										16983 text 2
+										16984 container rule.mail:
+											16985 text rule.mail:
+										16986 text false
+										16987 container rule.level:
+											16988 text rule.level:
+										16989 text 7
+										16990 container rule.pci_dss:
+											16991 text rule.pci_dss:
+										16992 text 10.2.7, 10.6.1
+										16993 container rule.hipaa:
+											16994 text rule.hipaa:
+										16995 text 164.312.b
+										16996 container rule.tsc:
+											16997 text rule.tsc:
+										16998 text CC6.8, CC7.2, CC7.3
+										16999 container rule.description:
+											17000 text rule.description:
+										17001 text Listened ports status (netstat) changed (new port opened or closed).
+										17002 container rule.groups:
+											17003 text rule.groups:
+										17004 text ossec
+										17005 container rule.id:
+											17006 text rule.id:
+										17007 text 533
+										17008 container rule.nist_800_53:
+											17009 text rule.nist_800_53:
+										17010 text AU.14, AU.6
+										17011 container rule.gpg13:
+											17012 text rule.gpg13:
+										17013 text 10.1
+										17014 container rule.gdpr:
+											17015 text rule.gdpr:
+										17016 text IV_35.7.d
+										17017 container location:
+											17018 text location:
+										17019 text netstat listening ports
+										17020 container decoder.name:
+											17021 text decoder.name:
+										17022 text ossec
+										17023 container id:
+											17024 text id:
+										17025 text 1793663301.26331285
+										17026 container full_log:
+											17027 text full_log:
+										17028 text ossec: output: 'netstat listening ports': tcp 0.0.0.0:22 0.0.0.0:* /usr tcp6 :::22 :::* /usr tcp 192.168.0.107:25 0.0.0.0:* 4239/dockerd tcp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve tcp 192.168.0.107:53 0.0.0.0:* 4239/dockerd udp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve udp 192.168.0.107:53 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:80 0.0.0.0:* 4239/dockerd udp 192.168.0.107:123 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:443 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:587 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:993 0.0.0.0:* 4239/dockerd tcp 0.0.0.0:2202 0.0.0.0:* 4239/dockerd tcp 0.0.0.0:2204 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:5601 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8000 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8001 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8002 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8003 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8004 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8005 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8006 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8007 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8010 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8020 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8030 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8050 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8060 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8070 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8081 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8082 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8083 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8090 0.0.0.0:* 79458/nginx tcp 192.168.0.107:8091 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:9100 0.0.0.0:* 4239/dockerd
+										17029 container timestamp:
+											17030 text timestamp:
+										17031 text Nov 3, 2026 @ 08:48:21.986
+										17032 container _index:
+											17033 text _index:
+										17034 text wazuh-alerts-4.x-2026.11.02
+							16951 row
+								16952 cell
+									16953 button Toggle row details
+								16954 cell
+									17035 text Nov 3, 2026 @ 08:42:21.686
+									16955 button Filter for value
+									16956 button Filter out value
+								17036 cell
+									17037 definition list
+										17038 container previous_log:
+											17039 text previous_log:
+										17040 text ossec: output: 'netstat listening ports': tcp 0.0.0.0:22 0.0.0.0:* /usr tcp6 :::22 :::* /usr tcp 192.168.0.107:25 0.0.0.0:* 4239/dockerd tcp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve tcp 192.168.0.107:53 0.0.0.0:* 4239/dockerd udp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve udp 192.168.0.107:53 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:80 0.0.0.0:* 4239/dockerd udp 192.168.0.107:123 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:443 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:587 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:993 0.0.0.0:* 4239/dockerd tcp 0.0.0.0:2202 0.0.0.0:* 4239/dockerd tcp 0.0.0.0:2204 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:5601 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8000 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8001 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8002 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8003 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8004 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8005 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8006 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8007 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8010 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8020 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8030 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8050 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8060 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8070 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8081 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8082 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8083 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8090 0.0.0.0:* 79458/nginx tcp 192.168.0.107:8091 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:9100 0.0.0.0:* 4239/dockerd
+										17041 container input.type:
+											17042 text input.type:
+										17043 text log
+										17044 container agent.ip:
+											17045 text agent.ip:
+										17046 text 10.20.32.254
+										17047 container agent.name:
+											17048 text agent.name:
+										17049 text kt66-host
+										17050 container agent.id:
+											17051 text agent.id:
+										17052 text 006
+										17053 container previous_output:
+											17054 text previous_output:
+										17055 text Previous output: ossec: output: 'netstat listening ports': tcp 0.0.0.0:22 0.0.0.0:* /usr tcp6 :::22 :::* /usr tcp 192.168.0.107:25 0.0.0.0:* 4239/dockerd tcp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve tcp 192.168.0.107:53 0.0.0.0:* 4239/dockerd udp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve udp 192.168.0.107:53 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:80 0.0.0.0:* 4239/dockerd udp 192.168.0.107:123 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:443 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:587 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:993 0.0.0.0:* 4239/dockerd tcp 0.0.0.0:2202 0.0.0.0:* 4239/dockerd tcp 0.0.0.0:2204 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:5601 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8000 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8001 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8002 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8003 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8004 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8005 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8006 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8007 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8010 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8020 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8030 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8050 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8060 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8070 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8081 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8082 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8083 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8090 0.0.0.0:* 79458/nginx tcp 192.168.0.107:8091 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:9100 0.0.0.0:* 4239/dockerd
+										17056 container manager.name:
+											17057 text manager.name:
+										17058 text wazuh.manager
+										17059 container rule.firedtimes:
+											17060 text rule.firedtimes:
+										17061 text 1
+										17062 container rule.mail:
+											17063 text rule.mail:
+										17064 text false
+										17065 container rule.level:
+											17066 text rule.level:
+										17067 text 7
+										17068 container rule.pci_dss:
+											17069 text rule.pci_dss:
+										17070 text 10.2.7, 10.6.1
+										17071 container rule.hipaa:
+											17072 text rule.hipaa:
+										17073 text 164.312.b
+										17074 container rule.tsc:
+											17075 text rule.tsc:
+										17076 text CC6.8, CC7.2, CC7.3
+										17077 container rule.description:
+											17078 text rule.description:
+										17079 text Listened ports status (netstat) changed (new port opened or closed).
+										17080 container rule.groups:
+											17081 text rule.groups:
+										17082 text ossec
+										17083 container rule.id:
+											17084 text rule.id:
+										17085 text 533
+										17086 container rule.nist_800_53:
+											17087 text rule.nist_800_53:
+										17088 text AU.14, AU.6
+										17089 container rule.gpg13:
+											17090 text rule.gpg13:
+										17091 text 10.1
+										17092 container rule.gdpr:
+											17093 text rule.gdpr:
+										17094 text IV_35.7.d
+										17095 container location:
+											17096 text location:
+										17097 text netstat listening ports
+										17098 container decoder.name:
+											17099 text decoder.name:
+										17100 text ossec
+										17101 container id:
+											17102 text id:
+										17103 text 1793662941.25845579
+										17104 container full_log:
+											17105 text full_log:
+										17106 text ossec: output: 'netstat listening ports': tcp 0.0.0.0:22 0.0.0.0:* /usr tcp6 :::22 :::* /usr tcp 192.168.0.107:25 0.0.0.0:* 4239/dockerd tcp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve tcp 192.168.0.107:53 0.0.0.0:* 4239/dockerd udp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve udp 192.168.0.107:53 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:80 0.0.0.0:* 4239/dockerd udp 192.168.0.107:123 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:443 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:587 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:993 0.0.0.0:* 4239/dockerd tcp 0.0.0.0:2202 0.0.0.0:* 4239/dockerd tcp 0.0.0.0:2204 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:5601 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8000 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8001 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8002 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8003 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8004 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8005 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8006 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8007 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8010 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8020 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8030 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8050 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8060 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8070 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8081 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8082 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8083 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:8090 0.0.0.0:* 79458/nginx tcp 192.168.0.107:8091 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:9100 0.0.0.0:* 4239/dockerd tcp 192.168.0.107:31337 0.0.0.0:* 181571/nc tcp 192.168.0.107:31338 0.0.0.0:* 182078/nc
+										17107 container timestamp:
+											17108 text timestamp:
+										17109 text Nov 3, 2026 @ 08:42:21.686
+										17110 container _index:
+											17111 text _index:
+										17112 text wazuh-alerts-4.x-2026.11.02
+		4763 container Notification message list
+		16938 container Add field as column, ID: idbe04115-d718-11f1-b04b-83502d6e80cb
+			16939 text Add field as column
+
+The focused UI element is 713 text entry area (settable) Description: Start typing to search and filter the discover page, Value: agent.name:"kt66-host" AND rule.id:533, ID: ibd1234f1-d718-11f1-b04b-83502d6e80cb

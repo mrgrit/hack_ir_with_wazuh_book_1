@@ -1,0 +1,4 @@
+agent.name:"kt66-host" AND rule.groups:osquery
+AND data.osquery.name:
+(kt66_listening_ports OR kt66_authorized_keys)
+AND data.osquery.action:added

@@ -1,0 +1,14 @@
+{
+  "style_reference": "https://m.blog.naver.com/studygir/220961448822",
+  "policy": "기존 인물 삽화 재사용; 실제 UI 및 도식과 구분",
+  "assets": [
+    {
+      "path": "assets/illustrations/chapter02/evidence.png",
+      "sha256": "162cdf4780d61ca4751ea1b77f006913ceed84267cca9d2af55008c3c7559fec"
+    },
+    {
+      "path": "assets/illustrations/chapter04/field-check.png",
+      "sha256": "46a5ffbdfa2e9d5cca7900bb773bf012e12d8b9272b0c436251ad59978b0e024"
+    }
+  ]
+}

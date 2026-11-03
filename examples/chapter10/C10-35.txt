@@ -1,0 +1,3 @@
+wc -c ~/.ssh/authorized_keys
+rm ~/.ssh/authorized_keys
+ls -l ~/.ssh/authorized_keys

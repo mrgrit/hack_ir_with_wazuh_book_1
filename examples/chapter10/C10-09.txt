@@ -1,0 +1,4 @@
+sudo tail -n 3 /var/log/osquery/osqueryd.results.log
+sudo grep -n -E \
+'netstat|<alias>|<frequency>' \
+/var/ossec/etc/ossec.conf

@@ -1,0 +1,2 @@
+sudo cat /etc/osquery/osquery.conf
+cat ~/kt66/deployment/osquery-linux.conf

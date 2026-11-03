@@ -1,0 +1,2 @@
+sudo ss -lntp 'sport = :31338'
+nc -lk 192.168.0.107 31338

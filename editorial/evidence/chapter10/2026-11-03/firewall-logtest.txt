@@ -1,0 +1,805 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Starting wazuh-logtest v4.10.0
+Type one log per line
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '1'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '2'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '3'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '4'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '5'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '6'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '7'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '8'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '9'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '10'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '11'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '12'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '13'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '14'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '15'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '16'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '17'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4151'
+	level: '10'
+	description: 'Multiple Firewall drop events from same source.'
+	groups: '['firewall', 'multiple_drops']'
+	firedtimes: '1'
+	frequency: '18'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1', '164.312.b']'
+	mail: 'False'
+	nist_800_53: '['SC.7', 'AU.6']'
+	pci_dss: '['1.4', '10.6.1']'
+	tsc: '['CC6.7', 'CC6.8', 'CC7.2', 'CC7.3']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '18'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '19'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '20'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '21'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '22'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '23'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.
+
+**Phase 1: Completed pre-decoding.
+	full event: 'Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 '
+	timestamp: 'Nov  3 08:37:46'
+	hostname: 'ccc'
+	program_name: 'kernel'
+
+**Phase 2: Completed decoding.
+	name: 'kernel'
+	parent: 'kernel'
+	action: 'DROP'
+	dstip: '192.168.0.107'
+	dstport: '565'
+	protocol: 'TCP'
+	srcip: '192.168.0.108'
+	srcport: '37018'
+
+**Phase 3: Completed filtering (rules).
+	id: '4101'
+	level: '5'
+	description: 'Firewall drop event.'
+	groups: '['firewall', 'firewall_drop']'
+	firedtimes: '24'
+	gdpr: '['IV_35.7.d']'
+	gpg13: '['4.12']'
+	hipaa: '['164.312.a.1']'
+	mail: 'False'
+	nist_800_53: '['SC.7']'
+	pci_dss: '['1.4']'
+	tsc: '['CC6.7', 'CC6.8']'
+**Alert to be generated.

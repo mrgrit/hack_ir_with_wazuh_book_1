@@ -1,0 +1,164 @@
+{
+  "sha256": "b3550f87c2342a43e72ee5ac74c9a884de6aff38631b8c77a2364d0cf5d47099",
+  "slides": [
+    {
+      "page": 322,
+      "text": "리눅스 · 29 / 61\n29 새 리스닝 포트 (명령 모니터링)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 29\n\n공격\n백도어나 채굴기가 새 포트를 염\n\n탐지 포인트\n룰 533(Listened ports status (netstat) changed). ossec.conf의 netstat 명령 모니터링이 켜져 있어야 함\n\n검색 원리\nWazuh가 주기적으로 netstat 출력을 비교해 변화만 알림\n\n주요 필드\ndata.extra_data 전후 비교\n\n결과 해석\ndata.extra_data에 변경 전후 포트 목록. 새로 생긴 포트와 25번의 프로세스 실행 이벤트를 연결\n\nkt66 검증 완료 · 원본 DQL 그대로 동작",
+      "images": []
+    },
+    {
+      "page": 323,
+      "text": "29 실습 ① 공격 실행 — 새 리스닝 포트 (명령 모니터링)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 29\n\n공격자 VM 에서 학생이 직접 입력하는 명령과 실제 결과. # 줄은 설명, 노란색은 확인할 결과",
+      "images": [
+        "source-323-3.png"
+      ]
+    },
+    {
+      "page": 324,
+      "text": "29 구문 풀이 — 새 리스닝 포트 (명령 모니터링)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 29\n\nnc -lk 31337 &\n•\n[피해 서버] 31337 포트를 계속(-k) 열어 두는 백도어 흉내 (& = 백그라운드)",
+      "images": []
+    },
+    {
+      "page": 325,
+      "text": "29 실습 ② 검색 준비 — 새 리스닝 포트 (명령 모니터링)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 29\n\n인덱스 패턴\nwazuh-alerts-*\n\n시간 범위\nLast 15 minutes (실습 직후)\nDQL — 검색창에 직접 입력 → Enter\n\nrule.id:533\n\n추가할 컬럼\nagent.name  ·  rule.id  ·  rule.description  ·  full_log\n\nkt66 결과\n1 hits",
+      "images": []
+    },
+    {
+      "page": 326,
+      "text": "29 결과 화면 ① — 결과 수와 시간 분포\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 29\n\n1 hits\n\n검색창 아래 hits = 찾은 건수, 막대 = 시간대별 건수. 실습 직후라 막대가 한곳에 몰려 있다",
+      "images": [
+        "source-326-3.png"
+      ]
+    },
+    {
+      "page": 327,
+      "text": "29 결과 화면 ② — 결과 표 (왼쪽 열)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 29\n\n결과 표 왼쪽 — 시간 · 에이전트 · 룰 (한 행 = 로그 한 건)",
+      "images": [
+        "source-327-3.png"
+      ]
+    },
+    {
+      "page": 328,
+      "text": "29 결과 화면 ② — 결과 표 (오른쪽 열)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 29\n\n결과 표 오른쪽 — 같은 행의 나머지 열",
+      "images": [
+        "source-328-3.png"
+      ]
+    },
+    {
+      "page": 329,
+      "text": "29 결과 읽는 법 — 새 리스닝 포트 (명령 모니터링)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 29\n•\n533 = 에이전트가 6분마다 netstat 결과를 비교해 '새로 열린/닫힌 포트'를 알림\n•\nfull_log 에 바뀐 포트 목록. 같은 포트를 osquery(62번)도 1분 주기로 찾는다\n\n원본 자료와 달라진 점 — kt66-host 에 net-tools(netstat) 설치 — 원본은 '확인 필요'",
+      "images": []
+    },
+    {
+      "page": 330,
+      "text": "개념 — 30 포트 스캔 · 방화벽\n포트 스캔과 방화벽 로그 (1/2)\nWazuh 위협 탐지 DQL 예시집  ·  개념 — 30 포트 스캔 · 방화벽\n포트와 스캔\n•\n포트 = 서버의 '창구 번호' (22 SSH, 80 웹, 3389 RDP …). 스캔 = 어느 창구가 열려 있나 두드려 보기\n•\nnmap -sS(SYN, 반쯤 연결) · -sT(완전 연결) · -Pn(살아 있는지 확인 생략) · -p 범위\n방화벽의 응답\n•\n열림: 연결 수락 · 닫힘: 거절(RST) · 필터됨: 응답 없음(DROP) — 방화벽이 조용히 버린 것\n•\nkt66-host 경계 방화벽: 아무도 듣지 않는 포트로 온 SYN 을 DROP + 커널 로그",
+      "images": []
+    },
+    {
+      "page": 331,
+      "text": "개념 — 30 포트 스캔 · 방화벽\n포트 스캔과 방화벽 로그 (2/2)\nWazuh 위협 탐지 DQL 예시집  ·  개념 — 30 포트 스캔 · 방화벽\n커널 방화벽 로그 한 줄\n\nkernel: DROP IN=ens33 OUT= SRC=192.168.0.202 DST=192.168.0.189 PROTO=TCP SPT=60392 DPT=451 SYN\n        │동작 │들어온 NIC    │출발지              │목적지                     │출발 포트 │목적 포트\n→ 4101 개별 차단(기본 no_log) · 4151 같은 IP 차단 45초에 18번 이상 → data.srcip, data.dstport",
+      "images": []
+    },
+    {
+      "page": 332,
+      "text": "리눅스 · 30 / 61 · MITRE T1046\n30 방화벽 드롭 다발 (포트 스캔)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 30\n\n공격\nnmap이 수백 포트를 두드려 iptables/firewalld 드롭 로그가 쏟아짐\n\n탐지 포인트\n룰 4151(Multiple Firewall drop events from same source)\n\n검색 원리\n개별 드롭(4101)을 Wazuh가 IP별로 집계\n\n주요 필드\ndata.srcip · data.dstport 집계\n\n결과 해석\ndata.srcip, data.dstport로 집계하면 스캔 범위가 보임. 같은 IP가 이후 16번(SSH) 결과에 나오면 정찰 → 공격 흐름\n\nkt66 검증 완료 · 원본 DQL 그대로 동작",
+      "images": []
+    },
+    {
+      "page": 333,
+      "text": "30 실습 ① 공격 실행 — 방화벽 드롭 다발 (포트 스캔)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 30\n\n공격자 VM 에서 학생이 직접 입력하는 명령과 실제 결과. # 줄은 설명, 노란색은 확인할 결과",
+      "images": [
+        "source-333-3.png"
+      ]
+    },
+    {
+      "page": 334,
+      "text": "30 구문 풀이 — 방화벽 드롭 다발 (포트 스캔)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 30\n\nnmap -sT -Pn -p 1-1000 --max-retries 1 192.168.0.189\n•\n-sT TCP 연결 스캔, -Pn 핑 생략, 1~1000번 포트, 재시도 1회",
+      "images": []
+    },
+    {
+      "page": 335,
+      "text": "30 실습 ② 검색 준비 — 방화벽 드롭 다발 (포트 스캔)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 30\n\n인덱스 패턴\nwazuh-alerts-*\n\n시간 범위\nLast 15 minutes (실습 직후)\nDQL — 검색창에 직접 입력 → Enter\n\nrule.id:4151 OR (rule.groups:firewall_drop AND data.srcip:*)\n\n추가할 컬럼\nagent.name  ·  rule.id  ·  rule.description  ·  data.srcip  ·  data.dstport  ·  data.action\n\nkt66 결과\n1 hits",
+      "images": []
+    },
+    {
+      "page": 336,
+      "text": "30 결과 화면 ① — 결과 수와 시간 분포\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 30\n\n1 hits\n\n검색창 아래 hits = 찾은 건수, 막대 = 시간대별 건수. 실습 직후라 막대가 한곳에 몰려 있다",
+      "images": [
+        "source-336-3.png"
+      ]
+    },
+    {
+      "page": 337,
+      "text": "30 결과 화면 ② — 결과 표\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 30\n\n결과 표 — 위: 시간 · 에이전트 · 룰 / 아래: 같은 행의 나머지 열 (한 행 = 로그 한 건)",
+      "images": [
+        "source-337-3.png"
+      ]
+    },
+    {
+      "page": 338,
+      "text": "30 결과 화면 ③ — 문서 펼치기 (Table)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 30\n\n행 왼쪽 > 를 눌러 펼친 화면. 노란색 = 검색 조건과 맞은 부분",
+      "images": [
+        "source-338-3.png"
+      ]
+    },
+    {
+      "page": 339,
+      "text": "30 결과 읽는 법 — 방화벽 드롭 다발 (포트 스캔)\nWazuh 위협 탐지 DQL 예시집  ·  리눅스 · 30\n•\nkt66 호스트의 경계 방화벽이 닫힌 포트로 온 SYN 을 DROP 하고 커널 로그('DROP IN=… SRC=… DPT=…')로 남긴다\n•\n4151 = 같은 IP 의 차단이 45초에 18번 이상 — 개별 차단(4101)은 기본 룰이 no_log 라 인덱스에 안 남는다\n\n원본 자료와 달라진 점 — 원본은 '대체(IPS 룰)'. kt66-host 경계 방화벽 + kern.log 수집으로 원본 룰 그대로 동작 (Wazuh journald 수집기는 커널 메시지를 가져오지 않아 kern.log 를 따로 읽는다)",
+      "images": []
+    },
+    {
+      "page": 627,
+      "text": "개념 — 62·63 osquery\nosquery — 운영체제를 SQL 표로 조회하기 (1/2)\nWazuh 위협 탐지 DQL 예시집  ·  개념 — 62·63 osquery\n무엇인가\n•\n프로세스·포트·사용자·시작 프로그램·예약 작업 등을 '표'로 만들어 SQL 로 조회하는 도구 (Linux·Windows·macOS)\n•\nosqueryi: 대화형 · osqueryd: 서비스로 정해진 쿼리를 주기 실행 → 결과 로그 → Wazuh osquery 모듈(룰 24010)\nkt66 쿼리 (1분마다)\n•\n리눅스: listening_ports · /tmp 실행 프로세스 · UID 0 계정 · crontab · authorized_keys · SUID 파일\n•\nWindows: listening_ports · Temp·AppData 실행 · startup_items · 관리자 그룹 · 예약 작업",
+      "images": []
+    },
+    {
+      "page": 628,
+      "text": "개념 — 62·63 osquery\nosquery — 운영체제를 SQL 표로 조회하기 (2/2)\nWazuh 위협 탐지 DQL 예시집  ·  개념 — 62·63 osquery\nSysmon 과의 차이\n•\nSysmon·auditd = '일어난 일'(이벤트) · osquery = '지금 있는 것'(상태) — 둘을 같이 보면 놓치는 것이 줄어든다\n예시\n\nSELECT u.username, g.groupname FROM user_groups ug\n  JOIN users u USING (uid) JOIN groups g USING (gid) WHERE g.groupname = 'Administrators';",
+      "images": []
+    },
+    {
+      "page": 629,
+      "text": "62 실습 ① 공격 실행 — osquery 로 리눅스 지속화 흔적 찾기\nWazuh 위협 탐지 DQL 예시집  ·  통합 모듈 · 62\n\n공격자 VM 에서 학생이 직접 입력하는 명령과 실제 결과. # 줄은 설명, 노란색은 확인할 결과",
+      "images": [
+        "source-629-3.png"
+      ]
+    },
+    {
+      "page": 630,
+      "text": "62 구문 풀이 — osquery 로 리눅스 지속화 흔적 찾기\nWazuh 위협 탐지 DQL 예시집  ·  통합 모듈 · 62\n\nnc -lk 31338 &\n•\n새 리스닝 포트(백도어 흉내)\n\necho '…backdoor2@attacker' >> ~/.ssh/authorized_keys\n•\n공격자 키 등록",
+      "images": []
+    },
+    {
+      "page": 631,
+      "text": "62 실습 ② 검색 준비 — osquery 로 리눅스 지속화 흔적 찾기\nWazuh 위협 탐지 DQL 예시집  ·  통합 모듈 · 62\n\n인덱스 패턴\nwazuh-alerts-*\n\n시간 범위\nLast 15 minutes (실습 직후)\nDQL — 검색창에 직접 입력 → Enter\n\nrule.groups:osquery AND agent.name:kt66-host AND data.osquery.name:(kt66_listening_ports or kt66_authorized_keys) AND data.osquery.action:added\n\n추가할 컬럼\nagent.name  ·  data.osquery.name  ·  data.osquery.action  ·  data.osquery.columns.port  ·  data.osquery.columns.name  ·  data.osquery.columns.comment\n\nkt66 결과\n2 hits",
+      "images": []
+    },
+    {
+      "page": 632,
+      "text": "62 결과 화면 ① — 결과 수와 시간 분포\nWazuh 위협 탐지 DQL 예시집  ·  통합 모듈 · 62\n\n2 hits\n\n검색창 아래 hits = 찾은 건수, 막대 = 시간대별 건수. 실습 직후라 막대가 한곳에 몰려 있다",
+      "images": [
+        "source-632-3.png"
+      ]
+    },
+    {
+      "page": 633,
+      "text": "62 결과 화면 ② — 결과 표\nWazuh 위협 탐지 DQL 예시집  ·  통합 모듈 · 62\n\n결과 표 — 위: 시간 · 에이전트 · 룰 / 아래: 같은 행의 나머지 열 (한 행 = 로그 한 건)",
+      "images": [
+        "source-633-3.png"
+      ]
+    },
+    {
+      "page": 634,
+      "text": "62 결과 화면 ③ — 문서 펼치기 (Table)\nWazuh 위협 탐지 DQL 예시집  ·  통합 모듈 · 62\n\n행 왼쪽 > 를 눌러 펼친 화면. 노란색 = 검색 조건과 맞은 부분",
+      "images": [
+        "source-634-3.png"
+      ]
+    },
+    {
+      "page": 635,
+      "text": "62 결과 읽는 법 — osquery 로 리눅스 지속화 흔적 찾기\nWazuh 위협 탐지 DQL 예시집  ·  통합 모듈 · 62\n•\nosquery 가 1분마다 'SELECT … FROM listening_ports / authorized_keys' 를 실행해 바뀐 행(added)만 Wazuh 로 보낸다 → 룰 24010\n•\ndata.osquery.name(어떤 쿼리), data.osquery.columns.*(찾은 값)\n\n원본 자료와 달라진 점 — 새 실습 — osquery 를 kt66-host 에 설치하고 Wazuh osquery 모듈로 수집",
+      "images": []
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+systemctl is-active rsyslog
+sudo tail -n 3 /var/log/kern.log

@@ -2,7 +2,7 @@
 
 1권 **시스템 침투와 SIEM 분석**의 집필 저장소입니다.
 
-기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2~9장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
+기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2~10장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
 
 - **[머리말·1장 DOCX](manuscript/volume01-chapter01.docx)** — 부크크 B5, 편집·검토용
 - **[2장 초안 DOCX](manuscript/volume01-chapter02.docx)** — 공격과 보안관제의 기초, 9쪽
@@ -13,6 +13,8 @@
 - **[7장 초안 DOCX](manuscript/volume01-chapter07.docx)** — 웹 서버 침투와 실행 흔적, 58쪽
 - **[8장 초안 DOCX](manuscript/volume01-chapter08.docx)** — SSH 인증 공격과 계정 권한 조사, 58쪽
 - **[9장 초안 DOCX](manuscript/volume01-chapter09.docx)** — 지속성 확보와 시스템 변경 탐지, 67쪽
+- **[10장 초안 DOCX](manuscript/volume01-chapter10.docx)** — 네트워크 흔적과 현재 상태 조사, 55쪽
+- [10장 복사용 명령·DQL·SQL·수집 설정·조사 양식](examples/chapter10/)
 - [9장 복사용 명령·검색식·스크립트·조사 양식](examples/chapter09/)
 - [7장 복사용 입력·명령·검색식·조사 양식](examples/chapter07/)
 - [6장 복사용 입력·명령·검색식·실제 로그](examples/chapter06/)
@@ -174,3 +176,23 @@ python tools/build_chapter09.py --output build/volume01-chapter09.docx
 9장도 위와 같은 Python 의존성과 글꼴을 사용합니다. 도식 재생성은 `tools/diagrams_chapter09.py`, 정적 검사는 `tools/check_chapter09.py DOCX경로 임시PDF경로 --bash Bash실행파일경로`입니다. 검사는 명령을 실행하지 않습니다. 일반 원고 경로에 초안을 저장했으며 REV01은 수정하지 않았습니다.
 
 PDF는 배포하지 않습니다. 임시 PDF·페이지 이미지는 DOCX 배치 검사용으로만 사용합니다. Consolas가 없는 환경에서는 대체 글꼴로 보일 수 있으므로 Word에서 최종 인쇄 크기를 재확인합니다.
+
+
+## 10장 — 네트워크 흔적과 현재 상태 조사
+
+Module 01 실습 29·30·62를 다룹니다. 호스트 리스닝 포트와 533 경보, Nmap TCP 스캔과 커널 DROP·4151, osquery 직접 SQL과 예약 조회의 added/removed를 연결했습니다. **55쪽, 실제 UI 영역 6개, 도식 5개, 기존 삽화 2개**이며 명령 44개·DQL 10개·osqueryi 입력 4개와 XML/SQL 복사용 파일을 제공합니다.
+
+실제 제공된 VM에서 31337·31338 리스너, 1~1000 포트 스캔, 유효한 임시 공개 키의 등록·제거를 확인했습니다. DQL 10개를 Discover에서 대조했고, 키·수집 설정의 초기 해시와 소켓·방화벽 원상복구를 확인했습니다. 공격자 VM에 설치한 Nmap과 새 archives 검색 패턴은 유지했습니다. 처음부터 파일이 없던 경우 등 조건부 절차, 전경 셸과 저자 실행 방식의 차이는 검토 기록에 명시합니다. 새 VM 설치나 이 키로의 SSH 인증 성공을 검증했다고 주장하지 않습니다.
+
+```bash
+.venv/bin/python tools/write_chapter10.py
+.venv/bin/python tools/diagrams_chapter10.py
+.venv/bin/python tools/build_chapter10.py
+```
+
+- [10장 집필·검증 기록](editorial/chapter10-review.md)
+- [원자료 대응표](editorial/chapter10-source-coverage.json)
+- [조판·예제·검색 검증 결과](editorial/chapter10-validation.json)
+- [실행·조회 증거](editorial/evidence/chapter10/2026-11-03/)
+
+초안은 일반 원고 경로에 저장했으며 REV01과 강의 저장소는 수정하지 않았습니다. PDF는 배포하지 않습니다.

@@ -1,0 +1,5 @@
+sudo install -m 0644 \
+~/kt66/deployment/osquery-linux.conf \
+/etc/osquery/osquery.conf
+sudo osqueryi \
+--config_path=/etc/osquery/osquery.conf --config_check

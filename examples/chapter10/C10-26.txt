@@ -1,0 +1,4 @@
+ls -l ~/book10-key ~/book10-key.pub
+ssh-keygen -t ed25519 -N '' \
+-C book10-key@attacker -f ~/book10-key
+ssh-keygen -lf ~/book10-key.pub

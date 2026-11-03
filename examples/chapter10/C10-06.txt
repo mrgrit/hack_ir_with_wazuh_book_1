@@ -1,0 +1,4 @@
+sudo sed -n '/<wodle name="osquery">/,/<\/wodle>/p' \
+/var/ossec/etc/ossec.conf
+sudo grep -n -F '/var/log/kern.log' \
+/var/ossec/etc/ossec.conf

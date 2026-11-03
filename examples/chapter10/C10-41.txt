@@ -1,0 +1,3 @@
+sudo rm /etc/osquery/osquery.conf \
+/etc/osquery/osquery.flags
+sudo ls -l /etc/osquery

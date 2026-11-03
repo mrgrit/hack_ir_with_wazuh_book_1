@@ -1,0 +1,4 @@
+hostname
+date -Is
+command -v nc ss netstat osqueryi
+systemctl is-active wazuh-agent osqueryd

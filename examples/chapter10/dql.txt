@@ -1,0 +1,73 @@
+# Q10-01 | Windows · Discover · wazuh-alerts-*
+# 콜론(:)은 필드 조건이고 AND는 두 조건을 모두 만족하는 기록을 찾는다. 에이전트 이름은 자기 환경의 값으로 바꾼다.
+agent.name:"kt66-host" AND rule.id:533
+# 확인: 6분 주기가 한 번 이상 지난 뒤 Refresh한다. 행을 펼쳐 full_log와 previous_output을 비교한다.
+
+# Q10-02 | Windows · Discover · wazuh-alerts-*
+# 별표(*)는 앞뒤에 다른 문자가 있어도 31337이 포함된 값을 찾는다. 괄호 안의 OR는 현재 또는 이전 출력 중 하나에 포트가 있는 조건이다.
+agent.name:"kt66-host" AND rule.id:533
+AND (full_log:*31337* OR previous_output:*31337*)
+# 확인: 현재 출력에만 있으면 새로 관찰된 리스너, 이전 출력에만 있으면 사라진 리스너 후보이다. 주변 행의 주소와 프로토콜도 대조한다.
+
+# Q10-03 | Windows · Discover · wazuh-alerts-*
+# 9장에서 다룬 audit의 명령 실행 경보를 같은 기간에 찾는다.
+agent.name:"kt66-host"
+AND rule.groups:audit_command
+AND data.audit.command:nc
+# 확인: EXECVE의 인수와 PID·PPID·auid를 읽어 소켓의 PID와 대조한다. execve 성공은 nc 실행에 관한 정보이며 포트 연결 성공이나 악성 판정은 별도로 확인한다.
+
+# Q10-04 | Windows · Discover · wazuh-alerts-*
+# 실습 대상의 반복 방화벽 드롭 경보를 출발지로 좁힌다.
+agent.name:"kt66-host" AND rule.id:4151
+AND data.srcip:"192.168.0.108"
+# 확인: 행을 펼치고 data.action·srcip·dstip·srcport·dstport, location, full_log를 읽는다.
+
+# Q10-05 | Windows · Discover · wazuh-archives-*
+# 수집 위치와 출발지를 함께 지정해 커널의 DROP 기록을 찾는다. alerts의 rule.id:4151 조건은 제거한다.
+agent.name:"kt66-host"
+AND location:"/var/log/kern.log"
+AND data.action:DROP
+AND data.srcip:"192.168.0.108"
+# 확인: data.dstport 열을 추가해 여러 목적지 포트를 확인한다. 이 결과도 LOG 제한이나 수집 손실이 있는 전체 패킷의 복제본은 아니다.
+
+# Q10-06 | Windows · Discover · wazuh-alerts-*
+# 두 예약 조회의 추가 결과를 한 번에 검색한다. 괄호는 조회 이름 두 개를 OR로 묶는다.
+agent.name:"kt66-host" AND rule.groups:osquery
+AND data.osquery.name:
+(kt66_listening_ports OR kt66_authorized_keys)
+AND data.osquery.action:added
+# 확인: 초기 수집의 다른 행도 나올 수 있다. 아래처럼 포트·키 주석으로 좁힌다. 시간 범위에 등록 시각과 다음 예약 실행 시각이 포함돼야 한다.
+
+# Q10-07 | Windows · Discover · wazuh-alerts-*
+# 예약 조회 이름과 결과 열의 port로 새 리스너를 찾는다.
+agent.name:"kt66-host"
+AND data.osquery.name:kt66_listening_ports
+AND data.osquery.columns.port:31338
+AND data.osquery.action:added
+# 확인: data.osquery.columns.name=nc, path=/usr/bin/nc.openbsd, address=192.168.0.107을 확인한다.
+
+# Q10-08 | Windows · Discover · wazuh-alerts-*
+# 키 조회의 주석을 지정해 이번에 추가한 행을 찾는다. 큰따옴표는 주석 전체를 한 값으로 지정한다.
+agent.name:"kt66-host"
+AND data.osquery.name:kt66_authorized_keys
+AND data.osquery.columns.comment:
+"book10-key@attacker"
+AND data.osquery.action:added
+# 확인: username=ccc, key_file=/home/ccc/.ssh/authorized_keys, algorithm=ssh-ed25519를 확인한다.
+
+# Q10-09 | Windows · Discover · wazuh-alerts-*
+# 종료한 두 리스너의 제거 결과를 검색한다.
+agent.name:"kt66-host"
+AND data.osquery.name:kt66_listening_ports
+AND data.osquery.columns.port:(31337 OR 31338)
+AND data.osquery.action:removed
+# 확인: 다음 예약 조회 뒤 두 포트의 removed를 확인한다. 현재 SQL·ss에 행이 없는 사실과 함께 원상복구 결과를 기록한다.
+
+# Q10-10 | Windows · Discover · wazuh-alerts-*
+# 백업 복원 후 조회 결과에서 사라진 키 행을 찾는다.
+agent.name:"kt66-host"
+AND data.osquery.name:kt66_authorized_keys
+AND data.osquery.columns.comment:
+"book10-key@attacker"
+AND data.osquery.action:removed
+# 확인: removed와 현재 키 파일의 해시를 함께 확인한다.

@@ -1,0 +1,4 @@
+sudo iptables -S INPUT
+sudo iptables -S KT66-PERIMETER
+ip -4 route get 192.168.0.108
+cat ~/kt66/deployment/perimeter.sh

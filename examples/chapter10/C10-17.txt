@@ -1,0 +1,2 @@
+command -v nmap
+nmap --version

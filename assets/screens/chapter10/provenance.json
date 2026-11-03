@@ -1,0 +1,72 @@
+{
+  "source": "실제 kt66 Wazuh Discover / 2026-11-03 / UTC+09:00",
+  "method": "CUA native browser screenshot, unmodified rectangular crops",
+  "assets": [
+    {
+      "asset": "assets/screens/chapter10/ports.png",
+      "original": "editorial/evidence/chapter10/2026-11-03/ui/ports-full.png",
+      "original_sha256": "7a3463841784830acb5cd2b022939c8e64afc65b03c5d7a6cc771abf861c9033",
+      "crop_xyxy": [
+        372,
+        615,
+        715,
+        706
+      ]
+    },
+    {
+      "asset": "assets/screens/chapter10/firewall.png",
+      "original": "editorial/evidence/chapter10/2026-11-03/ui/firewall-full.png",
+      "original_sha256": "b1ee771193d8f029e1a1c87e0dcfe741a3f21afc27bb71b63d62fe024e551817",
+      "crop_xyxy": [
+        190,
+        265,
+        515,
+        655
+      ]
+    },
+    {
+      "asset": "assets/screens/chapter10/archives.png",
+      "original": "editorial/evidence/chapter10/2026-11-03/ui/archives-full.png",
+      "original_sha256": "7c1194d5f0222ad352f02ee86ce0b304e7bdad1c4d9fa20759c1cd3860833b2d",
+      "crop_xyxy": [
+        275,
+        410,
+        575,
+        684
+      ]
+    },
+    {
+      "asset": "assets/screens/chapter10/osquery-port.png",
+      "original": "editorial/evidence/chapter10/2026-11-03/ui/osquery-port-full.png",
+      "original_sha256": "d3ca66a34b38450f74f199b3dd738c363ce38705e53cd909704396f376f45870",
+      "crop_xyxy": [
+        190,
+        55,
+        650,
+        515
+      ]
+    },
+    {
+      "asset": "assets/screens/chapter10/osquery-key.png",
+      "original": "editorial/evidence/chapter10/2026-11-03/ui/osquery-key-full.png",
+      "original_sha256": "3c2f740fd33f1bc52bc499ee69425e314a3d089498b03023589a0e012413fd1f",
+      "crop_xyxy": [
+        190,
+        55,
+        700,
+        515
+      ]
+    },
+    {
+      "asset": "assets/screens/chapter10/removed.png",
+      "original": "editorial/evidence/chapter10/2026-11-03/ui/removed-full.png",
+      "original_sha256": "6eea90a17d138c143bc71ce4bcd17fbd399160a94d2303251d3855d956406799",
+      "crop_xyxy": [
+        190,
+        55,
+        700,
+        515
+      ]
+    }
+  ]
+}

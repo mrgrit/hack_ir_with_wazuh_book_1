@@ -1,0 +1,2 @@
+scp ~/book10-key.pub \
+ccc@192.168.0.107:book10-key.pub

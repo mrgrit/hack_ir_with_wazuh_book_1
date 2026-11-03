@@ -1,0 +1,382 @@
+Browser tab: 4, Title: "Discover - Wazuh", URL: "https://192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(_source),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T23:35:00.000Z',to:'2026-11-03T00:30:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%22kt66-host%22%20AND%20rule.groups:osquery%0AAND%20data.osquery.name:%0A(kt66_listening_ports%20OR%20kt66_authorized_keys)%0AAND%20data.osquery.action:added'))".
+1 AXWebArea Discover - Wazuh, URL: 192.168.0.107:5601/app/data-explorer/discover#?_a=(discover:(columns:!(_source),isDirty:!f,sort:!()),metadata:(indexPattern:'wazuh-alerts-*',view:discover))&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2026-11-02T23:35:00.000Z',to:'2026-11-03T00:30:00.000Z'))&_q=(filters:!(),query:(language:kuery,query:'agent.name:%22kt66-host%22%20AND%20rule.groups:osquery%0AAND%20data.osquery.name:%0A(kt66_listening_ports%20OR%20kt66_authorized_keys)%0AAND%20data.osquery.action:added'))
+	2 container
+		3 container opensearch-dashboards-body
+			4 container
+				5 checkbox (collapsed) Description: Toggle primary navigation, Value: 0, Secondary Actions: Expand
+					6 image Menu
+				7 link Description: Go to home page, Value: 192.168.0.107:5601/app/wz-home
+				8 container breadcrumb
+					9 button Discover
+				10 container App navigation
+					11 button New Search
+					12 button Save search
+					13 button Open Saved Search
+					14 button Share search
+					15 button Reporting, ID: downloadReport
+					16 button Open Inspector for search
+				17 button admin, ID: user-icon-btn
+					18 container admin
+				19 pop up button (collapsed) Description: Help menu, Secondary Actions: Expand
+			20 container app-wrapper
+				21 container
+					22 container resizable-panel_bcf9f200-d718-11f1-b04b-83502d6e80cb
+						23 container
+							24 combo box (collapsed) Secondary Actions: Expand
+								25 container
+									10357 text wazuh-alerts-*
+									27 text field (settable)
+									28 button Open list of options
+								29 button sourceRefresh
+							30 container Index and fields
+								31 container
+									32 search text field (settable) Description: Search field names, Value: data.dstport
+									10344 button Clear input
+								33 button Show field filter settings
+									34 text Filter by type
+									35 container $0 $active filters
+										36 text 0
+								10345 button Selected fields
+								10346 button Available fields
+								10358 button String field data.​dstport View data.dstport summary Add data.dstport to table
+									10359 image String field
+									10360 text data.​dstport
+									10361 button View data.dstport summary
+									10362 button Add data.dstport to table
+						708 button Press to toggle this panel
+					709 button Description: Press left or right to adjust panels size, ID: resizable-button_bcfa8e40-d718-11f1-b04b-83502d6e80cb
+					710 container
+						711 button See saved queries
+						712 combo box (collapsed) Description: Search and filter the discover page, Secondary Actions: Expand
+							713 text entry area (settable) Description: Start typing to search and filter the discover page, ID: ibd1234f1-d718-11f1-b04b-83502d6e80cb, Value: agent.name:"kt66-host" AND rule.groups:osquery
+AND data.osquery.name:
+(kt66_listening_ports OR kt66_authorized_keys)
+AND data.osquery.action:added
+						714 button Change query language
+						16940 container
+							16941 button Date quick select
+							16942 button Nov 3, 2026 @ 08:35:00.000, Help: 2026-11-02T23:35:00.000Z
+							16943 text →
+							16944 button Nov 3, 2026 @ 09:30:00.000, Help: 2026-11-03T00:30:00.000Z
+						720 button Submit query
+						721 container GlobalFilterGroup
+							722 button Change all filters
+							723 button Add filter
+						724 container
+							725 text 3 hits
+						726 button Options for discover
+						727 text Nov 3, 2026 @ 08:35:00.000 - Nov 3, 2026 @ 09:30:00.000 per
+						728 container
+							729 pop up button (collapsed, settable) Description: Time interval, Value: Auto, ID: dscResultsIntervalSelector, Secondary Actions: Expand
+								730 menu
+									731 (selected) Auto
+									732 Millisecond
+									733 Second
+									734 Minute
+									735 Hour
+									736 Day
+									737 Week
+									738 Month
+									739 Year
+						740 container Histogram of found documents
+							741 container
+								742 container
+									743 definition list
+										744 container Chart type:
+											745 text Chart type:
+										746 text bar chart
+									747 image
+						748 table
+							749 row
+								750 cell Discover table column: timestamp
+									751 text Time
+									752 button Sort timestamp ascending
+								10363 cell Discover table column: _source
+									10364 text _source
+							16945 row
+								16946 cell
+									16947 button Toggle row details
+								16948 cell
+									16963 text Nov 3, 2026 @ 08:39:01.473
+									16949 button Filter for value
+									16950 button Filter out value
+								16964 cell
+									16965 definition list
+										16966 container input.type:
+											16967 text input.type:
+										16968 text log
+										16969 container agent.ip:
+											16970 text agent.ip:
+										16971 text 10.20.32.254
+										16972 container agent.name:
+											16973 text agent.name:
+										16974 text kt66-host
+										16975 container agent.id:
+											16976 text agent.id:
+										16977 text 006
+										16978 container manager.name:
+											16979 text manager.name:
+										16980 text wazuh.manager
+										16981 container data.osquery.calendarTime:
+											16982 text data.osquery.calendarTime:
+										16983 text Mon Nov 2 23:39:00 2026 UTC
+										16984 container data.osquery.hostIdentifier:
+											16985 text data.osquery.hostIdentifier:
+										16986 text ccc
+										16987 container data.osquery.unixTime:
+											16988 text data.osquery.unixTime:
+										16989 text 1793662740
+										16990 container data.osquery.columns.path:
+											16991 text data.osquery.columns.path:
+										16992 text /usr/bin/nc.openbsd
+										16993 container data.osquery.columns.address:
+											16994 text data.osquery.columns.address:
+										16995 text 192.168.0.107
+										16996 container data.osquery.columns.port:
+											16997 text data.osquery.columns.port:
+										16998 text 31338
+										16999 container data.osquery.columns.name:
+											17000 text data.osquery.columns.name:
+										17001 text nc
+										17002 container data.osquery.name:
+											17003 text data.osquery.name:
+										17004 text kt66_listening_ports
+										17005 container data.osquery.numerics:
+											17006 text data.osquery.numerics:
+										17007 text false
+										17008 container data.osquery.action:
+											17009 text data.osquery.action:
+										17010 text added
+										17011 container data.osquery.epoch:
+											17012 text data.osquery.epoch:
+										17013 text 0
+										17014 container data.osquery.counter:
+											17015 text data.osquery.counter:
+										17016 text 2
+										17017 container rule.firedtimes:
+											17018 text rule.firedtimes:
+										17019 text 112
+										17020 container rule.mail:
+											17021 text rule.mail:
+										17022 text false
+										17023 container rule.level:
+											17024 text rule.level:
+										17025 text 3
+										17026 container rule.description:
+											17027 text rule.description:
+										17028 text osquery: kt66_listening_ports query result
+										17029 container rule.groups:
+											17030 text rule.groups:
+										17031 text osquery
+										17032 container rule.id:
+											17033 text rule.id:
+										17034 text 24010
+										17035 container location:
+											17036 text location:
+										17037 text osquery
+										17038 container decoder.name:
+											17039 text decoder.name:
+										17040 text json
+										17041 container id:
+											17042 text id:
+										17043 text 1793662741.25462734
+										17044 container timestamp:
+											17045 text timestamp:
+										17046 text Nov 3, 2026 @ 08:39:01.473
+										17047 container _index:
+											17048 text _index:
+										17049 text wazuh-alerts-4.x-2026.11.02
+							16951 row
+								16952 cell
+									16953 button Toggle row details
+								16954 cell
+									17050 text Nov 3, 2026 @ 08:38:22.446
+									16955 button Filter for value
+									16956 button Filter out value
+								17051 cell
+									17052 definition list
+										17053 container input.type:
+											17054 text input.type:
+										17055 text log
+										17056 container agent.ip:
+											17057 text agent.ip:
+										17058 text 10.20.32.254
+										17059 container agent.name:
+											17060 text agent.name:
+										17061 text kt66-host
+										17062 container agent.id:
+											17063 text agent.id:
+										17064 text 006
+										17065 container manager.name:
+											17066 text manager.name:
+										17067 text wazuh.manager
+										17068 container data.osquery.calendarTime:
+											17069 text data.osquery.calendarTime:
+										17070 text Mon Nov 2 23:38:22 2026 UTC
+										17071 container data.osquery.hostIdentifier:
+											17072 text data.osquery.hostIdentifier:
+										17073 text ccc
+										17074 container data.osquery.unixTime:
+											17075 text data.osquery.unixTime:
+										17076 text 1793662702
+										17077 container data.osquery.columns.key_file:
+											17078 text data.osquery.columns.key_file:
+										17079 text /home/ccc/.ssh/authorized_keys
+										17080 container data.osquery.columns.comment:
+											17081 text data.osquery.columns.comment:
+										17082 text book10-key@attacker
+										17083 container data.osquery.columns.algorithm:
+											17084 text data.osquery.columns.algorithm:
+										17085 text ssh-ed25519
+										17086 container data.osquery.columns.username:
+											17087 text data.osquery.columns.username:
+										17088 text ccc
+										17089 container data.osquery.name:
+											17090 text data.osquery.name:
+										17091 text kt66_authorized_keys
+										17092 container data.osquery.numerics:
+											17093 text data.osquery.numerics:
+										17094 text false
+										17095 container data.osquery.action:
+											17096 text data.osquery.action:
+										17097 text added
+										17098 container data.osquery.epoch:
+											17099 text data.osquery.epoch:
+										17100 text 0
+										17101 container data.osquery.counter:
+											17102 text data.osquery.counter:
+										17103 text 1
+										17104 container rule.firedtimes:
+											17105 text rule.firedtimes:
+										17106 text 111
+										17107 container rule.mail:
+											17108 text rule.mail:
+										17109 text false
+										17110 container rule.level:
+											17111 text rule.level:
+										17112 text 3
+										17113 container rule.description:
+											17114 text rule.description:
+										17115 text osquery: kt66_authorized_keys query result
+										17116 container rule.groups:
+											17117 text rule.groups:
+										17118 text osquery
+										17119 container rule.id:
+											17120 text rule.id:
+										17121 text 24010
+										17122 container location:
+											17123 text location:
+										17124 text osquery
+										17125 container decoder.name:
+											17126 text decoder.name:
+										17127 text json
+										17128 container id:
+											17129 text id:
+										17130 text 1793662702.25461858
+										17131 container timestamp:
+											17132 text timestamp:
+										17133 text Nov 3, 2026 @ 08:38:22.446
+										17134 container _index:
+											17135 text _index:
+										17136 text wazuh-alerts-4.x-2026.11.02
+							16957 row
+								16958 cell
+									16959 button Toggle row details
+								16960 cell
+									17137 text Nov 3, 2026 @ 08:37:01.321
+									16961 button Filter for value
+									16962 button Filter out value
+								17138 cell
+									17139 definition list
+										17140 container input.type:
+											17141 text input.type:
+										17142 text log
+										17143 container agent.ip:
+											17144 text agent.ip:
+										17145 text 10.20.32.254
+										17146 container agent.name:
+											17147 text agent.name:
+										17148 text kt66-host
+										17149 container agent.id:
+											17150 text agent.id:
+										17151 text 006
+										17152 container manager.name:
+											17153 text manager.name:
+										17154 text wazuh.manager
+										17155 container data.osquery.calendarTime:
+											17156 text data.osquery.calendarTime:
+										17157 text Mon Nov 2 23:37:00 2026 UTC
+										17158 container data.osquery.hostIdentifier:
+											17159 text data.osquery.hostIdentifier:
+										17160 text ccc
+										17161 container data.osquery.unixTime:
+											17162 text data.osquery.unixTime:
+										17163 text 1793662620
+										17164 container data.osquery.columns.path:
+											17165 text data.osquery.columns.path:
+										17166 text /usr/bin/nc.openbsd
+										17167 container data.osquery.columns.address:
+											17168 text data.osquery.columns.address:
+										17169 text 192.168.0.107
+										17170 container data.osquery.columns.port:
+											17171 text data.osquery.columns.port:
+										17172 text 31337
+										17173 container data.osquery.columns.name:
+											17174 text data.osquery.columns.name:
+										17175 text nc
+										17176 container data.osquery.name:
+											17177 text data.osquery.name:
+										17178 text kt66_listening_ports
+										17179 container data.osquery.numerics:
+											17180 text data.osquery.numerics:
+										17181 text false
+										17182 container data.osquery.action:
+											17183 text data.osquery.action:
+										17184 text added
+										17185 container data.osquery.epoch:
+											17186 text data.osquery.epoch:
+										17187 text 0
+										17188 container data.osquery.counter:
+											17189 text data.osquery.counter:
+										17190 text 1
+										17191 container rule.firedtimes:
+											17192 text rule.firedtimes:
+										17193 text 103
+										17194 container rule.mail:
+											17195 text rule.mail:
+										17196 text false
+										17197 container rule.level:
+											17198 text rule.level:
+										17199 text 3
+										17200 container rule.description:
+											17201 text rule.description:
+										17202 text osquery: kt66_listening_ports query result
+										17203 container rule.groups:
+											17204 text rule.groups:
+										17205 text osquery
+										17206 container rule.id:
+											17207 text rule.id:
+										17208 text 24010
+										17209 container location:
+											17210 text location:
+										17211 text osquery
+										17212 container decoder.name:
+											17213 text decoder.name:
+										17214 text json
+										17215 container id:
+											17216 text id:
+										17217 text 1793662621.24610480
+										17218 container timestamp:
+											17219 text timestamp:
+										17220 text Nov 3, 2026 @ 08:37:01.321
+										17221 container _index:
+											17222 text _index:
+										17223 text wazuh-alerts-4.x-2026.11.02
+		4763 container Notification message list
+		16938 container Add field as column, ID: idbe04115-d718-11f1-b04b-83502d6e80cb
+			16939 text Add field as column
+
+The focused UI element is 713 text entry area (settable) Description: Start typing to search and filter the discover page, ID: ibd1234f1-d718-11f1-b04b-83502d6e80cb, Value: agent.name:"kt66-host" AND rule.groups:osquery
+AND data.osquery.name:
+(kt66_listening_ports OR kt66_authorized_keys)
+AND data.osquery.action:added

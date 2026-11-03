@@ -1,0 +1,124 @@
+{
+  "source": "https://docs.google.com/presentation/d/1o0H_2DDHBp8p2HvlSnEPbx6-jdURYzew/edit",
+  "pptx_sha256": "b3550f87c2342a43e72ee5ac74c9a884de6aff38631b8c77a2364d0cf5d47099",
+  "slide_numbering": "ppt/presentation.xml 발표 순서, 1부터",
+  "exercises": [
+    {
+      "exercise": 29,
+      "pages": [
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329
+      ],
+      "sections": [
+        "10.2",
+        "10.3",
+        "10.8"
+      ],
+      "retained": [
+        "nc TCP 31337 리스너",
+        "360초 netstat 명령 모니터링",
+        "rule 533와 audit 실행 연결"
+      ],
+      "corrections": [
+        "대상은 kt66 호스트 ccc이다. 공격자 VM이라는 공격 화면의 통일 문구를 따르지 않음",
+        "전경 실행과 별도 터미널로 변경; 원본 & 의미 설명",
+        "full_log·previous_output을 실제 필드와 대조; data.extra_data 존재를 가정하지 않음",
+        "533은 출력 전체의 변화; 백도어·통신 성공 또는 단일 포트 추가로 단정하지 않음"
+      ],
+      "evidence": [
+        "533 추가/제거 각1건",
+        "nc audit2건",
+        "소켓·PID·경로 대조"
+      ]
+    },
+    {
+      "exercise": 30,
+      "pages": [
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339
+      ],
+      "sections": [
+        "10.4",
+        "10.5",
+        "10.9"
+      ],
+      "retained": [
+        "-sT -Pn -p 1-1000 --max-retries 1",
+        "kernel DROP 필드 해석",
+        "4101과4151 같은 출발지 상관 분석",
+        "SSH 이력과 후속 조사"
+      ],
+      "corrections": [
+        "대상을 허가된 .107로 치환; -n 추가 및 설명",
+        "filtered는 DROP 하나만의 증거가 아님; SERVICE는 버전 검증 결과가 아님",
+        "perimeter는 적용 당시 리스너 예외와 INPUT 경로; Docker FORWARD와 구분",
+        "4151 dstport는 현재 이벤트의 값, 모든 스캔 포트 집계가 아님",
+        "4151 실제 그룹 firewall,multiple_drops; 원본 OR 검색의 다른 가지와 구분",
+        "개별 로그는 no_log에 의해 alerts에 생략되지만 설정된 archives에서 확인 가능",
+        "LOG 100/s burst200과 ignore240 때문에 전체 패킷 수와 경보 수를 동일시하지 않음"
+      ],
+      "evidence": [
+        "7 open/993 filtered",
+        "4151 1건",
+        "archives592건",
+        "격리된 logtest에서18번째 입력에4151"
+      ]
+    },
+    {
+      "exercise": 62,
+      "pages": [
+        627,
+        628,
+        629,
+        630,
+        631,
+        632,
+        633,
+        634,
+        635
+      ],
+      "sections": [
+        "10.6",
+        "10.7",
+        "10.8"
+      ],
+      "retained": [
+        "31338 리스너",
+        "authorized_keys 키 등록",
+        "osqueryi/osqueryd 구분",
+        "kt66_listening_ports·kt66_authorized_keys",
+        "24010 name·columns·action 읽기"
+      ],
+      "corrections": [
+        "유효한 임시 Ed25519 키 생성, 백업·restrict/from·공개 키 전송",
+        "슬라이드의 축약/예시 키 문자열로 인증 성공을 주장하지 않음",
+        "SQL은 현재 상태, DQL은 수집한 기록",
+        "직접 SQL은 PID 포함, 예약 SQL은 미포함",
+        "선택 열에 key·options가 없어 키 본문만 변경되면 동일 행일 수 있음",
+        "interval60과splay10, 초기added/removed 의미 구분",
+        "실제 인증 성공은 본 실습 범위 밖; 9장 인증 기록과 연결",
+        "Windows Administrators SQL은 OS 비교 개념이며 Linux 실습에 복제하지 않음"
+      ],
+      "evidence": [
+        "두 직접 SQL 결과",
+        "추가3/제거3 osquery행",
+        "키와설정해시복원",
+        "31337/31338 소켓없음"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "Q10-05",
+    "text": "agent.name:\"kt66-host\"\nAND location:\"/var/log/kern.log\"\nAND data.action:DROP\nAND data.srcip:\"192.168.0.108\"",
+    "index": "Windows · Discover · wazuh-archives-*",
+    "hits": 592,
+    "noResults": false,
+    "periodKST": "2026-11-03 08:35–09:30"
+  },
+  {
+    "id": "Q10-01",
+    "text": "agent.name:\"kt66-host\" AND rule.id:533",
+    "index": "Windows · Discover · wazuh-alerts-*",
+    "hits": 2,
+    "noResults": false,
+    "periodKST": "2026-11-03 08:35–09:30"
+  },
+  {
+    "id": "Q10-02",
+    "text": "agent.name:\"kt66-host\" AND rule.id:533\nAND (full_log:*31337* OR previous_output:*31337*)",
+    "index": "Windows · Discover · wazuh-alerts-*",
+    "hits": 2,
+    "noResults": false,
+    "periodKST": "2026-11-03 08:35–09:30"
+  },
+  {
+    "id": "Q10-03",
+    "text": "agent.name:\"kt66-host\"\nAND rule.groups:audit_command\nAND data.audit.command:nc",
+    "index": "Windows · Discover · wazuh-alerts-*",
+    "hits": 2,
+    "noResults": false,
+    "periodKST": "2026-11-03 08:35–09:30"
+  },
+  {
+    "id": "Q10-04",
+    "text": "agent.name:\"kt66-host\" AND rule.id:4151\nAND data.srcip:\"192.168.0.108\"",
+    "index": "Windows · Discover · wazuh-alerts-*",
+    "hits": 1,
+    "noResults": false,
+    "periodKST": "2026-11-03 08:35–09:30"
+  },
+  {
+    "id": "Q10-06",
+    "text": "agent.name:\"kt66-host\" AND rule.groups:osquery\nAND data.osquery.name:\n(kt66_listening_ports OR kt66_authorized_keys)\nAND data.osquery.action:added",
+    "index": "Windows · Discover · wazuh-alerts-*",
+    "hits": 3,
+    "noResults": false,
+    "periodKST": "2026-11-03 08:35–09:30"
+  },
+  {
+    "id": "Q10-07",
+    "text": "agent.name:\"kt66-host\"\nAND data.osquery.name:kt66_listening_ports\nAND data.osquery.columns.port:31338\nAND data.osquery.action:added",
+    "index": "Windows · Discover · wazuh-alerts-*",
+    "hits": 1,
+    "noResults": false,
+    "periodKST": "2026-11-03 08:35–09:30"
+  },
+  {
+    "id": "Q10-08",
+    "text": "agent.name:\"kt66-host\"\nAND data.osquery.name:kt66_authorized_keys\nAND data.osquery.columns.comment:\n\"book10-key@attacker\"\nAND data.osquery.action:added",
+    "index": "Windows · Discover · wazuh-alerts-*",
+    "hits": 1,
+    "noResults": false,
+    "periodKST": "2026-11-03 08:35–09:30"
+  },
+  {
+    "id": "Q10-09",
+    "text": "agent.name:\"kt66-host\"\nAND data.osquery.name:kt66_listening_ports\nAND data.osquery.columns.port:(31337 OR 31338)\nAND data.osquery.action:removed",
+    "index": "Windows · Discover · wazuh-alerts-*",
+    "hits": 2,
+    "noResults": false,
+    "periodKST": "2026-11-03 08:35–09:30"
+  },
+  {
+    "id": "Q10-10",
+    "text": "agent.name:\"kt66-host\"\nAND data.osquery.name:kt66_authorized_keys\nAND data.osquery.columns.comment:\n\"book10-key@attacker\"\nAND data.osquery.action:removed",
+    "index": "Windows · Discover · wazuh-alerts-*",
+    "hits": 1,
+    "noResults": false,
+    "periodKST": "2026-11-03 08:35–09:30"
+  }
+]

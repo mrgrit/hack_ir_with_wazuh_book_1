@@ -1,0 +1,2 @@
+sudo ss -lntp \
+'( sport = :31337 or sport = :31338 )'

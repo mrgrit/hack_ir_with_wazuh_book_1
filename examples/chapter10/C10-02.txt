@@ -1,0 +1,5 @@
+ls -ld ~/book10-state
+sudo ls -l /etc/osquery
+systemctl is-enabled osqueryd wazuh-agent
+sudo iptables -S INPUT
+sudo iptables -S KT66-PERIMETER
