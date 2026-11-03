@@ -1,0 +1,12 @@
+{
+  "errors": [],
+  "scope": "PowerShell parse only; no commands executed",
+  "checked": 5,
+  "ids": [
+    "C11-01",
+    "C11-02",
+    "C11-03",
+    "C11-04",
+    "C11-05"
+  ]
+}

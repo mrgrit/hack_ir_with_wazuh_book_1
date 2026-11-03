@@ -1,0 +1,4 @@
+sudo cat /etc/docker/daemon.json
+docker --version
+docker compose version
+docker ps

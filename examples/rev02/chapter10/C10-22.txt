@@ -1,0 +1,3 @@
+sed -n '1,40p' \
+/var/ossec/ruleset/rules/0900-firewall_rules.xml
+exit

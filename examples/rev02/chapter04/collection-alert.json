@@ -1,0 +1,42 @@
+{
+  "_index": "wazuh-alerts-4.x-2026.11.01",
+  "_id": "oPmhlqEBEYWT20nncWYi",
+  "_score": null,
+  "_source": {
+    "predecoder": {
+      "hostname": "bastion",
+      "program_name": "book04",
+      "timestamp": "Nov  1 19:22:01"
+    },
+    "agent": {
+      "ip": "10.20.30.201",
+      "name": "bastion",
+      "id": "010"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "rule": {
+      "firedtimes": 1,
+      "mail": false,
+      "level": 5,
+      "description": "Book04 collection check",
+      "groups": [
+        "book04"
+      ],
+      "id": "100410"
+    },
+    "decoder": {},
+    "full_log": "Nov  1 19:22:01 bastion book04: book04-collection-01",
+    "input": {
+      "type": "log"
+    },
+    "@timestamp": "2026-11-01T10:22:03.139Z",
+    "location": "/var/log/auth.log",
+    "id": "1793528523.108868706",
+    "timestamp": "2026-11-01T10:22:03.139+0000"
+  },
+  "sort": [
+    1793528523139
+  ]
+}

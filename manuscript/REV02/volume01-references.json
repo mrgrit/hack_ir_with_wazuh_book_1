@@ -1,0 +1,1020 @@
+{
+  "title": "1권 참고문헌",
+  "series": "해킹·침해대응 실무 with Wazuh",
+  "pages": [
+    {
+      "title": "1권 참고문헌",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 장 번호와 출처 번호로 자료를 찾는다. 설치된 버전의 설정과 코드가 실제 실습 결과를 해석하는 기준이다."
+        }
+      ]
+    },
+    {
+      "title": "1장 참고문헌",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 [1-번호]는 이 장의 출처 번호이다. 웹 문서의 현재 내용이 달라지면 본문에 명시한 버전과 커밋을 함께 대조한다."
+        },
+        {
+          "type": "h",
+          "text": "[1-1] kt66 기준 소스"
+        },
+        {
+          "type": "p",
+          "text": "설치 도구 kt66.sh, 서비스 구성 docker-compose.yaml, 호스트 센서 설치 deployment/host-sensors.sh가 이 커밋에 있다."
+        },
+        {
+          "type": "link",
+          "text": "kt66 · 기준 커밋 63d4180",
+          "url": "https://github.com/mrgrit/kt66/tree/63d4180b1d6866de986ef263a3bd831d6082b5d5"
+        },
+        {
+          "type": "h",
+          "text": "[1-2] Wazuh Docker 요구사항"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh Docker deployment · 메모리 매핑 한도",
+          "url": "https://documentation.wazuh.com/current/deployment-options/docker/wazuh-container.html"
+        },
+        {
+          "type": "h",
+          "text": "더 읽을거리"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · Components",
+          "url": "https://documentation.wazuh.com/current/getting-started/components/index.html"
+        },
+        {
+          "type": "h",
+          "text": "더 읽을거리"
+        },
+        {
+          "type": "link",
+          "text": "Docker Docs · What is a container?",
+          "url": "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/"
+        },
+        {
+          "type": "h",
+          "text": "더 읽을거리"
+        },
+        {
+          "type": "link",
+          "text": "kt66 · README · 기준 커밋 63d4180",
+          "url": "https://github.com/mrgrit/kt66/blob/63d4180b1d6866de986ef263a3bd831d6082b5d5/README.md"
+        }
+      ]
+    },
+    {
+      "title": "2장 참고문헌",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 [2-번호]는 이 장의 출처 번호이다. 웹 문서의 현재 내용이 달라지면 본문에 명시한 버전과 커밋을 함께 대조한다."
+        },
+        {
+          "type": "p",
+          "text": "사례: 2026년 11월 1일 기존 kt66에서 조회한 SSH 인증 실패 경보. 원문과 필드는 examples/rev02/chapter02/case-ssh.json에 있다."
+        },
+        {
+          "type": "h",
+          "text": "[2-1] kt66 기준 소스"
+        },
+        {
+          "type": "p",
+          "text": "bastion의 주소와 컨테이너 시간대는 docker-compose.yaml, 내부망 .254 주소는 kt66-net.sh, 아카이브 인덱스 설정은 siem/87-archives.sh에 있다."
+        },
+        {
+          "type": "link",
+          "text": "kt66 · docker-compose.yaml",
+          "url": "https://github.com/mrgrit/kt66/blob/63d4180b1d6866de986ef263a3bd831d6082b5d5/docker-compose.yaml"
+        },
+        {
+          "type": "link",
+          "text": "kt66 · kt66-net.sh",
+          "url": "https://github.com/mrgrit/kt66/blob/63d4180b1d6866de986ef263a3bd831d6082b5d5/kt66-net.sh"
+        },
+        {
+          "type": "link",
+          "text": "kt66 · siem/87-archives.sh",
+          "url": "https://github.com/mrgrit/kt66/blob/63d4180b1d6866de986ef263a3bd831d6082b5d5/siem/87-archives.sh"
+        },
+        {
+          "type": "h",
+          "text": "[2-2] Wazuh 4.10.0 SSH 디코더"
+        },
+        {
+          "type": "link",
+          "text": "0310-ssh_decoders.xml · ssh-invfailed",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/decoders/0310-ssh_decoders.xml"
+        },
+        {
+          "type": "h",
+          "text": "[2-3] Wazuh 4.10.0 SSH 규칙"
+        },
+        {
+          "type": "link",
+          "text": "0095-sshd_rules.xml · 5700, 5710, 5712, 5715, 5760",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0095-sshd_rules.xml"
+        },
+        {
+          "type": "h",
+          "text": "[2-4] Wazuh 경보 저장 기준"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · ossec.conf alerts · log_alert_level",
+          "url": "https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/alerts.html"
+        },
+        {
+          "type": "h",
+          "text": "[2-5] HTTP 응답 코드"
+        },
+        {
+          "type": "link",
+          "text": "RFC 9110 · HTTP Semantics · Section 15",
+          "url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-15"
+        },
+        {
+          "type": "h",
+          "text": "더 읽을거리"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh 4.10 · Rules Syntax",
+          "url": "https://documentation.wazuh.com/4.10/user-manual/ruleset/ruleset-xml-syntax/rules.html"
+        },
+        {
+          "type": "h",
+          "text": "더 읽을거리"
+        },
+        {
+          "type": "link",
+          "text": "MITRE ATT&CK · T1110.001 Password Guessing",
+          "url": "https://attack.mitre.org/techniques/T1110/001/"
+        }
+      ]
+    },
+    {
+      "title": "3장 참고문헌",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 [3-번호]는 이 장의 출처 번호이다. 웹 문서의 현재 내용이 달라지면 본문에 명시한 버전과 커밋을 함께 대조한다."
+        },
+        {
+          "type": "h",
+          "text": "[3-1] Discover 사용"
+        },
+        {
+          "type": "link",
+          "text": "OpenSearch 2.16 · Discover",
+          "url": "https://docs.opensearch.org/2.16/dashboards/discover/index-discover/"
+        },
+        {
+          "type": "h",
+          "text": "[3-2] DQL 검색 구문"
+        },
+        {
+          "type": "link",
+          "text": "OpenSearch 2.16 · Dashboards Query Language",
+          "url": "https://docs.opensearch.org/2.16/dashboards/dql/"
+        },
+        {
+          "type": "h",
+          "text": "실습 환경과 사례"
+        },
+        {
+          "type": "link",
+          "text": "kt66 · 기준 커밋 63d4180",
+          "url": "https://github.com/mrgrit/kt66/tree/63d4180b1d6866de986ef263a3bd831d6082b5d5"
+        },
+        {
+          "type": "p",
+          "text": "사례 원본은 examples/rev02/chapter02/case-ssh.json에 있다. 3.6의 사례 조회 범위는 2026년 11월 1일 14:20~14:25(KST)이다. 자신의 기록은 실행 일지의 시각으로 조회한다."
+        },
+        {
+          "type": "h",
+          "text": "더 읽을거리"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh 4.10 · Event logging",
+          "url": "https://documentation.wazuh.com/4.10/user-manual/manager/event-logging.html"
+        }
+      ]
+    },
+    {
+      "title": "4장 참고문헌",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 [4-번호]는 이 장의 출처 번호이다. 웹 문서의 현재 내용이 달라지면 본문에 명시한 버전과 커밋을 함께 대조한다."
+        },
+        {
+          "type": "h",
+          "text": "[4-1] 로그 수집·전송"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · Log data collection: How it works",
+          "url": "https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/how-it-works.html"
+        },
+        {
+          "type": "h",
+          "text": "[4-2] 수집 설정"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · localfile",
+          "url": "https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/localfile.html"
+        },
+        {
+          "type": "h",
+          "text": "[4-3] kt66 아카이브 활성화"
+        },
+        {
+          "type": "link",
+          "text": "kt66 · siem/87-archives.sh · 63d4180",
+          "url": "https://github.com/mrgrit/kt66/blob/63d4180b1d6866de986ef263a3bd831d6082b5d5/siem/87-archives.sh"
+        },
+        {
+          "type": "h",
+          "text": "[4-4] 규칙 시험"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · Testing decoders and rules",
+          "url": "https://documentation.wazuh.com/current/user-manual/ruleset/testing.html"
+        },
+        {
+          "type": "h",
+          "text": "[4-5] 기본 SSH 규칙"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh 4.10.0 · 0095-sshd_rules.xml",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0095-sshd_rules.xml"
+        },
+        {
+          "type": "h",
+          "text": "[4-6] 사용자 규칙과 구문"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · Custom rules",
+          "url": "https://documentation.wazuh.com/current/user-manual/ruleset/rules/custom.html"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · Rules syntax",
+          "url": "https://documentation.wazuh.com/current/user-manual/ruleset/ruleset-xml-syntax/rules.html"
+        },
+        {
+          "type": "h",
+          "text": "[4-7] 경보 저장 기준"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · alerts",
+          "url": "https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/alerts.html"
+        },
+        {
+          "type": "h",
+          "text": "[4-8] SSH 디코더 정의와 구문"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh 4.10.0 · 0310-ssh_decoders.xml",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/decoders/0310-ssh_decoders.xml"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · Decoders syntax",
+          "url": "https://documentation.wazuh.com/current/user-manual/ruleset/ruleset-xml-syntax/decoders.html"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · Custom decoders",
+          "url": "https://documentation.wazuh.com/current/user-manual/ruleset/decoders/custom.html"
+        },
+        {
+          "type": "h",
+          "text": "[4-9] logger 명령"
+        },
+        {
+          "type": "link",
+          "text": "util-linux · logger(1)",
+          "url": "https://man7.org/linux/man-pages/man1/logger.1.html"
+        }
+      ]
+    },
+    {
+      "title": "5장 참고문헌",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 [5-번호]는 이 장의 출처 번호이다. 웹 문서의 현재 내용이 달라지면 본문에 명시한 버전과 커밋을 함께 대조한다."
+        },
+        {
+          "type": "h",
+          "text": "[5-1] DVWA와 실습 코드"
+        },
+        {
+          "type": "link",
+          "text": "DVWA 공식 저장소",
+          "url": "https://github.com/digininja/DVWA"
+        },
+        {
+          "type": "link",
+          "text": "DVWA · SQL injection · low.php",
+          "url": "https://github.com/digininja/DVWA/blob/master/vulnerabilities/sqli/source/low.php"
+        },
+        {
+          "type": "h",
+          "text": "[5-2] kt66 WAF 구성과 CRS"
+        },
+        {
+          "type": "link",
+          "text": "kt66 · web/Dockerfile · 63d4180",
+          "url": "https://github.com/mrgrit/kt66/blob/63d4180b1d6866de986ef263a3bd831d6082b5d5/web/Dockerfile"
+        },
+        {
+          "type": "link",
+          "text": "OWASP CRS · Anomaly Scoring",
+          "url": "https://coreruleset.org/docs/2-how-crs-works/2-1-anomaly_scoring/"
+        },
+        {
+          "type": "h",
+          "text": "[5-3] curl 요청·인코딩 옵션"
+        },
+        {
+          "type": "link",
+          "text": "curl · Manual",
+          "url": "https://curl.se/docs/manpage.html"
+        },
+        {
+          "type": "h",
+          "text": "[5-4] Apache 로그 형식"
+        },
+        {
+          "type": "link",
+          "text": "Apache 2.4 · mod_log_config",
+          "url": "https://httpd.apache.org/docs/2.4/mod/mod_log_config.html"
+        },
+        {
+          "type": "link",
+          "text": "Apache 2.4 · mod_logio",
+          "url": "https://httpd.apache.org/docs/2.4/mod/mod_logio.html"
+        },
+        {
+          "type": "h",
+          "text": "[5-5] SQL 인젝션"
+        },
+        {
+          "type": "link",
+          "text": "OWASP · SQL Injection",
+          "url": "https://owasp.org/www-community/attacks/SQL_Injection"
+        },
+        {
+          "type": "link",
+          "text": "MySQL · Comments",
+          "url": "https://dev.mysql.com/doc/refman/8.4/en/comments.html"
+        },
+        {
+          "type": "h",
+          "text": "[5-6] Wazuh 웹 탐지 규칙"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh 4.10.0 · 0245-web_rules.xml",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0245-web_rules.xml"
+        },
+        {
+          "type": "h",
+          "text": "[5-7] XSS"
+        },
+        {
+          "type": "link",
+          "text": "OWASP · Cross Site Scripting",
+          "url": "https://owasp.org/www-community/attacks/xss/"
+        },
+        {
+          "type": "h",
+          "text": "[5-8] 출력 위치에 맞는 처리"
+        },
+        {
+          "type": "link",
+          "text": "OWASP · Cross Site Scripting Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html"
+        },
+        {
+          "type": "h",
+          "text": "[5-9] 경로 조작"
+        },
+        {
+          "type": "link",
+          "text": "OWASP · Path Traversal",
+          "url": "https://owasp.org/www-community/attacks/Path_Traversal"
+        },
+        {
+          "type": "h",
+          "text": "[5-10] DQL"
+        },
+        {
+          "type": "link",
+          "text": "OpenSearch 2.16 · Dashboards Query Language",
+          "url": "https://docs.opensearch.org/2.16/dashboards/dql/"
+        },
+        {
+          "type": "h",
+          "text": "[5-11] 브라우저의 Network 도구"
+        },
+        {
+          "type": "link",
+          "text": "Chrome DevTools · Inspect network activity",
+          "url": "https://developer.chrome.com/docs/devtools/network/"
+        },
+        {
+          "type": "link",
+          "text": "Chrome DevTools · Network features reference",
+          "url": "https://developer.chrome.com/docs/devtools/network/reference/"
+        },
+        {
+          "type": "link",
+          "text": "Microsoft Edge · Inspect network activity",
+          "url": "https://learn.microsoft.com/en-us/microsoft-edge/devtools/network/"
+        },
+        {
+          "type": "h",
+          "text": "[5-12] Windows hosts 파일"
+        },
+        {
+          "type": "link",
+          "text": "Microsoft Support · Hosts 파일 위치와 편집",
+          "url": "https://support.microsoft.com/en-us/windows/experience/how-to-reset-the-hosts-file-back-to-the-default"
+        }
+      ]
+    },
+    {
+      "title": "6장 참고문헌",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 [6-번호]는 이 장의 출처 번호이다. 웹 문서의 현재 내용이 달라지면 본문에 명시한 버전과 커밋을 함께 대조한다."
+        },
+        {
+          "type": "h",
+          "text": "[6-1] Network"
+        },
+        {
+          "type": "link",
+          "text": "Chrome DevTools · Network",
+          "url": "https://developer.chrome.com/docs/devtools/network/"
+        },
+        {
+          "type": "h",
+          "text": "[6-2] Gobuster 2.0.1"
+        },
+        {
+          "type": "link",
+          "text": "Gobuster · 2.0.1 README",
+          "url": "https://github.com/OJ/gobuster/tree/v2.0.1"
+        },
+        {
+          "type": "h",
+          "text": "[6-3] Wazuh 규칙"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh 4.10.0 · 웹 규칙",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0245-web_rules.xml"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · Rules syntax",
+          "url": "https://documentation.wazuh.com/current/user-manual/ruleset/ruleset-xml-syntax/rules.html"
+        },
+        {
+          "type": "h",
+          "text": "[6-4] User-Agent 변경"
+        },
+        {
+          "type": "link",
+          "text": "Chrome DevTools · Network conditions",
+          "url": "https://developer.chrome.com/docs/devtools/device-mode/override-user-agent"
+        },
+        {
+          "type": "h",
+          "text": "[6-5] OWASP CRS 3.3.2"
+        },
+        {
+          "type": "link",
+          "text": "CRS · 허용 메서드 정책",
+          "url": "https://github.com/coreruleset/coreruleset/blob/v3.3.2/rules/REQUEST-911-METHOD-ENFORCEMENT.conf"
+        },
+        {
+          "type": "link",
+          "text": "CRS · 스캐너 헤더 탐지",
+          "url": "https://github.com/coreruleset/coreruleset/blob/v3.3.2/rules/REQUEST-913-SCANNER-DETECTION.conf"
+        },
+        {
+          "type": "h",
+          "text": "[6-6] 암호 추측 공격"
+        },
+        {
+          "type": "link",
+          "text": "OWASP · Brute Force Attack",
+          "url": "https://owasp.org/www-community/attacks/Brute_force_attack"
+        },
+        {
+          "type": "h",
+          "text": "[6-7] DVWA"
+        },
+        {
+          "type": "link",
+          "text": "DVWA · 공식 저장소",
+          "url": "https://github.com/digininja/DVWA"
+        },
+        {
+          "type": "p",
+          "text": "설치본은 DVWA v1.10 Development이다. 일반 로그인과 **Brute Force** 처리 설명은 설치본의 login.php 및 vulnerabilities/brute/source/low.php와 대조했다."
+        },
+        {
+          "type": "h",
+          "text": "[6-8] HTTP 메서드"
+        },
+        {
+          "type": "link",
+          "text": "MDN · HTTP request methods",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods"
+        },
+        {
+          "type": "link",
+          "text": "RFC 4918 · WebDAV PROPFIND",
+          "url": "https://www.rfc-editor.org/rfc/rfc4918#section-9.1"
+        },
+        {
+          "type": "h",
+          "text": "[6-9] Console과 fetch"
+        },
+        {
+          "type": "link",
+          "text": "Chrome DevTools · Run JavaScript",
+          "url": "https://developer.chrome.com/docs/devtools/console/javascript"
+        },
+        {
+          "type": "link",
+          "text": "MDN · Using Fetch",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"
+        },
+        {
+          "type": "link",
+          "text": "WHATWG Fetch · 제한된 메서드",
+          "url": "https://fetch.spec.whatwg.org/#forbidden-method"
+        },
+        {
+          "type": "h",
+          "text": "[6-10] 요청 줄 제한"
+        },
+        {
+          "type": "link",
+          "text": "Apache 2.4 · LimitRequestLine",
+          "url": "https://httpd.apache.org/docs/2.4/mod/core.html#limitrequestline"
+        },
+        {
+          "type": "h",
+          "text": "[6-11] curl"
+        },
+        {
+          "type": "link",
+          "text": "curl · Manual",
+          "url": "https://curl.se/docs/manpage.html"
+        }
+      ]
+    },
+    {
+      "title": "7장 참고문헌",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 [7-번호]는 이 장의 출처 번호이다. 웹 문서의 현재 내용이 달라지면 본문에 명시한 버전과 커밋을 함께 대조한다."
+        },
+        {
+          "type": "p",
+          "text": "실습 절차와 기존 결과 화면의 출처는 [7-1]의 실습 07~12이다. 규칙 해석은 Wazuh 4.10 정의와 대조한다. 공식 문서의 최신 수정 지침은 적용 시점에 해당 운영체제·제품 버전과 함께 확인한다."
+        },
+        {
+          "type": "link",
+          "text": "[7-1] Module 01 Wazuh 위협탐지 DQL · 슬라이드 116~174",
+          "url": "https://docs.google.com/presentation/d/1o0H_2DDHBp8p2HvlSnEPbx6-jdURYzew/edit"
+        },
+        {
+          "type": "link",
+          "text": "[7-2] Apache HTTP Server 2.4 · Log Files",
+          "url": "https://httpd.apache.org/docs/2.4/logs.html"
+        },
+        {
+          "type": "link",
+          "text": "[7-3] Wazuh · File integrity monitoring",
+          "url": "https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/index.html"
+        },
+        {
+          "type": "link",
+          "text": "[7-4] Wazuh · Event logging",
+          "url": "https://documentation.wazuh.com/current/user-manual/manager/event-logging.html"
+        },
+        {
+          "type": "link",
+          "text": "[7-5] OWASP · File Upload Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
+        },
+        {
+          "type": "link",
+          "text": "[7-6] Apache Logging Services · Security",
+          "url": "https://logging.apache.org/security.html"
+        },
+        {
+          "type": "link",
+          "text": "[7-7] Red Hat · Bash Code Injection Vulnerability",
+          "url": "https://access.redhat.com/articles/1200223"
+        },
+        {
+          "type": "link",
+          "text": "[7-8] Wazuh 4.10.0 · Web access rules",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0245-web_rules.xml"
+        },
+        {
+          "type": "link",
+          "text": "[7-9] OWASP · OS Command Injection Defense Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+        },
+        {
+          "type": "p",
+          "text": "kt66 코드 기준은 1장의 63d4180b1d6866de986ef263a3bd831d6082b5d5이다. 수집·라우팅 설정과 DVWA의 처리 코드는 7.8의 경로에서 확인한다. 설정 확인 명령과 검색 조건은 해당 절의 복사용 예제 파일에 있다."
+        }
+      ]
+    },
+    {
+      "title": "8장 참고문헌",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 [8-번호]는 이 장의 출처 번호이다. 웹 문서의 현재 내용이 달라지면 본문에 명시한 버전과 커밋을 함께 대조한다."
+        },
+        {
+          "type": "link",
+          "text": "[8-1] Ubuntu 22.04 ssh 사용 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man1/ssh.1.html"
+        },
+        {
+          "type": "link",
+          "text": "[8-2] Ubuntu 22.04 sshd 및 설정 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man8/sshd.8.html"
+        },
+        {
+          "type": "link",
+          "text": "Ubuntu 22.04 sshd_config 설정 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man5/sshd_config.5.html"
+        },
+        {
+          "type": "link",
+          "text": "[8-3] THC Hydra 공식 저장소",
+          "url": "https://github.com/vanhauser-thc/thc-hydra"
+        },
+        {
+          "type": "link",
+          "text": "[8-4] Wazuh 4.10.0 SSH 디코더",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/decoders/0310-ssh_decoders.xml"
+        },
+        {
+          "type": "link",
+          "text": "[8-5] Wazuh 4.10.0 SSH 규칙",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0095-sshd_rules.xml"
+        },
+        {
+          "type": "link",
+          "text": "[8-6] Wazuh SSH 반복 인증 실패 차단",
+          "url": "https://documentation.wazuh.com/current/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html"
+        },
+        {
+          "type": "link",
+          "text": "[8-7] Ubuntu 22.04 sudo 사용 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man8/sudo.8.html"
+        },
+        {
+          "type": "link",
+          "text": "[8-8] Wazuh 4.10.0 시스템 로그 규칙",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0020-syslog_rules.xml"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh 4.10.0 sudo 디코더",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/decoders/0320-sudo_decoders.xml"
+        },
+        {
+          "type": "link",
+          "text": "[8-9] Ubuntu 22.04 useradd 사용 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man8/useradd.8.html"
+        },
+        {
+          "type": "link",
+          "text": "[8-10] Ubuntu 22.04 usermod 사용 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man8/usermod.8.html"
+        },
+        {
+          "type": "link",
+          "text": "[8-11] Ubuntu 22.04 userdel 사용 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man8/userdel.8.html"
+        },
+        {
+          "type": "link",
+          "text": "Module 01 강의 자료 실습 16~21",
+          "url": "https://docs.google.com/presentation/d/1o0H_2DDHBp8p2HvlSnEPbx6-jdURYzew/edit"
+        },
+        {
+          "type": "link",
+          "text": "kt66 실습 환경",
+          "url": "https://github.com/mrgrit/kt66"
+        },
+        {
+          "type": "p",
+          "text": "본문의 필드·규칙 해석은 설치된 Wazuh Manager 4.10.0과 bastion 에이전트 4.10.1의 기록을 대조했다. 설치별 사용자 규칙과 설정이 다르면 원문·설정·실제 경보를 함께 확인한다."
+        }
+      ]
+    },
+    {
+      "title": "9장 참고문헌",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 [9-번호]는 이 장의 출처 번호이다. 웹 문서의 현재 내용이 달라지면 본문에 명시한 버전과 커밋을 함께 대조한다."
+        },
+        {
+          "type": "link",
+          "text": "[9-1] Wazuh syscheck 설정",
+          "url": "https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/syscheck.html"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh FIM 고급 설정",
+          "url": "https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/advanced-settings.html"
+        },
+        {
+          "type": "link",
+          "text": "[9-2] OpenSSH ssh-keygen",
+          "url": "https://man.openbsd.org/ssh-keygen"
+        },
+        {
+          "type": "link",
+          "text": "Ubuntu 22.04 sshd 설정",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man5/sshd_config.5.html"
+        },
+        {
+          "type": "link",
+          "text": "[9-3] Ubuntu 22.04 crontab 형식",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man5/crontab.5.html"
+        },
+        {
+          "type": "link",
+          "text": "[9-4] curl 공식 사용 설명서",
+          "url": "https://curl.se/docs/manpage.html"
+        },
+        {
+          "type": "link",
+          "text": "[9-5] Python HTTP 서버 모듈",
+          "url": "https://docs.python.org/3/library/http.server.html"
+        },
+        {
+          "type": "link",
+          "text": "[9-6] Wazuh 사용자 실행 명령 감사",
+          "url": "https://documentation.wazuh.com/current/proof-of-concept-guide/audit-commands-run-by-user.html"
+        },
+        {
+          "type": "link",
+          "text": "Ubuntu 22.04 auditctl",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man8/auditctl.8.html"
+        },
+        {
+          "type": "link",
+          "text": "Ubuntu 22.04 ausearch",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man8/ausearch.8.html"
+        },
+        {
+          "type": "link",
+          "text": "[9-7] OpenBSD nc 사용 설명서",
+          "url": "https://man.openbsd.org/nc"
+        },
+        {
+          "type": "link",
+          "text": "[9-8] GNU Bash 파이프라인",
+          "url": "https://www.gnu.org/software/bash/manual/html_node/Pipelines.html"
+        },
+        {
+          "type": "link",
+          "text": "[9-9] Debian dpkg 사용 설명서",
+          "url": "https://manpages.debian.org/bookworm/dpkg/dpkg.1.en.html"
+        },
+        {
+          "type": "link",
+          "text": "[9-10] Wazuh 4.10.0 무결성·시스템 규칙",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0015-ossec_rules.xml"
+        },
+        {
+          "type": "link",
+          "text": "[9-11] Wazuh 4.10.0 감사 규칙",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0365-auditd_rules.xml"
+        },
+        {
+          "type": "link",
+          "text": "[9-12] Wazuh 4.10.0 감사 디코더",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/decoders/0040-auditd_decoders.xml"
+        },
+        {
+          "type": "link",
+          "text": "Module 01 강의 자료 · 실습 22~28",
+          "url": "https://docs.google.com/presentation/d/1o0H_2DDHBp8p2HvlSnEPbx6-jdURYzew/edit"
+        },
+        {
+          "type": "link",
+          "text": "kt66 실습 환경",
+          "url": "https://github.com/mrgrit/kt66"
+        },
+        {
+          "type": "p",
+          "text": "필드·규칙은 설치된 Manager 4.10.0, 에이전트 4.10.1의 설정·기록과 대조했다. 공식 문서의 current 페이지는 최신 버전을 설명할 수 있으므로 설치된 정의와 실제 이벤트를 함께 확인한다."
+        }
+      ]
+    },
+    {
+      "title": "10장 참고문헌",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 [10-번호]는 이 장의 출처 번호이다. 웹 문서의 현재 내용이 달라지면 본문에 명시한 버전과 커밋을 함께 대조한다."
+        },
+        {
+          "type": "link",
+          "text": "[10-1] kt66 기준 코드 · 호스트 센서와 예약 조회 설정",
+          "url": "https://github.com/mrgrit/kt66/tree/63d4180b1d6866de986ef263a3bd831d6082b5d5/deployment"
+        },
+        {
+          "type": "link",
+          "text": "[10-2] osquery 결과 로그와 차이 기록",
+          "url": "https://osquery.readthedocs.io/en/stable/deployment/logging/"
+        },
+        {
+          "type": "link",
+          "text": "[10-3] osquery 예약 조회 설정",
+          "url": "https://osquery.readthedocs.io/en/stable/deployment/configuration/"
+        },
+        {
+          "type": "link",
+          "text": "[10-4] Wazuh osquery 모듈 설정",
+          "url": "https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/wodle-osquery.html"
+        },
+        {
+          "type": "link",
+          "text": "[10-5] OpenBSD nc 사용 설명",
+          "url": "https://man.openbsd.org/nc.1"
+        },
+        {
+          "type": "link",
+          "text": "[10-6] Wazuh 4.10.0 시스템·명령 모니터링 규칙",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0015-ossec_rules.xml"
+        },
+        {
+          "type": "link",
+          "text": "[10-7] Nmap 포트 스캔 방식",
+          "url": "https://nmap.org/book/man-port-scanning-techniques.html"
+        },
+        {
+          "type": "link",
+          "text": "[10-8] Nmap 포트 상태의 의미",
+          "url": "https://nmap.org/book/man-port-scanning-basics.html"
+        },
+        {
+          "type": "link",
+          "text": "[10-9] iptables 사용 설명",
+          "url": "https://man7.org/linux/man-pages/man8/iptables.8.html"
+        },
+        {
+          "type": "link",
+          "text": "[10-10] Wazuh 4.10.0 방화벽 규칙",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0900-firewall_rules.xml"
+        },
+        {
+          "type": "link",
+          "text": "[10-11] osquery 5.24.0 authorized_keys 표 정의",
+          "url": "https://github.com/osquery/osquery/blob/5.24.0/specs/posix/authorized_keys.table"
+        },
+        {
+          "type": "link",
+          "text": "[10-12] Wazuh 4.10.0 osquery 규칙",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0545-osquery_rules.xml"
+        },
+        {
+          "type": "link",
+          "text": "[10-13] OpenSSH 공개 키 옵션",
+          "url": "https://man.openbsd.org/sshd.8"
+        },
+        {
+          "type": "link",
+          "text": "[10-14] Wazuh 4.10.0 커널 디코더",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/decoders/0140-kernel_decoders.xml"
+        },
+        {
+          "type": "link",
+          "text": "[10-15] Wazuh 디코더의 부모와 표시 이름",
+          "url": "https://documentation.wazuh.com/current/user-manual/ruleset/ruleset-xml-syntax/decoders.html"
+        },
+        {
+          "type": "link",
+          "text": "Module 01 강의 자료 · 실습 29·30·62",
+          "url": "https://docs.google.com/presentation/d/1o0H_2DDHBp8p2HvlSnEPbx6-jdURYzew/edit"
+        },
+        {
+          "type": "p",
+          "text": "절차와 필드는 kt66 기준 커밋, Manager 4.10.0·에이전트 4.10.1·osquery 5.24.0의 설정과 실제 기록을 대조했다. 온라인 문서의 최신 설명과 설치된 버전의 차이는 실제 정의·출력으로 확인한다."
+        }
+      ]
+    },
+    {
+      "title": "11장 참고문헌",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 [11-번호]는 이 장의 출처 번호이다. 웹 문서의 현재 내용이 달라지면 본문에 명시한 버전과 커밋을 함께 대조한다."
+        },
+        {
+          "type": "link",
+          "text": "[11-1] NIST SP 800-61 Rev. 3 · Incident Response Recommendations and Considerations for Cybersecurity Risk Management",
+          "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
+        },
+        {
+          "type": "p",
+          "text": "2025년 발행 문서의 탐지·대응·복구와 위험 관리 관점을 참고했다. 본문의 사례 양식과 판단 연습은 이 책의 실습 자료를 바탕으로 구성했다."
+        },
+        {
+          "type": "link",
+          "text": "[11-2] Wazuh · Event logging",
+          "url": "https://documentation.wazuh.com/current/user-manual/manager/event-logging.html"
+        },
+        {
+          "type": "link",
+          "text": "[11-3] Microsoft Learn · Get-FileHash",
+          "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-filehash"
+        },
+        {
+          "type": "link",
+          "text": "[11-4] 1권 원고와 복사용 예제",
+          "url": "https://github.com/mrgrit/hack_ir_with_wazuh_book_1"
+        },
+        {
+          "type": "p",
+          "text": "공격·방어의 개별 절차와 공식 기술 문서는 8·9·10장 참고자료에 연결되어 있다. 이 장의 화면과 기록은 해당 실습의 관찰 결과이다."
+        }
+      ]
+    }
+  ]
+}

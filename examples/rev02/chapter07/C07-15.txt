@@ -1,0 +1,2 @@
+grep -n -F 'shell.php' \
+  /var/log/apache2/landing_access.log

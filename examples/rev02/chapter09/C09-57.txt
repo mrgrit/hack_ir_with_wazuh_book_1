@@ -1,0 +1,4 @@
+cp -p /usr/bin/yes /root/book09-yes.before
+cmp /usr/bin/yes /root/book09-yes.before
+printf "cmp status=%s\n" "$?"
+sha256sum /root/book09-yes.before

@@ -1,0 +1,2 @@
+sed -n '/<syscheck>/,/<\/syscheck>/p' \
+/var/ossec/etc/ossec.conf

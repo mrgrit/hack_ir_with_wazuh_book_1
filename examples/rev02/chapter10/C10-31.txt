@@ -1,0 +1,4 @@
+printf '\n%s ' 'restrict,from="192.168.0.108"' \
+>> ~/.ssh/authorized_keys
+cat ~/book10-key.pub >> ~/.ssh/authorized_keys
+ssh-keygen -lf ~/.ssh/authorized_keys

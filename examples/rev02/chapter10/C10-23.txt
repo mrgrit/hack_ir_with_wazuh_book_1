@@ -1,0 +1,5 @@
+sudo iptables -S INPUT
+sudo iptables -D INPUT -i ens33 -j KT66-PERIMETER
+sudo iptables -F KT66-PERIMETER
+sudo iptables -X KT66-PERIMETER
+sudo iptables -S INPUT

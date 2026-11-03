@@ -1,0 +1,3 @@
+hostname
+/var/ossec/bin/wazuh-control status
+visudo -c

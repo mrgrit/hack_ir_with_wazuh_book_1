@@ -1,0 +1,339 @@
+{
+  "title": "부록 F  실습 대응표와 자료 사용",
+  "series": "해킹·침해대응 실무 with Wazuh",
+  "revision": "REV02",
+  "pages": [
+    {
+      "title": "부록 F  실습 대응표와 자료 사용",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "본문의 실습을 원자료와 연결하고 ATT&CK의 행동 분류와 대조한다. 학습한 범위와 실제로 탐지를 확인한 범위는 구분한다."
+        }
+      ]
+    },
+    {
+      "title": "F.1  웹 실습 대응표",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "Module 01",
+            "1권의 학습 위치"
+          ],
+          "rows": [
+            [
+              "01 · SQL 인젝션",
+              "5.5~5.6 · 입력·WAF·원문 대조"
+            ],
+            [
+              "02 · XSS",
+              "5.7 · 브라우저 실행과 차단 구분"
+            ],
+            [
+              "03 · LFI·경로 조작",
+              "5.8 · 경로·응답·파일 읽기 판단"
+            ],
+            [
+              "04 · 경로 탐색",
+              "6.2 · 개별 요청과 반복 탐색"
+            ],
+            [
+              "05 · User-Agent",
+              "6.3 · 헤더 변경과 차단"
+            ],
+            [
+              "06 · 웹 인증 시도",
+              "6.4 · 일반 로그인과 Brute Force"
+            ],
+            [
+              "07 · 웹셸",
+              "7.2 · 파일·요청·실행 근거"
+            ],
+            [
+              "08 · Log4Shell",
+              "7.3 · 조회 문자열과 외부 조회 조사"
+            ],
+            [
+              "09 · Shellshock",
+              "7.4 · 헤더 입력과 응답"
+            ],
+            [
+              "10 · 명령 삽입",
+              "7.5 · POST·GET·처리 코드"
+            ],
+            [
+              "11 · HTTP 200",
+              "7.6 · 응답 코드와 공격 결과"
+            ],
+            [
+              "12 · 서버 오류 반복",
+              "7.7 · 오류 분포와 규칙"
+            ],
+            [
+              "13 · HTTP 메서드",
+              "6.5 · 메서드 요청과 정책"
+            ],
+            [
+              "14 · 관리 경로",
+              "6.6 · 경로·출발지 조사"
+            ],
+            [
+              "15 · 긴 URL",
+              "6.7 · URL·요청 줄·로그 길이"
+            ]
+          ],
+          "widths": [
+            38,
+            89
+          ],
+          "keep": false
+        },
+        {
+          "type": "p",
+          "text": "실습 번호 순서보다 브라우저 입력과 결과 해석의 학습 흐름을 우선해 6장과 7장의 범위를 나누었다."
+        }
+      ],
+      "break": false,
+      "level": "section",
+      "major": true
+    },
+    {
+      "title": "F.2  Linux 실습 대응표",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "Module 01",
+            "1권의 학습 위치"
+          ],
+          "rows": [
+            [
+              "16 · SSH 반복 실패",
+              "8.2 · 암호 대입과 자동 대응"
+            ],
+            [
+              "17 · 없는 계정",
+              "8.3 · 계정 탐색"
+            ],
+            [
+              "18 · 실패 뒤 성공",
+              "8.4 · 인증 성공과 후속 조사"
+            ],
+            [
+              "19 · root 인증",
+              "8.5 · 허용 조건과 원상복구"
+            ],
+            [
+              "20 · sudo",
+              "8.6 · 실행자·대상·명령"
+            ],
+            [
+              "21 · 계정 변경",
+              "8.7 · 생성·그룹·삭제"
+            ],
+            [
+              "22 · sudoers",
+              "9.2 · 권한 파일 변경"
+            ],
+            [
+              "23 · SSH 키",
+              "9.3 · 등록·사용·제거"
+            ],
+            [
+              "24 · cron",
+              "9.4 · 등록과 실제 실행"
+            ],
+            [
+              "25 · 리버스 셸",
+              "9.5 · 연결·프로세스·감사"
+            ],
+            [
+              "26 · 다운로드 후 실행",
+              "9.6 · HTTP 응답과 셸"
+            ],
+            [
+              "27 · 실행 파일 변조",
+              "9.7 · 해시·크기·복구"
+            ],
+            [
+              "28 · 로그 훼손",
+              "9.8 · 삭제와 내용 비우기"
+            ],
+            [
+              "29 · 새 리스너",
+              "10.3 · 소켓·프로세스·533"
+            ],
+            [
+              "30 · 포트 스캔",
+              "10.4~10.5 · 응답·DROP·archives"
+            ],
+            [
+              "62 · osquery",
+              "10.6~10.8 · 직접·예약 조회·키·포트"
+            ]
+          ],
+          "widths": [
+            38,
+            89
+          ],
+          "keep": false
+        },
+        {
+          "type": "p",
+          "text": "11장에서는 위 실습의 저장 자료로 사건 재구성과 대응 판단을 연습한다. 이 표는 원자료와 책의 학습 범위를 연결하며, 각 사례의 성공 여부와 탐지 범위는 해당 장의 근거로 판단한다."
+        }
+      ],
+      "break": false,
+      "level": "section",
+      "major": false
+    },
+    {
+      "title": "F.3  자료와 버전 확인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "link",
+          "text": "Module 01 · 1권의 실습 원자료",
+          "url": "https://docs.google.com/presentation/d/1o0H_2DDHBp8p2HvlSnEPbx6-jdURYzew/edit"
+        },
+        {
+          "type": "link",
+          "text": "1권 집필 저장소 · 원고와 예제",
+          "url": "https://github.com/mrgrit/hack_ir_with_wazuh_book_1"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · Event logging",
+          "url": "https://documentation.wazuh.com/current/user-manual/manager/event-logging.html"
+        },
+        {
+          "type": "link",
+          "text": "NIST SP 800-61 Rev. 3 · 대응과 복구 참고",
+          "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
+        },
+        {
+          "type": "p",
+          "text": "개별 도구와 규칙의 전체 출처는 권말 참고문헌에 수록했다. 공식 문서가 최신 버전으로 갱신되면 설치 버전의 정의·설정과 대조한다. 본문 화면의 IP·PID·경보 건수는 실습 기록의 값이며 모든 환경에서 동일하게 나오지 않는다."
+        }
+      ],
+      "break": false,
+      "level": "section",
+      "major": false
+    },
+    {
+      "title": "F.4  ATT&CK 기법과 조사 근거",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "MITRE ATT&CK의 기법 설명과 이 책의 학습 주제를 대응시킨 표이다. 저자의 학습 분류이며 Wazuh 경보의 rule.mitre.id와 항상 같지는 않다. 정상 점검과 관리 작업도 같은 동작을 하므로 기법 번호만으로 공격이나 탐지 성공을 판정하지 않는다."
+        },
+        {
+          "type": "table",
+          "head": [
+            "학습 주제",
+            "기법 ID",
+            "확인 범위"
+          ],
+          "rows": [
+            [
+              "암호 추측 · 6.4, 8.2~8.4",
+              "T1110.001",
+              "실패·성공·반복 패턴. 한 번의 실패만으로 악성 여부를 확정하지 않는다."
+            ],
+            [
+              "SSH 접속 · 8장",
+              "T1021.004",
+              "계정·시각·접속과 후속 동작. 승인된 원격 관리도 같은 프로토콜을 쓴다."
+            ],
+            [
+              "웹셸 파일 · 7.2",
+              "T1505.003",
+              "파일 추가와 요청. 실제 웹셸 실행은 응답·프로세스 증거가 더 필요하다."
+            ],
+            [
+              "공개 키 · 9.3, 10.7",
+              "T1098.004",
+              "키 등록과 사용을 구분한다. 10장의 키 조회는 인증 성공을 시험한 결과가 아니다."
+            ],
+            [
+              "cron · 9.4",
+              "T1053.003",
+              "작업 등록·실행 기록. 예약식만으로 실행 성공을 판정하지 않는다."
+            ],
+            [
+              "sudo · 8.6, 9.2",
+              "T1548.003",
+              "권한 설정과 사용. 기존 허용 정책과 승인된 작업을 대조한다."
+            ],
+            [
+              "포트 탐색 · 10.4",
+              "T1046",
+              "요청·응답·DROP과 서비스 상태. 스캔 관찰은 침투 성공과 구분한다."
+            ]
+          ],
+          "widths": [
+            37,
+            28,
+            62
+          ]
+        },
+        {
+          "type": "p",
+          "text": "이 표는 탐지율이나 전체 공격 기법의 검증 범위를 나타내지 않는다. SQL 인젝션·XSS 같은 웹 취약점 이름은 실제 사용 목적과 결과가 확인되지 않으면 하나의 ATT&CK 기법으로 고정하지 않는다."
+        }
+      ]
+    },
+    {
+      "title": "F.5  ATT&CK 자료",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "link",
+          "text": "MITRE ATT&CK · T1110.001 Password Guessing",
+          "url": "https://attack.mitre.org/techniques/T1110/001/"
+        },
+        {
+          "type": "link",
+          "text": "MITRE ATT&CK · T1021.004 SSH",
+          "url": "https://attack.mitre.org/techniques/T1021/004/"
+        },
+        {
+          "type": "link",
+          "text": "MITRE ATT&CK · T1505.003 Web Shell",
+          "url": "https://attack.mitre.org/techniques/T1505/003/"
+        },
+        {
+          "type": "link",
+          "text": "MITRE ATT&CK · T1098.004 SSH Authorized Keys",
+          "url": "https://attack.mitre.org/techniques/T1098/004/"
+        },
+        {
+          "type": "link",
+          "text": "MITRE ATT&CK · T1053.003 Cron",
+          "url": "https://attack.mitre.org/techniques/T1053/003/"
+        },
+        {
+          "type": "link",
+          "text": "MITRE ATT&CK · T1548.003 Sudo and Sudo Caching",
+          "url": "https://attack.mitre.org/techniques/T1548/003/"
+        },
+        {
+          "type": "link",
+          "text": "MITRE ATT&CK · T1046 Network Service Discovery",
+          "url": "https://attack.mitre.org/techniques/T1046/"
+        }
+      ]
+    }
+  ]
+}

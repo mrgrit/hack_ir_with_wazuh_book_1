@@ -1,0 +1,3 @@
+docker compose ps -a
+./kt66.sh down
+docker compose ps -a

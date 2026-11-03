@@ -1,0 +1,3 @@
+sudo usermod -aG sudo book08-user
+id book08-user
+getent group sudo

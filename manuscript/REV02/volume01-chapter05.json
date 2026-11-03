@@ -1,0 +1,2450 @@
+{
+  "title": "웹 입력값 검증과 공격 탐지",
+  "series": "해킹·침해대응 실무 with Wazuh · 시스템 침투와 SIEM 분석",
+  "pages": [
+    {
+      "title": "5장  웹 입력값 검증과 공격 탐지",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "DVWA의 사용자 번호 입력란에 SQL 공격 구문을 전송하고 응답을 확인한다. 403 응답을 받으면 같은 요청의 접속 로그와 WAF 감사 로그를 대조해 차단한 구성 요소와 규칙을 확인한다."
+        },
+        {
+          "type": "h",
+          "text": "학습 목표"
+        },
+        {
+          "type": "list",
+          "items": [
+            "정상 요청을 기준으로 SQL·스크립트·파일 경로 입력의 응답을 비교한다.",
+            "같은 요청의 브라우저 기록·접속 로그·WAF 감사 기록을 연결한다.",
+            "공격 문자열의 탐지, 요청 차단, 실제 실행을 구분한다."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "4장에서는 기록이 경보가 되는 경로를 확인했다. 이제 정상 조회 한 건을 먼저 남겨 요청·응답·로그가 어떻게 대응하는지 기준을 세운다. SQL 인젝션·XSS·파일 경로 요청은 각각 별도의 사례로 기록한다."
+        },
+        {
+          "type": "h",
+          "text": "준비와 완료 기준"
+        },
+        {
+          "type": "table",
+          "head": [
+            "항목",
+            "준비·확인"
+          ],
+          "rows": [
+            [
+              "실행 위치",
+              "Windows 브라우저, 로그 조회는 kt66 VM"
+            ],
+            [
+              "선행 조건",
+              "kt66 실행, web 에이전트 연결, 3~4장의 Discover 사용"
+            ],
+            [
+              "대상",
+              "kt66의 DVWA"
+            ],
+            [
+              "성공 기준",
+              "보낸 입력과 응답 코드, 원문, 탐지 규칙을 대조하고 차단 근거를 설명한다."
+            ],
+            [
+              "실패 시",
+              "5.10에서 이름 해석 → 접속 → 원본 로그 → 수집 → 검색 순서로 확인한다."
+            ],
+            [
+              "원상복구",
+              "5.11에서 학습 단계와 hosts 변경을 복구하고 로그아웃한다."
+            ]
+          ],
+          "widths": [
+            30,
+            97
+          ]
+        },
+        {
+          "type": "p",
+          "text": "브라우저에서 값을 입력하고 버튼을 누른 뒤 응답과 Wazuh 기록을 읽는다. 같은 요청을 curl로 보내는 방법은 선택 실습인 5.13에 모았다."
+        },
+        {
+          "type": "p",
+          "text": "DVWA(Damn Vulnerable Web Application)는 웹 취약점을 학습하도록 만든 애플리케이션이다. kt66이 컨테이너로 실행한다. 이 장에서는 그 앞의 WAF가 공격 입력을 검사하는 과정도 함께 확인한다. [5-1]"
+        },
+        {
+          "type": "p",
+          "text": "각 요청의 시각과 입력을 실행 일지에 기록한다. 검색 결과는 해당 요청의 원문·필드와 대조한다."
+        }
+      ],
+      "break": false,
+      "level": "chapter"
+    },
+    {
+      "title": "5.1  웹 요청과 로그 수집 경로",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "브라우저가 DVWA로 보낸 요청은 먼저 kt66-web의 Apache에 도착한다. Apache는 HTTP 요청에 응답하는 웹 서버이며, 여기서는 요청을 DVWA로 전달하는 프록시도 맡는다. 따라서 DVWA를 조사할 때 첫 접속 기록은 kt66-web에서 찾는다."
+        },
+        {
+          "type": "p",
+          "text": "DVWA로 전달되기 전에 입력을 검사하는 구성요소가 WAF(Web Application Firewall)이다. kt66은 Apache에 ModSecurity를 설치하고 OWASP CRS 규칙으로 요청과 응답을 검사한다. DVWA 앞에서는 차단 모드이므로 공격 문자열이 애플리케이션에 도달하기 전에 거부될 수 있다. [5-2]"
+        },
+        {
+          "type": "image",
+          "path": "assets/figures/chapter05/request-log-path.png",
+          "caption": "도식 5-1. 웹 요청과 로그 수집 경로.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "fw와 ips는 1장에서 구성한 방화벽·침입방지 장비이다. 이 장에서는 그 뒤의 웹 요청과 Apache·ModSecurity 기록을 조사한다."
+        },
+        {
+          "type": "p",
+          "text": "ModSecurity는 요청을 처리하는 중에 차단 여부를 결정한다. Wazuh는 web 에이전트가 보낸 로그를 분석해 경보로 분류한다. 두 도구의 규칙 번호는 서로 다르다."
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "5.2  브라우저 접속 준비",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Windows PC에서 Chrome 또는 Edge를 연다. kt66 VM은 실행해 두며, 웹 실습에는 Windows 브라우저를 사용한다. 별도 공격자 VM은 5.13의 curl 실습을 선택할 때 필요하다."
+        },
+        {
+          "type": "command",
+          "id": "C05-01",
+          "text": "grep -E '^(WEB_HOST_IP|LAB_DOMAIN)=' .env",
+          "why": "kt66 저장소 디렉터리에서 실행한다. grep은 조건에 맞는 행을 찾는다. -E는 확장 정규표현식, ^는 행 시작, 괄호 안의 파이프(|)는 또는(OR)이다. 두 이름 뒤에 등호가 있는 설정을 찾는다.",
+          "result": "WEB_HOST_IP와 LAB_DOMAIN을 적는다. 예시는 192.168.0.107와 ccc.com이다.",
+          "where": "kt66 VM · ~/kt66"
+        },
+        {
+          "type": "image",
+          "path": "assets/figures/rev02/name-and-host.png",
+          "caption": "도식 5-2. 웹 이름과 접속 주소.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "IP는 접속할 장비를 정하고 HTTP의 Host 헤더는 요청할 사이트 이름을 알린다. 같은 kt66 IP에 여러 웹 사이트가 있으므로 DVWA 이름으로 접속한다."
+        },
+        {
+          "type": "p",
+          "text": "LAB_DOMAIN은 ccc.com이며 DVWA의 주소는 http://dvwa.ccc.com이다."
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "Windows hosts 파일 설정",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "hosts는 이름과 IP를 연결하는 파일이다. Windows에서 DVWA 이름을 kt66의 웹 진입 IP로 연결한다. [5-12]"
+        },
+        {
+          "type": "p",
+          "text": "① 시작 메뉴에서 메모장을 검색한다. 마우스 오른쪽 버튼을 눌러 관리자 권한으로 실행을 선택한다."
+        },
+        {
+          "type": "p",
+          "text": "② 파일 → 열기에서 아래 디렉터리를 연다. 파일 형식을 모든 파일로 바꾸고 hosts를 선택한다."
+        },
+        {
+          "type": "code",
+          "text": "C:\\Windows\\System32\\drivers\\etc"
+        },
+        {
+          "type": "p",
+          "text": "③ dvwa 이름이 있는지 찾는다. 있으면 기존 행을 메모하고 IP와 이름을 확인한다. 올바르면 그대로 둔다. 없으면 마지막에 다음 행을 추가한다."
+        },
+        {
+          "type": "code",
+          "text": "192.168.0.107 dvwa.ccc.com"
+        },
+        {
+          "type": "p",
+          "text": "④ Ctrl+S로 저장한다. 파일을 다시 열어 입력한 행이 남아 있는지 확인한다. 파일 이름은 확장자 없는 hosts이다."
+        },
+        {
+          "type": "p",
+          "text": "⑤ 브라우저 주소창에 아래 주소를 입력한다. DVWA 로고와 Username·Password 입력란이 나타나면 이름 연결이 된 것이다."
+        },
+        {
+          "type": "code",
+          "text": "http://dvwa.ccc.com/login.php"
+        },
+        {
+          "type": "p",
+          "text": "접속되지 않으면 kt66 기동 상태, hosts의 IP·이름, http 주소를 차례로 확인한다. 다른 사이트가 열리면 LAB_DOMAIN과 DVWA 이름을 다시 대조한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "DVWA 로그인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "kt66은 DVWA 프로그램을 컨테이너로 실행한다. 처음 사용할 때 필요한 학습용 DB는 다음 절차에서 초기화한다. DVWA 로그인 계정은 Wazuh 계정과 다르다. [5-1]"
+        },
+        {
+          "type": "p",
+          "text": "Username에 admin, Password에 password를 입력하고 **Login**을 누른다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/login-filled.png",
+          "caption": "화면 5-1. DVWA 계정 입력.",
+          "width_mm": 105
+        },
+        {
+          "type": "table",
+          "head": [
+            "열린 화면",
+            "다음 행동"
+          ],
+          "rows": [
+            [
+              "Home과 실습 메뉴",
+              "로그인됐다. DVWA Security 설정으로 진행한다."
+            ],
+            [
+              "Database Setup",
+              "처음 사용하는 DB의 초기화를 진행한다."
+            ],
+            [
+              "Login failed",
+              "계정 입력과 기존 환경의 변경된 암호를 확인한다."
+            ]
+          ],
+          "widths": [
+            46,
+            81
+          ]
+        },
+        {
+          "type": "p",
+          "text": "기존 환경에서 계정이나 데이터를 사용 중이면 초기화하지 않고 해당 계정으로 로그인한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "처음 사용하는 DB 초기화",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "로그인 후 Database Setup으로 이동했다면 학습용 테이블을 준비한다. 직접 열 때는 주소창에 다음 주소를 입력한다."
+        },
+        {
+          "type": "code",
+          "text": "http://dvwa.ccc.com/setup.php"
+        },
+        {
+          "type": "p",
+          "text": "① 페이지 아래의 **Create / Reset Database**를 누른다. 사용자와 방명록 테이블, 연습용 자료를 만든다. 기존 DB가 있으면 그 자료와 계정이 초기 상태로 바뀐다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/setup-button.png",
+          "caption": "화면 5-2. 학습용 DB 초기화 버튼.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "② Setup successful!과 users·guestbook 테이블 생성 메시지를 확인한다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/setup-success.png",
+          "caption": "화면 5-3. 학습용 DB 생성 결과.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "③ 약 5초 뒤 로그인 화면으로 이동한다. 먼저 이동하려면 login 링크를 누른다. admin / password로 다시 로그인해 실습 메뉴를 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "생성 오류가 나오면 오류 문구와 kt66-dvwa 실행 상태부터 확인한다. Setup Check의 allow_url_include나 reCAPTCHA 표시는 이번 장의 세 실습에 필요한 DB 생성 결과와 구분한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "학습 단계와 메뉴 확인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "**DVWA Security**는 애플리케이션의 입력 처리 단계를 고르는 메뉴이다. Low는 입력 검사가 약한 코드를 실행한다. 앞단 WAF의 검사·차단 설정은 별도로 적용된다."
+        },
+        {
+          "type": "p",
+          "text": "① 왼쪽 **DVWA Security**를 누른다. Security level is currently 옆의 현재 값을 메모한다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/security-current.png",
+          "caption": "화면 5-4. 현재 학습 단계.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "② 선택 상자에서 Low를 고르고 **Submit**을 누른다. 위의 현재 값이 low로 바뀌었는지 확인한다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/security-select.png",
+          "caption": "화면 5-5. Low 선택과 적용.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "③ 실습 메뉴는 **SQL Injection**, **XSS (Reflected)**, **File Inclusion** 순서로 사용한다. 각각 사용자 번호 조회, 문자열 출력, 파일 선택 기능이다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "실습 메뉴",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "왼쪽 메뉴에서 이번 장의 세 기능을 선택한다. 거부 화면에서는 뒤로 가기로 DVWA에 돌아온 뒤 다음 메뉴를 연다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/menu.png",
+          "caption": "화면 5-6. DVWA 실습 메뉴.",
+          "width_mm": 43
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "5.3  HTTP 요청과 브라우저 기록",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "HTTP는 클라이언트의 요청에 서버가 응답하는 통신 규약이다. 브라우저에서 링크나 **Submit**을 누르면 요청이 전송된다. HTTP 메서드는 요청의 동작을 나타내며, GET은 지정한 자원을 요청한다."
+        },
+        {
+          "type": "code",
+          "text": "GET /vulnerabilities/sqli/?id=1&Submit=Submit HTTP/1.1\nHost: dvwa.ccc.com"
+        },
+        {
+          "type": "p",
+          "text": "URL의 물음표(?) 뒤는 이름=값 형식의 쿼리 매개변수이다. 앰퍼샌드(&)는 여러 값을 구분한다."
+        },
+        {
+          "type": "table",
+          "head": [
+            "부분",
+            "뜻"
+          ],
+          "rows": [
+            [
+              "/vulnerabilities/sqli/",
+              "SQL 인젝션 실습 경로"
+            ],
+            [
+              "id=1",
+              "조회할 사용자 번호"
+            ],
+            [
+              "Submit=Submit",
+              "조회 버튼으로 전송한 값"
+            ],
+            [
+              "HTTP/1.1",
+              "사용하는 HTTP 버전"
+            ],
+            [
+              "Host",
+              "요청한 사이트 이름"
+            ]
+          ],
+          "widths": [
+            52,
+            75
+          ]
+        },
+        {
+          "type": "p",
+          "text": "개발자 도구의 **Network**는 브라우저가 보낸 요청과 받은 응답을 보여 준다. Wazuh의 Dev Tools와는 다른 도구이다. [5-11]"
+        },
+        {
+          "type": "p",
+          "text": "① DVWA 탭에서 Ctrl+Shift+I를 눌러 개발자 도구를 연다. **Network**(네트워크)를 선택한다. 탭이 숨겨졌으면 »에서 찾는다."
+        },
+        {
+          "type": "p",
+          "text": "② **Preserve log** 또는 **Keep log**(로그 보존)를 켠다. 페이지가 바뀌어도 요청 기록을 남긴다. 녹화 표시가 빨간색인지 확인한다. 회색이면 눌러 기록을 시작한다."
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "Network에서 확인할 항목",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "**Network**를 연 상태에서 페이지를 새로 고치면 요청이 한 행씩 나온다. HTML 외에 CSS와 이미지 요청도 생긴다. 분석할 문서 요청은 Type이 document인 행이다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/network-list.png",
+          "caption": "화면 5-7. Network의 요청 목록.",
+          "width_mm": 127
+        },
+        {
+          "type": "table",
+          "head": [
+            "항목",
+            "뜻"
+          ],
+          "rows": [
+            [
+              "Name",
+              "요청 경로와 쿼리"
+            ],
+            [
+              "Status",
+              "HTTP 응답 코드"
+            ],
+            [
+              "Type",
+              "document는 페이지 문서, stylesheet는 CSS 등 요청 자원 종류"
+            ],
+            [
+              "Headers",
+              "Request URL·Request Method·Status Code와 헤더"
+            ],
+            [
+              "Payload",
+              "전송한 쿼리 매개변수 또는 폼 값"
+            ],
+            [
+              "Response",
+              "서버가 반환한 본문"
+            ]
+          ],
+          "widths": [
+            38,
+            89
+          ]
+        },
+        {
+          "type": "p",
+          "text": "요청 이름을 누르면 세부 탭이 열린다. **Headers**의 General에서 URL·메서드·응답 코드를 읽는다. **Payload**에서는 id 같은 이름과 전달된 값을 대조한다."
+        },
+        {
+          "type": "p",
+          "text": "실습 전에 Windows의 설정 → 시간 및 언어 → 날짜 및 시간에서 시각이 맞는지 확인한다. 요청 시각을 기록해 **Discover**의 시간 범위를 맞춘다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "응답 코드와 입력값 확인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "응답",
+            "확인할 내용"
+          ],
+          "rows": [
+            [
+              "200 OK",
+              "반환된 본문과 화면을 읽는다."
+            ],
+            [
+              "302 Found",
+              "Location 헤더의 주소로 이동하라는 응답이다. 브라우저는 보통 자동으로 이동한다."
+            ],
+            [
+              "403 Forbidden",
+              "요청 거부이다. 차단 주체와 이유는 WAF 기록에서 확인한다."
+            ]
+          ],
+          "widths": [
+            38,
+            89
+          ]
+        },
+        {
+          "type": "p",
+          "text": "브라우저는 폼의 특수문자를 URL에 넣을 수 있게 인코딩한다. 바이트 값을 %와 16진수 두 자리로 표현한다. 주소창에서 읽는 표시와 **Network**의 실제 요청 URL을 대조한다."
+        },
+        {
+          "type": "table",
+          "head": [
+            "표기",
+            "해석"
+          ],
+          "rows": [
+            [
+              "%27",
+              "작은따옴표(')"
+            ],
+            [
+              "%20 또는 +",
+              "이 실습의 쿼리 값에서 공백"
+            ],
+            [
+              "%3C · %3E",
+              "여는 꺾쇠(<) · 닫는 꺾쇠(>)"
+            ],
+            [
+              "%2F · %2C",
+              "슬래시(/) · 쉼표(,)"
+            ],
+            [
+              "%28 · %29",
+              "여는 소괄호 · 닫는 소괄호"
+            ]
+          ],
+          "widths": [
+            43,
+            84
+          ]
+        },
+        {
+          "type": "p",
+          "text": "**Network**에서 기록을 지우는 Clear 버튼은 목록만 비운다. Wazuh와 서버에 수집된 로그는 그대로 남는다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "5.4  정상 요청과 응답",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "① DVWA 왼쪽 **SQL Injection**을 누른다. User ID에 1을 입력한다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/normal-input.png",
+          "caption": "화면 5-8. 사용자 번호 입력.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "② **Network**의 Clear 버튼으로 목록을 비운다. DVWA의 **Submit**을 누른다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/normal-result.png",
+          "caption": "화면 5-9. 사용자 1의 조회 결과.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "③ 화면에 ID: 1, First name: admin, Surname: admin이 나온다. 입력한 번호로 한 사용자를 조회한 결과이다."
+        },
+        {
+          "type": "image",
+          "path": "assets/illustrations/chapter05/request.png",
+          "caption": "삽화. 공격 담당은 SQL 시험을 시작하려다 정상 응답을 기록하지 않았다는 것을 확인한다. 사용자 번호부터 조회하고 응답·시각을 남긴 뒤 공격 입력과 비교한다.",
+          "width_mm": 55,
+          "align": "right"
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "정상 요청의 응답 확인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "**Network**에서 sqli/?id=1&**Submit**=**Submit** 문서 요청을 누른다. **Headers**를 열어 GET과 200 OK를 확인한다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/normal-headers.png",
+          "caption": "화면 5-10. 정상 요청의 URL·메서드·응답.",
+          "width_mm": 127,
+          "crop_px": [
+            0,
+            0,
+            900,
+            274
+          ]
+        },
+        {
+          "type": "p",
+          "text": "**Payload**의 **Query String Parameters**에서 id가 1, **Submit**이 **Submit**인지 확인한다. **Response**에는 앞에서 본 이름이 HTML 본문에 들어 있다."
+        },
+        {
+          "type": "p",
+          "text": "실습 시각과 **Request URL**을 적는다. 다음 Wazuh 검색에서는 같은 경로와 입력값을 찾는다. 로그인 상태라서 사용자 정보가 조회됐다. 로그인 전의 요청은 로그인 화면으로 이동할 수 있다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "정상 요청의 아카이브 기록",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Windows의 **Discover**에서 wazuh-archives-*와 **Last 24 hours**를 선택한다. 정상 입력은 경보가 없어도 아카이브에 수집될 수 있다."
+        },
+        {
+          "type": "query",
+          "id": "Q05-01",
+          "text": "agent.name: \"web\"\nAND data.url: \"/vulnerabilities/sqli/?id=1&Submit=Submit\"",
+          "why": "agent.name은 수집 에이전트이다. web이 수집한 URL 중 정상 조회 경로와 입력값이 일치하는 기록을 찾는다.",
+          "result": "실습 시각의 행을 펼쳐 data.id의 200과 data.url을 확인한다. data.srcip은 요청을 보낸 PC의 출발지 IP이다.",
+          "where": "Windows · Discover · wazuh-archives-*"
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/normal-data.png",
+          "caption": "화면 5-11. 정상 입력의 수집 기록.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "출발지 IP가 네트워크 장비에서 변환되면 PC의 주소와 다를 수 있다. 이후 검색에는 해당 요청에서 읽은 data.srcip 값을 쓴다."
+        },
+        {
+          "type": "p",
+          "text": "data.protocol은 이 웹 로그에서 HTTP 메서드인 GET을 담는다. data.id는 HTTP 응답 코드이다. rule.id는 Wazuh 탐지 규칙 번호이므로 구분한다."
+        },
+        {
+          "type": "p",
+          "text": "location은 /var/log/apache2/dvwa_access.log이다. 결과가 없으면 다음 절차에서 원본 파일부터 확인한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "Apache 원본 로그 확인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "웹 로그는 kt66-web 컨테이너에 있다. access 로그는 접속과 응답, error 로그는 처리 오류와 ModSecurity 메시지를 기록한다. modsec_audit.log는 WAF가 검사한 요청의 상세 기록이다."
+        },
+        {
+          "type": "command",
+          "id": "C05-02",
+          "text": "docker exec -it kt66-web /bin/bash",
+          "result": "이후 두 명령은 kt66-web 안에서 실행한다.",
+          "where": "kt66 VM · 터미널",
+          "purpose": "kt66-web 컨테이너 안에서 다음 작업을 수행할 셸을 연다.",
+          "syntax": "docker exec -it와 /bin/bash의 역할은 C02-P1에서 설명했다. 컨테이너 이름을 대조한 뒤 입력한다."
+        },
+        {
+          "type": "command",
+          "id": "C05-03",
+          "text": "cd /var/log/apache2",
+          "why": "cd는 작업 디렉터리를 옮긴다. Apache 로그 디렉터리로 이동한다.",
+          "result": "이제 파일명으로 로그를 조회할 수 있다.",
+          "where": "kt66-web 컨테이너 안"
+        },
+        {
+          "type": "command",
+          "id": "C05-04",
+          "text": "grep -F '/vulnerabilities/sqli/?id=1&Submit=Submit' \\\n  dvwa_access.log",
+          "why": "grep은 조건에 맞는 행을 찾는다. -F는 작은따옴표 안의 URL을 정규표현식으로 해석하지 않고 그대로 찾는다. 줄 끝의 역슬래시(\\)는 다음 줄까지 한 명령으로 잇는다.",
+          "result": "실습 시각의 행에서 출발지 IP, GET 요청과 200 응답을 읽는다.",
+          "where": "kt66-web 컨테이너 안"
+        },
+        {
+          "type": "command",
+          "id": "C05-05",
+          "text": "exit",
+          "result": "kt66 호스트 터미널로 돌아온다.",
+          "where": "kt66-web 컨테이너 안",
+          "purpose": "현재 셸을 끝내고 바깥 실행 위치로 돌아간다.",
+          "syntax": "종료 뒤 프롬프트로 실행 위치를 확인한다(C02-P4)."
+        },
+        {
+          "type": "p",
+          "text": "파일에 기록이 없으면 DVWA 이름이 올바른 사이트로 연결되는지 확인한다. 파일에는 있으나 **Discover**에 없으면 web 에이전트 연결과 수집 설정을 확인한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "접속 로그의 필드 해석",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "아래는 브라우저 접속 로그의 요청·응답 부분이다. 원문 전체는 examples/rev02/chapter05/browser/normal.log에 있다. [5-4]"
+        },
+        {
+          "type": "code",
+          "text": "10.20.30.254 - -\n[01/Nov/2026:21:12:21 +0900]\n\"GET /vulnerabilities/sqli/?id=1&Submit=Submit\nHTTP/1.1\"\n200 1792"
+        },
+        {
+          "type": "table",
+          "head": [
+            "원문의 부분",
+            "뜻·Wazuh 필드"
+          ],
+          "rows": [
+            [
+              "첫 번째 IP",
+              "접속 출발지 · data.srcip"
+            ],
+            [
+              "뒤의 두 개 -",
+              "원격 사용자 식별값·인증 사용자명이 기록되지 않았다."
+            ],
+            [
+              "[날짜:시각 시간대]",
+              "Apache가 기록한 시각·시간대"
+            ],
+            [
+              "GET",
+              "HTTP 메서드 · data.protocol"
+            ],
+            [
+              "/vulnerabilities/sqli/?…",
+              "요청 대상과 입력값 · data.url"
+            ],
+            [
+              "HTTP/1.1",
+              "HTTP 버전"
+            ],
+            [
+              "200",
+              "응답 코드 · data.id"
+            ],
+            [
+              "1792",
+              "이 환경에서는 헤더를 포함한 송신 바이트 수"
+            ],
+            [
+              "뒤의 두 따옴표 값",
+              "Referer · User-Agent"
+            ]
+          ],
+          "widths": [
+            51,
+            76
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Referer는 이전 페이지 주소를 알리는 헤더이다. SQL 입력 화면의 주소가 들어간다. User-Agent는 브라우저가 보낸 제품·환경 문자열이다."
+        },
+        {
+          "type": "p",
+          "text": "원문 전체는 full_log, 수집 파일은 location에 저장된다. 브라우저 화면의 결과와 응답 코드, 로그 시각을 함께 대조한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "5.5  SQL 인젝션 · 조회 입력",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "box",
+          "kind": "predict",
+          "text": [
+            "정상 조회의 200과 공격 입력의 응답이 어떻게 달라질지 적는다. 403이면 어느 기록에서 차단 주체를 확인할지도 함께 정한다."
+          ],
+          "title": "예상 결과"
+        },
+        {
+          "type": "p",
+          "text": "DVWA는 사용자 자료를 테이블에 저장한다. 테이블의 한 행은 사용자 한 명, 열은 이름·번호 같은 항목이다. id로 받은 번호를 조회 조건에 쓴다. SQL은 데이터베이스에서 자료를 조회·변경하는 언어이다. 다음은 입력 검사가 약한 low 단계의 조회문 구조이다. [5-1][5-5]"
+        },
+        {
+          "type": "code",
+          "text": "SELECT first_name, last_name\nFROM users\nWHERE user_id = '1';"
+        },
+        {
+          "type": "table",
+          "head": [
+            "구문",
+            "뜻"
+          ],
+          "rows": [
+            [
+              "SELECT first_name, last_name",
+              "이름과 성 열을 조회한다."
+            ],
+            [
+              "FROM users",
+              "조회할 테이블은 users이다."
+            ],
+            [
+              "WHERE user_id = '1'",
+              "사용자 번호가 1인 행을 선택한다."
+            ],
+            [
+              "작은따옴표(') · 세미콜론(;)",
+              "문자열 값을 감싼다 · SQL 문장을 끝낸다."
+            ]
+          ],
+          "widths": [
+            64,
+            63
+          ]
+        },
+        {
+          "type": "p",
+          "text": "SQL 인젝션은 입력값이 SQL 문법의 일부로 해석되어 원래 조회 의도가 바뀌는 취약점이다. 입력을 SQL 문자열에 그대로 결합하면 이런 문제가 생길 수 있다."
+        },
+        {
+          "type": "image",
+          "path": "assets/figures/chapter05/sql-context.png",
+          "caption": "도식 5-3. 입력값을 SQL 문자열에 결합하는 처리.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "조회 코드는 kt66-dvwa 컨테이너의 다음 파일에 있다."
+        },
+        {
+          "type": "code",
+          "text": "/var/www/html/vulnerabilities/sqli/source/low.php"
+        },
+        {
+          "type": "p",
+          "text": "**Discover**의 DQL은 저장된 기록을 검색하는 식이다. 여기서 애플리케이션이 데이터베이스에 보내는 SQL과 구분한다."
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "SQL 인젝션 · 입력 구문",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "id 값에 다음 문자열을 넣는다. 페이로드(payload)는 공격 동작을 유도하려고 보내는 입력값을 뜻한다."
+        },
+        {
+          "type": "code",
+          "text": "1' UNION SELECT user,password FROM users-- "
+        },
+        {
+          "type": "table",
+          "head": [
+            "부분",
+            "의도"
+          ],
+          "rows": [
+            [
+              "1'",
+              "번호 뒤의 작은따옴표로 기존 문자열 값을 끝낸다."
+            ],
+            [
+              "UNION",
+              "기존 조회 결과에 다른 SELECT의 결과를 결합한다."
+            ],
+            [
+              "SELECT user,password",
+              "계정명과 저장된 암호값 열을 선택한다."
+            ],
+            [
+              "FROM users",
+              "그 값을 users 테이블에서 읽으려 한다."
+            ],
+            [
+              "-- 뒤의 공백",
+              "MySQL에서 뒤에 붙을 나머지 SQL을 주석으로 처리한다."
+            ]
+          ],
+          "widths": [
+            49,
+            78
+          ]
+        },
+        {
+          "type": "p",
+          "text": "앞 조회는 두 열을 반환한다. 두 번째 SELECT도 user와 password라는 두 열을 지정한다. 실제 동작 여부는 DB 구문, 열의 형식, 애플리케이션 처리와 접근 권한에 달려 있다."
+        },
+        {
+          "type": "p",
+          "text": "User ID에 넣을 값이다. -- 뒤에는 공백 한 칸을 둔다. 복사용 값은 B05-03-sqli.txt에 있다."
+        },
+        {
+          "type": "p",
+          "text": "이 실습에서는 먼저 WAF가 이 입력을 어떻게 처리하는지 확인한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "SQL 공격 구문 전송",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "① **SQL Injection**의 User ID를 앞의 SQL 문자열로 바꾼다. 입력란이 짧아도 복사용 값 전체를 붙여 넣는다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/sqli-input.png",
+          "caption": "화면 5-12. User ID에 SQL 구문 입력.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "② **Network** 목록을 비우고 **Submit**을 누른다. 제시한 사례에서는 Forbidden 화면으로 바뀌었다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/sqli-blocked.png",
+          "caption": "화면 5-13. SQL 요청의 거부 응답.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "③ **Network**의 해당 문서 요청을 누른다. **Headers**에서 403을 확인하고 **Payload**에서 입력한 SQL이 전달됐는지 읽는다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "SQL 공격 요청 검색",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/sqli-headers.png",
+          "caption": "화면 5-14. SQL 요청의 URL과 응답 코드.",
+          "width_mm": 127,
+          "crop_px": [
+            0,
+            0,
+            900,
+            306
+          ]
+        },
+        {
+          "type": "query",
+          "id": "Q05-02",
+          "text": "agent.name: \"web\" AND data.url: *vulnerabilities/sqli/*\nAND data.url: *UNION*",
+          "why": "**Discover**에서 wazuh-alerts-*를 선택하고 실습 시간으로 좁힌다. 별표(*)는 임의 문자열에 일치한다. SQL 실습 경로에서 UNION을 보낸 요청을 찾는다.",
+          "result": "출발지와 시각이 맞는 행을 펼친다. rule.id, data.id, data.url을 기록한다.",
+          "where": "Windows · Discover · wazuh-alerts-*"
+        },
+        {
+          "type": "p",
+          "text": "200이나 302가 나왔다면 본문·로그인 상태·입력값·WAF 설정 순서로 확인한다. DB 자료가 반환됐는지까지 읽어야 실행 결과를 판단할 수 있다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "SQL 인젝션 · 경보 해석",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/sqli-data.png",
+          "caption": "화면 5-15. SQL 입력과 응답 코드.",
+          "width_mm": 127
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/sqli-rule.png",
+          "caption": "화면 5-16. SQL 인젝션 탐지 설명.",
+          "width_mm": 127
+        },
+        {
+          "type": "table",
+          "head": [
+            "확인 항목",
+            "이 사례의 해석"
+          ],
+          "rows": [
+            [
+              "data.url",
+              "%27은 작은따옴표, +는 공백, %2C는 쉼표로 읽는다. UNION SELECT 구문을 찾는다."
+            ],
+            [
+              "data.id: 403",
+              "웹 서버가 요청을 거부했다."
+            ],
+            [
+              "data.srcip",
+              "브라우저 요청이 웹 서버에 도착할 때의 출발지 IP이다."
+            ],
+            [
+              "rule.id: 31103",
+              "Wazuh가 SQL 인젝션 시도로 분류했다."
+            ],
+            [
+              "rule.description",
+              "SQL injection attempt. · SQL 인젝션 시도"
+            ],
+            [
+              "rule.firedtimes",
+              "해당 규칙에 일치한 누적 횟수이다."
+            ]
+          ],
+          "widths": [
+            45,
+            82
+          ]
+        },
+        {
+          "type": "p",
+          "text": "화면의 URL에서 &amp;는 매개변수를 구분하는 &의 HTML 표기이다. full_log의 원문과 대조한다."
+        },
+        {
+          "type": "p",
+          "text": "Wazuh의 기본 규칙 31103은 URL의 SQL 공격 관련 문자열을 찾는다. 데이터베이스가 그 SQL을 실행했는지는 이 접속 로그로 확인되지 않는다. [5-6]"
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "5.6  WAF 차단 근거 확인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "403만으로 차단 주체를 확정할 수는 없다. 같은 요청의 ModSecurity 감사 기록을 찾아 WAF가 차단했는지 확인한다."
+        },
+        {
+          "type": "query",
+          "id": "Q05-03",
+          "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *UNION*",
+          "why": "**Discover**의 패턴을 wazuh-archives-*로 바꾼다. location은 감사 로그 파일, request_line의 UNION으로 SQL 요청을 찾는다. AND로 세 조건을 모두 만족하는 기록을 찾는다.",
+          "result": "한 행을 펼쳐 data.request.request_line의 SQL 입력, transaction의 출발지와 시각을 앞의 접속 로그와 대조한다.",
+          "where": "Windows · Discover · wazuh-archives-*"
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/waf-action.png",
+          "caption": "화면 5-17. ModSecurity의 차단 결정.",
+          "width_mm": 127
+        },
+        {
+          "type": "table",
+          "head": [
+            "필드",
+            "뜻"
+          ],
+          "rows": [
+            [
+              "action.intercepted: true",
+              "WAF가 해당 요청의 처리를 차단했다."
+            ],
+            [
+              "action.phase: 2",
+              "요청 본문 검사 단계이다. URL 매개변수도 이 단계의 규칙으로 검사할 수 있다."
+            ],
+            [
+              "action.message",
+              "차단 평가의 비교 조건이다. anomaly_score가 기준 이상인지 검사했다."
+            ]
+          ],
+          "widths": [
+            57,
+            70
+          ]
+        },
+        {
+          "type": "p",
+          "text": "화면의 전체 필드 이름은 data.audit_data.action으로 시작한다. action은 처리 결정, intercepted는 가로막았는지를 나타낸다."
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "감사 기록의 응답과 규칙",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/waf-response.png",
+          "caption": "화면 5-18. 감사 기록의 응답과 접속 정보.",
+          "width_mm": 127
+        },
+        {
+          "type": "table",
+          "head": [
+            "필드",
+            "확인할 내용"
+          ],
+          "rows": [
+            [
+              "data.response.status",
+              "응답 코드 403"
+            ],
+            [
+              "transaction.remote_address",
+              "요청의 출발지 IP"
+            ],
+            [
+              "transaction.local_address",
+              "요청을 받은 web 주소 10.20.32.80"
+            ],
+            [
+              "transaction.local_port",
+              "web이 요청을 받은 HTTP 포트 80"
+            ],
+            [
+              "transaction.remote_port",
+              "공격자 연결에 임시 배정된 출발지 포트"
+            ],
+            [
+              "transaction.time",
+              "원본 처리 시각과 시간대"
+            ],
+            [
+              "transaction.transaction_id",
+              "WAF가 요청을 구별하는 식별자"
+            ]
+          ],
+          "widths": [
+            61,
+            66
+          ]
+        },
+        {
+          "type": "p",
+          "text": "transaction으로 시작한 항목은 data.transaction 아래에 있다. 시각·출발지·요청 URL이 같은지 대조한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "WAF 규칙과 차단 이유",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "감사 기록의 JSON 탭을 연다. data.audit_data.messages에는 일치한 CRS 규칙과 차단 이유가 들어 있다. 다음 번호와 문구를 찾는다."
+        },
+        {
+          "type": "code",
+          "text": "942100 · SQL Injection Attack Detected\n949110 · Access denied with code 403"
+        },
+        {
+          "type": "p",
+          "text": "CRS는 탐지 규칙이 부여한 점수를 합산하고 차단 기준과 비교한다. 이 요청은 점수가 기준 5 이상이어서 949110이 차단했다. 실제 합산 점수는 감사 기록의 메시지에서 읽는다. 942100은 WAF 규칙, 31103은 Wazuh 규칙이다. [5-2]"
+        },
+        {
+          "type": "p",
+          "text": "시각·출발지·요청 URL이 같은지 대조한 뒤 “SQL 인젝션 입력을 WAF가 차단했다”로 기록한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "5.7  XSS · 입력이 실행되는 위치",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "DVWA의 반사형 XSS 실습은 name에 받은 값을 응답 HTML에 넣는다. XSS(Cross-Site Scripting)는 입력한 스크립트가 웹 페이지의 코드로 해석되어 브라우저에서 실행되는 취약점이다. [5-7]"
+        },
+        {
+          "type": "code",
+          "text": "<script>alert(1)</script>"
+        },
+        {
+          "type": "table",
+          "head": [
+            "부분",
+            "뜻"
+          ],
+          "rows": [
+            [
+              "<script> · </script>",
+              "HTML에서 스크립트 영역의 시작과 끝을 표시한다."
+            ],
+            [
+              "alert(1)",
+              "JavaScript의 알림 창에 숫자 1을 표시한다. 소괄호 안은 함수에 전달하는 값이다."
+            ]
+          ],
+          "widths": [
+            48,
+            79
+          ]
+        },
+        {
+          "type": "image",
+          "path": "assets/figures/chapter05/xss-context.png",
+          "caption": "도식 5-4. 반사형 XSS의 실행 과정.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "반사형은 요청의 입력값이 곧바로 응답에 포함되는 방식이다. 이 장의 사례는 WAF가 해당 요청을 차단한 경우이다."
+        },
+        {
+          "type": "p",
+          "text": "SQL 인젝션은 데이터베이스의 SQL 해석을, XSS는 브라우저의 HTML·스크립트 해석을 노린다."
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "스크립트 입력과 전송",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "① 거부 화면에서는 뒤로 가기를 눌러 DVWA로 돌아온다. 왼쪽 **XSS (Reflected)**를 누른다."
+        },
+        {
+          "type": "p",
+          "text": "② What’s your name?에 <script>alert(1)</script>를 넣는다. **Network** 목록을 비우고 **Submit**을 누른다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/xss-input.png",
+          "caption": "화면 5-19. 이름 입력란의 스크립트.",
+          "width_mm": 127
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/xss-blocked.png",
+          "caption": "화면 5-20. XSS 요청의 거부 응답.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "③ 제시한 사례에서는 403 응답이 나왔고 알림 창은 열리지 않았다. **Network**의 **Payload**에서 name 값을 대조한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "XSS 요청의 경보 분석",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "query",
+          "id": "Q05-04",
+          "text": "agent.name: \"web\" AND data.url: *vulnerabilities/xss_r/*\nAND rule.id: \"31105\"",
+          "why": "wazuh-alerts-*에서 실습 시간의 XSS 경보를 찾는다.",
+          "result": "출발지·시각·name 값을 대조하고 data.id의 403을 읽는다.",
+          "where": "Windows · Discover · wazuh-alerts-*"
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/xss-data.png",
+          "caption": "화면 5-21. 스크립트 입력의 수집 기록.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "URL의 %3Cscript%3E는 <script>이다. %28과 %29는 소괄호, %2F는 닫는 태그의 슬래시이다. 인코딩을 읽어 입력한 값과 대조한다."
+        },
+        {
+          "type": "image",
+          "path": "assets/illustrations/diversity/v1-c05-response.png",
+          "caption": "삽화. 분석 담당은 403 응답만 보고 적었던 “WAF 차단”의 근거를 다시 확인한다. 같은 요청의 감사 로그에서 차단 메시지와 규칙 번호를 찾아 보고서에 추가한다.",
+          "width_mm": 55,
+          "align": "right"
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "XSS · 판정과 대응",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "31105의 설명은 XSS (Cross Site Scripting) attempt.이다. 이 규칙은 URL의 script 관련 문자열 등을 검사한다. 브라우저에서 코드가 실행됐다는 뜻은 아니다. [5-6]"
+        },
+        {
+          "type": "table",
+          "head": [
+            "관찰",
+            "판정·다음 확인"
+          ],
+          "rows": [
+            [
+              "요청 URL에 스크립트가 있다",
+              "XSS 입력을 전송했다."
+            ],
+            [
+              "403과 WAF intercepted: true",
+              "같은 요청을 WAF가 차단했다."
+            ],
+            [
+              "응답이 200이다",
+              "응답 HTML에서 입력이 어떻게 들어갔는지 확인한다."
+            ],
+            [
+              "브라우저에서 시험 코드가 실행된다",
+              "그 페이지에서의 XSS 실행 근거가 된다."
+            ]
+          ],
+          "widths": [
+            57,
+            70
+          ]
+        },
+        {
+          "type": "p",
+          "text": "5.6의 감사 로그 검색에서 마지막 조건을 data.request.request_line: *xss_r*로 바꾼다. request_line과 response.status, action.intercepted를 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "애플리케이션은 입력값을 HTML의 문자로 표시하도록 출력 위치에 맞게 처리해야 한다. 예를 들어 HTML 본문에서 <를 &lt;로 출력하면 태그 시작으로 해석되지 않는다. HTML 속성·JavaScript·URL은 각각 다른 처리가 필요하다. [5-8]"
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "5.8  경로 조작과 파일 포함",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "DVWA의 파일 포함 실습은 page 값으로 읽을 파일을 고른다. 디렉터리 트래버설은 ../ 같은 경로 표현으로 허용한 디렉터리 밖의 파일에 접근하려는 공격이다. [5-9]"
+        },
+        {
+          "type": "p",
+          "text": "LFI(Local **File Inclusion**)는 웹 애플리케이션이 입력값에 따라 서버 내부 파일을 포함하는 취약점이다. 이 실습에서는 파일 포함 기능에 상위 경로를 넣는다."
+        },
+        {
+          "type": "code",
+          "text": "../../../../../etc/passwd"
+        },
+        {
+          "type": "table",
+          "head": [
+            "부분",
+            "뜻"
+          ],
+          "rows": [
+            [
+              "../",
+              "현재 디렉터리의 상위 디렉터리로 이동한다."
+            ],
+            [
+              "다섯 번의 ../",
+              "예시 시작 경로에서 루트 디렉터리까지 올라간다."
+            ],
+            [
+              "/etc/passwd",
+              "리눅스 계정 이름·UID·홈·로그인 셸 등이 있는 파일이다. 암호 해시 파일은 /etc/shadow이다."
+            ]
+          ],
+          "widths": [
+            43,
+            84
+          ]
+        },
+        {
+          "type": "image",
+          "path": "assets/figures/chapter05/path-context.png",
+          "caption": "도식 5-5. 입력 경로를 그대로 사용한 파일 접근.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "시작 디렉터리와 파일 접근 권한에 따라 결과가 달라진다. 경로 문자열이 로그에 있다는 사실과 파일 내용이 응답에 나왔다는 사실을 구분한다."
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "파일 선택 기능 확인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "① DVWA의 **File Inclusion**을 누른다. file1.php, file2.php, file3.php 링크가 보인다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/file-menu.png",
+          "caption": "화면 5-22. File Inclusion의 파일 선택.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "② file1.php를 누른다. 주소창의 ?page=file1.php와 본문의 파일 내용을 확인한다. page 값으로 서버가 포함할 파일을 고르는 기능이다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/file-normal.png",
+          "caption": "화면 5-23. file1.php를 선택한 결과.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "File 1 화면의 IP는 DVWA에 요청을 전달한 웹 프록시의 주소이다. 요청을 보낸 PC의 출발지는 Wazuh의 data.srcip에서 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "allow_url_include 관련 문구는 URL을 통해 원격 파일을 포함하는 PHP 설정을 가리킨다. 다음 단계는 서버 내부의 경로를 보내므로 이 설정을 켤 필요가 없다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "파일 경로 변경 요청",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "① 주소창에서 물음표 뒤의 page=file1.php를 아래 값으로 바꾼다. 앞의 http 주소·이름·/vulnerabilities/fi/는 그대로 둔다."
+        },
+        {
+          "type": "code",
+          "text": "page=../../../../../etc/passwd\n&bookcase=book05-browser-path-raw"
+        },
+        {
+          "type": "p",
+          "text": "위의 두 줄은 줄바꿈 없이 붙인다. bookcase는 로그에서 이 요청을 찾을 표식이다. 전체 주소는 B05-06-path-raw-url.txt에서 복사할 수 있다."
+        },
+        {
+          "type": "p",
+          "text": "② Enter를 누른다. 제시한 사례에서는 Forbidden 화면이 나왔다. **Network**의 문서 요청을 눌러 URL의 page 값과 403 응답을 확인한다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/path-blocked.png",
+          "caption": "화면 5-24. 파일 경로 요청의 거부 응답.",
+          "width_mm": 127
+        },
+        {
+          "type": "query",
+          "id": "Q05-05",
+          "text": "agent.name: \"web\"\nAND data.url: *book05-browser-path*",
+          "result": "현재 요청의 data.url·data.id·rule.id를 기록한다. 사례 환경은 403과 31104였다.",
+          "where": "Windows · Discover · wazuh-alerts-*",
+          "purpose": "wazuh-alerts-*에서 경로 요청의 표식을 찾는다.",
+          "syntax": "다음 인코딩 비교 요청도 같은 검색에 포함된다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "경로 인코딩에 따른 응답 비교",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "① 같은 주소에서 물음표 뒤를 다음 값으로 바꾼다. %2F는 슬래시이다. 경로 값의 뜻은 유지하고 URL에 보내는 표기만 바꾼다."
+        },
+        {
+          "type": "code",
+          "text": "page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd\n&bookcase=book05-browser-path"
+        },
+        {
+          "type": "p",
+          "text": "두 줄을 붙여 입력한 뒤 Enter를 누른다. 전체 주소는 B05-08-path-encoded-url.txt에 있다. **Network**에서 실제 **Request URL**과 403 응답을 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "② 앞의 **Discover** 검색에서 **Refresh**를 누른다. 시각과 표식으로 두 요청을 골라 data.url과 rule.id를 비교한다."
+        },
+        {
+          "type": "table",
+          "head": [
+            "보낸 형태",
+            "사례 기록의 Wazuh 결과"
+          ],
+          "rows": [
+            [
+              "슬래시를 그대로 전달",
+              "31104 · Common web attack."
+            ],
+            [
+              "슬래시를 %2F로 인코딩",
+              "31101 · 400번대 응답 분류"
+            ]
+          ],
+          "widths": [
+            64,
+            63
+          ]
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter05/browser/path-data.png",
+          "caption": "화면 5-25. 경로 조작 요청의 수집 기록.",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "기본 규칙 31104에는 ../.. 등의 문자열 조건이 있다. 서버에서 같은 경로로 해석해도 URL에 남은 문자열에 따라 분류가 달라진다. [5-6]"
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "파일 접근 결과 판정",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "제시한 사례의 두 요청은 WAF에서 차단되었다. 파일 내용이 반환된 기록은 없다. 다음과 같이 근거를 나누어 적는다."
+        },
+        {
+          "type": "table",
+          "head": [
+            "대상",
+            "확인 근거"
+          ],
+          "rows": [
+            [
+              "접근 시도",
+              "page 값에 상위 경로와 etc/passwd가 있다."
+            ],
+            [
+              "WAF 차단",
+              "같은 요청의 intercepted: true와 응답 403"
+            ],
+            [
+              "파일 노출",
+              "응답 본문에 대상 파일의 내용이 있는지 확인해야 한다."
+            ],
+            [
+              "후속 조사",
+              "같은 출발지가 다른 파일과 경로도 요청했는지 찾는다."
+            ]
+          ],
+          "widths": [
+            38,
+            89
+          ]
+        },
+        {
+          "type": "p",
+          "text": "애플리케이션은 page에 실제 파일 경로를 직접 받기보다 home, help처럼 허용한 이름을 받고 서버에서 고정된 파일에 대응시키는 방식으로 바꾼다. 경로를 받을 필요가 있으면 정규화한 최종 경로가 허용 디렉터리 안에 있는지 검사한다."
+        },
+        {
+          "type": "p",
+          "text": "LFI에는 상위 경로 외에 PHP의 파일 처리 기능을 이용하는 변형도 있다. 문자열 필터 한두 개로 모든 파일 접근을 막을 수 있다고 가정하지 않는다. 이 장의 재현 대상은 앞의 경로 조작 두 요청이다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "5.9  검색 조건 확대",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "bookcase는 실습에서 붙인 표식이다. 실제 조사에서는 요청 경로·출발지·공격 문자열·탐지 규칙을 조합한다. 아래 조건은 이 장에서 확인한 경로 조작을 찾는 예이다."
+        },
+        {
+          "type": "query",
+          "id": "Q05-06",
+          "text": "agent.name: \"web\" AND\n(rule.id: \"31104\" OR data.url: *etc*passwd*)",
+          "why": "OR는 양쪽 조건 중 하나를 만족하면 선택한다. 소괄호는 그 범위를 묶는다. *etc*passwd*는 etc와 passwd 사이의 / 또는 %2F도 포함하도록 찾는다.",
+          "result": "경로 조작 규칙에 일치한 요청과 파일명 문자열이 들어간 요청을 함께 읽는다. 이 장 밖의 기록도 나올 수 있다.",
+          "where": "Windows · Discover · wazuh-alerts-*"
+        },
+        {
+          "type": "p",
+          "text": "자신의 브라우저 요청의 출발지 IP와 실습 시간을 추가해 범위를 좁힌다. data.srcip의 값은 앞에서 읽은 data.srcip 값으로 바꾼다."
+        },
+        {
+          "type": "query",
+          "id": "Q05-07",
+          "text": "agent.name: \"web\" AND data.srcip: \"10.20.30.254\"\nAND (rule.id: \"31104\" OR data.url: *etc*passwd*)",
+          "why": "AND로 출발지 조건을 추가한다. 기간은 실습 시작·종료 시각으로 지정한다.",
+          "result": "같은 출발지의 요청을 URL과 응답 코드로 묶어 읽는다.",
+          "where": "Windows · Discover · wazuh-alerts-*"
+        },
+        {
+          "type": "p",
+          "text": "공격 문자열 검색은 조사 후보를 찾는 방법이다. 정상 입력과 비슷한 문자열도 함께 나올 수 있으므로 원문과 응답, 애플리케이션의 기능을 확인한다. [5-10]"
+        },
+        {
+          "type": "box",
+          "kind": "blind",
+          "text": [
+            "접속 로그의 URL과 응답 코드는 SQL 실행 결과나 브라우저의 스크립트 실행을 모두 담지 않는다. 응답 본문과 애플리케이션·WAF 기록에서 빠진 근거를 보충한다."
+          ],
+          "title": "수집 한계"
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "응답·감사 로그·경보 대조",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "image",
+          "path": "assets/figures/chapter05/evidence.png",
+          "caption": "도식 5-6. 응답·차단 결정·로그 분류의 대조.",
+          "width_mm": 127
+        },
+        {
+          "type": "table",
+          "head": [
+            "관찰한 값",
+            "해석"
+          ],
+          "rows": [
+            [
+              "HTTP 403",
+              "클라이언트가 거부 응답을 받았다."
+            ],
+            [
+              "WAF intercepted: true",
+              "WAF가 요청 처리를 차단했다."
+            ],
+            [
+              "rule.id 31103·31105·31104",
+              "접속 로그가 SQL·XSS·일반 웹 공격 조건에 일치했다."
+            ],
+            [
+              "rule.id 31106",
+              "공격 관련 URL이 200 응답을 받았다. 침투 성공 여부는 본문과 서버 동작으로 확인한다."
+            ]
+          ],
+          "widths": [
+            57,
+            70
+          ]
+        },
+        {
+          "type": "p",
+          "text": "31106의 설명에는 success가 들어 있지만 조건은 공격 관련 상위 규칙과 응답 코드 200이다. DB 자료 노출·브라우저 실행·파일 반환을 직접 확인하는 규칙은 아니다. [5-6]"
+        },
+        {
+          "type": "p",
+          "text": "입력값 검증은 예상한 형식·범위·허용값만 받아들이는 작업이다. SQL은 문장을 고정하고 값을 별도로 전달하는 매개변수 바인딩을 적용한다. XSS에는 출력 위치에 맞는 처리, 파일 기능에는 접근 범위 제한을 적용한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "5.10  결과가 다를 때",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "증상",
+            "확인 순서"
+          ],
+          "rows": [
+            [
+              "사이트 이름을 찾을 수 없다",
+              "주소창의 이름 → Windows hosts의 이름·IP"
+            ],
+            [
+              "Connection refused 또는 시간 초과",
+              "kt66 기동 → Windows와 kt66의 주소·브리지 → 웹 진입 IP와 80번 포트"
+            ],
+            [
+              "로그인 페이지 대신 다른 사이트",
+              "LAB_DOMAIN → 주소창 → Windows hosts 항목"
+            ],
+            [
+              "공격 응답이 200 또는 302",
+              "응답 본문 → 요청 입력값 → 올바른 사이트인지 → WAF의 적용 설정"
+            ],
+            [
+              "Apache 원문이 없다",
+              "이름·접속 경로 → kt66-web의 dvwa_access.log → 요청 시각·URL"
+            ],
+            [
+              "원문은 있으나 검색 결과가 없다",
+              "인덱스·기간 → DQL·필터 → web 에이전트 상태 → localfile 설정"
+            ],
+            [
+              "예상한 공격 규칙이 없다",
+              "인코딩된 URL → data.id → 다른 rule.id → WAF 감사 로그"
+            ]
+          ],
+          "widths": [
+            48,
+            79
+          ]
+        },
+        {
+          "type": "p",
+          "text": "조건을 고친 뒤 요청 한 건을 다시 보내고 새 시각으로 찾는다. 기존 경보는 바뀐 요청의 결과를 보여 주지 않는다."
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "WAF와 수집 설정 확인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "command",
+          "id": "C05-06",
+          "text": "docker exec -it kt66-web /bin/bash",
+          "result": "아래 설정 조회를 컨테이너 안에서 진행한다.",
+          "where": "kt66 VM · 터미널",
+          "purpose": "kt66-web 컨테이너 안에서 다음 작업을 수행할 셸을 연다.",
+          "syntax": "docker exec -it와 /bin/bash의 역할은 C02-P1에서 설명했다. 컨테이너 이름을 대조한 뒤 입력한다."
+        },
+        {
+          "type": "command",
+          "id": "C05-07",
+          "text": "grep -n -E '^SecRuleEngine|^SecAuditEngine' \\\n  /etc/modsecurity/modsecurity.conf",
+          "why": "-n은 줄 번호, -E는 확장 정규표현식이다. 캐럿(^)은 행 시작, 파이프(|)는 또는(OR)을 의미한다.",
+          "result": "기준 환경은 SecRuleEngine On, SecAuditEngine RelevantOnly이다.",
+          "where": "kt66-web 컨테이너 안"
+        },
+        {
+          "type": "command",
+          "id": "C05-08",
+          "text": "grep -n -E 'ServerName|SecRuleEngine' \\\n  /etc/apache2/sites-enabled/020-dvwa.conf",
+          "why": "DVWA 사이트의 이름과 별도 검사 모드가 있는지 읽는다.",
+          "result": "ServerName이 dvwa.ccc.com인지 확인한다. 기준 DVWA 파일에는 검사 모드 재정의가 없어 전역 On을 사용한다.",
+          "where": "kt66-web 컨테이너 안"
+        },
+        {
+          "type": "p",
+          "text": "On은 차단 동작을 적용한다. DetectionOnly는 규칙을 검사하고 기록하지만 차단하지 않는 모드이다. RelevantOnly는 관련 응답·감사 조건을 만족한 요청의 상세 기록을 남긴다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "수집 설정 확인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "C05-06으로 접속한 kt66-web 안에서 계속한다. Wazuh 에이전트의 localfile은 수집할 파일 경로와 해석 형식을 지정한다."
+        },
+        {
+          "type": "command",
+          "id": "C05-09",
+          "text": "grep -F -B 1 -A 1 '*_access.log' \\\n  /var/ossec/etc/ossec.conf",
+          "result": "log_format apache와 /var/log/apache2/*_access.log를 확인한다. 설정 경로의 *는 여러 사이트의 access 파일을 수집하도록 지정한 것이다.",
+          "where": "kt66-web 컨테이너 안",
+          "purpose": "Apache 접속 로그를 수집하는 localfile 설정을 확인한다.",
+          "syntax": "-F로 경로 문자열을 찾고 -B 1과 -A 1로 앞뒤 한 줄을 함께 출력한다. 작은따옴표 안의 *는 grep에 문자 그대로 전달한다."
+        },
+        {
+          "type": "command",
+          "id": "C05-10",
+          "text": "grep -F -B 1 -A 1 'modsec_audit.log' \\\n  /var/ossec/etc/ossec.conf",
+          "why": "감사 로그의 수집 항목과 앞뒤 한 줄을 읽는다.",
+          "result": "log_format json과 /var/log/apache2/modsec_audit.log를 확인한다.",
+          "where": "kt66-web 컨테이너 안"
+        },
+        {
+          "type": "command",
+          "id": "C05-11",
+          "text": "exit",
+          "result": "호스트 터미널로 돌아온다.",
+          "where": "kt66-web 컨테이너 안",
+          "purpose": "현재 셸을 끝내고 바깥 실행 위치로 돌아간다.",
+          "syntax": "종료 뒤 프롬프트로 실행 위치를 확인한다(C02-P4)."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "Wazuh 규칙 파일 확인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "웹 접속 로그의 기본 탐지 조건은 kt66-siem의 아래 파일에 있다. Wazuh Manager가 설치할 때 제공하는 규칙이다."
+        },
+        {
+          "type": "code",
+          "text": "/var/ossec/ruleset/rules/0245-web_rules.xml"
+        },
+        {
+          "type": "command",
+          "id": "C05-12",
+          "text": "docker exec -it kt66-siem /bin/bash",
+          "result": "아래 조회는 kt66-siem 안에서 실행한다.",
+          "where": "kt66 VM · 터미널",
+          "purpose": "kt66-siem 컨테이너 안에서 다음 작업을 수행할 셸을 연다.",
+          "syntax": "docker exec -it와 /bin/bash의 역할은 C02-P1에서 설명했다. 컨테이너 이름을 대조한 뒤 입력한다."
+        },
+        {
+          "type": "command",
+          "id": "C05-13",
+          "text": "cd /var/ossec/ruleset/rules",
+          "why": "기본 규칙 디렉터리로 이동한다.",
+          "result": "파일명으로 웹 규칙을 조회할 수 있다.",
+          "where": "kt66-siem 컨테이너 안"
+        },
+        {
+          "type": "command",
+          "id": "C05-14",
+          "text": "grep -n -A 9 '<rule id=\"31104\"' \\\n  0245-web_rules.xml",
+          "result": "if_sid는 상위 규칙, url은 요청 URL의 문자열 조건이다. ../.. 조건과 Common web attack. 설명을 읽는다.",
+          "where": "kt66-siem 컨테이너 안",
+          "purpose": "웹 공격을 분류하는 규칙 31104의 조건을 읽는다.",
+          "syntax": "줄 번호를 붙이고 일치한 행 뒤의 아홉 줄까지 읽는다. -n은 줄 번호, -A 9는 뒤쪽 문맥이다."
+        },
+        {
+          "type": "command",
+          "id": "C05-15",
+          "text": "exit",
+          "result": "kt66 호스트 터미널로 돌아온다.",
+          "where": "kt66-siem 컨테이너 안",
+          "purpose": "현재 셸을 끝내고 바깥 실행 위치로 돌아간다.",
+          "syntax": "종료 뒤 프롬프트로 실행 위치를 확인한다(C02-P4)."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "5.11  원상복구와 결과 보관",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "① **DVWA Security**를 연다. 5.2에서 메모한 단계로 돌리고 **Submit**을 누른다. Security level is currently 옆의 값이 원래대로인지 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "② **Logout**을 누른다. 로그인 화면이 나오면 DVWA 세션을 종료한 것이다."
+        },
+        {
+          "type": "p",
+          "text": "③ Windows hosts를 수정했다면 메모장을 관리자 권한으로 열고 변경한 행을 확인한다. 다음 실습에서도 쓸 이름은 유지한다. 제거할 때는 추가한 행만 지우거나 수정 전 값으로 되돌린다. 저장 후 파일을 다시 열어 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "④ **Network**의 로그 보존을 끄고 개발자 도구를 닫는다. **Discover**의 검색식·필터를 비우고 wazuh-alerts-*, **Last 24 hours**로 되돌린다."
+        },
+        {
+          "type": "p",
+          "text": "초기화로 만든 학습용 DB는 다음 실습에서도 사용한다. **Create / Reset Database**는 복구 버튼이 아니며 다시 누르면 자료가 초기화된다. 접속 로그와 경보는 조사 자료로 남긴다."
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "5.12  조사 결과 정리",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "브라우저에서 한 행동",
+            "관찰 결과"
+          ],
+          "rows": [
+            [
+              "User ID에 1 입력·Submit",
+              "200 · 사용자 1의 이름 표시"
+            ],
+            [
+              "User ID에 SQL 입력·Submit",
+              "403 · Wazuh 31103 · WAF 차단"
+            ],
+            [
+              "이름 입력란에 스크립트·Submit",
+              "403 · Wazuh 31105 · WAF 차단"
+            ],
+            [
+              "주소창에 원래 경로 입력",
+              "403 · Wazuh 31104"
+            ],
+            [
+              "주소창에 인코딩한 경로 입력",
+              "403 · Wazuh 31101"
+            ]
+          ],
+          "widths": [
+            62,
+            65
+          ]
+        },
+        {
+          "type": "p",
+          "text": "표는 사례의 관찰 결과이다. 자신의 요청마다 아래 항목을 적는다."
+        },
+        {
+          "type": "table",
+          "head": [
+            "항목",
+            "기록할 내용"
+          ],
+          "rows": [
+            [
+              "요청",
+              "실행 PC·시각·메뉴·입력값·Request URL"
+            ],
+            [
+              "응답",
+              "HTTP 상태·화면 결과·관련 본문"
+            ],
+            [
+              "접속 로그",
+              "출발지·시각·location·full_log"
+            ],
+            [
+              "Wazuh",
+              "인덱스·문서 ID·rule.id·data.id"
+            ],
+            [
+              "WAF",
+              "transaction_id·intercepted·규칙·차단 이유"
+            ],
+            [
+              "판단",
+              "입력 시도·차단·실행 여부와 각각의 근거"
+            ]
+          ],
+          "widths": [
+            30,
+            97
+          ]
+        },
+        {
+          "type": "p",
+          "text": "양식은 examples/rev02/chapter05/investigation.txt이다. 다음 장에서는 웹 경로 탐색과 인증 요청의 기록을 조사한다."
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "5.13  curl을 이용한 HTTP 요청(선택)",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "앞의 실습은 브라우저로 마쳤다. curl은 URL로 요청을 보내고 응답을 터미널에 출력하는 도구이다. 같은 입력을 명령으로 지정하는 방법을 비교하려면 이 절을 진행한다."
+        },
+        {
+          "type": "p",
+          "text": "실행 위치는 1.9의 Ubuntu 22.04 공격자 VM이다. kt66과 같은 Bridged 네트워크에 연결한다. 부록 A.15의 일괄 설치에 curl이 포함돼 있다."
+        },
+        {
+          "type": "command",
+          "id": "C05-16",
+          "text": "curl --version",
+          "why": "curl [옵션] URL 형식으로 요청을 보낸다. --version은 설치 버전을 보여 준다.",
+          "result": "버전이 출력되는지 확인한다. 기존 검증은 curl 7.81.0을 사용했다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "command",
+          "id": "C05-17",
+          "text": "ip -br -4 address",
+          "why": "ip는 네트워크 주소를 확인하는 명령이다. -br은 간략 표시, -4는 IPv4, address는 인터페이스 주소 조회이다.",
+          "result": "ens33 등의 주소를 기록한다. lo의 127.0.0.1은 자기 자신이다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "p",
+          "text": "브라우저와 curl은 로그인 상태를 자동으로 공유하지 않는다. 아래 명령은 로그인 쿠키 없이 요청한다. 정상 조회는 로그인 페이지로 이동하는 302, 공격 입력은 WAF 차단에 따른 403을 관찰했다."
+        }
+      ],
+      "break": false,
+      "level": "section"
+    },
+    {
+      "title": "공격자 VM의 이름 설정",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "/etc/hosts는 Ubuntu의 이름·IP 연결 파일이다. Windows에서 한 설정과 별개이므로 공격자 VM에서도 확인한다."
+        },
+        {
+          "type": "command",
+          "id": "C05-18",
+          "text": "grep -n -F 'dvwa.' /etc/hosts",
+          "why": "-n은 줄 번호, -F는 작은따옴표 안의 문자를 그대로 검색한다.",
+          "result": "기존 이름과 IP가 올바르면 편집을 건너뛴다. 바꿀 때는 기존 행을 메모한다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "command",
+          "id": "C05-19",
+          "text": "sudo nano /etc/hosts",
+          "why": "sudo는 관리자 권한으로 실행하고 nano는 파일을 편집한다. 기존 이름이 있으면 그 행을 고치고, 없으면 아래 행을 추가한다.",
+          "result": "Ctrl+O, Enter로 저장하고 Ctrl+X로 닫는다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "code",
+          "text": "192.168.0.107 dvwa.ccc.com"
+        },
+        {
+          "type": "command",
+          "id": "C05-20",
+          "text": "getent hosts dvwa.ccc.com",
+          "why": "getent hosts 이름은 시스템의 이름 해석 결과를 출력한다. dvwa.ccc.com이 192.168.0.107로 해석되는지 확인한다.",
+          "result": "kt66의 WEB_HOST_IP가 나와야 한다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "command",
+          "id": "C05-21",
+          "text": "DVWA='http://dvwa.ccc.com'",
+          "result": "화면 출력 없이 DVWA 변수에 http://dvwa.ccc.com이 저장된다.",
+          "where": "공격자 VM · 터미널",
+          "purpose": "현재 셸에서 사용할 변수에 주소를 저장한다.",
+          "syntax": "등호 양쪽을 붙이며 작은따옴표는 문자열을 묶는다."
+        },
+        {
+          "type": "command",
+          "id": "C05-22",
+          "text": "echo \"$DVWA\"",
+          "why": "echo는 값을 출력한다. $DVWA는 변수의 값으로 바뀌고 큰따옴표는 이를 하나의 인자로 묶는다.",
+          "result": "http://dvwa.ccc.com이 나온다. 이후 요청도 이 터미널에서 실행한다.",
+          "where": "공격자 VM · 터미널"
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "시각 확인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "NTP는 시간 서버를 기준으로 시스템 시계를 맞추는 방식이다. 요청과 Wazuh 기록의 시각을 대조하기 전에 확인한다."
+        },
+        {
+          "type": "command",
+          "id": "C05-23",
+          "text": "date -Is",
+          "result": "시각과 +09:00 같은 시간대 값을 적는다.",
+          "where": "공격자 VM · 터미널",
+          "purpose": "date는 현재 시각을 출력한다.",
+          "syntax": "-I의 s는 ISO 8601 형식으로 초까지 표시한다는 뜻이다."
+        },
+        {
+          "type": "command",
+          "id": "C05-24",
+          "text": "date -Is",
+          "why": "kt66의 현재 시각도 읽는다.",
+          "result": "두 시각을 같은 시간대로 환산해 대조한다. +00:00과 +09:00은 9시간 차이이다.",
+          "where": "kt66 VM · 터미널"
+        },
+        {
+          "type": "command",
+          "id": "C05-25",
+          "text": "timedatectl status",
+          "why": "timedatectl은 시각과 동기화 상태를 관리한다. status는 현재 상태를 조회한다.",
+          "result": "System clock synchronized: yes와 NTP service: active를 확인한다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "command",
+          "id": "C05-26",
+          "text": "sudo timedatectl set-ntp true",
+          "why": "동기화가 꺼져 있을 때만 실행한다. set-ntp true는 NTP 동기화를 켜며 관리자 권한이 필요하다.",
+          "result": "timedatectl status로 다시 확인한다. 계속 no이면 인터넷 연결과 시간 서버 설정을 확인한다.",
+          "where": "공격자 VM · 터미널"
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "curl의 기본 응답 확인",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "옵션·구문",
+            "동작"
+          ],
+          "rows": [
+            [
+              "-s · -S",
+              "진행 표시를 숨긴다 · 오류 메시지는 표시한다. -sS로 붙여 쓸 수 있다."
+            ],
+            [
+              "-i",
+              "응답 헤더와 본문을 함께 출력한다."
+            ],
+            [
+              "--max-time 15",
+              "전체 요청 시간을 15초로 제한한다."
+            ],
+            [
+              "\"$DVWA/login.php\"",
+              "변수의 주소 뒤에 로그인 경로를 붙인다. 큰따옴표로 하나의 인자로 전달한다."
+            ]
+          ],
+          "widths": [
+            43,
+            84
+          ]
+        },
+        {
+          "type": "command",
+          "id": "C05-27",
+          "text": "curl -sS -i --max-time 15 \"$DVWA/login.php\"",
+          "why": "로그인 페이지를 요청한다. 옵션은 위 표와 같다.",
+          "result": "첫 줄에 200 OK, 아래에는 헤더와 HTML 본문이 나온다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "p",
+          "text": "HTML은 웹 페이지 구조를 표현하는 문서 형식이다. curl은 응답 문자를 출력하며 HTML을 화면으로 그리거나 스크립트를 실행하지 않는다. 브라우저에서는 같은 내용을 화면과 **Network**로 읽었다."
+        },
+        {
+          "type": "p",
+          "text": "응답은 상태 줄·헤더·빈 줄·본문 순서이다. -i를 생략하면 기본 출력에는 본문만 나온다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "curl의 정상 값 전송",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "옵션·기호",
+            "동작"
+          ],
+          "rows": [
+            [
+              "--get",
+              "뒤의 입력값을 URL 쿼리에 붙여 GET으로 보낸다."
+            ],
+            [
+              "--data-urlencode 이름=값",
+              "값에 URL 인코딩을 적용한다. 반복하면 여러 매개변수를 보낸다."
+            ],
+            [
+              "작은따옴표(')",
+              "공백·기호를 포함한 입력을 한 인자로 묶는다."
+            ],
+            [
+              "줄 끝 역슬래시(\\)",
+              "다음 줄까지 한 명령으로 이어 준다."
+            ]
+          ],
+          "widths": [
+            54,
+            73
+          ]
+        },
+        {
+          "type": "command",
+          "id": "C05-28",
+          "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/sqli/\" \\\n  --data-urlencode 'id=1' \\\n  --data-urlencode 'Submit=Submit' \\\n  --data-urlencode 'bookcase=book05-normal'",
+          "why": "id와 **Submit**은 브라우저 폼이 전송한 값이다. bookcase는 로그에서 구분하기 위한 표식이다. -sS·-i·--max-time은 C05-27의 응답 표시·시간 제한 옵션이다.",
+          "result": "로그인 쿠키가 없어 302 Found와 Location: login.php가 나왔다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "p",
+          "text": "curl은 이 명령에서 이동 안내를 자동으로 따라가지 않는다. 브라우저가 로그인된 상태에서 받은 200과 구분한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "curl의 SQL 구문 전송",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "command",
+          "id": "C05-29",
+          "text": "PAYLOAD=\"1' UNION SELECT user,password FROM users-- \"",
+          "result": "다음 명령에서 $PAYLOAD가 이 문자열로 바뀐다.",
+          "where": "공격자 VM · 터미널",
+          "purpose": "SQL 입력을 셸 변수에 저장한다.",
+          "syntax": "큰따옴표 안의 작은따옴표는 입력 문자의 일부이며, -- 뒤 공백도 포함한다."
+        },
+        {
+          "type": "command",
+          "id": "C05-30",
+          "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/sqli/\" \\\n  --data-urlencode \"id=$PAYLOAD\" \\\n  --data-urlencode 'Submit=Submit' \\\n  --data-urlencode 'bookcase=book05-sqli'",
+          "why": "--data-urlencode가 SQL의 공백과 작은따옴표를 인코딩하고 --get이 URL에 붙인다. 큰따옴표는 변수 값 전체를 하나의 인자로 묶는다.",
+          "result": "기존 검증에서는 403과 Wazuh 규칙 31103이 나왔다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "p",
+          "text": "브라우저와 같은 SQL 입력을 보냈다. **Discover**에서 data.url: *book05-sqli*로 찾고 같은 시각의 WAF 기록을 대조한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "curl의 스크립트 전송",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "command",
+          "id": "C05-31",
+          "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/xss_r/\" \\\n  --data-urlencode 'name=<script>alert(1)</script>' \\\n  --data-urlencode 'bookcase=book05-xss'",
+          "why": "name은 브라우저의 이름 입력란에 대응한다. 작은따옴표는 꺾쇠·소괄호를 셸 문법으로 처리하지 않도록 묶는다. --data-urlencode는 값을 인코딩하고 --get은 URL 쿼리로 보낸다.",
+          "result": "기존 검증에서는 403과 Wazuh 규칙 31105가 나왔다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "p",
+          "text": "curl 출력만으로 JavaScript 실행을 확인할 수는 없다. 이 요청에서는 응답과 WAF 차단을 확인한다. **Discover**에서 data.url: *book05-xss*로 찾는다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "curl의 인코딩 경로 전송",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "새 옵션 --data는 값을 URL 인코딩하지 않고 전달한다. 기본적으로 요청 본문에 넣지만 여기서는 --get과 함께 써서 쿼리에 붙인다. --data-urlencode와 구분한다."
+        },
+        {
+          "type": "table",
+          "head": [
+            "이번 명령의 입력",
+            "전송 형태"
+          ],
+          "rows": [
+            [
+              "--data-urlencode 'page=…'",
+              "슬래시를 %2F로 바꾼 경로 값"
+            ],
+            [
+              "--data 'bookcase=…'",
+              "인코딩할 특수문자가 없는 표식"
+            ]
+          ],
+          "widths": [
+            68,
+            59
+          ]
+        },
+        {
+          "type": "command",
+          "id": "C05-32",
+          "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/fi/\" \\\n  --data-urlencode 'page=../../../../../etc/passwd' \\\n  --data 'bookcase=book05-path'",
+          "why": "page는 읽을 파일 경로이다. ../는 상위 디렉터리이며 다섯 번 사용했다. 작은따옴표로 값을 묶고 역슬래시로 명령을 이어 쓴다. -sS·-i는 응답 표시, --max-time 15는 시간 제한이다.",
+          "result": "기존 검증에서는 403과 Wazuh 규칙 31101이 나왔다. URL의 슬래시는 %2F로 기록됐다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "p",
+          "text": "본문의 브라우저 주소창에서 %2F를 입력한 경우와 같은 경로 값을 보낸다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "curl의 경로 원문 전송",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "command",
+          "id": "C05-33",
+          "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/fi/\" \\\n  --data 'page=../../../../../etc/passwd' \\\n  --data 'bookcase=book05-path-raw'",
+          "why": "page도 --data로 전달한다. --get과 함께 사용하므로 슬래시가 그대로 URL 쿼리에 들어간다. 공백이 없는 경로이며, raw 표식으로 앞 요청과 구분한다.",
+          "result": "기존 검증에서는 403과 Wazuh 규칙 31104가 나왔다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "p",
+          "text": "**Discover**에서 data.url: *book05-path*로 두 요청을 찾는다. 5.8에서 비교한 ../와 ..%2F의 차이를 읽는다. WAF 차단은 해당 요청의 감사 기록에서 확인한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "curl 실습 원상복구",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "공격자 VM에서 hosts를 변경했다면 수정 전 메모와 대조한다. 다음 실습에서도 사용할 이름은 유지한다."
+        },
+        {
+          "type": "command",
+          "id": "C05-34",
+          "text": "grep -n -F 'dvwa.' /etc/hosts",
+          "why": "변경한 행을 줄 번호와 함께 찾는다.",
+          "result": "복구 대상이 이번 실습에서 바꾼 행인지 확인한다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "command",
+          "id": "C05-35",
+          "text": "sudo nano /etc/hosts",
+          "why": "추가한 행을 제거하거나 수정 전 값으로 되돌린다.",
+          "result": "Ctrl+O, Enter로 저장하고 Ctrl+X로 닫는다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "command",
+          "id": "C05-36",
+          "text": "grep -n -F 'dvwa.' /etc/hosts",
+          "why": "같은 조건으로 다시 읽는다.",
+          "result": "추가한 행이 사라졌거나 기존 값으로 돌아왔는지 확인한다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "command",
+          "id": "C05-37",
+          "text": "unset DVWA PAYLOAD",
+          "why": "unset은 현재 셸의 변수를 제거한다.",
+          "result": "echo \"$DVWA\"를 실행하면 값 없이 빈 줄이 나온다.",
+          "where": "공격자 VM · 터미널"
+        },
+        {
+          "type": "p",
+          "text": "NTP 동기화는 유지한다. 요청으로 생긴 로그와 경보는 조사 자료로 보관한다."
+        }
+      ],
+      "break": false,
+      "level": "subsection"
+    },
+    {
+      "title": "5장 정리",
+      "kind": "body",
+      "break": false,
+      "level": "section",
+      "blocks": [
+        {
+          "type": "h",
+          "text": "핵심 정리"
+        },
+        {
+          "type": "list",
+          "items": [
+            "같은 요청은 시각·출발지·경로와 입력값으로 연결한다. 접속 로그와 WAF 감사 기록의 규칙 번호를 구분한다.",
+            "403은 거부 응답이다. 차단 주체와 이유는 해당 요청의 감사 기록에서 확인한다.",
+            "URL의 공격 문자열과 HTTP 200만으로 SQL·스크립트·파일 읽기의 성공을 확정하지 않는다."
+          ]
+        },
+        {
+          "type": "h",
+          "text": "분석 문제"
+        },
+        {
+          "type": "p",
+          "text": "기존 기록을 읽고 답한다. 추가 공격이나 설정 변경 없이 필요한 근거와 확인 순서를 작성한다."
+        },
+        {
+          "type": "list",
+          "items": [
+            "SQL 문자열을 보낸 요청이 200이었다. 자료 유출이라고 쓰기 전에 어떤 근거가 필요한가?",
+            "403 접속 기록만 있다. WAF 차단이라는 결론의 부족한 근거를 적는다.",
+            "정상 사용자가 SQL 문법을 설명하는 글을 입력했다. 문자열 규칙이 일치하면 무엇을 더 조사하는가?"
+          ],
+          "style": "number"
+        },
+        {
+          "type": "h",
+          "text": "해설과 판정 기준"
+        },
+        {
+          "type": "list",
+          "items": [
+            "응답 본문에 실제 자료가 반환됐는지, 해당 요청이 애플리케이션까지 전달됐는지 확인한다. 접속 로그의 200과 공격 문자열만으로는 부족하다.",
+            "같은 요청의 WAF 감사 기록에서 처리 결정과 일치 규칙을 확인해야 한다. 애플리케이션이나 다른 접근 제한도 403을 반환할 수 있다.",
+            "해당 입력 기능, 전달된 값, 응답, 애플리케이션의 처리 방식과 승인된 사용 목적을 조사한다. 문자열의 일치와 취약점 악용은 구분한다."
+          ],
+          "style": "number"
+        },
+        {
+          "type": "h",
+          "text": "후속 실습"
+        },
+        {
+          "type": "p",
+          "text": "6장에서는 입력값 하나의 내용에서 여러 요청의 패턴으로 조사 범위를 넓힌다. 이번에 찾은 data.srcip과 location을 기준으로 같은 요청자의 앞뒤 기록을 연결한다."
+        },
+        {
+          "type": "h",
+          "text": "더 읽을거리"
+        },
+        {
+          "type": "p",
+          "text": "자료의 전체 주소는 권말 참고문헌 5장에서 찾는다."
+        },
+        {
+          "type": "p",
+          "text": "DVWA 공식 저장소의 설치 안내에서 데이터베이스 초기화와 보안 수준 설정의 선행 조건을 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "DVWA의 SQL injection low.php에서 브라우저의 입력값이 SQL 문에 들어가는 위치를 찾는다. 접속 로그의 요청 문자열과 서버가 처리하는 값을 나누어 읽는다."
+        }
+      ]
+    }
+  ],
+  "revision": "REV02",
+  "comments": "REV02 교정본. 실제 시험과 정적 검토의 범위는 editorial/REV02 및 원본 검토 기록을 참조한다."
+}

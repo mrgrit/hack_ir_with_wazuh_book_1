@@ -1,0 +1,3 @@
+Get-FileHash .\book11-analysis\case-a.json `
+  -Algorithm SHA256
+Get-Content .\book11-analysis\manifest.json

@@ -1,0 +1,27 @@
+# S10-01 | kt66 VM · sudo osqueryi의 osquery> 프롬프트
+# SELECT는 출력 열, FROM은 조사 표이다. l과 p는 표의 짧은 이름이다. JOIN ... USING(pid)는 pid가 같은 두 행을 연결한다. WHERE는 조건, IN은 괄호 안 값 중 하나를 선택한다. 세미콜론(;)은 SQL 문장의 끝이다.
+SELECT p.pid, p.name, p.path, l.address, l.port
+FROM listening_ports l
+JOIN processes p USING (pid)
+WHERE l.port IN (31337,31338);
+# 확인: 현재 열어 둔 31337 행의 nc·실행 파일 경로·주소·PID를 ss와 대조한다. 31338은 10.7에서 만든 뒤 다시 조회한다.
+
+# S10-02 | kt66 VM · sudo osqueryi의 osquery> 프롬프트
+# 마침표로 시작하는 .schema는 SQL 문장이 아니라 osqueryi의 표 구조 확인 명령이다. 뒤에는 표 이름을 넣는다.
+.schema authorized_keys
+.schema users
+# 확인: authorized_keys의 uid·algorithm·key·options·comment·key_file, users의 uid·username을 확인한다.
+
+# S10-03 | kt66 VM · sudo osqueryi의 osquery> 프롬프트
+# u와 k는 users와 authorized_keys의 별칭이다. 이 조회의 CROSS JOIN과 USING(uid)는 각 사용자 uid에 해당하는 키를 읽도록 연결한다. >=는 이상, OR는 둘 중 하나이다. 따라서 UID 1000 이상 계정과 UID 0을 선택한다.
+SELECT u.username, k.key_file,
+       k.algorithm, k.comment
+FROM users u
+CROSS JOIN authorized_keys k USING (uid)
+WHERE u.uid >= 1000 OR u.uid = 0;
+# 확인: 현재 조회에서는 등록된 키의 사용자·파일·알고리즘·주석을 읽는다. 10.7의 등록 뒤 book10-key@attacker 행을 찾는다.
+
+# S10-04 | kt66 VM · sudo osqueryi의 osquery> 프롬프트
+# osqueryi의 .quit는 조회 셸을 닫는다.
+.quit
+# 확인: 리눅스 셸 프롬프트로 돌아온다.

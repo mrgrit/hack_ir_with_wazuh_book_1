@@ -1,0 +1,59 @@
+{
+  "_index": "wazuh-archives-4.x-2026.11.01",
+  "_id": "4_kYl6EBEYWT20nncdRv",
+  "_score": null,
+  "_source": {
+    "agent": {
+      "ip": "10.20.32.80",
+      "name": "web",
+      "id": "013"
+    },
+    "data": {
+      "protocol": "GET",
+      "srcip": "192.168.0.202",
+      "id": "404",
+      "url": "/admin/"
+    },
+    "rule": {
+      "firedtimes": 17,
+      "mail": false,
+      "level": 5,
+      "pci_dss": [
+        "6.5",
+        "11.4"
+      ],
+      "tsc": [
+        "CC6.6",
+        "CC7.1",
+        "CC8.1",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ],
+      "description": "Web server 400 error code.",
+      "groups": [
+        "web",
+        "accesslog",
+        "attack"
+      ],
+      "id": "31101",
+      "nist_800_53": [
+        "SA.11",
+        "SI.4"
+      ],
+      "gdpr": [
+        "IV_35.7.d"
+      ]
+    },
+    "location": "/var/log/apache2/dvwa_access.log",
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "full_log": "192.168.0.202 - - [01/Nov/2026:21:32:00 +0900] \"GET /admin/ HTTP/1.1\" 404 443 \"-\" \"book06-scan\"",
+    "timestamp": "2026-11-01T12:32:02.198+0000"
+  },
+  "sort": [
+    1793536322198
+  ]
+}

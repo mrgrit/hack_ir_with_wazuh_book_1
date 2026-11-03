@@ -1,0 +1,5 @@
+ls -l ~/book10-authorized_keys.before
+cp -p ~/.ssh/authorized_keys \
+~/book10-authorized_keys.before
+cmp ~/.ssh/authorized_keys \
+~/book10-authorized_keys.before

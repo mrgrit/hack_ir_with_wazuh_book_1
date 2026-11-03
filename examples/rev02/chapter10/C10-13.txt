@@ -1,0 +1,1 @@
+ps -p 181571 -o pid,ppid,user,lstart,args

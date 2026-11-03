@@ -1,0 +1,2 @@
+sudo ausearch -if /var/log/audit/audit.log \
+-a 6630 -i

@@ -1,0 +1,27 @@
+{
+  "_index": "wazuh-archives-4.x-2026.11.01",
+  "_id": "afkYl6EBEYWT20nnkNWv",
+  "_score": null,
+  "_source": {
+    "agent": {
+      "ip": "10.20.32.80",
+      "name": "web",
+      "id": "013"
+    },
+    "data": {
+      "protocol": "GET",
+      "srcip": "10.20.30.254",
+      "id": "200",
+      "url": "/vulnerabilities/brute/?username=admin&password=book06-wrong1&Login=Login"
+    },
+    "location": "/var/log/apache2/dvwa_access.log",
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "full_log": "10.20.30.254 - - [01/Nov/2026:21:32:08 +0900] \"GET /vulnerabilities/brute/?username=admin&password=book06-wrong1&Login=Login HTTP/1.1\" 200 1804 \"http://dvwa.ccc.com/vulnerabilities/brute/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36\"",
+    "timestamp": "2026-11-01T12:32:10.206+0000"
+  },
+  "sort": [
+    1793536330206
+  ]
+}

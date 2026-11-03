@@ -1,0 +1,10 @@
+검색한 경보 기록
+
+검색 범위(인덱스 패턴·시작~종료·시간대):
+검색 조건(DQL·필터):
+기록 식별(_index·_id):
+발생 대상(agent.name·agent.ip):
+탐지 결과(rule.id·rule.description):
+원문(full_log·location):
+확인한 사실:
+추가 조사:

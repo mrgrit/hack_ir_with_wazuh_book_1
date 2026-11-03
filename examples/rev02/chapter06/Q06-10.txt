@@ -1,0 +1,3 @@
+agent.name: "web"
+AND data.url: ("/admin/" OR "/phpmyadmin/"
+OR "/wp-admin/" OR "/manager/html")

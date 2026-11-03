@@ -1,0 +1,330 @@
+[
+  {
+    "document": "volume01-chapter06.json",
+    "section": "없는 경로의 응답과 경보",
+    "id": "Q06-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-01.txt",
+    "text": "agent.name: \"web\"\nAND data.url: \"/book06-missing\""
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "목록 탐색 도구 준비",
+    "id": "C06-01",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-01.txt",
+    "text": "gobuster -h"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "설치와 이름 해석 확인",
+    "id": "C06-02",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-02.txt",
+    "text": "sudo apt update"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "설치와 이름 해석 확인",
+    "id": "C06-03",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-03.txt",
+    "text": "sudo apt install gobuster"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "설치와 이름 해석 확인",
+    "id": "C06-04",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-04.txt",
+    "text": "getent hosts dvwa.ccc.com"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "탐색 경로 목록 작성",
+    "id": "C06-05",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-05.txt",
+    "text": "cd ~"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "탐색 경로 목록 작성",
+    "id": "C06-06",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-06.txt",
+    "text": "ls -l book06-paths.txt"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "탐색 경로 목록 작성",
+    "id": "C06-07",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-07.txt",
+    "text": "nano book06-paths.txt"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "탐색 경로 목록 작성",
+    "id": "C06-08",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-08.txt",
+    "text": "cat book06-paths.txt"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "경로 목록을 이용한 탐색",
+    "id": "C06-09",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-09.txt",
+    "text": "gobuster -m dir \\\n  -u http://dvwa.ccc.com/ \\\n  -w book06-paths.txt -t 1 -a book06-scan"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "반복 요청 검색",
+    "id": "Q06-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-02.txt",
+    "text": "agent.name: \"web\"\nAND full_log: \"book06-scan\""
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "반복 요청 검색",
+    "id": "Q06-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-03.txt",
+    "text": "agent.name: \"web\" AND rule.id: \"31151\"\nAND full_log: \"book06-scan\""
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "반복 경보의 조건 확인",
+    "id": "C06-10",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-10.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "반복 경보의 조건 확인",
+    "id": "C06-11",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-11.txt",
+    "text": "cd /var/ossec/ruleset/rules"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "반복 경보의 조건 확인",
+    "id": "C06-12",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-12.txt",
+    "text": "sed -n '/<rule id=\"31151\"/,/<\\/rule>/p' \\\n  0245-web_rules.xml"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "반복 경보의 조건 확인",
+    "id": "C06-13",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-13.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "User-Agent 기록 검색",
+    "id": "Q06-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-04.txt",
+    "text": "agent.name: \"web\" AND data.url: \"/book06-ua\"\nAND full_log: \"sqlmap\""
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "WAF 차단 규칙 확인",
+    "id": "Q06-05",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter06/Q06-05.txt",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-ua*"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "일반 로그인 기록 검색",
+    "id": "Q06-06",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter06/Q06-06.txt",
+    "text": "agent.name: \"web\" AND data.protocol: \"POST\"\nAND data.url: \"/login.php\""
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "인증 요청 URL 분석",
+    "id": "Q06-07",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter06/Q06-07.txt",
+    "text": "agent.name: \"web\"\nAND data.url: *vulnerabilities/brute/*\nAND data.url: *username=admin*"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "메서드 요청의 접속 기록",
+    "id": "Q06-08",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-08.txt",
+    "text": "agent.name: \"web\" AND data.protocol: \"PROPFIND\"\nAND data.url: \"/book06-method\""
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "허용 메서드 정책과 대조",
+    "id": "Q06-09",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter06/Q06-09.txt",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-method*"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "관리 경로의 출발지 조사",
+    "id": "Q06-10",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-10.txt",
+    "text": "agent.name: \"web\"\nAND data.url: (\"/admin/\" OR \"/phpmyadmin/\"\nOR \"/wp-admin/\" OR \"/manager/html\")"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "로그 크기 경보 분석",
+    "id": "Q06-11",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-11.txt",
+    "text": "agent.name: \"web\" AND rule.id: \"31115\"\nAND data.url: *book06-long*"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.8  원본 access 로그 확인",
+    "id": "C06-14",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-14.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.8  원본 access 로그 확인",
+    "id": "C06-15",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-15.txt",
+    "text": "cd /var/log/apache2"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.8  원본 access 로그 확인",
+    "id": "C06-16",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-16.txt",
+    "text": "grep -F 'book06-scan' dvwa_access.log"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.8  원본 access 로그 확인",
+    "id": "C06-17",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-17.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "로그인 처리 코드의 위치",
+    "id": "C06-18",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-18.txt",
+    "text": "docker exec -it kt66-dvwa /bin/bash"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "로그인 처리 코드의 위치",
+    "id": "C06-19",
+    "where": "kt66-dvwa 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-19.txt",
+    "text": "cd /var/www/html"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "로그인 처리 코드의 위치",
+    "id": "C06-20",
+    "where": "kt66-dvwa 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-20.txt",
+    "text": "grep -nE 'checkToken|generateSessionToken|dvwaRedirect' \\\n  login.php"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "로그인 처리 코드의 위치",
+    "id": "C06-21",
+    "where": "kt66-dvwa 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-21.txt",
+    "text": "grep -nE 'GET|Welcome|incorrect' \\\n  vulnerabilities/brute/source/low.php"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "로그인 처리 코드의 위치",
+    "id": "C06-22",
+    "where": "kt66-dvwa 컨테이너 안",
+    "file": "examples/rev02/chapter06/C06-22.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "원상복구와 조사 기록",
+    "id": "C06-23",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-23.txt",
+    "text": "cat ~/book06-paths.txt"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "원상복구와 조사 기록",
+    "id": "C06-24",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-24.txt",
+    "text": "rm -i ~/book06-paths.txt"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "원상복구와 조사 기록",
+    "id": "C06-25",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-25.txt",
+    "text": "ls -l ~/book06-paths.txt"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.10  curl의 헤더 지정(선택)",
+    "id": "C06-26",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-26.txt",
+    "text": "curl --version"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.10  curl의 헤더 지정(선택)",
+    "id": "C06-27",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-27.txt",
+    "text": "curl -i --max-time 15 \\\n  -A \"sqlmap/1.0 book06-curl-ua\" \\\n  http://dvwa.ccc.com/book06-curl-ua"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "6.10  curl의 헤더 지정(선택)",
+    "id": "Q06-12",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-12.txt",
+    "text": "agent.name: \"web\" AND data.url: *book06-curl-ua*"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "curl의 메서드 지정(선택)",
+    "id": "C06-28",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter06/C06-28.txt",
+    "text": "curl -i --max-time 15 -X PROPFIND \\\n  http://dvwa.ccc.com/book06-curl-method"
+  },
+  {
+    "document": "volume01-chapter06.json",
+    "section": "curl의 메서드 지정(선택)",
+    "id": "Q06-13",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter06/Q06-13.txt",
+    "text": "agent.name: \"web\" AND data.url: *book06-curl-method*"
+  }
+]

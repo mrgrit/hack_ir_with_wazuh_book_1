@@ -1,0 +1,3 @@
+ls -l /home/ccc/.ssh/authorized_keys
+rm /home/ccc/.ssh/authorized_keys
+ls -l /home/ccc/.ssh/authorized_keys

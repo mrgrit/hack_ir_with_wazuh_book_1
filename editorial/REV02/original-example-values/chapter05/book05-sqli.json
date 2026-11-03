@@ -1,0 +1,80 @@
+{
+  "_index": "wazuh-archives-4.x-2026.11.01",
+  "_id": "BfnQlqEBEYWT20nn-Jc6",
+  "_score": null,
+  "_source": {
+    "agent": {
+      "ip": "10.20.32.80",
+      "name": "web",
+      "id": "013"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "data": {
+      "protocol": "GET",
+      "srcip": "192.168.0.202",
+      "id": "403",
+      "url": "/vulnerabilities/sqli/?id=1%27+UNION+SELECT+user%2Cpassword+FROM+users--+&Submit=Submit&bookcase=book05-sqli"
+    },
+    "rule": {
+      "firedtimes": 1,
+      "mail": false,
+      "level": 7,
+      "pci_dss": [
+        "6.5",
+        "11.4",
+        "6.5.1"
+      ],
+      "tsc": [
+        "CC6.6",
+        "CC7.1",
+        "CC8.1",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ],
+      "description": "SQL injection attempt.",
+      "groups": [
+        "web",
+        "accesslog",
+        "attack",
+        "sql_injection"
+      ],
+      "mitre": {
+        "technique": [
+          "Exploit Public-Facing Application"
+        ],
+        "id": [
+          "T1190"
+        ],
+        "tactic": [
+          "Initial Access"
+        ]
+      },
+      "id": "31103",
+      "nist_800_53": [
+        "SA.11",
+        "SI.4"
+      ],
+      "gdpr": [
+        "IV_35.7.d"
+      ]
+    },
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "full_log": "192.168.0.202 - - [01/Nov/2026:20:13:49 +0900] \"GET /vulnerabilities/sqli/?id=1%27+UNION+SELECT+user%2Cpassword+FROM+users--+&Submit=Submit&bookcase=book05-sqli HTTP/1.1\" 403 438 \"-\" \"curl/7.81.0\"",
+    "input": {
+      "type": "log"
+    },
+    "@timestamp": "2026-11-01T11:13:50.047Z",
+    "location": "/var/log/apache2/dvwa_access.log",
+    "id": "1793531630.128937751",
+    "timestamp": "2026-11-01T11:13:50.047+0000"
+  },
+  "sort": [
+    1793531630047
+  ]
+}

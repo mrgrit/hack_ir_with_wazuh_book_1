@@ -1,0 +1,466 @@
+[
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.1  조사 대상과 실행 위치",
+    "id": "C10-01",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-01.txt",
+    "text": "hostname\ndate -Is\ncommand -v nc ss netstat osqueryi\nsystemctl is-active wazuh-agent osqueryd"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.2  수집 준비와 사전 기록",
+    "id": "C10-02",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-02.txt",
+    "text": "ls -ld ~/book10-state\nsudo ls -l /etc/osquery\nsystemctl is-enabled osqueryd wazuh-agent\nsudo iptables -S INPUT\nsudo iptables -S KT66-PERIMETER"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.2  수집 준비와 사전 기록",
+    "id": "C10-03",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-03.txt",
+    "text": "mkdir -m 700 ~/book10-state\nsudo cp -p /var/ossec/etc/ossec.conf \\\n~/book10-state/ossec.conf.before\nsudo sha256sum /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "osquery 예약 조회 준비",
+    "id": "C10-04",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-04.txt",
+    "text": "sudo cat /etc/osquery/osquery.conf\ncat ~/kt66/deployment/osquery-linux.conf"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "osquery 예약 조회 준비",
+    "id": "C10-05",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-05.txt",
+    "text": "sudo install -m 0644 \\\n~/kt66/deployment/osquery-linux.conf \\\n/etc/osquery/osquery.conf\nsudo osqueryi \\\n--config_path=/etc/osquery/osquery.conf --config_check"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "Wazuh 수집 설정 확인",
+    "id": "C10-06",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-06.txt",
+    "text": "sudo sed -n '/<wodle name=\"osquery\">/,/<\\/wodle>/p' \\\n/var/ossec/etc/ossec.conf\nsudo grep -n -F '/var/log/kern.log' \\\n/var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "Wazuh 수집 설정 확인",
+    "id": "C10-07",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-07.txt",
+    "text": "sudo nano /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "수집 항목과 적용 확인",
+    "id": "C10-08",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-08.txt",
+    "text": "sudo /var/ossec/bin/wazuh-logcollector -t\nsudo /var/ossec/bin/wazuh-modulesd -t\nsudo systemctl start osqueryd\nsudo systemctl restart wazuh-agent\nsystemctl is-active osqueryd wazuh-agent"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "결과 파일과 조회 주기",
+    "id": "C10-09",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-09.txt",
+    "text": "sudo tail -n 3 /var/log/osquery/osqueryd.results.log\nsudo grep -n -E \\\n'netstat|<alias>|<frequency>' \\\n/var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.3  TCP 리스너 실행",
+    "id": "C10-10",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-10.txt",
+    "text": "sudo ss -lntp 'sport = :31337'"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.3  TCP 리스너 실행",
+    "id": "C10-11",
+    "where": "kt66 VM · ccc 호스트 셸 · 터미널 A",
+    "file": "examples/rev02/chapter10/C10-11.txt",
+    "text": "nc -lk 192.168.0.107 31337"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.3  TCP 리스너 실행",
+    "id": "C10-12",
+    "where": "kt66 VM · ccc 호스트 셸 · 터미널 B",
+    "file": "examples/rev02/chapter10/C10-12.txt",
+    "text": "sudo ss -lntp 'sport = :31337'"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "리스너의 프로세스와 주소",
+    "id": "C10-13",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-13.txt",
+    "text": "ps -p 181571 -o pid,ppid,user,lstart,args"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "Wazuh의 포트 목록 변경 경보",
+    "id": "Q10-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-01.txt",
+    "text": "agent.name:\"kt66-host\" AND rule.id:533"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "포트 목록과 실행 기록 대조",
+    "id": "Q10-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-02.txt",
+    "text": "agent.name:\"kt66-host\" AND rule.id:533\nAND (full_log:*31337* OR previous_output:*31337*)"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "포트 목록과 실행 기록 대조",
+    "id": "Q10-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-03.txt",
+    "text": "agent.name:\"kt66-host\"\nAND rule.groups:audit_command\nAND data.audit.command:nc"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "kt66 경계 방화벽 확인",
+    "id": "C10-14",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-14.txt",
+    "text": "sudo iptables -S INPUT\nsudo iptables -S KT66-PERIMETER\nip -4 route get 192.168.0.108\ncat ~/kt66/deployment/perimeter.sh"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "누락된 경계 방화벽 준비",
+    "id": "C10-15",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-15.txt",
+    "text": "sudo iptables-save > ~/book10-state/iptables.before\nsudo bash ~/kt66/deployment/perimeter.sh\nsudo iptables -S INPUT\nsudo iptables -S KT66-PERIMETER"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "누락된 경계 방화벽 준비",
+    "id": "C10-16",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-16.txt",
+    "text": "systemctl is-active rsyslog\nsudo tail -n 3 /var/log/kern.log"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "공격자 VM의 포트 스캔",
+    "id": "C10-17",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter10/C10-17.txt",
+    "text": "command -v nmap\nnmap --version"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "공격자 VM의 포트 스캔",
+    "id": "C10-18",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter10/C10-18.txt",
+    "text": "sudo apt-get update\nsudo apt-get install nmap"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "공격자 VM의 포트 스캔",
+    "id": "C10-19",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter10/C10-19.txt",
+    "text": "date -Is\nnmap -sT -Pn -n -p 1-1000 \\\n--max-retries 1 192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "스캔 응답과 커널 원문",
+    "id": "C10-20",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-20.txt",
+    "text": "sudo grep -F 'SRC=192.168.0.108 ' \\\n/var/log/kern.log | tail -n 5"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.5  반복 차단 경보 분석",
+    "id": "Q10-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-04.txt",
+    "text": "agent.name:\"kt66-host\" AND rule.id:4151\nAND data.srcip:\"192.168.0.108\""
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "규칙 조건과 누락 범위",
+    "id": "C10-21",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-21.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "규칙 조건과 누락 범위",
+    "id": "C10-22",
+    "where": "kt66-siem · root 셸",
+    "file": "examples/rev02/chapter10/C10-22.txt",
+    "text": "sed -n '1,40p' \\\n/var/ossec/ruleset/rules/0900-firewall_rules.xml\nexit"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "개별 차단 기록으로 범위 조사",
+    "id": "Q10-05",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter10/Q10-05.txt",
+    "text": "agent.name:\"kt66-host\"\nAND location:\"/var/log/kern.log\"\nAND data.action:DROP\nAND data.srcip:\"192.168.0.108\""
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "추가 조사와 방화벽 원상복구",
+    "id": "C10-23",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-23.txt",
+    "text": "sudo iptables -S INPUT\nsudo iptables -D INPUT -i ens33 -j KT66-PERIMETER\nsudo iptables -F KT66-PERIMETER\nsudo iptables -X KT66-PERIMETER\nsudo iptables -S INPUT"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.6  SQL로 현재 상태 직접 조회",
+    "id": "C10-24",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-24.txt",
+    "text": "sudo osqueryi"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.6  SQL로 현재 상태 직접 조회",
+    "id": "S10-01",
+    "where": "kt66 VM · sudo osqueryi의 osquery> 프롬프트",
+    "file": "examples/rev02/chapter10/S10-01.txt",
+    "text": "SELECT p.pid, p.name, p.path, l.address, l.port\nFROM listening_ports l\nJOIN processes p USING (pid)\nWHERE l.port IN (31337,31338);"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "예약 조회 SQL의 검색 조건",
+    "id": "S10-02",
+    "where": "kt66 VM · sudo osqueryi의 osquery> 프롬프트",
+    "file": "examples/rev02/chapter10/S10-02.txt",
+    "text": ".schema authorized_keys\n.schema users"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "공개 키와 사용자 연결",
+    "id": "S10-03",
+    "where": "kt66 VM · sudo osqueryi의 osquery> 프롬프트",
+    "file": "examples/rev02/chapter10/S10-03.txt",
+    "text": "SELECT u.username, k.key_file,\n       k.algorithm, k.comment\nFROM users u\nCROSS JOIN authorized_keys k USING (uid)\nWHERE u.uid >= 1000 OR u.uid = 0;"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "공개 키와 사용자 연결",
+    "id": "S10-04",
+    "where": "kt66 VM · sudo osqueryi의 osquery> 프롬프트",
+    "file": "examples/rev02/chapter10/S10-04.txt",
+    "text": ".quit"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.7  새 포트와 공개 키 관찰",
+    "id": "C10-25",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-25.txt",
+    "text": "ls -l ~/book10-key.pub ~/book10-authorized_keys.before"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.7  새 포트와 공개 키 관찰",
+    "id": "C10-26",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter10/C10-26.txt",
+    "text": "ls -l ~/book10-key ~/book10-key.pub\nssh-keygen -t ed25519 -N '' \\\n-C book10-key@attacker -f ~/book10-key\nssh-keygen -lf ~/book10-key.pub"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.7  새 포트와 공개 키 관찰",
+    "id": "C10-27",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter10/C10-27.txt",
+    "text": "scp ~/book10-key.pub \\\nccc@192.168.0.107:book10-key.pub"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "키 파일 사전 확인과 백업",
+    "id": "C10-28",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-28.txt",
+    "text": "ls -ld ~/.ssh\nls -l ~/.ssh/authorized_keys ~/book10-key.pub\nssh-keygen -lf ~/book10-key.pub\nsha256sum ~/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "키 파일 사전 확인과 백업",
+    "id": "C10-29",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-29.txt",
+    "text": "mkdir -p ~/.ssh\nchmod 700 ~/.ssh\ntouch ~/.ssh/authorized_keys\nchmod 600 ~/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "키 파일 사전 확인과 백업",
+    "id": "C10-30",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-30.txt",
+    "text": "ls -l ~/book10-authorized_keys.before\ncp -p ~/.ssh/authorized_keys \\\n~/book10-authorized_keys.before\ncmp ~/.ssh/authorized_keys \\\n~/book10-authorized_keys.before"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "제한된 실습 키 등록",
+    "id": "C10-31",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-31.txt",
+    "text": "printf '\\n%s ' 'restrict,from=\"192.168.0.108\"' \\\n>> ~/.ssh/authorized_keys\ncat ~/book10-key.pub >> ~/.ssh/authorized_keys\nssh-keygen -lf ~/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "제한된 실습 키 등록",
+    "id": "C10-32",
+    "where": "kt66 VM · ccc 호스트 셸 · 터미널 C",
+    "file": "examples/rev02/chapter10/C10-32.txt",
+    "text": "sudo ss -lntp 'sport = :31338'\nnc -lk 192.168.0.107 31338"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "예약 결과에서 추가 행 찾기",
+    "id": "Q10-06",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-06.txt",
+    "text": "agent.name:\"kt66-host\" AND rule.groups:osquery\nAND data.osquery.name:\n(kt66_listening_ports OR kt66_authorized_keys)\nAND data.osquery.action:added"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "예약 결과에서 추가 행 찾기",
+    "id": "Q10-07",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-07.txt",
+    "text": "agent.name:\"kt66-host\"\nAND data.osquery.name:kt66_listening_ports\nAND data.osquery.columns.port:31338\nAND data.osquery.action:added"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "공개 키 결과의 의미",
+    "id": "Q10-08",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-08.txt",
+    "text": "agent.name:\"kt66-host\"\nAND data.osquery.name:kt66_authorized_keys\nAND data.osquery.columns.comment:\n\"book10-key@attacker\"\nAND data.osquery.action:added"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.8  실습 포트와 키 원상복구",
+    "id": "C10-33",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-33.txt",
+    "text": "sudo ss -lntp \\\n'( sport = :31337 or sport = :31338 )'"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.8  실습 포트와 키 원상복구",
+    "id": "C10-34",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-34.txt",
+    "text": "cp -p ~/book10-authorized_keys.before \\\n~/.ssh/authorized_keys\ncmp ~/book10-authorized_keys.before \\\n~/.ssh/authorized_keys\nsha256sum ~/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "처음 만든 키 파일 정리",
+    "id": "C10-35",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-35.txt",
+    "text": "wc -c ~/.ssh/authorized_keys\nrm ~/.ssh/authorized_keys\nls -l ~/.ssh/authorized_keys"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "처음 만든 키 파일 정리",
+    "id": "C10-36",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-36.txt",
+    "text": "ls -la ~/.ssh\nrmdir ~/.ssh\nls -ld ~/.ssh"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "사라진 행과 현재 상태 대조",
+    "id": "Q10-09",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-09.txt",
+    "text": "agent.name:\"kt66-host\"\nAND data.osquery.name:kt66_listening_ports\nAND data.osquery.columns.port:(31337 OR 31338)\nAND data.osquery.action:removed"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "사라진 행과 현재 상태 대조",
+    "id": "Q10-10",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter10/Q10-10.txt",
+    "text": "agent.name:\"kt66-host\"\nAND data.osquery.name:kt66_authorized_keys\nAND data.osquery.columns.comment:\n\"book10-key@attacker\"\nAND data.osquery.action:removed"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "임시 파일과 수집 준비 원상복구",
+    "id": "C10-37",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-37.txt",
+    "text": "ls -l ~/book10-key.pub ~/book10-authorized_keys.before\nrm ~/book10-key.pub ~/book10-authorized_keys.before\nls -l ~/book10-key.pub ~/book10-authorized_keys.before"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "임시 파일과 수집 준비 원상복구",
+    "id": "C10-38",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter10/C10-38.txt",
+    "text": "ls -l ~/book10-key ~/book10-key.pub\nrm ~/book10-key ~/book10-key.pub\nls -l ~/book10-key ~/book10-key.pub"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "임시 파일과 수집 준비 원상복구",
+    "id": "C10-39",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-39.txt",
+    "text": "sudo cp -p ~/book10-state/ossec.conf.before \\\n/var/ossec/etc/ossec.conf\nsudo cmp ~/book10-state/ossec.conf.before \\\n/var/ossec/etc/ossec.conf\nsudo /var/ossec/bin/wazuh-logcollector -t\nsudo /var/ossec/bin/wazuh-modulesd -t\nsudo systemctl restart wazuh-agent"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "서비스와 설정 파일 정리",
+    "id": "C10-40",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-40.txt",
+    "text": "sudo systemctl stop osqueryd\nsystemctl is-active osqueryd\nsudo ls -l /etc/osquery/osquery.conf \\\n/etc/osquery/osquery.flags"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "서비스와 설정 파일 정리",
+    "id": "C10-41",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-41.txt",
+    "text": "sudo rm /etc/osquery/osquery.conf \\\n/etc/osquery/osquery.flags\nsudo ls -l /etc/osquery"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "10.9  결과가 다를 때의 확인 순서",
+    "id": "C10-42",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-42.txt",
+    "text": "sudo journalctl -u osqueryd -n 30 --no-pager\nsudo tail -n 30 /var/ossec/logs/ossec.log"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "원문·디코더·규칙 대조",
+    "id": "C10-43",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter10/C10-43.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter10.json",
+    "section": "원문·디코더·규칙 대조",
+    "id": "C10-44",
+    "where": "kt66-siem · root 셸",
+    "file": "examples/rev02/chapter10/C10-44.txt",
+    "text": "sed -n '1,65p' \\\n/var/ossec/ruleset/decoders/0140-kernel_decoders.xml\nsed -n '/id=\"530\"/,/id=\"534\"/p' \\\n/var/ossec/ruleset/rules/0015-ossec_rules.xml\nsed -n '1,40p' \\\n/var/ossec/ruleset/rules/0545-osquery_rules.xml\nexit"
+  }
+]

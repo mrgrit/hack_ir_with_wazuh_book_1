@@ -1,0 +1,3 @@
+ls -l /root/book08-sshd_config.before \
+/root/book08-shadow.before
+passwd -S root

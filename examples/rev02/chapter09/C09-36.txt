@@ -1,0 +1,5 @@
+hostname
+cat /proc/self/loginuid
+sudo systemctl is-active auditd wazuh-agent
+sudo auditctl -s
+sudo auditctl -l

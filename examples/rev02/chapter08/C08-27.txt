@@ -1,0 +1,4 @@
+cp -p /etc/ssh/sshd_config \
+/root/book08-sshd_config.before
+cp -p /etc/shadow /root/book08-shadow.before
+chmod 600 /root/book08-shadow.before

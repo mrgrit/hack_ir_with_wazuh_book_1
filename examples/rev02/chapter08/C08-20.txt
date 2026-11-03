@@ -1,0 +1,5 @@
+cd ~/book08
+ls -l users-invalid.txt
+printf '%s\n' book08-none1 book08-none2 \
+book08-none3 > users-invalid.txt
+cat users-invalid.txt

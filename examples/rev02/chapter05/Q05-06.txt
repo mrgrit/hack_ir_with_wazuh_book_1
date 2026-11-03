@@ -1,0 +1,2 @@
+agent.name: "web" AND
+(rule.id: "31104" OR data.url: *etc*passwd*)

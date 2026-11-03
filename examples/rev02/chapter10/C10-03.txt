@@ -1,0 +1,4 @@
+mkdir -m 700 ~/book10-state
+sudo cp -p /var/ossec/etc/ossec.conf \
+~/book10-state/ossec.conf.before
+sudo sha256sum /var/ossec/etc/ossec.conf

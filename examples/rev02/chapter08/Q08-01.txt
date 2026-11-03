@@ -1,0 +1,2 @@
+agent.name: "bastion" AND
+location: "/var/log/auth.log"

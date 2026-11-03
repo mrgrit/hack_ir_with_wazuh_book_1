@@ -1,0 +1,1 @@
+grep -n -F 'dvwa.' /etc/hosts

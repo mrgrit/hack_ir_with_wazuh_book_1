@@ -1,0 +1,1 @@
+192.168.0.202 - - [01/Nov/2026:20:13:49 +0900] "GET /vulnerabilities/xss_r/?name=%3Cscript%3Ealert%281%29%3C%2Fscript%3E&bookcase=book05-xss HTTP/1.1" 403 438 "-" "curl/7.81.0"

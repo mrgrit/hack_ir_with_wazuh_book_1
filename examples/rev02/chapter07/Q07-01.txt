@@ -1,0 +1,2 @@
+agent.name: "web" AND rule.id: "554"
+AND syscheck.path: *shell.php

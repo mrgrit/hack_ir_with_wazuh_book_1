@@ -1,0 +1,5 @@
+hostname
+ls -l /usr/bin/yes /root/book09-yes.before
+stat -c "%s %a %U %G %n" /usr/bin/yes
+sha256sum /usr/bin/yes
+dpkg -S /usr/bin/yes

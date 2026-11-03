@@ -1,0 +1,3 @@
+ls -l ~/book10-key ~/book10-key.pub
+rm ~/book10-key ~/book10-key.pub
+ls -l ~/book10-key ~/book10-key.pub

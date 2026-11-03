@@ -1,0 +1,4 @@
+# Preserve the byte hashes recorded by the REV02 editorial review.
+manuscript/REV02/*.json -text
+editorial/REV02/original-example-values/** -text
+examples/rev02/** -text

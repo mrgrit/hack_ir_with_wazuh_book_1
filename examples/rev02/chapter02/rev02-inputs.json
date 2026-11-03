@@ -1,0 +1,114 @@
+[
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-P1",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-P1.txt",
+    "text": "docker exec -it kt66-bastion /bin/bash"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-P2",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter02/C02-P2.txt",
+    "text": "getent passwd book02_probe"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-P3",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter02/C02-P3.txt",
+    "text": "sshd -T | grep '^hostkey '\nssh-keygen -lf \\\n  /var/lib/bastion/ssh-host-keys/ssh_host_ed25519_key.pub"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-P4",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter02/C02-P4.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-P5",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-P5.txt",
+    "text": "ssh-keygen -F 10.20.30.201"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-01",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-01.txt",
+    "text": "ssh -o HostKeyAlgorithms=ssh-ed25519 \\\n  book02_probe@10.20.30.201"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-02",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-02.txt",
+    "text": "docker exec -it kt66-bastion /bin/bash"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-03",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "file": "examples/rev02/chapter02/C02-03.txt",
+    "text": "grep \"book02_probe\" /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-04",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "file": "examples/rev02/chapter02/C02-04.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.2  SSH 인증 실패 재현",
+    "id": "C02-05",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-05.txt",
+    "text": "ssh-keygen -F 10.20.30.201\nssh-keygen -R 10.20.30.201\nssh-keygen -F 10.20.30.201"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.4  시각과 시간대 확인",
+    "id": "C02-06",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-06.txt",
+    "text": "timedatectl"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.4  시각과 시간대 확인",
+    "id": "C02-07",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-07.txt",
+    "text": "date -Is\ndate -u -Is"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.5  시도와 결과 구분",
+    "id": "C02-08",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-08.txt",
+    "text": "curl -I --max-time 15 http://192.168.0.107/"
+  },
+  {
+    "document": "volume01-chapter02.json",
+    "section": "2.5  시도와 결과 구분",
+    "id": "C02-09",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter02/C02-09.txt",
+    "text": "curl -I --max-time 15 http://192.168.0.107/book02-none"
+  }
+]

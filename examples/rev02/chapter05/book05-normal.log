@@ -1,0 +1,1 @@
+192.168.0.108 - - [01/Nov/2026:20:13:48 +0900] "GET /vulnerabilities/sqli/?id=1&Submit=Submit&bookcase=book05-normal HTTP/1.1" 302 429 "-" "curl/7.81.0"

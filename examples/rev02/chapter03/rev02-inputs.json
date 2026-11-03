@@ -1,0 +1,50 @@
+[
+  {
+    "document": "volume01-chapter03.json",
+    "section": "3.4  DQL 검색 조건",
+    "id": "Q03-01",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter03/Q03-01.txt",
+    "text": "agent.name: \"kt66-host\""
+  },
+  {
+    "document": "volume01-chapter03.json",
+    "section": "3.6  필드 조건을 이용한 검색",
+    "id": "Q03-02",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter03/Q03-02.txt",
+    "text": "agent.name: \"bastion\" AND rule.id: \"5710\""
+  },
+  {
+    "document": "volume01-chapter03.json",
+    "section": "3.6  필드 조건을 이용한 검색",
+    "id": "Q03-03",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter03/Q03-03.txt",
+    "text": "agent.name: \"bastion\" AND rule.id: \"5710\"\nAND data.srcip: \"10.20.30.254\""
+  },
+  {
+    "document": "volume01-chapter03.json",
+    "section": "3.7  실습에서 생성한 로그 검색",
+    "id": "Q03-04",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter03/Q03-04.txt",
+    "text": "data.srcuser: \"book02_probe\""
+  },
+  {
+    "document": "volume01-chapter03.json",
+    "section": "3.7  실습에서 생성한 로그 검색",
+    "id": "Q03-05",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter03/Q03-05.txt",
+    "text": "agent.name: \"bastion\" AND full_log: \"book02_probe\""
+  },
+  {
+    "document": "volume01-chapter03.json",
+    "section": "3.7  실습에서 생성한 로그 검색",
+    "id": "Q03-06",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter03/Q03-06.txt",
+    "text": "agent.name: \"bastion\" AND\ndata.srcip: \"10.20.30.254\" AND\n(rule.id: \"5710\" OR rule.id: \"5760\" OR rule.id: \"5715\")"
+  }
+]

@@ -1,0 +1,275 @@
+[
+  {
+    "timestamp": "2026-11-02T22:50:21.252+0000",
+    "rule": {
+      "level": 7,
+      "description": "Integrity checksum changed.",
+      "id": "550",
+      "mitre": {
+        "id": [
+          "T1565.001"
+        ],
+        "tactic": [
+          "Impact"
+        ],
+        "technique": [
+          "Stored Data Manipulation"
+        ]
+      },
+      "firedtimes": 3,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_modified",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659821.17888758",
+    "full_log": "File '/home/ccc/.ssh/authorized_keys' modified\nMode: realtime\nChanged attributes: size,mtime,md5,sha1,sha256\nSize changed from '99' to '196'\nOld modification time was: '1793609546', now it is '1793659821'\nOld md5sum was: '7ced89b98f4c9c5451dbde6e126e990b'\nNew md5sum is : '6546c875c73169d2de7451280f65a877'\nOld sha1sum was: 'f20613f9ab71dafa00eab08eee6bf0221e9aef9b'\nNew sha1sum is : '573bf696fbf210263e1bf98d0980c606c742aaff'\nOld sha256sum was: 'bd0120b8a37a90bf87b05c2a7856bd3c76e50050799739c4a94a7cfc8b6421d1'\nNew sha256sum is : 'caac4e666843389b8cc2061090abe270249b883c996ad5b7f5ba5e8584c49892'\n",
+    "syscheck": {
+      "path": "/home/ccc/.ssh/authorized_keys",
+      "mode": "realtime",
+      "size_before": "99",
+      "size_after": "196",
+      "perm_after": "rw-------",
+      "uid_after": "1000",
+      "gid_after": "1000",
+      "md5_before": "7ced89b98f4c9c5451dbde6e126e990b",
+      "md5_after": "6546c875c73169d2de7451280f65a877",
+      "sha1_before": "f20613f9ab71dafa00eab08eee6bf0221e9aef9b",
+      "sha1_after": "573bf696fbf210263e1bf98d0980c606c742aaff",
+      "sha256_before": "bd0120b8a37a90bf87b05c2a7856bd3c76e50050799739c4a94a7cfc8b6421d1",
+      "sha256_after": "caac4e666843389b8cc2061090abe270249b883c996ad5b7f5ba5e8584c49892",
+      "uname_after": "ccc",
+      "gname_after": "ccc",
+      "mtime_before": "2026-11-02T08:52:26",
+      "mtime_after": "2026-11-02T22:50:21",
+      "inode_after": 2360520,
+      "diff": "1a2\n> ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILy1BIGPG5oXr/vnf7TNysKFj0skhn8U1qT9xHVTBFmu book09@attacker\n",
+      "changed_attributes": [
+        "size",
+        "mtime",
+        "md5",
+        "sha1",
+        "sha256"
+      ],
+      "event": "modified"
+    },
+    "decoder": {
+      "name": "syscheck_integrity_changed"
+    },
+    "location": "syscheck",
+    "evidence_id": "B-001",
+    "source_chapter": 9
+  },
+  {
+    "timestamp": "2026-11-02T22:50:25.985+0000",
+    "rule": {
+      "level": 7,
+      "description": "Integrity checksum changed.",
+      "id": "550",
+      "mitre": {
+        "id": [
+          "T1565.001"
+        ],
+        "tactic": [
+          "Impact"
+        ],
+        "technique": [
+          "Stored Data Manipulation"
+        ]
+      },
+      "firedtimes": 4,
+      "mail": false,
+      "groups": [
+        "ossec",
+        "syscheck",
+        "syscheck_entry_modified",
+        "syscheck_file"
+      ],
+      "pci_dss": [
+        "11.5"
+      ],
+      "gpg13": [
+        "4.11"
+      ],
+      "gdpr": [
+        "II_5.1.f"
+      ],
+      "hipaa": [
+        "164.312.c.1",
+        "164.312.c.2"
+      ],
+      "nist_800_53": [
+        "SI.7"
+      ],
+      "tsc": [
+        "PI1.4",
+        "PI1.5",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659825.18022353",
+    "full_log": "File '/home/ccc/.ssh/authorized_keys' modified\nMode: realtime\nChanged attributes: size,mtime,md5,sha1,sha256\nSize changed from '196' to '99'\nOld modification time was: '1793659821', now it is '1793609546'\nOld md5sum was: '6546c875c73169d2de7451280f65a877'\nNew md5sum is : '7ced89b98f4c9c5451dbde6e126e990b'\nOld sha1sum was: '573bf696fbf210263e1bf98d0980c606c742aaff'\nNew sha1sum is : 'f20613f9ab71dafa00eab08eee6bf0221e9aef9b'\nOld sha256sum was: 'caac4e666843389b8cc2061090abe270249b883c996ad5b7f5ba5e8584c49892'\nNew sha256sum is : 'bd0120b8a37a90bf87b05c2a7856bd3c76e50050799739c4a94a7cfc8b6421d1'\n",
+    "syscheck": {
+      "path": "/home/ccc/.ssh/authorized_keys",
+      "mode": "realtime",
+      "size_before": "196",
+      "size_after": "99",
+      "perm_after": "rw-------",
+      "uid_after": "1000",
+      "gid_after": "1000",
+      "md5_before": "6546c875c73169d2de7451280f65a877",
+      "md5_after": "7ced89b98f4c9c5451dbde6e126e990b",
+      "sha1_before": "573bf696fbf210263e1bf98d0980c606c742aaff",
+      "sha1_after": "f20613f9ab71dafa00eab08eee6bf0221e9aef9b",
+      "sha256_before": "caac4e666843389b8cc2061090abe270249b883c996ad5b7f5ba5e8584c49892",
+      "sha256_after": "bd0120b8a37a90bf87b05c2a7856bd3c76e50050799739c4a94a7cfc8b6421d1",
+      "uname_after": "ccc",
+      "gname_after": "ccc",
+      "mtime_before": "2026-11-02T22:50:21",
+      "mtime_after": "2026-11-02T08:52:26",
+      "inode_after": 2360520,
+      "diff": "2d1\n< ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILy1BIGPG5oXr/vnf7TNysKFj0skhn8U1qT9xHVTBFmu book09@attacker\n",
+      "changed_attributes": [
+        "size",
+        "mtime",
+        "md5",
+        "sha1",
+        "sha256"
+      ],
+      "event": "modified"
+    },
+    "decoder": {
+      "name": "syscheck_integrity_changed"
+    },
+    "location": "syscheck",
+    "evidence_id": "B-002",
+    "source_chapter": 9
+  },
+  {
+    "timestamp": "2026-11-02T22:50:27.428+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 13,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793659827.18287384",
+    "full_log": "Nov  3 07:50:25 bastion sshd[4555]: Accepted publickey for ccc from 192.168.0.108 port 45618 ssh2: ED25519 SHA256:FnGa4j0F4T/pcAKG5Q0tazJNKt5dPLvnhViF1lk0KA0",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  3 07:50:25",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "45618",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log",
+    "evidence_id": "B-003",
+    "source_chapter": 9
+  }
+]

@@ -1,0 +1,240 @@
+[
+  {
+    "file": "examples/rev02/chapter05/B05-01-login.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/B05-01-login.txt",
+    "before_sha256": "701edab76060ea4335538f4abf39ad4ddff238ea3a8f58c08cc20ccd8451e56a",
+    "after_sha256": "9cb921eb207bd0dfc7d8b555f6b164240d0872026b160dd7af5ce5dd8b1a8230",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/B05-02-setup.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/B05-02-setup.txt",
+    "before_sha256": "b1db79ce280c684a1558cd53776b90cec8782a4358f4dce1fffa262ee270f2bc",
+    "after_sha256": "79cc193e3312d659e300103affeb95f13471e0a5886dbd9ea80a732f8bb3bd1c",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/B05-06-path-raw-url.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/B05-06-path-raw-url.txt",
+    "before_sha256": "e1732e11d4dff6e7cd5f2164bd6c2c102ea4485b3b9bb1e786591bded12a261d",
+    "after_sha256": "b270cb81cc08a52da93d5c2fb6d56d6236105728df90fb158aa6e2dee7885fca",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/B05-08-path-encoded-url.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/B05-08-path-encoded-url.txt",
+    "before_sha256": "6a2aad2d47c09a8f1a98561129d3ba57f0c9eeec84c6c936fda25dac44c66bbe",
+    "after_sha256": "a3d241de3aaf1d72fb0d7f2d4f587d35ffbce7144d34e7a5ee3236f6e480ebde",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/book05-normal.json",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/book05-normal.json",
+    "before_sha256": "a5ccf6290ffb28a59d09c6dad864451e1a05170ab5e4e472e481b0ed07d02bcc",
+    "after_sha256": "791cb937b5c893c3719e71a9032d5f7a919857ecad35b3f861ec78df1901bd86",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/book05-normal.log",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/book05-normal.log",
+    "before_sha256": "c70de713aa1e9fb9a5728d37c83da0050f0f1032053de44b84dc8da6489d155e",
+    "after_sha256": "ace7fa2db4fd8f449ee33fd75561b19b6c02ba365d129f85e1544101d4c5725c",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/book05-path-raw.json",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/book05-path-raw.json",
+    "before_sha256": "ab3a83ccfe3d97949813600371be136ea54558e7cb0ce943ce99b7a23ef3fb9a",
+    "after_sha256": "9a41e8649cde483edd682726934d0396f4f5b6b9a27c2ca653e4becfa120da07",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/book05-path-raw.log",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/book05-path-raw.log",
+    "before_sha256": "129e41b286f4c0d1d1499bc7890c52b693b088b0c5923ff7215e661d790b98ce",
+    "after_sha256": "e53e811ec5663f2ae660e30e66387eb209521981f5ad1051a94e7fe6c51a2ede",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/book05-path.json",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/book05-path.json",
+    "before_sha256": "c548f772ea4fc6e49cf5be9ee63132813a8e4373e518f3763fece10f818b02d0",
+    "after_sha256": "99da0a6f082f26abf5b79a681dd81bb511d3807a53c238be7c4792a886690828",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/book05-path.log",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/book05-path.log",
+    "before_sha256": "31ab227512d339a65dea9f91175db12b6e0b7016dded3f0f2ea9f016d5a32a29",
+    "after_sha256": "9d931e2533c38351306e7518eb4aa2e9231904e44afcf7eae9e7539f1878d1d8",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/book05-sqli-waf.json",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/book05-sqli-waf.json",
+    "before_sha256": "81efedb6f3f7e45fedbc7f7191a3a737c75f442739761f9e13936e58bd58af97",
+    "after_sha256": "2d011362f88c18e4f6c8120ffe16d6512d2cd659a5e61e10af77f94f281422ce",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/book05-sqli.json",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/book05-sqli.json",
+    "before_sha256": "8041120a394075579148da10f9538ea019b488b1ab3d7a902fce4c8283952a04",
+    "after_sha256": "4a02f1c26e5a6ab292da7ac30c696d4ef834466f55a17935a9b67077bc4e2ec4",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/book05-sqli.log",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/book05-sqli.log",
+    "before_sha256": "127f42ed242ca6d131f4cfb9821ec2754e0bab1576c43dd2839b6000883ca2a2",
+    "after_sha256": "a2f734e31149fd84a7260e3f5b78cc3d82038a94fd8acbf06a087effad0f5b3b",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/book05-xss.json",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/book05-xss.json",
+    "before_sha256": "03f6b7d760b8e07c85c1aa2eb8ba96f22807bada1227a65191d7c3a5946834d0",
+    "after_sha256": "2afbe9d14c16a538b65013e30cf3853da725f43be38673d1c84064b975c0f234",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/book05-xss.log",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/book05-xss.log",
+    "before_sha256": "845f106cb5aa87d1775bbaa25d218001d88bf5dd883d3505c4c37158046283c8",
+    "after_sha256": "ee82442e545d13cbfd5df25a33915c6609b79155cb6550c724bc146f2bfacdc6",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/browser-inputs.json",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/browser-inputs.json",
+    "before_sha256": "85747bea7cbf8359d8fea54a60bbd8a5a5c5e9e572153397cb3a5e2b3c359b23",
+    "after_sha256": "f89ac108e93645051d746bd160b084361b1e5ad910a481890a68ebcac102b179",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter05/README.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter05/README.txt",
+    "before_sha256": "5acfc50a192faebf5f8ab9ada701e790c096d20022987db15147eb19b38a4011",
+    "after_sha256": "7044a2181e4e483202dc35c6c3c6dd8b2b7d2c35b7f6c0931ce00c7a201dcab4",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/B06-01-login.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/B06-01-login.txt",
+    "before_sha256": "701edab76060ea4335538f4abf39ad4ddff238ea3a8f58c08cc20ccd8451e56a",
+    "after_sha256": "9cb921eb207bd0dfc7d8b555f6b164240d0872026b160dd7af5ce5dd8b1a8230",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/B06-02-known.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/B06-02-known.txt",
+    "before_sha256": "249f3903d91888cc4ad92833768987be6cfc01494fd4b6465f7e429a72a92066",
+    "after_sha256": "12286867ed4e332a2c8670ef1ebf2e7fd67effd389c8e91b78bada808be63db2",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/B06-03-missing.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/B06-03-missing.txt",
+    "before_sha256": "05c459abd651abd8cad438b2326104d87fd95133d59e551163a8da6da434b890",
+    "after_sha256": "1a6face6bb6c60c452a61d619a3a2ddff75eec6e0aaa5221fe14290b908711a4",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/B06-05-ua-url.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/B06-05-ua-url.txt",
+    "before_sha256": "d544dbc2e430eec7280760f97dd0668d49b188e87e5077b90ed9ac9e5d1473a7",
+    "after_sha256": "7a658a7d60e61231b4930ddaa89d52e1d63accd61c9dd781890fa09cd875b133",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/B06-07-admin.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/B06-07-admin.txt",
+    "before_sha256": "4ee51fd0898cb40a30f1383f3dca39aa17708e43f3d31189a0d418310b3cce8b",
+    "after_sha256": "90f7d5cf55e092a788d48f2c38b60513a753b641e01b29bcbd410f27a8821e1e",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/B06-08-phpmyadmin.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/B06-08-phpmyadmin.txt",
+    "before_sha256": "19c7135888bc909672df6fc3a7e6b741029a1ad71f3e111aab26eac693474bab",
+    "after_sha256": "73d49109802873d3e82d31304973a176a842c0f53f21d17d1be6ac3ff873f604",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/B06-09-wp-admin.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/B06-09-wp-admin.txt",
+    "before_sha256": "022d6efcf1416e5c1357cc9be3542194de141978d82f554635567f2d5767b8e9",
+    "after_sha256": "1176924bb89266c4650a44b20ad430e48c3b47408559f375a78230102bc98cf7",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/B06-10-manager.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/B06-10-manager.txt",
+    "before_sha256": "0368661e8a33e3ad2c0cda7661845f77e9af9c7e9235473cb76097876f5a7fac",
+    "after_sha256": "f2d006a1718dc6218fdacce2814d00320145f5bfc52aee76b60ab00e833702d5",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/browser-inputs.json",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/browser-inputs.json",
+    "before_sha256": "1df060941c261a5831d6c2fa94651fe067279eeda341aa2d349189cf59e77c32",
+    "after_sha256": "2faf29f7c8219f23e6e4f088fba3c856c0d1ca6b2fa6a2a04d9e0852a01a3887",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/README.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/README.txt",
+    "before_sha256": "cdd9065128c2ed7a1c81b02c1899e1fea57c087b31ad83cfbb28237976732c53",
+    "after_sha256": "4084c3502ca1433d72f33d2ae8a970d5394d92226912b4abf2fef17787dccdc3",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/records/admin.json",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/records/admin.json",
+    "before_sha256": "dfbae933eedf48530690b2d3f6f1a66b9d5eb8eed1622c9914a42f34d4f24592",
+    "after_sha256": "b40974985e05f330b893d23195de1d589c22eb041abf061203643c622ab4c67c",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/records/admin.log",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/records/admin.log",
+    "before_sha256": "11569e3256316ccb456b4e42a49c2d1379aae6bdfbc1f618dd3042fdb72d696e",
+    "after_sha256": "1a7edcbbc8ca3341ef27d4449e6f68731789c6688f68f3d4a4809131056905a0",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/records/scan.json",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/records/scan.json",
+    "before_sha256": "3b93a95dd52bd12c7091a3f86beda26bfb7fbdebc7c91b944b5a9ce954b4c603",
+    "after_sha256": "1843c765ab21bdedda2a158a19dd65238584978f450e399623408be90af5e949",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter06/records/scan.log",
+    "original_copy": "editorial/REV02/original-example-values/chapter06/records/scan.log",
+    "before_sha256": "af4c7559985fd019ba8264ffbde3ddd36285e649f5e6b435a28eea94ac3250bd",
+    "after_sha256": "91dda0c808d967564eec8b8b9e41fca14b6e1799b2934d84011576472b813d8a",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter07/B07-02-webshell.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter07/B07-02-webshell.txt",
+    "before_sha256": "b6703a1550be1bcc27ab39978a7a4aee6721af757a063cd3471c7aa90851d07f",
+    "after_sha256": "f808462779d35ec01a7776b13861d00fd5fabeeebeb6114f74f3cf359e040e29",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter07/browser-inputs.json",
+    "original_copy": "editorial/REV02/original-example-values/chapter07/browser-inputs.json",
+    "before_sha256": "89a78f613973e85b4ad474da73a5d8726f964ce013404a0ecc18147bd5557eba",
+    "after_sha256": "6ac9d913451ce256938be9d32dfbbd8e3699e198b0f108c64c917c0f64894abb",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  },
+  {
+    "file": "examples/rev02/chapter07/supplemental-inputs.txt",
+    "original_copy": "editorial/REV02/original-example-values/chapter07/supplemental-inputs.txt",
+    "before_sha256": "bd4e0c8faef8ab1b8c5b5273647157fd60a6013d4c06d8cc54ef5056dfedac74",
+    "after_sha256": "ae60cf3e7f389794533dce68ffda41308138430281ca1fa70561dfa72b02c90d",
+    "changes": "external host .189→.107; attacker .202→.108; domain kt66.lab→ccc.com; lab file book07-shell.php→shell.php; only matching strings"
+  }
+]

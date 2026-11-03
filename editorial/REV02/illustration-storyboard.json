@@ -1,0 +1,142 @@
+[
+  {
+    "file": "volume01-chapter01.json",
+    "section": "머리말",
+    "image": "assets/illustrations/overview.png",
+    "before": "삽화. 공격 실습과 로그 분석.",
+    "caption": "삽화. 가상의 실습팀이 관제 준비 보고서의 “공격 탐지 가능” 항목을 검증하기로 한다. 공격 담당은 실행 일지를, 분석 담당은 수집된 로그만으로 작성한 조사 기록을 준비한다."
+  },
+  {
+    "file": "volume01-chapter01.json",
+    "section": "1.6  kt66 기동과 접속",
+    "image": "assets/illustrations/chapter01/notes-v2.png",
+    "before": "삽화. 접속 주소 확인.",
+    "caption": "삽화. 준비 담당이 설치 완료로 표시한 항목에는 웹 접속 결과만 적혀 있다. 구성 기록과 대조한 뒤 에이전트 연결 상태까지 확인하도록 완료 조건을 수정한다."
+  },
+  {
+    "file": "volume01-chapter02.json",
+    "section": "2.7  조사 기록 작성",
+    "image": "assets/illustrations/chapter02/evidence.png",
+    "before": "삽화. 기록 대조.",
+    "caption": "삽화. 분석 담당이 경보의 출발지 IP를 공격자 주소로 적자 동료가 접속 경로를 대조한다. 두 사람은 kt66 VM에서 보낸 요청임을 확인하고, 접속자를 식별할 로그인·명령 기록을 추가로 조사한다."
+  },
+  {
+    "file": "volume01-chapter03.json",
+    "section": "3.8  검색 결과 0건의 점검 순서",
+    "image": "assets/illustrations/chapter03/time.png",
+    "before": "삽화. 조사 시각 확인.",
+    "caption": "삽화. 직접 남긴 인증 실패 로그가 검색되지 않아 분석 담당이 실행 시각을 다시 확인한다. 미탐으로 적기 전에 시간대·검색 기간·필터를 점검한다."
+  },
+  {
+    "file": "volume01-chapter04.json",
+    "section": "기록 결과 확인",
+    "image": "assets/illustrations/chapter04/field-check.png",
+    "before": "삽화. 현장 장비의 로그 수집 점검.",
+    "caption": "삽화. 수집 담당은 현장 장비의 확인 로그와 검색 결과를 대조한다. 원문이 수집됐는데도 경보가 없으면 파일 전송 상태와 별도로 탐지 규칙을 검사한다."
+  },
+  {
+    "file": "volume01-chapter05.json",
+    "section": "5.4  정상 요청과 응답",
+    "image": "assets/illustrations/chapter05/request.png",
+    "before": "삽화. 웹 요청 시험.",
+    "caption": "삽화. 공격 담당은 SQL 시험을 시작하려다 정상 응답을 기록하지 않았다는 것을 확인한다. 사용자 번호부터 조회하고 응답·시각을 남긴 뒤 공격 입력과 비교한다."
+  },
+  {
+    "file": "volume01-chapter05.json",
+    "section": "XSS 요청의 경보 분석",
+    "image": "assets/illustrations/diversity/v1-c05-response.png",
+    "before": "삽화. 응답과 탐지 기록 대조.",
+    "caption": "삽화. 분석 담당은 403 응답만 보고 적었던 “WAF 차단”의 근거를 다시 확인한다. 같은 요청의 감사 로그에서 차단 메시지와 규칙 번호를 찾아 보고서에 추가한다."
+  },
+  {
+    "file": "volume01-chapter06.json",
+    "section": "목록 탐색 도구 준비",
+    "image": "assets/illustrations/diversity/v1-c06-path.png",
+    "before": "삽화. 실습 경로 목록 확인.",
+    "caption": "삽화. 공격 담당은 단일 요청 시험을 마치고 탐색할 경로 목록을 점검한다. 이번 시험에서는 개별 404 응답과 반복 탐색 경보가 각각 남는지 비교한다."
+  },
+  {
+    "file": "volume01-chapter06.json",
+    "section": "WAF 차단 필드 해석",
+    "image": "assets/illustrations/diversity/v1-c06-logs.png",
+    "before": "삽화. 요청 기록과 차단 근거 대조.",
+    "caption": "삽화. 기록 담당은 User-Agent의 sqlmap 문자열을 보고 도구 실행으로 분류하려다 요청 변경 내역을 확인한다. 공격 담당이 헤더 값만 바꿨으므로 보고서에는 해당 문자열의 탐지와 차단 사실만 적는다."
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "section": "웹셸 조사와 대응",
+    "image": "assets/illustrations/rev02/webshell.png",
+    "before": null,
+    "caption": "삽화. 서버 담당은 파일 생성 경보를 확인한 뒤 같은 파일에 웹 요청을 보낸다. 파일 존재와 요청 기록까지 확인됐지만, PHP 실행 여부는 응답과 실행 위치를 더 조사해야 한다."
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "section": "200 경보의 우선 조사",
+    "image": "assets/illustrations/diversity/v1-c07-response.png",
+    "before": "삽화. 요청과 처리 결과의 증거 대조",
+    "caption": "삽화. 분석팀은 HTTP 200 요청과 서버의 처리 기록을 시간순으로 비교한다. 요청 처리와 명령 실행의 증거를 구분해 “공격 성공”이라고 적었던 결론을 다시 검토한다."
+  },
+  {
+    "file": "volume01-chapter08.json",
+    "section": "조사와 원상복구",
+    "image": "assets/illustrations/diversity/v1-c08-auth.png",
+    "before": "삽화. 인증 기록의 출발지와 계정을 대조하는 분석자",
+    "caption": "삽화. 인증 실패가 반복된 뒤 성공 기록이 나타나자 분석 담당은 출발지·계정·연결 포트를 대조한다. 실패 경보 수를 시도 횟수로 옮겨 적는 대신 원문에서 개별 접속을 구분한다."
+  },
+  {
+    "file": "volume01-chapter08.json",
+    "section": "경보 수와 판단의 구분",
+    "image": "assets/illustrations/diversity/v1-c08-changes.png",
+    "before": "삽화. 인증 결과와 변경 기록을 비교하는 분석자",
+    "caption": "삽화. 계정 담당이 승인된 변경 내역을 전달하자 분석 담당은 인증·sudo·계정 생성 기록과 비교한다. 보고서에서 정상 관리 작업과 추가 조사가 필요한 변경을 구분한다."
+  },
+  {
+    "file": "volume01-chapter09.json",
+    "section": "Discover 검색과 시간",
+    "image": "assets/illustrations/rev02/fim.png",
+    "before": null,
+    "caption": "삽화 9-1. 파일을 바꿔도 경보가 없자 시스템 담당이 감시 설정을 조회한다. 수집 대상 경로를 확인한 뒤에야 규칙의 탐지 여부를 시험할 수 있다."
+  },
+  {
+    "file": "volume01-chapter09.json",
+    "section": "9.10  사례별 조사 결과 정리",
+    "image": "assets/illustrations/diversity/v1-c09-compare.png",
+    "before": "삽화 9-2. 변경 전후 기록 대조",
+    "caption": "삽화 9-2. 분석 담당은 공개 키·예약 작업·실행 파일의 변경 전후 기록을 대조한다. 등록이나 변경 경보만으로 실행을 확정했던 항목에는 인증 결과와 프로세스 기록을 추가한다."
+  },
+  {
+    "file": "volume01-chapter10.json",
+    "section": "10.8  실습 포트와 키 원상복구",
+    "image": "assets/illustrations/rev02/ports.png",
+    "before": null,
+    "caption": "삽화. 한 사람은 실습용 리스너를 종료하고 다른 사람은 포트 목록을 다시 조회한다. 포트가 닫힌 뒤에도 과거 경보는 남으므로 보고서에 발생 시각과 조회 시각을 구분해 적는다."
+  },
+  {
+    "file": "volume01-chapter11.json",
+    "section": "11.11  실습 기록 정리",
+    "image": "assets/illustrations/diversity/v1-c11-evidence.png",
+    "before": "그림 11-10  증거와 조사 결론의 대조",
+    "caption": "그림 11-10. 실습팀은 최초 보고서의 “공격 탐지 가능”을 사례별 입력·수집 결과·판정 근거로 다시 작성한다. 실행 일지에는 있지만 조사 기록에서 설명하지 못한 동작은 원인을 적고 재시험 항목으로 남긴다."
+  },
+  {
+    "file": "volume01-appendix-a.json",
+    "section": "A.10  실습 전 점검",
+    "image": "assets/illustrations/diversity/v1-app-route.png",
+    "before": "부록 그림 A-1  수집 경로 확인",
+    "caption": "부록 그림 A-1. 준비 담당과 수집 담당이 접속 경로를 점검표와 대조한다. 주소·서비스·수집 상태를 확인한 뒤 공격 담당에게 시험 준비 결과를 전달한다."
+  },
+  {
+    "file": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "image": "assets/illustrations/chapter01/install-v2.png",
+    "before": "삽화. 설치 준비.",
+    "caption": "삽화. 준비 담당은 설치 자료와 기존 파일의 백업을 확인한다. 운영체제 설치를 시작하기 전에 사용할 VM과 보존할 데이터를 구분한다."
+  },
+  {
+    "file": "volume01-appendix-a.json",
+    "section": "A.15  공격자 VM 도구 설치",
+    "image": "assets/illustrations/chapter01/network-v2.png",
+    "before": "삽화. 연결 점검.",
+    "caption": "삽화. 준비 담당은 공격자 VM의 도구 설치를 마치고 대상 VM에 대한 연결을 확인한다. 연결 확인이 끝난 주소와 도구 버전을 실행 일지에 기록한다."
+  }
+]

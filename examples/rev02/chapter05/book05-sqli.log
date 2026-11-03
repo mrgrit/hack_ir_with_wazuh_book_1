@@ -1,0 +1,1 @@
+192.168.0.108 - - [01/Nov/2026:20:13:49 +0900] "GET /vulnerabilities/sqli/?id=1%27+UNION+SELECT+user%2Cpassword+FROM+users--+&Submit=Submit&bookcase=book05-sqli HTTP/1.1" 403 438 "-" "curl/7.81.0"

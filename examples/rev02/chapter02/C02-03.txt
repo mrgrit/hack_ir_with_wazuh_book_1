@@ -1,0 +1,1 @@
+grep "book02_probe" /var/log/auth.log

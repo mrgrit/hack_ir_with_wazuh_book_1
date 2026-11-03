@@ -1,0 +1,162 @@
+{
+  "documents": 18,
+  "inputs": 445,
+  "duplicate_ids": [],
+  "media": 203,
+  "counts": {
+    "volume01-appendix-a.json": {
+      "p": 46,
+      "table": 14,
+      "list": 3,
+      "capture_slot": 2,
+      "h": 12,
+      "command": 30,
+      "image": 5,
+      "box": 2,
+      "code": 2,
+      "link": 4
+    },
+    "volume01-appendix-b.json": {
+      "p": 12,
+      "table": 7
+    },
+    "volume01-appendix-c.json": {
+      "p": 6,
+      "table": 4
+    },
+    "volume01-appendix-d.json": {
+      "p": 5,
+      "table": 4
+    },
+    "volume01-appendix-e.json": {
+      "p": 10,
+      "table": 4
+    },
+    "volume01-appendix-f.json": {
+      "p": 6,
+      "table": 3,
+      "link": 11
+    },
+    "volume01-chapter01.json": {
+      "p": 57,
+      "h": 22,
+      "list": 6,
+      "image": 13,
+      "table": 13,
+      "box": 7,
+      "command": 4
+    },
+    "volume01-chapter02.json": {
+      "p": 43,
+      "h": 13,
+      "list": 5,
+      "image": 7,
+      "table": 9,
+      "code": 4,
+      "box": 8,
+      "command": 14
+    },
+    "volume01-chapter03.json": {
+      "p": 28,
+      "h": 9,
+      "list": 10,
+      "image": 12,
+      "table": 7,
+      "box": 4,
+      "query": 6
+    },
+    "volume01-chapter04.json": {
+      "p": 69,
+      "h": 15,
+      "list": 4,
+      "table": 12,
+      "image": 13,
+      "command": 47,
+      "code": 11,
+      "box": 2,
+      "query": 2
+    },
+    "volume01-chapter05.json": {
+      "p": 140,
+      "h": 7,
+      "list": 4,
+      "table": 24,
+      "image": 33,
+      "command": 37,
+      "code": 16,
+      "query": 7,
+      "box": 2
+    },
+    "volume01-chapter06.json": {
+      "p": 116,
+      "h": 7,
+      "list": 4,
+      "table": 13,
+      "image": 41,
+      "code": 16,
+      "query": 13,
+      "command": 28,
+      "box": 2
+    },
+    "volume01-chapter07.json": {
+      "p": 157,
+      "h": 18,
+      "list": 4,
+      "image": 27,
+      "table": 12,
+      "code": 16,
+      "command": 30,
+      "box": 2,
+      "query": 11
+    },
+    "volume01-chapter08.json": {
+      "p": 110,
+      "h": 12,
+      "list": 4,
+      "image": 16,
+      "table": 7,
+      "command": 56,
+      "query": 10,
+      "code": 4,
+      "box": 2
+    },
+    "volume01-chapter09.json": {
+      "p": 98,
+      "h": 12,
+      "list": 4,
+      "image": 18,
+      "table": 9,
+      "command": 69,
+      "query": 12,
+      "box": 2,
+      "code": 2
+    },
+    "volume01-chapter10.json": {
+      "p": 69,
+      "h": 7,
+      "list": 4,
+      "image": 12,
+      "table": 5,
+      "command": 44,
+      "code": 3,
+      "box": 2,
+      "query": 14
+    },
+    "volume01-chapter11.json": {
+      "p": 69,
+      "h": 7,
+      "list": 4,
+      "image": 10,
+      "table": 13,
+      "query": 6,
+      "box": 2,
+      "command": 5
+    },
+    "volume01-references.json": {
+      "p": 24,
+      "h": 48,
+      "link": 126
+    }
+  },
+  "issues": []
+}

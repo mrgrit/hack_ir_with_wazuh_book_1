@@ -1,0 +1,366 @@
+[
+  {
+    "type": "command",
+    "id": "C05-01",
+    "text": "grep -E '^(WEB_HOST_IP|LAB_DOMAIN)=' .env",
+    "why": "kt66 저장소 디렉터리에서 실행한다. grep은 조건에 맞는 행을 찾는다. -E는 확장 정규표현식, ^는 행 시작, 괄호 안의 파이프(|)는 또는(OR)이다. 두 이름 뒤에 등호가 있는 설정을 찾는다.",
+    "result": "WEB_HOST_IP와 LAB_DOMAIN을 적는다. 예시는 192.168.0.107와 ccc.com이다.",
+    "where": "kt66 VM · ~/kt66"
+  },
+  {
+    "type": "query",
+    "id": "Q05-01",
+    "text": "agent.name: \"web\"\nAND data.url: \"/vulnerabilities/sqli/?id=1&Submit=Submit\"",
+    "why": "agent.name은 수집 에이전트이다. web이 수집한 URL 중 정상 조회 경로와 입력값이 일치하는 기록을 찾는다.",
+    "result": "실습 시각의 행을 펼쳐 data.id의 200과 data.url을 확인한다. data.srcip은 요청을 보낸 PC의 출발지 IP이다.",
+    "where": "Windows · Discover · wazuh-archives-*"
+  },
+  {
+    "type": "command",
+    "id": "C05-02",
+    "text": "docker exec -it kt66-web /bin/bash",
+    "result": "이후 두 명령은 kt66-web 안에서 실행한다.",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-web 컨테이너 안에서 다음 작업을 수행할 셸을 연다.",
+    "syntax": "docker exec -it와 /bin/bash의 역할은 C02-P1에서 설명했다. 컨테이너 이름을 대조한 뒤 입력한다."
+  },
+  {
+    "type": "command",
+    "id": "C05-03",
+    "text": "cd /var/log/apache2",
+    "why": "cd는 작업 디렉터리를 옮긴다. Apache 로그 디렉터리로 이동한다.",
+    "result": "이제 파일명으로 로그를 조회할 수 있다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C05-04",
+    "text": "grep -F '/vulnerabilities/sqli/?id=1&Submit=Submit' \\\n  dvwa_access.log",
+    "why": "grep은 조건에 맞는 행을 찾는다. -F는 작은따옴표 안의 URL을 정규표현식으로 해석하지 않고 그대로 찾는다. 줄 끝의 역슬래시(\\)는 다음 줄까지 한 명령으로 잇는다.",
+    "result": "실습 시각의 행에서 출발지 IP, GET 요청과 200 응답을 읽는다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C05-05",
+    "text": "exit",
+    "result": "kt66 호스트 터미널로 돌아온다.",
+    "where": "kt66-web 컨테이너 안",
+    "purpose": "현재 셸을 끝내고 바깥 실행 위치로 돌아간다.",
+    "syntax": "종료 뒤 프롬프트로 실행 위치를 확인한다(C02-P4)."
+  },
+  {
+    "type": "query",
+    "id": "Q05-02",
+    "text": "agent.name: \"web\" AND data.url: *vulnerabilities/sqli/*\nAND data.url: *UNION*",
+    "why": "**Discover**에서 wazuh-alerts-*를 선택하고 실습 시간으로 좁힌다. 별표(*)는 임의 문자열에 일치한다. SQL 실습 경로에서 UNION을 보낸 요청을 찾는다.",
+    "result": "출발지와 시각이 맞는 행을 펼친다. rule.id, data.id, data.url을 기록한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q05-03",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *UNION*",
+    "why": "**Discover**의 패턴을 wazuh-archives-*로 바꾼다. location은 감사 로그 파일, request_line의 UNION으로 SQL 요청을 찾는다. AND로 세 조건을 모두 만족하는 기록을 찾는다.",
+    "result": "한 행을 펼쳐 data.request.request_line의 SQL 입력, transaction의 출발지와 시각을 앞의 접속 로그와 대조한다.",
+    "where": "Windows · Discover · wazuh-archives-*"
+  },
+  {
+    "type": "query",
+    "id": "Q05-04",
+    "text": "agent.name: \"web\" AND data.url: *vulnerabilities/xss_r/*\nAND rule.id: \"31105\"",
+    "why": "wazuh-alerts-*에서 실습 시간의 XSS 경보를 찾는다.",
+    "result": "출발지·시각·name 값을 대조하고 data.id의 403을 읽는다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q05-05",
+    "text": "agent.name: \"web\"\nAND data.url: *book05-browser-path*",
+    "result": "현재 요청의 data.url·data.id·rule.id를 기록한다. 사례 환경은 403과 31104였다.",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "wazuh-alerts-*에서 경로 요청의 표식을 찾는다.",
+    "syntax": "다음 인코딩 비교 요청도 같은 검색에 포함된다."
+  },
+  {
+    "type": "query",
+    "id": "Q05-06",
+    "text": "agent.name: \"web\" AND\n(rule.id: \"31104\" OR data.url: *etc*passwd*)",
+    "why": "OR는 양쪽 조건 중 하나를 만족하면 선택한다. 소괄호는 그 범위를 묶는다. *etc*passwd*는 etc와 passwd 사이의 / 또는 %2F도 포함하도록 찾는다.",
+    "result": "경로 조작 규칙에 일치한 요청과 파일명 문자열이 들어간 요청을 함께 읽는다. 이 장 밖의 기록도 나올 수 있다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q05-07",
+    "text": "agent.name: \"web\" AND data.srcip: \"10.20.30.254\"\nAND (rule.id: \"31104\" OR data.url: *etc*passwd*)",
+    "why": "AND로 출발지 조건을 추가한다. 기간은 실습 시작·종료 시각으로 지정한다.",
+    "result": "같은 출발지의 요청을 URL과 응답 코드로 묶어 읽는다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "command",
+    "id": "C05-06",
+    "text": "docker exec -it kt66-web /bin/bash",
+    "result": "아래 설정 조회를 컨테이너 안에서 진행한다.",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-web 컨테이너 안에서 다음 작업을 수행할 셸을 연다.",
+    "syntax": "docker exec -it와 /bin/bash의 역할은 C02-P1에서 설명했다. 컨테이너 이름을 대조한 뒤 입력한다."
+  },
+  {
+    "type": "command",
+    "id": "C05-07",
+    "text": "grep -n -E '^SecRuleEngine|^SecAuditEngine' \\\n  /etc/modsecurity/modsecurity.conf",
+    "why": "-n은 줄 번호, -E는 확장 정규표현식이다. 캐럿(^)은 행 시작, 파이프(|)는 또는(OR)을 의미한다.",
+    "result": "기준 환경은 SecRuleEngine On, SecAuditEngine RelevantOnly이다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C05-08",
+    "text": "grep -n -E 'ServerName|SecRuleEngine' \\\n  /etc/apache2/sites-enabled/020-dvwa.conf",
+    "why": "DVWA 사이트의 이름과 별도 검사 모드가 있는지 읽는다.",
+    "result": "ServerName이 dvwa.ccc.com인지 확인한다. 기준 DVWA 파일에는 검사 모드 재정의가 없어 전역 On을 사용한다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C05-09",
+    "text": "grep -F -B 1 -A 1 '*_access.log' \\\n  /var/ossec/etc/ossec.conf",
+    "result": "log_format apache와 /var/log/apache2/*_access.log를 확인한다. 설정 경로의 *는 여러 사이트의 access 파일을 수집하도록 지정한 것이다.",
+    "where": "kt66-web 컨테이너 안",
+    "purpose": "Apache 접속 로그를 수집하는 localfile 설정을 확인한다.",
+    "syntax": "-F로 경로 문자열을 찾고 -B 1과 -A 1로 앞뒤 한 줄을 함께 출력한다. 작은따옴표 안의 *는 grep에 문자 그대로 전달한다."
+  },
+  {
+    "type": "command",
+    "id": "C05-10",
+    "text": "grep -F -B 1 -A 1 'modsec_audit.log' \\\n  /var/ossec/etc/ossec.conf",
+    "why": "감사 로그의 수집 항목과 앞뒤 한 줄을 읽는다.",
+    "result": "log_format json과 /var/log/apache2/modsec_audit.log를 확인한다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C05-11",
+    "text": "exit",
+    "result": "호스트 터미널로 돌아온다.",
+    "where": "kt66-web 컨테이너 안",
+    "purpose": "현재 셸을 끝내고 바깥 실행 위치로 돌아간다.",
+    "syntax": "종료 뒤 프롬프트로 실행 위치를 확인한다(C02-P4)."
+  },
+  {
+    "type": "command",
+    "id": "C05-12",
+    "text": "docker exec -it kt66-siem /bin/bash",
+    "result": "아래 조회는 kt66-siem 안에서 실행한다.",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-siem 컨테이너 안에서 다음 작업을 수행할 셸을 연다.",
+    "syntax": "docker exec -it와 /bin/bash의 역할은 C02-P1에서 설명했다. 컨테이너 이름을 대조한 뒤 입력한다."
+  },
+  {
+    "type": "command",
+    "id": "C05-13",
+    "text": "cd /var/ossec/ruleset/rules",
+    "why": "기본 규칙 디렉터리로 이동한다.",
+    "result": "파일명으로 웹 규칙을 조회할 수 있다.",
+    "where": "kt66-siem 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C05-14",
+    "text": "grep -n -A 9 '<rule id=\"31104\"' \\\n  0245-web_rules.xml",
+    "result": "if_sid는 상위 규칙, url은 요청 URL의 문자열 조건이다. ../.. 조건과 Common web attack. 설명을 읽는다.",
+    "where": "kt66-siem 컨테이너 안",
+    "purpose": "웹 공격을 분류하는 규칙 31104의 조건을 읽는다.",
+    "syntax": "줄 번호를 붙이고 일치한 행 뒤의 아홉 줄까지 읽는다. -n은 줄 번호, -A 9는 뒤쪽 문맥이다."
+  },
+  {
+    "type": "command",
+    "id": "C05-15",
+    "text": "exit",
+    "result": "kt66 호스트 터미널로 돌아온다.",
+    "where": "kt66-siem 컨테이너 안",
+    "purpose": "현재 셸을 끝내고 바깥 실행 위치로 돌아간다.",
+    "syntax": "종료 뒤 프롬프트로 실행 위치를 확인한다(C02-P4)."
+  },
+  {
+    "type": "command",
+    "id": "C05-16",
+    "text": "curl --version",
+    "why": "curl [옵션] URL 형식으로 요청을 보낸다. --version은 설치 버전을 보여 준다.",
+    "result": "버전이 출력되는지 확인한다. 기존 검증은 curl 7.81.0을 사용했다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-17",
+    "text": "ip -br -4 address",
+    "why": "ip는 네트워크 주소를 확인하는 명령이다. -br은 간략 표시, -4는 IPv4, address는 인터페이스 주소 조회이다.",
+    "result": "ens33 등의 주소를 기록한다. lo의 127.0.0.1은 자기 자신이다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-18",
+    "text": "grep -n -F 'dvwa.' /etc/hosts",
+    "why": "-n은 줄 번호, -F는 작은따옴표 안의 문자를 그대로 검색한다.",
+    "result": "기존 이름과 IP가 올바르면 편집을 건너뛴다. 바꿀 때는 기존 행을 메모한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-19",
+    "text": "sudo nano /etc/hosts",
+    "why": "sudo는 관리자 권한으로 실행하고 nano는 파일을 편집한다. 기존 이름이 있으면 그 행을 고치고, 없으면 아래 행을 추가한다.",
+    "result": "Ctrl+O, Enter로 저장하고 Ctrl+X로 닫는다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-20",
+    "text": "getent hosts dvwa.ccc.com",
+    "why": "getent hosts 이름은 시스템의 이름 해석 결과를 출력한다. dvwa.ccc.com이 192.168.0.107로 해석되는지 확인한다.",
+    "result": "kt66의 WEB_HOST_IP가 나와야 한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-21",
+    "text": "DVWA='http://dvwa.ccc.com'",
+    "result": "화면 출력 없이 DVWA 변수에 http://dvwa.ccc.com이 저장된다.",
+    "where": "공격자 VM · 터미널",
+    "purpose": "현재 셸에서 사용할 변수에 주소를 저장한다.",
+    "syntax": "등호 양쪽을 붙이며 작은따옴표는 문자열을 묶는다."
+  },
+  {
+    "type": "command",
+    "id": "C05-22",
+    "text": "echo \"$DVWA\"",
+    "why": "echo는 값을 출력한다. $DVWA는 변수의 값으로 바뀌고 큰따옴표는 이를 하나의 인자로 묶는다.",
+    "result": "http://dvwa.ccc.com이 나온다. 이후 요청도 이 터미널에서 실행한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-23",
+    "text": "date -Is",
+    "result": "시각과 +09:00 같은 시간대 값을 적는다.",
+    "where": "공격자 VM · 터미널",
+    "purpose": "date는 현재 시각을 출력한다.",
+    "syntax": "-I의 s는 ISO 8601 형식으로 초까지 표시한다는 뜻이다."
+  },
+  {
+    "type": "command",
+    "id": "C05-24",
+    "text": "date -Is",
+    "why": "kt66의 현재 시각도 읽는다.",
+    "result": "두 시각을 같은 시간대로 환산해 대조한다. +00:00과 +09:00은 9시간 차이이다.",
+    "where": "kt66 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-25",
+    "text": "timedatectl status",
+    "why": "timedatectl은 시각과 동기화 상태를 관리한다. status는 현재 상태를 조회한다.",
+    "result": "System clock synchronized: yes와 NTP service: active를 확인한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-26",
+    "text": "sudo timedatectl set-ntp true",
+    "why": "동기화가 꺼져 있을 때만 실행한다. set-ntp true는 NTP 동기화를 켜며 관리자 권한이 필요하다.",
+    "result": "timedatectl status로 다시 확인한다. 계속 no이면 인터넷 연결과 시간 서버 설정을 확인한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-27",
+    "text": "curl -sS -i --max-time 15 \"$DVWA/login.php\"",
+    "why": "로그인 페이지를 요청한다. 옵션은 위 표와 같다.",
+    "result": "첫 줄에 200 OK, 아래에는 헤더와 HTML 본문이 나온다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-28",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/sqli/\" \\\n  --data-urlencode 'id=1' \\\n  --data-urlencode 'Submit=Submit' \\\n  --data-urlencode 'bookcase=book05-normal'",
+    "why": "id와 **Submit**은 브라우저 폼이 전송한 값이다. bookcase는 로그에서 구분하기 위한 표식이다. -sS·-i·--max-time은 C05-27의 응답 표시·시간 제한 옵션이다.",
+    "result": "로그인 쿠키가 없어 302 Found와 Location: login.php가 나왔다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-29",
+    "text": "PAYLOAD=\"1' UNION SELECT user,password FROM users-- \"",
+    "result": "다음 명령에서 $PAYLOAD가 이 문자열로 바뀐다.",
+    "where": "공격자 VM · 터미널",
+    "purpose": "SQL 입력을 셸 변수에 저장한다.",
+    "syntax": "큰따옴표 안의 작은따옴표는 입력 문자의 일부이며, -- 뒤 공백도 포함한다."
+  },
+  {
+    "type": "command",
+    "id": "C05-30",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/sqli/\" \\\n  --data-urlencode \"id=$PAYLOAD\" \\\n  --data-urlencode 'Submit=Submit' \\\n  --data-urlencode 'bookcase=book05-sqli'",
+    "why": "--data-urlencode가 SQL의 공백과 작은따옴표를 인코딩하고 --get이 URL에 붙인다. 큰따옴표는 변수 값 전체를 하나의 인자로 묶는다.",
+    "result": "기존 검증에서는 403과 Wazuh 규칙 31103이 나왔다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-31",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/xss_r/\" \\\n  --data-urlencode 'name=<script>alert(1)</script>' \\\n  --data-urlencode 'bookcase=book05-xss'",
+    "why": "name은 브라우저의 이름 입력란에 대응한다. 작은따옴표는 꺾쇠·소괄호를 셸 문법으로 처리하지 않도록 묶는다. --data-urlencode는 값을 인코딩하고 --get은 URL 쿼리로 보낸다.",
+    "result": "기존 검증에서는 403과 Wazuh 규칙 31105가 나왔다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-32",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/fi/\" \\\n  --data-urlencode 'page=../../../../../etc/passwd' \\\n  --data 'bookcase=book05-path'",
+    "why": "page는 읽을 파일 경로이다. ../는 상위 디렉터리이며 다섯 번 사용했다. 작은따옴표로 값을 묶고 역슬래시로 명령을 이어 쓴다. -sS·-i는 응답 표시, --max-time 15는 시간 제한이다.",
+    "result": "기존 검증에서는 403과 Wazuh 규칙 31101이 나왔다. URL의 슬래시는 %2F로 기록됐다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-33",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/fi/\" \\\n  --data 'page=../../../../../etc/passwd' \\\n  --data 'bookcase=book05-path-raw'",
+    "why": "page도 --data로 전달한다. --get과 함께 사용하므로 슬래시가 그대로 URL 쿼리에 들어간다. 공백이 없는 경로이며, raw 표식으로 앞 요청과 구분한다.",
+    "result": "기존 검증에서는 403과 Wazuh 규칙 31104가 나왔다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-34",
+    "text": "grep -n -F 'dvwa.' /etc/hosts",
+    "why": "변경한 행을 줄 번호와 함께 찾는다.",
+    "result": "복구 대상이 이번 실습에서 바꾼 행인지 확인한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-35",
+    "text": "sudo nano /etc/hosts",
+    "why": "추가한 행을 제거하거나 수정 전 값으로 되돌린다.",
+    "result": "Ctrl+O, Enter로 저장하고 Ctrl+X로 닫는다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-36",
+    "text": "grep -n -F 'dvwa.' /etc/hosts",
+    "why": "같은 조건으로 다시 읽는다.",
+    "result": "추가한 행이 사라졌거나 기존 값으로 돌아왔는지 확인한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C05-37",
+    "text": "unset DVWA PAYLOAD",
+    "why": "unset은 현재 셸의 변수를 제거한다.",
+    "result": "echo \"$DVWA\"를 실행하면 값 없이 빈 줄이 나온다.",
+    "where": "공격자 VM · 터미널"
+  }
+]

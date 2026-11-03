@@ -1,0 +1,4 @@
+hostname
+whoami
+id
+exit

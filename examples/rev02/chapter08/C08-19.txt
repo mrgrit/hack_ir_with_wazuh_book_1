@@ -1,0 +1,3 @@
+getent passwd book08-none1
+getent passwd book08-none2
+getent passwd book08-none3

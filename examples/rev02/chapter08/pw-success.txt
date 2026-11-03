@@ -1,0 +1,4 @@
+book08-bad1
+book08-bad2
+book08-bad3
+ccc

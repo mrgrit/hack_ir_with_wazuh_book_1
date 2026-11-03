@@ -1,0 +1,46 @@
+[
+  {
+    "file": "B06-01-login.txt",
+    "text": "http://dvwa.ccc.com/login.php"
+  },
+  {
+    "file": "B06-02-known.txt",
+    "text": "http://dvwa.ccc.com/login.php?book06=known"
+  },
+  {
+    "file": "B06-03-missing.txt",
+    "text": "http://dvwa.ccc.com/book06-missing"
+  },
+  {
+    "file": "B06-04-user-agent.txt",
+    "text": "sqlmap/1.0 book06-ua"
+  },
+  {
+    "file": "B06-05-ua-url.txt",
+    "text": "http://dvwa.ccc.com/book06-ua"
+  },
+  {
+    "file": "B06-06-method.txt",
+    "text": "fetch('/book06-method', {method: 'PROPFIND'})\n  .then(r => console.log(r.status));"
+  },
+  {
+    "file": "B06-07-admin.txt",
+    "text": "http://dvwa.ccc.com/admin/"
+  },
+  {
+    "file": "B06-08-phpmyadmin.txt",
+    "text": "http://dvwa.ccc.com/phpmyadmin/"
+  },
+  {
+    "file": "B06-09-wp-admin.txt",
+    "text": "http://dvwa.ccc.com/wp-admin/"
+  },
+  {
+    "file": "B06-10-manager.txt",
+    "text": "http://dvwa.ccc.com/manager/html"
+  },
+  {
+    "file": "B06-11-long.txt",
+    "text": "location.href = '/?book06-long=' + 'A'.repeat(8000);"
+  }
+]

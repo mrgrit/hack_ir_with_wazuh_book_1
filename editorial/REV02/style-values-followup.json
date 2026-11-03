@@ -1,0 +1,254 @@
+[
+  {
+    "file": "volume01-appendix-a.json",
+    "field": "/pages/9/blocks/1/text",
+    "before": "위 값은 책에 사용한 실습 환경의 접속 예시이다. 자신의 VM에 만든 계정과 암호가 다르면 해당 값을 사용한다. Wazuh 5601은 HTTPS로 접속한다. HTTP로 입력한 주소를 먼저 바로잡고 인증서 경고와 로그인 실패를 구분한다.",
+    "after": "위 계정으로 실습 환경을 구성한다. Wazuh는 https://192.168.0.107:5601/로 접속한다. 인증서 경고와 로그인 실패는 별도로 점검한다."
+  },
+  {
+    "file": "volume01-appendix-a.json",
+    "field": "/pages/14/blocks/14/result",
+    "before": "아래와 같은 네 줄이 나온다. 두 IP는 자신의 kt66 VM 주소이고 LAB_DOMAIN은 설치 중 선택한 이름이다. 이 값을 1.8의 실습 기록에 옮겨 적는다.",
+    "after": "WEB_HOST_IP와 INT_HOST_IP는 192.168.0.107, LAB_DOMAIN은 ccc.com이어야 한다. 설정값을 1.8의 실습 기록에 적는다."
+  },
+  {
+    "file": "volume01-appendix-a.json",
+    "field": "/pages/15/blocks/7/syntax",
+    "before": "주소를 자신의 kt66 VM 주소로 바꾼다. curl 주소는 그 주소로 HTTP 요청을 보낸다. -I는 본문 없이 응답 헤더만 요청하고, --max-time 15는 최대 15초까지만 기다린다.",
+    "after": "curl 주소는 그 주소로 HTTP 요청을 보낸다. -I는 본문 없이 응답 헤더만 요청하고, --max-time 15는 최대 15초까지만 기다린다."
+  },
+  {
+    "file": "volume01-appendix-b.json",
+    "field": "/pages/6/blocks/1/text",
+    "before": "명령 번호는 각 장의 조건과 결과 해석으로 돌아가는 안내이다. 자신의 기간·주소·에이전트 이름을 먼저 지정하고, 사례 기록은 제시된 날짜와 대상으로 조회한다.",
+    "after": "명령 번호로 본문의 선행 조건과 결과 해석을 찾는다. 기록을 조회할 때는 대상 에이전트와 실행 기간을 먼저 확인한다."
+  },
+  {
+    "file": "volume01-chapter01.json",
+    "field": "/pages/1/blocks/11/caption",
+    "before": "삽화. 실습팀은 관제 준비 보고서의 “공격 탐지 가능” 항목을 검증하기로 한다. 공격 담당은 실행 일지를, 분석 담당은 수집된 로그만으로 작성한 조사 기록을 준비한다.",
+    "after": "삽화. 가상의 실습팀이 관제 준비 보고서의 “공격 탐지 가능” 항목을 검증하기로 한다. 공격 담당은 실행 일지를, 분석 담당은 수집된 로그만으로 작성한 조사 기록을 준비한다."
+  },
+  {
+    "file": "volume01-chapter01.json",
+    "field": "/pages/2/blocks/13/rows/1/1",
+    "before": "192.168.0.202",
+    "after": "192.168.0.108"
+  },
+  {
+    "file": "volume01-chapter01.json",
+    "field": "/pages/10/blocks/7/text",
+    "before": "실행 위치는 Windows의 브라우저이다. 주소창에 자신의 VM 주소를 직접 입력한다. 콜론(:) 뒤의 숫자는 한 시스템 안에서 서비스를 구분하는 포트 번호이다.",
+    "after": "Windows 브라우저의 주소창에 아래 접속 주소를 입력한다. 콜론(:) 뒤의 숫자는 한 시스템 안에서 서비스를 구분하는 포트 번호이다."
+  },
+  {
+    "file": "volume01-chapter01.json",
+    "field": "/pages/10/blocks/11/caption",
+    "before": "삽화. 준비 담당은 접속에 성공한 주소를 구성 기록과 대조한다. 보고서의 설치 완료 항목에는 웹 접속뿐 아니라 에이전트 연결 확인도 추가한다.",
+    "after": "삽화. 준비 담당이 설치 완료로 표시한 항목에는 웹 접속 결과만 적혀 있다. 구성 기록과 대조한 뒤 에이전트 연결 상태까지 확인하도록 완료 조건을 수정한다."
+  },
+  {
+    "file": "volume01-chapter01.json",
+    "field": "/pages/10/blocks/14/text",
+    "before": "② Wazuh 주소를 연다. kt66은 브라우저가 기본으로 신뢰하지 않는 자체 서명 인증서를 쓰기 때문에 인증서 경고가 나온다. 주소가 자신의 VM인지 확인한 뒤 **고급** 또는 **상세 정보**를 열고 해당 사이트로 계속 진행한다. kt66의 일부 안내 문구에 HTTP로 적혀 있어도 5601은 HTTPS로 접속한다.",
+    "after": "② Wazuh 주소를 연다. kt66은 브라우저가 기본으로 신뢰하지 않는 자체 서명 인증서를 쓰기 때문에 인증서 경고가 나온다. 주소가 192.168.0.107인지 확인한 뒤 **고급** 또는 **상세 정보**를 열고 해당 사이트로 계속 진행한다. kt66의 일부 안내 문구에 HTTP로 적혀 있어도 5601은 HTTPS로 접속한다."
+  },
+  {
+    "file": "volume01-chapter02.json",
+    "field": "/pages/5/blocks/6/text",
+    "before": "웹 서버는 HTTP 응답 코드로 요청 처리 결과를 알린다. 1장에서 설치한 curl로 kt66 웹 서버의 응답 헤더를 읽는다. 주소는 자신의 kt66 VM 주소로 바꾼다.",
+    "after": "웹 서버는 HTTP 응답 코드로 요청 처리 결과를 알린다. 1장에서 설치한 curl로 kt66 웹 서버의 응답 헤더를 읽는다."
+  },
+  {
+    "file": "volume01-chapter03.json",
+    "field": "/pages/4/blocks/1/purpose",
+    "before": "kt66 VM 자신의 에이전트가 보낸 경보만 고른다.",
+    "after": "kt66 VM의 에이전트가 보낸 경보만 고른다."
+  },
+  {
+    "file": "volume01-chapter05.json",
+    "field": "/pages/0/blocks/5/rows/2/1",
+    "before": "자신의 kt66에 설치된 DVWA",
+    "after": "kt66의 DVWA"
+  },
+  {
+    "file": "volume01-chapter05.json",
+    "field": "/pages/0/blocks/8/text",
+    "before": "입력의 주소와 사이트 이름은 자신의 환경에 맞춘다. 화면의 시각·주소·에이전트 번호·경보 건수는 사례값이다. 자신의 결과는 실행 일지의 시각과 실제 수집 필드로 연결하며 사례의 건수를 완료 조건으로 쓰지 않는다.",
+    "after": "각 요청의 시각과 입력을 실행 일지에 기록한다. 검색 결과는 해당 요청의 원문·필드와 대조한다."
+  },
+  {
+    "file": "volume01-chapter05.json",
+    "field": "/pages/11/blocks/5/caption",
+    "before": "삽화. 공격 담당은 SQL 구문을 보내기 전에 정상 사용자 번호로 조회한다. 정상 응답과 시각을 먼저 남겨 이후 공격 요청과 비교할 기준을 만든다.",
+    "after": "삽화. 공격 담당은 SQL 시험을 시작하려다 정상 응답을 기록하지 않았다는 것을 확인한다. 사용자 번호부터 조회하고 응답·시각을 남긴 뒤 공격 입력과 비교한다."
+  },
+  {
+    "file": "volume01-chapter05.json",
+    "field": "/pages/36/blocks/2/result",
+    "before": "ServerName이 자신의 dvwa 도메인인지 확인한다. 기준 DVWA 파일에는 검사 모드 재정의가 없어 전역 On을 사용한다.",
+    "after": "ServerName이 dvwa.ccc.com인지 확인한다. 기준 DVWA 파일에는 검사 모드 재정의가 없어 전역 On을 사용한다."
+  },
+  {
+    "file": "volume01-chapter05.json",
+    "field": "/pages/42/blocks/4/why",
+    "before": "getent hosts 이름은 시스템이 해석한 주소를 출력한다. 자신의 도메인으로 바꾼다.",
+    "after": "getent hosts 이름은 시스템의 이름 해석 결과를 출력한다. dvwa.ccc.com이 192.168.0.107로 해석되는지 확인한다."
+  },
+  {
+    "file": "volume01-chapter05.json",
+    "field": "/pages/42/blocks/5/result",
+    "before": "화면 출력 없이 저장된다. 자신의 도메인으로 바꾼다.",
+    "after": "화면 출력 없이 DVWA 변수에 http://dvwa.ccc.com이 저장된다."
+  },
+  {
+    "file": "volume01-chapter05.json",
+    "field": "/pages/42/blocks/6/result",
+    "before": "자신의 DVWA 주소가 나온다. 이후 요청도 이 터미널에서 실행한다.",
+    "after": "http://dvwa.ccc.com이 나온다. 이후 요청도 이 터미널에서 실행한다."
+  },
+  {
+    "file": "volume01-chapter06.json",
+    "field": "/pages/0/blocks/5/rows/2/1",
+    "before": "자신의 kt66에 설치한 DVWA.",
+    "after": "kt66의 DVWA."
+  },
+  {
+    "file": "volume01-chapter06.json",
+    "field": "/pages/0/blocks/7/text",
+    "before": "입력의 주소와 사이트 이름은 자신의 환경에 맞춘다. 화면의 시각·주소·에이전트 번호·경보 건수는 사례값이다. 자신의 결과는 실행 일지의 시각과 실제 수집 필드로 연결하며 사례의 건수를 완료 조건으로 쓰지 않는다.",
+    "after": "각 요청의 시각과 입력을 실행 일지에 기록한다. 검색 결과는 해당 요청의 원문·필드와 대조한다."
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/4/blocks/4/text",
+    "before": "기존 화면의 출발지 .202와 새 요청의 .108을 섞어 검색하지 않는다. 기존 데이터가 없는 환경에서는 본문의 기록으로 분석하고, 직접 만든 기록은 자신의 시각·주소로 조회한다.",
+    "after": "검색 기간을 실행 일지의 시각에 맞추고 요청 경로와 출발지 조건으로 대상을 좁힌다."
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/6/blocks/2/text",
+    "before": "사례 화면의 파일명은 shell.php이고 직접 만드는 파일명은 book07-shell.php이다. 기존 파일을 덮어쓰지 않도록 실습 이름을 분리했다. 검색할 때는 전체 경로와 시각으로 두 파일을 구분한다.",
+    "after": "실습 파일은 /var/www/html/uploads/shell.php이다. 생성 전 파일이 없는지 확인하고, 같은 경로의 파일이 이미 있으면 소유자와 용도를 확인할 때까지 생성을 중단한다."
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/8/blocks/0/text",
+    "before": "ls -l /var/www/html/uploads/book07-shell.php",
+    "after": "ls -l /var/www/html/uploads/shell.php"
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/8/blocks/0/result",
+    "before": "No such file or directory일 때 새 파일을 만든다. 이미 있으면 덮어쓰지 말고 다른 파일명을 정해 이후 입력에도 동일하게 쓴다.",
+    "after": "No such file or directory일 때 다음 파일 생성 절차를 진행한다. 이미 있으면 소유자·내용·생성 목적을 확인할 때까지 실습을 중단한다."
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/8/blocks/1/text",
+    "before": "vim /var/www/html/uploads/book07-shell.php",
+    "after": "vim /var/www/html/uploads/shell.php"
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/9/blocks/0/text",
+    "before": "cat /var/www/html/uploads/book07-shell.php",
+    "after": "cat /var/www/html/uploads/shell.php"
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/9/blocks/3/text",
+    "before": "http://192.168.0.107/uploads/book07-shell.php?cmd=id",
+    "after": "http://192.168.0.107/uploads/shell.php?cmd=id"
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/10/blocks/0/result",
+    "before": "기존 shell.php와 실습 book07-shell.php를 전체 경로로 구분하고 시각을 적는다.",
+    "after": "/var/www/html/uploads/shell.php의 전체 경로와 생성 시각을 확인한다."
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/10/blocks/4/text",
+    "before": "agent.name: \"web\"\nAND data.url: *book07-shell.php*",
+    "after": "agent.name: \"web\"\nAND data.url: *shell.php*"
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/12/blocks/1/text",
+    "before": "cat /var/www/html/uploads/book07-shell.php",
+    "after": "cat /var/www/html/uploads/shell.php"
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/12/blocks/2/text",
+    "before": "rm -i /var/www/html/uploads/book07-shell.php",
+    "after": "rm -i /var/www/html/uploads/shell.php"
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/12/blocks/2/result",
+    "before": "확인창의 경로가 맞으면 y를 입력한다. 이어 ls -l /var/www/html/uploads/book07-shell.php에서 파일이 없음을 확인한다.",
+    "after": "확인창의 경로가 맞으면 y를 입력한다. 이어 ls -l /var/www/html/uploads/shell.php에서 파일이 없음을 확인한다."
+  },
+  {
+    "file": "volume01-chapter07.json",
+    "field": "/pages/37/blocks/2/text",
+    "before": "grep -n -F 'book07-shell.php' \\\n  /var/log/apache2/landing_access.log",
+    "after": "grep -n -F 'shell.php' \\\n  /var/log/apache2/landing_access.log"
+  },
+  {
+    "file": "volume01-chapter08.json",
+    "field": "/pages/0/blocks/7/text",
+    "before": "본문 화면은 2026년 11월 2일 kt66 실습 환경의 기록이다. 자신의 실습에서는 시작·종료 시각과 주소를 따로 기록한다. 경보 수와 시각, 포트 번호는 실행 때마다 달라진다.",
+    "after": "SSH 실습의 시작·종료 시각을 기록하고 해당 기간의 인증 로그를 검색한다. 개별 연결은 출발지·계정·연결 포트로 구분한다."
+  },
+  {
+    "file": "volume01-chapter08.json",
+    "field": "/pages/0/blocks/8/text",
+    "before": "입력의 주소와 사이트 이름은 자신의 환경에 맞춘다. 화면의 시각·주소·에이전트 번호·경보 건수는 사례값이다. 자신의 결과는 실행 일지의 시각과 실제 수집 필드로 연결하며 사례의 건수를 완료 조건으로 쓰지 않는다.",
+    "after": "각 요청의 시각과 입력을 실행 일지에 기록한다. 검색 결과는 해당 요청의 원문·필드와 대조한다."
+  },
+  {
+    "file": "volume01-chapter09.json",
+    "field": "/pages/0/blocks/7/text",
+    "before": "본문 화면은 2026년 11월 3일 실습 환경의 기록이다. 자신의 시작·종료 시각을 기록하고 검색 기간을 맞춘다. 프로세스 번호, 경보 수, 해시는 환경과 입력에 따라 달라질 수 있다.",
+    "after": "변경 전 파일 해시와 설정을 보관하고 실습의 시작·종료 시각을 기록한다. 변경 결과와 원상복구 상태를 이 기록과 비교한다."
+  },
+  {
+    "file": "volume01-chapter09.json",
+    "field": "/pages/0/blocks/8/text",
+    "before": "입력의 주소와 사이트 이름은 자신의 환경에 맞춘다. 화면의 시각·주소·에이전트 번호·경보 건수는 사례값이다. 자신의 결과는 실행 일지의 시각과 실제 수집 필드로 연결하며 사례의 건수를 완료 조건으로 쓰지 않는다.",
+    "after": "각 요청의 시각과 입력을 실행 일지에 기록한다. 검색 결과는 해당 요청의 원문·필드와 대조한다."
+  },
+  {
+    "file": "volume01-chapter09.json",
+    "field": "/pages/16/blocks/2/result",
+    "before": "파일은 root 소유, 0644이며 cron 한 행이 기록된다. URL에는 자신의 공격자 VM 주소를 쓴다.",
+    "after": "파일은 root 소유, 0644이며 cron 한 행이 기록된다. URL의 호스트는 공격자 VM의 192.168.0.108이다."
+  },
+  {
+    "file": "volume01-chapter10.json",
+    "field": "/pages/0/blocks/7/text",
+    "before": "입력의 주소와 사이트 이름은 자신의 환경에 맞춘다. 화면의 시각·주소·에이전트 번호·경보 건수는 사례값이다. 자신의 결과는 실행 일지의 시각과 실제 수집 필드로 연결하며 사례의 건수를 완료 조건으로 쓰지 않는다.",
+    "after": "각 요청의 시각과 입력을 실행 일지에 기록한다. 검색 결과는 해당 요청의 원문·필드와 대조한다."
+  },
+  {
+    "file": "volume01-chapter10.json",
+    "field": "/pages/1/blocks/1/text",
+    "before": "이 장의 대상은 Ubuntu 호스트이다. SSH 기본 포트 22로 접속한다. 8·9장에서 사용한 2204는 bastion 컨테이너이므로 구분한다. 예제의 주소는 자신의 VM 주소로 바꾼다. kt66 VM의 VMware 콘솔과 별도 터미널 두 개를 준비한다.",
+    "after": "이 장의 대상은 Ubuntu 호스트이다. SSH 기본 포트 22로 접속한다. 8·9장에서 사용한 2204는 bastion 컨테이너이므로 구분한다. kt66 VM의 VMware 콘솔과 별도 터미널 두 개를 준비한다."
+  },
+  {
+    "file": "volume01-chapter11.json",
+    "field": "/pages/26/blocks/2/caption",
+    "before": "그림 11-10. 실습팀은 처음 작성한 보고서의 각 판단을 사례별 증거와 대조한다. 입증한 범위·추가 수집이 필요한 항목·재시험 조건을 구분해 검증 결과를 확정한다.",
+    "after": "그림 11-10. 실습팀은 최초 보고서의 “공격 탐지 가능”을 사례별 입력·수집 결과·판정 근거로 다시 작성한다. 실행 일지에는 있지만 조사 기록에서 설명하지 못한 동작은 원인을 적고 재시험 항목으로 남긴다."
+  },
+  {
+    "file": "volume01-references.json",
+    "field": "/pages/7/blocks/11/text",
+    "before": "kt66 코드 기준은 1장의 63d4180b1d6866de986ef263a3bd831d6082b5d5이다. 수집·라우팅 설정과 DVWA의 처리 코드는 7.8의 경로에서 확인한다. 기존 화면의 주소·상태·시각은 원본 기록대로 읽고 새 입력은 자신의 환경 값으로 대조한다.",
+    "after": "kt66 코드 기준은 1장의 63d4180b1d6866de986ef263a3bd831d6082b5d5이다. 수집·라우팅 설정과 DVWA의 처리 코드는 7.8의 경로에서 확인한다. 설정 확인 명령과 검색 조건은 해당 절의 복사용 예제 파일에 있다."
+  }
+]

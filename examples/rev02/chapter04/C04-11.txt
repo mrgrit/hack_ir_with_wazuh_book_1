@@ -1,0 +1,2 @@
+grep -n -A 5 '<decoder name="ssh-invfailed">' \
+  0310-ssh_decoders.xml

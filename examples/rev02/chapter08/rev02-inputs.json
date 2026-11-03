@@ -1,0 +1,530 @@
+[
+  {
+    "document": "volume01-chapter08.json",
+    "section": "컨테이너와 수집 상태 확인",
+    "id": "C08-01",
+    "where": "Windows · 터미널",
+    "file": "examples/rev02/chapter08/C08-01.txt",
+    "text": "ssh ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "컨테이너와 수집 상태 확인",
+    "id": "C08-02",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter08/C08-02.txt",
+    "text": "docker ps\ndocker port kt66-bastion"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "컨테이너와 수집 상태 확인",
+    "id": "C08-03",
+    "where": "kt66 VM · ccc 호스트 셸",
+    "file": "examples/rev02/chapter08/C08-03.txt",
+    "text": "docker exec -it kt66-bastion /bin/bash"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "서버의 초기 상태 기록",
+    "id": "C08-04",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-04.txt",
+    "text": "hostname\n/usr/sbin/sshd -T | grep -E \\\n'^(port|permitrootlogin|passwordauthentication|maxauthtries) '"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "서버의 초기 상태 기록",
+    "id": "C08-05",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-05.txt",
+    "text": "passwd -S root\n/var/ossec/bin/wazuh-control status\ntail -n 10 /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "공격자 VM에 Hydra 준비",
+    "id": "C08-06",
+    "where": "Windows · 별도 터미널",
+    "file": "examples/rev02/chapter08/C08-06.txt",
+    "text": "ssh att@192.168.0.108"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "공격자 VM에 Hydra 준비",
+    "id": "C08-07",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-07.txt",
+    "text": "command -v ssh\ncommand -v hydra"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "공격자 VM에 Hydra 준비",
+    "id": "C08-08",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-08.txt",
+    "text": "sudo apt-get update\nsudo apt-get install -y hydra\nhydra -h"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "목록 파일과 정상 로그인 준비",
+    "id": "C08-09",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-09.txt",
+    "text": "ls -ld ~/book08"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "목록 파일과 정상 로그인 준비",
+    "id": "C08-10",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-10.txt",
+    "text": "mkdir ~/book08\ncd ~/book08\npwd"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "목록 파일과 정상 로그인 준비",
+    "id": "C08-11",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-11.txt",
+    "text": "ssh -p 2204 -o HostKeyAlgorithms=ssh-ed25519 \\\n  ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "서버 확인과 정상 인증 기록",
+    "id": "C08-12",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-12.txt",
+    "text": "ssh-keygen -lf \\\n/var/lib/bastion/ssh-host-keys/ssh_host_ed25519_key.pub"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "서버 확인과 정상 인증 기록",
+    "id": "C08-13",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-13.txt",
+    "text": "hostname\nwhoami\nid\nexit"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "서버 확인과 정상 인증 기록",
+    "id": "C08-14",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-14.txt",
+    "text": "tail -n 20 /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "Discover에서 인증 로그 검색",
+    "id": "Q08-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-01.txt",
+    "text": "agent.name: \"bastion\" AND\nlocation: \"/var/log/auth.log\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.2  동일 계정의 암호 대입",
+    "id": "C08-15",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-15.txt",
+    "text": "cd ~/book08\nls -l pw-fail.txt"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.2  동일 계정의 암호 대입",
+    "id": "C08-16",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-16.txt",
+    "text": "printf '%s\\n' \\\nbook08-wrong01 book08-wrong02 book08-wrong03 \\\nbook08-wrong04 book08-wrong05 book08-wrong06 \\\nbook08-wrong07 book08-wrong08 book08-wrong09 \\\nbook08-wrong10 book08-wrong11 book08-wrong12 \\\n> pw-fail.txt\ncat pw-fail.txt\nwc -l pw-fail.txt"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "인증 시도와 응답 분석",
+    "id": "C08-17",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-17.txt",
+    "text": "timeout 45s hydra -l ccc -P pw-fail.txt \\\n-t 4 -w 5 ssh://192.168.0.107:2204"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "인증 시도와 응답 분석",
+    "id": "Q08-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-02.txt",
+    "text": "agent.name: \"bastion\" AND\n(rule.id: \"5760\" OR rule.id: \"5763\")"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "반복 로그 요약과 필드 누락",
+    "id": "Q08-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-03.txt",
+    "text": "agent.name: \"bastion\" AND\nfull_log: \"message repeated\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "자동 대응의 실행 여부 확인",
+    "id": "C08-18",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-18.txt",
+    "text": "tail -n 25 /var/ossec/logs/active-responses.log\niptables -S"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.3  존재하지 않는 계정의 인증 시도",
+    "id": "C08-19",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-19.txt",
+    "text": "getent passwd book08-none1\ngetent passwd book08-none2\ngetent passwd book08-none3"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.3  존재하지 않는 계정의 인증 시도",
+    "id": "C08-20",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-20.txt",
+    "text": "cd ~/book08\nls -l users-invalid.txt\nprintf '%s\\n' book08-none1 book08-none2 \\\nbook08-none3 > users-invalid.txt\ncat users-invalid.txt"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "잘못된 계정의 응답과 경보",
+    "id": "C08-21",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-21.txt",
+    "text": "timeout 30s hydra -L users-invalid.txt \\\n-p book08-wrong -t 3 -w 5 \\\nssh://192.168.0.107:2204"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "잘못된 계정의 응답과 경보",
+    "id": "Q08-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-04.txt",
+    "text": "agent.name: \"bastion\" AND\n(rule.id: \"5710\" OR rule.id: \"5712\")"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.4  인증 실패 이후의 성공 기록",
+    "id": "C08-22",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-22.txt",
+    "text": "cd ~/book08\nls -l pw-success.txt\nprintf '%s\\n' book08-bad1 book08-bad2 \\\nbook08-bad3 ccc > pw-success.txt\ncat pw-success.txt"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.4  인증 실패 이후의 성공 기록",
+    "id": "C08-23",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-23.txt",
+    "text": "timeout 35s hydra -l ccc -P pw-success.txt \\\n-t 1 -w 5 -f ssh://192.168.0.107:2204"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "성공 뒤 셸과 기록 확인",
+    "id": "C08-24",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-24.txt",
+    "text": "ssh -p 2204 ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "성공 뒤 셸과 기록 확인",
+    "id": "C08-25",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-25.txt",
+    "text": "hostname\nwhoami\nid\nexit"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "성공 뒤 셸과 기록 확인",
+    "id": "Q08-05",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-05.txt",
+    "text": "agent.name: \"bastion\" AND\ndata.srcip: \"192.168.0.108\" AND\n(rule.id: \"5760\" OR rule.id: \"5715\")"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "설정과 암호 상태 백업",
+    "id": "C08-26",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-26.txt",
+    "text": "ls -l /root/book08-sshd_config.before \\\n/root/book08-shadow.before\npasswd -S root"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "설정과 암호 상태 백업",
+    "id": "C08-27",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-27.txt",
+    "text": "cp -p /etc/ssh/sshd_config \\\n/root/book08-sshd_config.before\ncp -p /etc/shadow /root/book08-shadow.before\nchmod 600 /root/book08-shadow.before"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "설정과 암호 상태 백업",
+    "id": "C08-28",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-28.txt",
+    "text": "cmp /etc/ssh/sshd_config \\\n/root/book08-sshd_config.before\ncmp /etc/shadow /root/book08-shadow.before"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 인증을 임시로 허용",
+    "id": "C08-29",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-29.txt",
+    "text": "vim /etc/ssh/sshd_config"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 인증을 임시로 허용",
+    "id": "C08-30",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-30.txt",
+    "text": "passwd root"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "유효 설정 검사와 재적용",
+    "id": "C08-31",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-31.txt",
+    "text": "/usr/sbin/sshd -t\n/usr/sbin/sshd -T -C \\\nuser=root,addr=192.168.0.108,host=attacker \\\n| grep -E '^(permitrootlogin|passwordauthentication) '"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "유효 설정 검사와 재적용",
+    "id": "C08-32",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-32.txt",
+    "text": "service ssh reload\npasswd -S root"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "직접 로그인과 Wazuh 확인",
+    "id": "C08-33",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-33.txt",
+    "text": "ssh -p 2204 root@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "직접 로그인과 Wazuh 확인",
+    "id": "Q08-06",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-06.txt",
+    "text": "agent.name: \"bastion\" AND\nrule.id: \"5715\" AND data.dstuser: \"root\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 설정과 암호 원상복구",
+    "id": "C08-34",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-34.txt",
+    "text": "ls -l /root/book08-sshd_config.before \\\n/root/book08-shadow.before\ncp -p /root/book08-sshd_config.before \\\n/etc/ssh/sshd_config\ncp -p /root/book08-shadow.before /etc/shadow"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 설정과 암호 원상복구",
+    "id": "C08-35",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-35.txt",
+    "text": "cmp /etc/ssh/sshd_config \\\n/root/book08-sshd_config.before\ncmp /etc/shadow /root/book08-shadow.before\n/usr/sbin/sshd -t\nservice ssh reload"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 설정과 암호 원상복구",
+    "id": "C08-36",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-36.txt",
+    "text": "passwd -S root\n/usr/sbin/sshd -T | grep permitrootlogin"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "복구 뒤 새 연결로 확인",
+    "id": "C08-37",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-37.txt",
+    "text": "ssh -p 2204 -o NumberOfPasswordPrompts=1 \\\nroot@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "복구 뒤 새 연결로 확인",
+    "id": "C08-38",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-38.txt",
+    "text": "ssh -p 2204 ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "복구 뒤 새 연결로 확인",
+    "id": "C08-39",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-39.txt",
+    "text": "rm -i /root/book08-sshd_config.before \\\n/root/book08-shadow.before"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.6  sudo 권한과 실행자 조사",
+    "id": "C08-40",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-40.txt",
+    "text": "ssh -p 2204 ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.6  sudo 권한과 실행자 조사",
+    "id": "C08-41",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-41.txt",
+    "text": "id\nsudo -l"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 권한 명령 실행",
+    "id": "C08-42",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-42.txt",
+    "text": "sudo -i id\nid"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "root 권한 명령 실행",
+    "id": "C08-43",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-43.txt",
+    "text": "ls -l /etc/shadow\nsudo cat /etc/shadow > /dev/null\necho $?"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "sudo 원문과 필드 해석",
+    "id": "Q08-07",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-07.txt",
+    "text": "agent.name: \"bastion\" AND\n(rule.id: \"5402\" OR rule.id: \"5403\")"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.7  새 계정과 권한 변경 조사",
+    "id": "C08-44",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-44.txt",
+    "text": "ssh -p 2204 ccc@192.168.0.107"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "8.7  새 계정과 권한 변경 조사",
+    "id": "C08-45",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-45.txt",
+    "text": "getent passwd book08-user\ngetent group book08-user\nls -ld /home/book08-user"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "계정 생성과 암호 상태",
+    "id": "C08-46",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-46.txt",
+    "text": "sudo useradd -m -s /bin/bash book08-user\ngetent passwd book08-user\nid book08-user\nsudo passwd -S book08-user"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "계정 생성과 암호 상태",
+    "id": "Q08-08",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-08.txt",
+    "text": "agent.name: \"bastion\" AND\nrule.id: \"5902\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "생성 필드와 그룹 추가",
+    "id": "C08-47",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-47.txt",
+    "text": "sudo usermod -aG sudo book08-user\nid book08-user\ngetent group sudo"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "실행 요청과 변경 결과 대조",
+    "id": "Q08-09",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-09.txt",
+    "text": "agent.name: \"bastion\" AND\ndata.command: \"/usr/sbin/usermod -aG sudo book08-user\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "실행 요청과 변경 결과 대조",
+    "id": "C08-48",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-48.txt",
+    "text": "sudo grep -F 'book08-user' /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "계정 삭제와 원상복구",
+    "id": "C08-49",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-49.txt",
+    "text": "getent passwd book08-user\nid book08-user\nsudo userdel -r book08-user"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "계정 삭제와 원상복구",
+    "id": "C08-50",
+    "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+    "file": "examples/rev02/chapter08/C08-50.txt",
+    "text": "getent passwd book08-user\necho $?\ngetent group book08-user\necho $?\nls -ld /home/book08-user\ngetent group sudo"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "삭제 기록의 계정 필드",
+    "id": "Q08-10",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter08/Q08-10.txt",
+    "text": "agent.name: \"bastion\" AND\nrule.id: \"5903\""
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "수집 설정과 자동 대응 설정",
+    "id": "C08-51",
+    "where": "kt66-bastion · root 셸",
+    "file": "examples/rev02/chapter08/C08-51.txt",
+    "text": "grep -n -A 3 -B 2 '/var/log/auth.log' \\\n/var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "수집 설정과 자동 대응 설정",
+    "id": "C08-52",
+    "where": "bastion 관리 셸 → kt66 VM 호스트",
+    "file": "examples/rev02/chapter08/C08-52.txt",
+    "text": "exit\ndocker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "수집 설정과 자동 대응 설정",
+    "id": "C08-53",
+    "where": "kt66-siem · root 셸",
+    "file": "examples/rev02/chapter08/C08-53.txt",
+    "text": "grep -n -A 6 -B 2 '<command>firewall-drop' \\\n/var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "수집 설정과 자동 대응 설정",
+    "id": "C08-54",
+    "where": "kt66-siem · root 셸",
+    "file": "examples/rev02/chapter08/C08-54.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "실습 파일과 세션 원상복구",
+    "id": "C08-55",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-55.txt",
+    "text": "cd ~/book08\npwd\nls -la"
+  },
+  {
+    "document": "volume01-chapter08.json",
+    "section": "실습 파일과 세션 원상복구",
+    "id": "C08-56",
+    "where": "공격자 VM · att 셸",
+    "file": "examples/rev02/chapter08/C08-56.txt",
+    "text": "rm -i pw-fail.txt users-invalid.txt pw-success.txt"
+  }
+]

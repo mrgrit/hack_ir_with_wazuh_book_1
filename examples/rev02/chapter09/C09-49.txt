@@ -1,0 +1,7 @@
+ls -l ~/book09/www/a.sh
+cat > ~/book09/www/a.sh <<'EOF'
+#!/bin/sh
+printf "book09-payload user=%s host=%s\n" \
+"$(id -un)" "$(hostname)"
+EOF
+cat ~/book09/www/a.sh

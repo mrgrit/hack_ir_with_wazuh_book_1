@@ -1,0 +1,66 @@
+[
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.3  공격자 VM 설치",
+    "id": "CA-01",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/appendix-a/CA-01.txt",
+    "text": "cat /etc/os-release\nip -4 -br address"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.4  설치가 멈췄을 때",
+    "id": "CA-02",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/appendix-a/CA-02.txt",
+    "text": "getent hosts github.com\ncurl -I --max-time 15 https://github.com"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.4  설치가 멈췄을 때",
+    "id": "CA-03",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/appendix-a/CA-03.txt",
+    "text": "id -nG"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.4  설치가 멈췄을 때",
+    "id": "CA-04",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/appendix-a/CA-04.txt",
+    "text": "sudo usermod -aG docker \"$USER\""
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.5  화면이 열리지 않을 때",
+    "id": "CA-05",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/appendix-a/CA-05.txt",
+    "text": "docker compose logs --tail 50 wazuh-dashboard\ndocker compose logs --tail 50 wazuh-indexer"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.6  수집기가 연결되지 않을 때",
+    "id": "CA-06",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/appendix-a/CA-06.txt",
+    "text": "sudo systemctl status wazuh-agent --no-pager\nsudo journalctl -u wazuh-agent -n 50 --no-pager"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.6  수집기가 연결되지 않을 때",
+    "id": "CA-07",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/appendix-a/CA-07.txt",
+    "text": "docker compose logs --tail 50 siem"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.6  수집기가 연결되지 않을 때",
+    "id": "CA-08",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/appendix-a/CA-08.txt",
+    "text": "sudo ./deployment/host-sensors.sh"
+  }
+]

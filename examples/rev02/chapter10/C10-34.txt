@@ -1,0 +1,5 @@
+cp -p ~/book10-authorized_keys.before \
+~/.ssh/authorized_keys
+cmp ~/book10-authorized_keys.before \
+~/.ssh/authorized_keys
+sha256sum ~/.ssh/authorized_keys

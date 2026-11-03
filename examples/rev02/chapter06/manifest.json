@@ -1,0 +1,342 @@
+[
+  {
+    "type": "query",
+    "id": "Q06-01",
+    "text": "agent.name: \"web\"\nAND data.url: \"/book06-missing\"",
+    "why": "wazuh-alerts-*에서 실습 기간으로 좁힌다. AND는 두 조건을 모두 만족하는 기록을 찾는다.",
+    "result": "행을 펼쳐 data.id가 404, data.protocol이 GET인지 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "command",
+    "id": "C06-01",
+    "text": "gobuster -h",
+    "why": "기본 구문은 gobuster 옵션이다. -h는 사용법을 표시한다. 이 장은 Ubuntu 22.04 패키지의 Gobuster 2.0.1을 기준으로 한다.",
+    "result": "-m, -u, -w, -t, -a 옵션이 보이는지 확인한다. 명령을 찾지 못하면 아래 설치 절차를 수행한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C06-02",
+    "text": "sudo apt update",
+    "why": "apt는 Ubuntu 패키지 관리자이다. update는 설치 가능한 패키지 목록을 갱신한다. sudo는 관리자 권한으로 실행한다.",
+    "result": "저장소 접속 오류가 없는지 확인한다. Gobuster가 설치돼 있으면 이 명령과 다음 설치 명령을 건너뛴다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C06-03",
+    "text": "sudo apt install gobuster",
+    "why": "install 뒤에 지정한 패키지를 설치한다. 설치할 목록을 확인하고 계속할지 묻는 질문에 답한다.",
+    "result": "완료 후 gobuster -h를 다시 실행해 사용법이 나오는지 확인한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C06-04",
+    "text": "getent hosts dvwa.ccc.com",
+    "why": "getent는 시스템의 이름 조회 설정으로 주소를 찾는다. hosts 뒤에 DVWA 이름을 지정한다.",
+    "result": "kt66 웹 진입 IP가 나와야 한다. 결과가 없거나 IP가 다르면 5.13의 공격자 VM hosts 설정을 확인한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C06-05",
+    "text": "cd ~",
+    "why": "cd는 작업 디렉터리를 옮긴다. 물결표(~)는 현재 사용자의 홈 디렉터리이다.",
+    "result": "이후 목록 파일은 공격자 계정의 홈 디렉터리에 둔다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C06-06",
+    "text": "ls -l book06-paths.txt",
+    "why": "ls는 파일 정보를 표시하고 -l은 권한·크기 등을 함께 표시한다. 변경 전 대상 파일의 존재 여부를 확인한다.",
+    "result": "No such file or directory이면 새 파일로 만들 수 있다. 있으면 cat으로 내용을 먼저 읽는다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C06-07",
+    "text": "nano book06-paths.txt",
+    "why": "nano는 터미널 텍스트 편집기이다. 뒤에 지정한 파일을 연다. 다음 절차의 경로 목록을 한 행씩 입력한다.",
+    "result": "Ctrl+O → Enter로 저장하고 Ctrl+X로 닫는다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C06-08",
+    "text": "cat book06-paths.txt",
+    "why": "cat은 파일 내용을 출력한다. 저장 후 실제 내용을 확인한다.",
+    "result": "다음 절차의 23행과 비교한다. URL 전체가 아니라 경로만 들어 있어야 한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C06-09",
+    "text": "gobuster -m dir \\\n  -u http://dvwa.ccc.com/ \\\n  -w book06-paths.txt -t 1 -a book06-scan",
+    "why": "줄 끝의 역슬래시(\\)는 다음 줄까지 한 명령으로 잇는다. 각 경로를 확인하고 응답 코드를 출력한다.",
+    "result": "제시한 사례에서는 /login.php와 /robots.txt가 200으로 표시됐다. 종료 후 **Discover**에서 같은 시각의 요청을 찾는다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "query",
+    "id": "Q06-02",
+    "text": "agent.name: \"web\"\nAND full_log: \"book06-scan\"",
+    "why": "full_log는 원문이다. 명령에서 지정한 User-Agent 표식이 있는 기록을 찾는다.",
+    "result": "data.srcip이 공격자 VM 주소인지 확인하고 data.url과 data.id를 비교한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-03",
+    "text": "agent.name: \"web\" AND rule.id: \"31151\"\nAND full_log: \"book06-scan\"",
+    "result": "규칙 31151의 경보와 원문을 확인한다. 요청 목록 전체는 Q06-02의 검색으로 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "같은 표식의 기록 중 반복된 4xx 응답 경보를 찾는다.",
+    "syntax": "rule.id는 HTTP 응답 코드와 다르다."
+  },
+  {
+    "type": "command",
+    "id": "C06-10",
+    "text": "docker exec -it kt66-siem /bin/bash",
+    "result": "이후 조회는 kt66-siem 안에서 수행한다.",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-siem 컨테이너 안에서 다음 작업을 수행할 셸을 연다.",
+    "syntax": "docker exec -it와 /bin/bash의 역할은 C02-P1에서 설명했다. 컨테이너 이름을 대조한 뒤 입력한다."
+  },
+  {
+    "type": "command",
+    "id": "C06-11",
+    "text": "cd /var/ossec/ruleset/rules",
+    "why": "Wazuh 기본 규칙 디렉터리로 이동한다.",
+    "result": "다음 명령에서 웹 규칙 파일을 조회한다.",
+    "where": "kt66-siem 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C06-12",
+    "text": "sed -n '/<rule id=\"31151\"/,/<\\/rule>/p' \\\n  0245-web_rules.xml",
+    "why": "sed는 텍스트의 행을 선택·변환하는 도구이다. -n은 기본 출력을 끄고 p는 선택한 행을 출력한다. 쉼표 앞·뒤의 /패턴/은 시작·끝 행을 지정한다. 끝 패턴의 \\/는 슬래시(/) 문자이다. 작은따옴표는 식을 셸 해석 없이 전달한다.",
+    "result": "id 31151의 시작 태그부터 닫는 rule 태그까지 나온다.",
+    "where": "kt66-siem 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C06-13",
+    "text": "exit",
+    "result": "kt66 호스트 터미널로 돌아온다.",
+    "where": "kt66-siem 컨테이너 안",
+    "purpose": "현재 셸을 끝내고 바깥 실행 위치로 돌아간다.",
+    "syntax": "종료 뒤 프롬프트로 실행 위치를 확인한다(C02-P4)."
+  },
+  {
+    "type": "query",
+    "id": "Q06-04",
+    "text": "agent.name: \"web\" AND data.url: \"/book06-ua\"\nAND full_log: \"sqlmap\"",
+    "result": "full_log 끝의 User-Agent와 data.id의 403을 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "URL과 원문의 sqlmap 문자열을 함께 찾는다.",
+    "syntax": "access 로그의 data.url이 있는 기록으로 한정한다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-05",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-ua*",
+    "result": "행을 펼쳐 요청 줄·응답·차단 결정·메시지를 대조한다.",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "purpose": "wazuh-archives-*에서 WAF 감사 파일과 요청 경로로 찾는다.",
+    "syntax": "별표(*)는 임의 문자열에 일치한다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-06",
+    "text": "agent.name: \"web\" AND data.protocol: \"POST\"\nAND data.url: \"/login.php\"",
+    "result": "세 POST 요청의 출발지·시각·302 응답을 비교한다.",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "purpose": "아카이브에서 로그인 폼을 제출한 요청을 찾는다.",
+    "syntax": "조회 기간을 세 후보를 입력한 시각으로 좁힌다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-07",
+    "text": "agent.name: \"web\"\nAND data.url: *vulnerabilities/brute/*\nAND data.url: *username=admin*",
+    "why": "아카이브에서 **Brute Force** 경로와 admin 입력을 함께 찾는다.",
+    "result": "세 후보의 URL과 200 응답을 대조한다. 인증 결과 문구는 브라우저에서 적은 기록과 비교한다.",
+    "where": "Windows · Discover · wazuh-archives-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-08",
+    "text": "agent.name: \"web\" AND data.protocol: \"PROPFIND\"\nAND data.url: \"/book06-method\"",
+    "why": "wazuh-alerts-*에서 메서드와 경로를 함께 지정한다.",
+    "result": "data.protocol의 PROPFIND와 data.id의 403을 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-09",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-method*",
+    "why": "아카이브에서 같은 메서드 시험의 WAF 감사 기록을 찾는다.",
+    "result": "메시지의 911100과 intercepted 값을 확인한다.",
+    "where": "Windows · Discover · wazuh-archives-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-10",
+    "text": "agent.name: \"web\"\nAND data.url: (\"/admin/\" OR \"/phpmyadmin/\"\nOR \"/wp-admin/\" OR \"/manager/html\")",
+    "why": "괄호는 경로 조건을 묶고 OR는 어느 하나에 일치하는 기록을 찾는다.",
+    "result": "네 경로의 data.srcip·data.id를 확인한다. 경보가 없으면 같은 식으로 아카이브를 검색한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "query",
+    "id": "Q06-11",
+    "text": "agent.name: \"web\" AND rule.id: \"31115\"\nAND data.url: *book06-long*",
+    "why": "경보 인덱스에서 긴 URL 실습 표식과 규칙 번호로 찾는다.",
+    "result": "rule.id와 data.id를 구분하고 full_log의 요청 줄을 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "command",
+    "id": "C06-14",
+    "text": "docker exec -it kt66-web /bin/bash",
+    "result": "다음 조회는 kt66-web 안에서 실행한다.",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-web 컨테이너 안에서 다음 작업을 수행할 셸을 연다.",
+    "syntax": "docker exec -it와 /bin/bash의 역할은 C02-P1에서 설명했다. 컨테이너 이름을 대조한 뒤 입력한다."
+  },
+  {
+    "type": "command",
+    "id": "C06-15",
+    "text": "cd /var/log/apache2",
+    "why": "Apache 로그 디렉터리로 이동한다.",
+    "result": "dvwa_access.log를 파일명으로 조회할 수 있다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C06-16",
+    "text": "grep -F 'book06-scan' dvwa_access.log",
+    "why": "grep은 조건에 맞는 행을 찾는다. -F는 작은따옴표 안의 문자열을 정규표현식이 아닌 문자 그대로 찾는다.",
+    "result": "경로와 끝의 User-Agent를 읽고 출발지·시각·404 응답을 확인한다.",
+    "where": "kt66-web 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C06-17",
+    "text": "exit",
+    "result": "kt66 호스트 터미널로 돌아온다.",
+    "where": "kt66-web 컨테이너 안",
+    "purpose": "현재 셸을 끝내고 바깥 실행 위치로 돌아간다.",
+    "syntax": "종료 뒤 프롬프트로 실행 위치를 확인한다(C02-P4)."
+  },
+  {
+    "type": "command",
+    "id": "C06-18",
+    "text": "docker exec -it kt66-dvwa /bin/bash",
+    "result": "다음 명령은 kt66-dvwa 안에서 실행한다.",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-dvwa 컨테이너 안에서 다음 작업을 수행할 셸을 연다.",
+    "syntax": "docker exec -it와 /bin/bash의 역할은 C02-P1에서 설명했다. 컨테이너 이름을 대조한 뒤 입력한다."
+  },
+  {
+    "type": "command",
+    "id": "C06-19",
+    "text": "cd /var/www/html",
+    "why": "DVWA 프로그램 디렉터리로 이동한다.",
+    "result": "login.php와 vulnerabilities 디렉터리를 기준으로 조회한다.",
+    "where": "kt66-dvwa 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C06-20",
+    "text": "grep -nE 'checkToken|generateSessionToken|dvwaRedirect' \\\n  login.php",
+    "why": "-n은 행 번호, -E는 확장 정규표현식이다. 이 식의 파이프(|)는 또는(OR)을 의미한다. 토큰 확인·갱신과 페이지 이동 함수가 있는 행을 출력한다.",
+    "result": "checkToken, generateSessionToken과 login.php·index.php로의 이동을 확인한다.",
+    "where": "kt66-dvwa 컨테이너 안"
+  },
+  {
+    "type": "command",
+    "id": "C06-21",
+    "text": "grep -nE 'GET|Welcome|incorrect' \\\n  vulnerabilities/brute/source/low.php",
+    "result": "$_GET에서 username·password를 읽고 결과 문구를 나누는 행이 나온다.",
+    "where": "kt66-dvwa 컨테이너 안",
+    "purpose": "GET 입력과 성공·실패 문구를 찾는다.",
+    "syntax": "파일은 읽기만 한다."
+  },
+  {
+    "type": "command",
+    "id": "C06-22",
+    "text": "exit",
+    "result": "kt66 호스트 터미널로 돌아온다.",
+    "where": "kt66-dvwa 컨테이너 안",
+    "purpose": "현재 셸을 끝내고 바깥 실행 위치로 돌아간다.",
+    "syntax": "종료 뒤 프롬프트로 실행 위치를 확인한다(C02-P4)."
+  },
+  {
+    "type": "command",
+    "id": "C06-23",
+    "text": "cat ~/book06-paths.txt",
+    "result": "이번에 만든 목록인지 확인한다. 다른 이름으로 만들었으면 그 파일명을 쓴다.",
+    "where": "공격자 VM · 터미널",
+    "purpose": "삭제 전 경로 목록 내용을 확인한다.",
+    "syntax": "~는 공격자 계정의 홈 디렉터리이다."
+  },
+  {
+    "type": "command",
+    "id": "C06-24",
+    "text": "rm -i ~/book06-paths.txt",
+    "why": "rm은 파일을 삭제한다. -i는 삭제 전에 확인을 묻는다. 표시된 경로가 맞으면 y를 입력한다.",
+    "result": "이 실습에서 새로 만든 파일 한 개를 삭제한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C06-25",
+    "text": "ls -l ~/book06-paths.txt",
+    "why": "삭제 후 같은 경로를 다시 확인한다.",
+    "result": "No such file or directory가 나오면 파일이 제거됐다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C06-26",
+    "text": "curl --version",
+    "why": "--version은 설치된 버전과 기능을 표시한다.",
+    "result": "사례 환경은 Ubuntu 22.04의 curl 7.81.0이다. 명령이 없으면 부록 A.15의 도구 설치를 먼저 수행한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "command",
+    "id": "C06-27",
+    "text": "curl -i --max-time 15 \\\n  -A \"sqlmap/1.0 book06-curl-ua\" \\\n  http://dvwa.ccc.com/book06-curl-ua",
+    "why": "큰따옴표는 공백을 포함한 헤더 값을 하나의 인자로 묶는다. 줄 끝의 역슬래시(\\)는 다음 줄로 명령을 잇는다.",
+    "result": "제시한 사례에서는 HTTP/1.1 403 Forbidden이 나왔다. data.url: *book06-curl-ua*로 찾고 WAF 메시지의 913100을 확인한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "query",
+    "id": "Q06-12",
+    "text": "agent.name: \"web\" AND data.url: *book06-curl-ua*",
+    "why": "curl로 보낸 User-Agent 시험 경로를 찾는다.",
+    "result": "출발지와 403 응답을 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  },
+  {
+    "type": "command",
+    "id": "C06-28",
+    "text": "curl -i --max-time 15 -X PROPFIND \\\n  http://dvwa.ccc.com/book06-curl-method",
+    "why": "-i로 헤더를 함께 보고 --max-time으로 대기 시간을 제한한다. -X 뒤의 PROPFIND가 요청 메서드가 된다.",
+    "result": "제시한 사례에서는 403이었다. data.url: *book06-curl-method*로 찾고 같은 시각의 WAF 메시지 911100을 대조한다.",
+    "where": "공격자 VM · 터미널"
+  },
+  {
+    "type": "query",
+    "id": "Q06-13",
+    "text": "agent.name: \"web\" AND data.url: *book06-curl-method*",
+    "why": "curl로 지정한 메서드의 시험 경로를 찾는다.",
+    "result": "data.protocol의 PROPFIND와 403 응답을 확인한다.",
+    "where": "Windows · Discover · wazuh-alerts-*"
+  }
+]

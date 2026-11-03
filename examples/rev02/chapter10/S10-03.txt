@@ -1,0 +1,5 @@
+SELECT u.username, k.key_file,
+       k.algorithm, k.comment
+FROM users u
+CROSS JOIN authorized_keys k USING (uid)
+WHERE u.uid >= 1000 OR u.uid = 0;

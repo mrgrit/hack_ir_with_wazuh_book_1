@@ -1,0 +1,2 @@
+ssh -p 2204 -o HostKeyAlgorithms=ssh-ed25519 \
+  ccc@192.168.0.107

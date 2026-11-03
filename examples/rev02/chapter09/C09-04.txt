@@ -1,0 +1,4 @@
+ls -l /etc/sudoers.d/ccc
+cat /etc/sudoers.d/ccc
+chmod 0440 /etc/sudoers.d/ccc
+visudo -c

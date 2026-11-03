@@ -1,0 +1,5 @@
+install -d -m 700 -o ccc -g ccc /home/ccc/.ssh
+install -m 600 -o ccc -g ccc /dev/null \
+/home/ccc/.ssh/authorized_keys
+ls -ld /home/ccc/.ssh
+ls -l /home/ccc/.ssh/authorized_keys

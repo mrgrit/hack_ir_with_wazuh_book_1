@@ -1,0 +1,18 @@
+[
+  {
+    "type": "query",
+    "id": "Q04-01",
+    "text": "agent.name: \"bastion\"\nAND predecoder.program_name: \"book04\"",
+    "why": "predecoder.program_name은 로그 앞부분에서 읽은 프로그램 이름이다. 여기서는 logger의 태그 book04가 들어간다. 두 줄을 함께 입력한다.",
+    "result": "결과 한 행을 펼쳐 full_log에 자신이 남긴 시각과 확인 문구가 있는지 읽는다.",
+    "where": "Windows · Discover 검색창"
+  },
+  {
+    "type": "query",
+    "id": "Q04-02",
+    "text": "agent.name: \"bastion\" AND rule.id: \"100410\"",
+    "why": "bastion에서 수집한 경보 중 새 규칙 100410에 일치한 기록을 찾는다.",
+    "result": "결과를 펼쳐 새로 남긴 로그의 시각, 원문, 규칙 번호를 대조한다.",
+    "where": "Windows · Discover 검색창"
+  }
+]

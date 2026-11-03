@@ -1,0 +1,3 @@
+ls -l /etc/shadow
+sudo cat /etc/shadow > /dev/null
+echo $?

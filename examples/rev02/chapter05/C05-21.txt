@@ -1,0 +1,1 @@
+DVWA='http://dvwa.ccc.com'

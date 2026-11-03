@@ -1,0 +1,2 @@
+cd ~/book08
+ls -l pw-fail.txt

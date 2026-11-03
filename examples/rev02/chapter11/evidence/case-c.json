@@ -1,0 +1,454 @@
+[
+  {
+    "timestamp": "2026-11-02T23:37:01.321+0000",
+    "rule": {
+      "level": 3,
+      "description": "osquery: kt66_listening_ports query result",
+      "id": "24010",
+      "firedtimes": 103,
+      "mail": false,
+      "groups": [
+        "osquery"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793662621.24610480",
+    "decoder": {
+      "name": "json"
+    },
+    "data": {
+      "osquery": {
+        "name": "kt66_listening_ports",
+        "hostIdentifier": "ccc",
+        "calendarTime": "Mon Nov  2 23:37:00 2026 UTC",
+        "unixTime": "1793662620",
+        "epoch": "0",
+        "counter": "1",
+        "numerics": "false",
+        "columns": {
+          "address": "192.168.0.107",
+          "name": "nc",
+          "path": "/usr/bin/nc.openbsd",
+          "port": "31337"
+        },
+        "action": "added"
+      }
+    },
+    "location": "osquery",
+    "evidence_id": "C-001",
+    "source_chapter": 10
+  },
+  {
+    "timestamp": "2026-11-02T23:37:47.380+0000",
+    "rule": {
+      "level": 10,
+      "description": "Multiple Firewall drop events from same source.",
+      "id": "4151",
+      "frequency": 18,
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "firewall",
+        "multiple_drops"
+      ],
+      "pci_dss": [
+        "1.4",
+        "10.6.1"
+      ],
+      "gpg13": [
+        "4.12"
+      ],
+      "gdpr": [
+        "IV_35.7.d"
+      ],
+      "hipaa": [
+        "164.312.a.1",
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "SC.7",
+        "AU.6"
+      ],
+      "tsc": [
+        "CC6.7",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793662667.24962457",
+    "previous_output": "Nov  3 08:37:46 ccc kernel: [53977.508647] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=57991 DF PROTO=TCP SPT=34678 DPT=558 WINDOW=64240 RES=0x00 SYN URGP=0 \nNov  3 08:37:45 ccc kernel: [53976.484629] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7906 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 \nNov  3 08:37:45 ccc kernel: [53976.484625] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=37634 DF PROTO=TCP SPT=34646 DPT=782 WINDOW=64240 RES=0x00 SYN URGP=0 \nNov  3 08:37:45 ccc kernel: [53976.484649] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=57990 DF PROTO=TCP SPT=34678 DPT=558 WINDOW=64240 RES=0x00 SYN URGP=0 \nNov  3 08:37:45 ccc kernel: [53976.482682] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=561 DF PROTO=TCP SPT=33562 DPT=21 WINDOW=64240 RES=0x00 SYN URGP=0 \nNov  3 08:37:45 ccc kernel: [53976.482685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=41866 DF PROTO=TCP SPT=44392 DPT=199 WINDOW=64240 RES=0x00 SYN URGP=0 \nNov  3 08:37:45 ccc kernel: [53976.482691] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=56276 DF PROTO=TCP SPT=52522 DPT=111 WINDOW=64240 RES=0x00 SYN URGP=0 \nNov  3 08:37:45 ccc kernel: [53976.484433] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=40167 DF PROTO=TCP SPT=59520 DPT=23 WINDOW=64240 RES=0x00 SYN URGP=0 \nNov  3 08:37:45 ccc kernel: [53976.482667] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=23339 DF PROTO=TCP SPT=46046 DPT=110 WINDOW=64240 RES=0x00 SYN URGP=0 \nNov  3 08:37:45 ccc kernel: [53976.484427] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=31313 DF PROTO=TCP SPT=47194 DPT=445 WINDOW=64240 RES=0x00 SYN URGP=0 \nNov  3 08:37:45 ccc kernel: [53976.482622] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=18914 DF PROTO=TCP SPT=36244 DPT=995 WINDOW=64240 RES=0x00 SYN URGP=0 ",
+    "full_log": "Nov  3 08:37:46 ccc kernel: [53977.508685] DROP IN=ens33 OUT= MAC=00:0c:29:15:55:c7:00:0c:29:aa:f2:b9:08:00 SRC=192.168.0.108 DST=192.168.0.107 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=7907 DF PROTO=TCP SPT=37018 DPT=565 WINDOW=64240 RES=0x00 SYN URGP=0 ",
+    "predecoder": {
+      "program_name": "kernel",
+      "timestamp": "Nov  3 08:37:46",
+      "hostname": "ccc"
+    },
+    "decoder": {
+      "parent": "kernel",
+      "name": "kernel"
+    },
+    "data": {
+      "protocol": "TCP",
+      "action": "DROP",
+      "srcip": "192.168.0.108",
+      "srcport": "37018",
+      "dstip": "192.168.0.107",
+      "dstport": "565"
+    },
+    "location": "/var/log/kern.log",
+    "evidence_id": "C-002",
+    "source_chapter": 10
+  },
+  {
+    "timestamp": "2026-11-02T23:38:22.446+0000",
+    "rule": {
+      "level": 3,
+      "description": "osquery: kt66_authorized_keys query result",
+      "id": "24010",
+      "firedtimes": 111,
+      "mail": false,
+      "groups": [
+        "osquery"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793662702.25461858",
+    "decoder": {
+      "name": "json"
+    },
+    "data": {
+      "osquery": {
+        "name": "kt66_authorized_keys",
+        "hostIdentifier": "ccc",
+        "calendarTime": "Mon Nov  2 23:38:22 2026 UTC",
+        "unixTime": "1793662702",
+        "epoch": "0",
+        "counter": "1",
+        "numerics": "false",
+        "columns": {
+          "algorithm": "ssh-ed25519",
+          "comment": "book10-key@attacker",
+          "key_file": "/home/ccc/.ssh/authorized_keys",
+          "username": "ccc"
+        },
+        "action": "added"
+      }
+    },
+    "location": "osquery",
+    "evidence_id": "C-003",
+    "source_chapter": 10
+  },
+  {
+    "timestamp": "2026-11-02T23:39:01.473+0000",
+    "rule": {
+      "level": 3,
+      "description": "osquery: kt66_listening_ports query result",
+      "id": "24010",
+      "firedtimes": 112,
+      "mail": false,
+      "groups": [
+        "osquery"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793662741.25462734",
+    "decoder": {
+      "name": "json"
+    },
+    "data": {
+      "osquery": {
+        "name": "kt66_listening_ports",
+        "hostIdentifier": "ccc",
+        "calendarTime": "Mon Nov  2 23:39:00 2026 UTC",
+        "unixTime": "1793662740",
+        "epoch": "0",
+        "counter": "2",
+        "numerics": "false",
+        "columns": {
+          "address": "192.168.0.107",
+          "name": "nc",
+          "path": "/usr/bin/nc.openbsd",
+          "port": "31338"
+        },
+        "action": "added"
+      }
+    },
+    "location": "osquery",
+    "evidence_id": "C-004",
+    "source_chapter": 10
+  },
+  {
+    "timestamp": "2026-11-02T23:42:21.686+0000",
+    "rule": {
+      "level": 7,
+      "description": "Listened ports status (netstat) changed (new port opened or closed).",
+      "id": "533",
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "ossec"
+      ],
+      "pci_dss": [
+        "10.2.7",
+        "10.6.1"
+      ],
+      "gpg13": [
+        "10.1"
+      ],
+      "gdpr": [
+        "IV_35.7.d"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AU.6"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793662941.25845579",
+    "previous_output": "Previous output:\nossec: output: 'netstat listening ports':\ntcp 0.0.0.0:22 0.0.0.0:* /usr\ntcp6 :::22 :::* /usr\ntcp 192.168.0.107:25 0.0.0.0:* 4239/dockerd\ntcp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve\ntcp 192.168.0.107:53 0.0.0.0:* 4239/dockerd\nudp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve\nudp 192.168.0.107:53 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:80 0.0.0.0:* 4239/dockerd\nudp 192.168.0.107:123 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:443 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:587 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:993 0.0.0.0:* 4239/dockerd\ntcp 0.0.0.0:2202 0.0.0.0:* 4239/dockerd\ntcp 0.0.0.0:2204 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:5601 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8000 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8001 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8002 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8003 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8004 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8005 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8006 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8007 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8010 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8020 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8030 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8050 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8060 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8070 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8081 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8082 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8083 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8090 0.0.0.0:* 79458/nginx\ntcp 192.168.0.107:8091 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:9100 0.0.0.0:* 4239/dockerd",
+    "full_log": "ossec: output: 'netstat listening ports':\ntcp 0.0.0.0:22 0.0.0.0:* /usr\ntcp6 :::22 :::* /usr\ntcp 192.168.0.107:25 0.0.0.0:* 4239/dockerd\ntcp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve\ntcp 192.168.0.107:53 0.0.0.0:* 4239/dockerd\nudp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve\nudp 192.168.0.107:53 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:80 0.0.0.0:* 4239/dockerd\nudp 192.168.0.107:123 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:443 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:587 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:993 0.0.0.0:* 4239/dockerd\ntcp 0.0.0.0:2202 0.0.0.0:* 4239/dockerd\ntcp 0.0.0.0:2204 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:5601 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8000 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8001 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8002 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8003 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8004 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8005 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8006 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8007 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8010 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8020 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8030 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8050 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8060 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8070 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8081 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8082 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8083 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8090 0.0.0.0:* 79458/nginx\ntcp 192.168.0.107:8091 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:9100 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:31337 0.0.0.0:* 181571/nc\ntcp 192.168.0.107:31338 0.0.0.0:* 182078/nc",
+    "decoder": {
+      "name": "ossec"
+    },
+    "previous_log": "ossec: output: 'netstat listening ports':\ntcp 0.0.0.0:22 0.0.0.0:* /usr\ntcp6 :::22 :::* /usr\ntcp 192.168.0.107:25 0.0.0.0:* 4239/dockerd\ntcp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve\ntcp 192.168.0.107:53 0.0.0.0:* 4239/dockerd\nudp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve\nudp 192.168.0.107:53 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:80 0.0.0.0:* 4239/dockerd\nudp 192.168.0.107:123 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:443 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:587 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:993 0.0.0.0:* 4239/dockerd\ntcp 0.0.0.0:2202 0.0.0.0:* 4239/dockerd\ntcp 0.0.0.0:2204 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:5601 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8000 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8001 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8002 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8003 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8004 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8005 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8006 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8007 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8010 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8020 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8030 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8050 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8060 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8070 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8081 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8082 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8083 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8090 0.0.0.0:* 79458/nginx\ntcp 192.168.0.107:8091 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:9100 0.0.0.0:* 4239/dockerd",
+    "location": "netstat listening ports",
+    "evidence_id": "C-005",
+    "source_chapter": 10
+  },
+  {
+    "timestamp": "2026-11-02T23:45:01.696+0000",
+    "rule": {
+      "level": 3,
+      "description": "osquery: kt66_listening_ports query result",
+      "id": "24010",
+      "firedtimes": 120,
+      "mail": false,
+      "groups": [
+        "osquery"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793663101.26242319",
+    "decoder": {
+      "name": "json"
+    },
+    "data": {
+      "osquery": {
+        "name": "kt66_listening_ports",
+        "hostIdentifier": "ccc",
+        "calendarTime": "Mon Nov  2 23:45:00 2026 UTC",
+        "unixTime": "1793663100",
+        "epoch": "0",
+        "counter": "3",
+        "numerics": "false",
+        "columns": {
+          "address": "192.168.0.107",
+          "name": "nc",
+          "path": "/usr/bin/nc.openbsd",
+          "port": "31337"
+        },
+        "action": "removed"
+      }
+    },
+    "location": "osquery",
+    "evidence_id": "C-006",
+    "source_chapter": 10
+  },
+  {
+    "timestamp": "2026-11-02T23:45:01.738+0000",
+    "rule": {
+      "level": 3,
+      "description": "osquery: kt66_listening_ports query result",
+      "id": "24010",
+      "firedtimes": 121,
+      "mail": false,
+      "groups": [
+        "osquery"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793663101.26243125",
+    "decoder": {
+      "name": "json"
+    },
+    "data": {
+      "osquery": {
+        "name": "kt66_listening_ports",
+        "hostIdentifier": "ccc",
+        "calendarTime": "Mon Nov  2 23:45:00 2026 UTC",
+        "unixTime": "1793663100",
+        "epoch": "0",
+        "counter": "3",
+        "numerics": "false",
+        "columns": {
+          "address": "192.168.0.107",
+          "name": "nc",
+          "path": "/usr/bin/nc.openbsd",
+          "port": "31338"
+        },
+        "action": "removed"
+      }
+    },
+    "location": "osquery",
+    "evidence_id": "C-007",
+    "source_chapter": 10
+  },
+  {
+    "timestamp": "2026-11-02T23:45:08.720+0000",
+    "rule": {
+      "level": 3,
+      "description": "osquery: kt66_authorized_keys query result",
+      "id": "24010",
+      "firedtimes": 122,
+      "mail": false,
+      "groups": [
+        "osquery"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793663108.26243931",
+    "decoder": {
+      "name": "json"
+    },
+    "data": {
+      "osquery": {
+        "name": "kt66_authorized_keys",
+        "hostIdentifier": "ccc",
+        "calendarTime": "Mon Nov  2 23:45:08 2026 UTC",
+        "unixTime": "1793663108",
+        "epoch": "0",
+        "counter": "2",
+        "numerics": "false",
+        "columns": {
+          "algorithm": "ssh-ed25519",
+          "comment": "book10-key@attacker",
+          "key_file": "/home/ccc/.ssh/authorized_keys",
+          "username": "ccc"
+        },
+        "action": "removed"
+      }
+    },
+    "location": "osquery",
+    "evidence_id": "C-008",
+    "source_chapter": 10
+  },
+  {
+    "timestamp": "2026-11-02T23:48:21.986+0000",
+    "rule": {
+      "level": 7,
+      "description": "Listened ports status (netstat) changed (new port opened or closed).",
+      "id": "533",
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "ossec"
+      ],
+      "pci_dss": [
+        "10.2.7",
+        "10.6.1"
+      ],
+      "gpg13": [
+        "10.1"
+      ],
+      "gdpr": [
+        "IV_35.7.d"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AU.6"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "006",
+      "name": "kt66-host",
+      "ip": "10.20.32.254"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793663301.26331285",
+    "previous_output": "Previous output:\nossec: output: 'netstat listening ports':\ntcp 0.0.0.0:22 0.0.0.0:* /usr\ntcp6 :::22 :::* /usr\ntcp 192.168.0.107:25 0.0.0.0:* 4239/dockerd\ntcp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve\ntcp 192.168.0.107:53 0.0.0.0:* 4239/dockerd\nudp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve\nudp 192.168.0.107:53 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:80 0.0.0.0:* 4239/dockerd\nudp 192.168.0.107:123 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:443 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:587 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:993 0.0.0.0:* 4239/dockerd\ntcp 0.0.0.0:2202 0.0.0.0:* 4239/dockerd\ntcp 0.0.0.0:2204 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:5601 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8000 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8001 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8002 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8003 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8004 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8005 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8006 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8007 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8010 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8020 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8030 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8050 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8060 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8070 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8081 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8082 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8083 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8090 0.0.0.0:* 79458/nginx\ntcp 192.168.0.107:8091 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:9100 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:31337 0.0.0.0:* 181571/nc\ntcp 192.168.0.107:31338 0.0.0.0:* 182078/nc",
+    "full_log": "ossec: output: 'netstat listening ports':\ntcp 0.0.0.0:22 0.0.0.0:* /usr\ntcp6 :::22 :::* /usr\ntcp 192.168.0.107:25 0.0.0.0:* 4239/dockerd\ntcp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve\ntcp 192.168.0.107:53 0.0.0.0:* 4239/dockerd\nudp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve\nudp 192.168.0.107:53 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:80 0.0.0.0:* 4239/dockerd\nudp 192.168.0.107:123 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:443 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:587 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:993 0.0.0.0:* 4239/dockerd\ntcp 0.0.0.0:2202 0.0.0.0:* 4239/dockerd\ntcp 0.0.0.0:2204 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:5601 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8000 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8001 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8002 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8003 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8004 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8005 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8006 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8007 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8010 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8020 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8030 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8050 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8060 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8070 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8081 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8082 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8083 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8090 0.0.0.0:* 79458/nginx\ntcp 192.168.0.107:8091 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:9100 0.0.0.0:* 4239/dockerd",
+    "decoder": {
+      "name": "ossec"
+    },
+    "previous_log": "ossec: output: 'netstat listening ports':\ntcp 0.0.0.0:22 0.0.0.0:* /usr\ntcp6 :::22 :::* /usr\ntcp 192.168.0.107:25 0.0.0.0:* 4239/dockerd\ntcp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve\ntcp 192.168.0.107:53 0.0.0.0:* 4239/dockerd\nudp 127.0.0.53:53 0.0.0.0:* 872/systemd-resolve\nudp 192.168.0.107:53 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:80 0.0.0.0:* 4239/dockerd\nudp 192.168.0.107:123 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:443 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:587 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:993 0.0.0.0:* 4239/dockerd\ntcp 0.0.0.0:2202 0.0.0.0:* 4239/dockerd\ntcp 0.0.0.0:2204 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:5601 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8000 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8001 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8002 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8003 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8004 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8005 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8006 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8007 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8010 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8020 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8030 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8050 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8060 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8070 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8081 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8082 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8083 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:8090 0.0.0.0:* 79458/nginx\ntcp 192.168.0.107:8091 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:9100 0.0.0.0:* 4239/dockerd\ntcp 192.168.0.107:31337 0.0.0.0:* 181571/nc\ntcp 192.168.0.107:31338 0.0.0.0:* 182078/nc",
+    "location": "netstat listening ports",
+    "evidence_id": "C-009",
+    "source_chapter": 10
+  }
+]

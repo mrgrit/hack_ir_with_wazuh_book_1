@@ -1,0 +1,2 @@
+agent.name:"kt66-host" AND rule.id:533
+AND (full_log:*31337* OR previous_output:*31337*)

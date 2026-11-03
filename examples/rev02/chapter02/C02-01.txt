@@ -1,0 +1,2 @@
+ssh -o HostKeyAlgorithms=ssh-ed25519 \
+  book02_probe@10.20.30.201

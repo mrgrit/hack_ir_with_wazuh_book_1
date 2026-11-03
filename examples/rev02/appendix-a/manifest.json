@@ -1,0 +1,74 @@
+[
+  {
+    "type": "command",
+    "id": "CA-01",
+    "where": "공격자 VM · 터미널",
+    "purpose": "설치한 Ubuntu 버전과 공격자 VM의 주소를 확인한다.",
+    "text": "cat /etc/os-release\nip -4 -br address",
+    "syntax": "1장의 C01-01·C01-03과 같은 명령이다.",
+    "result": "VERSION_ID=\"22.04\"이고, kt66과 같은 대역의 서로 다른 IPv4 주소가 있다. 주소가 없으면 Bridged·Connected 설정과 DHCP 연결을 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "CA-02",
+    "where": "kt66 VM · 터미널",
+    "purpose": "이름 해석과 외부 HTTPS 연결을 나누어 확인한다.",
+    "text": "getent hosts github.com\ncurl -I --max-time 15 https://github.com",
+    "syntax": "getent hosts 이름은 시스템의 이름 해석 결과를 조회한다. curl -I는 응답 헤더만 요청하고 --max-time 15는 최대 15초까지만 기다린다.",
+    "result": "첫 줄이 IP를 출력하면 이름 해석은 정상이다. 둘째 줄에 HTTP 응답 코드가 나오면 서버 연결도 정상이다. 오류 문구로 이름 해석·연결·인증서 가운데 어디가 문제인지 나눈다."
+  },
+  {
+    "type": "command",
+    "id": "CA-03",
+    "where": "kt66 VM · 터미널",
+    "purpose": "현재 계정이 docker 그룹에 속하는지 확인한다.",
+    "text": "id -nG",
+    "syntax": "id는 사용자 정보를 출력한다. -G는 소속 그룹 목록을, -n은 번호 대신 이름을 표시한다.",
+    "result": "docker가 목록에 있으면 그룹은 정상이다. 없으면 CA-04를 실행한다."
+  },
+  {
+    "type": "command",
+    "id": "CA-04",
+    "where": "kt66 VM · 터미널",
+    "purpose": "현재 계정을 docker 그룹에 추가한다.",
+    "text": "sudo usermod -aG docker \"$USER\"",
+    "syntax": "usermod는 계정 설정을 바꾼다. -aG는 기존 그룹을 유지하면서 지정한 그룹을 추가한다. $USER는 현재 계정 이름이며 큰따옴표로 하나의 인자로 묶는다.",
+    "result": "로그아웃·재로그인 후 CA-03과 docker ps를 다시 실행해 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "CA-05",
+    "where": "kt66 VM · ~/kt66",
+    "purpose": "검색 화면과 저장·검색 서비스의 최근 로그를 읽는다.",
+    "text": "docker compose logs --tail 50 wazuh-dashboard\ndocker compose logs --tail 50 wazuh-indexer",
+    "syntax": "logs 서비스는 그 서비스의 로그를 출력하며 --tail 50은 마지막 50줄로 제한한다.",
+    "result": "연결·인증·초기화 오류를 찾는다. vm.max_map_count 오류는 A.14, 메모리·디스크 오류는 1.3의 값과 대조한다. server is not ready yet가 계속 표시되면 인덱서 로그에서 초기화 오류를 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "CA-06",
+    "where": "kt66 VM · 터미널",
+    "purpose": "수집기 서비스의 상세 상태와 최근 기록을 읽는다.",
+    "text": "sudo systemctl status wazuh-agent --no-pager\nsudo journalctl -u wazuh-agent -n 50 --no-pager",
+    "syntax": "systemctl status는 서비스의 상세 상태를 출력하며 --no-pager는 별도 페이지 뷰어 없이 바로 출력한다. journalctl은 시스템 저널을 읽으며 -u는 서비스, -n 50은 마지막 50개 항목이다.",
+    "result": "Active 줄과 최근 오류를 읽고 매니저 연결·등록·버전 관련 메시지를 찾는다. 서비스가 정지 상태면 첫 줄의 종료 코드가 0이 아닐 수 있다."
+  },
+  {
+    "type": "command",
+    "id": "CA-07",
+    "where": "kt66 VM · ~/kt66",
+    "purpose": "수집기가 기록을 보내는 Wazuh Manager의 상태를 읽는다.",
+    "text": "docker compose logs --tail 50 siem",
+    "syntax": "siem은 kt66의 Wazuh Manager 서비스 이름이다.",
+    "result": "매니저가 시작되었는지, 등록 오류가 있는지 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "CA-08",
+    "where": "kt66 VM · ~/kt66",
+    "purpose": "호스트 센서를 다시 설치하고 설정한다.",
+    "text": "sudo ./deployment/host-sensors.sh",
+    "syntax": "/var/ossec/etc/ossec.conf, auditd·Sysmon·osquery 설정과 관련 서비스를 바꾼다.",
+    "result": "C01-22와 Wazuh의 에이전트 목록을 다시 확인한다. 전체 변경을 취소하려면 ubuntu-clean 스냅샷으로 돌아간다."
+  }
+]

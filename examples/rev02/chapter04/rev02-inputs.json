@@ -1,0 +1,394 @@
+[
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.2  수집 파일 확인",
+    "id": "C04-01",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-01.txt",
+    "text": "docker exec -it kt66-bastion /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.2  수집 파일 확인",
+    "id": "C04-02",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-02.txt",
+    "text": "hostname"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.2  수집 파일 확인",
+    "id": "C04-03",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-03.txt",
+    "text": "grep -F -B 1 -A 1 '/var/log/auth.log' \\\n  /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.3  확인 문구 기록",
+    "id": "C04-04",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-04.txt",
+    "text": "grep -F 'book04: book04-collection-01' \\\n  /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.3  확인 문구 기록",
+    "id": "C04-05",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-05.txt",
+    "text": "logger -p authpriv.notice -t book04 \\\n  'book04-collection-01'"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "기록 결과 확인",
+    "id": "C04-06",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-06.txt",
+    "text": "grep -F 'book04: book04-collection-01' \\\n  /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "기록 결과 확인",
+    "id": "C04-07",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-07.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.4  아카이브 검색",
+    "id": "Q04-01",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter04/Q04-01.txt",
+    "text": "agent.name: \"bastion\"\nAND predecoder.program_name: \"book04\""
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "디코더 정의 직접 확인",
+    "id": "C04-08",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-08.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "디코더 정의 직접 확인",
+    "id": "C04-09",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-09.txt",
+    "text": "cd /var/ossec/ruleset/decoders"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "디코더 정의 직접 확인",
+    "id": "C04-10",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-10.txt",
+    "text": "grep -n -A 2 '<decoder name=\"sshd\">' \\\n  0310-ssh_decoders.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "디코더 정의 직접 확인",
+    "id": "C04-11",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-11.txt",
+    "text": "grep -n -A 5 '<decoder name=\"ssh-invfailed\">' \\\n  0310-ssh_decoders.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "추출 결과와 경보 대조",
+    "id": "C04-12",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-12.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "규칙 파일 확인",
+    "id": "C04-13",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-13.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "규칙 파일 확인",
+    "id": "C04-14",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-14.txt",
+    "text": "cd /var/ossec/ruleset/rules"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "규칙 파일 확인",
+    "id": "C04-15",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-15.txt",
+    "text": "grep -n -A 3 '<rule id=\"5700\"' \\\n  0095-sshd_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "규칙 파일 확인",
+    "id": "C04-16",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-16.txt",
+    "text": "grep -n -A 3 '<rule id=\"5710\"' \\\n  0095-sshd_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "규칙 파일 확인",
+    "id": "C04-17",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-17.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.7  확인 문구용 규칙 준비",
+    "id": "C04-18",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-18.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.7  확인 문구용 규칙 준비",
+    "id": "C04-19",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-19.txt",
+    "text": "ls -l /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.7  확인 문구용 규칙 준비",
+    "id": "C04-20",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-20.txt",
+    "text": "grep -R -n '100410' /var/ossec/etc/rules \\\n  /var/ossec/ruleset/rules"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "규칙 파일 작성",
+    "id": "C04-21",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-21.txt",
+    "text": "nano /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "저장 내용과 권한 확인",
+    "id": "C04-22",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-22.txt",
+    "text": "cat /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "저장 내용과 권한 확인",
+    "id": "C04-23",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-23.txt",
+    "text": "chown root:wazuh \\\n  /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "저장 내용과 권한 확인",
+    "id": "C04-24",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-24.txt",
+    "text": "chmod 640 /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "저장 내용과 권한 확인",
+    "id": "C04-25",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-25.txt",
+    "text": "ls -l /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.8  규칙 검사",
+    "id": "C04-26",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-26.txt",
+    "text": "/var/ossec/bin/wazuh-analysisd -t"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.8  규칙 검사",
+    "id": "C04-27",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-27.txt",
+    "text": "echo $?"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.9  규칙 적용과 확인 로그 생성",
+    "id": "C04-28",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-28.txt",
+    "text": "/var/ossec/bin/wazuh-control restart"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.9  규칙 적용과 확인 로그 생성",
+    "id": "C04-29",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-29.txt",
+    "text": "/var/ossec/bin/wazuh-control status"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.9  규칙 적용과 확인 로그 생성",
+    "id": "C04-30",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-30.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "새 경보 확인",
+    "id": "C04-31",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-31.txt",
+    "text": "docker exec -it kt66-bastion /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "새 경보 확인",
+    "id": "C04-32",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-32.txt",
+    "text": "logger -p authpriv.notice -t book04 \\\n  'book04-collection-01'"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "새 경보 확인",
+    "id": "C04-33",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-33.txt",
+    "text": "grep -F 'book04: book04-collection-01' \\\n  /var/log/auth.log"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "새 경보 확인",
+    "id": "C04-34",
+    "where": "kt66-bastion 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-34.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "새 경보 확인",
+    "id": "Q04-02",
+    "where": "Windows · Discover 검색창",
+    "file": "examples/rev02/chapter04/Q04-02.txt",
+    "text": "agent.name: \"bastion\" AND rule.id: \"100410\""
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.10  실습 규칙 원상복구",
+    "id": "C04-35",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-35.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.10  실습 규칙 원상복구",
+    "id": "C04-36",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-36.txt",
+    "text": "cat /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.10  실습 규칙 원상복구",
+    "id": "C04-37",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-37.txt",
+    "text": "rm /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "4.10  실습 규칙 원상복구",
+    "id": "C04-38",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-38.txt",
+    "text": "ls -l /var/ossec/etc/rules/book04_rules.xml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "원상복구 후 실행 확인",
+    "id": "C04-39",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-39.txt",
+    "text": "/var/ossec/bin/wazuh-analysisd -t"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "원상복구 후 실행 확인",
+    "id": "C04-40",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-40.txt",
+    "text": "echo $?"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "원상복구 후 실행 확인",
+    "id": "C04-41",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-41.txt",
+    "text": "/var/ossec/bin/wazuh-control restart"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "원상복구 후 실행 확인",
+    "id": "C04-42",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-42.txt",
+    "text": "/var/ossec/bin/wazuh-control status"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "원상복구 후 실행 확인",
+    "id": "C04-43",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-43.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "아카이브 설정 확인",
+    "id": "C04-44",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter04/C04-44.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "아카이브 설정 확인",
+    "id": "C04-45",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-45.txt",
+    "text": "grep -E 'logall_json|log_alert_level' \\\n  /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "아카이브 설정 확인",
+    "id": "C04-46",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-46.txt",
+    "text": "grep -A 2 'archives:' /etc/filebeat/filebeat.yml"
+  },
+  {
+    "document": "volume01-chapter04.json",
+    "section": "아카이브 설정 확인",
+    "id": "C04-47",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter04/C04-47.txt",
+    "text": "exit"
+  }
+]

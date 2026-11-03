@@ -1,0 +1,4 @@
+ls -ld ~/.ssh
+ls -l ~/.ssh/authorized_keys ~/book10-key.pub
+ssh-keygen -lf ~/book10-key.pub
+sha256sum ~/.ssh/authorized_keys

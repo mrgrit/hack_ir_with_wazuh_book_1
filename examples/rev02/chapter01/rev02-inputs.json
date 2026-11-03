@@ -1,0 +1,210 @@
+[
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "id": "C01-01",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-01.txt",
+    "text": "cat /etc/os-release\nuname -m"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "id": "C01-02",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-02.txt",
+    "text": "free -h\ndf -h /"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "id": "C01-03",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-03.txt",
+    "text": "ip -4 -br address\nip route"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "id": "C01-04",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-04.txt",
+    "text": "dpkg -s git curl openssl jq nano python3 \\\n  python3-yaml gnupg ca-certificates openssh-client"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "id": "C01-05",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-05.txt",
+    "text": "sudo apt-get update"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.12  VM과 Ubuntu 준비",
+    "id": "C01-06",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-06.txt",
+    "text": "sudo apt-get install git curl ca-certificates openssl jq \\\n  nano python3 python3-yaml gnupg openssh-client"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.13  kt66 코드와 환경 설정",
+    "id": "C01-07",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-07.txt",
+    "text": "cd ~\nls -ld kt66\ngit clone https://github.com/mrgrit/kt66.git\ncd kt66\npwd"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.13  kt66 코드와 환경 설정",
+    "id": "C01-08",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-08.txt",
+    "text": "git status --short\ngit checkout --detach 63d4180\ngit rev-parse --short=7 HEAD"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.13  kt66 코드와 환경 설정",
+    "id": "C01-09",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-09.txt",
+    "text": "ls -l .env.example .env\ncp .env.example .env\nchmod 600 .env\nls -l .env"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.13  kt66 코드와 환경 설정",
+    "id": "C01-10",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-10.txt",
+    "text": "openssl rand -hex 32"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.13  kt66 코드와 환경 설정",
+    "id": "C01-11",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-11.txt",
+    "text": "nano .env"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.13  kt66 코드와 환경 설정",
+    "id": "C01-12",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-12.txt",
+    "text": "grep -E '^(SSH_USER|TZ)=' .env"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-13",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-13.txt",
+    "text": "sysctl vm.max_map_count"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-14",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-14.txt",
+    "text": "ls -l /etc/sysctl.d/99-wazuh-book.conf\nsudo nano /etc/sysctl.d/99-wazuh-book.conf"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-15",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-15.txt",
+    "text": "cat /etc/sysctl.d/99-wazuh-book.conf\nsudo sysctl -p /etc/sysctl.d/99-wazuh-book.conf\nsysctl vm.max_map_count"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-16",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-16.txt",
+    "text": "ls -l /etc/docker/daemon.json\nsudo cat /etc/docker/daemon.json"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-17",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-17.txt",
+    "text": "./kt66.sh install"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-18",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-18.txt",
+    "text": "sudo cat /etc/docker/daemon.json\ndocker --version\ndocker compose version\ndocker ps"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.14  Docker와 메모리 매핑 설정",
+    "id": "C01-19",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-19.txt",
+    "text": "grep -E \\\n'^(WEB_HOST_IP|INT_HOST_IP|LAB_DOMAIN|WINDOWS_ENABLED)=' \\\n  .env"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.15  공격자 VM 도구 설치",
+    "id": "C01-24",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-24.txt",
+    "text": "sudo apt update && sudo apt install -y \\\n  nmap hydra sqlmap nikto dirb gobuster curl \\\n  netcat-openbsd python3 python3-requests sshpass"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.15  공격자 VM 도구 설치",
+    "id": "C01-25",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-25.txt",
+    "text": "dpkg -s nmap hydra sqlmap nikto dirb gobuster curl \\\n  netcat-openbsd python3 python3-requests sshpass"
+  },
+  {
+    "document": "volume01-appendix-a.json",
+    "section": "A.15  공격자 VM 도구 설치",
+    "id": "C01-26",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-26.txt",
+    "text": "curl -I --max-time 15 http://192.168.0.107/"
+  },
+  {
+    "document": "volume01-chapter01.json",
+    "section": "1.6  kt66 기동과 접속",
+    "id": "C01-20",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-20.txt",
+    "text": "./kt66.sh up"
+  },
+  {
+    "document": "volume01-chapter01.json",
+    "section": "1.6  kt66 기동과 접속",
+    "id": "C01-21",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-21.txt",
+    "text": "docker compose ps -a"
+  },
+  {
+    "document": "volume01-chapter01.json",
+    "section": "1.7  수집기 연결 확인",
+    "id": "C01-22",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter01/C01-22.txt",
+    "text": "systemctl is-active wazuh-agent\nsystemctl is-active osqueryd"
+  },
+  {
+    "document": "volume01-chapter01.json",
+    "section": "1.8  초기 상태 보존",
+    "id": "C01-23",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter01/C01-23.txt",
+    "text": "docker compose ps -a\n./kt66.sh down\ndocker compose ps -a"
+  }
+]

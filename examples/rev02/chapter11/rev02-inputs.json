@@ -1,0 +1,90 @@
+[
+  {
+    "document": "volume01-chapter11.json",
+    "section": "11.3  검색 조건 기록",
+    "id": "Q11-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter11/Q11-01.txt",
+    "text": "agent.name: \"bastion\" AND\ndata.srcip: \"192.168.0.108\" AND\n(rule.id: \"5760\" OR rule.id: \"5715\")"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "11.5  사례 B의 공개 키 변경",
+    "id": "Q11-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter11/Q11-02.txt",
+    "text": "agent.name: \"bastion\" AND rule.groups: \"syscheck\" AND syscheck.path: \"/home/ccc/.ssh/authorized_keys\""
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "11.5  사례 B의 공개 키 변경",
+    "id": "Q11-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter11/Q11-03.txt",
+    "text": "agent.name: \"bastion\" AND rule.id: \"5715\" AND data.dstuser: \"ccc\" AND data.srcip: \"192.168.0.108\" AND full_log: \"Accepted publickey\""
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "11.6  사례 C의 세 수집원",
+    "id": "Q11-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter11/Q11-04.txt",
+    "text": "agent.name:\"kt66-host\" AND rule.id:533\nAND (full_log:*31337* OR previous_output:*31337*)"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "스캔 범위와 기록 수의 해석",
+    "id": "Q11-05",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter11/Q11-05.txt",
+    "text": "agent.name:\"kt66-host\" AND rule.id:4151\nAND data.srcip:\"192.168.0.108\""
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "스캔 범위와 기록 수의 해석",
+    "id": "Q11-06",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter11/Q11-06.txt",
+    "text": "agent.name:\"kt66-host\"\nAND location:\"/var/log/kern.log\"\nAND data.action:DROP\nAND data.srcip:\"192.168.0.108\""
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "11.7  증거 사본 준비",
+    "id": "C11-01",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "file": "examples/rev02/chapter11/C11-01.txt",
+    "text": "Get-Location\nTest-Path .\\book11-analysis\nGet-ChildItem .\\examples\\rev02\\chapter11\\evidence"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "11.7  증거 사본 준비",
+    "id": "C11-02",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "file": "examples/rev02/chapter11/C11-02.txt",
+    "text": "New-Item -ItemType Directory .\\book11-analysis\nCopy-Item .\\examples\\rev02\\chapter11\\evidence\\*.json `\n  .\\book11-analysis\\\nGet-ChildItem .\\book11-analysis"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "해시와 원본 위치 기록",
+    "id": "C11-03",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "file": "examples/rev02/chapter11/C11-03.txt",
+    "text": "Get-FileHash .\\book11-analysis\\case-a.json `\n  -Algorithm SHA256\nGet-Content .\\book11-analysis\\manifest.json"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "원문과 추출 필드 확인",
+    "id": "C11-04",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "file": "examples/rev02/chapter11/C11-04.txt",
+    "text": "$caseA = Get-Content -Raw `\n  .\\book11-analysis\\case-a.json | ConvertFrom-Json\n$caseA | Select-Object -First 1 | Format-List *"
+  },
+  {
+    "document": "volume01-chapter11.json",
+    "section": "원문과 추출 필드 확인",
+    "id": "C11-05",
+    "where": "Windows · PowerShell · 저장소 루트",
+    "file": "examples/rev02/chapter11/C11-05.txt",
+    "text": "$caseA[0].agent | Format-List *\n$caseA[0].data | Format-List *\n$caseA[0].full_log"
+  }
+]

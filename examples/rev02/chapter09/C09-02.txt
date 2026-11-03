@@ -1,0 +1,3 @@
+docker ps
+docker port kt66-bastion
+docker exec -it kt66-bastion /bin/bash

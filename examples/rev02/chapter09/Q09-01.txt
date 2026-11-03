@@ -1,0 +1,1 @@
+agent.name: "bastion" AND rule.groups: "syscheck" AND syscheck.path: "/etc/sudoers.d/99-book09-lab"

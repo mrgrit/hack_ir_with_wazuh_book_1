@@ -1,0 +1,4 @@
+sudo useradd -m -s /bin/bash book08-user
+getent passwd book08-user
+id book08-user
+sudo passwd -S book08-user

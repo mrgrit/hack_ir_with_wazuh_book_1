@@ -1,0 +1,3 @@
+Get-Location
+Test-Path .\book11-analysis
+Get-ChildItem .\examples\rev02\chapter11\evidence

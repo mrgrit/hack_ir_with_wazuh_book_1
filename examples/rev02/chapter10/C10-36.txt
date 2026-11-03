@@ -1,0 +1,3 @@
+ls -la ~/.ssh
+rmdir ~/.ssh
+ls -ld ~/.ssh

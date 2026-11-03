@@ -1,0 +1,145 @@
+[
+  {
+    "chapter": 1,
+    "source": "manuscript/REV01/volume01-chapter01.json",
+    "sections": 15,
+    "changes": [
+      "도입과 학습 목표 재작성",
+      "앞뒤 장 조사 연결",
+      "사례와 검증 범위 구분",
+      "연속 조판과 절 제목 계층",
+      "권말 참고문헌 통합",
+      "문체·용어·참조 교정"
+    ]
+  },
+  {
+    "chapter": 2,
+    "source": "manuscript/REV01/volume01-chapter02.json",
+    "sections": 9,
+    "changes": [
+      "도입과 학습 목표 재작성",
+      "앞뒤 장 조사 연결",
+      "사례와 검증 범위 구분",
+      "연속 조판과 절 제목 계층",
+      "권말 참고문헌 통합",
+      "문체·용어·참조 교정"
+    ]
+  },
+  {
+    "chapter": 3,
+    "source": "manuscript/REV01/volume01-chapter03.json",
+    "sections": 11,
+    "changes": [
+      "도입과 학습 목표 재작성",
+      "앞뒤 장 조사 연결",
+      "사례와 검증 범위 구분",
+      "연속 조판과 절 제목 계층",
+      "권말 참고문헌 통합",
+      "문체·용어·참조 교정"
+    ]
+  },
+  {
+    "chapter": 4,
+    "source": "manuscript/volume01-chapter04.json",
+    "sections": 29,
+    "changes": [
+      "도입과 학습 목표 재작성",
+      "앞뒤 장 조사 연결",
+      "사례와 검증 범위 구분",
+      "연속 조판과 절 제목 계층",
+      "권말 참고문헌 통합",
+      "문체·용어·참조 교정"
+    ]
+  },
+  {
+    "chapter": 5,
+    "source": "manuscript/volume01-chapter05.json",
+    "sections": 52,
+    "changes": [
+      "도입과 학습 목표 재작성",
+      "앞뒤 장 조사 연결",
+      "사례와 검증 범위 구분",
+      "연속 조판과 절 제목 계층",
+      "권말 참고문헌 통합",
+      "문체·용어·참조 교정"
+    ]
+  },
+  {
+    "chapter": 6,
+    "source": "manuscript/volume01-chapter06.json",
+    "sections": 43,
+    "changes": [
+      "도입과 학습 목표 재작성",
+      "앞뒤 장 조사 연결",
+      "사례와 검증 범위 구분",
+      "연속 조판과 절 제목 계층",
+      "권말 참고문헌 통합",
+      "문체·용어·참조 교정"
+    ]
+  },
+  {
+    "chapter": 7,
+    "source": "manuscript/volume01-chapter07.json",
+    "sections": 49,
+    "changes": [
+      "도입과 학습 목표 재작성",
+      "앞뒤 장 조사 연결",
+      "사례와 검증 범위 구분",
+      "연속 조판과 절 제목 계층",
+      "권말 참고문헌 통합",
+      "문체·용어·참조 교정"
+    ]
+  },
+  {
+    "chapter": 8,
+    "source": "manuscript/volume01-chapter08.json",
+    "sections": 48,
+    "changes": [
+      "도입과 학습 목표 재작성",
+      "앞뒤 장 조사 연결",
+      "사례와 검증 범위 구분",
+      "연속 조판과 절 제목 계층",
+      "권말 참고문헌 통합",
+      "문체·용어·참조 교정"
+    ]
+  },
+  {
+    "chapter": 9,
+    "source": "manuscript/volume01-chapter09.json",
+    "sections": 44,
+    "changes": [
+      "도입과 학습 목표 재작성",
+      "앞뒤 장 조사 연결",
+      "사례와 검증 범위 구분",
+      "연속 조판과 절 제목 계층",
+      "권말 참고문헌 통합",
+      "문체·용어·참조 교정"
+    ]
+  },
+  {
+    "chapter": 10,
+    "source": "manuscript/volume01-chapter10.json",
+    "sections": 40,
+    "changes": [
+      "도입과 학습 목표 재작성",
+      "앞뒤 장 조사 연결",
+      "사례와 검증 범위 구분",
+      "연속 조판과 절 제목 계층",
+      "권말 참고문헌 통합",
+      "문체·용어·참조 교정"
+    ]
+  },
+  {
+    "chapter": 11,
+    "source": "manuscript/volume01-chapter11.json",
+    "sections": 30,
+    "changes": [
+      "도입과 학습 목표 재작성",
+      "앞뒤 장 조사 연결",
+      "사례와 검증 범위 구분",
+      "연속 조판과 절 제목 계층",
+      "권말 참고문헌 통합",
+      "문체·용어·참조 교정"
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "_index": "wazuh-archives-4.x-2026.11.01",
+  "_id": "_PkYl6EBEYWT20nncdRv",
+  "_score": null,
+  "_source": {
+    "agent": {
+      "ip": "10.20.32.80",
+      "name": "web",
+      "id": "013"
+    },
+    "data": {
+      "protocol": "POST",
+      "srcip": "10.20.30.254",
+      "id": "302",
+      "url": "/login.php"
+    },
+    "location": "/var/log/apache2/dvwa_access.log",
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "full_log": "10.20.30.254 - - [01/Nov/2026:21:32:01 +0900] \"POST /login.php HTTP/1.1\" 302 336 \"http://dvwa.ccc.com/login.php\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36\"",
+    "timestamp": "2026-11-01T12:32:02.246+0000"
+  },
+  "sort": [
+    1793536322246
+  ]
+}

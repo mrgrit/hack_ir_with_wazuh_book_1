@@ -1,0 +1,31 @@
+본문의 보조 입력 · 순서와 조건은 본문 참조
+
+kt66-web 컨테이너에서 uploads가 없을 때만:
+mkdir -p /var/www/html/uploads
+ls -ld /var/www/html/uploads
+
+실습 파일 삭제 확인:
+ls -l /var/www/html/uploads/shell.php
+
+이번에 만든 uploads가 비었을 때만:
+ls -la /var/www/html/uploads
+rmdir /var/www/html/uploads
+ls -ld /var/www/html/uploads
+
+Discover 파일 삭제 검색:
+agent.name: "web" AND rule.id: "553" AND syscheck.path: *shell.php
+
+Windows 브라우저 정상 상품 검색:
+http://juice.ccc.com/rest/products/search?q=apple
+
+DVWA 정상 입력:
+127.0.0.1
+
+kt66-siem 컨테이너의 규칙 조회 · 한 명령씩:
+grep -n -A 16 -F 'id="31106"' /var/ossec/ruleset/rules/0245-web_rules.xml
+grep -n -A 16 -F 'id="31108"' /var/ossec/ruleset/rules/0245-web_rules.xml
+grep -n -A 16 -F 'id="31120"' /var/ossec/ruleset/rules/0245-web_rules.xml
+grep -n -A 16 -F 'id="31122"' /var/ossec/ruleset/rules/0245-web_rules.xml
+grep -n -A 16 -F 'id="31162"' /var/ossec/ruleset/rules/0245-web_rules.xml
+grep -n -A 16 -F 'id="31166"' /var/ossec/ruleset/rules/0245-web_rules.xml
+grep -n -A 16 -F 'id="31168"' /var/ossec/ruleset/rules/0245-web_rules.xml

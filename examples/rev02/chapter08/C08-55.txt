@@ -1,0 +1,3 @@
+cd ~/book08
+pwd
+ls -la

@@ -1,0 +1,5 @@
+curl -sS -i --max-time 15 --get \
+  "$DVWA/vulnerabilities/sqli/" \
+  --data-urlencode 'id=1' \
+  --data-urlencode 'Submit=Submit' \
+  --data-urlencode 'bookcase=book05-normal'

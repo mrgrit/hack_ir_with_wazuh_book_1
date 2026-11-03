@@ -1,0 +1,3 @@
+command -v nc
+readlink -f /usr/bin/nc
+ls -l /tmp/book09.fifo

@@ -1,0 +1,3 @@
+agent.name: "web"
+AND (full_log: *jndi* OR full_log: *lower*
+     OR data.url: *%24%7B*)

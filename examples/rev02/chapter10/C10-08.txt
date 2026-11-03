@@ -1,0 +1,5 @@
+sudo /var/ossec/bin/wazuh-logcollector -t
+sudo /var/ossec/bin/wazuh-modulesd -t
+sudo systemctl start osqueryd
+sudo systemctl restart wazuh-agent
+systemctl is-active osqueryd wazuh-agent

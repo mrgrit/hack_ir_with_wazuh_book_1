@@ -1,0 +1,2 @@
+getent hosts github.com
+curl -I --max-time 15 https://github.com

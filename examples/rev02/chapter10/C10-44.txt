@@ -1,0 +1,7 @@
+sed -n '1,65p' \
+/var/ossec/ruleset/decoders/0140-kernel_decoders.xml
+sed -n '/id="530"/,/id="534"/p' \
+/var/ossec/ruleset/rules/0015-ossec_rules.xml
+sed -n '1,40p' \
+/var/ossec/ruleset/rules/0545-osquery_rules.xml
+exit

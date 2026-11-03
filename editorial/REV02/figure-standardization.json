@@ -1,0 +1,104 @@
+[
+  {
+    "action": "Word crop; original pixel values unchanged",
+    "path": "assets/screens/chapter05/browser/normal-headers.png",
+    "rectangle": [
+      0,
+      0,
+      900,
+      274
+    ]
+  },
+  {
+    "action": "Word crop; original pixel values unchanged",
+    "path": "assets/screens/chapter05/browser/sqli-headers.png",
+    "rectangle": [
+      0,
+      0,
+      900,
+      306
+    ]
+  },
+  {
+    "action": "Word crop; original pixel values unchanged",
+    "path": "assets/screens/chapter06/scan-data.png",
+    "rectangle": [
+      0,
+      0,
+      1060,
+      171
+    ]
+  },
+  {
+    "action": "Word crop; original pixel values unchanged",
+    "path": "assets/screens/chapter06/login-failed-headers.png",
+    "rectangle": [
+      0,
+      0,
+      900,
+      242
+    ]
+  },
+  {
+    "action": "Word crop; original pixel values unchanged",
+    "path": "assets/screens/chapter06/login-success-headers.png",
+    "rectangle": [
+      0,
+      0,
+      900,
+      242
+    ]
+  },
+  {
+    "action": "Word crop; original pixel values unchanged",
+    "path": "assets/screens/chapter06/brute-success-headers.png",
+    "rectangle": [
+      0,
+      0,
+      900,
+      306
+    ]
+  },
+  {
+    "action": "Word crop; original pixel values unchanged",
+    "path": "assets/screens/chapter06/method-headers.png",
+    "rectangle": [
+      0,
+      0,
+      900,
+      242
+    ]
+  },
+  {
+    "action": "omit raw screenshot with historical payload destination; preserve source in editorial",
+    "path": "assets/screens/chapter07/log4-raw.png"
+  },
+  {
+    "action": "Word crop; original pixel values unchanged",
+    "path": "assets/screens/chapter07/shell-rules.png",
+    "rectangle": [
+      0,
+      0,
+      405,
+      181
+    ]
+  },
+  {
+    "action": "transcribe request/status/header portions; no address substitution",
+    "path": "assets/screens/chapter07/shell-raw.png"
+  },
+  {
+    "action": "Word crop; original pixel values unchanged",
+    "path": "assets/screens/chapter07/ok-status.png",
+    "rectangle": [
+      205,
+      0,
+      375,
+      120
+    ]
+  },
+  {
+    "action": "remove redundant illustration",
+    "path": "assets/illustrations/diversity/v1-c10-sensor.png"
+  }
+]

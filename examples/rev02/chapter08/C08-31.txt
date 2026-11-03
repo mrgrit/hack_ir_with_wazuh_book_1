@@ -1,0 +1,4 @@
+/usr/sbin/sshd -t
+/usr/sbin/sshd -T -C \
+user=root,addr=192.168.0.108,host=attacker \
+| grep -E '^(permitrootlogin|passwordauthentication) '

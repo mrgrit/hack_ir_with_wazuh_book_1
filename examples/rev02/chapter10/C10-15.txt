@@ -1,0 +1,4 @@
+sudo iptables-save > ~/book10-state/iptables.before
+sudo bash ~/kt66/deployment/perimeter.sh
+sudo iptables -S INPUT
+sudo iptables -S KT66-PERIMETER

@@ -1,0 +1,5 @@
+sed -n \
+-e '/<rule id="550"/,/<\/rule>/p' \
+-e '/<rule id="553"/,/<\/rule>/p' \
+-e '/<rule id="554"/,/<\/rule>/p' \
+/var/ossec/ruleset/rules/0015-ossec_rules.xml

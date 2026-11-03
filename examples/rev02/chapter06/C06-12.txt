@@ -1,0 +1,2 @@
+sed -n '/<rule id="31151"/,/<\/rule>/p' \
+  0245-web_rules.xml

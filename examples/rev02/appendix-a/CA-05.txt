@@ -1,0 +1,2 @@
+docker compose logs --tail 50 wazuh-dashboard
+docker compose logs --tail 50 wazuh-indexer

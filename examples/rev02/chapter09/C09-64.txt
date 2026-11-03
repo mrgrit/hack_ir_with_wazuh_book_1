@@ -1,0 +1,5 @@
+sudo sha256sum /var/log/btmp
+cat /home/ccc/book09-history/.bash_history
+rm /home/ccc/book09-history/.bash_history
+rmdir /home/ccc/book09-history
+ls -ld /home/ccc/book09-history /var/log/book09-btmp

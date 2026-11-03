@@ -1,0 +1,35 @@
+{
+  "documents": [
+    "volume01-chapter02.json",
+    "volume01-chapter04.json",
+    "volume01-chapter07.json",
+    "volume01-chapter10.json",
+    "volume01-chapter11.json"
+  ],
+  "purpose_corrected": [
+    "C04-11",
+    "C04-15",
+    "C04-45",
+    "C04-46",
+    "C05-09",
+    "C05-14",
+    "C08-11",
+    "C08-37",
+    "C08-04",
+    "C09-03",
+    "C09-15",
+    "C09-24",
+    "C09-32",
+    "C09-47",
+    "C09-48",
+    "C10-01",
+    "C10-14",
+    "C10-15",
+    "Q10-01",
+    "Q10-02",
+    "C10-42",
+    "C10-44",
+    "C11-01"
+  ],
+  "scope": "문장·참조·설명 순서의 정적 교정. 명령 실행 없음."
+}

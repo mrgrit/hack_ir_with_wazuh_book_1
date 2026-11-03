@@ -1,0 +1,3 @@
+agent.name: "bastion" AND
+data.srcip: "10.20.30.254" AND
+(rule.id: "5710" OR rule.id: "5760" OR rule.id: "5715")

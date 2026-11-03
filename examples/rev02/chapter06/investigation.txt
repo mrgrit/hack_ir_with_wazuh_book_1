@@ -1,0 +1,10 @@
+실행 위치·시각·시간대:
+대상 사이트·요청 URL·메서드:
+입력값·User-Agent:
+HTTP 상태·Location·본문 결과:
+agent.name·data.srcip·location:
+_index·_id·rule.id:
+WAF transaction_id·규칙·차단 근거:
+반복 요청의 횟수·시간 간격:
+확인한 사실·추가 확인할 자료:
+User-Agent·학습 단계·파일 원상복구:

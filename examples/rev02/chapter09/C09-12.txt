@@ -1,0 +1,2 @@
+ls -ld ~/book09
+command -v ssh-keygen

@@ -1,0 +1,446 @@
+﻿document,section,id,where,file
+volume01-appendix-a.json,A.3  공격자 VM 설치,CA-01,공격자 VM · 터미널,examples/rev02/appendix-a/CA-01.txt
+volume01-appendix-a.json,A.4  설치가 멈췄을 때,CA-02,kt66 VM · 터미널,examples/rev02/appendix-a/CA-02.txt
+volume01-appendix-a.json,A.4  설치가 멈췄을 때,CA-03,kt66 VM · 터미널,examples/rev02/appendix-a/CA-03.txt
+volume01-appendix-a.json,A.4  설치가 멈췄을 때,CA-04,kt66 VM · 터미널,examples/rev02/appendix-a/CA-04.txt
+volume01-appendix-a.json,A.5  화면이 열리지 않을 때,CA-05,kt66 VM · ~/kt66,examples/rev02/appendix-a/CA-05.txt
+volume01-appendix-a.json,A.6  수집기가 연결되지 않을 때,CA-06,kt66 VM · 터미널,examples/rev02/appendix-a/CA-06.txt
+volume01-appendix-a.json,A.6  수집기가 연결되지 않을 때,CA-07,kt66 VM · ~/kt66,examples/rev02/appendix-a/CA-07.txt
+volume01-appendix-a.json,A.6  수집기가 연결되지 않을 때,CA-08,kt66 VM · ~/kt66,examples/rev02/appendix-a/CA-08.txt
+volume01-appendix-a.json,A.12  VM과 Ubuntu 준비,C01-01,kt66 VM · 터미널,examples/rev02/chapter01/C01-01.txt
+volume01-appendix-a.json,A.12  VM과 Ubuntu 준비,C01-02,kt66 VM · 터미널,examples/rev02/chapter01/C01-02.txt
+volume01-appendix-a.json,A.12  VM과 Ubuntu 준비,C01-03,kt66 VM · 터미널,examples/rev02/chapter01/C01-03.txt
+volume01-appendix-a.json,A.12  VM과 Ubuntu 준비,C01-04,kt66 VM · 터미널,examples/rev02/chapter01/C01-04.txt
+volume01-appendix-a.json,A.12  VM과 Ubuntu 준비,C01-05,kt66 VM · 터미널,examples/rev02/chapter01/C01-05.txt
+volume01-appendix-a.json,A.12  VM과 Ubuntu 준비,C01-06,kt66 VM · 터미널,examples/rev02/chapter01/C01-06.txt
+volume01-appendix-a.json,A.13  kt66 코드와 환경 설정,C01-07,kt66 VM · 터미널,examples/rev02/chapter01/C01-07.txt
+volume01-appendix-a.json,A.13  kt66 코드와 환경 설정,C01-08,kt66 VM · ~/kt66,examples/rev02/chapter01/C01-08.txt
+volume01-appendix-a.json,A.13  kt66 코드와 환경 설정,C01-09,kt66 VM · ~/kt66,examples/rev02/chapter01/C01-09.txt
+volume01-appendix-a.json,A.13  kt66 코드와 환경 설정,C01-10,kt66 VM · ~/kt66,examples/rev02/chapter01/C01-10.txt
+volume01-appendix-a.json,A.13  kt66 코드와 환경 설정,C01-11,kt66 VM · ~/kt66,examples/rev02/chapter01/C01-11.txt
+volume01-appendix-a.json,A.13  kt66 코드와 환경 설정,C01-12,kt66 VM · ~/kt66,examples/rev02/chapter01/C01-12.txt
+volume01-appendix-a.json,A.14  Docker와 메모리 매핑 설정,C01-13,kt66 VM · 터미널,examples/rev02/chapter01/C01-13.txt
+volume01-appendix-a.json,A.14  Docker와 메모리 매핑 설정,C01-14,kt66 VM · 터미널,examples/rev02/chapter01/C01-14.txt
+volume01-appendix-a.json,A.14  Docker와 메모리 매핑 설정,C01-15,kt66 VM · 터미널,examples/rev02/chapter01/C01-15.txt
+volume01-appendix-a.json,A.14  Docker와 메모리 매핑 설정,C01-16,kt66 VM · 터미널,examples/rev02/chapter01/C01-16.txt
+volume01-appendix-a.json,A.14  Docker와 메모리 매핑 설정,C01-17,kt66 VM · ~/kt66,examples/rev02/chapter01/C01-17.txt
+volume01-appendix-a.json,A.14  Docker와 메모리 매핑 설정,C01-18,kt66 VM · 터미널,examples/rev02/chapter01/C01-18.txt
+volume01-appendix-a.json,A.14  Docker와 메모리 매핑 설정,C01-19,kt66 VM · ~/kt66,examples/rev02/chapter01/C01-19.txt
+volume01-appendix-a.json,A.15  공격자 VM 도구 설치,C01-24,공격자 VM · 터미널,examples/rev02/chapter01/C01-24.txt
+volume01-appendix-a.json,A.15  공격자 VM 도구 설치,C01-25,공격자 VM · 터미널,examples/rev02/chapter01/C01-25.txt
+volume01-appendix-a.json,A.15  공격자 VM 도구 설치,C01-26,공격자 VM · 터미널,examples/rev02/chapter01/C01-26.txt
+volume01-chapter01.json,1.6  kt66 기동과 접속,C01-20,kt66 VM · ~/kt66,examples/rev02/chapter01/C01-20.txt
+volume01-chapter01.json,1.6  kt66 기동과 접속,C01-21,kt66 VM · ~/kt66,examples/rev02/chapter01/C01-21.txt
+volume01-chapter01.json,1.7  수집기 연결 확인,C01-22,kt66 VM · 터미널,examples/rev02/chapter01/C01-22.txt
+volume01-chapter01.json,1.8  초기 상태 보존,C01-23,kt66 VM · ~/kt66,examples/rev02/chapter01/C01-23.txt
+volume01-chapter02.json,2.2  SSH 인증 실패 재현,C02-P1,kt66 VM · 터미널,examples/rev02/chapter02/C02-P1.txt
+volume01-chapter02.json,2.2  SSH 인증 실패 재현,C02-P2,kt66-bastion 컨테이너 안,examples/rev02/chapter02/C02-P2.txt
+volume01-chapter02.json,2.2  SSH 인증 실패 재현,C02-P3,kt66-bastion 컨테이너 안,examples/rev02/chapter02/C02-P3.txt
+volume01-chapter02.json,2.2  SSH 인증 실패 재현,C02-P4,kt66-bastion 컨테이너 안,examples/rev02/chapter02/C02-P4.txt
+volume01-chapter02.json,2.2  SSH 인증 실패 재현,C02-P5,kt66 VM · 터미널,examples/rev02/chapter02/C02-P5.txt
+volume01-chapter02.json,2.2  SSH 인증 실패 재현,C02-01,kt66 VM · 터미널,examples/rev02/chapter02/C02-01.txt
+volume01-chapter02.json,2.2  SSH 인증 실패 재현,C02-02,kt66 VM · 터미널,examples/rev02/chapter02/C02-02.txt
+volume01-chapter02.json,2.2  SSH 인증 실패 재현,C02-03,kt66-bastion 컨테이너 · 셸,examples/rev02/chapter02/C02-03.txt
+volume01-chapter02.json,2.2  SSH 인증 실패 재현,C02-04,kt66-bastion 컨테이너 · 셸,examples/rev02/chapter02/C02-04.txt
+volume01-chapter02.json,2.2  SSH 인증 실패 재현,C02-05,kt66 VM · 터미널,examples/rev02/chapter02/C02-05.txt
+volume01-chapter02.json,2.4  시각과 시간대 확인,C02-06,kt66 VM · 터미널,examples/rev02/chapter02/C02-06.txt
+volume01-chapter02.json,2.4  시각과 시간대 확인,C02-07,kt66 VM · 터미널,examples/rev02/chapter02/C02-07.txt
+volume01-chapter02.json,2.5  시도와 결과 구분,C02-08,kt66 VM · 터미널,examples/rev02/chapter02/C02-08.txt
+volume01-chapter02.json,2.5  시도와 결과 구분,C02-09,kt66 VM · 터미널,examples/rev02/chapter02/C02-09.txt
+volume01-chapter03.json,3.4  DQL 검색 조건,Q03-01,Windows · Discover 검색창,examples/rev02/chapter03/Q03-01.txt
+volume01-chapter03.json,3.6  필드 조건을 이용한 검색,Q03-02,Windows · Discover 검색창,examples/rev02/chapter03/Q03-02.txt
+volume01-chapter03.json,3.6  필드 조건을 이용한 검색,Q03-03,Windows · Discover 검색창,examples/rev02/chapter03/Q03-03.txt
+volume01-chapter03.json,3.7  실습에서 생성한 로그 검색,Q03-04,Windows · Discover 검색창,examples/rev02/chapter03/Q03-04.txt
+volume01-chapter03.json,3.7  실습에서 생성한 로그 검색,Q03-05,Windows · Discover 검색창,examples/rev02/chapter03/Q03-05.txt
+volume01-chapter03.json,3.7  실습에서 생성한 로그 검색,Q03-06,Windows · Discover 검색창,examples/rev02/chapter03/Q03-06.txt
+volume01-chapter04.json,4.2  수집 파일 확인,C04-01,kt66 VM · 터미널,examples/rev02/chapter04/C04-01.txt
+volume01-chapter04.json,4.2  수집 파일 확인,C04-02,kt66-bastion 컨테이너 안,examples/rev02/chapter04/C04-02.txt
+volume01-chapter04.json,4.2  수집 파일 확인,C04-03,kt66-bastion 컨테이너 안,examples/rev02/chapter04/C04-03.txt
+volume01-chapter04.json,4.3  확인 문구 기록,C04-04,kt66-bastion 컨테이너 안,examples/rev02/chapter04/C04-04.txt
+volume01-chapter04.json,4.3  확인 문구 기록,C04-05,kt66-bastion 컨테이너 안,examples/rev02/chapter04/C04-05.txt
+volume01-chapter04.json,기록 결과 확인,C04-06,kt66-bastion 컨테이너 안,examples/rev02/chapter04/C04-06.txt
+volume01-chapter04.json,기록 결과 확인,C04-07,kt66-bastion 컨테이너 안,examples/rev02/chapter04/C04-07.txt
+volume01-chapter04.json,4.4  아카이브 검색,Q04-01,Windows · Discover 검색창,examples/rev02/chapter04/Q04-01.txt
+volume01-chapter04.json,디코더 정의 직접 확인,C04-08,kt66 VM · 터미널,examples/rev02/chapter04/C04-08.txt
+volume01-chapter04.json,디코더 정의 직접 확인,C04-09,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-09.txt
+volume01-chapter04.json,디코더 정의 직접 확인,C04-10,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-10.txt
+volume01-chapter04.json,디코더 정의 직접 확인,C04-11,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-11.txt
+volume01-chapter04.json,추출 결과와 경보 대조,C04-12,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-12.txt
+volume01-chapter04.json,규칙 파일 확인,C04-13,kt66 VM · 터미널,examples/rev02/chapter04/C04-13.txt
+volume01-chapter04.json,규칙 파일 확인,C04-14,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-14.txt
+volume01-chapter04.json,규칙 파일 확인,C04-15,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-15.txt
+volume01-chapter04.json,규칙 파일 확인,C04-16,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-16.txt
+volume01-chapter04.json,규칙 파일 확인,C04-17,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-17.txt
+volume01-chapter04.json,4.7  확인 문구용 규칙 준비,C04-18,kt66 VM · 터미널,examples/rev02/chapter04/C04-18.txt
+volume01-chapter04.json,4.7  확인 문구용 규칙 준비,C04-19,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-19.txt
+volume01-chapter04.json,4.7  확인 문구용 규칙 준비,C04-20,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-20.txt
+volume01-chapter04.json,규칙 파일 작성,C04-21,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-21.txt
+volume01-chapter04.json,저장 내용과 권한 확인,C04-22,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-22.txt
+volume01-chapter04.json,저장 내용과 권한 확인,C04-23,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-23.txt
+volume01-chapter04.json,저장 내용과 권한 확인,C04-24,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-24.txt
+volume01-chapter04.json,저장 내용과 권한 확인,C04-25,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-25.txt
+volume01-chapter04.json,4.8  규칙 검사,C04-26,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-26.txt
+volume01-chapter04.json,4.8  규칙 검사,C04-27,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-27.txt
+volume01-chapter04.json,4.9  규칙 적용과 확인 로그 생성,C04-28,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-28.txt
+volume01-chapter04.json,4.9  규칙 적용과 확인 로그 생성,C04-29,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-29.txt
+volume01-chapter04.json,4.9  규칙 적용과 확인 로그 생성,C04-30,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-30.txt
+volume01-chapter04.json,새 경보 확인,C04-31,kt66 VM · 터미널,examples/rev02/chapter04/C04-31.txt
+volume01-chapter04.json,새 경보 확인,C04-32,kt66-bastion 컨테이너 안,examples/rev02/chapter04/C04-32.txt
+volume01-chapter04.json,새 경보 확인,C04-33,kt66-bastion 컨테이너 안,examples/rev02/chapter04/C04-33.txt
+volume01-chapter04.json,새 경보 확인,C04-34,kt66-bastion 컨테이너 안,examples/rev02/chapter04/C04-34.txt
+volume01-chapter04.json,새 경보 확인,Q04-02,Windows · Discover 검색창,examples/rev02/chapter04/Q04-02.txt
+volume01-chapter04.json,4.10  실습 규칙 원상복구,C04-35,kt66 VM · 터미널,examples/rev02/chapter04/C04-35.txt
+volume01-chapter04.json,4.10  실습 규칙 원상복구,C04-36,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-36.txt
+volume01-chapter04.json,4.10  실습 규칙 원상복구,C04-37,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-37.txt
+volume01-chapter04.json,4.10  실습 규칙 원상복구,C04-38,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-38.txt
+volume01-chapter04.json,원상복구 후 실행 확인,C04-39,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-39.txt
+volume01-chapter04.json,원상복구 후 실행 확인,C04-40,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-40.txt
+volume01-chapter04.json,원상복구 후 실행 확인,C04-41,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-41.txt
+volume01-chapter04.json,원상복구 후 실행 확인,C04-42,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-42.txt
+volume01-chapter04.json,원상복구 후 실행 확인,C04-43,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-43.txt
+volume01-chapter04.json,아카이브 설정 확인,C04-44,kt66 VM · 터미널,examples/rev02/chapter04/C04-44.txt
+volume01-chapter04.json,아카이브 설정 확인,C04-45,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-45.txt
+volume01-chapter04.json,아카이브 설정 확인,C04-46,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-46.txt
+volume01-chapter04.json,아카이브 설정 확인,C04-47,kt66-siem 컨테이너 안,examples/rev02/chapter04/C04-47.txt
+volume01-chapter05.json,5.2  브라우저 접속 준비,C05-01,kt66 VM · ~/kt66,examples/rev02/chapter05/C05-01.txt
+volume01-chapter05.json,정상 요청의 아카이브 기록,Q05-01,Windows · Discover · wazuh-archives-*,examples/rev02/chapter05/Q05-01.txt
+volume01-chapter05.json,Apache 원본 로그 확인,C05-02,kt66 VM · 터미널,examples/rev02/chapter05/C05-02.txt
+volume01-chapter05.json,Apache 원본 로그 확인,C05-03,kt66-web 컨테이너 안,examples/rev02/chapter05/C05-03.txt
+volume01-chapter05.json,Apache 원본 로그 확인,C05-04,kt66-web 컨테이너 안,examples/rev02/chapter05/C05-04.txt
+volume01-chapter05.json,Apache 원본 로그 확인,C05-05,kt66-web 컨테이너 안,examples/rev02/chapter05/C05-05.txt
+volume01-chapter05.json,SQL 공격 요청 검색,Q05-02,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter05/Q05-02.txt
+volume01-chapter05.json,5.6  WAF 차단 근거 확인,Q05-03,Windows · Discover · wazuh-archives-*,examples/rev02/chapter05/Q05-03.txt
+volume01-chapter05.json,XSS 요청의 경보 분석,Q05-04,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter05/Q05-04.txt
+volume01-chapter05.json,파일 경로 변경 요청,Q05-05,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter05/Q05-05.txt
+volume01-chapter05.json,5.9  검색 조건 확대,Q05-06,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter05/Q05-06.txt
+volume01-chapter05.json,5.9  검색 조건 확대,Q05-07,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter05/Q05-07.txt
+volume01-chapter05.json,WAF와 수집 설정 확인,C05-06,kt66 VM · 터미널,examples/rev02/chapter05/C05-06.txt
+volume01-chapter05.json,WAF와 수집 설정 확인,C05-07,kt66-web 컨테이너 안,examples/rev02/chapter05/C05-07.txt
+volume01-chapter05.json,WAF와 수집 설정 확인,C05-08,kt66-web 컨테이너 안,examples/rev02/chapter05/C05-08.txt
+volume01-chapter05.json,수집 설정 확인,C05-09,kt66-web 컨테이너 안,examples/rev02/chapter05/C05-09.txt
+volume01-chapter05.json,수집 설정 확인,C05-10,kt66-web 컨테이너 안,examples/rev02/chapter05/C05-10.txt
+volume01-chapter05.json,수집 설정 확인,C05-11,kt66-web 컨테이너 안,examples/rev02/chapter05/C05-11.txt
+volume01-chapter05.json,Wazuh 규칙 파일 확인,C05-12,kt66 VM · 터미널,examples/rev02/chapter05/C05-12.txt
+volume01-chapter05.json,Wazuh 규칙 파일 확인,C05-13,kt66-siem 컨테이너 안,examples/rev02/chapter05/C05-13.txt
+volume01-chapter05.json,Wazuh 규칙 파일 확인,C05-14,kt66-siem 컨테이너 안,examples/rev02/chapter05/C05-14.txt
+volume01-chapter05.json,Wazuh 규칙 파일 확인,C05-15,kt66-siem 컨테이너 안,examples/rev02/chapter05/C05-15.txt
+volume01-chapter05.json,5.13  curl을 이용한 HTTP 요청(선택),C05-16,공격자 VM · 터미널,examples/rev02/chapter05/C05-16.txt
+volume01-chapter05.json,5.13  curl을 이용한 HTTP 요청(선택),C05-17,공격자 VM · 터미널,examples/rev02/chapter05/C05-17.txt
+volume01-chapter05.json,공격자 VM의 이름 설정,C05-18,공격자 VM · 터미널,examples/rev02/chapter05/C05-18.txt
+volume01-chapter05.json,공격자 VM의 이름 설정,C05-19,공격자 VM · 터미널,examples/rev02/chapter05/C05-19.txt
+volume01-chapter05.json,공격자 VM의 이름 설정,C05-20,공격자 VM · 터미널,examples/rev02/chapter05/C05-20.txt
+volume01-chapter05.json,공격자 VM의 이름 설정,C05-21,공격자 VM · 터미널,examples/rev02/chapter05/C05-21.txt
+volume01-chapter05.json,공격자 VM의 이름 설정,C05-22,공격자 VM · 터미널,examples/rev02/chapter05/C05-22.txt
+volume01-chapter05.json,시각 확인,C05-23,공격자 VM · 터미널,examples/rev02/chapter05/C05-23.txt
+volume01-chapter05.json,시각 확인,C05-24,kt66 VM · 터미널,examples/rev02/chapter05/C05-24.txt
+volume01-chapter05.json,시각 확인,C05-25,공격자 VM · 터미널,examples/rev02/chapter05/C05-25.txt
+volume01-chapter05.json,시각 확인,C05-26,공격자 VM · 터미널,examples/rev02/chapter05/C05-26.txt
+volume01-chapter05.json,curl의 기본 응답 확인,C05-27,공격자 VM · 터미널,examples/rev02/chapter05/C05-27.txt
+volume01-chapter05.json,curl의 정상 값 전송,C05-28,공격자 VM · 터미널,examples/rev02/chapter05/C05-28.txt
+volume01-chapter05.json,curl의 SQL 구문 전송,C05-29,공격자 VM · 터미널,examples/rev02/chapter05/C05-29.txt
+volume01-chapter05.json,curl의 SQL 구문 전송,C05-30,공격자 VM · 터미널,examples/rev02/chapter05/C05-30.txt
+volume01-chapter05.json,curl의 스크립트 전송,C05-31,공격자 VM · 터미널,examples/rev02/chapter05/C05-31.txt
+volume01-chapter05.json,curl의 인코딩 경로 전송,C05-32,공격자 VM · 터미널,examples/rev02/chapter05/C05-32.txt
+volume01-chapter05.json,curl의 경로 원문 전송,C05-33,공격자 VM · 터미널,examples/rev02/chapter05/C05-33.txt
+volume01-chapter05.json,curl 실습 원상복구,C05-34,공격자 VM · 터미널,examples/rev02/chapter05/C05-34.txt
+volume01-chapter05.json,curl 실습 원상복구,C05-35,공격자 VM · 터미널,examples/rev02/chapter05/C05-35.txt
+volume01-chapter05.json,curl 실습 원상복구,C05-36,공격자 VM · 터미널,examples/rev02/chapter05/C05-36.txt
+volume01-chapter05.json,curl 실습 원상복구,C05-37,공격자 VM · 터미널,examples/rev02/chapter05/C05-37.txt
+volume01-chapter06.json,없는 경로의 응답과 경보,Q06-01,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter06/Q06-01.txt
+volume01-chapter06.json,목록 탐색 도구 준비,C06-01,공격자 VM · 터미널,examples/rev02/chapter06/C06-01.txt
+volume01-chapter06.json,설치와 이름 해석 확인,C06-02,공격자 VM · 터미널,examples/rev02/chapter06/C06-02.txt
+volume01-chapter06.json,설치와 이름 해석 확인,C06-03,공격자 VM · 터미널,examples/rev02/chapter06/C06-03.txt
+volume01-chapter06.json,설치와 이름 해석 확인,C06-04,공격자 VM · 터미널,examples/rev02/chapter06/C06-04.txt
+volume01-chapter06.json,탐색 경로 목록 작성,C06-05,공격자 VM · 터미널,examples/rev02/chapter06/C06-05.txt
+volume01-chapter06.json,탐색 경로 목록 작성,C06-06,공격자 VM · 터미널,examples/rev02/chapter06/C06-06.txt
+volume01-chapter06.json,탐색 경로 목록 작성,C06-07,공격자 VM · 터미널,examples/rev02/chapter06/C06-07.txt
+volume01-chapter06.json,탐색 경로 목록 작성,C06-08,공격자 VM · 터미널,examples/rev02/chapter06/C06-08.txt
+volume01-chapter06.json,경로 목록을 이용한 탐색,C06-09,공격자 VM · 터미널,examples/rev02/chapter06/C06-09.txt
+volume01-chapter06.json,반복 요청 검색,Q06-02,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter06/Q06-02.txt
+volume01-chapter06.json,반복 요청 검색,Q06-03,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter06/Q06-03.txt
+volume01-chapter06.json,반복 경보의 조건 확인,C06-10,kt66 VM · 터미널,examples/rev02/chapter06/C06-10.txt
+volume01-chapter06.json,반복 경보의 조건 확인,C06-11,kt66-siem 컨테이너 안,examples/rev02/chapter06/C06-11.txt
+volume01-chapter06.json,반복 경보의 조건 확인,C06-12,kt66-siem 컨테이너 안,examples/rev02/chapter06/C06-12.txt
+volume01-chapter06.json,반복 경보의 조건 확인,C06-13,kt66-siem 컨테이너 안,examples/rev02/chapter06/C06-13.txt
+volume01-chapter06.json,User-Agent 기록 검색,Q06-04,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter06/Q06-04.txt
+volume01-chapter06.json,WAF 차단 규칙 확인,Q06-05,Windows · Discover · wazuh-archives-*,examples/rev02/chapter06/Q06-05.txt
+volume01-chapter06.json,일반 로그인 기록 검색,Q06-06,Windows · Discover · wazuh-archives-*,examples/rev02/chapter06/Q06-06.txt
+volume01-chapter06.json,인증 요청 URL 분석,Q06-07,Windows · Discover · wazuh-archives-*,examples/rev02/chapter06/Q06-07.txt
+volume01-chapter06.json,메서드 요청의 접속 기록,Q06-08,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter06/Q06-08.txt
+volume01-chapter06.json,허용 메서드 정책과 대조,Q06-09,Windows · Discover · wazuh-archives-*,examples/rev02/chapter06/Q06-09.txt
+volume01-chapter06.json,관리 경로의 출발지 조사,Q06-10,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter06/Q06-10.txt
+volume01-chapter06.json,로그 크기 경보 분석,Q06-11,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter06/Q06-11.txt
+volume01-chapter06.json,6.8  원본 access 로그 확인,C06-14,kt66 VM · 터미널,examples/rev02/chapter06/C06-14.txt
+volume01-chapter06.json,6.8  원본 access 로그 확인,C06-15,kt66-web 컨테이너 안,examples/rev02/chapter06/C06-15.txt
+volume01-chapter06.json,6.8  원본 access 로그 확인,C06-16,kt66-web 컨테이너 안,examples/rev02/chapter06/C06-16.txt
+volume01-chapter06.json,6.8  원본 access 로그 확인,C06-17,kt66-web 컨테이너 안,examples/rev02/chapter06/C06-17.txt
+volume01-chapter06.json,로그인 처리 코드의 위치,C06-18,kt66 VM · 터미널,examples/rev02/chapter06/C06-18.txt
+volume01-chapter06.json,로그인 처리 코드의 위치,C06-19,kt66-dvwa 컨테이너 안,examples/rev02/chapter06/C06-19.txt
+volume01-chapter06.json,로그인 처리 코드의 위치,C06-20,kt66-dvwa 컨테이너 안,examples/rev02/chapter06/C06-20.txt
+volume01-chapter06.json,로그인 처리 코드의 위치,C06-21,kt66-dvwa 컨테이너 안,examples/rev02/chapter06/C06-21.txt
+volume01-chapter06.json,로그인 처리 코드의 위치,C06-22,kt66-dvwa 컨테이너 안,examples/rev02/chapter06/C06-22.txt
+volume01-chapter06.json,원상복구와 조사 기록,C06-23,공격자 VM · 터미널,examples/rev02/chapter06/C06-23.txt
+volume01-chapter06.json,원상복구와 조사 기록,C06-24,공격자 VM · 터미널,examples/rev02/chapter06/C06-24.txt
+volume01-chapter06.json,원상복구와 조사 기록,C06-25,공격자 VM · 터미널,examples/rev02/chapter06/C06-25.txt
+volume01-chapter06.json,6.10  curl의 헤더 지정(선택),C06-26,공격자 VM · 터미널,examples/rev02/chapter06/C06-26.txt
+volume01-chapter06.json,6.10  curl의 헤더 지정(선택),C06-27,공격자 VM · 터미널,examples/rev02/chapter06/C06-27.txt
+volume01-chapter06.json,6.10  curl의 헤더 지정(선택),Q06-12,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter06/Q06-12.txt
+volume01-chapter06.json,curl의 메서드 지정(선택),C06-28,공격자 VM · 터미널,examples/rev02/chapter06/C06-28.txt
+volume01-chapter06.json,curl의 메서드 지정(선택),Q06-13,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter06/Q06-13.txt
+volume01-chapter07.json,경보가 없을 때 원문 확인,C07-01,kt66 VM · 터미널,examples/rev02/chapter07/C07-01.txt
+volume01-chapter07.json,경보가 없을 때 원문 확인,C07-02,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-02.txt
+volume01-chapter07.json,경보가 없을 때 원문 확인,C07-03,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-03.txt
+volume01-chapter07.json,감시 경로와 생성 전 확인,C07-04,kt66 VM · 터미널,examples/rev02/chapter07/C07-04.txt
+volume01-chapter07.json,감시 경로와 생성 전 확인,C07-05,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-05.txt
+volume01-chapter07.json,감시 경로와 생성 전 확인,C07-06,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-06.txt
+volume01-chapter07.json,웹셸 코드 저장,C07-07,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-07.txt
+volume01-chapter07.json,웹셸 코드 저장,C07-08,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-08.txt
+volume01-chapter07.json,파일 확인과 웹 요청,C07-09,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-09.txt
+volume01-chapter07.json,파일 확인과 웹 요청,C07-10,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-10.txt
+volume01-chapter07.json,FIM 경보와 요청 검색,Q07-01,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter07/Q07-01.txt
+volume01-chapter07.json,FIM 경보와 요청 검색,Q07-02,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter07/Q07-02.txt
+volume01-chapter07.json,실습 파일 원상복구,C07-11,kt66 VM · 터미널,examples/rev02/chapter07/C07-11.txt
+volume01-chapter07.json,실습 파일 원상복구,C07-12,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-12.txt
+volume01-chapter07.json,실습 파일 원상복구,C07-13,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-13.txt
+volume01-chapter07.json,원문에서 입력 찾기,Q07-03,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter07/Q07-03.txt
+volume01-chapter07.json,변형 입력과 수집 한계,Q07-04,Windows · Discover · wazuh-archives-*,examples/rev02/chapter07/Q07-04.txt
+volume01-chapter07.json,Shellshock 규칙 검색,Q07-05,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter07/Q07-05.txt
+volume01-chapter07.json,접속 기록의 필드 해석,Q07-06,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter07/Q07-06.txt
+volume01-chapter07.json,명령 문자열과 WAF 검색,Q07-07,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter07/Q07-07.txt
+volume01-chapter07.json,명령 문자열과 WAF 검색,Q07-08,Windows · Discover · wazuh-archives-*,examples/rev02/chapter07/Q07-08.txt
+volume01-chapter07.json,200 경보의 우선 조사,Q07-09,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter07/Q07-09.txt
+volume01-chapter07.json,SQL 인젝션 경보의 500,Q07-10,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter07/Q07-10.txt
+volume01-chapter07.json,반복 오류 규칙과 대응,Q07-11,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter07/Q07-11.txt
+volume01-chapter07.json,7.8  로그와 설정의 원본 위치,C07-14,kt66 VM · 터미널,examples/rev02/chapter07/C07-14.txt
+volume01-chapter07.json,7.8  로그와 설정의 원본 위치,C07-15,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-15.txt
+volume01-chapter07.json,7.8  로그와 설정의 원본 위치,C07-16,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-16.txt
+volume01-chapter07.json,감사 기록과 앱 처리기 조회,C07-17,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-17.txt
+volume01-chapter07.json,감사 기록과 앱 처리기 조회,C07-18,kt66-web · 컨테이너 셸,examples/rev02/chapter07/C07-18.txt
+volume01-chapter07.json,감사 기록과 앱 처리기 조회,C07-19,kt66 VM · 터미널,examples/rev02/chapter07/C07-19.txt
+volume01-chapter07.json,감사 기록과 앱 처리기 조회,C07-20,kt66-dvwa · 컨테이너 셸,examples/rev02/chapter07/C07-20.txt
+volume01-chapter07.json,감사 기록과 앱 처리기 조회,C07-21,kt66-dvwa · 컨테이너 셸,examples/rev02/chapter07/C07-21.txt
+volume01-chapter07.json,Manager의 규칙 정의 조회,C07-22,kt66 VM · 터미널,examples/rev02/chapter07/C07-22.txt
+volume01-chapter07.json,Manager의 규칙 정의 조회,C07-23,kt66-siem · 컨테이너 셸,examples/rev02/chapter07/C07-23.txt
+volume01-chapter07.json,7.9  curl 요청 실습(선택),C07-24,공격자 VM · 터미널,examples/rev02/chapter07/C07-24.txt
+volume01-chapter07.json,JNDI 헤더와 URL,C07-25,공격자 VM · 터미널,examples/rev02/chapter07/C07-25.txt
+volume01-chapter07.json,JNDI 변형 헤더,C07-26,공격자 VM · 터미널,examples/rev02/chapter07/C07-26.txt
+volume01-chapter07.json,Shellshock의 두 헤더,C07-27,공격자 VM · 터미널,examples/rev02/chapter07/C07-27.txt
+volume01-chapter07.json,Shellshock의 두 헤더,C07-28,공격자 VM · 터미널,examples/rev02/chapter07/C07-28.txt
+volume01-chapter07.json,POST 본문과 인증 상태,C07-29,공격자 VM · 터미널,examples/rev02/chapter07/C07-29.txt
+volume01-chapter07.json,원본 반복문의 구문,C07-30,공격자 VM · 터미널,examples/rev02/chapter07/C07-30.txt
+volume01-chapter08.json,컨테이너와 수집 상태 확인,C08-01,Windows · 터미널,examples/rev02/chapter08/C08-01.txt
+volume01-chapter08.json,컨테이너와 수집 상태 확인,C08-02,kt66 VM · ccc 호스트 셸,examples/rev02/chapter08/C08-02.txt
+volume01-chapter08.json,컨테이너와 수집 상태 확인,C08-03,kt66 VM · ccc 호스트 셸,examples/rev02/chapter08/C08-03.txt
+volume01-chapter08.json,서버의 초기 상태 기록,C08-04,kt66-bastion · root 셸,examples/rev02/chapter08/C08-04.txt
+volume01-chapter08.json,서버의 초기 상태 기록,C08-05,kt66-bastion · root 셸,examples/rev02/chapter08/C08-05.txt
+volume01-chapter08.json,공격자 VM에 Hydra 준비,C08-06,Windows · 별도 터미널,examples/rev02/chapter08/C08-06.txt
+volume01-chapter08.json,공격자 VM에 Hydra 준비,C08-07,공격자 VM · att 셸,examples/rev02/chapter08/C08-07.txt
+volume01-chapter08.json,공격자 VM에 Hydra 준비,C08-08,공격자 VM · att 셸,examples/rev02/chapter08/C08-08.txt
+volume01-chapter08.json,목록 파일과 정상 로그인 준비,C08-09,공격자 VM · att 셸,examples/rev02/chapter08/C08-09.txt
+volume01-chapter08.json,목록 파일과 정상 로그인 준비,C08-10,공격자 VM · att 셸,examples/rev02/chapter08/C08-10.txt
+volume01-chapter08.json,목록 파일과 정상 로그인 준비,C08-11,공격자 VM · att 셸,examples/rev02/chapter08/C08-11.txt
+volume01-chapter08.json,서버 확인과 정상 인증 기록,C08-12,kt66-bastion · root 셸,examples/rev02/chapter08/C08-12.txt
+volume01-chapter08.json,서버 확인과 정상 인증 기록,C08-13,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter08/C08-13.txt
+volume01-chapter08.json,서버 확인과 정상 인증 기록,C08-14,kt66-bastion · root 셸,examples/rev02/chapter08/C08-14.txt
+volume01-chapter08.json,Discover에서 인증 로그 검색,Q08-01,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter08/Q08-01.txt
+volume01-chapter08.json,8.2  동일 계정의 암호 대입,C08-15,공격자 VM · att 셸,examples/rev02/chapter08/C08-15.txt
+volume01-chapter08.json,8.2  동일 계정의 암호 대입,C08-16,공격자 VM · att 셸,examples/rev02/chapter08/C08-16.txt
+volume01-chapter08.json,인증 시도와 응답 분석,C08-17,공격자 VM · att 셸,examples/rev02/chapter08/C08-17.txt
+volume01-chapter08.json,인증 시도와 응답 분석,Q08-02,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter08/Q08-02.txt
+volume01-chapter08.json,반복 로그 요약과 필드 누락,Q08-03,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter08/Q08-03.txt
+volume01-chapter08.json,자동 대응의 실행 여부 확인,C08-18,kt66-bastion · root 셸,examples/rev02/chapter08/C08-18.txt
+volume01-chapter08.json,8.3  존재하지 않는 계정의 인증 시도,C08-19,kt66-bastion · root 셸,examples/rev02/chapter08/C08-19.txt
+volume01-chapter08.json,8.3  존재하지 않는 계정의 인증 시도,C08-20,공격자 VM · att 셸,examples/rev02/chapter08/C08-20.txt
+volume01-chapter08.json,잘못된 계정의 응답과 경보,C08-21,공격자 VM · att 셸,examples/rev02/chapter08/C08-21.txt
+volume01-chapter08.json,잘못된 계정의 응답과 경보,Q08-04,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter08/Q08-04.txt
+volume01-chapter08.json,8.4  인증 실패 이후의 성공 기록,C08-22,공격자 VM · att 셸,examples/rev02/chapter08/C08-22.txt
+volume01-chapter08.json,8.4  인증 실패 이후의 성공 기록,C08-23,공격자 VM · att 셸,examples/rev02/chapter08/C08-23.txt
+volume01-chapter08.json,성공 뒤 셸과 기록 확인,C08-24,공격자 VM · att 셸,examples/rev02/chapter08/C08-24.txt
+volume01-chapter08.json,성공 뒤 셸과 기록 확인,C08-25,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter08/C08-25.txt
+volume01-chapter08.json,성공 뒤 셸과 기록 확인,Q08-05,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter08/Q08-05.txt
+volume01-chapter08.json,설정과 암호 상태 백업,C08-26,kt66-bastion · root 셸,examples/rev02/chapter08/C08-26.txt
+volume01-chapter08.json,설정과 암호 상태 백업,C08-27,kt66-bastion · root 셸,examples/rev02/chapter08/C08-27.txt
+volume01-chapter08.json,설정과 암호 상태 백업,C08-28,kt66-bastion · root 셸,examples/rev02/chapter08/C08-28.txt
+volume01-chapter08.json,root 인증을 임시로 허용,C08-29,kt66-bastion · root 셸,examples/rev02/chapter08/C08-29.txt
+volume01-chapter08.json,root 인증을 임시로 허용,C08-30,kt66-bastion · root 셸,examples/rev02/chapter08/C08-30.txt
+volume01-chapter08.json,유효 설정 검사와 재적용,C08-31,kt66-bastion · root 셸,examples/rev02/chapter08/C08-31.txt
+volume01-chapter08.json,유효 설정 검사와 재적용,C08-32,kt66-bastion · root 셸,examples/rev02/chapter08/C08-32.txt
+volume01-chapter08.json,직접 로그인과 Wazuh 확인,C08-33,공격자 VM · att 셸,examples/rev02/chapter08/C08-33.txt
+volume01-chapter08.json,직접 로그인과 Wazuh 확인,Q08-06,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter08/Q08-06.txt
+volume01-chapter08.json,root 설정과 암호 원상복구,C08-34,kt66-bastion · root 셸,examples/rev02/chapter08/C08-34.txt
+volume01-chapter08.json,root 설정과 암호 원상복구,C08-35,kt66-bastion · root 셸,examples/rev02/chapter08/C08-35.txt
+volume01-chapter08.json,root 설정과 암호 원상복구,C08-36,kt66-bastion · root 셸,examples/rev02/chapter08/C08-36.txt
+volume01-chapter08.json,복구 뒤 새 연결로 확인,C08-37,공격자 VM · att 셸,examples/rev02/chapter08/C08-37.txt
+volume01-chapter08.json,복구 뒤 새 연결로 확인,C08-38,공격자 VM · att 셸,examples/rev02/chapter08/C08-38.txt
+volume01-chapter08.json,복구 뒤 새 연결로 확인,C08-39,kt66-bastion · root 셸,examples/rev02/chapter08/C08-39.txt
+volume01-chapter08.json,8.6  sudo 권한과 실행자 조사,C08-40,공격자 VM · att 셸,examples/rev02/chapter08/C08-40.txt
+volume01-chapter08.json,8.6  sudo 권한과 실행자 조사,C08-41,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter08/C08-41.txt
+volume01-chapter08.json,root 권한 명령 실행,C08-42,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter08/C08-42.txt
+volume01-chapter08.json,root 권한 명령 실행,C08-43,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter08/C08-43.txt
+volume01-chapter08.json,sudo 원문과 필드 해석,Q08-07,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter08/Q08-07.txt
+volume01-chapter08.json,8.7  새 계정과 권한 변경 조사,C08-44,공격자 VM · att 셸,examples/rev02/chapter08/C08-44.txt
+volume01-chapter08.json,8.7  새 계정과 권한 변경 조사,C08-45,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter08/C08-45.txt
+volume01-chapter08.json,계정 생성과 암호 상태,C08-46,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter08/C08-46.txt
+volume01-chapter08.json,계정 생성과 암호 상태,Q08-08,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter08/Q08-08.txt
+volume01-chapter08.json,생성 필드와 그룹 추가,C08-47,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter08/C08-47.txt
+volume01-chapter08.json,실행 요청과 변경 결과 대조,Q08-09,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter08/Q08-09.txt
+volume01-chapter08.json,실행 요청과 변경 결과 대조,C08-48,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter08/C08-48.txt
+volume01-chapter08.json,계정 삭제와 원상복구,C08-49,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter08/C08-49.txt
+volume01-chapter08.json,계정 삭제와 원상복구,C08-50,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter08/C08-50.txt
+volume01-chapter08.json,삭제 기록의 계정 필드,Q08-10,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter08/Q08-10.txt
+volume01-chapter08.json,수집 설정과 자동 대응 설정,C08-51,kt66-bastion · root 셸,examples/rev02/chapter08/C08-51.txt
+volume01-chapter08.json,수집 설정과 자동 대응 설정,C08-52,bastion 관리 셸 → kt66 VM 호스트,examples/rev02/chapter08/C08-52.txt
+volume01-chapter08.json,수집 설정과 자동 대응 설정,C08-53,kt66-siem · root 셸,examples/rev02/chapter08/C08-53.txt
+volume01-chapter08.json,수집 설정과 자동 대응 설정,C08-54,kt66-siem · root 셸,examples/rev02/chapter08/C08-54.txt
+volume01-chapter08.json,실습 파일과 세션 원상복구,C08-55,공격자 VM · att 셸,examples/rev02/chapter08/C08-55.txt
+volume01-chapter08.json,실습 파일과 세션 원상복구,C08-56,공격자 VM · att 셸,examples/rev02/chapter08/C08-56.txt
+volume01-chapter09.json,관리 창과 실습 창 준비,C09-01,Windows · 터미널,examples/rev02/chapter09/C09-01.txt
+volume01-chapter09.json,관리 창과 실습 창 준비,C09-02,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-02.txt
+volume01-chapter09.json,관리 창과 실습 창 준비,C09-03,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-03.txt
+volume01-chapter09.json,관리 창과 실습 창 준비,C09-04,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-04.txt
+volume01-chapter09.json,관리 창과 실습 창 준비,C09-05,Windows · 별도 터미널,examples/rev02/chapter09/C09-05.txt
+volume01-chapter09.json,관리 창과 실습 창 준비,C09-06,공격자 VM · att 셸,examples/rev02/chapter09/C09-06.txt
+volume01-chapter09.json,파일 무결성 감시의 조건,C09-07,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-07.txt
+volume01-chapter09.json,9.2  sudo 권한 파일 변경,C09-08,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-08.txt
+volume01-chapter09.json,9.2  sudo 권한 파일 변경,C09-09,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-09.txt
+volume01-chapter09.json,추가와 수정 기록 구분,Q09-01,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter09/Q09-01.txt
+volume01-chapter09.json,추가와 수정 기록 구분,C09-10,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-10.txt
+volume01-chapter09.json,추가와 수정 기록 구분,Q09-02,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter09/Q09-02.txt
+volume01-chapter09.json,조사와 원상복구,C09-11,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-11.txt
+volume01-chapter09.json,9.3  SSH 공개 키 등록,C09-12,공격자 VM · att 셸,examples/rev02/chapter09/C09-12.txt
+volume01-chapter09.json,9.3  SSH 공개 키 등록,C09-13,공격자 VM · att 셸,examples/rev02/chapter09/C09-13.txt
+volume01-chapter09.json,키 생성과 서버의 기존 상태 보존,C09-14,공격자 VM · att 셸,examples/rev02/chapter09/C09-14.txt
+volume01-chapter09.json,키 생성과 서버의 기존 상태 보존,C09-15,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-15.txt
+volume01-chapter09.json,키 생성과 서버의 기존 상태 보존,C09-16,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-16.txt
+volume01-chapter09.json,키 생성과 서버의 기존 상태 보존,C09-17,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-17.txt
+volume01-chapter09.json,공개 키 한 줄 추가와 접속,C09-18,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-18.txt
+volume01-chapter09.json,공개 키 한 줄 추가와 접속,C09-19,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-19.txt
+volume01-chapter09.json,공개 키 한 줄 추가와 접속,C09-20,공격자 VM · att 셸,examples/rev02/chapter09/C09-20.txt
+volume01-chapter09.json,파일 변경과 인증 성공 연결,Q09-03,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter09/Q09-03.txt
+volume01-chapter09.json,파일 변경과 인증 성공 연결,Q09-04,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter09/Q09-04.txt
+volume01-chapter09.json,키 제거와 원상복구 확인,C09-21,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-21.txt
+volume01-chapter09.json,키 제거와 원상복구 확인,C09-22,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-22.txt
+volume01-chapter09.json,키 제거와 원상복구 확인,C09-23,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-23.txt
+volume01-chapter09.json,9.4  cron 예약 작업,C09-24,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-24.txt
+volume01-chapter09.json,9.4  cron 예약 작업,C09-25,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-25.txt
+volume01-chapter09.json,제공할 스크립트 준비,C09-26,공격자 VM · att 셸,examples/rev02/chapter09/C09-26.txt
+volume01-chapter09.json,제공할 스크립트 준비,C09-27,공격자 VM · att 셸,examples/rev02/chapter09/C09-27.txt
+volume01-chapter09.json,제공할 스크립트 준비,C09-28,공격자 VM · att 셸,examples/rev02/chapter09/C09-28.txt
+volume01-chapter09.json,예약 파일 등록,C09-29,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-29.txt
+volume01-chapter09.json,예약 파일 등록,C09-30,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-30.txt
+volume01-chapter09.json,예약 파일 등록,C09-31,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-31.txt
+volume01-chapter09.json,등록 경보와 실행 결과,Q09-05,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter09/Q09-05.txt
+volume01-chapter09.json,등록 경보와 실행 결과,C09-32,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-32.txt
+volume01-chapter09.json,예약 제거와 원상복구,C09-33,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-33.txt
+volume01-chapter09.json,예약 제거와 원상복구,C09-34,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-34.txt
+volume01-chapter09.json,예약 제거와 원상복구,C09-35,kt66-bastion · root 관리 셸,examples/rev02/chapter09/C09-35.txt
+volume01-chapter09.json,9.5  리버스 셸과 호스트 감사,C09-36,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-36.txt
+volume01-chapter09.json,수집 상태 점검과 서비스 복구,C09-37,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-37.txt
+volume01-chapter09.json,수집 상태 점검과 서비스 복구,C09-38,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-38.txt
+volume01-chapter09.json,수집 상태 점검과 서비스 복구,C09-39,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-39.txt
+volume01-chapter09.json,연결 도구와 FIFO 준비,C09-40,공격자 VM · att 셸,examples/rev02/chapter09/C09-40.txt
+volume01-chapter09.json,연결 도구와 FIFO 준비,C09-41,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-41.txt
+volume01-chapter09.json,연결 도구와 FIFO 준비,C09-42,공격자 VM · att 셸,examples/rev02/chapter09/C09-42.txt
+volume01-chapter09.json,입력과 응답 확인,C09-43,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-43.txt
+volume01-chapter09.json,입력과 응답 확인,C09-44,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-44.txt
+volume01-chapter09.json,입력과 응답 확인,C09-45,공격자 VM · nc 연결 창,examples/rev02/chapter09/C09-45.txt
+volume01-chapter09.json,입력과 응답 확인,C09-46,kt66 VM · 연결 종료 후 ccc 셸,examples/rev02/chapter09/C09-46.txt
+volume01-chapter09.json,nc 실행 경보 해석,Q09-06,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter09/Q09-06.txt
+volume01-chapter09.json,부모 프로세스와 Sysmon 보강,Q09-07,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter09/Q09-07.txt
+volume01-chapter09.json,부모 프로세스와 Sysmon 보강,C09-47,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-47.txt
+volume01-chapter09.json,부모 프로세스와 Sysmon 보강,C09-48,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-48.txt
+volume01-chapter09.json,9.6  다운로드한 응답을 셸로 실행,C09-49,공격자 VM · att 셸,examples/rev02/chapter09/C09-49.txt
+volume01-chapter09.json,9.6  다운로드한 응답을 셸로 실행,C09-50,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-50.txt
+volume01-chapter09.json,실행 결과와 두 명령의 상태,C09-51,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-51.txt
+volume01-chapter09.json,실행 결과와 두 명령의 상태,Q09-08,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter09/Q09-08.txt
+volume01-chapter09.json,curl과 sh의 부모 프로세스,Q09-09,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter09/Q09-09.txt
+volume01-chapter09.json,HTTP 서버와 임시 키 정리,C09-52,공격자 VM · att 셸,examples/rev02/chapter09/C09-52.txt
+volume01-chapter09.json,HTTP 서버와 임시 키 정리,C09-53,공격자 VM · att 셸,examples/rev02/chapter09/C09-53.txt
+volume01-chapter09.json,9.7  실행 파일 변조,C09-54,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-54.txt
+volume01-chapter09.json,9.7  실행 파일 변조,C09-55,kt66-web · root 관리 셸,examples/rev02/chapter09/C09-55.txt
+volume01-chapter09.json,9.7  실행 파일 변조,C09-56,kt66-web · root 관리 셸,examples/rev02/chapter09/C09-56.txt
+volume01-chapter09.json,백업과 7바이트 변경,C09-57,kt66-web · root 관리 셸,examples/rev02/chapter09/C09-57.txt
+volume01-chapter09.json,백업과 7바이트 변경,C09-58,kt66-web · root 관리 셸,examples/rev02/chapter09/C09-58.txt
+volume01-chapter09.json,Wazuh의 변경 전후 값,Q09-10,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter09/Q09-10.txt
+volume01-chapter09.json,바이너리 원상복구,C09-59,kt66-web · root 관리 셸,examples/rev02/chapter09/C09-59.txt
+volume01-chapter09.json,바이너리 원상복구,C09-60,kt66-web · root 관리 셸,examples/rev02/chapter09/C09-60.txt
+volume01-chapter09.json,9.8  로그 삭제와 내용 비우기,C09-61,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-61.txt
+volume01-chapter09.json,감시할 실습 파일 준비,C09-62,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-62.txt
+volume01-chapter09.json,감시할 실습 파일 준비,C09-63,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-63.txt
+volume01-chapter09.json,삭제 경보와 크기 변경 경보,Q09-11,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter09/Q09-11.txt
+volume01-chapter09.json,삭제 경보와 크기 변경 경보,Q09-12,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter09/Q09-12.txt
+volume01-chapter09.json,정상 회전과 훼손 조사,C09-64,kt66-bastion · SSH로 접속한 ccc 셸,examples/rev02/chapter09/C09-64.txt
+volume01-chapter09.json,9.9  디코더와 탐지 규칙 확인,C09-65,kt66 VM · ccc 호스트 셸,examples/rev02/chapter09/C09-65.txt
+volume01-chapter09.json,9.9  디코더와 탐지 규칙 확인,C09-66,kt66-siem · root 셸,examples/rev02/chapter09/C09-66.txt
+volume01-chapter09.json,9.9  디코더와 탐지 규칙 확인,C09-67,kt66-siem · root 셸,examples/rev02/chapter09/C09-67.txt
+volume01-chapter09.json,audit 디코더·규칙·분류 키,C09-68,kt66-siem · root 셸,examples/rev02/chapter09/C09-68.txt
+volume01-chapter09.json,audit 디코더·규칙·분류 키,C09-69,kt66-siem · root 셸,examples/rev02/chapter09/C09-69.txt
+volume01-chapter10.json,10.1  조사 대상과 실행 위치,C10-01,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-01.txt
+volume01-chapter10.json,10.2  수집 준비와 사전 기록,C10-02,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-02.txt
+volume01-chapter10.json,10.2  수집 준비와 사전 기록,C10-03,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-03.txt
+volume01-chapter10.json,osquery 예약 조회 준비,C10-04,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-04.txt
+volume01-chapter10.json,osquery 예약 조회 준비,C10-05,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-05.txt
+volume01-chapter10.json,Wazuh 수집 설정 확인,C10-06,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-06.txt
+volume01-chapter10.json,Wazuh 수집 설정 확인,C10-07,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-07.txt
+volume01-chapter10.json,수집 항목과 적용 확인,C10-08,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-08.txt
+volume01-chapter10.json,결과 파일과 조회 주기,C10-09,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-09.txt
+volume01-chapter10.json,10.3  TCP 리스너 실행,C10-10,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-10.txt
+volume01-chapter10.json,10.3  TCP 리스너 실행,C10-11,kt66 VM · ccc 호스트 셸 · 터미널 A,examples/rev02/chapter10/C10-11.txt
+volume01-chapter10.json,10.3  TCP 리스너 실행,C10-12,kt66 VM · ccc 호스트 셸 · 터미널 B,examples/rev02/chapter10/C10-12.txt
+volume01-chapter10.json,리스너의 프로세스와 주소,C10-13,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-13.txt
+volume01-chapter10.json,Wazuh의 포트 목록 변경 경보,Q10-01,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter10/Q10-01.txt
+volume01-chapter10.json,포트 목록과 실행 기록 대조,Q10-02,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter10/Q10-02.txt
+volume01-chapter10.json,포트 목록과 실행 기록 대조,Q10-03,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter10/Q10-03.txt
+volume01-chapter10.json,kt66 경계 방화벽 확인,C10-14,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-14.txt
+volume01-chapter10.json,누락된 경계 방화벽 준비,C10-15,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-15.txt
+volume01-chapter10.json,누락된 경계 방화벽 준비,C10-16,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-16.txt
+volume01-chapter10.json,공격자 VM의 포트 스캔,C10-17,공격자 VM · att 셸,examples/rev02/chapter10/C10-17.txt
+volume01-chapter10.json,공격자 VM의 포트 스캔,C10-18,공격자 VM · att 셸,examples/rev02/chapter10/C10-18.txt
+volume01-chapter10.json,공격자 VM의 포트 스캔,C10-19,공격자 VM · att 셸,examples/rev02/chapter10/C10-19.txt
+volume01-chapter10.json,스캔 응답과 커널 원문,C10-20,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-20.txt
+volume01-chapter10.json,10.5  반복 차단 경보 분석,Q10-04,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter10/Q10-04.txt
+volume01-chapter10.json,규칙 조건과 누락 범위,C10-21,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-21.txt
+volume01-chapter10.json,규칙 조건과 누락 범위,C10-22,kt66-siem · root 셸,examples/rev02/chapter10/C10-22.txt
+volume01-chapter10.json,개별 차단 기록으로 범위 조사,Q10-05,Windows · Discover · wazuh-archives-*,examples/rev02/chapter10/Q10-05.txt
+volume01-chapter10.json,추가 조사와 방화벽 원상복구,C10-23,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-23.txt
+volume01-chapter10.json,10.6  SQL로 현재 상태 직접 조회,C10-24,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-24.txt
+volume01-chapter10.json,10.6  SQL로 현재 상태 직접 조회,S10-01,kt66 VM · sudo osqueryi의 osquery> 프롬프트,examples/rev02/chapter10/S10-01.txt
+volume01-chapter10.json,예약 조회 SQL의 검색 조건,S10-02,kt66 VM · sudo osqueryi의 osquery> 프롬프트,examples/rev02/chapter10/S10-02.txt
+volume01-chapter10.json,공개 키와 사용자 연결,S10-03,kt66 VM · sudo osqueryi의 osquery> 프롬프트,examples/rev02/chapter10/S10-03.txt
+volume01-chapter10.json,공개 키와 사용자 연결,S10-04,kt66 VM · sudo osqueryi의 osquery> 프롬프트,examples/rev02/chapter10/S10-04.txt
+volume01-chapter10.json,10.7  새 포트와 공개 키 관찰,C10-25,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-25.txt
+volume01-chapter10.json,10.7  새 포트와 공개 키 관찰,C10-26,공격자 VM · att 셸,examples/rev02/chapter10/C10-26.txt
+volume01-chapter10.json,10.7  새 포트와 공개 키 관찰,C10-27,공격자 VM · att 셸,examples/rev02/chapter10/C10-27.txt
+volume01-chapter10.json,키 파일 사전 확인과 백업,C10-28,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-28.txt
+volume01-chapter10.json,키 파일 사전 확인과 백업,C10-29,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-29.txt
+volume01-chapter10.json,키 파일 사전 확인과 백업,C10-30,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-30.txt
+volume01-chapter10.json,제한된 실습 키 등록,C10-31,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-31.txt
+volume01-chapter10.json,제한된 실습 키 등록,C10-32,kt66 VM · ccc 호스트 셸 · 터미널 C,examples/rev02/chapter10/C10-32.txt
+volume01-chapter10.json,예약 결과에서 추가 행 찾기,Q10-06,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter10/Q10-06.txt
+volume01-chapter10.json,예약 결과에서 추가 행 찾기,Q10-07,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter10/Q10-07.txt
+volume01-chapter10.json,공개 키 결과의 의미,Q10-08,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter10/Q10-08.txt
+volume01-chapter10.json,10.8  실습 포트와 키 원상복구,C10-33,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-33.txt
+volume01-chapter10.json,10.8  실습 포트와 키 원상복구,C10-34,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-34.txt
+volume01-chapter10.json,처음 만든 키 파일 정리,C10-35,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-35.txt
+volume01-chapter10.json,처음 만든 키 파일 정리,C10-36,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-36.txt
+volume01-chapter10.json,사라진 행과 현재 상태 대조,Q10-09,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter10/Q10-09.txt
+volume01-chapter10.json,사라진 행과 현재 상태 대조,Q10-10,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter10/Q10-10.txt
+volume01-chapter10.json,임시 파일과 수집 준비 원상복구,C10-37,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-37.txt
+volume01-chapter10.json,임시 파일과 수집 준비 원상복구,C10-38,공격자 VM · att 셸,examples/rev02/chapter10/C10-38.txt
+volume01-chapter10.json,임시 파일과 수집 준비 원상복구,C10-39,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-39.txt
+volume01-chapter10.json,서비스와 설정 파일 정리,C10-40,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-40.txt
+volume01-chapter10.json,서비스와 설정 파일 정리,C10-41,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-41.txt
+volume01-chapter10.json,10.9  결과가 다를 때의 확인 순서,C10-42,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-42.txt
+volume01-chapter10.json,원문·디코더·규칙 대조,C10-43,kt66 VM · ccc 호스트 셸,examples/rev02/chapter10/C10-43.txt
+volume01-chapter10.json,원문·디코더·규칙 대조,C10-44,kt66-siem · root 셸,examples/rev02/chapter10/C10-44.txt
+volume01-chapter11.json,11.3  검색 조건 기록,Q11-01,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter11/Q11-01.txt
+volume01-chapter11.json,11.5  사례 B의 공개 키 변경,Q11-02,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter11/Q11-02.txt
+volume01-chapter11.json,11.5  사례 B의 공개 키 변경,Q11-03,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter11/Q11-03.txt
+volume01-chapter11.json,11.6  사례 C의 세 수집원,Q11-04,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter11/Q11-04.txt
+volume01-chapter11.json,스캔 범위와 기록 수의 해석,Q11-05,Windows · Discover · wazuh-alerts-*,examples/rev02/chapter11/Q11-05.txt
+volume01-chapter11.json,스캔 범위와 기록 수의 해석,Q11-06,Windows · Discover · wazuh-archives-*,examples/rev02/chapter11/Q11-06.txt
+volume01-chapter11.json,11.7  증거 사본 준비,C11-01,Windows · PowerShell · 저장소 루트,examples/rev02/chapter11/C11-01.txt
+volume01-chapter11.json,11.7  증거 사본 준비,C11-02,Windows · PowerShell · 저장소 루트,examples/rev02/chapter11/C11-02.txt
+volume01-chapter11.json,해시와 원본 위치 기록,C11-03,Windows · PowerShell · 저장소 루트,examples/rev02/chapter11/C11-03.txt
+volume01-chapter11.json,원문과 추출 필드 확인,C11-04,Windows · PowerShell · 저장소 루트,examples/rev02/chapter11/C11-04.txt
+volume01-chapter11.json,원문과 추출 필드 확인,C11-05,Windows · PowerShell · 저장소 루트,examples/rev02/chapter11/C11-05.txt

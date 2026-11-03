@@ -1,0 +1,130 @@
+[
+  {
+    "chapter": 7,
+    "section": "파일 확인과 웹 요청",
+    "original": {
+      "type": "p",
+      "text": "Status Code와 Response를 함께 적는다. 슬라이드의 shell.php 요청은 404와 Not Found 본문을 반환했다. 파일을 만든 /var/www/html과 IP 요청의 기본 사이트 루트 /var/www/landing은 서로 다른 경로이다. PHP 실행기의 유무에 앞서 URL과 파일의 연결부터 확인한다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "브라우저 헤더와 URL 입력",
+    "original": {
+      "type": "p",
+      "text": "Network의 Request Headers에서 User-Agent를, Request URL에서 q 값을 확인한다. 두 위치에 같은 조회 주소를 넣었는지 비교하고 응답 코드와 본문을 기록한다. 슬라이드의 첫 요청은 403이었다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "변형과 수집의 빈틈",
+    "original": {
+      "type": "p",
+      "text": "슬라이드의 두 번째 요청은 X-Api-Version 헤더에 조회 문자열을 나누어 넣고 User-Agent에는 RMI 조회 문자열을 넣었다. RMI는 Java 프로그램 사이의 원격 호출에 쓰는 방식이다. 이 헤더 변형은 7.9의 선택 curl 예제에서 읽는다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "변형과 수집의 빈틈",
+    "original": {
+      "type": "p",
+      "text": "슬라이드 변형 요청의 응답은 302이다. Location·본문과 외부 통신을 추가 확인해야 한다. Wazuh에 없으면 원본 access·감사 기록, 수집 설정, 인덱스·기간 순서로 확인한다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "User-Agent에 공격 구문 입력",
+    "original": {
+      "type": "p",
+      "text": "슬라이드는 이 요청에 200을 기록했다. 일반 웹앱의 시작 페이지가 반환된 경우와 명령 출력이 반환된 경우를 본문으로 구분한다. 응답 크기만으로 id 실행을 판단하지 않는다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "GET 요청 두 가지 비교",
+    "original": {
+      "type": "p",
+      "text": "슬라이드의 첫 GET은 Juice 주문 추적 경로에 ;id를 붙인 요청이다. Windows 브라우저에서 아래 주소를 한 번 요청하고 경로·상태·본문을 적는다. %3B는 세미콜론이다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "GET 요청 두 가지 비교",
+    "original": {
+      "type": "p",
+      "text": "DVWA Low 처리기는 POST에 Submit이 있어야 명령을 구성한다. 따라서 주소창의 GET과 앞의 폼 POST는 동작이 다르다. 슬라이드의 인증 없는 curl POST는 302였으며, 로그인한 브라우저 제출 결과로 바꾸어 설명할 수 없다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "7.6  HTTP 200과 공격 결과",
+    "original": {
+      "type": "p",
+      "text": "선행 조건은 Juice Shop 정상 접속과 사이트의 WAF 모드 확인이다. 슬라이드의 Juice는 DetectionOnly이다. 이 모드는 검사 결과를 남기면서 요청을 통과시킨다. 탐지 전용 모드라도 애플리케이션이 오류를 내면 500이 반환될 수 있다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "UNION 입력과 500 응답",
+    "original": {
+      "type": "p",
+      "text": "같은 슬라이드의 다른 공격은 상품 검색 API의 SQL 인젝션이다. API는 프로그램이 데이터를 요청하는 인터페이스이다. 다음 URL은 q 값의 작은따옴표와 닫는 괄호로 기존 SQL 구문을 끝내고 UNION SELECT를 이어 붙이려는 입력이다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "UNION 입력과 500 응답",
+    "original": {
+      "type": "p",
+      "text": "이 입력의 슬라이드 응답은 500이다. 사용자 표가 반환됐다는 본문 증거는 제시돼 있지 않다. 자료 노출 여부는 응답 본문·애플리케이션·DB 기록을 확보한 뒤 판단한다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "UNION 입력과 500 응답",
+    "original": {
+      "type": "p",
+      "text": "브라우저에서는 URL을 한 번 요청하고 상태·본문을 기록한다. 같은 슬라이드의 XSS 형태 요청은 200이었다. “WAF를 통과했다”와 “목표한 SQL 처리가 성공했다”를 각각 적는다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "7.7  서버 오류와 반복 요청",
+    "original": {
+      "type": "p",
+      "text": "퍼징은 입력을 바꾸며 비정상 동작을 찾는 시험이다. 슬라이드의 실습은 작은따옴표와 숫자를 바꾸어 요청한다. 서비스 거부 공격은 서비스 가용성을 해치는 공격이며, 20회 오류 관찰을 곧바로 서비스 거부 성공으로 부르지는 않는다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "오류 입력과 20회 관찰",
+    "original": {
+      "type": "p",
+      "text": "슬라이드의 터미널 출력에는 500이 20개 있다. 이는 요청 도구가 받은 상태 목록이다. Wazuh 결과 화면의 한 건과 같은 수치로 취급하지 않는다. 원본의 반복문과 구문 해설은 7.9에 있다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "시간 분포와 오류 비율",
+    "original": {
+      "type": "p",
+      "text": "비율은 5xx 접속 로그 수를 전체 접속 로그 수로 나눈 뒤 100을 곱한다. 위 표는 계산 예시이며 슬라이드의 측정값이 아니다. 같은 access 로그 한 종류를 분자·분모에 사용한다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "7.9  다른 방법으로 요청 보내기",
+    "original": {
+      "type": "p",
+      "text": "curl은 브라우저의 로그인 쿠키를 자동으로 공유하지 않는다. 아래 요청의 302는 Location과 함께 확인한다. -i로 본문을 남겨 상태만 출력한 슬라이드 명령보다 처리 결과를 더 확인할 수 있게 한다."
+    }
+  },
+  {
+    "chapter": 7,
+    "section": "POST 본문과 인증 상태",
+    "original": {
+      "type": "p",
+      "text": "슬라이드는 이 POST에 302를 기록했다. access 로그에는 POST와 경로가 남고 ip 값은 일반적으로 남지 않는다. 본문 탐지는 WAF 감사 기록의 저장 여부까지 확인해야 한다."
+    }
+  }
+]

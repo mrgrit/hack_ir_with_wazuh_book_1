@@ -1,0 +1,2 @@
+sudo journalctl -u osqueryd -n 30 --no-pager
+sudo tail -n 30 /var/ossec/logs/ossec.log

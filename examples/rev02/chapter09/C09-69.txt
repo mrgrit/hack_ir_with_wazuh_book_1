@@ -1,0 +1,4 @@
+grep -n -A 8 -B 2 -E \
+'auditd-syscall|auditd-execve|<order>audit[.]exe' \
+/var/ossec/ruleset/decoders/0040-auditd_decoders.xml
+exit

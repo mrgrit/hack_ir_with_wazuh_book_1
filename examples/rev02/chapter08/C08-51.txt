@@ -1,0 +1,2 @@
+grep -n -A 3 -B 2 '/var/log/auth.log' \
+/var/ossec/etc/ossec.conf

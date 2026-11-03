@@ -1,0 +1,4 @@
+sudo systemctl stop osqueryd
+systemctl is-active osqueryd
+sudo ls -l /etc/osquery/osquery.conf \
+/etc/osquery/osquery.flags

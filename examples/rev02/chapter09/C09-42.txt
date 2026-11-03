@@ -1,0 +1,2 @@
+ss -ltn 'sport = :4444'
+timeout 90s nc -lvn 192.168.0.108 4444

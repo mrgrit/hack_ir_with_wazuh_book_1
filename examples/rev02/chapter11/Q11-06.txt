@@ -1,0 +1,4 @@
+agent.name:"kt66-host"
+AND location:"/var/log/kern.log"
+AND data.action:DROP
+AND data.srcip:"192.168.0.108"

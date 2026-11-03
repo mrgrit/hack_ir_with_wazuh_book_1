@@ -1,0 +1,3 @@
+mkdir ~/book08
+cd ~/book08
+pwd

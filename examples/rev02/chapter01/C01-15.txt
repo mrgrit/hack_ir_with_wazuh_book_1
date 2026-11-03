@@ -1,0 +1,3 @@
+cat /etc/sysctl.d/99-wazuh-book.conf
+sudo sysctl -p /etc/sysctl.d/99-wazuh-book.conf
+sysctl vm.max_map_count

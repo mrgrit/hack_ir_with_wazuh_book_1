@@ -1,0 +1,35 @@
+{
+  "_index": "wazuh-archives-4.x-2026.11.01",
+  "_id": "A_nQlqEBEYWT20nn-Jc6",
+  "_score": null,
+  "_source": {
+    "agent": {
+      "ip": "10.20.32.80",
+      "name": "web",
+      "id": "013"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "data": {
+      "protocol": "GET",
+      "srcip": "192.168.0.202",
+      "id": "302",
+      "url": "/vulnerabilities/sqli/?id=1&Submit=Submit&bookcase=book05-normal"
+    },
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "full_log": "192.168.0.202 - - [01/Nov/2026:20:13:48 +0900] \"GET /vulnerabilities/sqli/?id=1&Submit=Submit&bookcase=book05-normal HTTP/1.1\" 302 429 \"-\" \"curl/7.81.0\"",
+    "input": {
+      "type": "log"
+    },
+    "@timestamp": "2026-11-01T11:13:50.035Z",
+    "location": "/var/log/apache2/dvwa_access.log",
+    "id": "1793531630.128936098",
+    "timestamp": "2026-11-01T11:13:50.035+0000"
+  },
+  "sort": [
+    1793531630035
+  ]
+}

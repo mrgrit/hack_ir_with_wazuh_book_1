@@ -1,0 +1,3 @@
+agent.name: "web" AND data.url:
+(*%3Bid* OR *;id* OR *%7Ccat* OR *cat%20*
+ OR *whoami* OR *%24%28*)
