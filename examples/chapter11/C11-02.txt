@@ -1,0 +1,4 @@
+New-Item -ItemType Directory .\book11-analysis
+Copy-Item .\examples\chapter11\evidence\*.json `
+  .\book11-analysis\
+Get-ChildItem .\book11-analysis

@@ -1,0 +1,163 @@
+[
+  {
+    "timestamp": "2026-11-02T11:37:05.325+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: authentication failed.",
+      "id": "5760",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 12,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619425.12645506",
+    "full_log": "Nov  2 20:37:04 bastion sshd[2537]: Failed password for ccc from 192.168.0.108 port 42688 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:37:04",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "42688",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log",
+    "evidence_id": "A-001",
+    "source_chapter": 8
+  },
+  {
+    "timestamp": "2026-11-02T11:37:13.330+0000",
+    "rule": {
+      "level": 3,
+      "description": "sshd: authentication success.",
+      "id": "5715",
+      "mitre": {
+        "id": [
+          "T1078",
+          "T1021"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Valid Accounts",
+          "Remote Services"
+        ]
+      },
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_success"
+      ],
+      "gdpr": [
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1",
+        "7.2"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "pci_dss": [
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "bastion",
+      "ip": "10.20.30.201"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1793619433.12646445",
+    "full_log": "Nov  2 20:37:12 bastion sshd[2537]: Accepted password for ccc from 192.168.0.108 port 42688 ssh2",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov  2 20:37:12",
+      "hostname": "bastion"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "192.168.0.108",
+      "srcport": "42688",
+      "dstuser": "ccc"
+    },
+    "location": "/var/log/auth.log",
+    "evidence_id": "A-002",
+    "source_chapter": 8
+  }
+]

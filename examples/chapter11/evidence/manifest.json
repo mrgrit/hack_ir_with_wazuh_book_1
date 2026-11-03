@@ -1,0 +1,35 @@
+{
+  "description": "기존 실습 경보 발췌본. evidence_id/source_chapter는 저자 추가 필드. 전체 원본 로그가 아님. sha256은 배포 사본의 바이트, source_sha256은 지정 Git 커밋의 원본 바이트, source_checkout_sha256은 집필 PC 작업 사본의 바이트이다. .gitattributes로 배포 사본의 줄바꿈 자동 변환을 끈다.",
+  "files": [
+    {
+      "file": "case-a.json",
+      "records": 2,
+      "sha256": "98c405b9f0b1fa5a97e31e6322a7a259eefd7839b0ad5262f0f9d173a8ae4aed",
+      "source": "editorial/evidence/chapter08/2026-11-02/authentication-alerts.json",
+      "source_commit": "6ab15fe596f94bc3f54abb32c21463852ac3f548",
+      "source_sha256": "2ebbc55876f6ce0bcc6360c2fd1eca9c0be65254244ac82320796c0751496e59",
+      "source_checkout_sha256": "db695223ab313d5bb5763d6d2b243664fd36a8027e192890b9f2c1dabc508467",
+      "selection": "srcport=42688 and rule 5760/5715"
+    },
+    {
+      "file": "case-b.json",
+      "records": 3,
+      "sha256": "f804e4fd0e33ee008656a9274c06bda688da37babdaa510f65918ff3e51353c9",
+      "source": "editorial/evidence/chapter09/2026-11-03/selected-alerts.json",
+      "source_commit": "6ab15fe596f94bc3f54abb32c21463852ac3f548",
+      "source_sha256": "c1629c7b8cbdc351b053ec098b1ad215cd98aa6beae16360cfe9829d731b7c85",
+      "source_checkout_sha256": "df2fb8a49d7626207d9d74b50ce6123fa310360e843c36931fd3476292c103ad",
+      "selection": "authorized_keys FIM or Accepted publickey 5715"
+    },
+    {
+      "file": "case-c.json",
+      "records": 9,
+      "sha256": "63231335dd04880d34b41d41321026d84018e92d15d56502f5e2965197151cd8",
+      "source": "editorial/evidence/chapter10/2026-11-03/selected-alerts.json",
+      "source_commit": "6ab15fe596f94bc3f54abb32c21463852ac3f548",
+      "source_sha256": "ed1e5d50274b2ed63ab4c6d4cfb27e7a62d4f75e188c562b23e2235047cb7f3b",
+      "source_checkout_sha256": "292bca1a3d2258f430d415715efe9c01e1b1372a2291d24b695b7fb22537c6fc",
+      "selection": "chapter10 selected-alerts, all nine records"
+    }
+  ]
+}

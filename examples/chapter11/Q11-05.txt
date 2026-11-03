@@ -1,0 +1,2 @@
+agent.name:"kt66-host" AND rule.id:4151
+AND data.srcip:"192.168.0.108"

@@ -1,0 +1,116 @@
+{
+  "date": "2026-11-03",
+  "new_ui_captures": false,
+  "new_raster_illustrations": false,
+  "diagram_generator": "tools/diagrams_chapter11.py",
+  "ui_source_records": [
+    "assets/screens/chapter08/provenance.json",
+    "assets/screens/chapter09/provenance.json",
+    "assets/screens/chapter10/provenance.json"
+  ],
+  "illustration_source_records": [
+    "editorial/chapter02-illustrations.json",
+    "editorial/chapter04-illustrations.json"
+  ],
+  "images": [
+    {
+      "document": "chapter11",
+      "section": "11장  사건 재구성과 대응 판단",
+      "caption": "그림 11-1  기록 확인에서 대응 결정과 종결까지",
+      "path": "assets/figures/chapter11/roadmap.png",
+      "kind": "new_relationship_diagram",
+      "sha256": "8d1fa0c7b7b826bf264a05eb3504fc1493cde4eca68949865ac40e0823cd9ae6",
+      "width_mm": 127
+    },
+    {
+      "document": "chapter11",
+      "section": "11.2  시간과 대상 식별",
+      "caption": "그림 11-2  원문 발생 시각과 Wazuh 시각과 화면 표시 시각",
+      "path": "assets/figures/chapter11/time.png",
+      "kind": "new_relationship_diagram",
+      "sha256": "58dc6263cc85d189d7fa64731cd3b098efb0e6b7de57dd907ca5c4d5f24dde2d",
+      "width_mm": 127
+    },
+    {
+      "document": "chapter11",
+      "section": "11.3  빈 결과를 조사하는 순서",
+      "caption": "그림 11-3  검색 결과가 없을 때의 확인 순서",
+      "path": "assets/figures/chapter11/empty.png",
+      "kind": "new_relationship_diagram",
+      "sha256": "30fcff8fc514e625703a9f20cf376f1cd9316a6062e16bc04b33eff9f097a7b2",
+      "width_mm": 127
+    },
+    {
+      "document": "chapter11",
+      "section": "11.4  사례 A의 실패와 성공",
+      "caption": "그림 11-4  bastion 인증 성공의 대상 계정과 출발지 포트",
+      "path": "assets/screens/chapter08/success-fields.png",
+      "kind": "reused_recorded_ui",
+      "sha256": "aed8a06d30216a8e986d08636f0f2634fbdfdc6f074a06e7a2da25e7828475f5",
+      "width_mm": 127
+    },
+    {
+      "document": "chapter11",
+      "section": "11.5  등록과 사용을 연결하기",
+      "caption": "그림 11-5  공개 키 인증 성공의 대상과 출발지 필드",
+      "path": "assets/screens/chapter09/publickey-fields.png",
+      "kind": "reused_recorded_ui",
+      "sha256": "b9fa9f73eecbb7ca930b95dcf98e9df6c94154a71593228d08dfeafd305c30e3",
+      "width_mm": 105
+    },
+    {
+      "document": "chapter11",
+      "section": "11.6  사례 C의 세 수집원",
+      "caption": "그림 11-6  실행·소켓·예약 결과를 연결하는 조건",
+      "path": "assets/figures/chapter11/layers.png",
+      "kind": "new_relationship_diagram",
+      "sha256": "81b6bc56408946282d308a296b04a6ce396f59c525d24f5cb3ce4b849e6420f1",
+      "width_mm": 127
+    },
+    {
+      "document": "chapter11",
+      "section": "11.6  포트와 프로세스의 시간표",
+      "caption": "그림 11-7  명령 모니터링이 관찰한 리스너 목록",
+      "path": "assets/screens/chapter10/ports.png",
+      "kind": "reused_recorded_ui",
+      "sha256": "ab276fba0b1f8b6b8260ed8a0f684a803dc6b1ae768f73af0793fdd9f94f4be0",
+      "width_mm": 127
+    },
+    {
+      "document": "chapter11",
+      "section": "11.6  공개 키 상태와 침투 판단",
+      "caption": "그림 11-8  호스트에서 관찰된 공개 키 등록 행",
+      "path": "assets/screens/chapter10/osquery-key.png",
+      "kind": "reused_recorded_ui",
+      "sha256": "4684180e6c6b3f7b1858149a05d59c0d4caf538a9422c43682f60cd776705418",
+      "width_mm": 127
+    },
+    {
+      "document": "chapter11",
+      "section": "11.9  대응의 우선순위",
+      "caption": "그림 11-9  영향과 증거 보존을 함께 고려하는 대응",
+      "path": "assets/figures/chapter11/response.png",
+      "kind": "new_relationship_diagram",
+      "sha256": "c5538d70dc62308169d5e48434f6d1cb3ebf6be6ae6256d2ec38bd54c68ea7c4",
+      "width_mm": 127
+    },
+    {
+      "document": "chapter11",
+      "section": "11.11  실습 기록 정리",
+      "caption": "그림 11-10  증거와 조사 결론의 대조",
+      "path": "assets/illustrations/chapter02/evidence.png",
+      "kind": "reused_character_illustration",
+      "sha256": "162cdf4780d61ca4751ea1b77f006913ceed84267cca9d2af55008c3c7559fec",
+      "width_mm": 55
+    },
+    {
+      "document": "appendices",
+      "section": "A.4  실습 전 점검",
+      "caption": "부록 그림 A-1  수집 경로 확인",
+      "path": "assets/illustrations/chapter04/field-check.png",
+      "kind": "reused_character_illustration",
+      "sha256": "46a5ffbdfa2e9d5cca7900bb773bf012e12d8b9272b0c436251ad59978b0e024",
+      "width_mm": 55
+    }
+  ]
+}

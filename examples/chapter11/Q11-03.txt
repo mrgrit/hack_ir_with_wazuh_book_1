@@ -1,0 +1,1 @@
+agent.name: "bastion" AND rule.id: "5715" AND data.dstuser: "ccc" AND data.srcip: "192.168.0.108" AND full_log: "Accepted publickey"

@@ -1,0 +1,3 @@
+$caseA = Get-Content -Raw `
+  .\book11-analysis\case-a.json | ConvertFrom-Json
+$caseA | Select-Object -First 1 | Format-List *

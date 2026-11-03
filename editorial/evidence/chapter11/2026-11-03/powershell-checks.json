@@ -1,0 +1,32 @@
+[
+  {
+    "id": "C11-01",
+    "input": "Get-Location\r\nTest-Path .\\book11-analysis\r\nGet-ChildItem .\\examples\\chapter11\\evidence\r\n",
+    "result": "\r\nPath\r\n----\r\nC:\\Users\\Student\\Documents\\ChatGPT\\hack_ir_book\r\nFalse\r\n\r\nLastWriteTime : 2026-11-03 오전 9:54:22\r\nLength        : 91\r\nName          : .gitattributes\r\n\r\n\r\nLastWriteTime : 2026-11-03 오전 9:54:22\r\nLength        : 3456\r\nName          : case-a.json\r\n\r\n\r\nLastWriteTime : 2026-11-03 오전 9:54:22\r\nLength        : 7933\r\nName          : case-b.json\r\n\r\n\r\nLastWriteTime : 2026-11-03 오전 9:54:22\r\nLength        : 23370\r\nName          : case-c.json\r\n\r\n\r\nLastWriteTime : 2026-11-03 오전 9:54:23\r\nLength        : 2070\r\nName          : manifest.json\r\n\r\n\r\n",
+    "verified_at": "2026-11-03T09:54:43.9172400+09:00"
+  },
+  {
+    "id": "C11-02",
+    "input": "New-Item -ItemType Directory .\\book11-analysis\r\nCopy-Item .\\examples\\chapter11\\evidence\\*.json `\r\n  .\\book11-analysis\\\r\nGet-ChildItem .\\book11-analysis\r\n",
+    "result": "\r\n    Directory: C:\\Users\\Student\\Documents\\ChatGPT\\hack_ir_book\r\n\r\nMode                 LastWriteTime         Length Name\r\n----                 -------------         ------ ----\r\nd----        2026-11-03  오전 9:54                book11-analysis\r\n\r\n    Directory: C:\\Users\\Student\\Documents\\ChatGPT\\hack_ir_book\\book11-analysis\r\n\r\nMode                 LastWriteTime         Length Name\r\n----                 -------------         ------ ----\r\n-a---        2026-11-03  오전 9:54           3456 case-a.json\r\n-a---        2026-11-03  오전 9:54           7933 case-b.json\r\n-a---        2026-11-03  오전 9:54          23370 case-c.json\r\n-a---        2026-11-03  오전 9:54           2070 manifest.json\r\n\r\n",
+    "verified_at": "2026-11-03T09:54:43.9727014+09:00"
+  },
+  {
+    "id": "C11-03",
+    "input": "Get-FileHash .\\book11-analysis\\case-a.json `\r\n  -Algorithm SHA256\r\nGet-Content .\\book11-analysis\\manifest.json\r\n",
+    "result": "\r\nAlgorithm       Hash                                                                   Path\r\n---------       ----                                                                   ----\r\nSHA256          98C405B9F0B1FA5A97E31E6322A7A259EEFD7839B0AD5262F0F9D173A8AE4AED       C:\\Users\\Student\\Documents\\ChatGPT\\hack_ir_book\\book11-analysis\\case-a.json\r\n{\r\n  \"description\": \"기존 실습 경보 발췌본. evidence_id/source_chapter는 저자 추가 필드. 전체 원본 로그가 아님. sha256은 배포 사본의 바이트, source_sha256은 지정 Git 커밋의 원본 바이트, source_checkout_sha256은 집필 PC 작업 사본의 바이트이다. .gitattributes로 배포 사본의 줄바꿈 자동 변환을 끈다.\",\r\n  \"files\": [\r\n    {\r\n      \"file\": \"case-a.json\",\r\n      \"records\": 2,\r\n      \"sha256\": \"98c405b9f0b1fa5a97e31e6322a7a259eefd7839b0ad5262f0f9d173a8ae4aed\",\r\n      \"source\": \"editorial/evidence/chapter08/2026-11-02/authentication-alerts.json\",\r\n      \"source_commit\": \"6ab15fe596f94bc3f54abb32c21463852ac3f548\",\r\n      \"source_sha256\": \"2ebbc55876f6ce0bcc6360c2fd1eca9c0be65254244ac82320796c0751496e59\",\r\n      \"source_checkout_sha256\": \"db695223ab313d5bb5763d6d2b243664fd36a8027e192890b9f2c1dabc508467\",\r\n      \"selection\": \"srcport=42688 and rule 5760/5715\"\r\n    },\r\n    {\r\n      \"file\": \"case-b.json\",\r\n      \"records\": 3,\r\n      \"sha256\": \"f804e4fd0e33ee008656a9274c06bda688da37babdaa510f65918ff3e51353c9\",\r\n      \"source\": \"editorial/evidence/chapter09/2026-11-03/selected-alerts.json\",\r\n      \"source_commit\": \"6ab15fe596f94bc3f54abb32c21463852ac3f548\",\r\n      \"source_sha256\": \"c1629c7b8cbdc351b053ec098b1ad215cd98aa6beae16360cfe9829d731b7c85\",\r\n      \"source_checkout_sha256\": \"df2fb8a49d7626207d9d74b50ce6123fa310360e843c36931fd3476292c103ad\",\r\n      \"selection\": \"authorized_keys FIM or Accepted publickey 5715\"\r\n    },\r\n    {\r\n      \"file\": \"case-c.json\",\r\n      \"records\": 9,\r\n      \"sha256\": \"63231335dd04880d34b41d41321026d84018e92d15d56502f5e2965197151cd8\",\r\n      \"source\": \"editorial/evidence/chapter10/2026-11-03/selected-alerts.json\",\r\n      \"source_commit\": \"6ab15fe596f94bc3f54abb32c21463852ac3f548\",\r\n      \"source_sha256\": \"ed1e5d50274b2ed63ab4c6d4cfb27e7a62d4f75e188c562b23e2235047cb7f3b\",\r\n      \"source_checkout_sha256\": \"292bca1a3d2258f430d415715efe9c01e1b1372a2291d24b695b7fb22537c6fc\",\r\n      \"selection\": \"chapter10 selected-alerts, all nine records\"\r\n    }\r\n  ]\r\n}\r\n\r\n",
+    "verified_at": "2026-11-03T09:54:43.9856530+09:00"
+  },
+  {
+    "id": "C11-04",
+    "input": "$caseA = Get-Content -Raw `\r\n  .\\book11-analysis\\case-a.json | ConvertFrom-Json\r\n$caseA | Select-Object -First 1 | Format-List *\r\n",
+    "result": "\r\ntimestamp      : 2026-11-02 오후 8:37:05\r\nrule           : @{level=5; description=sshd: authentication failed.; id=5760; mitre=; firedtimes=12; mail=False; groups=System.Object[]; gdpr=System.Object[]; gpg13=System.Object[]; hipaa=System.Object[]; nist_800_53=System.Object[]; pci_d\r\n                 ss=System.Object[]; tsc=System.Object[]}\r\nagent          : @{id=001; name=bastion; ip=10.20.30.201}\r\nmanager        : @{name=wazuh.manager}\r\nid             : 1793619425.12645506\r\nfull_log       : Nov  2 20:37:04 bastion sshd[2537]: Failed password for ccc from 192.168.0.108 port 42688 ssh2\r\npredecoder     : @{program_name=sshd; timestamp=Nov  2 20:37:04; hostname=bastion}\r\ndecoder        : @{parent=sshd; name=sshd}\r\ndata           : @{srcip=192.168.0.108; srcport=42688; dstuser=ccc}\r\nlocation       : /var/log/auth.log\r\nevidence_id    : A-001\r\nsource_chapter : 8\r\n\r\n",
+    "verified_at": "2026-11-03T09:54:44.0031871+09:00"
+  },
+  {
+    "id": "C11-05",
+    "input": "$caseA[0].agent | Format-List *\r\n$caseA[0].data | Format-List *\r\n$caseA[0].full_log\r\n",
+    "result": "\r\nid   : 001\r\nname : bastion\r\nip   : 10.20.30.201\r\n\r\n\r\nsrcip   : 192.168.0.108\r\nsrcport : 42688\r\ndstuser : ccc\r\n\r\nNov  2 20:37:04 bastion sshd[2537]: Failed password for ccc from 192.168.0.108 port 42688 ssh2\r\n",
+    "verified_at": "2026-11-03T09:54:44.0102101+09:00"
+  }
+]

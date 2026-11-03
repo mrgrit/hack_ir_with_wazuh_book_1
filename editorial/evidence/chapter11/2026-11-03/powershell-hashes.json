@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "98C405B9F0B1FA5A97E31E6322A7A259EEFD7839B0AD5262F0F9D173A8AE4AED",
+    "Path": "C:\\Users\\Student\\Documents\\ChatGPT\\hack_ir_book\\book11-analysis\\case-a.json"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F804E4FD0E33EE008656A9274C06BDA688DA37BABDAA510F65918FF3E51353C9",
+    "Path": "C:\\Users\\Student\\Documents\\ChatGPT\\hack_ir_book\\book11-analysis\\case-b.json"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "63231335DD04880D34B41D41321026D84018E92D15D56502F5E2965197151CD8",
+    "Path": "C:\\Users\\Student\\Documents\\ChatGPT\\hack_ir_book\\book11-analysis\\case-c.json"
+  }
+]

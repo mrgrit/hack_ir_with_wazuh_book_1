@@ -2,7 +2,7 @@
 
 1권 **시스템 침투와 SIEM 분석**의 집필 저장소입니다.
 
-기존 1~3장 원고를 백지화하고 **머리말·미리 안내·1장**을 새로 썼고 **2~10장 초안**을 추가했습니다. 핵심 설명, 독자의 행동, 확인 기준을 짧게 제시합니다. 이전 원고는 Git 이력에만 남습니다.
+**머리말·미리 안내·1~11장과 부록의 초안**을 작성했습니다. 다음 교정은 챕터별 DOCX를 기준으로 진행합니다. 핵심 설명, 독자의 행동, 확인 기준을 제시하며 기존 1~3장 폐기 원고는 Git 이력에 보존합니다.
 
 - **[머리말·1장 DOCX](manuscript/volume01-chapter01.docx)** — 부크크 B5, 편집·검토용
 - **[2장 초안 DOCX](manuscript/volume01-chapter02.docx)** — 공격과 보안관제의 기초, 9쪽
@@ -14,6 +14,11 @@
 - **[8장 초안 DOCX](manuscript/volume01-chapter08.docx)** — SSH 인증 공격과 계정 권한 조사, 58쪽
 - **[9장 초안 DOCX](manuscript/volume01-chapter09.docx)** — 지속성 확보와 시스템 변경 탐지, 67쪽
 - **[10장 초안 DOCX](manuscript/volume01-chapter10.docx)** — 네트워크 흔적과 현재 상태 조사, 55쪽
+- **[11장 초안 DOCX](manuscript/volume01-chapter11.docx)** — 사건 재구성과 대응 판단, 30쪽
+- **[부록 초안 DOCX](manuscript/volume01-appendices.docx)** — 실습 점검과 조사 자료, 27쪽
+- [11장 분석 예제·증거 발췌·조사 양식](examples/chapter11/)
+- [전체 입력 451개 색인](examples/appendices/example-index.csv)
+- [11장·부록 집필 및 검토 기록](editorial/chapter11-appendices-review.md)
 - [10장 복사용 명령·DQL·SQL·수집 설정·조사 양식](examples/chapter10/)
 - [9장 복사용 명령·검색식·스크립트·조사 양식](examples/chapter09/)
 - [7장 복사용 입력·명령·검색식·조사 양식](examples/chapter07/)
@@ -196,3 +201,24 @@ Module 01 실습 29·30·62를 다룹니다. 호스트 리스닝 포트와 533 �
 - [실행·조회 증거](editorial/evidence/chapter10/2026-11-03/)
 
 초안은 일반 원고 경로에 저장했으며 REV01과 강의 저장소는 수정하지 않았습니다. PDF는 배포하지 않습니다.
+
+## 11장과 부록 — 장별 교정용 초안
+
+11장은 독립된 세 실습 사례의 시간·대상·인증·프로세스·수집 결과를 대조하고, 증거 대장·시간표·대응 계획·조사 보고서를 작성하는 종합 연습입니다. **30쪽, 기존 화면 4개, 새 관계 도식 5개, 기존 삽화 1개**를 수록했습니다. PowerShell 명령 5개는 Windows에서 확인했고 DQL 6개는 8~10장에서 검증한 검색식을 재사용했습니다. 새 공격과 VM 변경, 새 화면 촬영은 수행하지 않았습니다.
+
+부록은 **27쪽**으로 환경과 실행 위치, 명령·검색 참조, 원상복구 점검, 용어·필드 해석, 조사 양식, Module 01 실습 01~30 및 62의 장별 대응표를 제공합니다. 전체 복사용 입력 451개의 위치와 파일을 CSV 색인으로 연결했습니다. 이번 작업에서는 1~10장 원고와 REV01을 유지했고, 사용자 요청에 따라 합본은 산출물에 포함하지 않았습니다.
+
+```bash
+python tools/write_chapter11.py
+python tools/write_appendices.py
+python tools/build_remaining.py chapter11 appendices
+```
+
+위 조판 명령은 `build/volume01-final/`에 DOCX를 출력합니다. 확정한 원고를 저장할 때만 `--output-dir manuscript`를 지정합니다. 본문의 직접 Word 교정은 JSON·Python에 자동 반영되지 않으므로 재생성 전에 변경 내용을 보존합니다. 앞 장과 같은 글꼴 및 Python 의존성을 사용하며 Windows에서는 UTF-8 모드로 실행합니다. 저장된 그림을 사용하므로 도식 재생성은 필수가 아닙니다.
+
+- [본문·복사용 파일·템플릿·증거 검사](editorial/chapter11-appendices-validation.json)
+- [그림 출처와 재사용 기록](editorial/chapter11-assets.json)
+- [PowerShell 실행 기록](editorial/evidence/chapter11/2026-11-03/)
+- 정적 검사: `python tools/check_remaining.py 11장임시PDF경로 부록임시PDF경로`. 이 명령은 실습 입력을 실행하지 않습니다.
+
+장별 DOCX는 교정 전 초안입니다. 1장에 남아 있는 VMware·Ubuntu 설치 화면 두 곳은 기존 저자 촬영 대상으로 유지합니다. PDF와 임시 페이지 이미지는 조판 검사에만 사용합니다.

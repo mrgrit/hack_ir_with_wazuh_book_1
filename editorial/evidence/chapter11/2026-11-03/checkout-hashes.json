@@ -1,0 +1,50 @@
+[
+  {
+    "core.autocrlf": "true",
+    "file": "examples/chapter11/evidence/case-a.json",
+    "sha256": "98c405b9f0b1fa5a97e31e6322a7a259eefd7839b0ad5262f0f9d173a8ae4aed",
+    "matches_distribution_bytes": true
+  },
+  {
+    "core.autocrlf": "true",
+    "file": "examples/chapter11/evidence/case-b.json",
+    "sha256": "f804e4fd0e33ee008656a9274c06bda688da37babdaa510f65918ff3e51353c9",
+    "matches_distribution_bytes": true
+  },
+  {
+    "core.autocrlf": "true",
+    "file": "examples/chapter11/evidence/case-c.json",
+    "sha256": "63231335dd04880d34b41d41321026d84018e92d15d56502f5e2965197151cd8",
+    "matches_distribution_bytes": true
+  },
+  {
+    "core.autocrlf": "true",
+    "file": "examples/chapter11/evidence/manifest.json",
+    "sha256": "2ced69ab185966da9f08fa5dffc08628519df2c30baaedb781dd9d2e08c05d8e",
+    "matches_distribution_bytes": true
+  },
+  {
+    "core.autocrlf": "false",
+    "file": "examples/chapter11/evidence/case-a.json",
+    "sha256": "98c405b9f0b1fa5a97e31e6322a7a259eefd7839b0ad5262f0f9d173a8ae4aed",
+    "matches_distribution_bytes": true
+  },
+  {
+    "core.autocrlf": "false",
+    "file": "examples/chapter11/evidence/case-b.json",
+    "sha256": "f804e4fd0e33ee008656a9274c06bda688da37babdaa510f65918ff3e51353c9",
+    "matches_distribution_bytes": true
+  },
+  {
+    "core.autocrlf": "false",
+    "file": "examples/chapter11/evidence/case-c.json",
+    "sha256": "63231335dd04880d34b41d41321026d84018e92d15d56502f5e2965197151cd8",
+    "matches_distribution_bytes": true
+  },
+  {
+    "core.autocrlf": "false",
+    "file": "examples/chapter11/evidence/manifest.json",
+    "sha256": "2ced69ab185966da9f08fa5dffc08628519df2c30baaedb781dd9d2e08c05d8e",
+    "matches_distribution_bytes": true
+  }
+]
