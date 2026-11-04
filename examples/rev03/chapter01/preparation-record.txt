@@ -1,0 +1,50 @@
+1장 실습 준비 기록
+확인 날짜 / 작성자:
+실습망 / Windows 연결 어댑터:
+
+[1.3 Ubuntu와 주소]
+Ubuntu VERSION_ID / 아키텍처:
+VM 할당 메모리·디스크 / free의 total / df의 Size·Avail:
+Ubuntu 이름 / 사용자:
+VM MAC 주소 / DHCP 예약 주소:
+C01-03의 IPv4 주소 / default 경로의 인터페이스:
+ubuntu-clean 저장 시각:
+기본 패키지 설치 확인 / 확인 시각:
+
+[1.4~1.5 코드와 실행 준비]
+kt66 커밋:
+.env 존재·권한 확인:
+SSH_USER / TZ (암호·API_KEY는 기록하지 않음):
+WEB_HOST_IP / INT_HOST_IP / LAB_DOMAIN / WINDOWS_ENABLED:
+vm.max_map_count / 변경 전 값·변경 여부:
+Docker·Compose 버전 / docker ps 결과:
+확인 시각:
+
+[1.6 서비스와 접속]
+C01-20의 up 완료 / WARN·ERROR:
+C01-21의 fw·ips·web·bastion·siem·인덱서·대시보드 상태:
+netglue·agent-observer-setup 상태:
+웹 주소 / 제목 표시 / 확인 시각:
+Wazuh 주소 / 로그인·Overview 표시 / 확인 시각:
+
+[1.7 센서와 연결]
+wazuh-agent:
+osqueryd:
+auditd:
+sysmon:
+Wazuh kt66-host 상태 / 확인 시각:
+실패 항목 / 오류 문구 / 조치 / 재확인 결과:
+
+[1.8 보존과 재기동]
+C01-23 제거 전후 상태:
+kt66-ready 저장 시각:
+재기동 후 IPv4 주소 / up·컨테이너 상태:
+재기동 후 웹·Wazuh 접속:
+재기동 후 네 센서·kt66-host 상태:
+재기동 확인 시각:
+
+[1.9 공격자 VM을 준비한 경우]
+MAC 주소 / DHCP 예약 / 실제 IPv4 주소:
+도구 패키지 설치 결과:
+C01-26의 응답 코드 / 확인 시각:
+attacker-clean / attacker-ready 저장 시각:

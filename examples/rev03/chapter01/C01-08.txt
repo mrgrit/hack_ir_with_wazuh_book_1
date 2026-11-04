@@ -1,0 +1,3 @@
+git status --short
+git checkout --detach 63d4180
+git rev-parse --short=7 HEAD

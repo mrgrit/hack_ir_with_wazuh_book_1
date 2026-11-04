@@ -1,0 +1,22 @@
+[
+  {
+    "source": "assets/illustrations/overview.png",
+    "copy": "assets/illustrations/rev03/chapter01/overview.png",
+    "operation": "byte-for-byte copy of individually inspected current illustration"
+  },
+  {
+    "source": "assets/illustrations/chapter01/install-v2.png",
+    "copy": "assets/illustrations/rev03/chapter01/install-v2.png",
+    "operation": "byte-for-byte copy of individually inspected current illustration"
+  },
+  {
+    "source": "assets/illustrations/chapter01/network-v2.png",
+    "copy": "assets/illustrations/rev03/chapter01/network-v2.png",
+    "operation": "byte-for-byte copy of individually inspected current illustration"
+  },
+  {
+    "source": "assets/illustrations/chapter01/notes-v2.png",
+    "copy": "assets/illustrations/rev03/chapter01/notes-v2.png",
+    "operation": "byte-for-byte copy of individually inspected current illustration"
+  }
+]

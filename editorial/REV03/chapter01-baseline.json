@@ -1,0 +1,86 @@
+{
+  "git_head": "2855a8d059672e11cf2efb61bed3cd72716b9011",
+  "files": [
+    {
+      "path": "manuscript/REV02/volume01-chapter01.json",
+      "sha256": "7a50895d062af0e34434ce9c1440a3862b567232587e2c71c69edfbc3a66f94c"
+    },
+    {
+      "path": "manuscript/REV02/volume01-chapter01.docx",
+      "sha256": "b120f43e09107a7840a0037bb241c992e2a98a06f2224ec1c0eafc8bb0871f2b"
+    },
+    {
+      "path": "manuscript/REV02/volume01-appendix-a.json",
+      "sha256": "6fde8d759950729414172db08ca64db6d25d1056bbc0ef51870a121d835c9a18"
+    },
+    {
+      "path": "manuscript/REV02/volume01-appendix-a.docx",
+      "sha256": "96a072f60a840be06e2b0d6576ecde376a80c12de1bb62aa7755a3108751ef00"
+    },
+    {
+      "path": "tools/assets/bookk-B5.docx",
+      "sha256": "2506e3b2036c3bfa18f84a1f3b6185bff52c0273d4c2c526dd3c68d9adb5b18b"
+    },
+    {
+      "path": "assets/illustrations/overview.png",
+      "sha256": "ad64c96897d1b7015be92fe31f74826cc09659aa717b72b991199c291e3be88f"
+    },
+    {
+      "path": "assets/figures/rev02/chapter01-path.png",
+      "sha256": "c1c77c455c335a363dfa9712fee45ec1eb9dfbd21b45b72dd3676d2a74712edf"
+    },
+    {
+      "path": "assets/figures/chapter01/installation.png",
+      "sha256": "01fed7acb35d9492edd643808eaf1f910bd66f3b285ea751fc03984398e8fa8b"
+    },
+    {
+      "path": "assets/figures/chapter01/wazuh-flow.png",
+      "sha256": "1a0cc8370c80b20bee41d9641636eb6b333653728feac4bab01f2c0725dacd5f"
+    },
+    {
+      "path": "assets/figures/rev02/environment.png",
+      "sha256": "9a9c4e7dc3cbda292a3b4d4a6b4551e1d0417a8e0061e39fcc80c1549b3b097a"
+    },
+    {
+      "path": "assets/figures/rev02/ports.png",
+      "sha256": "37f23f5b9381ce2c8cc45d2fd7c7b1e2f500ecac001e3d2333926dbf3cc51dfd"
+    },
+    {
+      "path": "assets/illustrations/chapter01/notes-v2.png",
+      "sha256": "5973d5b2e09cba3110604a417132e6cd8991a49e3a02c3b1c686a3985e85ddef"
+    },
+    {
+      "path": "assets/screens/chapter01/web.png",
+      "sha256": "748b2d61d6740f29d0e6f509813976ba44542f80e934dfbd2af258685b4a3081"
+    },
+    {
+      "path": "assets/screens/chapter01/login.png",
+      "sha256": "345c1d8a314e999008142fd0e84be6fad87ecd69da8163ec696957437b0daf07"
+    },
+    {
+      "path": "assets/screens/chapter01/home.png",
+      "sha256": "84684d1b8e62394c596b822e8458be2bb7db78ef773294bf67e461724c344c50"
+    },
+    {
+      "path": "assets/screens/chapter01/agents.png",
+      "sha256": "d5c6da7baad4cb9f33534054d8c5e4329141d02c76a259f66aa478a569615bef"
+    },
+    {
+      "path": "assets/figures/chapter01/lifecycle.png",
+      "sha256": "e833ba8e1a4b467d916432ad4c0f6fa5ee4305c7be3eec012b6f4b880a00e4ca"
+    },
+    {
+      "path": "assets/figures/rev02/casebook-path.png",
+      "sha256": "7131047a15eafb2c35d957ba744b6b00a744ba85bcf938e3f6bf9bff52932381"
+    },
+    {
+      "path": "assets/illustrations/chapter01/install-v2.png",
+      "sha256": "11d25b1eef854f7d1c5cfbfa4b52c548b3623915296da8611c345100d2322abb"
+    },
+    {
+      "path": "assets/illustrations/chapter01/network-v2.png",
+      "sha256": "5fb3d92cec2ae454177872cdb0dd3cbc57719f249265a119047e7ba9132d19f6"
+    }
+  ],
+  "scope": "Sequential mastering of chapter 1; existing REV01, REV02 and concurrent illustration work preserved."
+}

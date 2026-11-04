@@ -1,0 +1,103 @@
+{
+  "source_text_in_docx": true,
+  "sections": [
+    "1.1",
+    "1.2",
+    "1.3",
+    "1.4",
+    "1.5",
+    "1.6",
+    "1.7",
+    "1.8",
+    "1.9"
+  ],
+  "copy_inputs_and_bash_syntax": 28,
+  "embedded_image_hashes": [
+    {
+      "path": "assets/illustrations/rev03/chapter01/overview.png",
+      "sha256": "ad64c96897d1b7015be92fe31f74826cc09659aa717b72b991199c291e3be88f"
+    },
+    {
+      "path": "assets/figures/rev03/chapter01/learning-sequence.png",
+      "sha256": "4e305c97abaca805f79b7a353c88fa40bc7c5a3f2c62b8c2a8594d653bec8d62"
+    },
+    {
+      "path": "assets/figures/rev03/chapter01/installation.png",
+      "sha256": "7383b537664ea70d82894b4c0b60ab7647169ceb484eff869bf2a9844df31cba"
+    },
+    {
+      "path": "assets/figures/rev03/chapter01/wazuh-flow.png",
+      "sha256": "c331711a6c58f18f0c6d8527ffc122503e27cfb207ad60609840b2cb9cc0b834"
+    },
+    {
+      "path": "assets/figures/rev03/chapter01/environment.png",
+      "sha256": "59b67aab24637718b24fcb7a55c8662d9c4f39b736851c9e4c0d05e82dc959ba"
+    },
+    {
+      "path": "assets/illustrations/rev03/chapter01/network-v2.png",
+      "sha256": "5fb3d92cec2ae454177872cdb0dd3cbc57719f249265a119047e7ba9132d19f6"
+    },
+    {
+      "path": "assets/illustrations/rev03/chapter01/install-v2.png",
+      "sha256": "11d25b1eef854f7d1c5cfbfa4b52c548b3623915296da8611c345100d2322abb"
+    },
+    {
+      "path": "assets/figures/rev03/chapter01/env-flow.png",
+      "sha256": "c9be4aa4f86570c0df09957acba8d1978cba87367012832bced152d6e187de16"
+    },
+    {
+      "path": "assets/figures/rev03/chapter01/ports.png",
+      "sha256": "1cbe9871c382ef0e43d0b28fd7d69fa8620c8b3cc0b3417e35c05ba65e787ba6"
+    },
+    {
+      "path": "assets/screens/chapter01/web.png",
+      "sha256": "748b2d61d6740f29d0e6f509813976ba44542f80e934dfbd2af258685b4a3081"
+    },
+    {
+      "path": "assets/screens/chapter01/login.png",
+      "sha256": "345c1d8a314e999008142fd0e84be6fad87ecd69da8163ec696957437b0daf07"
+    },
+    {
+      "path": "assets/screens/chapter01/home.png",
+      "sha256": "84684d1b8e62394c596b822e8458be2bb7db78ef773294bf67e461724c344c50"
+    },
+    {
+      "path": "assets/screens/chapter01/agents.png",
+      "sha256": "d5c6da7baad4cb9f33534054d8c5e4329141d02c76a259f66aa478a569615bef"
+    },
+    {
+      "path": "assets/illustrations/rev03/chapter01/notes-v2.png",
+      "sha256": "5973d5b2e09cba3110604a417132e6cd8991a49e3a02c3b1c686a3985e85ddef"
+    },
+    {
+      "path": "assets/figures/rev03/chapter01/lifecycle.png",
+      "sha256": "12fd1bda7f585ec6c31e543f71a6217bfa807c8b2dae64153f52133387c287d0"
+    },
+    {
+      "path": "assets/figures/rev03/chapter01/case-records.png",
+      "sha256": "c2094ecb1463eecdca159e0f3fa881d95581629ad975adc1c9ee3010da52b564"
+    }
+  ],
+  "outlined_screenshots": 4,
+  "styled_command_query_blocks": 6,
+  "shaded_centered_bold_table_headers": 15,
+  "page_mm": [
+    188,
+    263
+  ],
+  "body_mm": [
+    127,
+    192
+  ],
+  "preserved_baseline_files": 20,
+  "printed_full_reference_urls": [
+    "https://github.com/mrgrit/kt66/tree/63d4180b1d6866de986ef263a3bd831d6082b5d5",
+    "https://documentation.wazuh.com/current/deployment-options/docker/wazuh-container.html",
+    "https://documentation.wazuh.com/current/getting-started/components/index.html",
+    "https://docs.docker.com/reference/cli/docker/compose/down/"
+  ],
+  "render_pages": 38,
+  "lateral_overflow_pages": 0,
+  "docx_sha256": "569d55d8a0a6b7dc85c189549bec78ba2b9bf49f667b9760268b6a88084ce6b0",
+  "source_sha256": "765685151723e81d59936dca4f5e472d2ef19db37877a028c268222499f88e25"
+}

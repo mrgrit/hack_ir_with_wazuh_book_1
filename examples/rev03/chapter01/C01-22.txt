@@ -1,0 +1,4 @@
+systemctl is-active wazuh-agent
+systemctl is-active osqueryd
+systemctl is-active auditd
+systemctl is-active sysmon

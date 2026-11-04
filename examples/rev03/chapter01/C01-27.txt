@@ -1,0 +1,2 @@
+sudo systemctl status \
+  wazuh-agent osqueryd auditd sysmon --no-pager

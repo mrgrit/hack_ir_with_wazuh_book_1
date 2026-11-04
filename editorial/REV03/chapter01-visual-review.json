@@ -1,0 +1,458 @@
+{
+  "date": "2026-11-04",
+  "document": "manuscript/REV03/volume01-chapter01.docx",
+  "docx_sha256": "569d55d8a0a6b7dc85c189549bec78ba2b9bf49f667b9760268b6a88084ce6b0",
+  "render_method": "Microsoft Word read-only PDF export; PDFium page PNGs",
+  "review_method": "Sequential visual review of full document, followed by visual review of changed pages. Unchanged pages compared by SHA-256.",
+  "initial_full_reviews": [
+    {
+      "render": "render-r1",
+      "pages": 42
+    },
+    {
+      "render": "render-r3",
+      "pages": 39
+    }
+  ],
+  "revision_history": [
+    {
+      "render": "build/REV03/chapter01/render-final",
+      "pages": 39,
+      "document": "volume01-chapter01",
+      "unchanged": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        11,
+        14,
+        15,
+        16,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        28,
+        29,
+        30,
+        31,
+        32,
+        34
+      ],
+      "changed": [
+        7,
+        9,
+        10,
+        12,
+        13,
+        17,
+        19,
+        27,
+        33,
+        35,
+        36,
+        37,
+        38,
+        39
+      ]
+    },
+    {
+      "render": "build/REV03/chapter01/render-final2",
+      "pages": 38,
+      "document": "volume01-chapter01",
+      "unchanged": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "changed": [
+        9,
+        10,
+        19,
+        27,
+        38
+      ]
+    },
+    {
+      "render": "build/REV03/chapter01/render-release",
+      "pages": 38,
+      "document": "volume01-chapter01",
+      "unchanged": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38
+      ],
+      "changed": []
+    },
+    {
+      "render": "build/REV03/chapter01/render-styled",
+      "pages": 38,
+      "document": "volume01-chapter01",
+      "unchanged": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        21,
+        22,
+        23,
+        26,
+        27,
+        28,
+        29,
+        31,
+        32,
+        33,
+        34,
+        36,
+        37,
+        38
+      ],
+      "changed": [
+        19,
+        20,
+        24,
+        25,
+        30,
+        35
+      ]
+    },
+    {
+      "render": "build/REV03/chapter01/render-styled2",
+      "pages": 38,
+      "document": "volume01-chapter01",
+      "unchanged": [
+        1,
+        2,
+        6,
+        7,
+        9,
+        10,
+        14,
+        19,
+        24,
+        25,
+        29,
+        30,
+        33,
+        35,
+        36,
+        37,
+        38
+      ],
+      "changed": [
+        3,
+        4,
+        5,
+        8,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23,
+        26,
+        27,
+        28,
+        31,
+        32,
+        34
+      ]
+    }
+  ],
+  "final_page_count": 38,
+  "all_pages_reviewed": true,
+  "checks": [
+    "Body and captions readable at page size",
+    "No clipped text or overlapping objects",
+    "Table headers shaded, centered and bold",
+    "Four actual UI screenshots outlined",
+    "Six command blocks shaded and padded",
+    "Full reference URLs printed",
+    "Four illustration originals individually inspected and checked in page context"
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "sha256": "df8baf5154f8e7ef7e685725bc44eaf7a8e3c0c44409188a8d94a86152036ec2",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 2,
+      "sha256": "fdb207394ef64507b709d6b90224ce514ca0916db47413aaf9fd0f47a73cf690",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 3,
+      "sha256": "596f3010a97997fc277929ab2e260908b863d2c1381e4dc7b8e459770f367a6f",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 4,
+      "sha256": "889fed44f2b21076cef13a4e156513fcffb94f0125f73184aa56adaf4abaa611",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 5,
+      "sha256": "a1a265b09c3824be8bcc16b1f4ece4220be679004aa9497f59c530418ca9d995",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 6,
+      "sha256": "77a12bb0b501f1e6ec4dabd7fa3437a7542d19c12f7362eb3917b893d1f23392",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 7,
+      "sha256": "b74a3f84c991fe87c3f71c41546f9a0e2db8ca3baee622a723ded33725183756",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 8,
+      "sha256": "b0918b0c03157372fc1079b7d42f1e5bcad3fda0d66ec0fd965db378218091ee",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 9,
+      "sha256": "c3454e28dea6a88cc335caefcfaedf2a3192971dfe5de793c62a1174bde7c6e4",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 10,
+      "sha256": "63dcf3aef4cb1f6d093710115a45c71abacd60968b998c2a4c25d83e3f36b154",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 11,
+      "sha256": "9edb2c0a7e284e3e2311c625c138af66554d4169957e0e56494798f5ac64a717",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 12,
+      "sha256": "9a0d764c3a1a92d5f5babe2d7fa3c843dd434040c600d9da777dda1c9a06aaa5",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 13,
+      "sha256": "7c03e50fcd8e8fb9161543c43c3bbfe689baca8e3eccc9a88bcadcd55a99eb4c",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 14,
+      "sha256": "bf9a33a957992ae0fb8909e52121bbf7329e055929a473bc46e600e71e4548b4",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 15,
+      "sha256": "5e530be10730fd92f580f8345210a6ad5174a39360861bb3450f6d15b59fad1c",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 16,
+      "sha256": "2d768e0b88885b9d668f77df0c3115f90d583de412f497037c005e3857e18294",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 17,
+      "sha256": "02bc91a203b8ee2591f246edf4b2d1161070f3e4ac3fca59d1c9b045c4c9602b",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 18,
+      "sha256": "71dc9d05fd235a92aa0e959fefc4c9dd54be532121f248ed719d2d6b3af60374",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 19,
+      "sha256": "c6d88f8918aae3d4998e2f75ba7754b31772334cde127eb8eda8a880de863e00",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 20,
+      "sha256": "dd082a090f284d6db53afd9582fd540b45d36aa1179edff0d004fddb5e0455d1",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 21,
+      "sha256": "23fc3df0556b05ee262b066ae18d9751417204542c7cb0f73a3c8a205842c8e4",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 22,
+      "sha256": "f506d7616ac084a29ed75c65aa10b8df95d1bd87e930b1196c4274d096401e5c",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 23,
+      "sha256": "a6238d190901ebf8b33851f15ef8d1eec610771cc7ce3d2dc35386b088288219",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 24,
+      "sha256": "003a58b6178a5938a9abe42e027a80106ed6c98148ef3502c1e6aed6ef2aaae7",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 25,
+      "sha256": "526b70f5e0d18a93226ebbe65b95cb3259f93867609c5f8562764034f1158dc0",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 26,
+      "sha256": "3b2601636708dcb323d1459dc2f0e0f4c4472bd90832ebce615826c3b2d3d0ba",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 27,
+      "sha256": "3677327989b81c595a70d473828bb8c63d83cc68c9db4cd3bed7fd999e1b9abd",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 28,
+      "sha256": "44da0c4ec27c36c39cbb09c2cf3fbce245d55ab88c6c8e5a7fcc6b870cd6f975",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 29,
+      "sha256": "bc26d0f49958aa4da15a3f62b514fb53c0f83375b3224e04bde39283c127115a",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 30,
+      "sha256": "01d830995e81b5b51fce2702fc9bc5f774bbb7b8e8353efe68cf5d80c0fd7437",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 31,
+      "sha256": "eed7ded54f165c5113d23946da4e88fdad45db3d60c158f1cb2867d2e56b17e3",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 32,
+      "sha256": "6517f68458df86a37d922a2f7a6d48bacdb84885fd2a8c004b22b4a43ce8e53c",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 33,
+      "sha256": "de6d5dd2a4538dc85c8071f2b7272eac29e3bccdd9317d40e725f07a1ab536e1",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 34,
+      "sha256": "13ef7a3236f84133507cea68ca82932ff25aee2a38084606935a8ea42e4f33b9",
+      "review": "opened_after_final_style_change"
+    },
+    {
+      "page": 35,
+      "sha256": "881ac750eba483032c90dc3c165cede46c1cbc265968f656e3e3ab8378bc2c2b",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 36,
+      "sha256": "ae4588232dcddb4e3a5cada85254aefadb59e0901eb2ccc6eab384e0f7e20241",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 37,
+      "sha256": "a4f39d9234a287b36c27e389a1cc978bd8cee7ec55967576ecc5e90772362b45",
+      "review": "identical_to_previously_reviewed_page"
+    },
+    {
+      "page": 38,
+      "sha256": "28de8a885cccbd43141e387f154c543e4933acb0888c71eaa057097cd6c67420",
+      "review": "identical_to_previously_reviewed_page"
+    }
+  ],
+  "runtime_validation": "No new VM installation, attack execution or UI capture in this revision."
+}

@@ -1,0 +1,3 @@
+cd ~/kt66
+pwd
+./kt66.sh up
