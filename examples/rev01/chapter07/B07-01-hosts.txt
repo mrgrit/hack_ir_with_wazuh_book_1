@@ -1,0 +1,1 @@
+192.168.0.189 dvwa.kt66.lab juice.kt66.lab

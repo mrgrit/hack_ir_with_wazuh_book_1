@@ -1,0 +1,3 @@
+grep -n -A 6 -F 'id="31168"' \
+  /var/ossec/ruleset/rules/0245-web_rules.xml
+exit

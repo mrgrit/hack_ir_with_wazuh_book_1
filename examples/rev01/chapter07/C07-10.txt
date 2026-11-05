@@ -1,0 +1,3 @@
+grep -n -F 'book07-shell.php' \
+  /var/log/apache2/landing_access.log
+tail -n 5 /var/log/apache2/modsec_audit.log

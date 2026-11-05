@@ -1,4 +1,4 @@
-# REV01 — 재작성본 (1~6장·부록 A)
+# REV01 — 재작성본 (1~7장·부록 A)
 
 기존 `manuscript/volume01-chapter0N.*`은 그대로 두고, 재작성본을 이 디렉터리에 둔다. 검토 후 채택하면 기존 파일을 교체한다.
 
@@ -13,6 +13,7 @@
 | `volume01-chapter04.json` / `.docx` | 4장 로그 수집과 탐지 규칙 (렌더 31쪽) |
 | `volume01-chapter05.json` / `.docx` | 5장 웹 공격의 시작과 입력값 검증 (렌더 44쪽) |
 | `volume01-chapter06.json` / `.docx` | 6장 웹 탐색과 인증 공격 (렌더 34쪽) |
+| `volume01-chapter07.json` / `.docx` | 7장 웹 서버 침투와 실행 흔적 (렌더 35쪽) |
 | `../../examples/rev01/chapter01/` | C01-01~26 복사용 명령, `manifest.json`, `casebook.txt`(사건 노트 양식) |
 | `../../examples/rev01/appendix-a/` | CA-01~08 복사용 명령, `manifest.json` |
 | `../../examples/rev01/chapter02/` | C02-01~09 복사용 명령, `manifest.json`, 사례(`case-ssh.json`·`.log`), `investigation.txt` |
@@ -26,6 +27,8 @@
 | `../../assets/figures/chapter05/rev01-*.png` | 5장 로드맵(5-1), 입력의 도달 지점과 확인할 기록(5-3) |
 | `../../examples/rev01/chapter06/` | C06-01~19 명령, Q06-01~12 검색식, D06-01.json(Dev Tools 집계), B06 입력, paths.txt, records/, `investigation.txt` |
 | `../../assets/figures/chapter06/rev01-*.png` | 6장 로드맵(6-1), 출발지별 타임라인(6-7) |
+| `../../examples/rev01/chapter07/` | C07-01~21 명령, Q07-01~11 검색식, B07-01~12 입력(kt66.lab·.189·.202), P07-webshell.php, `investigation.txt` |
+| `../../assets/figures/chapter07/rev01-*.png` | 7장 로드맵(7-1), 실행 판정의 네 단계(7-2) |
 
 ## 기존 1장 대비 변경
 
@@ -87,6 +90,16 @@
 6. **구성 정리** — 관리 경로를 6.2로, User-Agent·메서드를 6.3으로 합쳤다. 명령 C06-01~28 → C06-01~19.
 7. 6.6~6.7의 건수(30·22·8, NOT 404 3건, 인증 6건, 집계 버킷)는 같은 시간 범위의 저장 기록(`editorial/evidence/chapter06/wazuh-alerts-records.json`, `wazuh-archives-records.json`)을 센 값이다.
 
+## 기존 7장 대비 변경
+
+1. **판정 틀** — 조사 질문 "서버에서 실행되었는가"를 네 단계(입력 흔적 → 처리 흔적 → 서버 변화 → 실행 결과)로 정리하고(도식 7-2), 여섯 사례를 모두 이 단계로 판정한다. 5장의 도달 지점(1~5)을 이어받는다.
+2. **3단계 기록의 출처** — kt66 web의 FIM(/var/www realtime, 554·550·553), cmdlog(100260, group cmdlog), ClamAV(52502)를 기준 커밋 소스(`web/wazuh-agent.conf.append`, `web/entrypoint.sh`, `web/kt66-clamav.sh`)와 대조해 표로 넣었다.
+3. **7.8 교차 분석 (신규)** — rule.groups 분포로 1·2단계(attack·web_scan)와 3단계(syscheck·virus·cmdlog)를 나누고, 2xx 공격 요청(Q07-08)에서 같은 시간대의 서버 변화로 피벗한다. 사례별 판정 표, Dev Tools 집계 변형(그룹 → 응답 코드).
+4. **규칙 해석 보강** — 31168/31169는 31108(2xx·3xx)을 상위로 하는 수준 15, 31166/31167은 31101·31120을 상위로 하는 수준 6. 같은 문자열이 응답 코드로 attempt/detected로 나뉜다. 공격 문자열이 든 500은 31103이라 31162 반복 조건에 들어가지 않는다(0245-web_rules.xml 대조).
+5. **보이지 않는 것** — docker exec 셸은 로그인 셸이 아니어서 cmdlog에 남지 않을 수 있음, combined 로그에 없는 헤더(X-Api-Version), POST 본문.
+6. **주소·이름 통일** — 원고 본문을 REV01 예시값(192.168.0.189·.202, kt66.lab)으로 맞췄다. 슬라이드 화면의 .189·.202와 같아서 주소 대응표가 필요 없다. 화면의 ccc.com은 일러두기 원칙대로 읽는다.
+7. **명령 정리** — C07-01~30 → C07-01~21. curl의 긴 헤더 값은 셸 변수(J, R)로 나눠 줄 길이 60자 이하로 맞췄다.
+
 ## 새 조판 규칙 (`tools/build_chapter01.py` 확장, 기존 장과 호환)
 
 | 규칙 | JSON | 비고 |
@@ -123,6 +136,9 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter05.js
 python3 tools/diagrams_chapter06_rev01.py
 python3 tools/write_chapter06_rev01.py
 python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter06.json --output manuscript/REV01/volume01-chapter06.docx
+python3 tools/diagrams_chapter07_rev01.py
+python3 tools/write_chapter07_rev01.py
+python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter07.json --output manuscript/REV01/volume01-chapter07.docx
 ```
 
 `tools/check_chapter01.py`는 "JSON 1쪽 = 렌더 1쪽"을 검사하므로 흐름 조판인 REV01에는 맞지 않는다. REV01은 명령↔예제 파일 일치, `bash -n`, 줄 길이 60자 이하, 판형·글꼴·색을 따로 확인했다.
@@ -150,5 +166,6 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter06.js
 - 4장의 명령·화면·결과는 2026-11-01 기존 kt66 실측(`editorial/chapter04-review.json`)을 따른다. 묶은 명령 블록(C04-02, 09, 12, 13, 14, 17, 21, 22, 25)은 같은 명령을 한 블록에 모은 것이며 블록 단위로 다시 실행하지 않았다.
 - 5장의 브라우저·Wazuh 결과는 2026-11-01 실측(`editorial/chapter05-review.json`)이다. Windows hosts 편집·ipconfig·시간 설정은 실제 Windows에서 실행하지 않았다(UI 검증은 Linux Chromium). 5.12 curl은 이번에 다시 실행하지 않았다.
 - 6장 화면 6-12(필드 상세)·6-13(값 필터)은 촬영 자리로 두었다. Discover 필드 세부 정보 버튼·Filter for/out value·Exclude results·Temporarily disable과 Dev Tools 메뉴 위치(Indexer management → Dev Tools)는 OpenSearch Dashboards 2.16 기준 설명이며 kt66 화면에서 확인하지 않았다. D06-01 요청도 실행하지 않았다(결과 값은 저장 기록으로 계산).
+- 7장은 AGENTS.md 조건대로 새 공격 실행·UI 촬영·DQL 실서버 검증을 하지 않았다. 결과는 강의 슬라이드(2026-10-31) 기록이다. Q07-08·Q07-11과 7.8의 집계 변형은 새로 쓴 검색식이며 실행하지 않았다. cmdlog가 docker exec 셸을 기록하지 않을 수 있다는 판단은 profile.d 방식(로그인 셸)에 근거한 추정이다.
 - 3장 화면 3-1~3-8은 기존 kt66(에이전트 ID 010 시기)의 화면이다. 현재 환경의 bastion 에이전트 ID는 001이다.
 - 렌더 쪽수는 LibreOffice 대체 글꼴 기준이다. 부크크 글꼴이 있는 Word에서 쪽 나눔을 다시 확인한다.

