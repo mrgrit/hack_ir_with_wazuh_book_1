@@ -1,0 +1,20 @@
+[
+  {
+    "type": "query",
+    "id": "Q04-01",
+    "where": "Windows · Discover 검색창",
+    "purpose": "bastion이 보낸 기록 중 프로그램 이름이 book04인 기록을 찾는다.",
+    "text": "agent.name: \"bastion\"\nAND predecoder.program_name: \"book04\"",
+    "syntax": "predecoder는 Manager가 디코더를 적용하기 전에 syslog 형식의 앞부분에서 시각·호스트·프로그램 이름을 읽은 결과이다. logger의 태그 book04가 program_name에 들어간다. 두 줄을 함께 입력한다.",
+    "result": "한 건이 나온다. 행을 펼쳐 full_log의 시각과 문구를 4.3에서 적은 값과 대조한다."
+  },
+  {
+    "type": "query",
+    "id": "Q04-02",
+    "where": "Windows · Discover 검색창",
+    "purpose": "새 규칙 100410에 일치한 bastion의 경보를 찾는다.",
+    "text": "agent.name: \"bastion\" AND rule.id: \"100410\"",
+    "syntax": "3.6과 같은 형식이다.",
+    "result": "새로 남긴 문구의 경보 한 건이 나온다. 행을 펼쳐 아래 항목을 확인한다."
+  }
+]

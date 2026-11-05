@@ -1,0 +1,236 @@
+[
+  {
+    "type": "command",
+    "id": "C04-01",
+    "where": "kt66 VM · 터미널",
+    "purpose": "bastion 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-bastion /bin/bash",
+    "syntax": "-i는 키보드 입력을 연결하고 -t는 터미널을 할당한다. kt66-bastion은 컨테이너 이름, /bin/bash는 실행할 셸이다.",
+    "result": "프롬프트가 root@bastion:/# 형태로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C04-02",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "purpose": "현재 위치가 bastion인지 확인하고 auth.log의 수집 설정을 읽는다.",
+    "text": "hostname\ngrep -F -B 1 -A 1 '/var/log/auth.log' \\\n  /var/ossec/etc/ossec.conf",
+    "syntax": "hostname은 현재 시스템의 호스트 이름을 출력한다. grep -F는 찾을 문자열을 정규표현식이 아니라 글자 그대로 찾고, -B 1과 -A 1은 일치한 줄의 앞뒤 한 줄을 함께 출력한다. 작은따옴표는 문자열을 하나의 인자로 묶는다. 줄 끝의 역슬래시(\\)는 명령을 다음 줄로 잇는다.",
+    "result": "첫 줄에 bastion이 나오고, 이어서 다음 세 줄이 나온다."
+  },
+  {
+    "type": "command",
+    "id": "C04-03",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "purpose": "(사전 확인) 같은 확인 문구가 이미 있는지 찾는다.",
+    "text": "grep -F 'book04: book04-collection-01' \\\n  /var/log/auth.log",
+    "syntax": "찾을 문자열 book04: book04-collection-01은 logger가 남길 줄의 일부이다.",
+    "result": "처음이면 아무것도 출력되지 않는다. 이미 있으면 마지막 줄의 시각을 적어 둔다."
+  },
+  {
+    "type": "command",
+    "id": "C04-04",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "purpose": "확인 문구 book04-collection-01을 인증 로그에 남긴다.",
+    "text": "logger -p authpriv.notice -t book04 \\\n  'book04-collection-01'",
+    "syntax": "기본 구문은 logger [옵션] 메시지이다. 옵션의 뜻은 아래 표와 같다. 두 줄을 함께 입력한다.",
+    "result": "화면 출력 없이 끝난다."
+  },
+  {
+    "type": "command",
+    "id": "C04-05",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "purpose": "(사후 확인) 방금 남긴 줄을 찾는다.",
+    "text": "grep -F 'book04: book04-collection-01' \\\n  /var/log/auth.log",
+    "syntax": "C04-03과 같은 명령이다.",
+    "result": "현재 시각, bastion, book04 태그, 확인 문구가 한 줄에 나온다. 이 시각을 적어 둔다."
+  },
+  {
+    "type": "command",
+    "id": "C04-06",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "purpose": "bastion 셸에서 나온다.",
+    "text": "exit",
+    "syntax": "exit는 현재 셸을 끝낸다. 컨테이너는 계속 실행된다.",
+    "result": "kt66 VM의 프롬프트로 돌아온다."
+  },
+  {
+    "type": "command",
+    "id": "C04-07",
+    "where": "kt66 VM · 터미널",
+    "purpose": "Manager가 실행되는 kt66-siem 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-siem /bin/bash",
+    "syntax": "C04-01과 같은 형식이다. 컨테이너 이름만 다르다.",
+    "result": "프롬프트가 kt66-siem 안으로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C04-08",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "하위 디코더 ssh-invfailed와 규칙 5710의 설치된 정의를 읽는다.",
+    "text": "grep -n -A 5 '<decoder name=\"ssh-invfailed\">' \\\n  /var/ossec/ruleset/decoders/0310-ssh_decoders.xml\ngrep -n -A 3 '<rule id=\"5710\"' \\\n  /var/ossec/ruleset/rules/0095-sshd_rules.xml",
+    "syntax": "-n은 줄 번호를 붙이고, -A 5와 -A 3은 일치한 줄 뒤의 다섯 줄과 세 줄을 함께 출력한다. 작은따옴표 안의 XML 시작 태그를 글자 그대로 찾는다. 두 명령을 차례로 입력한다.",
+    "result": "첫 명령은 88번 줄부터 parent·prematch·regex·order를, 둘째 명령은 89번 줄부터 if_sid 5700과 match를 출력한다. 2.3의 정의와 같은지 대조한다."
+  },
+  {
+    "type": "command",
+    "id": "C04-09",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "(사전 확인) 같은 이름의 파일이 없고 규칙 번호 100410이 쓰이지 않는지 확인한다.",
+    "text": "ls -l /var/ossec/etc/rules/book04_rules.xml\ngrep -R -n '100410' /var/ossec/etc/rules \\\n  /var/ossec/ruleset/rules",
+    "syntax": "ls -l은 파일의 권한·소유자 등을 출력한다. grep -R은 하위 디렉터리까지 찾고 -n은 줄 번호를 붙인다. 사용자 규칙과 기본 규칙 디렉터리를 모두 찾는다.",
+    "result": "ls는 No such file or directory를, grep은 아무것도 출력하지 않는다. 파일이 있거나 번호가 쓰이고 있으면 기존 파일을 보존하고 다른 파일 이름·번호를 정해 이후 명령에서 모두 바꾼다."
+  },
+  {
+    "type": "command",
+    "id": "C04-10",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "규칙 파일을 새로 만들어 연다.",
+    "text": "nano /var/ossec/etc/rules/book04_rules.xml",
+    "syntax": "nano는 터미널 편집기이다. 없는 파일 이름을 주면 빈 파일로 연다.",
+    "result": "아래 XML을 입력하고 **Ctrl+O**, **Enter**로 저장한 뒤 **Ctrl+X**로 닫는다."
+  },
+  {
+    "type": "command",
+    "id": "C04-11",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "저장된 내용을 위 XML과 대조한다.",
+    "text": "cat /var/ossec/etc/rules/book04_rules.xml",
+    "syntax": "cat은 파일 내용을 그대로 출력한다.",
+    "result": "여는 태그와 닫는 태그, 번호, 프로그램 이름, 확인 문구가 위 XML과 같다. 다르면 C04-10으로 다시 열어 고친다. 복사용 파일은 examples/rev01/chapter04/book04_rules.xml이다."
+  },
+  {
+    "type": "command",
+    "id": "C04-12",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "규칙 파일의 소유자와 권한을 Wazuh가 읽을 수 있게 정하고, 바꾸기 전후를 확인한다.",
+    "text": "ls -l /var/ossec/etc/rules/book04_rules.xml\nchown root:wazuh /var/ossec/etc/rules/book04_rules.xml\nchmod 640 /var/ossec/etc/rules/book04_rules.xml\nls -l /var/ossec/etc/rules/book04_rules.xml",
+    "syntax": "chown 소유자:그룹 파일은 소유자와 그룹을 바꾼다. root가 관리하고 wazuh 그룹이 읽게 한다. chmod 640에서 6은 소유자의 읽기·쓰기, 4는 그룹의 읽기, 0은 그 밖의 사용자에게 권한을 주지 않는다는 뜻이다.",
+    "result": "마지막 ls -l에 -rw-r----- root wazuh가 나온다."
+  },
+  {
+    "type": "command",
+    "id": "C04-13",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "규칙과 설정에 구문 오류가 없는지 검사한다.",
+    "text": "/var/ossec/bin/wazuh-analysisd -t\necho $?",
+    "syntax": "wazuh-analysisd는 Manager의 로그 분석 프로그램이다. -t는 실행하지 않고 설정과 규칙만 검사한다. echo $?는 바로 앞 명령의 종료 상태를 출력한다.",
+    "result": "검사는 오류가 없으면 출력 없이 끝나고, echo $?가 0을 출력한다. ERROR가 나오면 표시된 파일과 줄을 고친 뒤 다시 검사한다."
+  },
+  {
+    "type": "command",
+    "id": "C04-14",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "Manager를 다시 시작해 새 규칙을 적용하고 실행 상태를 확인한다.",
+    "text": "/var/ossec/bin/wazuh-control restart\n/var/ossec/bin/wazuh-control status",
+    "syntax": "wazuh-control은 Manager의 프로세스를 제어한다. restart는 중지 후 다시 시작하고, status는 프로세스마다 실행 여부를 출력한다.",
+    "result": "restart는 Completed로 끝난다. status에서 wazuh-analysisd(분석)와 wazuh-remoted(에이전트 수신)가 is running이다. 메일용 maild와 클러스터용 clusterd는 쓰지 않으므로 not running이 정상이다. 재시작하는 동안에는 분석이 잠시 멈춘다."
+  },
+  {
+    "type": "command",
+    "id": "C04-15",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "kt66-siem 셸에서 나온다.",
+    "text": "exit",
+    "syntax": "C04-06과 같다.",
+    "result": "kt66 VM의 프롬프트로 돌아온다."
+  },
+  {
+    "type": "command",
+    "id": "C04-16",
+    "where": "kt66 VM · 터미널",
+    "purpose": "bastion 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-bastion /bin/bash",
+    "syntax": "C04-01과 같다.",
+    "result": "프롬프트가 root@bastion:/# 형태로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C04-17",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "purpose": "같은 문구를 새로 남기고 저장된 줄을 확인한다.",
+    "text": "logger -p authpriv.notice -t book04 \\\n  'book04-collection-01'\ngrep -F 'book04: book04-collection-01' \\\n  /var/log/auth.log",
+    "syntax": "C04-04와 C04-03을 차례로 입력한다.",
+    "result": "4.3의 줄보다 늦은 시각의 줄이 하나 더 나온다. 새 줄의 시각을 적어 둔다."
+  },
+  {
+    "type": "command",
+    "id": "C04-18",
+    "where": "kt66-bastion 컨테이너 · 셸",
+    "purpose": "bastion 셸에서 나온다.",
+    "text": "exit",
+    "syntax": "C04-06과 같다.",
+    "result": "kt66 VM의 프롬프트로 돌아온다."
+  },
+  {
+    "type": "command",
+    "id": "C04-19",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-siem 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-siem /bin/bash",
+    "syntax": "C04-07과 같다.",
+    "result": "프롬프트가 kt66-siem 안으로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C04-20",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "(사전 확인) 지울 파일이 4.7에서 만든 규칙인지 확인한다.",
+    "text": "cat /var/ossec/etc/rules/book04_rules.xml",
+    "syntax": "C04-11과 같다.",
+    "result": "100410 규칙과 book04-collection-01 문구가 나온다. 다른 내용이면 지우지 않고 파일 이름을 다시 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "C04-21",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "실습 규칙 파일을 지우고 지워졌는지 확인한다.",
+    "text": "rm /var/ossec/etc/rules/book04_rules.xml\nls -l /var/ossec/etc/rules/book04_rules.xml",
+    "syntax": "rm은 지정한 파일을 지운다. 경로 전체를 확인한 뒤 입력한다.",
+    "result": "ls -l이 No such file or directory를 출력한다."
+  },
+  {
+    "type": "command",
+    "id": "C04-22",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "남은 규칙의 구문을 검사하고 Manager를 재시작해 실습 규칙을 적용 대상에서 뺀다.",
+    "text": "/var/ossec/bin/wazuh-analysisd -t\necho $?\n/var/ossec/bin/wazuh-control restart\n/var/ossec/bin/wazuh-control status",
+    "syntax": "C04-13과 C04-14를 차례로 입력한다. 검사가 0으로 끝난 것을 확인한 뒤 재시작한다.",
+    "result": "echo $?가 0, restart가 Completed, status에서 wazuh-analysisd와 wazuh-remoted가 is running이다."
+  },
+  {
+    "type": "command",
+    "id": "C04-23",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "kt66-siem 셸에서 나온다.",
+    "text": "exit",
+    "syntax": "C04-06과 같다.",
+    "result": "kt66 VM의 프롬프트로 돌아온다."
+  },
+  {
+    "type": "command",
+    "id": "C04-24",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-siem 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-siem /bin/bash",
+    "syntax": "C04-07과 같다.",
+    "result": "프롬프트가 kt66-siem 안으로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C04-25",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "Manager의 아카이브 저장·경보 저장 기준과 Filebeat의 아카이브 전송 설정을 읽는다.",
+    "text": "grep -E 'logall_json|log_alert_level' \\\n  /var/ossec/etc/ossec.conf\ngrep -A 2 'archives:' /etc/filebeat/filebeat.yml",
+    "syntax": "grep -E는 확장 정규표현식으로 찾는다. 이 정규표현식에서 파이프(|)는 또는(OR)을 뜻하므로 두 단어 중 하나가 든 줄을 출력한다. 셸에서 명령을 잇는 |와 달리 작은따옴표 안에 있어 grep에 그대로 전달된다. -A 2는 일치한 줄 뒤 두 줄을 함께 출력한다.",
+    "result": "logall_json이 yes, log_alert_level이 3이고, archives: 아래에 enabled: true가 있다."
+  },
+  {
+    "type": "command",
+    "id": "C04-26",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "kt66-siem 셸에서 나온다.",
+    "text": "exit",
+    "syntax": "C04-06과 같다.",
+    "result": "kt66 VM의 프롬프트로 돌아온다."
+  }
+]

@@ -1,0 +1,4 @@
+ls -l /var/ossec/etc/rules/book04_rules.xml
+chown root:wazuh /var/ossec/etc/rules/book04_rules.xml
+chmod 640 /var/ossec/etc/rules/book04_rules.xml
+ls -l /var/ossec/etc/rules/book04_rules.xml

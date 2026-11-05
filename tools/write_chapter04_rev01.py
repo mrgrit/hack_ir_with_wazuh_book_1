@@ -1,0 +1,410 @@
+"""REV01 · 4장 로그 수집과 탐지 규칙. 저자용이며 실습 명령을 실행하지 않는다.
+
+2026-11-05 개정 기준
+- 조사 질문: 기록은 어떻게 경보가 되는가. 원본 → 수집 설정 → 아카이브 → 분석(Ruleset Test) → 경보의 단계를
+  직접 확인하고, 사용자 규칙으로 같은 문구를 경보로 만든 뒤 원상복구한다.
+- 2.3에서 정의를 읽은 디코더·규칙은 여기서 설치 파일과 Ruleset Test 결과로 대조만 하고 문법 설명을 반복하지 않는다.
+- 명령·화면·결과는 2026-11-01 기존 kt66 실측 기록(editorial/chapter04-review.json,
+  editorial/evidence/chapter04/)을 따른다. 기존 4장의 C04-01~47을 같은 목적끼리 묶어 C04-01~26로 다시 번호를 붙였다.
+"""
+import json,shutil
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+OUT=ROOT/'manuscript/REV01'
+EX=ROOT/'examples/rev01/chapter04'
+COMMIT='63d4180b1d6866de986ef263a3bd831d6082b5d5'
+pages=[];commands=[];queries=[]
+
+def p(t): return {'type':'p','text':t}
+def h(t): return {'type':'h','text':t}
+def ul(*items): return {'type':'list','items':list(items)}
+def ol(*items): return {'type':'list','style':'number','items':list(items)}
+def tab(head,rows,widths=None,keep=False):
+    b={'type':'table','head':head,'rows':rows,'widths':widths}
+    if keep:b['keep']=True
+    return b
+def img(path,caption,width=127): return {'type':'image','path':path,'caption':caption,'width_mm':width}
+def screen(name,caption,width=127): return img(f'assets/screens/chapter04/{name}.png',caption,width)
+def box(kind,*text,items=None):
+    b={'type':'box','kind':kind,'text':list(text)}
+    if items:b['items']=items
+    return b
+def code(t): return {'type':'code','text':t}
+def link(text,url): return {'type':'link','text':text,'url':url}
+HOST='kt66 VM · 터미널';BASTION='kt66-bastion 컨테이너 · 셸';SIEM='kt66-siem 컨테이너 · 셸'
+def c(text,purpose,syntax,result,where):
+    b={'type':'command','id':f'C04-{len(commands)+1:02d}','where':where,'purpose':purpose,'text':text,'syntax':syntax,'result':result}
+    commands.append(b);return b
+def q(text,purpose,syntax,result):
+    b={'type':'query','id':f'Q04-{len(queries)+1:02d}','where':'Windows · Discover 검색창','purpose':purpose,'text':text,'syntax':syntax,'result':result}
+    queries.append(b);return b
+def page(title,*blocks,brk=True,level='page'):
+    pg={'title':title,'kind':'body','blocks':list(blocks)}
+    if not brk:pg['break']=False
+    if level!='page':pg['level']=level
+    pages.append(pg)
+def section(title,*blocks):page(title,*blocks,brk=False,level='section')
+FIG='assets/figures/chapter04/'
+RULEFILE='/var/ossec/etc/rules/book04_rules.xml'
+GREP_MARK="grep -F 'book04: book04-collection-01' \\\n  /var/log/auth.log"
+LOGGER="logger -p authpriv.notice -t book04 \\\n  'book04-collection-01'"
+RULE_XML='<group name="book04,">\n  <rule id="100410" level="5">\n    <program_name>^book04$</program_name>\n    <match>book04-collection-01</match>\n    <description>Book04 collection check</description>\n  </rule>\n</group>'
+
+# ── 장 도입 ───────────────────────────────────────────────────
+page('4장  로그 수집과 탐지 규칙',
+    p('3.7에서 결과가 없으면 아카이브를 보고, 아카이브에도 없으면 수집 단계부터 확인한다고 했다. 수집 단계는 어디에서 어떻게 확인하는가? 2.3에서는 디코더와 규칙의 정의를 읽었다. 정의를 읽는 것과 Manager가 실제로 그 정의대로 처리했는지 확인하는 것은 다른 일이다. 직접 남긴 문구 한 줄을 원본 파일, 아카이브, 분석 시험, 경보까지 따라가며 각 단계를 확인한다.'),
+    h('학습 목표'),
+    ul('bastion의 수집 설정을 읽고, 직접 남긴 로그가 아카이브까지 전달되었는지 원문과 location으로 확인한다.',
+       'Ruleset Test로 원문에 적용되는 디코더·필드·규칙을 확인하고, 문장 차이가 필드와 규칙 번호를 바꾸는 것을 관찰한다.',
+       '사용자 규칙을 작성·검사·적용해 새 경보를 만들고, 규칙을 지워 원상복구한다.'),
+    img(FIG+'rev01-roadmap.png','도식 4-1. 4장 학습 순서.',120),
+    h('준비와 완료 기준'),
+    tab(['항목','내용'],[
+        ['실행 위치','kt66 VM 터미널, kt66-bastion·kt66-siem 컨테이너 셸, Windows 브라우저'],
+        ['선행 조건','kt66 기동, Wazuh 로그인(1.6), Discover 검색(3장)'],
+        ['예제 파일','examples/rev01/chapter04/의 ssh-failed.log·ssh-variant.log·collection-test.log·book04_rules.xml'],
+        ['완료 기준','4장 정리의 완료 점검표를 모두 채운다.'],
+        ['결과가 다를 때','4.11의 증상별 확인 순서를 따른다.'],
+        ['원상복구','4.10에서 실습 규칙 파일을 지우고 Manager를 재시작한다.']],[32,95],keep=True))
+
+# ── 4.1 ──────────────────────────────────────────────────────
+section('4.1  로그가 검색되기까지',
+    p('bastion의 로그는 다음 경로로 Discover에 나타난다. bastion의 Wazuh 에이전트(Agent)가 로그 파일의 새 줄을 읽어 Manager로 보낸다. Manager는 kt66-siem 컨테이너에서 실행되며, 받은 로그를 디코더와 규칙으로 분석해 파일에 저장한다. Filebeat는 Manager가 저장한 파일을 Indexer로 보내는 프로그램으로, kt66이 Manager와 같은 컨테이너에 구성한다. [1]'),
+    img(FIG+'collection-path.png','도식 4-2. bastion 로그의 수집·검색 경로.'),
+    p('Manager는 받은 로그를 두 갈래로 저장한다. 받은 로그 전체는 아카이브(archives.json)에, 규칙에 일치하고 저장 기준 수준 이상인 기록은 경보(alerts.json)에 저장한다. 두 파일이 각각 wazuh-archives-*와 wazuh-alerts-* 인덱스가 된다. kt66은 아카이브 저장과 전송을 켜 둔다. [3]'),
+    img(FIG+'storage.png','도식 4-3. 아카이브와 경보 저장.'),
+    p('각 단계는 다음 위치에서 확인한다. 이 표의 순서가 4.11의 문제 해결 순서이다.'),
+    tab(['단계','확인 위치','절'],[
+        ['원본 기록','bastion의 /var/log/auth.log','4.3'],
+        ['수집 설정','bastion 에이전트의 ossec.conf','4.2'],
+        ['전달','Discover · wazuh-archives-*','4.4'],
+        ['분석','Ruleset Test · Manager의 디코더·규칙 파일','4.5~4.8'],
+        ['경보','Discover · wazuh-alerts-*','4.9']],[24,85,18],keep=True),
+    box('blind','경보 검색 화면에는 마지막 단계의 결과만 보인다. 경보가 0건일 때 기록이 원본에서 멈췄는지, 전달되지 않았는지, 규칙에 일치하지 않았는지는 앞 단계를 차례로 확인해야 알 수 있다.'))
+
+# ── 4.2 ──────────────────────────────────────────────────────
+section('4.2  수집 설정 확인',
+    p('bastion의 SSH 인증 기록은 /var/log/auth.log에 남는다. bastion에 설치된 Wazuh 에이전트는 설정 파일 ossec.conf의 localfile 항목에 적힌 파일을 읽는다. 이 설정은 kt66이 bastion 컨테이너를 만들 때 넣는다. [2]'),
+    c('docker exec -it kt66-bastion /bin/bash',
+      'bastion 컨테이너의 셸로 들어간다.',
+      '-i는 키보드 입력을 연결하고 -t는 터미널을 할당한다. kt66-bastion은 컨테이너 이름, /bin/bash는 실행할 셸이다.',
+      '프롬프트가 root@bastion:/# 형태로 바뀐다.',HOST),
+    c("hostname\ngrep -F -B 1 -A 1 '/var/log/auth.log' \\\n  /var/ossec/etc/ossec.conf",
+      '현재 위치가 bastion인지 확인하고 auth.log의 수집 설정을 읽는다.',
+      'hostname은 현재 시스템의 호스트 이름을 출력한다. grep -F는 찾을 문자열을 정규표현식이 아니라 글자 그대로 찾고, -B 1과 -A 1은 일치한 줄의 앞뒤 한 줄을 함께 출력한다. 작은따옴표는 문자열을 하나의 인자로 묶는다. 줄 끝의 역슬래시(\\)는 명령을 다음 줄로 잇는다.',
+      '첫 줄에 bastion이 나오고, 이어서 다음 세 줄이 나온다.',BASTION),
+    code('<log_format>syslog</log_format>\n<location>/var/log/auth.log</location>\n</localfile>'),
+    p('ossec.conf는 XML 형식이다. <이름>과 </이름> 사이에 값을 적는다. localfile은 수집 대상 하나를 묶는 항목이고, 그 안의 location은 읽을 파일, log_format은 그 파일의 로그 형식이다. syslog 형식은 줄마다 시각·호스트·프로그램 이름이 앞에 붙는 형식이다. 셸은 4.3에서 계속 쓴다.'))
+
+# ── 4.3 ──────────────────────────────────────────────────────
+section('4.3  확인 문구 남기기',
+    p('수집을 확인하려면 언제 무엇을 남겼는지 아는 로그가 필요하다. logger는 지정한 메시지를 시스템 로그로 보내는 Linux 명령이다. Ubuntu의 로그 저장 서비스 rsyslog는 인증 분류(auth·authpriv)의 메시지를 /var/log/auth.log에 저장한다. 그러면 에이전트가 4.2의 설정에 따라 그 줄을 읽어 Manager로 보낸다. [8]'),
+    c(GREP_MARK,
+      '(사전 확인) 같은 확인 문구가 이미 있는지 찾는다.',
+      '찾을 문자열 book04: book04-collection-01은 logger가 남길 줄의 일부이다.',
+      '처음이면 아무것도 출력되지 않는다. 이미 있으면 마지막 줄의 시각을 적어 둔다.',BASTION),
+    c(LOGGER,
+      '확인 문구 book04-collection-01을 인증 로그에 남긴다.',
+      '기본 구문은 logger [옵션] 메시지이다. 옵션의 뜻은 아래 표와 같다. 두 줄을 함께 입력한다.',
+      '화면 출력 없이 끝난다.',BASTION),
+    tab(['옵션·구문','뜻'],[
+        ['-p authpriv.notice','-p는 로그의 분류와 중요도를 지정한다. 점(.) 앞의 authpriv는 인증·보안 분류, 뒤의 notice는 정상 동작 중 주목할 기록이라는 중요도이다.'],
+        ['-t book04','-t는 로그에 붙일 태그를 지정한다. 원문의 프로그램 이름 자리에 book04가 들어간다.'],
+        ["'book04-collection-01'",'기록할 메시지이다.'],
+        ['역슬래시(\\)','줄 끝에서 명령을 다음 줄로 잇는다.']],[38,89],keep=True),
+    c(GREP_MARK,
+      '(사후 확인) 방금 남긴 줄을 찾는다.',
+      'C04-03과 같은 명령이다.',
+      '현재 시각, bastion, book04 태그, 확인 문구가 한 줄에 나온다. 이 시각을 적어 둔다.',BASTION),
+    code('Nov  1 19:20:01 bastion book04:\nbook04-collection-01'),
+    p('위 줄의 시각은 검증 환경의 값이다. notice는 시스템 로그의 중요도이며, Wazuh 규칙의 수준(level)과는 따로 정해진다.'),
+    c('exit',
+      'bastion 셸에서 나온다.',
+      'exit는 현재 셸을 끝낸다. 컨테이너는 계속 실행된다.',
+      'kt66 VM의 프롬프트로 돌아온다.',BASTION),
+    box('predict','이 문구는 wazuh-archives-*에 있을까? wazuh-alerts-*에도 있을까? 4.4로 넘어가기 전에 각각 예측을 적는다.'))
+
+# ── 4.4 ──────────────────────────────────────────────────────
+section('4.4  아카이브에서 찾기',
+    p('Windows의 Discover에서 인덱스 패턴을 wazuh-archives-*로 바꾸고, 기간을 4.3에서 적은 시각의 앞뒤 5분으로 지정한다.'),
+    q('agent.name: "bastion"\nAND predecoder.program_name: "book04"',
+      'bastion이 보낸 기록 중 프로그램 이름이 book04인 기록을 찾는다.',
+      'predecoder는 Manager가 디코더를 적용하기 전에 syslog 형식의 앞부분에서 시각·호스트·프로그램 이름을 읽은 결과이다. logger의 태그 book04가 program_name에 들어간다. 두 줄을 함께 입력한다.',
+      '한 건이 나온다. 행을 펼쳐 full_log의 시각과 문구를 4.3에서 적은 값과 대조한다.'),
+    screen('archive-record','화면 4-1. 확인 문구의 아카이브 기록.'),
+    tab(['필드','확인할 값'],[
+        ['agent.name','bastion · 기록을 보낸 에이전트'],
+        ['location','/var/log/auth.log · 에이전트가 읽은 파일(4.2)'],
+        ['predecoder.program_name','book04 · logger의 태그'],
+        ['full_log','4.3에서 확인한 시각과 문구']],[45,82]),
+    p('네 값이 원본과 일치하면 bastion의 auth.log에 남긴 줄이 Manager를 거쳐 Indexer까지 전달된 것이다. 문구만으로 검색하면 같은 문자열이 들어간 다른 로그(예: 명령 실행 기록)도 나올 수 있으므로 location과 program_name을 함께 본다.'),
+    p('같은 검색식을 둔 채 인덱스 패턴을 wazuh-alerts-*로 바꾼다. 결과는 0건이다. 이 문구에 일치하는 규칙이 없어서 경보가 되지 않았기 때문이다. 3.8의 “아카이브에는 있고 경보에는 없는” 경우가 이것이다. 확인한 뒤 인덱스 패턴을 wazuh-archives-*로 되돌린다.'))
+
+# ── 4.5 ──────────────────────────────────────────────────────
+section('4.5  Ruleset Test로 분석 과정 보기',
+    p('Ruleset Test는 입력한 원문 한 줄에 Manager의 디코더와 규칙을 적용해 결과를 보여 주는 화면이다. Manager에 포함된 시험 도구 wazuh-logtest를 브라우저에서 쓰는 것이다. 입력한 원문은 로그 파일이나 인덱스에 저장되지 않는다. [4]'),
+    ol('Wazuh 화면 왼쪽 메뉴에서 **Server management** → **Ruleset Test**를 연다.',
+       'examples/rev01/chapter04/ssh-failed.log를 열어 한 줄 전체를 입력란에 붙여 넣는다. 2.1의 SSH 실패 원문이다.',
+       '**Test**를 누른다.'),
+    screen('logtest-input','화면 4-2. Ruleset Test에 SSH 원문 입력.',115),
+    p('결과는 세 단계로 나온다. 2.3에서 읽은 정의가 실제로 어떤 결과를 내는지 대조한다.'),
+    screen('logtest-decode','화면 4-3. 사전 분석과 디코딩 결과.'),
+    screen('logtest-rule','화면 4-4. 규칙 대조 결과.'),
+    tab(['단계','하는 일','이 원문의 결과'],[
+        ['Phase 1','syslog 앞부분에서 시각·호스트·프로그램 이름을 읽는다.','timestamp Nov  1 14:22:35, hostname bastion, program_name sshd'],
+        ['Phase 2','디코더를 고르고 본문에서 값을 꺼낸다.','name·parent sshd, srcuser book03_probe, srcip 10.20.30.254'],
+        ['Phase 3','규칙을 대조해 번호·수준·설명을 붙인다.','id 5710, level 5, Alert to be generated']],[20,52,55],keep=True),
+    p('Phase 1의 program_name은 원문에 적힌 프로그램 이름이고, Phase 2의 name은 Wazuh가 고른 디코더의 이름이다. 이 원문에서는 둘 다 sshd이다. 실제로 계정과 주소를 꺼낸 하위 디코더 ssh-invfailed의 이름은 결과에 나타나지 않는다(2.3). firedtimes는 현재 시험 세션에서 그 규칙이 일치한 횟수이다. Alert to be generated는 이 원문이 실제로 들어오면 경보가 된다는 시험 결과이다.'),
+    h('설치된 정의 대조'),
+    p('2.3에서 본 정의가 kt66의 Manager에 실제로 설치되어 있는지 확인한다. 기본 디코더와 규칙은 kt66-siem 컨테이너의 /var/ossec/ruleset 아래에 있다.'),
+    c('docker exec -it kt66-siem /bin/bash',
+      'Manager가 실행되는 kt66-siem 컨테이너의 셸로 들어간다.',
+      'C04-01과 같은 형식이다. 컨테이너 이름만 다르다.',
+      '프롬프트가 kt66-siem 안으로 바뀐다.',HOST),
+    c("grep -n -A 5 '<decoder name=\"ssh-invfailed\">' \\\n  /var/ossec/ruleset/decoders/0310-ssh_decoders.xml\ngrep -n -A 3 '<rule id=\"5710\"' \\\n  /var/ossec/ruleset/rules/0095-sshd_rules.xml",
+      '하위 디코더 ssh-invfailed와 규칙 5710의 설치된 정의를 읽는다.',
+      '-n은 줄 번호를 붙이고, -A 5와 -A 3은 일치한 줄 뒤의 다섯 줄과 세 줄을 함께 출력한다. 작은따옴표 안의 XML 시작 태그를 글자 그대로 찾는다. 두 명령을 차례로 입력한다.',
+      '첫 명령은 88번 줄부터 parent·prematch·regex·order를, 둘째 명령은 89번 줄부터 if_sid 5700과 match를 출력한다. 2.3의 정의와 같은지 대조한다.',SIEM),
+    p('파일이 없다는 오류가 나오면 프롬프트로 현재 컨테이너를 확인한다. kt66-siem 셸은 4.7에서 그대로 쓴다.'))
+
+# ── 4.6 ──────────────────────────────────────────────────────
+section('4.6  문장 하나 바꿔 비교',
+    ol('Ruleset Test에서 **Clear session**을 누르고 **Confirm**을 누른다. 앞 시험의 누적 상태를 비우고 새 시험을 시작한다.',
+       'examples/rev01/chapter04/ssh-variant.log를 입력하고 **Test**를 누른다.'),
+    code('Nov  1 14:22:35 bastion sshd[7249]:\nFailed password for book03_probe\nfrom 10.20.30.254 port 50964 ssh2'),
+    p('ssh-failed.log에서 invalid user 두 단어만 지운 시험용 문장이다. 실제로 일어난 접속 기록이 아니라 비교를 위해 만든 입력이다.'),
+    box('predict','계정 이름이 들어가는 필드와 규칙 번호는 그대로일까? Test를 누르기 전에 예측을 적는다.'),
+    screen('logtest-variant','화면 4-5. 바꾼 문장의 규칙 대조 결과.'),
+    img(FIG+'rev01-variant.png','도식 4-4. 문장에 따라 달라지는 하위 디코더·필드·규칙.'),
+    p('같은 부모 디코더 sshd 아래에서 문장 형식에 맞는 하위 디코더가 달라졌다. 바꾼 문장에는 ssh-failed가 적용되어 계정이 dstuser로, 출발지 포트가 srcport로 추출되었다. 규칙은 계정이 있는 경우의 인증 실패 5760이다. ssh-invfailed의 order에는 srcuser·srcip만 있어 원래 문장에서는 포트가 추출되지 않았다.'),
+    box('blind','계정 이름이 들어가는 필드는 디코더 정의에 따라 data.srcuser 또는 data.dstuser이다. 3.7의 Q03-04처럼 data.srcuser로만 찾으면 있는 계정으로 시도한 실패(5760)와 로그인 성공(5715)의 계정은 결과에 나오지 않는다. 계정으로 찾을 때는 두 필드를 OR로 묶거나 full_log로 찾는다.'),
+    p('시험을 마치면 **Clear session** → **Confirm**을 누른다.'))
+
+# ── 4.7 ──────────────────────────────────────────────────────
+section('4.7  사용자 규칙 작성',
+    p('4.4의 확인 문구는 아카이브에만 있고 경보가 되지 않았다. 이 문구에 경보를 붙이는 규칙을 직접 만든다. 프로그램 이름이 book04이고 본문에 book04-collection-01이 들어간 로그에 규칙 번호 100410, 수준 5를 붙인다.'),
+    img(FIG+'rule-conditions.png','도식 4-5. 확인 문구를 찾는 두 조건.'),
+    p('기본 규칙 파일은 Wazuh를 업데이트할 때 새 파일로 바뀔 수 있다. 그래서 사용자 규칙은 /var/ossec/etc/rules에 별도 XML 파일로 둔다. 사용자 규칙 번호는 100000~120000 범위에서 고른다. [6]'),
+    c(f"ls -l {RULEFILE}\ngrep -R -n '100410' /var/ossec/etc/rules \\\n  /var/ossec/ruleset/rules",
+      '(사전 확인) 같은 이름의 파일이 없고 규칙 번호 100410이 쓰이지 않는지 확인한다.',
+      'ls -l은 파일의 권한·소유자 등을 출력한다. grep -R은 하위 디렉터리까지 찾고 -n은 줄 번호를 붙인다. 사용자 규칙과 기본 규칙 디렉터리를 모두 찾는다.',
+      'ls는 No such file or directory를, grep은 아무것도 출력하지 않는다. 파일이 있거나 번호가 쓰이고 있으면 기존 파일을 보존하고 다른 파일 이름·번호를 정해 이후 명령에서 모두 바꾼다.',SIEM),
+    c(f'nano {RULEFILE}',
+      '규칙 파일을 새로 만들어 연다.',
+      'nano는 터미널 편집기이다. 없는 파일 이름을 주면 빈 파일로 연다.',
+      '아래 XML을 입력하고 **Ctrl+O**, **Enter**로 저장한 뒤 **Ctrl+X**로 닫는다.',SIEM),
+    code(RULE_XML),
+    tab(['항목','뜻'],[
+        ['group name="book04,"','규칙이 속할 그룹 이름. 경보의 rule.groups에 들어간다. 쉼표로 여러 그룹을 구분한다.'],
+        ['id="100410" · level="5"','규칙 번호와 경보 수준. 수준 5는 저장 기준 3 이상이다.'],
+        ['program_name','Phase 1의 program_name 조건이다. ^는 시작, $는 끝을 뜻하므로 ^book04$는 이름 전체가 book04일 때만 일치한다.'],
+        ['match','로그에 book04-collection-01이 들어 있으면 일치한다.'],
+        ['description','경보의 rule.description에 표시할 설명']],[40,87],keep=True),
+    c(f'cat {RULEFILE}',
+      '저장된 내용을 위 XML과 대조한다.',
+      'cat은 파일 내용을 그대로 출력한다.',
+      '여는 태그와 닫는 태그, 번호, 프로그램 이름, 확인 문구가 위 XML과 같다. 다르면 C04-10으로 다시 열어 고친다. 복사용 파일은 examples/rev01/chapter04/book04_rules.xml이다.',SIEM),
+    c(f'ls -l {RULEFILE}\nchown root:wazuh {RULEFILE}\nchmod 640 {RULEFILE}\nls -l {RULEFILE}',
+      '규칙 파일의 소유자와 권한을 Wazuh가 읽을 수 있게 정하고, 바꾸기 전후를 확인한다.',
+      'chown 소유자:그룹 파일은 소유자와 그룹을 바꾼다. root가 관리하고 wazuh 그룹이 읽게 한다. chmod 640에서 6은 소유자의 읽기·쓰기, 4는 그룹의 읽기, 0은 그 밖의 사용자에게 권한을 주지 않는다는 뜻이다.',
+      '마지막 ls -l에 -rw-r----- root wazuh가 나온다.',SIEM))
+
+# ── 4.8 ──────────────────────────────────────────────────────
+section('4.8  규칙 검사와 시험',
+    c('/var/ossec/bin/wazuh-analysisd -t\necho $?',
+      '규칙과 설정에 구문 오류가 없는지 검사한다.',
+      'wazuh-analysisd는 Manager의 로그 분석 프로그램이다. -t는 실행하지 않고 설정과 규칙만 검사한다. echo $?는 바로 앞 명령의 종료 상태를 출력한다.',
+      '검사는 오류가 없으면 출력 없이 끝나고, echo $?가 0을 출력한다. ERROR가 나오면 표시된 파일과 줄을 고친 뒤 다시 검사한다.',SIEM),
+    ol('Ruleset Test에서 **Clear session** → **Confirm**을 누른다. 새 세션은 저장된 규칙 파일로 시험한다.',
+       'examples/rev01/chapter04/collection-test.log를 입력하고 **Test**를 누른다. 4.3에서 남긴 것과 같은 형식의 줄이다.'),
+    screen('logtest-custom','화면 4-6. 사용자 규칙 100410의 시험 결과.'),
+    p('Phase 3에 100410, 수준 5, Book04 collection check가 나온다. Phase 2의 No decoder matched는 이 줄에 맞는 디코더가 없다는 뜻이다. 규칙 100410은 디코더가 꺼내는 필드 대신 Phase 1의 program_name과 원문 문구를 조건으로 쓰므로 디코더 없이도 일치한다. mail: false는 이메일 알림 대상이 아니라는 뜻이다.'),
+    p('시험 결과는 규칙 파일이 맞게 작성되었다는 확인이다. 실제로 들어오는 로그를 분석하는 Manager는 아직 새 규칙을 읽지 않았다. 4.9에서 재시작해 적용한다.'))
+
+# ── 4.9 ──────────────────────────────────────────────────────
+section('4.9  적용하고 새 경보 확인',
+    img(FIG+'apply.png','도식 4-6. 규칙 적용과 확인 순서.'),
+    c('/var/ossec/bin/wazuh-control restart\n/var/ossec/bin/wazuh-control status',
+      'Manager를 다시 시작해 새 규칙을 적용하고 실행 상태를 확인한다.',
+      'wazuh-control은 Manager의 프로세스를 제어한다. restart는 중지 후 다시 시작하고, status는 프로세스마다 실행 여부를 출력한다.',
+      'restart는 Completed로 끝난다. status에서 wazuh-analysisd(분석)와 wazuh-remoted(에이전트 수신)가 is running이다. 메일용 maild와 클러스터용 clusterd는 쓰지 않으므로 not running이 정상이다. 재시작하는 동안에는 분석이 잠시 멈춘다.',SIEM),
+    c('exit',
+      'kt66-siem 셸에서 나온다.',
+      'C04-06과 같다.',
+      'kt66 VM의 프롬프트로 돌아온다.',SIEM),
+    box('predict','4.3에서 규칙 적용 전에 남긴 문구도 이제 경보로 나올까? 다음 단계로 가기 전에 예측을 적는다.'),
+    p('Manager는 이미 저장한 기록을 새 규칙으로 다시 분석하지 않는다. 4.3의 문구는 아카이브에만 남아 있다. 새 규칙을 확인하려면 같은 문구를 새로 남긴다.'),
+    c('docker exec -it kt66-bastion /bin/bash',
+      'bastion 컨테이너의 셸로 들어간다.',
+      'C04-01과 같다.',
+      '프롬프트가 root@bastion:/# 형태로 바뀐다.',HOST),
+    c(LOGGER+'\n'+GREP_MARK,
+      '같은 문구를 새로 남기고 저장된 줄을 확인한다.',
+      'C04-04와 C04-03을 차례로 입력한다.',
+      '4.3의 줄보다 늦은 시각의 줄이 하나 더 나온다. 새 줄의 시각을 적어 둔다.',BASTION),
+    c('exit',
+      'bastion 셸에서 나온다.',
+      'C04-06과 같다.',
+      'kt66 VM의 프롬프트로 돌아온다.',BASTION),
+    p('Discover에서 인덱스 패턴을 wazuh-alerts-*로, 기간을 새 줄의 시각 앞뒤 5분으로 지정한다.'),
+    q('agent.name: "bastion" AND rule.id: "100410"',
+      '새 규칙 100410에 일치한 bastion의 경보를 찾는다.',
+      '3.6과 같은 형식이다.',
+      '새로 남긴 문구의 경보 한 건이 나온다. 행을 펼쳐 아래 항목을 확인한다.'),
+    screen('alert-record','화면 4-7. 사용자 규칙으로 생성된 경보.'),
+    tab(['항목','검증 환경의 값'],[
+        ['원문 시각','2026년 11월 1일 19:22:01 (KST)'],
+        ['rule.id · rule.level','100410 · 5'],
+        ['rule.description','Book04 collection check'],
+        ['location','/var/log/auth.log'],
+        ['predecoder.program_name','book04']],[45,82]),
+    p('이 경보의 수준 5는 실습 규칙에 직접 정한 값이다. 경보 수준은 규칙을 만든 사람이 붙인 분류이므로, 사건의 위험도는 원문과 실제 활동을 조사해 판단한다. wazuh-archives-*에서는 규칙 적용 전후의 두 문구를 모두 볼 수 있고, wazuh-alerts-*에서는 적용 후의 문구만 보인다.'))
+
+# ── 4.10 ─────────────────────────────────────────────────────
+section('4.10  실습 규칙 원상복구',
+    p('4.7에서 만든 파일만 지운다. 다른 파일 이름을 썼다면 그 이름으로 바꿔 입력한다.'),
+    c('docker exec -it kt66-siem /bin/bash',
+      'kt66-siem 컨테이너의 셸로 들어간다.',
+      'C04-07과 같다.',
+      '프롬프트가 kt66-siem 안으로 바뀐다.',HOST),
+    c(f'cat {RULEFILE}',
+      '(사전 확인) 지울 파일이 4.7에서 만든 규칙인지 확인한다.',
+      'C04-11과 같다.',
+      '100410 규칙과 book04-collection-01 문구가 나온다. 다른 내용이면 지우지 않고 파일 이름을 다시 확인한다.',SIEM),
+    c(f'rm {RULEFILE}\nls -l {RULEFILE}',
+      '실습 규칙 파일을 지우고 지워졌는지 확인한다.',
+      'rm은 지정한 파일을 지운다. 경로 전체를 확인한 뒤 입력한다.',
+      'ls -l이 No such file or directory를 출력한다.',SIEM),
+    c('/var/ossec/bin/wazuh-analysisd -t\necho $?\n/var/ossec/bin/wazuh-control restart\n/var/ossec/bin/wazuh-control status',
+      '남은 규칙의 구문을 검사하고 Manager를 재시작해 실습 규칙을 적용 대상에서 뺀다.',
+      'C04-13과 C04-14를 차례로 입력한다. 검사가 0으로 끝난 것을 확인한 뒤 재시작한다.',
+      'echo $?가 0, restart가 Completed, status에서 wazuh-analysisd와 wazuh-remoted가 is running이다.',SIEM),
+    c('exit',
+      'kt66-siem 셸에서 나온다.',
+      'C04-06과 같다.',
+      'kt66 VM의 프롬프트로 돌아온다.',SIEM),
+    p('원상복구를 확인하려면 C04-16~C04-18로 문구를 한 번 더 남기고 Discover에서 Q04-02를 다시 검색한다. 새 시각의 100410 경보가 없고 wazuh-archives-*에는 새 문구가 있으면 규칙이 빠진 것이다.'),
+    p('브라우저에서는 Ruleset Test의 **Clear session** → **Confirm**을 누르고, Discover의 검색식과 필터를 비운 뒤 wazuh-alerts-*, Last 24 hours로 되돌린다. 이미 저장된 경보와 아카이브 기록은 지워지지 않는다. 실습 결과를 대조할 자료로 둔다.'))
+
+# ── 4.11 ─────────────────────────────────────────────────────
+section('4.11  어느 단계에서 멈췄는가',
+    p('결과가 예상과 다르면 4.1의 단계 순서로 확인한다.'),
+    tab(['증상','확인 순서'],[
+        ['auth.log에 문구가 없다','실행 위치가 bastion인지(hostname) → logger의 -p, -t, 문구 → 원본 파일을 다시 읽는다.'],
+        ['원문은 있으나 아카이브에 없다','검색 기간과 조건 → 에이전트 연결(1.7) → localfile 경로(4.2) → 아카이브 저장·전송 설정(아래)'],
+        ['아카이브에는 있으나 경보가 없다','Ruleset Test 결과 → 규칙 수준과 저장 기준 → Manager 재시작 여부 → 재시작 뒤 새 로그를 남겼는지'],
+        ['Ruleset Test가 다른 규칙을 보인다','입력 원문 → Clear session → 저장한 XML → 규칙 번호 중복'],
+        ['Manager가 시작되지 않는다','오류에 표시된 파일·줄을 확인한다. 실습 파일을 지우고 구문 검사 후 재시작한다.']],[40,87],keep=True),
+    h('아카이브 설정 확인'),
+    c('docker exec -it kt66-siem /bin/bash',
+      'kt66-siem 컨테이너의 셸로 들어간다.',
+      'C04-07과 같다.',
+      '프롬프트가 kt66-siem 안으로 바뀐다.',HOST),
+    c("grep -E 'logall_json|log_alert_level' \\\n  /var/ossec/etc/ossec.conf\ngrep -A 2 'archives:' /etc/filebeat/filebeat.yml",
+      'Manager의 아카이브 저장·경보 저장 기준과 Filebeat의 아카이브 전송 설정을 읽는다.',
+      'grep -E는 확장 정규표현식으로 찾는다. 이 정규표현식에서 파이프(|)는 또는(OR)을 뜻하므로 두 단어 중 하나가 든 줄을 출력한다. 셸에서 명령을 잇는 |와 달리 작은따옴표 안에 있어 grep에 그대로 전달된다. -A 2는 일치한 줄 뒤 두 줄을 함께 출력한다.',
+      'logall_json이 yes, log_alert_level이 3이고, archives: 아래에 enabled: true가 있다.',SIEM),
+    c('exit',
+      'kt66-siem 셸에서 나온다.',
+      'C04-06과 같다.',
+      'kt66 VM의 프롬프트로 돌아온다.',SIEM),
+    p('kt66의 .env에 WAZUH_ARCHIVES=no가 있으면 kt66은 아카이브를 켜지 않는다. 값을 고쳤다면 kt66을 다시 기동하고(1.6) 확인 문구를 새로 남겨 확인한다. [3]'),
+    box('caution','이 장의 bastion은 auth.log 파일을 읽지만, kt66 VM 자신의 수집기 kt66-host는 sshd·sudo 기록을 journald에서 읽는다. 같은 SSH 기록이라도 실행 위치에 따라 location과 수집 방식이 다르다. 아카이브는 받은 기록 전체를 저장하므로 디스크를 더 쓴다. 실습 뒤 VM의 남은 공간을 확인한다.'))
+
+# ── 장 끝 ─────────────────────────────────────────────────────
+page('4장 정리',
+    h('완료 점검표'),
+    tab(['확인 대상','완료 근거','절'],[
+        ['원본 기록','bastion의 auth.log에 확인 문구가 있다.','4.3'],
+        ['수집·전달','아카이브의 full_log·location·program_name이 원본과 일치한다.','4.4'],
+        ['분석','SSH 원문이 sshd 디코더와 규칙 5710에, 바꾼 문장이 5760에 일치한다.','4.5~4.6'],
+        ['사용자 규칙','Ruleset Test에서 100410·수준 5를 확인했다.','4.8'],
+        ['새 경보','재시작 뒤 새로 남긴 문구가 100410 경보로 검색된다.','4.9'],
+        ['원상복구','실습 XML을 지우고 Manager 실행 상태를 확인했다.','4.10']],[25,82,20],keep=True),
+    p('확인 시각·원문·검색 조건·규칙 번호와, 문제가 있었다면 오류와 고친 내용을 examples/rev01/chapter04/investigation.txt 양식에 적는다.'),
+    h('핵심 정리'),
+    ul('로그는 원본 파일 → 에이전트 수집 → Manager 분석 → 아카이브·경보 저장 → Indexer 순서로 전달된다. 경보가 없으면 앞 단계부터 차례로 확인한다.',
+       'wazuh-archives-*에는 받은 기록 전체가, wazuh-alerts-*에는 규칙에 일치하고 저장 기준 이상인 기록만 있다.',
+       'Ruleset Test는 원문 한 줄에 디코더와 규칙을 적용한 결과를 보여 준다. 문장이 바뀌면 하위 디코더, 계정 필드(srcuser·dstuser), 규칙 번호가 달라질 수 있다.',
+       '사용자 규칙은 /var/ossec/etc/rules에 두고, 구문 검사 → 시험 → 재시작 → 새 로그 순서로 적용을 확인한다. 이미 저장된 기록은 다시 분석되지 않는다.'),
+    h('확인 문제'),
+    ol('auth.log에는 문구가 있는데 wazuh-archives-*에서 찾을 수 없다. 무엇을 확인하는가?',
+       'wazuh-archives-*에는 있고 wazuh-alerts-*에는 없다. 이유로 생각할 수 있는 두 가지는?',
+       'Ruleset Test에서 100410이 나왔는데 Discover에 새 경보가 없다. 빠뜨렸을 수 있는 두 단계는?',
+       'Failed password for root from 10.20.30.254 port 41022 ssh2에서 root는 어느 필드에 들어가고, 어떤 규칙이 적용되는가?',
+       '사용자 규칙을 /var/ossec/ruleset/rules의 기본 파일에 추가하지 않는 이유는?'),
+    h('확인 문제 해설'),
+    ol('검색 기간과 조건, 에이전트 연결(1.7), localfile 경로(4.2), 아카이브 저장·전송 설정(4.11)을 차례로 확인한다.',
+       '일치하는 규칙이 없거나, 일치한 규칙의 수준이 경보 저장 기준(log_alert_level 3)보다 낮다.',
+       'Manager 재시작(4.9)과, 재시작 뒤 새 로그를 남기는 일이다. 재시작 전에 남긴 기록은 새 규칙으로 다시 분석되지 않는다.',
+       '계정이 있는 경우의 형식이므로 ssh-failed 디코더가 적용되어 dstuser에 들어가고, 규칙은 5760이다(4.6).',
+       '기본 규칙 파일은 Wazuh를 업데이트할 때 새 파일로 바뀔 수 있다. 사용자 규칙은 /var/ossec/etc/rules에 따로 두어야 유지된다.'),
+    h('더 읽을거리'),
+    p('Wazuh 공식 문서의 디코더·규칙 시험 설명이다. 터미널에서 wazuh-logtest를 직접 실행하는 방법도 있다.'),
+    link('Wazuh · Testing decoders and rules','https://documentation.wazuh.com/current/user-manual/ruleset/testing.html'),
+    p('사용자 규칙 작성 문서이다. 기본 규칙을 덮어쓰는 방법(overwrite)과 사용자 디코더를 추가하는 방법을 읽는다.'),
+    link('Wazuh · Custom rules','https://documentation.wazuh.com/current/user-manual/ruleset/rules/custom.html'))
+
+section('4장 참고 자료',
+    h('[1] 로그 수집·전송'),
+    link('Wazuh · Log data collection: How it works','https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/how-it-works.html'),
+    h('[2] 수집 설정'),
+    link('Wazuh · localfile','https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/localfile.html'),
+    h('[3] kt66 아카이브 활성화'),
+    link('kt66 · siem/87-archives.sh · 63d4180','https://github.com/mrgrit/kt66/blob/'+COMMIT+'/siem/87-archives.sh'),
+    h('[4] 규칙 시험'),
+    link('Wazuh · Testing decoders and rules','https://documentation.wazuh.com/current/user-manual/ruleset/testing.html'),
+    h('[5] 기본 SSH 디코더와 규칙'),
+    link('Wazuh 4.10.0 · 0310-ssh_decoders.xml','https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/decoders/0310-ssh_decoders.xml'),
+    link('Wazuh 4.10.0 · 0095-sshd_rules.xml','https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0095-sshd_rules.xml'),
+    h('[6] 사용자 규칙과 구문'),
+    link('Wazuh · Custom rules','https://documentation.wazuh.com/current/user-manual/ruleset/rules/custom.html'),
+    link('Wazuh 4.10 · Rules Syntax','https://documentation.wazuh.com/4.10/user-manual/ruleset/ruleset-xml-syntax/rules.html'),
+    h('[7] 경보 저장 기준'),
+    link('Wazuh · ossec.conf alerts','https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/alerts.html'),
+    h('[8] logger 명령'),
+    link('util-linux · logger(1)','https://man7.org/linux/man-pages/man1/logger.1.html'),
+    p('화면은 Wazuh 4.10.0의 기존 kt66에서 2026년 11월 1일에 촬영했다. 예제 원문은 2.1의 SSH 사례와 4.3의 확인 문구이다.'))
+
+INVESTIGATION='''로그 수집·규칙 확인 기록
+
+원문 기록 시각과 시간대:
+원문:
+agent.name · location · program_name:
+아카이브 _index · _id:
+Ruleset Test 입력 파일:
+디코더 · 규칙 · 수준:
+사용자 규칙 파일 · 번호:
+적용 후 새 경보 시각:
+경보 _index · _id:
+오류 · 고친 내용:
+원상복구(규칙 삭제 · 검사 · 재시작) 확인:
+'''
+README='''4장 REV01 복사용 명령과 예제
+
+C04-01~26 : 명령 블록 번호와 같은 파일. 실행 위치는 manifest.json의 where를 따른다.
+Q04-01~02 : Discover 검색식. queries.json에 설명이 있다.
+ssh-failed.log      : 2.1의 SSH 실패 원문(Ruleset Test 입력)
+ssh-variant.log     : invalid user를 지운 비교용 문장(Ruleset Test 입력)
+collection-test.log : 확인 문구 형식의 줄(Ruleset Test 입력)
+book04_rules.xml    : 4.7의 사용자 규칙
+investigation.txt   : 확인 기록 양식
+
+로그 파일은 Ruleset Test에 붙여 넣는 읽기 자료이며 셸 명령이 아니다.
+'''
+
+if __name__=='__main__':
+    data={'title':'로그 수집과 탐지 규칙','series':'해킹·침해대응 실무 with Wazuh · 시스템 침투와 SIEM 분석','baseline':COMMIT,'revision':'REV01',
+          'comments':'REV01 원고. 명령·화면·결과는 2026-11-01 기존 kt66 실측 기록(editorial/chapter04-review.json)을 따른다.','pages':pages}
+    OUT.mkdir(parents=True,exist_ok=True)
+    (OUT/'volume01-chapter04.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+    EX.mkdir(parents=True,exist_ok=True)
+    for old in list(EX.glob('C04-*.txt'))+list(EX.glob('Q04-*.txt')):old.unlink()
+    for b in commands+queries:(EX/(b['id']+'.txt')).write_text(b['text']+'\n')
+    (EX/'manifest.json').write_text(json.dumps(commands,ensure_ascii=False,indent=2)+'\n')
+    (EX/'queries.json').write_text(json.dumps(queries,ensure_ascii=False,indent=2)+'\n')
+    for name in ['ssh-failed.log','ssh-variant.log','collection-test.log']:shutil.copyfile(ROOT/'examples/chapter04'/name,EX/name)
+    (EX/'book04_rules.xml').write_text(RULE_XML+'\n')
+    (EX/'investigation.txt').write_text(INVESTIGATION)
+    (EX/'README.txt').write_text(README)
+    print(len(pages),'pages',len(commands),'commands',len(queries),'queries')

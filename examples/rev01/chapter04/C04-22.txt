@@ -1,0 +1,4 @@
+/var/ossec/bin/wazuh-analysisd -t
+echo $?
+/var/ossec/bin/wazuh-control restart
+/var/ossec/bin/wazuh-control status

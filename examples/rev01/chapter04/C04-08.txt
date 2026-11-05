@@ -1,0 +1,4 @@
+grep -n -A 5 '<decoder name="ssh-invfailed">' \
+  /var/ossec/ruleset/decoders/0310-ssh_decoders.xml
+grep -n -A 3 '<rule id="5710"' \
+  /var/ossec/ruleset/rules/0095-sshd_rules.xml

@@ -1,4 +1,4 @@
-# REV01 — 재작성본 (1~3장·부록 A)
+# REV01 — 재작성본 (1~4장·부록 A)
 
 기존 `manuscript/volume01-chapter0N.*`은 그대로 두고, 재작성본을 이 디렉터리에 둔다. 검토 후 채택하면 기존 파일을 교체한다.
 
@@ -10,6 +10,7 @@
 | `volume01-appendix-a.json` / `.docx` | 부록 A 설치 상세와 문제 해결 (렌더 8쪽) |
 | `volume01-chapter02.json` / `.docx` | 2장 공격과 보안관제의 기초 (렌더 23쪽) |
 | `volume01-chapter03.json` / `.docx` | 3장 Wazuh 기본 운용 (렌더 20쪽) |
+| `volume01-chapter04.json` / `.docx` | 4장 로그 수집과 탐지 규칙 (렌더 31쪽) |
 | `../../examples/rev01/chapter01/` | C01-01~26 복사용 명령, `manifest.json`, `casebook.txt`(사건 노트 양식) |
 | `../../examples/rev01/appendix-a/` | CA-01~08 복사용 명령, `manifest.json` |
 | `../../examples/rev01/chapter02/` | C02-01~09 복사용 명령, `manifest.json`, 사례(`case-ssh.json`·`.log`), `investigation.txt` |
@@ -17,6 +18,8 @@
 | `../../assets/figures/chapter02/rev01-*.png` | 2장 로드맵(2-1), SSH 출발지 경로(2-2), 원문→필드(2-4) |
 | `../../examples/rev01/chapter03/` | Q03-01~06 검색식, `queries.json`, `investigation.txt` |
 | `../../assets/figures/chapter03/rev01-*.png` | 3장 로드맵(3-1), 조건을 하나씩 더하는 검색(3-3) |
+| `../../examples/rev01/chapter04/` | C04-01~26 명령, Q04-01~02 검색식, Ruleset Test 입력 로그 3개, `book04_rules.xml`, `investigation.txt` |
+| `../../assets/figures/chapter04/rev01-*.png` | 4장 로드맵(4-1), 문장에 따른 하위 디코더·필드·규칙 차이(4-4) |
 
 ## 기존 1장 대비 변경
 
@@ -48,6 +51,16 @@
 6. **3.7 직접 남긴 기록 찾기 (신규)** — 2.2의 book02_probe를 data.srcuser, full_log, 같은 출발지의 실패·성공(5710·5760·5715) 순으로 찾는다. 결과가 없을 때 아카이브로 넘어가는 판단을 현장 노트로 넣었다.
 7. **3.8** — 아카이브 확인 단계를 추가하고 "검색 상태 원상복구"로 이름을 맞췄다. 절 번호 3.8·3.9는 기존과 같다.
 
+## 기존 4장 대비 변경
+
+1. **장 도입·정리** — 조사 질문 "기록은 어떻게 경보가 되는가". 3.7·3.8의 "아카이브 → 수집 단계" 확인을 이어받는다. 4.12의 완료 근거 표는 장 정리의 완료 점검표로 옮겼다.
+2. **4.1 단계별 확인 위치 표** — 원본 → 수집 설정 → 전달 → 분석 → 경보를 확인 위치·절과 연결하고, 4.11의 문제 해결 순서와 같게 맞췄다.
+3. **명령 정리** — 기존 C04-01~47을 같은 목적끼리 묶어 C04-01~26으로 줄였다(hostname+grep, chown+chmod 전후 ls, 검사+종료 상태, restart+status 등). 2.3에서 설명한 정규표현식·5700/5710 문법은 반복하지 않고 설치 파일 대조 한 블록(C04-08)만 남겼다. 같은 kt66-siem 셸을 4.5~4.9에서 이어 쓴다.
+4. **4.4 경보 0건을 실습 결과로** — 같은 검색식을 wazuh-alerts-*로 바꾸면 0건인 것을 3.8의 "아카이브에는 있고 경보에는 없는" 경우로 연결했다.
+5. **4.6 보이지 않는 것** — 문장에 따라 계정이 srcuser(5710) 또는 dstuser(5760)로 추출되어 data.srcuser 검색이 5760·5715를 놓친다. 도식 4-4 추가.
+6. **먼저 예측 3곳** — 문구가 아카이브·경보에 있을지, 바꾼 문장의 필드·규칙, 적용 전 문구가 경보가 될지.
+7. **4.10 원상복구 확인** — 규칙 삭제 후 문구를 다시 남겨 아카이브에만 있고 100410 경보가 없음을 확인하는 단계를 넣었다(기존 실측 `editorial/evidence/chapter04/collection-restored.json`).
+
 ## 새 조판 규칙 (`tools/build_chapter01.py` 확장, 기존 장과 호환)
 
 | 규칙 | JSON | 비고 |
@@ -75,6 +88,9 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter02.js
 python3 tools/diagrams_chapter03_rev01.py
 python3 tools/write_chapter03_rev01.py
 python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter03.json --output manuscript/REV01/volume01-chapter03.docx
+python3 tools/diagrams_chapter04_rev01.py
+python3 tools/write_chapter04_rev01.py
+python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter04.json --output manuscript/REV01/volume01-chapter04.docx
 ```
 
 `tools/check_chapter01.py`는 "JSON 1쪽 = 렌더 1쪽"을 검사하므로 흐름 조판인 REV01에는 맞지 않는다. REV01은 명령↔예제 파일 일치, `bash -n`, 줄 길이 60자 이하, 판형·글꼴·색을 따로 확인했다.
@@ -99,5 +115,6 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter03.js
 - 2장 2.2(C02-01~05)는 새 VM에서 실행 검증하지 않았다. 출발지 10.20.30.254는 기존 kt66 기록(book03_probe)과 kt66 소스(ext망 게이트웨이 .254, bastion 10.20.30.201)로 대조한 예상 결과이다. 실행 후 화면을 촬영해 넣는다.
 - 2장 C02-09(없는 경로)의 응답 코드는 확인하지 않았다. 본문은 "먼저 예측" 후 표에서 읽도록 썼다.
 - 3장 3.7(Q03-04~06)은 2.2를 실행한 VM에서 검색 검증하지 않았다. 결과 설명은 5710 동작(8장 증거)과 2.2의 예상 출발지에 근거한다. Connection closed by invalid user 줄의 필드 추출 여부는 확인하지 않아 "일 수 있다"로 썼다. 실행 후 화면을 촬영해 넣는다.
+- 4장의 명령·화면·결과는 2026-11-01 기존 kt66 실측(`editorial/chapter04-review.json`)을 따른다. 묶은 명령 블록(C04-02, 09, 12, 13, 14, 17, 21, 22, 25)은 같은 명령을 한 블록에 모은 것이며 블록 단위로 다시 실행하지 않았다.
 - 3장 화면 3-1~3-8은 기존 kt66(에이전트 ID 010 시기)의 화면이다. 현재 환경의 bastion 에이전트 ID는 001이다.
 - 렌더 쪽수는 LibreOffice 대체 글꼴 기준이다. 부크크 글꼴이 있는 Word에서 쪽 나눔을 다시 확인한다.

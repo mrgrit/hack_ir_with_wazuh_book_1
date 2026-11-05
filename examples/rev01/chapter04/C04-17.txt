@@ -1,0 +1,4 @@
+logger -p authpriv.notice -t book04 \
+  'book04-collection-01'
+grep -F 'book04: book04-collection-01' \
+  /var/log/auth.log

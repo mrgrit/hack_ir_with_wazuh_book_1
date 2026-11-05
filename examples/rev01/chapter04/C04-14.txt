@@ -1,0 +1,2 @@
+/var/ossec/bin/wazuh-control restart
+/var/ossec/bin/wazuh-control status
