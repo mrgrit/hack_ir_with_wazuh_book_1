@@ -1,0 +1,3 @@
+agent.name: "web" AND data.srcip: "10.20.30.254" AND
+((data.protocol: "POST" AND data.url: "/login.php")
+OR data.url: *username=*)

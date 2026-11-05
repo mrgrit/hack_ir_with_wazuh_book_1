@@ -1,0 +1,3 @@
+agent.name: "web"
+AND data.url: *vulnerabilities/brute/*
+AND data.url: *username=admin*

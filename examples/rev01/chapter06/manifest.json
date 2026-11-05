@@ -1,0 +1,173 @@
+[
+  {
+    "type": "command",
+    "id": "C06-01",
+    "where": "공격자 VM · 터미널",
+    "purpose": "Gobuster가 설치되어 있는지와 사용할 수 있는 옵션을 확인한다.",
+    "text": "gobuster -h",
+    "syntax": "-h는 사용법을 출력한다. Ubuntu 22.04의 패키지는 Gobuster 2.0.1이다.",
+    "result": "-m, -u, -w, -t, -a 옵션이 보인다. command not found이면 다음 명령으로 설치한다. 3 계열이면 dir 하위 명령을 쓰므로 C06-07의 구문을 그 버전의 도움말로 고친다."
+  },
+  {
+    "type": "command",
+    "id": "C06-02",
+    "where": "공격자 VM · 터미널",
+    "purpose": "(설치되어 있지 않을 때만) Gobuster를 설치한다.",
+    "text": "sudo apt update\nsudo apt install gobuster",
+    "syntax": "apt는 Ubuntu의 패키지 관리자이다. update는 설치 가능한 패키지 목록을 갱신하고, install은 지정한 패키지를 설치한다. 설치를 계속할지 물으면 Y를 입력한다.",
+    "result": "오류 없이 끝나면 gobuster -h를 다시 실행해 사용법을 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "C06-03",
+    "where": "공격자 VM · 터미널",
+    "purpose": "공격자 VM에서 DVWA 이름이 kt66 IP로 해석되는지 확인한다.",
+    "text": "getent hosts dvwa.kt66.lab",
+    "syntax": "5.12와 같은 명령이다. 도메인은 자신의 값으로 바꾼다.",
+    "result": "kt66의 WEB_HOST_IP가 나온다. 없으면 5.12의 hosts 등록을 먼저 한다."
+  },
+  {
+    "type": "command",
+    "id": "C06-04",
+    "where": "공격자 VM · 터미널",
+    "purpose": "(사전 확인) 같은 이름의 파일이 이미 있는지 확인한다.",
+    "text": "ls -l ~/book06-paths.txt",
+    "syntax": "물결표(~)는 현재 사용자의 홈 디렉터리이다.",
+    "result": "No such file or directory가 나오면 새로 만든다. 파일이 있으면 내용을 확인하고 다른 이름을 정해 이후 명령에서 모두 바꾼다."
+  },
+  {
+    "type": "command",
+    "id": "C06-05",
+    "where": "공격자 VM · 터미널",
+    "purpose": "경로 목록 파일을 만든다.",
+    "text": "nano ~/book06-paths.txt",
+    "syntax": "nano는 터미널 편집기이다. 아래 목록을 한 줄에 하나씩 23줄 입력한다. … 자리에는 book06-scan-02부터 19까지가 차례로 들어간다. **Ctrl+O**, **Enter**로 저장하고 **Ctrl+X**로 닫는다.",
+    "result": "편집기가 닫히고 프롬프트로 돌아온다."
+  },
+  {
+    "type": "command",
+    "id": "C06-06",
+    "where": "공격자 VM · 터미널",
+    "purpose": "(사후 확인) 저장된 목록을 확인한다.",
+    "text": "cat ~/book06-paths.txt",
+    "syntax": "cat은 파일 내용을 출력한다.",
+    "result": "23줄이 나온다. URL 전체가 아니라 경로만 들어 있어야 한다."
+  },
+  {
+    "type": "command",
+    "id": "C06-07",
+    "where": "공격자 VM · 터미널",
+    "purpose": "목록의 경로를 차례로 요청한다.",
+    "text": "gobuster -m dir \\\n  -u http://dvwa.kt66.lab/ \\\n  -w ~/book06-paths.txt -t 1 -a book06-scan",
+    "syntax": "옵션은 위 표와 같다. -a로 User-Agent를 book06-scan으로 바꿔 Gobuster의 요청을 원본 로그에서 구분할 수 있게 한다. 줄 끝의 역슬래시(\\)는 명령을 다음 줄로 잇는다.",
+    "result": "검증 환경에서는 /login.php (Status: 200)와 /robots.txt (Status: 200) 두 줄이 출력되었다. 실행 시각을 공격 일지에 적는다."
+  },
+  {
+    "type": "command",
+    "id": "C06-08",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-web 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-web /bin/bash",
+    "syntax": "5.4와 같은 명령이다.",
+    "result": "프롬프트가 kt66-web 안으로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C06-09",
+    "where": "kt66-web 컨테이너 · 셸",
+    "purpose": "Gobuster 요청의 원본 접속 로그를 읽는다.",
+    "text": "grep -F 'book06-scan' /var/log/apache2/dvwa_access.log",
+    "syntax": "grep -F로 User-Agent 표식을 글자 그대로 찾는다.",
+    "result": "각 줄의 출발지·시각·경로·응답 코드와 끝의 \"book06-scan\"을 읽는다. 404 줄 사이에 /login.php와 /robots.txt의 200 줄도 있다."
+  },
+  {
+    "type": "command",
+    "id": "C06-10",
+    "where": "kt66-web 컨테이너 · 셸",
+    "purpose": "kt66-web 셸에서 나온다.",
+    "text": "exit",
+    "syntax": "exit는 현재 셸을 끝낸다.",
+    "result": "kt66 VM의 프롬프트로 돌아온다."
+  },
+  {
+    "type": "command",
+    "id": "C06-11",
+    "where": "kt66 VM · 터미널",
+    "purpose": "kt66-siem 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-siem /bin/bash",
+    "syntax": "4.5와 같은 명령이다.",
+    "result": "프롬프트가 kt66-siem 안으로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C06-12",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "반복 4xx 규칙 31151의 정의 전체를 읽는다.",
+    "text": "sed -n '/<rule id=\"31151\"/,/<\\/rule>/p' \\\n  /var/ossec/ruleset/rules/0245-web_rules.xml",
+    "syntax": "sed는 텍스트의 줄을 골라 출력하거나 바꾸는 도구이다. -n은 자동 출력을 끄고, 끝의 p는 선택한 줄을 출력한다. /시작/,/끝/은 시작 패턴이 있는 줄부터 끝 패턴이 있는 줄까지를 고른다. 끝 패턴의 \\/는 슬래시(/) 문자 자체를 뜻한다. 작은따옴표는 식 전체를 셸이 해석하지 않고 sed에 넘긴다.",
+    "result": "rule id=\"31151\" level=\"10\" frequency=\"14\" timeframe=\"90\", if_matched_sid 31101, same_source_ip, 설명, 그룹 web_scan·recon이 나온다."
+  },
+  {
+    "type": "command",
+    "id": "C06-13",
+    "where": "kt66-siem 컨테이너 · 셸",
+    "purpose": "kt66-siem 셸에서 나온다.",
+    "text": "exit",
+    "syntax": "C06-10과 같다.",
+    "result": "kt66 VM의 프롬프트로 돌아온다."
+  },
+  {
+    "type": "command",
+    "id": "C06-14",
+    "where": "kt66 VM · 터미널",
+    "purpose": "DVWA 애플리케이션 컨테이너의 셸로 들어간다.",
+    "text": "docker exec -it kt66-dvwa /bin/bash",
+    "syntax": "컨테이너 이름만 다르다.",
+    "result": "프롬프트가 kt66-dvwa 안으로 바뀐다."
+  },
+  {
+    "type": "command",
+    "id": "C06-15",
+    "where": "kt66-dvwa 컨테이너 · 셸",
+    "purpose": "두 로그인 기능이 입력을 받고 결과를 나누는 코드를 찾는다.",
+    "text": "grep -nE 'checkToken|generateSessionToken|dvwaRedirect' \\\n  /var/www/html/login.php\ngrep -nE 'GET|Welcome|incorrect' \\\n  /var/www/html/vulnerabilities/brute/source/low.php",
+    "syntax": "-n은 줄 번호, -E는 확장 정규표현식이다. 이 정규표현식에서 파이프(|)는 또는(OR)을 뜻한다. 파일은 읽기만 한다.",
+    "result": "login.php에서 토큰 확인(checkToken)과 login.php·index.php로의 이동(dvwaRedirect)이, low.php에서 $_GET으로 username·password를 읽고 Welcome·incorrect 문구로 나누는 줄이 나온다."
+  },
+  {
+    "type": "command",
+    "id": "C06-16",
+    "where": "kt66-dvwa 컨테이너 · 셸",
+    "purpose": "kt66-dvwa 셸에서 나온다.",
+    "text": "exit",
+    "syntax": "C06-10과 같다.",
+    "result": "kt66 VM의 프롬프트로 돌아온다."
+  },
+  {
+    "type": "command",
+    "id": "C06-17",
+    "where": "공격자 VM · 터미널",
+    "purpose": "공격자 VM에서 이번에 만든 경로 목록을 확인하고 지운다.",
+    "text": "cat ~/book06-paths.txt\nrm -i ~/book06-paths.txt\nls -l ~/book06-paths.txt",
+    "syntax": "cat으로 지울 파일이 이번 목록인지 확인한다. rm -i는 지우기 전에 확인을 묻는다. 표시된 경로가 맞으면 y를 입력한다.",
+    "result": "마지막 ls -l이 No such file or directory를 출력한다."
+  },
+  {
+    "type": "command",
+    "id": "C06-18",
+    "where": "공격자 VM · 터미널",
+    "purpose": "User-Agent를 바꾼 요청을 보낸다.",
+    "text": "curl -i --max-time 15 \\\n  -A \"sqlmap/1.0 book06-curl-ua\" \\\n  http://dvwa.kt66.lab/book06-curl-ua",
+    "syntax": "큰따옴표는 공백이 든 헤더 값을 하나의 인자로 묶는다.",
+    "result": "검증 환경에서는 HTTP/1.1 403 Forbidden이었다. Discover에서 data.url: *book06-curl-ua*로 찾고 WAF 메시지 913100을 확인한다."
+  },
+  {
+    "type": "command",
+    "id": "C06-19",
+    "where": "공격자 VM · 터미널",
+    "purpose": "PROPFIND 메서드로 요청한다.",
+    "text": "curl -i --max-time 15 -X PROPFIND \\\n  http://dvwa.kt66.lab/book06-curl-method",
+    "syntax": "-X 뒤의 값이 요청 메서드가 된다.",
+    "result": "검증 환경에서는 403이었다. data.url: *book06-curl-method*로 찾고 data.protocol PROPFIND와 WAF 메시지 911100을 확인한다."
+  }
+]

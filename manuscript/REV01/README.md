@@ -1,4 +1,4 @@
-# REV01 — 재작성본 (1~5장·부록 A)
+# REV01 — 재작성본 (1~6장·부록 A)
 
 기존 `manuscript/volume01-chapter0N.*`은 그대로 두고, 재작성본을 이 디렉터리에 둔다. 검토 후 채택하면 기존 파일을 교체한다.
 
@@ -12,6 +12,7 @@
 | `volume01-chapter03.json` / `.docx` | 3장 Wazuh 기본 운용 (렌더 20쪽) |
 | `volume01-chapter04.json` / `.docx` | 4장 로그 수집과 탐지 규칙 (렌더 31쪽) |
 | `volume01-chapter05.json` / `.docx` | 5장 웹 공격의 시작과 입력값 검증 (렌더 44쪽) |
+| `volume01-chapter06.json` / `.docx` | 6장 웹 탐색과 인증 공격 (렌더 34쪽) |
 | `../../examples/rev01/chapter01/` | C01-01~26 복사용 명령, `manifest.json`, `casebook.txt`(사건 노트 양식) |
 | `../../examples/rev01/appendix-a/` | CA-01~08 복사용 명령, `manifest.json` |
 | `../../examples/rev01/chapter02/` | C02-01~09 복사용 명령, `manifest.json`, 사례(`case-ssh.json`·`.log`), `investigation.txt` |
@@ -23,6 +24,8 @@
 | `../../assets/figures/chapter04/rev01-*.png` | 4장 로드맵(4-1), 문장에 따른 하위 디코더·필드·규칙 차이(4-4) |
 | `../../examples/rev01/chapter05/` | C05-01~24 명령, Q05-01~07 검색식, B05-01~08 브라우저 입력, `browser/` 원문, `investigation.txt` |
 | `../../assets/figures/chapter05/rev01-*.png` | 5장 로드맵(5-1), 입력의 도달 지점과 확인할 기록(5-3) |
+| `../../examples/rev01/chapter06/` | C06-01~19 명령, Q06-01~12 검색식, D06-01.json(Dev Tools 집계), B06 입력, paths.txt, records/, `investigation.txt` |
+| `../../assets/figures/chapter06/rev01-*.png` | 6장 로드맵(6-1), 출발지별 타임라인(6-7) |
 
 ## 기존 1장 대비 변경
 
@@ -74,6 +77,16 @@
 6. **명령 정리** — 기존 C05-01~37을 C05-01~24로 줄였다(cd 제거, 설정 grep 묶기, 시각 확인 묶기, 두 경로 curl 한 블록). curl 문자열은 기존과 같고 실행 결과는 이전 검증 기록을 인용한다.
 7. **절 번호** — 기존 5.12(조사 결과 정리)는 5.9 요약 표와 5.11 기록으로 합치고, curl 선택 실습을 5.13에서 5.12로 당겼다.
 
+## 기존 6장 대비 변경 — Wazuh 분석 과정 보강
+
+1. **두 단계 구성** — 6.1~6.5는 공격을 보내며 공격 일지를 쓰고, 6.6~6.7은 일지를 덮고 표식 없이 경보만으로 다시 찾는다(사용자 지적 "Wazuh 필터링·분석 과정이 부족" 반영).
+2. **6.6 분포와 필터** — 필드 상위 값(data.srcip·rule.id·data.id·data.protocol), Filter for/out value, 필터 반전·비활성화, Dev Tools terms 집계(D06-01, 출발지 → 규칙 중첩).
+3. **6.7 피벗과 타임라인** — 최다 출발지로 피벗 → 시간순 정렬(0.05초 22건 = 자동 도구) → 아카이브 `NOT data.id: "404"`로 공격자가 찾아낸 200 경로 확인 → 두 번째 출발지의 인증 요청 → 타임라인 도식 → 공격 일지와 대조 표(탐지 공백).
+4. **보이지 않는 것** — Gobuster 화면은 404를 숨기고 경보는 200을 숨긴다. 웹 로그인 6회는 경보 0건(302·200, POST 본문·Location 없음).
+5. **31151 해석** — 별도 경보가 아니라 조건을 채운 404 한 건에 31101 대신 붙는다(증거 기록 확인). 그룹 web_scan·recon으로 계열 검색.
+6. **구성 정리** — 관리 경로를 6.2로, User-Agent·메서드를 6.3으로 합쳤다. 명령 C06-01~28 → C06-01~19.
+7. 6.6~6.7의 건수(30·22·8, NOT 404 3건, 인증 6건, 집계 버킷)는 같은 시간 범위의 저장 기록(`editorial/evidence/chapter06/wazuh-alerts-records.json`, `wazuh-archives-records.json`)을 센 값이다.
+
 ## 새 조판 규칙 (`tools/build_chapter01.py` 확장, 기존 장과 호환)
 
 | 규칙 | JSON | 비고 |
@@ -107,6 +120,9 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter04.js
 python3 tools/diagrams_chapter05_rev01.py
 python3 tools/write_chapter05_rev01.py
 python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter05.json --output manuscript/REV01/volume01-chapter05.docx
+python3 tools/diagrams_chapter06_rev01.py
+python3 tools/write_chapter06_rev01.py
+python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter06.json --output manuscript/REV01/volume01-chapter06.docx
 ```
 
 `tools/check_chapter01.py`는 "JSON 1쪽 = 렌더 1쪽"을 검사하므로 흐름 조판인 REV01에는 맞지 않는다. REV01은 명령↔예제 파일 일치, `bash -n`, 줄 길이 60자 이하, 판형·글꼴·색을 따로 확인했다.
@@ -133,5 +149,6 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter05.js
 - 3장 3.7(Q03-04~06)은 2.2를 실행한 VM에서 검색 검증하지 않았다. 결과 설명은 5710 동작(8장 증거)과 2.2의 예상 출발지에 근거한다. Connection closed by invalid user 줄의 필드 추출 여부는 확인하지 않아 "일 수 있다"로 썼다. 실행 후 화면을 촬영해 넣는다.
 - 4장의 명령·화면·결과는 2026-11-01 기존 kt66 실측(`editorial/chapter04-review.json`)을 따른다. 묶은 명령 블록(C04-02, 09, 12, 13, 14, 17, 21, 22, 25)은 같은 명령을 한 블록에 모은 것이며 블록 단위로 다시 실행하지 않았다.
 - 5장의 브라우저·Wazuh 결과는 2026-11-01 실측(`editorial/chapter05-review.json`)이다. Windows hosts 편집·ipconfig·시간 설정은 실제 Windows에서 실행하지 않았다(UI 검증은 Linux Chromium). 5.12 curl은 이번에 다시 실행하지 않았다.
+- 6장 화면 6-12(필드 상세)·6-13(값 필터)은 촬영 자리로 두었다. Discover 필드 세부 정보 버튼·Filter for/out value·Exclude results·Temporarily disable과 Dev Tools 메뉴 위치(Indexer management → Dev Tools)는 OpenSearch Dashboards 2.16 기준 설명이며 kt66 화면에서 확인하지 않았다. D06-01 요청도 실행하지 않았다(결과 값은 저장 기록으로 계산).
 - 3장 화면 3-1~3-8은 기존 kt66(에이전트 ID 010 시기)의 화면이다. 현재 환경의 bastion 에이전트 ID는 001이다.
 - 렌더 쪽수는 LibreOffice 대체 글꼴 기준이다. 부크크 글꼴이 있는 Word에서 쪽 나눔을 다시 확인한다.

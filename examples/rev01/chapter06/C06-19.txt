@@ -1,0 +1,2 @@
+curl -i --max-time 15 -X PROPFIND \
+  http://dvwa.kt66.lab/book06-curl-method

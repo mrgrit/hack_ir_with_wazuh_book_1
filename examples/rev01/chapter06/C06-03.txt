@@ -1,0 +1,1 @@
+getent hosts dvwa.kt66.lab

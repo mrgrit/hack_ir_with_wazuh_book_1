@@ -1,0 +1,3 @@
+cat ~/book06-paths.txt
+rm -i ~/book06-paths.txt
+ls -l ~/book06-paths.txt

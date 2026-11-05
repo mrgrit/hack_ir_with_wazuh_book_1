@@ -1,0 +1,4 @@
+grep -nE 'checkToken|generateSessionToken|dvwaRedirect' \
+  /var/www/html/login.php
+grep -nE 'GET|Welcome|incorrect' \
+  /var/www/html/vulnerabilities/brute/source/low.php

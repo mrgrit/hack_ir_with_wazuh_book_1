@@ -1,0 +1,119 @@
+[
+  {
+    "type": "query",
+    "id": "Q06-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "관리 경로 후보 네 개의 경보를 찾는다.",
+    "text": "agent.name: \"web\"\nAND data.url: (\"/admin/\" OR \"/phpmyadmin/\"\nOR \"/wp-admin/\" OR \"/manager/html\")",
+    "syntax": "값 자리의 괄호와 OR는 data.url이 넷 중 하나와 일치하는 기록을 고른다. 세 줄을 함께 입력한다.",
+    "result": "검증 환경에서는 네 요청 모두 404, 규칙 31101(Web server 400 error code.)이었다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "같은 출발지의 반복된 4xx 경보를 찾는다.",
+    "text": "agent.name: \"web\" AND rule.id: \"31151\"",
+    "syntax": "31151은 같은 출발지에서 31101이 짧은 시간에 반복되면 붙는 규칙이다. 기간은 Gobuster 실행 시각의 앞뒤 1분으로 지정한다.",
+    "result": "검증 환경에서 한 건이 나왔다. data.srcip가 공격자 VM의 주소이다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "User-Agent에 sqlmap이 들어간 요청을 찾는다.",
+    "text": "agent.name: \"web\" AND data.url: \"/book06-ua\"\nAND full_log: \"sqlmap\"",
+    "syntax": "User-Agent는 별도 필드로 추출되지 않으므로 원문 full_log에서 찾는다.",
+    "result": "data.id가 403이고 full_log 끝에 sqlmap/1.0 book06-ua가 있다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-04",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "purpose": "같은 요청의 WAF 감사 기록을 찾는다.",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *book06-ua*",
+    "syntax": "5.6과 같은 형식이다.",
+    "result": "intercepted: true, 응답 403이다. messages에 913100과 949110이 있다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-05",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "PROPFIND 요청의 경보를 찾는다.",
+    "text": "agent.name: \"web\" AND data.protocol: \"PROPFIND\"\nAND data.url: \"/book06-method\"",
+    "syntax": "data.protocol은 웹 접속 로그에서 HTTP 메서드이다.",
+    "result": "data.protocol PROPFIND, data.id 403이다. 같은 경로로 감사 기록을 찾으면(Q06-04의 마지막 조건을 *book06-method*로 바꾼다) messages에 911100과 949110이 있다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-06",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "긴 URL 경보를 찾는다.",
+    "text": "agent.name: \"web\" AND rule.id: \"31115\"\nAND data.url: *book06-long*",
+    "syntax": "31115는 로그 이벤트의 크기 조건(maxsize)으로 일치하는 규칙이다.",
+    "result": "검증 환경에서 data.id 200, rule.id 31115(URL too long…)였다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-07",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "purpose": "일반 로그인 제출 요청을 찾는다.",
+    "text": "agent.name: \"web\" AND data.protocol: \"POST\"\nAND data.url: \"/login.php\"",
+    "syntax": "인덱스 패턴을 wazuh-archives-*로 바꾼다. 경보 인덱스에서는 0건이다.",
+    "result": "세 POST 요청이 나오고 모두 302이다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-08",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "purpose": "Brute Force 메뉴의 인증 시도를 찾는다.",
+    "text": "agent.name: \"web\"\nAND data.url: *vulnerabilities/brute/*\nAND data.url: *username=admin*",
+    "syntax": "경로와 admin 입력을 함께 찾는다.",
+    "result": "세 요청이 나오고 모두 200이다. URL에 password=… 값이 그대로 남아 있다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-09",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "실습 시간대의 web 경보 전체를 본다.",
+    "text": "agent.name: \"web\"",
+    "syntax": "조건을 에이전트 하나로만 두고 나머지는 시간 범위로 제한한다.",
+    "result": "검증 환경(21:31:58~21:32:32)에서는 30건이었다."
+  },
+  {
+    "type": "query",
+    "id": "D06-01",
+    "where": "Windows · Indexer management · Dev Tools",
+    "purpose": "시간 범위 안의 web 경보를 출발지별로, 그 안에서 규칙별로 센다.",
+    "text": "GET wazuh-alerts-*/_search\n{\n  \"size\": 0,\n  \"query\": {\"bool\": {\"filter\": [\n    {\"term\": {\"agent.name\": \"web\"}},\n    {\"range\": {\"timestamp\": {\n      \"gte\": \"2026-11-01T21:31:58+09:00\",\n      \"lte\": \"2026-11-01T21:32:32+09:00\"}}}\n  ]}},\n  \"aggs\": {\"by_src\": {\n    \"terms\": {\"field\": \"data.srcip\"},\n    \"aggs\": {\"by_rule\": {\"terms\": {\"field\": \"rule.id\"}}}\n  }}\n}",
+    "syntax": "GET 인덱스/_search는 검색 요청이다. size 0은 문서를 돌려받지 않고 집계만 받는다. bool.filter는 에이전트 이름과 시간 범위 조건이다. aggs의 terms는 필드 값별 건수를 세고, 안쪽 aggs가 출발지마다 rule.id를 다시 센다. 요청 줄 오른쪽의 실행 버튼(▶)을 누른다.",
+    "result": "aggregations.by_src.buckets에 출발지별 doc_count가, 각 버킷의 by_rule에 규칙별 건수가 나온다. 저장된 검증 기록으로 세면 192.168.0.202는 22건(31101 21, 31151 1), 10.20.30.254는 8건(31101 7, 31115 1)이다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-10",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "한 출발지의 경보를 시간순으로 읽는다.",
+    "text": "agent.name: \"web\" AND data.srcip: \"192.168.0.202\"",
+    "syntax": "Time 열 머리글을 눌러 오래된 순으로 정렬하고 data.url, data.id, rule.id 열을 추가한다(3.5).",
+    "result": "22건이 21:32:02.191부터 .243 사이, 0.05초 안에 몰려 있다. 첫 요청은 무작위 문자열 경로이고, 이어서 /admin/, /book06-scan-01~20이 순서대로 나온다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-11",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "purpose": "같은 출발지의 요청 중 404가 아닌 것을 아카이브에서 찾는다.",
+    "text": "agent.name: \"web\" AND data.srcip: \"192.168.0.202\"\nAND NOT data.id: \"404\"",
+    "syntax": "인덱스 패턴을 wazuh-archives-*로 바꾼다. NOT은 뒤의 조건을 만족하지 않는 기록을 고른다.",
+    "result": "검증 환경에서 세 건이 나왔다: / (302), /login.php (200), /robots.txt (200). 공격자가 찾아낸 경로이다."
+  },
+  {
+    "type": "query",
+    "id": "Q06-12",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "purpose": "같은 출발지의 로그인 제출과 GET 인증 시도를 함께 찾는다.",
+    "text": "agent.name: \"web\" AND data.srcip: \"10.20.30.254\" AND\n((data.protocol: \"POST\" AND data.url: \"/login.php\")\nOR data.url: *username=*)",
+    "syntax": "안쪽 괄호는 “POST이면서 /login.php”를 한 조건으로 묶고, OR로 username=이 든 URL을 더한다. 10.20.30.254는 자신의 data.srcip로 바꾼다.",
+    "result": "검증 환경에서 여섯 건이다. 세 번째 POST와 같은 시각에 같은 출발지의 GET /index.php가 있다(검색 조건을 빼고 그 시각 앞뒤를 보면 나온다). 그 POST가 로그인 성공이다. Brute Force의 세 번째 요청 URL에는 password=password가 보인다."
+  }
+]

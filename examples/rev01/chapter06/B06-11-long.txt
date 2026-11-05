@@ -1,0 +1,1 @@
+location.href = '/?book06-long=' + 'A'.repeat(8000);

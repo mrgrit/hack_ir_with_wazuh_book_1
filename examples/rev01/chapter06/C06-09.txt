@@ -1,0 +1,1 @@
+grep -F 'book06-scan' /var/log/apache2/dvwa_access.log

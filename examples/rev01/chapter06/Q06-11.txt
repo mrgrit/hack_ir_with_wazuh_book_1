@@ -1,0 +1,2 @@
+agent.name: "web" AND data.srcip: "192.168.0.202"
+AND NOT data.id: "404"
