@@ -1,0 +1,80 @@
+{
+  "_index": "wazuh-alerts-4.x-2026.11.01",
+  "_id": "gvkGl6EBEYWT20nnfMA8",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "ip": "10.20.32.80",
+      "name": "web",
+      "id": "013"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "data": {
+      "protocol": "GET",
+      "srcip": "10.20.30.254",
+      "id": "403",
+      "url": "/vulnerabilities/fi/?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-browser-path"
+    },
+    "rule": {
+      "firedtimes": 2,
+      "mail": false,
+      "level": 5,
+      "pci_dss": [
+        "6.5",
+        "11.4"
+      ],
+      "tsc": [
+        "CC6.6",
+        "CC7.1",
+        "CC8.1",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ],
+      "description": "Web server 400 error code.",
+      "groups": [
+        "web",
+        "accesslog",
+        "attack"
+      ],
+      "id": "31101",
+      "nist_800_53": [
+        "SA.11",
+        "SI.4"
+      ],
+      "gdpr": [
+        "IV_35.7.d"
+      ]
+    },
+    "location": "/var/log/apache2/dvwa_access.log",
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "id": "1793535145.147205575",
+    "full_log": "10.20.30.254 - - [01/Nov/2026:21:12:24 +0900] \"GET /vulnerabilities/fi/?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-browser-path HTTP/1.1\" 403 493 \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36\"",
+    "timestamp": "2026-11-01T12:12:25.196+0000"
+  },
+  "fields": {
+    "timestamp": [
+      "2026-11-01T12:12:25.196Z"
+    ]
+  },
+  "highlight": {
+    "data.url": [
+      "@opensearch-dashboards-highlighted-field@/vulnerabilities/fi/?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&bookcase=book05-browser-path@/opensearch-dashboards-highlighted-field@"
+    ],
+    "agent.name": [
+      "@opensearch-dashboards-highlighted-field@web@/opensearch-dashboards-highlighted-field@"
+    ]
+  },
+  "sort": [
+    1793535145196
+  ]
+}

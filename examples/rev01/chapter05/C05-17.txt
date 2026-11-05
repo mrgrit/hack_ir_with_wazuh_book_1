@@ -1,0 +1,2 @@
+date -Is
+timedatectl status

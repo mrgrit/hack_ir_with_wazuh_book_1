@@ -1,0 +1,3 @@
+getent hosts dvwa.kt66.lab
+DVWA='http://dvwa.kt66.lab'
+echo "$DVWA"

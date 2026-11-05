@@ -1,0 +1,2 @@
+grep -n -A 9 '<rule id="31104"' \
+  /var/ossec/ruleset/rules/0245-web_rules.xml

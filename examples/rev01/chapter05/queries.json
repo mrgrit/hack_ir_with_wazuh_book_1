@@ -1,0 +1,65 @@
+[
+  {
+    "type": "query",
+    "id": "Q05-01",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "purpose": "정상 조회 요청의 수집 기록을 찾는다.",
+    "text": "agent.name: \"web\"\nAND data.url: \"/vulnerabilities/sqli/?id=1&Submit=Submit\"",
+    "syntax": "Discover에서 wazuh-archives-*를 고르고 기간을 요청 시각 앞뒤 5분으로 정한다. data.url은 디코더가 접속 로그에서 꺼낸 요청 경로와 쿼리이다.",
+    "result": "요청 시각의 행이 나온다. 정상 요청에 일치하는 경보 규칙이 없어 wazuh-alerts-*에서는 같은 검색이 0건이다."
+  },
+  {
+    "type": "query",
+    "id": "Q05-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "SQL 실습 경로에 UNION을 보낸 요청의 경보를 찾는다.",
+    "text": "agent.name: \"web\" AND data.url: *vulnerabilities/sqli/*\nAND data.url: *UNION*",
+    "syntax": "별표(*)는 임의의 문자열과 일치한다. 두 data.url 조건을 AND로 묶어 경로와 문자열을 모두 포함한 URL을 고른다.",
+    "result": "요청 시각의 행이 나온다. rule.id·data.id·data.url을 조사 기록에 적는다."
+  },
+  {
+    "type": "query",
+    "id": "Q05-03",
+    "where": "Windows · Discover · wazuh-archives-*",
+    "purpose": "SQL 요청에 대한 WAF 감사 기록을 찾는다.",
+    "text": "agent.name: \"web\"\nAND location: \"/var/log/apache2/modsec_audit.log\"\nAND data.request.request_line: *UNION*",
+    "syntax": "감사 기록은 경보 규칙과 관계없이 아카이브에 있으므로 인덱스 패턴을 wazuh-archives-*로 바꾼다. location으로 감사 로그를, request_line으로 SQL 요청을 고른다.",
+    "result": "한 행을 펼쳐 request_line의 SQL 입력, 시각, 출발지를 5.5의 접속 로그와 대조한다."
+  },
+  {
+    "type": "query",
+    "id": "Q05-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "XSS 실습 경로의 XSS 경보를 찾는다.",
+    "text": "agent.name: \"web\" AND data.url: *vulnerabilities/xss_r/*\nAND rule.id: \"31105\"",
+    "syntax": "5.5와 같은 형식이다. 31105는 Wazuh의 XSS 시도 규칙이다.",
+    "result": "요청 시각의 행에서 data.url의 %3Cscript%3E(<script>)와 data.id 403을 읽는다."
+  },
+  {
+    "type": "query",
+    "id": "Q05-05",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "두 경로 요청의 경보를 함께 찾는다.",
+    "text": "agent.name: \"web\"\nAND data.url: *book05-browser-path*",
+    "syntax": "두 요청의 표식에 모두 book05-browser-path가 들어 있으므로 한 번에 나온다.",
+    "result": "두 행의 data.url·data.id·rule.id를 비교한다."
+  },
+  {
+    "type": "query",
+    "id": "Q05-06",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "경로 조작 규칙에 일치한 요청과 파일명 문자열이 들어간 요청을 함께 찾는다.",
+    "text": "agent.name: \"web\" AND\n(rule.id: \"31104\" OR data.url: *etc*passwd*)",
+    "syntax": "괄호 안의 OR로 두 조건 중 하나를 만족하는 기록을 고른다. *etc*passwd*는 etc와 passwd 사이가 / 이든 %2F이든 일치한다.",
+    "result": "31104 요청과 31101 요청이 함께 나온다. 실습 밖의 기록도 나올 수 있다."
+  },
+  {
+    "type": "query",
+    "id": "Q05-07",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "같은 출발지의 경로 조작 요청만 남긴다.",
+    "text": "agent.name: \"web\" AND data.srcip: \"10.20.30.254\"\nAND (rule.id: \"31104\" OR data.url: *etc*passwd*)",
+    "syntax": "10.20.30.254를 5.4에서 읽은 자신의 data.srcip로 바꾼다. 기간은 실습 시작부터 끝까지로 정한다.",
+    "result": "같은 출발지의 요청을 시각 순서로 읽는다."
+  }
+]

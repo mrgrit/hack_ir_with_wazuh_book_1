@@ -1,4 +1,4 @@
-# REV01 — 재작성본 (1~4장·부록 A)
+# REV01 — 재작성본 (1~5장·부록 A)
 
 기존 `manuscript/volume01-chapter0N.*`은 그대로 두고, 재작성본을 이 디렉터리에 둔다. 검토 후 채택하면 기존 파일을 교체한다.
 
@@ -11,6 +11,7 @@
 | `volume01-chapter02.json` / `.docx` | 2장 공격과 보안관제의 기초 (렌더 23쪽) |
 | `volume01-chapter03.json` / `.docx` | 3장 Wazuh 기본 운용 (렌더 20쪽) |
 | `volume01-chapter04.json` / `.docx` | 4장 로그 수집과 탐지 규칙 (렌더 31쪽) |
+| `volume01-chapter05.json` / `.docx` | 5장 웹 공격의 시작과 입력값 검증 (렌더 44쪽) |
 | `../../examples/rev01/chapter01/` | C01-01~26 복사용 명령, `manifest.json`, `casebook.txt`(사건 노트 양식) |
 | `../../examples/rev01/appendix-a/` | CA-01~08 복사용 명령, `manifest.json` |
 | `../../examples/rev01/chapter02/` | C02-01~09 복사용 명령, `manifest.json`, 사례(`case-ssh.json`·`.log`), `investigation.txt` |
@@ -20,6 +21,8 @@
 | `../../assets/figures/chapter03/rev01-*.png` | 3장 로드맵(3-1), 조건을 하나씩 더하는 검색(3-3) |
 | `../../examples/rev01/chapter04/` | C04-01~26 명령, Q04-01~02 검색식, Ruleset Test 입력 로그 3개, `book04_rules.xml`, `investigation.txt` |
 | `../../assets/figures/chapter04/rev01-*.png` | 4장 로드맵(4-1), 문장에 따른 하위 디코더·필드·규칙 차이(4-4) |
+| `../../examples/rev01/chapter05/` | C05-01~24 명령, Q05-01~07 검색식, B05-01~08 브라우저 입력, `browser/` 원문, `investigation.txt` |
+| `../../assets/figures/chapter05/rev01-*.png` | 5장 로드맵(5-1), 입력의 도달 지점과 확인할 기록(5-3) |
 
 ## 기존 1장 대비 변경
 
@@ -61,6 +64,16 @@
 6. **먼저 예측 3곳** — 문구가 아카이브·경보에 있을지, 바꾼 문장의 필드·규칙, 적용 전 문구가 경보가 될지.
 7. **4.10 원상복구 확인** — 규칙 삭제 후 문구를 다시 남겨 아카이브에만 있고 100410 경보가 없음을 확인하는 단계를 넣었다(기존 실측 `editorial/evidence/chapter04/collection-restored.json`).
 
+## 기존 5장 대비 변경
+
+1. **판정 틀** — 조사 질문 "입력은 어디까지 전달되었는가"를 다섯 도달 지점(브라우저 송신 → 웹 서버 도착 → WAF 판정 → 애플리케이션 처리 → 결과)과 지점별 기록으로 정리했다(도식 5-3). 5.9의 요약 표에 요청마다 도달 지점을 적는다.
+2. **공격 일지 시작** — 머리말·1.8의 사건 노트를 5장부터 쓴다. Windows 출발지를 `ipconfig`(C05-02)로 적고 data.srcip와 비교해, 다르면 그 이유를 조사 기록에 남기도록 했다(11장 대조의 준비).
+3. **5.4 기준 기록** — 정상 요청이 경보 0건·아카이브에만 있음을 "먼저 예측"으로 확인한다. 검증 화면의 10.20.30.254는 저자 브라우저 경로 값임을 밝혔다.
+4. **5.8 보이지 않는 것** — `..%2F`는 31104 조건(../.., %2E%2E)에 없어서 403 때문에 31101만 붙었다. 규칙 조건상 같은 요청이 200이면 경보가 없다(0245-web_rules.xml 대조).
+5. **5.9 31106 해석** — 조건은 공격 문자열 + 응답 200이므로 4 지점의 일부만 확인한 것으로 정리했다.
+6. **명령 정리** — 기존 C05-01~37을 C05-01~24로 줄였다(cd 제거, 설정 grep 묶기, 시각 확인 묶기, 두 경로 curl 한 블록). curl 문자열은 기존과 같고 실행 결과는 이전 검증 기록을 인용한다.
+7. **절 번호** — 기존 5.12(조사 결과 정리)는 5.9 요약 표와 5.11 기록으로 합치고, curl 선택 실습을 5.13에서 5.12로 당겼다.
+
 ## 새 조판 규칙 (`tools/build_chapter01.py` 확장, 기존 장과 호환)
 
 | 규칙 | JSON | 비고 |
@@ -91,6 +104,9 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter03.js
 python3 tools/diagrams_chapter04_rev01.py
 python3 tools/write_chapter04_rev01.py
 python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter04.json --output manuscript/REV01/volume01-chapter04.docx
+python3 tools/diagrams_chapter05_rev01.py
+python3 tools/write_chapter05_rev01.py
+python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter05.json --output manuscript/REV01/volume01-chapter05.docx
 ```
 
 `tools/check_chapter01.py`는 "JSON 1쪽 = 렌더 1쪽"을 검사하므로 흐름 조판인 REV01에는 맞지 않는다. REV01은 명령↔예제 파일 일치, `bash -n`, 줄 길이 60자 이하, 판형·글꼴·색을 따로 확인했다.
@@ -116,5 +132,6 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter04.js
 - 2장 C02-09(없는 경로)의 응답 코드는 확인하지 않았다. 본문은 "먼저 예측" 후 표에서 읽도록 썼다.
 - 3장 3.7(Q03-04~06)은 2.2를 실행한 VM에서 검색 검증하지 않았다. 결과 설명은 5710 동작(8장 증거)과 2.2의 예상 출발지에 근거한다. Connection closed by invalid user 줄의 필드 추출 여부는 확인하지 않아 "일 수 있다"로 썼다. 실행 후 화면을 촬영해 넣는다.
 - 4장의 명령·화면·결과는 2026-11-01 기존 kt66 실측(`editorial/chapter04-review.json`)을 따른다. 묶은 명령 블록(C04-02, 09, 12, 13, 14, 17, 21, 22, 25)은 같은 명령을 한 블록에 모은 것이며 블록 단위로 다시 실행하지 않았다.
+- 5장의 브라우저·Wazuh 결과는 2026-11-01 실측(`editorial/chapter05-review.json`)이다. Windows hosts 편집·ipconfig·시간 설정은 실제 Windows에서 실행하지 않았다(UI 검증은 Linux Chromium). 5.12 curl은 이번에 다시 실행하지 않았다.
 - 3장 화면 3-1~3-8은 기존 kt66(에이전트 ID 010 시기)의 화면이다. 현재 환경의 bastion 에이전트 ID는 001이다.
 - 렌더 쪽수는 LibreOffice 대체 글꼴 기준이다. 부크크 글꼴이 있는 Word에서 쪽 나눔을 다시 확인한다.

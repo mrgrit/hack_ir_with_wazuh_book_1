@@ -1,0 +1,2 @@
+agent.name: "web" AND data.url: *vulnerabilities/sqli/*
+AND data.url: *UNION*

@@ -1,0 +1,2 @@
+curl --version
+ip -br -4 address

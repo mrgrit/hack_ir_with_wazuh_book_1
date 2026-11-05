@@ -1,0 +1,4 @@
+grep -F -B 1 -A 1 '*_access.log' \
+  /var/ossec/etc/ossec.conf
+grep -F -B 1 -A 1 'modsec_audit.log' \
+  /var/ossec/etc/ossec.conf

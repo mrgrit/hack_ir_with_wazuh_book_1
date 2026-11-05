@@ -1,0 +1,2 @@
+grep -F '/vulnerabilities/sqli/?id=1&Submit=Submit' \
+  /var/log/apache2/dvwa_access.log
