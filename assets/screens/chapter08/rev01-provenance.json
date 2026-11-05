@@ -1,0 +1,24 @@
+[
+ {
+  "asset": "assets/screens/chapter08/rev01-histogram.png",
+  "original": "editorial/evidence/chapter08/2026-11-02/Q08-01-query.png",
+  "original_sha256": "e867183afa4faee3e1d95d8d7e6cdbef18b4cd65fa9f72183fec1b4b42017e54",
+  "crop_xyxy": [
+   275,
+   140,
+   1295,
+   405
+  ]
+ },
+ {
+  "asset": "assets/screens/chapter08/rev01-pivot.png",
+  "original": "editorial/evidence/chapter08/2026-11-02/Q08-05-query.png",
+  "original_sha256": "421d2863de004d0a08126918383cab55c2aa49d14550d6a5261bfce387d08e64",
+  "crop_xyxy": [
+   275,
+   140,
+   1295,
+   880
+  ]
+ }
+]
