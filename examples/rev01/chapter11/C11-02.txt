@@ -1,0 +1,4 @@
+New-Item -ItemType Directory .\book11
+$src = '.\examples\rev01\chapter11\evidence'
+Copy-Item "$src\*.json" .\book11
+Get-ChildItem .\book11

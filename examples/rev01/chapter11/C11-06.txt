@@ -1,0 +1,5 @@
+$f = '.\book11\case-c.json'
+$caseC = Get-Content -Raw $f | ConvertFrom-Json
+$rule = @{n='rule';e={$_.rule.id}}
+$caseC | Sort-Object timestamp |
+  Format-Table evidence_id, timestamp, $rule

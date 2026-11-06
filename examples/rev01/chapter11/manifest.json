@@ -1,0 +1,65 @@
+[
+  {
+    "type": "command",
+    "id": "C11-01",
+    "where": "Windows · PowerShell · 예제 저장소 폴더",
+    "purpose": "현재 위치와 분석 폴더 이름을 확인하고 증거 파일 목록을 본다.",
+    "text": "Get-Location\nTest-Path .\\book11\nGet-ChildItem .\\examples\\rev01\\chapter11\\evidence",
+    "syntax": "Get-Location은 현재 폴더를 출력한다. Test-Path는 경로가 있으면 True, 없으면 False를 출력한다. Get-ChildItem은 폴더 안의 파일을 나열한다. .\\는 현재 폴더를 뜻한다.",
+    "result": "예제 저장소 폴더 경로, False, case-a.json·case-b.json·case-c.json·manifest.json 네 파일이 나온다. True이면 이미 있는 book11 폴더의 내용을 확인하고 다른 이름을 쓴다."
+  },
+  {
+    "type": "command",
+    "id": "C11-02",
+    "where": "Windows · PowerShell · 예제 저장소 폴더",
+    "purpose": "분석 폴더를 만들고 증거 파일을 복사한다.",
+    "text": "New-Item -ItemType Directory .\\book11\n$src = '.\\examples\\rev01\\chapter11\\evidence'\nCopy-Item \"$src\\*.json\" .\\book11\nGet-ChildItem .\\book11",
+    "syntax": "New-Item -ItemType Directory는 폴더를 만든다. $src = …는 경로를 변수에 담는다. Copy-Item의 *.json은 확장자가 json인 모든 파일이다. 큰따옴표 안의 $src는 변수 값으로 바뀐다.",
+    "result": "book11에 네 파일이 보인다. 이후 분석은 이 사본으로 하고 원본 폴더의 파일은 열어 고치지 않는다."
+  },
+  {
+    "type": "command",
+    "id": "C11-03",
+    "where": "Windows · PowerShell · 예제 저장소 폴더",
+    "purpose": "사본의 해시를 계산해 manifest의 값과 대조한다.",
+    "text": "Get-FileHash .\\book11\\*.json -Algorithm SHA256\nGet-Content .\\book11\\manifest.json",
+    "syntax": "Get-FileHash는 파일 내용의 해시를 계산하며 -Algorithm으로 방식을 정한다. Get-Content는 파일 내용을 출력한다.",
+    "result": "case-a.json의 Hash가 98C405B9…(manifest의 sha256 98c405b9…와 대소문자만 다름), case-b.json이 F804E4FD…, case-c.json이 63231335…로 시작한다. 다르면 파일이 바뀌었거나 줄바꿈이 변환된 것이므로 분석하지 않고 저장소를 다시 받는다."
+  },
+  {
+    "type": "command",
+    "id": "C11-04",
+    "where": "Windows · PowerShell · 예제 저장소 폴더",
+    "purpose": "사례 A의 첫 기록을 필드 단위로 읽는다.",
+    "text": "$f = '.\\book11\\case-a.json'\n$caseA = Get-Content -Raw $f | ConvertFrom-Json\n$caseA | Select-Object -First 1 | Format-List *",
+    "syntax": "Get-Content -Raw는 파일 전체를 문자열 하나로 읽고, ConvertFrom-Json은 JSON을 PowerShell 객체로 바꾼다. PowerShell의 파이프(|)도 앞 명령의 결과를 다음 명령으로 넘긴다. Select-Object -First 1은 첫 기록, Format-List *는 모든 속성을 한 줄씩 보인다.",
+    "result": "evidence_id A-001, timestamp 2026-11-02T11:37:05.325+0000, rule, agent, data, full_log 등이 나온다. 중첩된 값은 @{…}로 줄여 보인다."
+  },
+  {
+    "type": "command",
+    "id": "C11-05",
+    "where": "Windows · PowerShell · 예제 저장소 폴더",
+    "purpose": "중첩된 필드와 원문을 펼친다.",
+    "text": "$caseA[0].agent | Format-List *\n$caseA[0].data | Format-List *\n$caseA[0].full_log",
+    "syntax": "[0]은 첫 번째 기록, 마침표(.)는 그 안의 속성이다.",
+    "result": "agent는 id 001, name bastion, data는 srcip 192.168.0.108, srcport 42688, dstuser ccc이고 full_log는 Nov  2 20:37:04 bastion sshd[2537]: Failed password for ccc from 192.168.0.108 port 42688 ssh2이다. data의 세 값이 원문 어디에서 왔는지 짚는다."
+  },
+  {
+    "type": "command",
+    "id": "C11-06",
+    "where": "Windows · PowerShell · 예제 저장소 폴더",
+    "purpose": "사례 C의 기록을 시각순 표로 본다.",
+    "text": "$f = '.\\book11\\case-c.json'\n$caseC = Get-Content -Raw $f | ConvertFrom-Json\n$rule = @{n='rule';e={$_.rule.id}}\n$caseC | Sort-Object timestamp |\n  Format-Table evidence_id, timestamp, $rule",
+    "syntax": "@{n='rule';e={…}}는 표에 새 열을 만드는 계산 속성이다. n은 열 이름, e는 값을 만드는 식이며 $_는 지금 처리 중인 기록이다. 줄 끝의 파이프(|)는 다음 줄로 명령을 잇는다.",
+    "result": "C-001(24010)부터 C-009(533)까지 아홉 줄이 시각순으로 나온다. 이 표가 사례 C 시간표의 뼈대이다."
+  },
+  {
+    "type": "command",
+    "id": "C11-07",
+    "where": "Windows · PowerShell · 예제 저장소 폴더",
+    "purpose": "분석 사본의 해시를 다시 확인한 뒤 분석 폴더를 지운다.",
+    "text": "Get-FileHash .\\book11\\case-*.json -Algorithm SHA256\nRemove-Item -Recurse .\\book11",
+    "syntax": "Remove-Item -Recurse는 폴더와 안의 파일을 함께 지운다. 작성한 시간표·보고서를 다른 곳에 보관했는지 먼저 확인한다.",
+    "result": "해시가 C11-03과 같고 폴더가 지워진다. 예제 저장소의 원본 증거 파일은 그대로 남는다."
+  }
+]

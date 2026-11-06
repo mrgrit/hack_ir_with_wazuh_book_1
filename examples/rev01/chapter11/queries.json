@@ -1,0 +1,38 @@
+[
+  {
+    "type": "query",
+    "id": "Q11-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "자신의 8장 기록에서 같은 출발지의 실패와 성공을 고른다.",
+    "text": "agent.name: \"bastion\" AND\ndata.srcip: \"192.168.0.202\" AND\n(rule.id: \"5760\" OR rule.id: \"5715\")",
+    "syntax": "기간을 8장 실습 시간으로 정하고 data.srcport 열을 추가한다. 출발지는 자신의 공격자 VM 주소이다.",
+    "result": "사례 A의 기록에서는 22건이었다. 같은 포트의 실패와 성공을 찾는다."
+  },
+  {
+    "type": "query",
+    "id": "Q11-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "자신의 9장 기록에서 키 파일 변경을 찾는다.",
+    "text": "agent.name: \"bastion\" AND\nsyscheck.path: \"/home/ccc/.ssh/authorized_keys\"",
+    "syntax": "기간을 9장 실습 시간으로 정한다. 9.3의 Q09-03과 같다.",
+    "result": "키 추가와 원상복구의 550 두 건이 나온다."
+  },
+  {
+    "type": "query",
+    "id": "Q11-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "자신의 10장 기록에서 osquery 결과를 시각순으로 본다.",
+    "text": "agent.name: \"kt66-host\" AND rule.groups: \"osquery\"",
+    "syntax": "data.osquery.name, action, columns.port, columns.comment 열을 추가한다.",
+    "result": "포트 두 개와 공개 키 한 개의 added와 removed가 나온다."
+  },
+  {
+    "type": "query",
+    "id": "D11-01",
+    "where": "Windows · Indexer management · Dev Tools",
+    "purpose": "한 출발지의 경보가 어느 에이전트에서 언제 몰려 있는지 센다.",
+    "text": "GET wazuh-alerts-*/_search\n{\n  \"size\": 0,\n  \"query\": {\"bool\": {\"filter\": [\n    {\"term\": {\"data.srcip\": \"192.168.0.202\"}},\n    {\"range\": {\"timestamp\": {\n      \"gte\": \"2026-11-02T00:00:00+09:00\",\n      \"lte\": \"2026-11-04T00:00:00+09:00\"}}}\n  ]}},\n  \"aggs\": {\"by_agent\": {\n    \"terms\": {\"field\": \"agent.name\"},\n    \"aggs\": {\"by_time\": {\"date_histogram\": {\n      \"field\": \"timestamp\", \"fixed_interval\": \"10m\",\n      \"min_doc_count\": 1, \"time_zone\": \"+09:00\"}}}\n  }}\n}",
+    "syntax": "date_histogram은 시간 구간별로 문서 수를 센다. fixed_interval 10m은 10분 단위, min_doc_count 1은 빈 구간을 빼고, time_zone은 구간을 KST로 나눈다. 주소와 기간은 자신의 값으로 바꾼다.",
+    "result": "by_agent 아래 에이전트마다 시간 구간과 doc_count가 나온다. 경보가 몰린 구간이 에이전트·날짜별로 떨어져 있으면 그 구간이 사례의 경계 후보이다. 사례 기록이라면 bastion은 11월 2일 20시대와 11월 3일 07시대, kt66-host는 11월 3일 08시대에 나뉘어 나온다."
+  }
+]

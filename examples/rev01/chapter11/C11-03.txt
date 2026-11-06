@@ -1,0 +1,2 @@
+Get-FileHash .\book11\*.json -Algorithm SHA256
+Get-Content .\book11\manifest.json

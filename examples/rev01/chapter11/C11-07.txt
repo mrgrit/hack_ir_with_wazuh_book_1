@@ -1,0 +1,2 @@
+Get-FileHash .\book11\case-*.json -Algorithm SHA256
+Remove-Item -Recurse .\book11

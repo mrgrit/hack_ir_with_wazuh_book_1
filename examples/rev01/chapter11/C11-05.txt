@@ -1,0 +1,3 @@
+$caseA[0].agent | Format-List *
+$caseA[0].data | Format-List *
+$caseA[0].full_log

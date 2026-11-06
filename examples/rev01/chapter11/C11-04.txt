@@ -1,0 +1,3 @@
+$f = '.\book11\case-a.json'
+$caseA = Get-Content -Raw $f | ConvertFrom-Json
+$caseA | Select-Object -First 1 | Format-List *

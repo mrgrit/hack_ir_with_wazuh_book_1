@@ -1,4 +1,4 @@
-# REV01 — 재작성본 (1~7장·9~10장·부록 A)
+# REV01 — 재작성본 (1~7장·9~11장·부록 A)
 
 기존 `manuscript/volume01-chapter0N.*`은 그대로 두고, 재작성본을 이 디렉터리에 둔다. 검토 후 채택하면 기존 파일을 교체한다.
 
@@ -16,6 +16,7 @@
 | `volume01-chapter07.json` / `.docx` | 7장 웹 서버 침투와 실행 흔적 (렌더 35쪽) |
 | `volume01-chapter09.json` / `.docx` | 9장 지속성 흔적과 시스템 변경 조사 (렌더 44쪽) |
 | `volume01-chapter10.json` / `.docx` | 10장 네트워크 흔적과 현재 상태 조사 (렌더 26쪽) |
+| `volume01-chapter11.json` / `.docx` | 11장 사건 재구성과 대응 판단 (렌더 22쪽) |
 | `../../examples/rev01/chapter01/` | C01-01~26 복사용 명령, `manifest.json`, `casebook.txt`(사건 노트 양식) |
 | `../../examples/rev01/appendix-a/` | CA-01~08 복사용 명령, `manifest.json` |
 | `../../examples/rev01/chapter02/` | C02-01~09 복사용 명령, `manifest.json`, 사례(`case-ssh.json`·`.log`), `investigation.txt` |
@@ -35,6 +36,8 @@
 | `../../assets/figures/chapter09/rev01-*.png` | 9장 로드맵(9-1), 변경을 보는 세 기록(9-2), 기록의 변경 타임라인(9-3) |
 | `../../examples/rev01/chapter10/` | C10-01~17 명령, Q10-01~08 검색식, S10-01 osqueryi SQL, D10-01.json(Dev Tools 집계), `investigation.txt` |
 | `../../assets/figures/chapter10/rev01-*.png` | 10장 로드맵(10-1), 세 기록이 본 시각(10-2), 스캔 한 번의 기록별 수(10-3) |
+| `../../examples/rev01/chapter11/` | C11-01~07 PowerShell, Q11-01~03 검색식, D11-01.json, evidence/(발췌본·manifest·.gitattributes), 양식 4종 |
+| `../../assets/figures/chapter11/rev01-*.png` | 11장 로드맵(11-1), 세 사례의 경계(11-2), 기록에서 결론까지의 층(11-3) |
 | `../../assets/figures/chapter08/rev01-*.png`, `../../assets/screens/chapter08/rev01-*` | 8장용 도식·화면 자르기(원고 없음) |
 
 ## 기존 1장 대비 변경
@@ -124,6 +127,14 @@
 4. **공개 키** — 공격자 VM에서 만들어 scp로 보내는 대신 kt66 VM에서 만든다. 기록 값(주석 book10-key@attacker)은 그대로 인용했다.
 5. **명령 정리** — C10-01~44 → C10-01~17, DQL 10 → 8 + osqueryi SQL 1 + Dev Tools 1.
 
+## 기존 11장 대비 변경
+
+1. **사건 노트 대조(11.1)** — 5장부터 쓴 공격 일지와 조사 기록을 대조하는 표(양쪽·일지에만·조사 기록에만)를 넣고, 5장에서 남긴 "출발지가 다른 행"(10.20.30.254)을 주소 변환으로 설명하고 확인 방법을 제시했다.
+2. **판단의 층** — 사례마다 관찰 사실·근거 있는 판단·미확인·다음 행동 표(도식 11-3). 사례 B의 지문 일치는 diff의 공개 키로 계산한 SHA-256 지문(FnGa4j0F…)과 5715 원문의 지문을 대조해 확인했다.
+3. **탐지 공백 모음(11.6)** — 5·6·7·9·10장의 "경보에 없음" 행을 모아 기록 위치와 보완 후보를 표로 정리했다(6·7·9장에서 약속한 항목).
+4. **증거 사본** — 기존 발췌본(examples/chapter11/evidence)을 바이트 그대로 examples/rev01/chapter11/evidence로 복사했다(해시 동일 확인). PowerShell 명령은 백틱 줄 잇기 없이 60자 이내로 다시 썼다.
+5. **경계 확인** — 한 출발지의 경보를 에이전트별·10분 단위로 세는 Dev Tools 집계(D11-01)로 세 사례가 날짜·대상에서 떨어져 있음을 확인하게 했다.
+
 ## 새 조판 규칙 (`tools/build_chapter01.py` 확장, 기존 장과 호환)
 
 | 규칙 | JSON | 비고 |
@@ -169,6 +180,9 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter09.js
 python3 tools/diagrams_chapter10_rev01.py
 python3 tools/write_chapter10_rev01.py
 python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter10.json --output manuscript/REV01/volume01-chapter10.docx
+python3 tools/diagrams_chapter11_rev01.py
+python3 tools/write_chapter11_rev01.py
+python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter11.json --output manuscript/REV01/volume01-chapter11.docx
 ```
 
 `tools/check_chapter01.py`는 "JSON 1쪽 = 렌더 1쪽"을 검사하므로 흐름 조판인 REV01에는 맞지 않는다. REV01은 명령↔예제 파일 일치, `bash -n`, 줄 길이 60자 이하, 판형·글꼴·색을 따로 확인했다.
@@ -199,6 +213,7 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter10.js
 - 7장은 AGENTS.md 조건대로 새 공격 실행·UI 촬영·DQL 실서버 검증을 하지 않았다. 결과는 강의 슬라이드(2026-10-31) 기록이다. Q07-08·Q07-11과 7.8의 집계 변형은 새로 쓴 검색식이며 실행하지 않았다. cmdlog가 docker exec 셸을 기록하지 않을 수 있다는 판단은 profile.d 방식(로그인 셸)에 근거한 추정이다.
 - 9장 결과 값·화면은 2026-11-03 실제 실행 기록(kt66 .107·공격자 .108)이다. 본문 절차를 줄여 기록과 달라진 값(sudoers 실습 파일 크기, cron 결과 문자열, nc 세션 구성)은 기록 값으로 인용하지 않았다. 새로 쓴 Q09-02(data.command 와일드카드)·Q09-11(경로 와일드카드)·D09-01, C09-20의 syslog CRON 줄, C09-05의 auditctl -l 출력 형식, 한 셸에서 두 curl을 실행할 때의 세션 구성은 실행 검증하지 않았다. bastion /var/log에서 내용 비우기가 FIM 경보를 만들지 않는다는 설명은 check_all="no" 설정에 근거한 판단이며 실제 로그로 시험하지 않았다.
 - 10장 결과 값·화면은 2026-11-03 실제 실행 기록(kt66 .107·공격자 .108)이다. 기록 환경은 host-sensors 구성이 일부 빠져 저자가 수동 보완했다. 본문의 C10-03(host-sensors.sh 재실행), Q10-08(출발지만으로 검색), D10-01(cardinality 집계)은 실행 검증하지 않았다. 나중에 연 리스너가 경계 방화벽에 막힌다는 설명과 LOG 상한 약 690줄은 perimeter.sh의 규칙과 Nmap 실행 시간으로 계산한 판단이다.
+- 11장 PowerShell 명령은 기존 검증(2026-11-03, C11-01~05)과 같은 동작이지만 경로(examples\rev01\chapter11)와 줄 나눔을 바꿨고, C11-06(계산 속성 표)·C11-07(정리)은 새 명령이다. Windows에서 다시 실행하지 않았다. Q11-01~03·D11-01도 실행하지 않았다. 11.1의 출발지 변경 설명은 .254가 kt66 VM 주소라는 사실에 근거한 판단이며 NAT 규칙을 확인하지 않았다.
 - 8장 REV01 원고는 없다. 9장은 8장 절 번호를 참조하지 않고 "8장"으로만 가리킨다.
 - 3장 화면 3-1~3-8은 기존 kt66(에이전트 ID 010 시기)의 화면이다. 현재 환경의 bastion 에이전트 ID는 001이다.
 - 렌더 쪽수는 LibreOffice 대체 글꼴 기준이다. 부크크 글꼴이 있는 Word에서 쪽 나눔을 다시 확인한다.

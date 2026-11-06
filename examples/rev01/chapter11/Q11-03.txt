@@ -1,0 +1,1 @@
+agent.name: "kt66-host" AND rule.groups: "osquery"
