@@ -1,0 +1,1 @@
+sudo ss -lntp 'sport = :31337'

@@ -1,4 +1,4 @@
-# REV01 — 재작성본 (1~7장·9장·부록 A)
+# REV01 — 재작성본 (1~7장·9~10장·부록 A)
 
 기존 `manuscript/volume01-chapter0N.*`은 그대로 두고, 재작성본을 이 디렉터리에 둔다. 검토 후 채택하면 기존 파일을 교체한다.
 
@@ -15,6 +15,7 @@
 | `volume01-chapter06.json` / `.docx` | 6장 웹 탐색과 인증 공격 (렌더 34쪽) |
 | `volume01-chapter07.json` / `.docx` | 7장 웹 서버 침투와 실행 흔적 (렌더 35쪽) |
 | `volume01-chapter09.json` / `.docx` | 9장 지속성 흔적과 시스템 변경 조사 (렌더 44쪽) |
+| `volume01-chapter10.json` / `.docx` | 10장 네트워크 흔적과 현재 상태 조사 (렌더 26쪽) |
 | `../../examples/rev01/chapter01/` | C01-01~26 복사용 명령, `manifest.json`, `casebook.txt`(사건 노트 양식) |
 | `../../examples/rev01/appendix-a/` | CA-01~08 복사용 명령, `manifest.json` |
 | `../../examples/rev01/chapter02/` | C02-01~09 복사용 명령, `manifest.json`, 사례(`case-ssh.json`·`.log`), `investigation.txt` |
@@ -32,6 +33,8 @@
 | `../../assets/figures/chapter07/rev01-*.png` | 7장 로드맵(7-1), 실행 판정의 네 단계(7-2) |
 | `../../examples/rev01/chapter09/` | C09-01~38 명령, Q09-01~11 검색식, D09-01.json(Dev Tools 집계), a.sh, `investigation.txt` |
 | `../../assets/figures/chapter09/rev01-*.png` | 9장 로드맵(9-1), 변경을 보는 세 기록(9-2), 기록의 변경 타임라인(9-3) |
+| `../../examples/rev01/chapter10/` | C10-01~17 명령, Q10-01~08 검색식, S10-01 osqueryi SQL, D10-01.json(Dev Tools 집계), `investigation.txt` |
+| `../../assets/figures/chapter10/rev01-*.png` | 10장 로드맵(10-1), 세 기록이 본 시각(10-2), 스캔 한 번의 기록별 수(10-3) |
 | `../../assets/figures/chapter08/rev01-*.png`, `../../assets/screens/chapter08/rev01-*` | 8장용 도식·화면 자르기(원고 없음) |
 
 ## 기존 1장 대비 변경
@@ -113,6 +116,14 @@
 5. **논리 보강** — 554는 등록이지 실행이 아님, audit success는 execve 성공이지 연결 성공이 아님, curl 두 건은 같은 부모의 sh로 구분, sudo 없이 ccc가 바꾼 파일(authorized_keys·이력 사본)은 바꾼 세션을 기록으로 특정할 수 없음, docker exec 변경은 인증 기록이 없음.
 6. **명령 정리** — C09-01~69 → C09-01~38, DQL 12 → 11 + Dev Tools 1.
 
+## 기존 10장 대비 변경
+
+1. **조사 질문과 관점** — "무엇이 연결을 기다리고 있고 누가 두드렸는가". 같은 변화가 기록마다 다른 시각(auditd 즉시·osquery 60초·netstat 533 360초, 도식 10-2)과 다른 수(Nmap 993·LOG 상한 약 690·아카이브 592·경보 1, 도식 10-3)로 남는다는 점을 10.6 교차 분석의 축으로 삼았다.
+2. **준비 단순화** — 기록 환경에서 수동으로 보완한 osquery 모듈·kern.log 수집·경계 방화벽 생성/제거 절차를 빼고, kt66.sh up이 매번 실행하는 `deployment/host-sensors.sh` 상태를 확인하고 빠지면 그 스크립트를 다시 실행하게 했다(C10-01~03).
+3. **논리 보강** — 경계 방화벽 예외는 적용 시점의 수신 대기 포트로 만들어지므로 나중에 연 리스너는 밖에서 닿지 않음(perimeter.sh), LOG 상한 계산으로 아카이브가 스캔 범위 전체를 담을 수 없음을 보임, 4151의 dstport는 마지막 패킷 하나, osquery 첫 보고의 added는 기존 행일 수 있음, 종료 시각은 어느 경보에도 없음.
+4. **공개 키** — 공격자 VM에서 만들어 scp로 보내는 대신 kt66 VM에서 만든다. 기록 값(주석 book10-key@attacker)은 그대로 인용했다.
+5. **명령 정리** — C10-01~44 → C10-01~17, DQL 10 → 8 + osqueryi SQL 1 + Dev Tools 1.
+
 ## 새 조판 규칙 (`tools/build_chapter01.py` 확장, 기존 장과 호환)
 
 | 규칙 | JSON | 비고 |
@@ -155,6 +166,9 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter07.js
 python3 tools/diagrams_chapter09_rev01.py
 python3 tools/write_chapter09_rev01.py
 python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter09.json --output manuscript/REV01/volume01-chapter09.docx
+python3 tools/diagrams_chapter10_rev01.py
+python3 tools/write_chapter10_rev01.py
+python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter10.json --output manuscript/REV01/volume01-chapter10.docx
 ```
 
 `tools/check_chapter01.py`는 "JSON 1쪽 = 렌더 1쪽"을 검사하므로 흐름 조판인 REV01에는 맞지 않는다. REV01은 명령↔예제 파일 일치, `bash -n`, 줄 길이 60자 이하, 판형·글꼴·색을 따로 확인했다.
@@ -184,6 +198,7 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter09.js
 - 6장 화면 6-12(필드 상세)·6-13(값 필터)은 촬영 자리로 두었다. Discover 필드 세부 정보 버튼·Filter for/out value·Exclude results·Temporarily disable과 Dev Tools 메뉴 위치(Indexer management → Dev Tools)는 OpenSearch Dashboards 2.16 기준 설명이며 kt66 화면에서 확인하지 않았다. D06-01 요청도 실행하지 않았다(결과 값은 저장 기록으로 계산).
 - 7장은 AGENTS.md 조건대로 새 공격 실행·UI 촬영·DQL 실서버 검증을 하지 않았다. 결과는 강의 슬라이드(2026-10-31) 기록이다. Q07-08·Q07-11과 7.8의 집계 변형은 새로 쓴 검색식이며 실행하지 않았다. cmdlog가 docker exec 셸을 기록하지 않을 수 있다는 판단은 profile.d 방식(로그인 셸)에 근거한 추정이다.
 - 9장 결과 값·화면은 2026-11-03 실제 실행 기록(kt66 .107·공격자 .108)이다. 본문 절차를 줄여 기록과 달라진 값(sudoers 실습 파일 크기, cron 결과 문자열, nc 세션 구성)은 기록 값으로 인용하지 않았다. 새로 쓴 Q09-02(data.command 와일드카드)·Q09-11(경로 와일드카드)·D09-01, C09-20의 syslog CRON 줄, C09-05의 auditctl -l 출력 형식, 한 셸에서 두 curl을 실행할 때의 세션 구성은 실행 검증하지 않았다. bastion /var/log에서 내용 비우기가 FIM 경보를 만들지 않는다는 설명은 check_all="no" 설정에 근거한 판단이며 실제 로그로 시험하지 않았다.
+- 10장 결과 값·화면은 2026-11-03 실제 실행 기록(kt66 .107·공격자 .108)이다. 기록 환경은 host-sensors 구성이 일부 빠져 저자가 수동 보완했다. 본문의 C10-03(host-sensors.sh 재실행), Q10-08(출발지만으로 검색), D10-01(cardinality 집계)은 실행 검증하지 않았다. 나중에 연 리스너가 경계 방화벽에 막힌다는 설명과 LOG 상한 약 690줄은 perimeter.sh의 규칙과 Nmap 실행 시간으로 계산한 판단이다.
 - 8장 REV01 원고는 없다. 9장은 8장 절 번호를 참조하지 않고 "8장"으로만 가리킨다.
 - 3장 화면 3-1~3-8은 기존 kt66(에이전트 ID 010 시기)의 화면이다. 현재 환경의 bastion 에이전트 ID는 001이다.
 - 렌더 쪽수는 LibreOffice 대체 글꼴 기준이다. 부크크 글꼴이 있는 Word에서 쪽 나눔을 다시 확인한다.

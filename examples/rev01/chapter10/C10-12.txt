@@ -1,0 +1,4 @@
+ls -l ~/.ssh/authorized_keys ~/book10-ak.before
+mkdir -m 700 ~/book10
+ssh-keygen -t ed25519 -N '' -C book10-lab -f ~/book10/key
+cp -p ~/.ssh/authorized_keys ~/book10-ak.before

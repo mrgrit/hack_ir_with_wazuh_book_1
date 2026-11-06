@@ -1,0 +1,2 @@
+sudo ss -lntp 'sport = :31337'
+ps -C nc -o pid,ppid,user,lstart,args

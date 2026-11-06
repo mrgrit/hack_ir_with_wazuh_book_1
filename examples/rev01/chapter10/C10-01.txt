@@ -1,0 +1,2 @@
+systemctl is-active wazuh-agent osqueryd auditd
+sudo iptables -S INPUT | grep KT66

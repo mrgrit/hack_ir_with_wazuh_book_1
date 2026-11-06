@@ -1,0 +1,15 @@
+GET wazuh-archives-*/_search
+{
+  "size": 0,
+  "query": {"bool": {"filter": [
+    {"term": {"agent.name": "kt66-host"}},
+    {"term": {"data.srcip": "192.168.0.202"}},
+    {"term": {"data.action": "DROP"}},
+    {"range": {"timestamp": {"gte": "now-1h"}}}
+  ]}},
+  "aggs": {
+    "ports": {"cardinality": {"field": "data.dstport"}},
+    "first": {"min": {"field": "timestamp"}},
+    "last": {"max": {"field": "timestamp"}}
+  }
+}

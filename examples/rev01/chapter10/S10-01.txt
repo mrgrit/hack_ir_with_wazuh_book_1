@@ -1,0 +1,5 @@
+SELECT p.pid, p.name, p.path, l.address, l.port
+FROM listening_ports l
+JOIN processes p USING (pid)
+WHERE l.port IN (31337, 31338);
+.quit

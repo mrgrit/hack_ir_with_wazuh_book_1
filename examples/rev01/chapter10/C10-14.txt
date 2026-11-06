@@ -1,0 +1,3 @@
+echo >> ~/.ssh/authorized_keys
+cat ~/book10/key.pub >> ~/.ssh/authorized_keys
+ssh-keygen -lf ~/.ssh/authorized_keys

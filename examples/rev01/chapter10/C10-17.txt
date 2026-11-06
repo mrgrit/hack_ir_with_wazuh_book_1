@@ -1,0 +1,6 @@
+R=/var/ossec/ruleset/rules
+grep -n -A4 'id="533"' $R/0015-ossec_rules.xml
+grep -n -A5 'id="4101"' $R/0900-firewall_rules.xml
+grep -n -A3 'id="4151"' $R/0900-firewall_rules.xml
+grep -n -A4 'id="24010"' $R/0545-osquery_rules.xml
+exit

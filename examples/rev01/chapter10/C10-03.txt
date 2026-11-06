@@ -1,0 +1,2 @@
+cd ~/kt66
+sudo ./deployment/host-sensors.sh

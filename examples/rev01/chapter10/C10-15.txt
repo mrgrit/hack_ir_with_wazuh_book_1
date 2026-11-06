@@ -1,0 +1,5 @@
+sudo ss -lntp '( sport = :31337 or sport = :31338 )'
+cp -p ~/book10-ak.before ~/.ssh/authorized_keys
+cmp ~/book10-ak.before ~/.ssh/authorized_keys
+rm ~/book10/key ~/book10/key.pub ~/book10-ak.before
+rmdir ~/book10
