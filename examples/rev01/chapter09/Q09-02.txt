@@ -1,0 +1,2 @@
+agent.name: "bastion" AND rule.groups: "sudo"
+AND data.command: *99-book09-lab*

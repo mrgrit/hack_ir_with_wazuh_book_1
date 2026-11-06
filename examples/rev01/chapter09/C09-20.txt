@@ -1,0 +1,3 @@
+date
+cat /tmp/book09-cron-result
+grep book09 /var/log/syslog | tail -n 2

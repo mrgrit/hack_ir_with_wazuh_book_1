@@ -1,0 +1,4 @@
+ls -ld ~/book09
+mkdir ~/book09
+cd ~/book09
+pwd

@@ -1,0 +1,4 @@
+cd /home/ccc/.ssh
+ls -l authorized_keys /root/book09-ak.before
+cp -p authorized_keys /root/book09-ak.before
+cmp authorized_keys /root/book09-ak.before

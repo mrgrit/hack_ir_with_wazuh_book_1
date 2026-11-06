@@ -1,0 +1,3 @@
+sudo wc -l /var/ossec/etc/client.keys
+sudo /var/ossec/bin/agent-auth -m 10.20.32.100 -A kt66-host
+sudo systemctl restart wazuh-agent

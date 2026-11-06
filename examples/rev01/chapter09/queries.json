@@ -1,0 +1,110 @@
+[
+  {
+    "type": "query",
+    "id": "Q09-01",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "실습 파일의 FIM 경보를 찾는다.",
+    "text": "agent.name: \"bastion\" AND\nsyscheck.path: \"/etc/sudoers.d/99-book09-lab\"",
+    "syntax": "syscheck.path는 바뀐 파일의 전체 경로이다. 경로는 큰따옴표로 묶는다.",
+    "result": "554(File added to the system), syscheck.event added가 나온다. 기록에서는 07:49:34였다."
+  },
+  {
+    "type": "query",
+    "id": "Q09-02",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "실습 파일을 대상으로 한 sudo 명령을 찾는다.",
+    "text": "agent.name: \"bastion\" AND rule.groups: \"sudo\"\nAND data.command: *99-book09-lab*",
+    "syntax": "값 앞뒤의 *는 그 사이에 문자열이 들어 있는 값을 고른다(따옴표 없이 쓴다). data.srcuser, data.command 열을 추가한다.",
+    "result": "data.srcuser ccc, data.command /usr/bin/tee /etc/sudoers.d/99-book09-lab과 /usr/bin/chmod 0440 …, /usr/bin/tee -a …가 FIM 경보와 같은 초에 나온다. sudo 요청 계정이 ccc이고 그 세션이 실습 SSH 세션이다."
+  },
+  {
+    "type": "query",
+    "id": "Q09-03",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "키 목록 변경을 찾는다.",
+    "text": "agent.name: \"bastion\" AND\nsyscheck.path: \"/home/ccc/.ssh/authorized_keys\"",
+    "syntax": "경보를 펼쳐 syscheck.diff, size_before, size_after를 읽는다.",
+    "result": "550이 나오고 diff는 1a2와 > ssh-ed25519 AAAA… book09-lab이다. 기록에서는 07:50:21에 99바이트가 196바이트가 되었다."
+  },
+  {
+    "type": "query",
+    "id": "Q09-04",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "공개 키 인증 성공을 찾는다.",
+    "text": "agent.name: \"bastion\" AND rule.id: \"5715\"\nAND full_log: \"Accepted publickey\"",
+    "syntax": "full_log의 문구로 암호 인증(Accepted password)과 구분한다.",
+    "result": "full_log 끝에 ssh2: ED25519 SHA256:…가 있다. 이 값이 C09-12의 지문과 같으면 등록한 키로 로그인한 것이다."
+  },
+  {
+    "type": "query",
+    "id": "Q09-05",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "예약 작업 파일의 생성을 찾는다.",
+    "text": "agent.name: \"bastion\" AND\nsyscheck.path: \"/etc/cron.d/book09-lab\"",
+    "syntax": "Q09-01과 같은 형식이다.",
+    "result": "554가 나온다. 기록에서는 07:51:42였다. 추가 경보에는 diff가 없다."
+  },
+  {
+    "type": "query",
+    "id": "Q09-06",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "호스트에서 실행된 nc의 감사 경보를 찾는다.",
+    "text": "agent.name: \"kt66-host\" AND\nrule.groups: \"audit_command\" AND\ndata.audit.execve.a0: \"nc\"",
+    "syntax": "audit_command는 명령 실행 감사 경보의 그룹이다. data.audit.execve.a0는 실행 인자의 첫 번째(프로그램 이름)이다.",
+    "result": "80792(Audit: Command: /usr/bin/nc.) 한 건이 나온다. 기록의 인자는 a1 -N, a2 192.168.0.108, a3 4444였다."
+  },
+  {
+    "type": "query",
+    "id": "Q09-07",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "curl 실행 기록을 찾는다.",
+    "text": "agent.name: \"kt66-host\" AND\nrule.groups: \"audit_command\" AND\ndata.audit.execve.a0: \"curl\"",
+    "syntax": "data.audit.execve 아래 인자를 모두 연다.",
+    "result": "두 건(내용 확인, 파이프 실행)이 나온다. 인자는 a1 -fsS, a2 --max-time, a3 5, a4 URL이다."
+  },
+  {
+    "type": "query",
+    "id": "Q09-08",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "파이프로 실행한 curl과 같은 세션의 명령을 모두 고른다.",
+    "text": "agent.name: \"kt66-host\" AND\nrule.groups: \"audit_command\" AND\ndata.audit.session: \"87\"",
+    "syntax": "87은 자신의 파이프 실행 curl 기록의 data.audit.session으로 바꾼다. data.audit.exe, execve.a0, pid, ppid 열을 추가하고 오래된 순으로 정렬한다.",
+    "result": "기록에서는 5건이었다(아래 표). 한 셸에서 실습했다면 내용 확인용 curl과 그 셸의 다른 명령도 함께 나온다."
+  },
+  {
+    "type": "query",
+    "id": "Q09-09",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "yes 파일의 변경 경보를 찾는다.",
+    "text": "agent.name: \"web\" AND syscheck.path: \"/usr/bin/yes\"",
+    "syntax": "size_before·size_after, sha256_before·sha256_after 열을 추가한다.",
+    "result": "550 한 건, size 31112→31119가 나온다. sha256_before가 C09-29의 해시와 같다."
+  },
+  {
+    "type": "query",
+    "id": "Q09-10",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "두 사본의 FIM 경보를 함께 본다.",
+    "text": "agent.name: \"bastion\" AND\n(syscheck.path: \"/var/log/book09-btmp\" OR\nsyscheck.path: \"/home/ccc/book09-history/.bash_history\")",
+    "syntax": "OR로 두 경로를 묶는다. syscheck.event, size_before, size_after 열을 추가한다.",
+    "result": "기록에서는 4건이었다: 두 경로의 554, 이력 사본의 550(size 20→0, diff 1d0 < echo book09-history), btmp 사본의 553."
+  },
+  {
+    "type": "query",
+    "id": "Q09-11",
+    "where": "Windows · Discover · wazuh-alerts-*",
+    "purpose": "이름과 상관없이 권한·반복 실행·재접속 위치의 변경을 고른다.",
+    "text": "rule.groups: \"syscheck\" AND\n(syscheck.path: /etc/sudoers.d/* OR\nsyscheck.path: /etc/cron.d/* OR\nsyscheck.path: */.ssh/authorized_keys)",
+    "syntax": "따옴표 없는 값의 *는 그 자리에 어떤 문자열이든 올 수 있다는 뜻이다. 앞에 *가 오면 경로의 앞부분과 상관없이 끝이 같은 값을 고른다. agent.name 열을 추가한다.",
+    "result": "기록의 실습 경보 중 이 조건에 맞는 것은 7건이다: sudoers.d 실습 파일 3, authorized_keys 2, cron.d 실습 파일 2. 모두 bastion이다. 자신의 결과에는 같은 시간대의 다른 변경도 함께 나온다."
+  },
+  {
+    "type": "query",
+    "id": "D09-01",
+    "where": "Windows · Indexer management · Dev Tools",
+    "purpose": "시간 범위의 FIM 경보를 경로·사건별로 센다.",
+    "text": "GET wazuh-alerts-*/_search\n{\n  \"size\": 0,\n  \"query\": {\"bool\": {\"filter\": [\n    {\"term\": {\"rule.groups\": \"syscheck\"}},\n    {\"range\": {\"timestamp\": {\n      \"gte\": \"2026-11-03T07:45:00+09:00\",\n      \"lte\": \"2026-11-03T08:05:00+09:00\"}}}\n  ]}},\n  \"aggs\": {\"by_path\": {\n    \"terms\": {\"field\": \"syscheck.path\", \"size\": 30},\n    \"aggs\": {\"by_event\": {\"terms\": {\"field\": \"syscheck.event\"}}}\n  }}\n}",
+    "syntax": "filter의 term은 syscheck 그룹, range는 시간 범위이다. 자신의 실습 시각으로 바꾼다. 바깥 terms는 경로별, 안쪽 terms는 그 경로의 added·modified·deleted별 건수이다.",
+    "result": "by_path.buckets에 경로마다 doc_count와 by_event가 나온다. 기록의 실습 경로 14건을 정리하면 아래 표와 같다."
+  }
+]

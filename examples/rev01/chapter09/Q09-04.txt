@@ -1,0 +1,2 @@
+agent.name: "bastion" AND rule.id: "5715"
+AND full_log: "Accepted publickey"

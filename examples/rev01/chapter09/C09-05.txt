@@ -1,0 +1,2 @@
+sudo /var/ossec/bin/wazuh-control status
+sudo auditctl -l

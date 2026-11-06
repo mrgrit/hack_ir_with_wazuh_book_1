@@ -1,0 +1,4 @@
+grep -n '<directories' /var/ossec/etc/ossec.conf
+ls -l /etc/sudoers.d/99-book09-lab \
+  /etc/cron.d/book09-lab /var/log/book09-btmp
+ls -ld /home/ccc/book09-history

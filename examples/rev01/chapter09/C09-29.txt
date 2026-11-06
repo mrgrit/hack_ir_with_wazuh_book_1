@@ -1,0 +1,5 @@
+ls -l /root/book09-yes.before
+stat -c '%s %a %U %n' /usr/bin/yes
+sha256sum /usr/bin/yes
+cp -p /usr/bin/yes /root/book09-yes.before
+cmp /usr/bin/yes /root/book09-yes.before

@@ -1,0 +1,6 @@
+grep -n -A3 'id="55[034]"' \
+  /var/ossec/ruleset/rules/0015-ossec_rules.xml
+grep -n -A4 'id="80792"' \
+  /var/ossec/ruleset/rules/0365-auditd_rules.xml
+grep audit-wazuh /var/ossec/etc/lists/audit-keys
+exit

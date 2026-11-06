@@ -1,0 +1,4 @@
+rule.groups: "syscheck" AND
+(syscheck.path: /etc/sudoers.d/* OR
+syscheck.path: /etc/cron.d/* OR
+syscheck.path: */.ssh/authorized_keys)

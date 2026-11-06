@@ -1,4 +1,4 @@
-# REV01 — 재작성본 (1~7장·부록 A)
+# REV01 — 재작성본 (1~7장·9장·부록 A)
 
 기존 `manuscript/volume01-chapter0N.*`은 그대로 두고, 재작성본을 이 디렉터리에 둔다. 검토 후 채택하면 기존 파일을 교체한다.
 
@@ -14,6 +14,7 @@
 | `volume01-chapter05.json` / `.docx` | 5장 웹 공격의 시작과 입력값 검증 (렌더 44쪽) |
 | `volume01-chapter06.json` / `.docx` | 6장 웹 탐색과 인증 공격 (렌더 34쪽) |
 | `volume01-chapter07.json` / `.docx` | 7장 웹 서버 침투와 실행 흔적 (렌더 35쪽) |
+| `volume01-chapter09.json` / `.docx` | 9장 지속성 흔적과 시스템 변경 조사 (렌더 44쪽) |
 | `../../examples/rev01/chapter01/` | C01-01~26 복사용 명령, `manifest.json`, `casebook.txt`(사건 노트 양식) |
 | `../../examples/rev01/appendix-a/` | CA-01~08 복사용 명령, `manifest.json` |
 | `../../examples/rev01/chapter02/` | C02-01~09 복사용 명령, `manifest.json`, 사례(`case-ssh.json`·`.log`), `investigation.txt` |
@@ -29,6 +30,9 @@
 | `../../assets/figures/chapter06/rev01-*.png` | 6장 로드맵(6-1), 출발지별 타임라인(6-7) |
 | `../../examples/rev01/chapter07/` | C07-01~21 명령, Q07-01~11 검색식, B07-01~12 입력(kt66.lab·.189·.202), P07-webshell.php, `investigation.txt` |
 | `../../assets/figures/chapter07/rev01-*.png` | 7장 로드맵(7-1), 실행 판정의 네 단계(7-2) |
+| `../../examples/rev01/chapter09/` | C09-01~38 명령, Q09-01~11 검색식, D09-01.json(Dev Tools 집계), a.sh, `investigation.txt` |
+| `../../assets/figures/chapter09/rev01-*.png` | 9장 로드맵(9-1), 변경을 보는 세 기록(9-2), 기록의 변경 타임라인(9-3) |
+| `../../assets/figures/chapter08/rev01-*.png`, `../../assets/screens/chapter08/rev01-*` | 8장용 도식·화면 자르기(원고 없음) |
 
 ## 기존 1장 대비 변경
 
@@ -100,6 +104,15 @@
 6. **주소·이름 통일** — 원고 본문을 REV01 예시값(192.168.0.189·.202, kt66.lab)으로 맞췄다. 슬라이드 화면의 .189·.202와 같아서 주소 대응표가 필요 없다. 화면의 ccc.com은 일러두기 원칙대로 읽는다.
 7. **명령 정리** — C07-01~30 → C07-01~21. curl의 긴 헤더 값은 셸 변수(J, R)로 나눠 줄 길이 60자 이하로 맞췄다.
 
+## 기존 9장 대비 변경
+
+1. **조사 질문** — "다시 들어오거나 다시 실행할 수단이 남았는가, 무엇이 바뀌었는가". 앞부분(9.2~9.8)에서 변경을 만들고, 9.9에서 FIM·auth.log·auditd 세 기록을 시각으로 묶는다(도식 9-2·9-3).
+2. **실습 절차 축소** — 변경 흔적 관찰에 필요한 최소 동작만 남겼다. sudoers.d 실습 파일은 주석만, cron은 로컬 명령 하나(id -un), 외부 연결은 문자열 한 줄(nc -N), 내려받아 실행은 사용자·호스트 이름만 출력하는 스크립트. 기록의 셸 연결과 cron 원격 내려받기 절차는 본문에 옮기지 않았다.
+3. **감시 범위** — bastion·web·kt66-host의 FIM 경로를 기준 커밋 소스(`bastion/entrypoint.sh`, `web/wazuh-agent.conf.append`, `deployment/host-sensors.sh`)와 대조했다. bastion `/var/log`의 check_all="no"(추가·삭제만, 내용·크기 변경 없음)를 9.8과 확인 문제 5의 근거로 썼다.
+4. **교차 분석(9.9)** — 이름과 무관하게 지속성 위치(sudoers.d·cron.d·authorized_keys)를 고르는 와일드카드 검색, 경로·사건 집계(D09-01), 시각으로 sudo·5715·audit 세션에 넘기기. authorized_keys 제거(550, 07:50:25.985)가 공개 키 로그인 경보(07:50:27.428)보다 앞서 보이는 timestamp 역전을 원문 시각으로 바로잡는 예를 넣었다.
+5. **논리 보강** — 554는 등록이지 실행이 아님, audit success는 execve 성공이지 연결 성공이 아님, curl 두 건은 같은 부모의 sh로 구분, sudo 없이 ccc가 바꾼 파일(authorized_keys·이력 사본)은 바꾼 세션을 기록으로 특정할 수 없음, docker exec 변경은 인증 기록이 없음.
+6. **명령 정리** — C09-01~69 → C09-01~38, DQL 12 → 11 + Dev Tools 1.
+
 ## 새 조판 규칙 (`tools/build_chapter01.py` 확장, 기존 장과 호환)
 
 | 규칙 | JSON | 비고 |
@@ -139,6 +152,9 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter06.js
 python3 tools/diagrams_chapter07_rev01.py
 python3 tools/write_chapter07_rev01.py
 python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter07.json --output manuscript/REV01/volume01-chapter07.docx
+python3 tools/diagrams_chapter09_rev01.py
+python3 tools/write_chapter09_rev01.py
+python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter09.json --output manuscript/REV01/volume01-chapter09.docx
 ```
 
 `tools/check_chapter01.py`는 "JSON 1쪽 = 렌더 1쪽"을 검사하므로 흐름 조판인 REV01에는 맞지 않는다. REV01은 명령↔예제 파일 일치, `bash -n`, 줄 길이 60자 이하, 판형·글꼴·색을 따로 확인했다.
@@ -167,5 +183,7 @@ python3 tools/build_chapter01.py --source manuscript/REV01/volume01-chapter07.js
 - 5장의 브라우저·Wazuh 결과는 2026-11-01 실측(`editorial/chapter05-review.json`)이다. Windows hosts 편집·ipconfig·시간 설정은 실제 Windows에서 실행하지 않았다(UI 검증은 Linux Chromium). 5.12 curl은 이번에 다시 실행하지 않았다.
 - 6장 화면 6-12(필드 상세)·6-13(값 필터)은 촬영 자리로 두었다. Discover 필드 세부 정보 버튼·Filter for/out value·Exclude results·Temporarily disable과 Dev Tools 메뉴 위치(Indexer management → Dev Tools)는 OpenSearch Dashboards 2.16 기준 설명이며 kt66 화면에서 확인하지 않았다. D06-01 요청도 실행하지 않았다(결과 값은 저장 기록으로 계산).
 - 7장은 AGENTS.md 조건대로 새 공격 실행·UI 촬영·DQL 실서버 검증을 하지 않았다. 결과는 강의 슬라이드(2026-10-31) 기록이다. Q07-08·Q07-11과 7.8의 집계 변형은 새로 쓴 검색식이며 실행하지 않았다. cmdlog가 docker exec 셸을 기록하지 않을 수 있다는 판단은 profile.d 방식(로그인 셸)에 근거한 추정이다.
+- 9장 결과 값·화면은 2026-11-03 실제 실행 기록(kt66 .107·공격자 .108)이다. 본문 절차를 줄여 기록과 달라진 값(sudoers 실습 파일 크기, cron 결과 문자열, nc 세션 구성)은 기록 값으로 인용하지 않았다. 새로 쓴 Q09-02(data.command 와일드카드)·Q09-11(경로 와일드카드)·D09-01, C09-20의 syslog CRON 줄, C09-05의 auditctl -l 출력 형식, 한 셸에서 두 curl을 실행할 때의 세션 구성은 실행 검증하지 않았다. bastion /var/log에서 내용 비우기가 FIM 경보를 만들지 않는다는 설명은 check_all="no" 설정에 근거한 판단이며 실제 로그로 시험하지 않았다.
+- 8장 REV01 원고는 없다. 9장은 8장 절 번호를 참조하지 않고 "8장"으로만 가리킨다.
 - 3장 화면 3-1~3-8은 기존 kt66(에이전트 ID 010 시기)의 화면이다. 현재 환경의 bastion 에이전트 ID는 001이다.
 - 렌더 쪽수는 LibreOffice 대체 글꼴 기준이다. 부크크 글꼴이 있는 Word에서 쪽 나눔을 다시 확인한다.

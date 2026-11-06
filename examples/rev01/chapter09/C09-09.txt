@@ -1,0 +1,4 @@
+printf '%s\n' '# book09 lab' | \
+  sudo tee /etc/sudoers.d/99-book09-lab
+sudo chmod 0440 /etc/sudoers.d/99-book09-lab
+sudo visudo -c

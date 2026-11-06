@@ -1,0 +1,3 @@
+printf '%s\n' \
+  '* * * * * root id -un >> /tmp/book09-cron-result' \
+  | sudo tee /etc/cron.d/book09-lab

@@ -1,0 +1,6 @@
+ls -l /etc/sudoers.d/99-book09-lab /etc/cron.d/book09-lab \
+  /tmp/book09-cron-result /var/log/book09-btmp
+cmp /root/book09-ak.before /home/ccc/.ssh/authorized_keys
+rm /root/book09-ak.before
+visudo -c
+exit

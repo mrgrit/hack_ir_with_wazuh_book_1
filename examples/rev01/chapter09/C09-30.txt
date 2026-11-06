@@ -1,0 +1,4 @@
+printf '\x00BOOK09' >> /usr/bin/yes
+stat -c '%s %a %U %n' /usr/bin/yes
+sha256sum /usr/bin/yes
+dpkg -V coreutils

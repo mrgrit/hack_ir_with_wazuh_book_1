@@ -1,0 +1,3 @@
+ssh -p 2204 -i ~/book09/book09_key \
+  -o IdentitiesOnly=yes -o PasswordAuthentication=no \
+  ccc@192.168.0.189 hostname

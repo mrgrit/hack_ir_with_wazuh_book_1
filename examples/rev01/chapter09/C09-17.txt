@@ -1,0 +1,2 @@
+command -v cron
+service cron status

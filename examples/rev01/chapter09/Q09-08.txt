@@ -1,0 +1,3 @@
+agent.name: "kt66-host" AND
+rule.groups: "audit_command" AND
+data.audit.session: "87"

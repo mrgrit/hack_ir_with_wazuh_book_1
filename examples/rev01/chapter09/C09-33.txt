@@ -1,0 +1,3 @@
+> /home/ccc/book09-history/.bash_history
+sudo rm /var/log/book09-btmp
+stat -c '%s %n' /home/ccc/book09-history/.bash_history

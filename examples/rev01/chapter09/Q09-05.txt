@@ -1,0 +1,2 @@
+agent.name: "bastion" AND
+syscheck.path: "/etc/cron.d/book09-lab"

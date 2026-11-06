@@ -1,0 +1,5 @@
+cat > a.sh <<'EOF'
+#!/bin/sh
+echo "book09-pipe user=$(id -un) host=$(hostname)"
+EOF
+cat a.sh

@@ -1,0 +1,2 @@
+agent.name: "bastion" AND
+syscheck.path: "/home/ccc/.ssh/authorized_keys"

@@ -1,0 +1,3 @@
+sudo cat /etc/sudoers.d/99-book09-lab
+sudo rm /etc/sudoers.d/99-book09-lab
+sudo visudo -c

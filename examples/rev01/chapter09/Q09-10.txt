@@ -1,0 +1,3 @@
+agent.name: "bastion" AND
+(syscheck.path: "/var/log/book09-btmp" OR
+syscheck.path: "/home/ccc/book09-history/.bash_history")
