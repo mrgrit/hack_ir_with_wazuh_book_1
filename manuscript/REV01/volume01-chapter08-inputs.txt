@@ -1,0 +1,442 @@
+REV01 1권 8장 복사용 입력과 조사 기록
+각 블록은 해당 실행 위치에서 한 명령씩 입력한다. 이 파일 전체를 스크립트로 실행하지 않는다.
+
+
+8장  SSH 인증 공격과 계정 권한 조사
+
+8.1  준비와 정상 접속
+
+[C08-01] Windows · 터미널
+ssh ccc@192.168.0.107
+
+
+[C08-02] kt66 VM · ccc 호스트 셸
+docker ps
+docker port kt66-bastion
+
+
+[C08-03] kt66 VM · ccc 호스트 셸
+docker exec -it kt66-bastion /bin/bash
+
+
+[C08-04] kt66-bastion · root 셸
+hostname
+/usr/sbin/sshd -T | grep -E \
+  -e '^(port|permitrootlogin) ' \
+  -e '^(passwordauthentication|maxauthtries) '
+
+
+[C08-05] kt66-bastion · root 셸
+passwd -S root
+ls -l /etc/shadow
+/var/ossec/bin/wazuh-control status
+tail -n 10 /var/log/auth.log
+
+
+[C08-06] Windows · 별도 터미널
+ssh att@192.168.0.108
+
+
+[C08-07] 공격자 VM · att 셸
+command -v ssh
+command -v hydra
+
+
+[C08-08] 공격자 VM · att 셸
+sudo apt-get update
+sudo apt-get install -y hydra
+hydra -h
+
+
+[C08-09] 공격자 VM · att 셸
+ls -ld ~/book08
+
+
+[C08-10] 공격자 VM · att 셸
+mkdir ~/book08
+cd ~/book08
+pwd
+
+
+[C08-11] 공격자 VM · att 셸
+ssh -p 2204 -o HostKeyAlgorithms=ssh-ed25519 \
+  ccc@192.168.0.107
+
+
+[C08-12] kt66-bastion · root 셸
+ssh-keygen -lf \
+/var/lib/bastion/ssh-host-keys/ssh_host_ed25519_key.pub
+
+
+[C08-13] kt66-bastion · SSH로 접속한 ccc 셸
+hostname
+whoami
+id
+exit
+
+
+[C08-14] kt66-bastion · root 셸
+tail -n 20 /var/log/auth.log
+
+
+[Q08-01] Windows · Discover · wazuh-alerts-*
+agent.name: "bastion" AND
+location: "/var/log/auth.log"
+
+
+8.2  동일 계정의 암호 대입
+
+[C08-15] 공격자 VM · att 셸
+cd ~/book08
+ls -l pw-fail.txt
+
+
+[C08-16] 공격자 VM · att 셸
+printf '%s\n' \
+book08-wrong01 book08-wrong02 book08-wrong03 \
+book08-wrong04 book08-wrong05 book08-wrong06 \
+book08-wrong07 book08-wrong08 book08-wrong09 \
+book08-wrong10 book08-wrong11 book08-wrong12 \
+> pw-fail.txt
+cat pw-fail.txt
+wc -l pw-fail.txt
+
+
+[C08-17] 공격자 VM · att 셸
+timeout 45s hydra -l ccc -P pw-fail.txt \
+-t 4 -w 5 ssh://192.168.0.107:2204
+
+
+[Q08-02] Windows · Discover · wazuh-alerts-*
+agent.name: "bastion" AND
+(rule.id: "5760" OR rule.id: "5763")
+
+
+[Q08-03] Windows · Discover · wazuh-alerts-*
+agent.name: "bastion" AND
+full_log: "message repeated"
+
+
+[C08-18] kt66-bastion · root 셸
+tail -n 25 /var/ossec/logs/active-responses.log
+iptables -S
+
+
+8.3  존재하지 않는 계정의 인증 시도
+
+[C08-19] kt66-bastion · root 셸
+getent passwd book08-none1
+getent passwd book08-none2
+getent passwd book08-none3
+
+
+[C08-20] 공격자 VM · att 셸
+cd ~/book08
+ls -l users-invalid.txt
+printf '%s\n' book08-none1 book08-none2 \
+book08-none3 > users-invalid.txt
+cat users-invalid.txt
+
+
+[C08-21] 공격자 VM · att 셸
+timeout 30s hydra -L users-invalid.txt \
+-p book08-wrong -t 3 -w 5 \
+ssh://192.168.0.107:2204
+
+
+[Q08-04] Windows · Discover · wazuh-alerts-*
+agent.name: "bastion" AND
+(rule.id: "5710" OR rule.id: "5712")
+
+
+8.4  인증 실패 뒤의 성공
+
+[C08-22] 공격자 VM · att 셸
+cd ~/book08
+ls -l pw-success.txt
+printf '%s\n' book08-bad1 book08-bad2 \
+book08-bad3 ccc > pw-success.txt
+cat pw-success.txt
+
+
+[C08-23] 공격자 VM · att 셸
+timeout 35s hydra -l ccc -P pw-success.txt \
+-t 1 -w 5 -f ssh://192.168.0.107:2204
+
+
+[C08-24] 공격자 VM · att 셸
+ssh -p 2204 ccc@192.168.0.107
+
+
+[C08-25] kt66-bastion · SSH로 접속한 ccc 셸
+hostname
+whoami
+id
+exit
+
+
+[Q08-05] Windows · Discover · wazuh-alerts-*
+agent.name: "bastion" AND
+data.srcip: "192.168.0.108" AND
+(rule.id: "5760" OR rule.id: "5715")
+
+
+[Q08-06] Windows · Discover · wazuh-archives-*
+agent.name: "bastion"
+AND location: "/var/log/auth.log"
+AND predecoder.program_name: "sshd"
+
+
+8.5  root 직접 로그인
+
+[C08-26] kt66-bastion · root 셸
+ls -l /root/book08-sshd_config.before \
+/root/book08-shadow.before
+passwd -S root
+
+
+[C08-27] kt66-bastion · root 셸
+cp -p /etc/ssh/sshd_config \
+/root/book08-sshd_config.before
+cp -p /etc/shadow /root/book08-shadow.before
+chmod 600 /root/book08-shadow.before
+
+
+[C08-28] kt66-bastion · root 셸
+cmp /etc/ssh/sshd_config \
+/root/book08-sshd_config.before
+cmp /etc/shadow /root/book08-shadow.before
+
+
+[C08-29] kt66-bastion · root 셸
+vim /etc/ssh/sshd_config
+
+
+[C08-30] kt66-bastion · root 셸
+passwd root
+
+
+[C08-31] kt66-bastion · root 셸
+/usr/sbin/sshd -t
+/usr/sbin/sshd -T -C \
+user=root,addr=192.168.0.108,host=attacker \
+| grep -E '^(permitrootlogin|passwordauthentication) '
+
+
+[C08-32] kt66-bastion · root 셸
+service ssh reload
+passwd -S root
+
+
+[C08-33] 공격자 VM · att 셸
+ssh -p 2204 root@192.168.0.107
+
+
+[Q08-07] Windows · Discover · wazuh-alerts-*
+agent.name: "bastion" AND
+rule.id: "5715" AND data.dstuser: "root"
+
+
+[C08-34] kt66-bastion · root 셸
+ls -l /root/book08-sshd_config.before \
+/root/book08-shadow.before
+cp -p /root/book08-sshd_config.before \
+/etc/ssh/sshd_config
+cp /root/book08-shadow.before /etc/shadow
+
+
+[C08-35] kt66-bastion · root 셸
+cmp /etc/ssh/sshd_config \
+/root/book08-sshd_config.before
+cmp /etc/shadow /root/book08-shadow.before
+/usr/sbin/sshd -t
+service ssh reload
+
+
+[C08-36] kt66-bastion · root 셸
+passwd -S root
+ls -l /etc/shadow
+/usr/sbin/sshd -T | grep permitrootlogin
+
+
+[C08-37] 공격자 VM · att 셸
+ssh -p 2204 -o NumberOfPasswordPrompts=1 \
+root@192.168.0.107
+
+
+[C08-38] 공격자 VM · att 셸
+ssh -p 2204 ccc@192.168.0.107
+
+
+[C08-39] kt66-bastion · root 셸
+rm -i /root/book08-sshd_config.before \
+/root/book08-shadow.before
+
+
+8.6  sudo 권한 사용
+
+[C08-40] 공격자 VM · att 셸
+ssh -p 2204 ccc@192.168.0.107
+
+
+[C08-41] kt66-bastion · SSH로 접속한 ccc 셸
+id
+sudo -l
+
+
+[C08-42] kt66-bastion · SSH로 접속한 ccc 셸
+sudo -i id
+id
+
+
+[C08-43] kt66-bastion · SSH로 접속한 ccc 셸
+ls -l /etc/shadow
+sudo cat /etc/shadow > /dev/null
+echo $?
+
+
+[Q08-08] Windows · Discover · wazuh-alerts-*
+agent.name: "bastion" AND
+(rule.id: "5402" OR rule.id: "5403")
+
+
+8.7  계정 생성과 권한 변경
+
+[C08-44] 공격자 VM · att 셸
+ssh -p 2204 ccc@192.168.0.107
+
+
+[C08-45] kt66-bastion · SSH로 접속한 ccc 셸
+getent passwd book08-user
+getent group book08-user
+ls -ld /home/book08-user
+
+
+[C08-46] kt66-bastion · SSH로 접속한 ccc 셸
+sudo useradd -m -s /bin/bash book08-user
+getent passwd book08-user
+id book08-user
+sudo passwd -S book08-user
+
+
+[Q08-09] Windows · Discover · wazuh-alerts-*
+agent.name: "bastion" AND
+rule.id: "5902"
+
+
+[C08-47] kt66-bastion · SSH로 접속한 ccc 셸
+sudo usermod -aG sudo book08-user
+id book08-user
+getent group sudo
+
+
+[Q08-10] Windows · Discover · wazuh-alerts-*
+agent.name: "bastion" AND
+data.command: "/usr/sbin/usermod -aG sudo book08-user"
+
+
+[C08-48] kt66-bastion · SSH로 접속한 ccc 셸
+sudo grep -F 'book08-user' /var/log/auth.log
+
+
+[C08-49] kt66-bastion · SSH로 접속한 ccc 셸
+getent passwd book08-user
+id book08-user
+sudo userdel -r book08-user
+
+
+[C08-50] kt66-bastion · SSH로 접속한 ccc 셸
+getent passwd book08-user
+echo $?
+getent group book08-user
+echo $?
+ls -ld /home/book08-user
+getent group sudo
+
+
+[Q08-11] Windows · Discover · wazuh-alerts-*
+agent.name: "bastion" AND
+rule.id: "5903"
+
+
+[Q08-12] Windows · Discover · wazuh-archives-*
+agent.name: "bastion"
+AND location: "/var/log/auth.log"
+AND full_log: "book08-user"
+
+
+8.8  접속과 권한 사용 재구성
+
+[Q08-13] Windows · Discover · wazuh-alerts-*
+agent.name: "bastion"
+AND location: "/var/log/auth.log"
+AND full_log: "sshd[2537]"
+
+
+8.9  로그 수집 설정과 탐지 규칙
+
+[C08-51] kt66-bastion · root 셸
+grep -n -F -A 3 -B 2 '/var/log/auth.log' \
+/var/ossec/etc/ossec.conf
+
+
+[C08-52] kt66-bastion · root 관리 셸
+exit
+
+
+[C08-53] kt66 VM · 관리 셸
+docker exec -it kt66-siem /bin/bash
+
+
+[C08-54] kt66-siem · root 셸
+grep -n -F -A 6 -B 2 '<command>firewall-drop' \
+/var/ossec/etc/ossec.conf
+
+
+[C08-55] kt66-siem · root 관리 셸
+cd /var/ossec/ruleset
+pwd
+grep -n -A 16 -F 'id="5763"' \
+  rules/0095-sshd_rules.xml
+
+
+[C08-56] kt66-siem · root 관리 셸
+grep -n -A 5 -F 'id="5903"' \
+  rules/0020-syslog_rules.xml
+grep -n -A 7 -F 'name="sudo-fields"' \
+  decoders/0320-sudo_decoders.xml
+
+
+[C08-57] kt66-siem · root 셸
+exit
+
+
+8.10  결과가 다를 때와 원상복구
+
+[C08-58] 공격자 VM · att 셸
+cd ~/book08
+pwd
+ls -la
+
+
+[C08-59] 공격자 VM · att 셸
+rm -i pw-fail.txt users-invalid.txt pw-success.txt
+
+
+8장 정리
+
+8장 참고 자료
+
+조사 기록 양식
+사례 번호:
+실행 시작·종료 시각 / 시간대:
+공격 일지: 실행 위치·입력 번호·응답·종료 코드
+조사 기록: 인덱스·시간 범위·검색식·_index·_id
+접속 묶음: 계정·출발지 IP·포트·sshd 번호·열림·닫힘
+권한 사용: 요청자·권한 대상·COMMAND·TTY·결과
+계정 변경: 대상 이름·UID·그룹·홈·셸·삭제 결과
+자동 대응: add/delete 시각·대상 IP·규칙·새 연결 결과
+확인한 사실:
+추가 조사: 승인 내역·겹치는 세션·변경 파일
+원상복구 결과:
+공격 일지와 대조한 차이:

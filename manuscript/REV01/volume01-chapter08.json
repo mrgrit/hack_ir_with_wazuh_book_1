@@ -1,0 +1,1927 @@
+{
+  "title": "8장  SSH 인증 공격과 계정 권한 조사",
+  "series": "해킹·침해대응 실무 with Wazuh · 1권",
+  "baseline": "kt66 63d4180 / Wazuh 4.10",
+  "revision": "REV01 · 2026-11-06 · 누락된 8장 보완",
+  "comments": "REV02 8장의 절차와 2026-11-02 저장 기록을 대조해 REV01 구조로 편집했다. 새 공격·설정 변경·UI 촬영을 하지 않았다. 새 검색식·명령의 정적 검사와 기존 실행 기록을 구분한다.",
+  "pages": [
+    {
+      "title": "8장  SSH 인증 공격과 계정 권한 조사",
+      "kind": "body",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "bastion의 인증 기록에 ccc의 암호 실패가 세 번 남고, 같은 연결에서 인증 성공이 이어졌다. 그 뒤에는 ccc가 root 권한으로 명령을 요청한 sudo 기록과 새 계정의 생성·삭제 기록이 있다. 인증 결과와 권한 사용을 구분해 읽고, 각각 어느 연결에서 발생했는지 조사한다."
+        },
+        {
+          "type": "p",
+          "text": "7장에서는 웹 요청 뒤의 서버 변화와 실행 결과를 대조했다. 이번에는 SSH로 접속한 계정과 그 계정이 사용한 권한을 확인한다. 2장의 인증 원문 읽기, 3장의 기간·필드 검색, 6장의 출발지별 분석을 사용한다. 실습마다 공격 일지를 적고, 8.8에서는 일지를 덮은 채 경보에서 작업 순서를 다시 찾는다."
+        },
+        {
+          "type": "h",
+          "text": "학습 목표"
+        },
+        {
+          "type": "list",
+          "items": [
+            "인증 실패·성공과 자동 대응을 원문·규칙·접속 결과로 대조한다.",
+            "계정·출발지 포트·sshd 프로세스 번호로 연결을 구분하고 sudo 요청자와 권한 사용 대상을 찾는다.",
+            "계정 생성·그룹 변경·삭제를 확인하고 SSH 설정과 실습 계정을 원상복구한다."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "복사용 명령·검색식과 조사 기록 양식은 이 원고와 같은 디렉터리의 volume01-chapter08-inputs.txt에 있다. C08·Q08 번호로 찾는다. 입력은 한 명령씩 실행하고 확인 결과를 읽은 뒤 다음 단계로 진행한다."
+        },
+        {
+          "type": "image",
+          "path": "assets/figures/rev02/chapter08-path.png",
+          "caption": "도식 8-1. 암호 대입부터 계정 변경까지의 실습 순서.",
+          "width_mm": 127
+        },
+        {
+          "type": "h",
+          "text": "준비와 완료 기준"
+        },
+        {
+          "type": "table",
+          "head": [
+            "항목",
+            "내용"
+          ],
+          "rows": [
+            [
+              "실행 위치",
+              "Windows 브라우저·터미널, kt66 VM, 별도 공격자 VM, bastion·Manager 관리 셸"
+            ],
+            [
+              "선행 조건",
+              "1.9의 공격자 VM, bastion 정상 접속, auth.log 수집, 3장의 Discover 검색"
+            ],
+            [
+              "완료 기준",
+              "8.8의 조사 표에 접속과 권한 사용의 근거를 채우고 공격 일지와 대조한다."
+            ],
+            [
+              "결과가 다를 때",
+              "8.10에서 연결·수집·필드 조건을 순서대로 확인한다."
+            ],
+            [
+              "원상복구",
+              "root 설정·암호는 8.5, 계정은 8.7, 후보 파일·남은 세션은 8.10에서 확인한다."
+            ]
+          ],
+          "widths": [
+            30,
+            97
+          ],
+          "keep": false
+        }
+      ]
+    },
+    {
+      "title": "8.1  준비와 정상 접속",
+      "kind": "body",
+      "level": "section",
+      "break": true,
+      "blocks": [
+        {
+          "type": "p",
+          "text": "SSH는 원격 컴퓨터에 암호화된 연결을 만들고 인증 뒤 셸이나 명령을 실행하는 프로토콜이다. ssh는 접속하는 프로그램이고 sshd는 접속을 받는 서버 프로그램이다. 이 장의 공격 대상은 kt66 VM 안의 bastion 컨테이너이다. [1][2]"
+        },
+        {
+          "type": "table",
+          "head": [
+            "실행 위치",
+            "역할과 주소"
+          ],
+          "rows": [
+            [
+              "Windows",
+              "브라우저로 Wazuh 검색\nhttps://192.168.0.107:5601"
+            ],
+            [
+              "kt66 VM 호스트",
+              "Docker 상태 확인·관리\n192.168.0.107:22 · ccc / 1"
+            ],
+            [
+              "공격자 VM",
+              "SSH와 Hydra 실행\n192.168.0.108:22 · att / 1"
+            ],
+            [
+              "kt66-bastion",
+              "인증 공격 대상\n192.168.0.107:2204 · ccc / ccc"
+            ],
+            [
+              "kt66-siem",
+              "Wazuh Manager 설정·규칙 확인"
+            ]
+          ],
+          "widths": [
+            39,
+            88
+          ],
+          "keep": false
+        },
+        {
+          "type": "p",
+          "text": "두 VM은 앞 장에서 준비한 Ubuntu 실습 VM이다. 공격자 VM은 kt66 내부 attacker 컨테이너와 별개이다. 같은 .107 주소라도 포트 22는 VM 관리용 SSH이고 2204는 bastion으로 연결된다."
+        },
+        {
+          "type": "image",
+          "path": "assets/figures/chapter08/collection.png",
+          "caption": "도식 8-2. SSH 접속과 인증 로그 수집 경로",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "Docker는 kt66 VM의 2204번 포트로 온 연결을 kt66-bastion의 22번 포트로 전달한다. sshd가 인증 결과를 기록하면 rsyslog가 /var/log/auth.log에 저장한다. rsyslog는 시스템 프로그램의 로그를 받아 파일이나 다른 서버로 전달하는 서비스이다."
+        },
+        {
+          "type": "p",
+          "text": "bastion의 Wazuh 에이전트는 auth.log를 localfile 설정으로 읽는다. Manager는 원문에서 필드를 추출하고 규칙을 적용한다. 경보는 인덱서에 저장되며 Windows의 **Discover**에서 검색한다. 로그를 읽는 에이전트 주소와 SSH 접속자의 주소를 구분한다."
+        },
+        {
+          "type": "table",
+          "head": [
+            "구분",
+            "이번 환경에서의 값"
+          ],
+          "rows": [
+            [
+              "agent.name",
+              "bastion · 수집 에이전트 이름"
+            ],
+            [
+              "agent.ip",
+              "10.20.30.201 · 컨테이너의 등록 주소"
+            ],
+            [
+              "data.srcip",
+              "192.168.0.108 · SSH 연결 출발지"
+            ],
+            [
+              "location",
+              "/var/log/auth.log · 수집 파일"
+            ]
+          ],
+          "widths": [
+            39,
+            88
+          ],
+          "keep": false
+        },
+        {
+          "type": "h",
+          "text": "컨테이너와 수집 상태 확인"
+        },
+        {
+          "type": "p",
+          "text": "Windows에서 터미널 창 두 개를 연다. 첫 창은 kt66 VM과 bastion의 관리에 쓰고, 둘째 창은 공격자 VM에서 SSH·Hydra를 실행하는 데 쓴다. kt66 VM과 공격자 VM의 주소는 각각 192.168.0.107과 192.168.0.108이다. 관리용 SSH에 접속할 때 처음 표시되는 호스트 키 지문은 VMware 콘솔에서 해당 VM의 /etc/ssh/ssh_host_ed25519_key.pub를 ssh-keygen -lf로 읽은 값과 대조한다. ssh-keygen은 키를 관리하는 도구이며 -l은 지문 출력, -f는 읽을 파일 지정이다."
+        },
+        {
+          "type": "command",
+          "id": "C08-01",
+          "where": "Windows · 터미널",
+          "text": "ssh ccc@192.168.0.107",
+          "result": "kt66 VM의 ccc 셸이 열린다.",
+          "syntax": "ssh의 기본 구문은 ssh 사용자@주소이다. @ 앞은 원격 계정, 뒤는 서버 주소이며 포트를 생략하면 22를 사용한다.",
+          "purpose": "Windows에서 kt66 VM의 관리용 SSH 셸을 연다."
+        },
+        {
+          "type": "command",
+          "id": "C08-02",
+          "where": "kt66 VM · ccc 호스트 셸",
+          "text": "docker ps\ndocker port kt66-bastion",
+          "result": "kt66-bastion과 kt66-siem이 실행 중이고 bastion의 22/tcp가 호스트 2204로 연결된다.",
+          "syntax": "docker ps는 실행 중인 컨테이너를, docker port는 공개한 포트 연결을 표시한다.",
+          "purpose": "bastion·Manager의 실행 상태와 공개 포트를 확인한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-03",
+          "where": "kt66 VM · ccc 호스트 셸",
+          "text": "docker exec -it kt66-bastion /bin/bash",
+          "result": "bastion의 root 관리 셸이 열린다. hostname으로 bastion인지 확인한다.",
+          "purpose": "kt66-bastion 컨테이너 안에서 다음 작업을 수행할 셸을 연다.",
+          "syntax": "docker exec는 실행 중인 컨테이너에서 명령을 시작한다. -i는 표준 입력 유지, -t는 터미널 할당이며 /bin/bash는 열 셸이다. 이 관리 셸을 원상복구가 끝날 때까지 유지한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-04",
+          "where": "kt66-bastion · root 셸",
+          "text": "hostname\n/usr/sbin/sshd -T | grep -E \\\n  -e '^(port|permitrootlogin) ' \\\n  -e '^(passwordauthentication|maxauthtries) '",
+          "result": "hostname은 bastion이며 port 22, permitrootlogin no, passwordauthentication yes, maxauthtries 6을 확인한다. 값이 다르면 이후 실습 조건과 먼저 대조한다.",
+          "purpose": "실습 대상 서버의 이름과 유효 SSH 인증 설정을 확인한다.",
+          "syntax": "hostname은 시스템 이름, sshd -T는 유효 설정을 출력한다. 파이프(|)는 출력을 grep에 전달한다. grep -E는 확장 정규표현식으로 줄을 고른다. 작은따옴표는 검색식의 셸 해석을 막는다. ^는 줄 시작, 괄호는 묶음, 괄호 안의 |는 또는(OR)이다. 끝 공백은 항목 이름을 구분한다. 줄 끝 역슬래시(\\)는 다음 줄을 같은 명령으로 잇는다. -e는 검색식 지정이며 두 식 중 하나에 일치하는 줄을 출력한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-05",
+          "where": "kt66-bastion · root 셸",
+          "text": "passwd -S root\nls -l /etc/shadow\n/var/ossec/bin/wazuh-control status\ntail -n 10 /var/log/auth.log",
+          "result": "root 상태 L은 암호 잠금이다. shadow의 소유자·그룹·권한도 적는다. 에이전트 프로세스가 실행 중이어야 한다. auth.log의 새 SSH 기록은 C08-11의 정상 접속 뒤 확인한다.",
+          "syntax": "passwd는 암호와 계정의 암호 상태를 관리한다. -S는 상태만 표시하며 암호를 바꾸지 않는다. wazuh-control status는 에이전트 프로세스 상태를 확인한다. tail -n 10은 파일 끝 10줄을 읽는다.",
+          "purpose": "root의 초기 암호 상태와 파일 권한, 에이전트와 인증 로그의 상태를 기록한다."
+        },
+        {
+          "type": "p",
+          "text": "MaxAuthTries는 한 SSH 연결에서 허용할 인증 시도 수이다. 계정의 누적 실패 횟수나 Wazuh 경보 임계값과는 다르다. 초기 root 잠금과 PermitRootLogin 값을 기록해 8.5의 원상복구 기준으로 사용한다."
+        },
+        {
+          "type": "h",
+          "text": "공격자 VM에 Hydra 준비"
+        },
+        {
+          "type": "p",
+          "text": "Hydra는 계정·암호 후보를 지정한 서비스에 대입하는 인증 시험 도구이다. -l과 -p는 단일 계정·암호, -L과 -P는 후보를 한 줄씩 저장한 파일을 지정한다. 1.9에서 도구를 설치했다면 경로만 확인하고 설치 단계를 건너뛴다. [3]"
+        },
+        {
+          "type": "command",
+          "id": "C08-06",
+          "where": "Windows · 별도 터미널",
+          "text": "ssh att@192.168.0.108",
+          "result": "att 셸이 열리면 이후 Hydra 명령을 이 창에서 실행한다.",
+          "syntax": "공격자 VM의 att 계정으로 접속한다.",
+          "purpose": "공격자 VM의 터미널을 연다."
+        },
+        {
+          "type": "command",
+          "id": "C08-07",
+          "where": "공격자 VM · att 셸",
+          "text": "command -v ssh\ncommand -v hydra",
+          "result": "ssh와 hydra의 경로가 나오면 준비된 상태이다. Hydra 경로가 없을 때만 아래 설치를 진행한다.",
+          "syntax": "command -v는 현재 셸에서 실행할 명령의 위치를 찾는다.",
+          "purpose": "공격자 VM에서 ssh와 Hydra의 설치 여부를 확인한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-08",
+          "where": "공격자 VM · att 셸",
+          "text": "sudo apt-get update\nsudo apt-get install -y hydra\nhydra -h",
+          "result": "설치 오류가 없어야 한다. 제시한 사례에서는 Hydra 9.2를 사용했다. update가 실패하면 VM의 인터넷·DNS 연결부터 확인한다.",
+          "syntax": "sudo는 허용된 관리자 권한으로 명령을 실행한다. apt-get은 Ubuntu 패키지 관리 도구이다. update는 목록 갱신, install은 설치, -y는 설치 확인에 자동 동의한다. hydra -h는 도움말을 표시한다.",
+          "purpose": "Hydra가 없을 때 패키지를 설치하고 도움말을 확인한다."
+        },
+        {
+          "type": "h",
+          "text": "목록 파일과 정상 로그인 준비"
+        },
+        {
+          "type": "p",
+          "text": "후보 파일은 공격자 VM의 ~/book08에 저장한다. ls -ld로 디렉터리 자체를 확인한 뒤 mkdir로 만들고 cd로 들어간다. pwd로 작업 위치를 확인한다. 같은 이름의 디렉터리가 있으면 기존 파일부터 읽는다."
+        },
+        {
+          "type": "command",
+          "id": "C08-09",
+          "where": "공격자 VM · att 셸",
+          "text": "ls -ld ~/book08",
+          "result": "없다는 메시지가 나오면 다음 명령으로 만든다. 이미 있으면 파일을 확인하고 기존 목록을 덮어쓰지 않는다.",
+          "syntax": "물결표(~)는 현재 계정의 홈 디렉터리이다. 먼저 실습 디렉터리가 있는지 확인한다.",
+          "purpose": "실습 디렉터리가 이미 있는지 확인한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-10",
+          "where": "공격자 VM · att 셸",
+          "text": "mkdir ~/book08\ncd ~/book08\npwd",
+          "result": "/home/att/book08이 표시된다.",
+          "syntax": "새로 준비한 환경에서 실습 디렉터리를 만든다. 이미 만든 독자는 cd와 pwd만 실행한다.",
+          "purpose": "후보 목록을 저장할 작업 디렉터리를 만든다."
+        },
+        {
+          "type": "command",
+          "id": "C08-11",
+          "where": "공격자 VM · att 셸",
+          "text": "ssh -p 2204 -o HostKeyAlgorithms=ssh-ed25519 \\\n  ccc@192.168.0.107",
+          "result": "bastion의 기본 암호 ccc로 로그인한다. 실패하면 주소·포트·공개 포트·암호 순서로 확인한다.",
+          "purpose": "bastion의 ccc 계정으로 정상 로그인할 수 있는지 확인한다.",
+          "syntax": "-p 2204는 접속할 서버 포트이다. -o는 SSH 설정을 지정하며 HostKeyAlgorithms=ssh-ed25519는 서버 확인에 Ed25519 키를 사용한다. 줄 끝 역슬래시(\\)는 다음 줄을 잇는다. bastion의 ccc 계정으로 접속한다. 첫 접속 안내가 나오면 승인하기 전에 별도 관리 창에서 C08-12를 실행해 지문을 대조한다."
+        },
+        {
+          "type": "p",
+          "text": "SSH는 입력하는 암호를 화면에 표시하지 않는다. 정상 로그인을 먼저 확인해야 이후의 인증 실패와 접속 자체의 실패를 구분할 수 있다."
+        },
+        {
+          "type": "command",
+          "id": "C08-12",
+          "where": "kt66-bastion · root 셸",
+          "text": "ssh-keygen -lf \\\n/var/lib/bastion/ssh-host-keys/ssh_host_ed25519_key.pub",
+          "result": "두 창의 SHA256 지문이 같아야 한다. 다르면 승인하지 말고 대상 VM과 포트를 확인한다.",
+          "syntax": "ssh-keygen -lf는 공개 키의 지문을 출력한다. 여기서는 bastion이 영구 저장한 공개 호스트 키를 읽는다. 공격자 창은 첫 접속 안내에서 기다리고, 이 명령은 따로 유지한 bastion 관리 창에 입력한다.",
+          "purpose": "첫 SSH 연결에서 표시한 서버 키 지문을 관리 창의 공개 키와 대조한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-13",
+          "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+          "text": "hostname\nwhoami\nid\nexit",
+          "result": "bastion, ccc, uid=1000(ccc)를 확인한 뒤 공격자 VM으로 돌아간다. sudo·docker 그룹은 이 환경의 ccc 권한이며 일반 사용자에게 당연히 주어지는 권한이 아니다.",
+          "syntax": "hostname은 접속한 시스템 이름, whoami는 현재 유효 사용자 이름, id는 사용자·그룹 번호를 표시한다. exit는 현재 셸을 닫는다.",
+          "purpose": "접속한 서버와 계정을 확인한 뒤 SSH 연결을 닫는다."
+        },
+        {
+          "type": "command",
+          "id": "C08-14",
+          "where": "kt66-bastion · root 셸",
+          "text": "tail -n 20 /var/log/auth.log",
+          "result": "Accepted password for ccc, 출발지 .108과 임시 출발지 포트를 찾는다. sshd 뒤 대괄호는 프로세스 ID이다.",
+          "syntax": "bastion 관리 창에서 방금 접속한 인증 로그를 읽는다.",
+          "purpose": "정상 접속의 인증 원문을 읽는다."
+        },
+        {
+          "type": "p",
+          "text": "Accepted password는 암호 방식의 인증 성공이다. Accepted publickey라면 공개 키 방식이다. PAM의 session opened와 session closed는 세션 생명주기이며 인증 결과 줄과 구분한다. PAM은 서비스가 공통 인증·계정·세션 기능을 이용하도록 하는 체계이다."
+        },
+        {
+          "type": "h",
+          "text": "Discover에서 인증 로그 검색"
+        },
+        {
+          "type": "p",
+          "text": "Windows 브라우저에서 https://192.168.0.107:5601에 접속하고 admin / SecretPassword로 로그인한다. ☰ 메뉴에서 **Explore → Discover**를 열어 **wazuh-alerts-***를 선택한다. 이전 검색식과 필터를 지우고 시간 선택의 **Absolute**에서 방금 접속한 시작·종료 시각을 포함하는 범위를 지정한 뒤 **Refresh**를 누른다. Q08-01을 검색창에 입력하고 Enter를 누른다."
+        },
+        {
+          "type": "query",
+          "id": "Q08-01",
+          "where": "Windows · Discover · wazuh-alerts-*",
+          "text": "agent.name: \"bastion\" AND\nlocation: \"/var/log/auth.log\"",
+          "result": "정상 접속 원문의 Accepted password와 rule.id 5715를 찾는다. 결과가 없으면 8.10의 순서로 시간·인덱스·수집을 확인한 뒤 다음 실습으로 진행한다.",
+          "syntax": "DQL은 저장된 문서를 조건으로 고르는 검색식이다. 필드 뒤 콜론(:)은 값 조건, 큰따옴표는 값의 범위, AND는 두 조건을 모두 만족함을 뜻한다. 줄바꿈 대신 공백을 넣어 한 줄로 입력해도 된다.",
+          "purpose": "bastion의 인증 파일에서 만들어진 경보를 모은다."
+        },
+        {
+          "type": "p",
+          "text": "왼쪽 필드 목록에서 rule.id, data.srcip, data.dstuser의 추가 버튼을 눌러 결과 표에 넣는다. Time 열을 오름차순으로 정렬하면 실패와 성공의 순서를 읽기 쉽다. 결과 행 왼쪽 >를 누르고 Table에서 full_log, decoder.name, location을 찾는다."
+        },
+        {
+          "type": "p",
+          "text": "본문에서 대조할 인증 기록의 기간은 한국 시각 2026년 11월 2일 20:25~21:00이다. JSON의 11:38:05+0000과 화면의 20:38:05는 같은 시각이다. 직접 실습할 때는 공격 일지에 적은 시작·종료 시각으로 기간을 정한다. auth.log 원문의 시각에는 연도·시간대가 없으므로 2.4에서 확인한 서버 시간대와 함께 읽는다."
+        },
+        {
+          "type": "p",
+          "text": "아래는 정상 로그인 원문 한 줄이다. 포트 51380은 공격자 측 임시 포트이며 대상의 2204와 다르다."
+        },
+        {
+          "type": "code",
+          "text": "Nov  2 20:28:12 bastion sshd[2445]:\nAccepted password for ccc from\n192.168.0.108 port 51380 ssh2"
+        },
+        {
+          "type": "table",
+          "head": [
+            "필드",
+            "원문에서 읽는 위치와 의미"
+          ],
+          "rows": [
+            [
+              "predecoder.\nprogram_name",
+              "sshd[프로세스 ID]의 sshd. 기록한 프로그램이다."
+            ],
+            [
+              "decoder.name",
+              "sshd. Wazuh가 선택한 분석기 이름이다. 프로그램 이름과 역할이 다르다."
+            ],
+            [
+              "data.dstuser",
+              "for 뒤 ccc. 인증 대상 계정이다."
+            ],
+            [
+              "data.srcip · srcport",
+              "from 뒤 주소와 port 뒤 숫자. 연결 출발지이다."
+            ],
+            [
+              "rule.id",
+              "5715. 인증 성공 원문에 적용한 규칙이다."
+            ]
+          ],
+          "widths": [
+            39,
+            88
+          ],
+          "keep": false
+        },
+        {
+          "type": "p",
+          "text": "sshd 디코더에는 부모·하위 정의가 있다. 하위 정의가 주소와 계정을 추출하더라도 표시 이름은 부모인 sshd를 이어받을 수 있다. 실제 추출 필드와 원문을 읽고 이를 처리한 하위 디코더의 조건을 확인한다. [4]"
+        },
+        {
+          "type": "p",
+          "text": "경보가 없다면 8.10의 확인 순서를 따른다. 정상 접속 기록이 검색되는 상태에서 다음 실습을 시작한다."
+        }
+      ]
+    },
+    {
+      "title": "8.2  동일 계정의 암호 대입",
+      "kind": "body",
+      "level": "section",
+      "break": false,
+      "blocks": [
+        {
+          "type": "p",
+          "text": "존재하는 ccc 계정에 틀린 암호 후보를 넣는다. 선행 조건은 정상 SSH 로그인과 auth.log 수집이다. 성공 기준은 인증 실패 원문과 그 경보를 찾는 것이다. 반복 실패 경보와 자동 차단은 별도로 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "printf는 지정한 형식으로 문자열을 출력한다. 아래의 %s는 문자열 하나, \\n은 줄바꿈이며 각 후보가 한 줄씩 저장된다. 작은따옴표는 형식과 값을 그대로 전달한다. >는 출력을 파일에 저장하며 기존 파일을 덮어쓰므로 먼저 ls로 확인한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-15",
+          "where": "공격자 VM · att 셸",
+          "text": "cd ~/book08\nls -l pw-fail.txt",
+          "result": "pw-fail.txt가 없을 때 다음 입력을 진행한다. 이미 있으면 cat으로 내용을 확인하고 자신이 만든 목록인지 확인한다.",
+          "syntax": "실습 위치와 대상 파일을 확인한다.",
+          "purpose": "틀린 암호 목록을 저장할 위치와 기존 파일을 확인한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-16",
+          "where": "공격자 VM · att 셸",
+          "text": "printf '%s\\n' \\\nbook08-wrong01 book08-wrong02 book08-wrong03 \\\nbook08-wrong04 book08-wrong05 book08-wrong06 \\\nbook08-wrong07 book08-wrong08 book08-wrong09 \\\nbook08-wrong10 book08-wrong11 book08-wrong12 \\\n> pw-fail.txt\ncat pw-fail.txt\nwc -l pw-fail.txt",
+          "result": "틀린 암호 후보 12개가 보이고 줄 수는 12이다. 실제 ccc 암호를 이 목록에 넣지 않는다.",
+          "syntax": "cat은 파일 내용을 출력한다. wc -l은 줄 수를 센다.",
+          "purpose": "서로 다른 틀린 암호 후보 12개를 파일에 저장한다."
+        },
+        {
+          "type": "h",
+          "text": "인증 시도와 응답 분석"
+        },
+        {
+          "type": "command",
+          "id": "C08-17",
+          "where": "공격자 VM · att 셸",
+          "text": "timeout 45s hydra -l ccc -P pw-fail.txt \\\n-t 4 -w 5 ssh://192.168.0.107:2204",
+          "result": "실행이 정상 종료하면 유효 암호 수를 확인한다. 사례에서는 후보 12개를 시험하고 0 valid password found로 끝났다. 연결 오류·시간 만료이면 종료 사유와 auth.log에 도착한 요청을 대조한다.",
+          "syntax": "timeout은 뒤 명령의 실행 시간을 제한한다. 45s는 45초이며 시간 만료 종료 코드는 124이다. Hydra -l은 계정 하나, -P는 암호 파일, -t 4는 최대 병렬 작업 수, -w 5는 응답 대기 시간(초)이다. ssh:// 뒤에 대상 주소와 포트를 붙인다.",
+          "purpose": "ccc 계정에 틀린 암호 후보를 대입하고 서버가 처리한 실패 기록을 찾는다."
+        },
+        {
+          "type": "p",
+          "text": "연결 시간 초과, SSH 프로토콜 오류, 암호 거부는 서로 다른 결과이다. Active Response가 동작했을 가능성도 있으므로 오류 직후 같은 명령을 계속 실행하지 않는다. timeout으로 중단되면 남은 hydra.restore 파일은 중단된 작업 정보이며 8.10에서 정리한다."
+        },
+        {
+          "type": "query",
+          "id": "Q08-02",
+          "where": "Windows · Discover · wazuh-alerts-*",
+          "text": "agent.name: \"bastion\" AND\n(rule.id: \"5760\" OR rule.id: \"5763\")",
+          "result": "실습 시간의 Failed password 원문과 srcip·dstuser를 확인한다. 규칙 적용 결과에 따라 개별 실패 대신 상위 연관 경보가 표시될 수 있다.",
+          "syntax": "OR는 둘 중 하나 이상의 조건이며 괄호로 규칙 조건을 묶는다. 5760은 개별 암호 인증 실패, 5763은 같은 출발지의 실패를 연관한 규칙이다.",
+          "purpose": "암호 실패와 같은 출발지의 반복 실패 경보를 함께 찾는다."
+        },
+        {
+          "type": "p",
+          "text": "암호 후보 수와 경보 건수는 일치할 필요가 없다. 연결 준비·PAM 실패·접속 종료도 별도 기록이 되며, 같은 로그가 합쳐지기도 한다."
+        },
+        {
+          "type": "h",
+          "text": "반복 실패 경보의 근거"
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter08/5763-fields.png",
+          "caption": "화면 8-1. 반복 실패 경보의 계정과 연결 출발지",
+          "width_mm": 112
+        },
+        {
+          "type": "p",
+          "text": "화면의 data.dstuser는 ccc, data.srcip는 192.168.0.108이다. full_log는 연관 경보가 붙은 마지막 실패를, previous_output은 앞선 실패 원문을 담는다. previous_output에는 이번 실행보다 앞선 20:29~20:30의 실패도 포함돼 있다. 공격 일지의 각 실행 시간과 비교해 어떤 요청이 같은 120초 구간에 들어갔는지 확인한다."
+        },
+        {
+          "type": "image",
+          "path": "assets/figures/chapter08/correlation.png",
+          "caption": "도식 8-3. 실패 원문과 반복 실패 경보의 관계",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "설치된 5763 규칙은 5760 일치 이력, 같은 출발지 IP, frequency=8, timeframe=120을 사용한다. ignore=60도 설정돼 있다. frequency는 분석기의 연관 조건이고 firedtimes는 규칙의 발화 횟수이다. 암호 입력 횟수는 개별 인증 원문에서 세고, 접속자는 계정·출발지·세션과 승인 내역을 대조해 조사한다. [5]"
+        },
+        {
+          "type": "h",
+          "text": "반복 로그 요약과 필드 누락"
+        },
+        {
+          "type": "p",
+          "text": "같은 프로세스가 같은 실패 문구를 반복하면 rsyslog가 반복을 한 줄로 줄일 수 있다. 단일 작업(-t 1) 시험에서는 다음 원문을 관찰했다."
+        },
+        {
+          "type": "code",
+          "text": "sshd[2461]: message repeated 5 times:\n[ Failed password for ccc from\n192.168.0.108 port 53002 ssh2]"
+        },
+        {
+          "type": "p",
+          "text": "이 기록에는 5760이 적용됐지만 data.srcip와 data.dstuser가 추출되지 않았다. 같은 IP 조건의 DQL만 사용하면 이 문서가 결과에서 빠진다. 먼저 agent.name과 시간만으로 넓혀 full_log를 확인한다."
+        },
+        {
+          "type": "query",
+          "id": "Q08-03",
+          "where": "Windows · Discover · wazuh-alerts-*",
+          "text": "agent.name: \"bastion\" AND\nfull_log: \"message repeated\"",
+          "result": "해당 기록이 있으면 앞뒤의 원래 실패 줄과 묶어 읽는다. 요약 줄 한 건을 실패 한 번으로 세지 않는다.",
+          "purpose": "full_log에서 반복 요약 문구를 찾는다.",
+          "syntax": "큰따옴표로 여러 단어를 묶는다."
+        },
+        {
+          "type": "p",
+          "text": "반복 요약을 찾았으면 바로 앞의 Failed password와 sshd 프로세스 번호를 비교한다. 원래 줄의 실패 한 번에 message repeated의 반복 수를 더해 입력 횟수를 계산한다. PAM 실패·연결 종료·연관 경보는 각각 별도 기록으로 표시한다."
+        },
+        {
+          "type": "h",
+          "text": "자동 대응의 실행 여부 확인"
+        },
+        {
+          "type": "p",
+          "text": "Active Response는 경보를 조건으로 대응 명령을 실행하는 기능이다. kt66 설정은 5712 또는 5763이 발생하면 해당 에이전트에서 firewall-drop을 실행하고 180초 뒤 해제하도록 지정한다. bastion 관리 창에서 대응 로그와 현재 방화벽 규칙을 확인한다. 설정의 확인 위치는 8.9에 있다. [6]"
+        },
+        {
+          "type": "command",
+          "id": "C08-18",
+          "where": "kt66-bastion · root 셸",
+          "text": "tail -n 25 /var/ossec/logs/active-responses.log\niptables -S",
+          "result": "firewall-drop의 command가 add인지 delete인지, parameters 안의 출발지 IP가 .108인지 확인한다. 규칙 목록에서도 해당 출발지의 DROP 조건을 대조한다.",
+          "purpose": "bastion 관리 창에서 대응 기록과 현재 방화벽 규칙을 읽는다.",
+          "syntax": "iptables는 Linux 패킷 필터 규칙을 관리하는 도구이며 -S는 규칙을 출력한다. 여기서는 규칙을 변경하지 않는다."
+        },
+        {
+          "type": "p",
+          "text": "사례의 대응 로그에는 20:31:37에 add, 20:34:38에 delete가 있다. 뒤에 조회한 방화벽 목록에는 192.168.0.108의 차단 규칙이 남아 있지 않았다. 차단 중의 상태를 조사할 때는 add 시각의 DROP 규칙과 새 SSH 연결 결과를 함께 적는다."
+        },
+        {
+          "type": "p",
+          "text": "차단 중 새 SSH가 연결되지 않으면 해제 시각을 기다린 뒤 정상 암호로 한 번 확인한다. kt66 VM 관리용 22번 접속 창은 원상복구를 위해 유지한다. 실패 시 VM 공개 포트, auth.log, 에이전트 상태, 대응 로그 순서로 확인한다."
+        },
+        {
+          "type": "h",
+          "text": "조사와 원상복구"
+        },
+        {
+          "type": "p",
+          "text": "운영 환경에서는 출발지별 실패 빈도와 대상 계정, 정상 업무 시간을 비교한다. 승인된 점검도 같은 실패를 만들 수 있다. NAT 장비 뒤에서 여러 사용자가 한 주소를 공유하면 인증 계정·접속 시각·연결 정보와 NAT 기록을 대조해 접속자를 조사한다."
+        },
+        {
+          "type": "p",
+          "text": "의심 출발지의 접근을 제한할 때는 관리자의 정상 접속 경로를 확보하고 예외 범위를 기록한다. SSH 접근 허용망 축소, 계정별 인증 수단 점검, 강한 인증 적용을 검토한다. 기본 암호나 과도한 sudo 권한이 남아 있다면 함께 개선한다."
+        },
+        {
+          "type": "p",
+          "text": "Hydra가 종료된 뒤 대응 로그의 delete와 차단 규칙 해제를 확인한다. C08-11로 ccc 접속을 확인하고 exit로 나온 다음 8.3을 시작한다. 로그와 경보는 남겨 두고 후보 파일은 8.10에서 정리한다."
+        }
+      ]
+    },
+    {
+      "title": "8.3  존재하지 않는 계정의 인증 시도",
+      "kind": "body",
+      "level": "section",
+      "break": false,
+      "blocks": [
+        {
+          "type": "p",
+          "text": "서버에 없는 계정 이름으로 인증을 시도한다. 기존 ccc에 틀린 암호를 넣었던 8.2와 구분한다. 성공 기준은 Invalid user 또는 Failed password for invalid user 원문과 계정 필드를 연결하는 것이다."
+        },
+        {
+          "type": "command",
+          "id": "C08-19",
+          "where": "kt66-bastion · root 셸",
+          "text": "getent passwd book08-none1\ngetent passwd book08-none2\ngetent passwd book08-none3",
+          "result": "세 이름 모두 출력이 없어야 한다. 이미 존재하는 이름이 있으면 공격 목록에 넣지 않고 새 이름을 정해 동일하게 확인한다.",
+          "syntax": "getent는 시스템의 이름 서비스 설정에 따라 계정·그룹 정보를 조회한다. passwd 뒤에는 조회할 계정 이름을 쓴다.",
+          "purpose": "시험할 계정 이름 세 개가 bastion에 없는지 확인한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-20",
+          "where": "공격자 VM · att 셸",
+          "text": "cd ~/book08\nls -l users-invalid.txt\nprintf '%s\\n' book08-none1 book08-none2 \\\nbook08-none3 > users-invalid.txt\ncat users-invalid.txt",
+          "result": "서로 다른 계정 이름 3개가 한 줄씩 저장된다.",
+          "syntax": "ls에서 파일이 없거나 이번 실습에서 만든 파일임을 확인한 후 printf를 실행한다.",
+          "purpose": "사전 확인한 계정 이름 세 개를 목록에 저장한다."
+        },
+        {
+          "type": "p",
+          "text": "admin이나 oracle도 서버에 따라 실제 계정으로 사용한다. 목록의 각 이름을 대상 서버의 계정 조회 결과와 대조한다."
+        },
+        {
+          "type": "h",
+          "text": "잘못된 계정의 응답과 경보"
+        },
+        {
+          "type": "command",
+          "id": "C08-21",
+          "where": "공격자 VM · att 셸",
+          "text": "timeout 30s hydra -L users-invalid.txt \\\n-p book08-wrong -t 3 -w 5 \\\nssh://192.168.0.107:2204",
+          "result": "사례에서는 유효 암호를 찾지 못했다. 존재하지 않는 계정인지 여부는 서버의 Invalid user 원문과 사전 getent 결과로 확인한다.",
+          "syntax": "-L은 계정 목록, 소문자 -p는 공통 암호 하나이다. 최대 3개 작업으로 짧은 목록을 시험하고 30초를 넘기면 중단한다.",
+          "purpose": "존재하지 않는 계정 세 개로 인증을 시도한다."
+        },
+        {
+          "type": "query",
+          "id": "Q08-04",
+          "where": "Windows · Discover · wazuh-alerts-*",
+          "text": "agent.name: \"bastion\" AND\n(rule.id: \"5710\" OR rule.id: \"5712\")",
+          "result": "사례에서는 계정 이름 세 개에 5710 경보 8건이 기록됐다. 5712는 없었다. 각 이름의 Invalid user·Failed password·연결 종료 원문을 분류해 여러 경보가 나온 이유를 확인한다.",
+          "syntax": "5710은 잘못된 계정 이름을 포함한 SSH 기록, 5712는 같은 출발지의 해당 기록을 연관한 규칙이다.",
+          "purpose": "존재하지 않는 계정의 인증 시도와 반복 경보를 찾는다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter08/5710-fields.png",
+          "caption": "화면 8-2. 잘못된 계정 이름을 담은 data.srcuser",
+          "width_mm": 112
+        },
+        {
+          "type": "p",
+          "text": "이 원문에서는 계정이 data.srcuser에 저장됐다. 정상 계정 로그인에서 사용한 data.dstuser 조건을 그대로 붙이면 놓칠 수 있다. 표시 이름과 원문의 위치를 먼저 대조한다."
+        },
+        {
+          "type": "h",
+          "text": "계정 탐색과 방어 판단"
+        },
+        {
+          "type": "p",
+          "text": "같은 출발지가 여러 계정 이름을 바꾸어 사용하면 원문의 이름 목록을 만든다. 한 이름의 Invalid user, 암호 실패, 연결 종료가 각각 5710에 일치할 수 있으므로 계정 수는 중복을 제거한 이름 목록에서 센다."
+        },
+        {
+          "type": "table",
+          "head": [
+            "관찰",
+            "다음 확인"
+          ],
+          "rows": [
+            [
+              "계정 이름이 계속 달라짐",
+              "원문의 이름 목록·출발지·시간 간격을 비교한다."
+            ],
+            [
+              "실제 업무 계정도 포함됨",
+              "요청된 계정 이름의 공개 여부와 승인된 점검 내역을 확인하고, 비공개 이름을 알아낸 경위를 조사한다."
+            ],
+            [
+              "5712 또는 접속 시간 초과",
+              "Active Response 기록과 실제 차단·해제를 확인한다."
+            ],
+            [
+              "경보 0건",
+              "auth.log의 Invalid user와 수집 상태, DQL 필드부터 확인한다."
+            ]
+          ],
+          "widths": [
+            39,
+            88
+          ],
+          "keep": false
+        },
+        {
+          "type": "p",
+          "text": "방어자는 공개 서비스 계정 이름의 노출과 불필요한 SSH 접근을 줄인다. 허용 계정과 접속 경로를 정하고 변경 이력을 남긴다. 사설 IP의 접속도 해당 구간의 접근 정책과 승인된 장비 목록을 대조한다."
+        },
+        {
+          "type": "p",
+          "text": "원상복구에서는 Hydra가 종료됐는지 확인하고 자동 차단이 있으면 해제를 확인한다. 이 실습은 계정을 생성하지 않았으므로 삭제할 서버 계정이 없다. 자신이 만든 users-invalid.txt는 8.10에서 정리한다."
+        }
+      ]
+    },
+    {
+      "title": "8.4  인증 실패 뒤의 성공",
+      "kind": "body",
+      "level": "section",
+      "break": false,
+      "blocks": [
+        {
+          "type": "box",
+          "kind": "predict",
+          "text": [
+            "실패 뒤의 성공 로그에서 계정·출발지 IP가 같으면 같은 접속이라고 볼 수 있을까? 접속을 구분할 필드를 정한 뒤 원문을 읽는다."
+          ],
+          "title": "먼저 예측"
+        },
+        {
+          "type": "p",
+          "text": "틀린 암호 세 개 뒤에 실습 계정의 실제 암호를 넣는다. 짧은 목록에서 인증 성공까지 관찰하고, 실패와 성공을 하나의 시간표으로 연결한다. 선행 조건은 앞 실습의 차단 해제와 정상 ccc 접속이다."
+        },
+        {
+          "type": "command",
+          "id": "C08-22",
+          "where": "공격자 VM · att 셸",
+          "text": "cd ~/book08\nls -l pw-success.txt\nprintf '%s\\n' book08-bad1 book08-bad2 \\\nbook08-bad3 ccc > pw-success.txt\ncat pw-success.txt",
+          "result": "네 줄을 확인한다. 기본 암호를 바꾼 환경에서는 마지막 줄만 자신의 실습 암호로 바꾼다.",
+          "purpose": "파일이 없거나 자신이 만든 실습 파일임을 확인한 뒤 후보 네 개를 저장한다.",
+          "syntax": "마지막 ccc는 bastion의 기본 실습 암호이다."
+        },
+        {
+          "type": "command",
+          "id": "C08-23",
+          "where": "공격자 VM · att 셸",
+          "text": "timeout 35s hydra -l ccc -P pw-success.txt \\\n-t 1 -w 5 -f ssh://192.168.0.107:2204",
+          "result": "사례에서는 ccc / ccc 한 쌍을 찾고 종료했다. 성공 출력에는 암호가 포함되므로 조사 보고서에는 암호 자체를 복사하지 않는다.",
+          "syntax": "-t 1은 한 작업으로 후보를 순서대로 시험한다. -f는 이 대상에서 유효한 계정·암호를 찾으면 중단한다.",
+          "purpose": "틀린 후보 세 개와 정상 암호를 순서대로 시험한다."
+        },
+        {
+          "type": "p",
+          "text": "시간 초과나 연결 오류로 끝났다면 후보 목록의 정답 여부를 판단하기 전에 차단 상태부터 확인한다."
+        },
+        {
+          "type": "h",
+          "text": "성공 뒤 셸과 기록 확인"
+        },
+        {
+          "type": "command",
+          "id": "C08-24",
+          "where": "공격자 VM · att 셸",
+          "text": "ssh -p 2204 ccc@192.168.0.107",
+          "result": "bastion 셸이 열리면 아래 명령을 한 줄씩 실행한다.",
+          "syntax": "발견한 실습 암호로 직접 접속해 인증 이후 상태를 확인한다.",
+          "purpose": "찾은 암호로 새 SSH 연결을 열어 접속한 계정을 확인한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-25",
+          "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+          "text": "hostname\nwhoami\nid\nexit",
+          "result": "bastion과 ccc가 확인되며 공격자 VM으로 돌아간다.",
+          "syntax": "서버 이름과 유효 계정·그룹을 확인하고 접속을 종료한다.",
+          "purpose": "bastion의 ccc로 접속했는지 확인하고 연결을 종료한다."
+        },
+        {
+          "type": "query",
+          "id": "Q08-05",
+          "where": "Windows · Discover · wazuh-alerts-*",
+          "text": "agent.name: \"bastion\" AND\ndata.srcip: \"192.168.0.108\" AND\n(rule.id: \"5760\" OR rule.id: \"5715\")",
+          "result": "제시한 사례에서는 20:37:04 실패 뒤 20:37:12에 ccc 성공이 나타났다. 같은 연결의 포트는 42688이다.",
+          "syntax": "같은 출발지의 암호 실패와 인증 성공을 고른다. 결과를 시간 오름차순으로 읽고 계정과 출발지 포트도 비교한다.",
+          "purpose": "같은 출발지의 암호 실패와 성공을 시간순으로 대조한다."
+        },
+        {
+          "type": "p",
+          "text": "중간의 message repeated 2 times에는 srcip가 추출되지 않아 위 검색에서 빠졌다. 8.2의 반복 요약 검색으로 보완한다. 별도의 직접 로그인은 다른 출발지 포트로 기록된다. Hydra의 인증 성공과 이후 조사자가 실행한 접속을 구분해 기록한다."
+        },
+        {
+          "type": "p",
+          "text": "경보에 포함되지 않은 연결 종료·인증 관련 원문까지 확인할 때는 wazuh-archives-*로 전환한다. 이전 규칙·출발지 필터를 지우고 같은 실행 기간에서 Q08-06를 실행한다."
+        },
+        {
+          "type": "query",
+          "id": "Q08-06",
+          "where": "Windows · Discover · wazuh-archives-*",
+          "text": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND predecoder.program_name: \"sshd\"",
+          "result": "Failed password·Accepted password·연결 종료 원문의 계정·출발지 포트·sshd 프로세스 번호를 대조한다. 작업자가 유지한 관리 접속도 시각과 포트로 분리한다.",
+          "syntax": "인증 서버의 원문을 규칙 번호와 추출된 계정 필드로 제한하지 않고 찾는다.",
+          "purpose": "sshd의 인증·세션 원문을 규칙 번호와 계정 필드 제한 없이 찾는다."
+        },
+        {
+          "type": "h",
+          "text": "성공 기록의 연결 정보"
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter08/success-fields.png",
+          "caption": "화면 8-3. 실패 뒤 인증 성공의 계정과 출발지 포트",
+          "width_mm": 112
+        },
+        {
+          "type": "p",
+          "text": "사례 기록의 인증 성공 계정은 ccc이고 출발지 포트는 42688이다. 같은 시각 구간의 Failed password 원문에도 이 포트가 기록됐다. 출발지 IP뿐 아니라 계정·연결 포트를 함께 비교한다."
+        },
+        {
+          "type": "code",
+          "text": "20:37:04  Failed password for ccc\n20:37:11  message repeated 2 times\n20:37:12  Accepted password for ccc"
+        },
+        {
+          "type": "p",
+          "text": "위 시간표은 auth.log에서 읽은 시각이다. 실패 세 번 뒤 성공했으며 가운데 두 실패는 요약 줄에 포함됐다. 각 줄의 Wazuh 수집 시각은 원문 시각과 약간 차이가 날 수 있다."
+        },
+        {
+          "type": "h",
+          "text": "계정 탈취 판단에 필요한 증거"
+        },
+        {
+          "type": "image",
+          "path": "assets/figures/chapter08/timeline.png",
+          "caption": "도식 8-4. 인증 실패와 성공 뒤에 연결할 조사 기록",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "같은 연결의 실패 세 번 뒤 정상 암호가 받아들여졌다. 사용자도 암호를 잘못 입력한 뒤 성공할 수 있으므로 계정 소유자의 작업 시각과 승인된 점검 내역을 대조한다. 이 실습은 후보 목록에 정상 암호를 넣은 작업이며, 조사 기록에는 인증 성공을 확인한 원문과 접속 경로를 적는다."
+        },
+        {
+          "type": "p",
+          "text": "SSH 인증 로그에서 접속 계정·시각·세션을 확인한 뒤 sudo 실행과 계정 변경, 프로세스·파일 변화, 외부 통신을 조사한다. 셸 안에서 실행한 명령은 별도로 수집해야 한다. 명령·프로세스 수집은 다음 장에서 다룬다."
+        },
+        {
+          "type": "p",
+          "text": "침해가 의심되면 로그와 세션 정보를 확보한 뒤 해당 세션과 계정의 접근을 제한한다. 암호뿐 아니라 등록된 공개 키와 다른 인증 수단도 점검한다. 공유 계정 사용 여부와 다른 시스템에서의 같은 계정 사용도 조사 범위에 넣는다."
+        },
+        {
+          "type": "p",
+          "text": "C08-25의 exit로 SSH 접속을 닫는다. ccc 암호는 그대로 유지하고 성공 후보 파일은 8.10에서 다른 목록과 함께 삭제한다."
+        }
+      ]
+    },
+    {
+      "title": "8.5  root 직접 로그인",
+      "kind": "body",
+      "level": "section",
+      "break": false,
+      "blocks": [
+        {
+          "type": "p",
+          "text": "root의 SSH 인증 성공을 조사한다. root는 UID 0인 관리자 계정이다. 일반 계정이 sudo로 명령을 실행한 것과 root 이름으로 직접 SSH 인증한 것을 구분한다."
+        },
+        {
+          "type": "image",
+          "path": "assets/figures/chapter08/root-state.png",
+          "caption": "도식 8-5. root 직접 로그인 실습의 상태 변화",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "초기 상태는 root 암호 잠금(L), PermitRootLogin no이다. 직접 로그인을 관찰하려면 bastion에서만 임시 암호와 허용 설정을 적용한다. kt66 VM 호스트의 SSH 설정은 변경하지 않는다. VM 관리 창과 bastion root 관리 셸을 유지한다."
+        },
+        {
+          "type": "p",
+          "text": "이 실습 동안 다른 계정·암호를 변경하지 않는다. /etc/shadow 전체를 변경 전 파일로 되돌리는 절차이므로 그 사이의 다른 암호 변경도 사라지기 때문이다. 8.6과 8.7은 원상복구를 확인한 뒤 시작한다."
+        },
+        {
+          "type": "p",
+          "text": "성공 기준은 root 인증 성공 원문과 UID 0 확인, 그리고 복구 후의 root 접속 거부와 ccc 정상 접속이다. SSH의 유효 설정과 실제 인증 결과를 대조해 root 직접 로그인 허용 상태를 확인한다."
+        },
+        {
+          "type": "h",
+          "text": "설정과 암호 상태 백업"
+        },
+        {
+          "type": "command",
+          "id": "C08-26",
+          "where": "kt66-bastion · root 셸",
+          "text": "ls -l /root/book08-sshd_config.before \\\n/root/book08-shadow.before\npasswd -S root",
+          "result": "두 백업이 없고 기본 환경의 root 상태가 L이어야 한다. 상태가 다르면 그 상태를 별도로 기록한 뒤 복구 기준을 정한다.",
+          "syntax": "백업 경로에 기존 파일이 없는지 확인하고 root의 초기 상태를 적는다. 기존 백업이 있으면 덮어쓰지 말고 이전 실습의 복구 여부부터 확인한다.",
+          "purpose": "기존 백업 유무와 root의 암호 상태를 확인한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-27",
+          "where": "kt66-bastion · root 셸",
+          "text": "cp -p /etc/ssh/sshd_config \\\n/root/book08-sshd_config.before\ncp -p /etc/shadow /root/book08-shadow.before\nchmod 600 /root/book08-shadow.before",
+          "result": "백업 두 개가 생긴다. shadow 내용은 화면·보고서·저장소에 복사하지 않는다.",
+          "syntax": "cp는 파일 복사, -p는 권한·소유자·시각 보존이다. chmod는 권한을 바꾸며 600은 소유자만 읽고 쓸 수 있게 한다. shadow에는 암호 해시가 있으므로 백업도 root만 읽게 한다.",
+          "purpose": "SSH 설정과 암호 상태 파일의 백업을 만든다."
+        },
+        {
+          "type": "command",
+          "id": "C08-28",
+          "where": "kt66-bastion · root 셸",
+          "text": "cmp /etc/ssh/sshd_config \\\n/root/book08-sshd_config.before\ncmp /etc/shadow /root/book08-shadow.before",
+          "result": "출력이 없고 각각 종료 코드 0이면 내용이 같다. 차이가 있으면 설정 변경을 진행하지 않고 백업을 다시 확인한다.",
+          "syntax": "cmp는 두 파일의 바이트를 비교한다. 각 명령 바로 다음에 echo $?를 입력하면 종료 코드를 볼 수 있다. echo는 값을 출력하고 $?는 직전 명령의 종료 코드이다.",
+          "purpose": "백업 내용이 현재 파일과 일치하는지 검사한다."
+        },
+        {
+          "type": "h",
+          "text": "root 인증을 임시로 허용"
+        },
+        {
+          "type": "command",
+          "id": "C08-29",
+          "where": "kt66-bastion · root 셸",
+          "text": "vim /etc/ssh/sshd_config",
+          "result": "PermitRootLogin yes가 유효 설정으로 적용되는지는 C08-31에서 확인한다. 같은 항목을 파일 끝에 중복 추가하지 않는다.",
+          "syntax": "vim은 터미널의 텍스트 편집기이다. Esc 뒤 /^PermitRootLogin no$와 Enter로 활성 줄을 찾는다. ^는 줄 시작, $는 줄 끝이다. cc로 그 줄을 교체하는 입력 모드를 열고 PermitRootLogin yes를 입력한다. Esc 뒤 :wq와 Enter로 저장·종료한다. 취소는 Esc 뒤 :q!와 Enter이다.",
+          "purpose": "root 직접 로그인을 허용하도록 SSH 설정 한 줄을 바꾼다."
+        },
+        {
+          "type": "command",
+          "id": "C08-30",
+          "where": "kt66-bastion · root 셸",
+          "text": "passwd root",
+          "result": "암호 변경 성공 안내를 확인한다. 예시는 Kt66Root!를 사용하며 원상복구 후에는 사용할 수 없어야 한다.",
+          "syntax": "passwd 뒤 root를 지정하면 root 암호를 변경한다. New password와 재입력 프롬프트에 이 실습에서만 쓸 임시 암호를 입력한다.",
+          "purpose": "root에 실습용 임시 암호를 설정한다."
+        },
+        {
+          "type": "p",
+          "text": "OpenSSH는 Include로 다른 설정 파일을 읽고 Match로 접속 조건별 설정을 적용할 수 있다. 다음 명령의 -C는 root 접속 조건을 넣어 유효 설정을 읽는다. 기본 설정과 다른 값이 나오면 Include 파일과 Match 조건을 확인한다. [2]"
+        },
+        {
+          "type": "h",
+          "text": "유효 설정 검사와 재적용"
+        },
+        {
+          "type": "command",
+          "id": "C08-31",
+          "where": "kt66-bastion · root 셸",
+          "text": "/usr/sbin/sshd -t\n/usr/sbin/sshd -T -C \\\nuser=root,addr=192.168.0.108,host=attacker \\\n| grep -E '^(permitrootlogin|passwordauthentication) '",
+          "result": "-t가 오류 없이 끝나고 permitrootlogin yes, passwordauthentication yes를 확인한다. 오류가 있으면 reload하지 않고 설정을 고친다.",
+          "syntax": "소문자 -t는 설정 구문과 키의 유효성을 검사한다. 대문자 -T는 유효 설정을 출력하며 -C는 Match 판정에 사용할 접속 조건이다. user는 대상 계정, addr는 접속자 주소, host는 접속자 호스트 이름이다. 실제 환경의 Match Host 조건이 있으면 서버가 인식하는 이름으로 대조한다.",
+          "purpose": "변경한 SSH 설정의 문법과 root 접속에 적용될 값을 검사한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-32",
+          "where": "kt66-bastion · root 셸",
+          "text": "service ssh reload\npasswd -S root",
+          "result": "reload 성공 안내와 root의 암호 설정 상태 P를 확인한다.",
+          "syntax": "service는 서비스 제어 명령을 호출한다. ssh reload는 SSH 서버에 설정을 다시 읽게 한다. 기존 관리 셸은 유지한 채 새 접속으로 적용 여부를 확인한다.",
+          "purpose": "검사한 설정을 SSH 서버에 적용하고 root 암호 상태를 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "kt66의 bastion에서는 sshd가 컨테이너의 주 프로세스이다. 일반 VM의 systemctl 절차를 그대로 옮기지 않는다. reload가 실패하면 auth.log와 sshd -t 결과를 확인하고 보관한 파일로 복구한다."
+        },
+        {
+          "type": "h",
+          "text": "직접 로그인과 Wazuh 확인"
+        },
+        {
+          "type": "command",
+          "id": "C08-33",
+          "where": "공격자 VM · att 셸",
+          "text": "ssh -p 2204 root@192.168.0.107",
+          "result": "root 셸이 열리면 whoami와 id를 실행한다. root와 uid=0(root)를 확인한 뒤 exit로 즉시 접속을 종료한다.",
+          "syntax": "bastion의 root 계정으로 새 SSH 연결을 열고 방금 정한 임시 암호를 입력한다.",
+          "purpose": "bastion에 root로 직접 SSH 인증한다."
+        },
+        {
+          "type": "query",
+          "id": "Q08-07",
+          "where": "Windows · Discover · wazuh-alerts-*",
+          "text": "agent.name: \"bastion\" AND\nrule.id: \"5715\" AND data.dstuser: \"root\"",
+          "result": "full_log의 Accepted password for root, 출발지 .108과 인증 방식을 확인한다.",
+          "syntax": "인증 성공 경보 중 대상 계정이 root인 것을 찾는다.",
+          "purpose": "root를 대상으로 한 SSH 인증 성공을 찾는다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter08/root-fields.png",
+          "caption": "화면 8-4. root 직접 인증 성공의 대상 계정과 출발지",
+          "width_mm": 112
+        },
+        {
+          "type": "p",
+          "text": "이 경보는 해당 시점에 root 직접 인증이 성공했음을 보여 준다. 운영 환경에서 발견하면 변경 승인, 접속자와 출발지, root 인증 정책을 확인한다. PermitRootLogin prohibit-password는 암호 로그인을 제한하지만 공개 키 로그인을 허용할 수 있으므로 no와 구분한다."
+        },
+        {
+          "type": "h",
+          "text": "root 설정과 암호 원상복구"
+        },
+        {
+          "type": "command",
+          "id": "C08-34",
+          "where": "kt66-bastion · root 셸",
+          "text": "ls -l /root/book08-sshd_config.before \\\n/root/book08-shadow.before\ncp -p /root/book08-sshd_config.before \\\n/etc/ssh/sshd_config\ncp /root/book08-shadow.before /etc/shadow",
+          "result": "복사 오류가 없어야 한다. root 계정의 잠금 상태와 암호 해시를 모두 초기 상태로 되돌리도록 백업 내용을 복구한다.",
+          "syntax": "두 백업을 확인한 뒤 복사한다. shadow 백업은 600으로 제한했으므로 복구할 때 -p를 빼고 기존 /etc/shadow의 소유자·권한을 유지한다. 백업 이후 다른 계정·암호 변경이 없는 실습 구간에 적용한다.",
+          "purpose": "SSH 설정과 암호 상태 파일을 백업 내용으로 되돌린다."
+        },
+        {
+          "type": "command",
+          "id": "C08-35",
+          "where": "kt66-bastion · root 셸",
+          "text": "cmp /etc/ssh/sshd_config \\\n/root/book08-sshd_config.before\ncmp /etc/shadow /root/book08-shadow.before\n/usr/sbin/sshd -t\nservice ssh reload",
+          "result": "복구된 설정으로 reload가 성공한다. 어느 단계든 오류가 있으면 관리 셸을 닫지 말고 해당 파일부터 확인한다.",
+          "syntax": "두 파일이 원본 백업과 일치하는지 확인한 뒤 구문 검사와 reload를 진행한다. 각 cmp는 출력 없음·종료 코드 0이어야 한다.",
+          "purpose": "복구 내용을 비교하고 SSH 서버에 다시 적용한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-36",
+          "where": "kt66-bastion · root 셸",
+          "text": "passwd -S root\nls -l /etc/shadow\n/usr/sbin/sshd -T | grep permitrootlogin",
+          "result": "root 상태 L과 permitrootlogin no, shadow의 소유자·그룹·권한이 C08-05에서 적은 값과 같아야 한다.",
+          "purpose": "root 암호 상태와 유효 SSH 정책을 읽는다.",
+          "syntax": "여기서 grep은 permitrootlogin 문자열이 있는 줄을 선택한다."
+        },
+        {
+          "type": "h",
+          "text": "복구 뒤 새 연결로 확인"
+        },
+        {
+          "type": "command",
+          "id": "C08-37",
+          "where": "공격자 VM · att 셸",
+          "text": "ssh -p 2204 -o NumberOfPasswordPrompts=1 \\\nroot@192.168.0.107",
+          "result": "복구한 기본 환경에서는 Permission denied로 거부된다. 공개 키가 별도로 등록된 환경이라면 인증 방식과 유효 설정도 함께 확인한다.",
+          "purpose": "원상복구한 뒤 임시 암호를 사용한 root 접속이 거부되는지 확인한다.",
+          "syntax": "-o는 SSH 설정 항목을 명령행에서 지정한다. NumberOfPasswordPrompts=1은 암호 질문을 한 번으로 제한한다. 임시 암호로 root 접속을 한 번 확인한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-38",
+          "where": "공격자 VM · att 셸",
+          "text": "ssh -p 2204 ccc@192.168.0.107",
+          "result": "ccc로 접속되면 hostname과 id로 bastion·ccc를 확인하고 exit로 나온다.",
+          "syntax": "일반 실습 계정의 기존 인증이 유지되는지 새 연결로 확인한다.",
+          "purpose": "일반 계정 ccc의 정상 접속이 유지되는지 확인한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-39",
+          "where": "kt66-bastion · root 셸",
+          "text": "rm -i /root/book08-sshd_config.before \\\n/root/book08-shadow.before",
+          "result": "각 경로를 읽고 y로 확인한다. ls -l로 두 경로를 다시 조회했을 때 없어야 한다.",
+          "syntax": "rm은 파일을 삭제하며 -i는 파일마다 확인을 묻는다. 설정·암호 상태와 새 접속 확인을 모두 마친 후 이번에 만든 백업만 삭제한다.",
+          "purpose": "원상복구가 끝난 뒤 이번 백업 두 개를 삭제한다."
+        },
+        {
+          "type": "p",
+          "text": "실제 사고의 설정 변경은 인증·세션·변경 기록을 보존하고 정상 관리 경로를 확보한 뒤 수행한다. 파일 백업 복원은 다른 계정 변경이 없는 이 실습의 원상복구에 사용한다."
+        }
+      ]
+    },
+    {
+      "title": "8.6  sudo 권한 사용",
+      "kind": "body",
+      "level": "section",
+      "break": false,
+      "blocks": [
+        {
+          "type": "p",
+          "text": "ccc로 로그인한 뒤 root 권한 명령을 실행한다. sudo는 sudoers 정책에 따라 다른 계정의 권한으로 명령을 실행하는 도구이다. 기본 대상은 root이다. root로 직접 SSH 인증하는 8.5와 구분한다. [7]"
+        },
+        {
+          "type": "image",
+          "path": "assets/figures/chapter08/sudo.png",
+          "caption": "도식 8-6. 로그인 계정과 sudo 실행 대상의 관계",
+          "width_mm": 127
+        },
+        {
+          "type": "command",
+          "id": "C08-40",
+          "where": "공격자 VM · att 셸",
+          "text": "ssh -p 2204 ccc@192.168.0.107",
+          "result": "bastion의 ccc 셸이 열린다.",
+          "syntax": "root 설정의 원상복구를 마친 뒤 일반 계정으로 접속한다.",
+          "purpose": "권한 사용을 관찰할 ccc SSH 세션을 연다."
+        },
+        {
+          "type": "command",
+          "id": "C08-41",
+          "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+          "text": "id\nsudo -l",
+          "result": "제시한 사례의 ccc에는 (ALL) NOPASSWD: ALL이 있다. 이는 암호 재입력 없이 허용된 대상 계정으로 모든 명령을 실행할 수 있는 실습용 설정이다.",
+          "syntax": "sudo -l은 현재 사용자가 실행할 수 있는 명령을 나열한다. 실행 전 계정과 허용 정책을 확인한다.",
+          "purpose": "로그인 계정의 그룹과 실제 sudo 허용 범위를 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "sudo 그룹에 속했는지만 보지 말고 sudo -l의 실제 허용 범위를 읽는다. docker 그룹 권한도 별도로 점검할 대상이다. 성공 기준은 일반 계정의 실행 요청과 root 권한 실행을 로그에서 구분하는 것이다."
+        },
+        {
+          "type": "h",
+          "text": "root 권한 명령 실행"
+        },
+        {
+          "type": "command",
+          "id": "C08-42",
+          "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+          "text": "sudo -i id\nid",
+          "result": "첫 출력은 uid=0(root), 다음 출력은 uid=1000(ccc)이다. 첫 명령이 끝나면 ccc 셸로 돌아온다.",
+          "syntax": "sudo -i는 대상 사용자의 로그인 환경을 사용한다. 뒤에 id를 붙였으므로 해당 명령을 실행한 뒤 돌아온다. 명령 없는 sudo -i는 대화형 셸을 열어 exit가 필요하다.",
+          "purpose": "root 권한으로 id를 실행한 뒤 ccc 권한으로 돌아온 것을 비교한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-43",
+          "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+          "text": "ls -l /etc/shadow\nsudo cat /etc/shadow > /dev/null\necho $?",
+          "result": "echo $?가 0이면 읽기 명령이 성공했다. 실제 내용 확인·복사는 하지 않아도 sudo 실행 기록은 남는다.",
+          "syntax": "shadow는 암호 해시와 암호 만료 정보를 담는 보호된 파일이다. ls로 존재와 권한을 확인한 뒤 root 권한의 cat으로 읽는다. >는 cat의 출력을 /dev/null로 보내고 /dev/null은 받은 데이터를 버린다. 해시는 화면에 표시하지 않는다.",
+          "purpose": "보호된 파일의 읽기 권한을 시험하고 종료 결과를 기록한다."
+        },
+        {
+          "type": "p",
+          "text": "ccc의 NOPASSWD 정책에서는 sudo 암호 질문을 생략한다. 여기서는 5402·5403과 COMMAND를 조회한다. sudo -l 결과에 암호 인증을 요구하는 정책이 있으면 그 정책에 따른 인증 결과를 기록한다."
+        },
+        {
+          "type": "h",
+          "text": "sudo 원문과 필드 해석"
+        },
+        {
+          "type": "query",
+          "id": "Q08-08",
+          "where": "Windows · Discover · wazuh-alerts-*",
+          "text": "agent.name: \"bastion\" AND\n(rule.id: \"5402\" OR rule.id: \"5403\")",
+          "result": "ccc가 USER=root로 요청한 COMMAND를 찾는다. 이번 sudo -i id에는 5403, cat에는 5402가 적용됐다.",
+          "syntax": "5402는 root 대상 sudo 실행, 5403은 Wazuh의 첫 관찰 조건과 관련된 규칙이다. 두 규칙을 함께 조회하고 full_log를 읽는다.",
+          "purpose": "sudo의 root 대상 실행 요청과 최초 관찰 경보를 찾는다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter08/sudo-fields.png",
+          "caption": "화면 8-5. sudo 실행 요청의 명령과 사용자 필드",
+          "width_mm": 112
+        },
+        {
+          "type": "p",
+          "text": "data.srcuser는 원문의 ccc, data.dstuser는 USER=root, data.pwd는 PWD, data.command는 COMMAND 뒤에서 나온다. PWD는 명령을 요청할 때의 작업 디렉터리이다. 명령이 읽거나 쓴 파일은 COMMAND의 경로와 실행 기록에서 찾는다. 대화형 터미널이면 TTY가 기록될 수 있고 비대화형 실행에는 없을 수 있다."
+        },
+        {
+          "type": "p",
+          "text": "cat 기록의 COMMAND는 /usr/bin/cat /etc/shadow이다. > /dev/null은 ccc의 셸이 처리한 출력 방향이므로 sudo 명령 인수에는 포함되지 않는다. sudo-i의 COMMAND는 /bin/bash --login -c id로 나타났다."
+        },
+        {
+          "type": "h",
+          "text": "sudo 관찰의 범위와 대응"
+        },
+        {
+          "type": "p",
+          "text": "sudo 디코더의 부모는 sudo이며 하위 sudo-fields 정의가 사용자·TTY·작업 디렉터리·명령을 추출한다. 화면의 decoder.name은 sudo를 이어받는다. decoder.ftscomment의 첫 실행 문구는 Wazuh가 보관한 FTS 관찰 상태를 기준으로 읽는다. [4][8]"
+        },
+        {
+          "type": "p",
+          "text": "5403은 Wazuh가 보관한 첫 관찰 상태에 영향을 받는다. 이 디코더의 FTS(최초 관찰) 조건은 이름·출발 사용자·위치를 사용한다. 이번 기록에는 sudo의 PAM 경고에도 5403이 나타났으나 명령 필드는 없었다. root 권한으로 실행한 명령은 COMMAND가 포함된 sudo 원문과 실행 결과에서 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "sudo로 셸을 열면 sudo 경보에는 그 셸을 실행한 요청이 남는다. 셸 안의 개별 명령은 프로세스·감사 기록 등으로 조사한다. 명령의 실행 결과는 실습의 id 출력·종료 코드와 후속 시스템 상태를 대조해 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "방어자는 srcuser, dstuser, command, 작업 시간과 승인 내역을 비교한다. 승인되지 않은 사용이면 세션·인증 수단을 통제하고 sudoers의 허용 명령을 최소화한다. 정책 편집은 문법 검사 기능이 있는 visudo로 수행하고 정상 관리 경로를 먼저 확보한다."
+        },
+        {
+          "type": "p",
+          "text": "sudo 정책과 shadow 내용은 그대로 유지된다. 조사를 마치면 exit로 ccc SSH 셸을 닫고, 8.7은 공격자 VM에서 새 연결로 시작한다."
+        }
+      ]
+    },
+    {
+      "title": "8.7  계정 생성과 권한 변경",
+      "kind": "body",
+      "level": "section",
+      "break": false,
+      "blocks": [
+        {
+          "type": "p",
+          "text": "일회용 계정을 만들고 sudo 그룹에 추가한 뒤 삭제한다. 생성된 계정의 재접속 가능 여부는 암호·공개 키와 SSH 허용 정책으로 확인한다. 계정 생성 경위는 승인된 작업 내역과 관련 명령 기록을 대조해 조사한다."
+        },
+        {
+          "type": "image",
+          "path": "assets/figures/chapter08/account.png",
+          "caption": "도식 8-7. 계정 생성과 권한 변경 뒤의 확인 대상",
+          "width_mm": 127
+        },
+        {
+          "type": "p",
+          "text": "선행 조건은 8.5의 원상복구 완료와 ccc의 sudo 권한이다. 성공 기준은 계정 생성 원문·그룹 변경·삭제 기록을 연결하고 최종적으로 계정과 홈 디렉터리가 사라졌는지 확인하는 것이다."
+        },
+        {
+          "type": "command",
+          "id": "C08-44",
+          "where": "공격자 VM · att 셸",
+          "text": "ssh -p 2204 ccc@192.168.0.107",
+          "result": "hostname과 id로 위치·계정을 확인한다.",
+          "syntax": "공격자 창에서 bastion의 일반 실습 계정으로 들어간다.",
+          "purpose": "계정 변경 실습을 위한 ccc SSH 세션을 연다."
+        },
+        {
+          "type": "command",
+          "id": "C08-45",
+          "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+          "text": "getent passwd book08-user\ngetent group book08-user\nls -ld /home/book08-user",
+          "result": "계정·그룹 조회는 출력이 없고 홈은 없다는 메시지가 나와야 한다. 하나라도 기존 항목이 있으면 여기서 중단하고 별도 이름을 정한다.",
+          "purpose": "계정·동명 그룹·홈 디렉터리의 사전 존재 여부를 확인한다.",
+          "syntax": "group 데이터베이스는 그룹 번호와 구성원을 보여 준다."
+        },
+        {
+          "type": "h",
+          "text": "계정 생성과 암호 상태"
+        },
+        {
+          "type": "command",
+          "id": "C08-46",
+          "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+          "text": "sudo useradd -m -s /bin/bash book08-user\ngetent passwd book08-user\nid book08-user\nsudo passwd -S book08-user",
+          "result": "이번 환경은 UID·GID 1001, 홈 /home/book08-user, 셸 /bin/bash로 생성됐다. passwd -S의 L은 암호 잠금이다. 번호는 시스템 상태에 따라 달라진다.",
+          "syntax": "useradd는 로컬 계정을 만든다. -m은 홈 디렉터리 생성, -s는 로그인 셸 지정이다. C08-45로 대상 이름·경로가 없는 것을 확인한 뒤 실행한다.",
+          "purpose": "일회용 계정을 만들고 계정 속성과 암호 상태를 읽는다."
+        },
+        {
+          "type": "p",
+          "text": "getent passwd의 한 줄은 이름, 암호 표기, UID, GID, 설명, 홈, 셸을 콜론으로 구분한다. 두 번째 필드 x는 실제 암호가 아니라 별도 shadow 정보를 사용한다는 표시이다. 실제 인증 가능 여부는 암호 상태·키·계정 만료·SSH 정책까지 확인한다."
+        },
+        {
+          "type": "query",
+          "id": "Q08-09",
+          "where": "Windows · Discover · wazuh-alerts-*",
+          "text": "agent.name: \"bastion\" AND\nrule.id: \"5902\"",
+          "result": "full_log의 new user 문구와 name, UID, GID, home, shell을 getent 결과와 대조한다.",
+          "syntax": "새 사용자 생성 규칙을 조회한다.",
+          "purpose": "계정 생성 경보의 속성을 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "새 계정은 암호 잠금(L) 상태로 두며 공개 키도 등록하지 않는다. 현재 상태 확인은 getent·id·passwd -S로 끝낸다. [9]"
+        },
+        {
+          "type": "h",
+          "text": "생성 필드와 그룹 추가"
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter08/useradd-fields.png",
+          "caption": "화면 8-6. 새 사용자 생성 경보의 계정 속성",
+          "width_mm": 112
+        },
+        {
+          "type": "p",
+          "text": "data.dstuser는 new user의 name, data.uid·gid는 숫자 ID, data.home·shell은 홈과 셸에서 나온다. 화면의 data.shell에는 /bin/bash,처럼 쉼표가 포함됐다. 디코더가 구분 문자를 값에 포함한 결과이며 실제 셸 경로는 getent와 원문의 shell 항목으로 대조한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-47",
+          "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+          "text": "sudo usermod -aG sudo book08-user\nid book08-user\ngetent group sudo",
+          "result": "id에 27(sudo)가 추가되고 sudo 그룹 구성원에 book08-user가 보인다. 그룹 번호는 환경별로 다를 수 있다.",
+          "syntax": "usermod는 기존 계정 속성을 변경한다. -G는 보조 그룹 목록, -a는 기존 보조 그룹에 추가한다는 뜻이다. -a를 빼고 -G만 사용하면 기존 목록을 교체할 수 있다.",
+          "purpose": "기존 보조 그룹을 유지하며 실습 계정을 sudo 그룹에 추가한다."
+        },
+        {
+          "type": "p",
+          "text": "NOPASSWD는 sudoers에서 계정과 명령에 적용하는 태그이다. 이 환경의 ccc 전용 규칙은 새 계정에 자동 적용되지 않는다. sudo 그룹에 추가한 뒤에도 새 계정의 암호 잠금 상태는 유지된다. [10]"
+        },
+        {
+          "type": "h",
+          "text": "실행 요청과 변경 결과 대조"
+        },
+        {
+          "type": "query",
+          "id": "Q08-10",
+          "where": "Windows · Discover · wazuh-alerts-*",
+          "text": "agent.name: \"bastion\" AND\ndata.command: \"/usr/sbin/usermod -aG sudo book08-user\"",
+          "result": "실행 요청의 srcuser는 ccc, dstuser는 root이다. 그룹 변경 결과는 id·getent의 현재 상태와 변경 원문을 대조해 확인한다.",
+          "syntax": "sudo가 기록한 그룹 변경 명령을 찾는다. 명령의 인수까지 포함해 이번 대상 계정으로 좁힌다.",
+          "purpose": "실습 계정을 sudo 그룹에 추가하도록 요청한 명령을 찾는다."
+        },
+        {
+          "type": "command",
+          "id": "C08-48",
+          "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+          "text": "sudo grep -F 'book08-user' /var/log/auth.log",
+          "result": "useradd의 new user와 usermod의 add 문구를 찾는다. 이 조회 명령 자체도 sudo 기록으로 남으므로 조사자의 활동 시각을 기록한다.",
+          "syntax": "grep -F는 검색어를 정규표현식이 아닌 고정 문자열로 찾는다. 작은따옴표는 하이픈 등을 포함한 이름을 한 인수로 전달한다. auth.log를 읽을 권한 때문에 sudo를 사용한다.",
+          "purpose": "계정 생성과 그룹 변경 원문을 인증 파일에서 찾는다."
+        },
+        {
+          "type": "code",
+          "text": "usermod[2728]: add 'book08-user' to group 'sudo'"
+        },
+        {
+          "type": "p",
+          "text": "사례의 그룹 추가 원문은 auth.log에 남았지만 경보 목록에는 없었다. Q08-10의 sudo COMMAND로 요청자를 찾고, auth.log의 add 문구와 id·getent로 그룹 변경 결과를 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "5904는 changed user 형태의 사용자 정보 변경 원문에 적용한다. usermod 작업은 실제로 남은 원문을 기준으로 규칙을 확인한다. 생성 5902, 삭제 5903, 사용자 정보 변경 5904를 구분한다. [8]"
+        },
+        {
+          "type": "h",
+          "text": "계정 삭제와 원상복구"
+        },
+        {
+          "type": "command",
+          "id": "C08-49",
+          "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+          "text": "getent passwd book08-user\nid book08-user\nsudo userdel -r book08-user",
+          "result": "계정 삭제가 완료된다. 이번 환경에서는 메일 스풀이 없다는 안내가 나왔으므로 아래 상태 조회로 실제 삭제 결과를 확인했다.",
+          "purpose": "삭제할 대상이 이번 실습 계정인지 다시 확인한다.",
+          "syntax": "userdel은 계정을 삭제하고 -r은 홈과 메일 스풀도 제거한다. 기존 사용자나 기존 자료에 적용하지 않는다."
+        },
+        {
+          "type": "command",
+          "id": "C08-50",
+          "where": "kt66-bastion · SSH로 접속한 ccc 셸",
+          "text": "getent passwd book08-user\necho $?\ngetent group book08-user\necho $?\nls -ld /home/book08-user\ngetent group sudo",
+          "result": "계정과 동명 그룹 조회는 출력 없음·코드 2, 홈은 없음, sudo 그룹에는 기존 ccc만 남아야 한다. 결과가 다르면 열린 세션·프로세스와 삭제 오류를 확인한다.",
+          "syntax": "getent 조회의 종료 코드 2는 지정한 키를 찾지 못했음을 뜻한다. 홈과 sudo 그룹에서도 잔여 항목을 확인한다.",
+          "purpose": "실습 계정·동명 그룹·홈이 지워지고 sudo 그룹이 처음 구성으로 돌아왔는지 확인한다."
+        },
+        {
+          "type": "p",
+          "text": "userdel -r로 계정과 홈 디렉터리를 삭제한 뒤에도 다른 경로의 소유 파일과 예약 작업은 별도로 조사해야 한다. 실제 침해 대응에서는 삭제 전 UID를 기록하고 관련 파일·실행 중 프로세스·키·예약 작업을 보존·조사한 뒤 접근을 통제한다. [11]"
+        },
+        {
+          "type": "h",
+          "text": "삭제 기록의 계정 필드"
+        },
+        {
+          "type": "query",
+          "id": "Q08-11",
+          "where": "Windows · Discover · wazuh-alerts-*",
+          "text": "agent.name: \"bastion\" AND\nrule.id: \"5903\"",
+          "result": "full_log의 delete user와 삭제된 이름을 확인한다. 관련 그룹 삭제 기록이 함께 잡히는지는 원문별로 확인한다.",
+          "syntax": "사용자 또는 그룹 삭제 규칙을 조회한다.",
+          "purpose": "사용자·그룹 삭제 원문을 담은 경보를 찾는다."
+        },
+        {
+          "type": "image",
+          "path": "assets/screens/chapter08/userdel-fields.png",
+          "caption": "화면 8-7. 계정 삭제 경보의 이름과 디코더",
+          "width_mm": 112
+        },
+        {
+          "type": "p",
+          "text": "이 기록의 프로그램은 userdel이고 decoder.name은 open-userdel이다. data.srcuser의 book08-user는 삭제된 계정 이름이다. 삭제 명령을 요청한 사용자는 앞선 sudo 원문의 실행자에서 확인한다. 같은 srcuser 필드도 로그 형식과 디코더에 따라 가리키는 대상이 달라진다."
+        },
+        {
+          "type": "p",
+          "text": "삭제를 요청한 사람은 앞선 sudo COMMAND=/usr/sbin/userdel -r book08-user 기록의 srcuser=ccc에서 확인한다. 생성의 dstuser, 삭제의 srcuser, sudo의 srcuser·dstuser를 하나의 필드로 뭉뚱그리지 않는다."
+        },
+        {
+          "type": "p",
+          "text": "계정·그룹·홈의 삭제 확인과 Q08-12의 원문 대조를 마치면 exit로 ccc SSH 셸을 닫는다."
+        },
+        {
+          "type": "p",
+          "text": "계정 생성·그룹 변경·삭제의 요청 주체를 조사하려면 wazuh-archives-*로 바꾸고 해당 작업 전체의 시작·종료 시각을 지정한다."
+        },
+        {
+          "type": "query",
+          "id": "Q08-12",
+          "where": "Windows · Discover · wazuh-archives-*",
+          "text": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND full_log: \"book08-user\"",
+          "result": "useradd·usermod·userdel 원문과 sudo의 COMMAND를 시간순으로 읽는다. sudo의 요청 계정과 변경 대상 book08-user를 구분하고, id·getent 결과를 대조한다.",
+          "syntax": "계정 이름이 들어 있는 인증 원문을 규칙 번호로 제한하지 않고 모은다.",
+          "purpose": "실습 계정 이름이 포함된 인증 원문을 모두 모은다."
+        },
+        {
+          "type": "p",
+          "text": "계정 원상복구가 끝나면 Q08-12의 기간을 삭제 이후까지 넓혀 userdel 및 sudo 원문을 확인한다. 이미 수집한 생성 경보는 그대로 보존하고, 현재 계정의 부재는 getent·id 결과로 기록한다."
+        }
+      ]
+    },
+    {
+      "title": "8.8  접속과 권한 사용 재구성",
+      "kind": "body",
+      "level": "section",
+      "break": false,
+      "blocks": [
+        {
+          "type": "p",
+          "text": "6장에서는 출발지별 요청을 시간순으로 정렬했다. 인증 조사에서는 같은 IP와 계정을 쓰는 여러 연결을 더 나눠야 한다. 먼저 공격 일지를 보지 않고 SSH 성공 한 건을 고른 뒤, 그 연결의 실패와 세션 종료를 찾는다."
+        },
+        {
+          "type": "h",
+          "text": "출발지와 시간 범위 좁히기"
+        },
+        {
+          "type": "list",
+          "style": "number",
+          "items": [
+            "Discover에서 wazuh-alerts-*를 고르고 실습 전체 기간을 지정한다. Q08-01로 bastion의 인증 기록을 모은다.",
+            "rule.id 5715인 ccc 성공 한 건을 열어 원문의 시각, 출발지 IP·포트, sshd 뒤 프로세스 번호를 적는다.",
+            "그 시각 앞뒤 2분으로 기간을 좁힌다. 규칙·출발지 조건을 지우고 아래 검색으로 같은 프로세스의 인증·세션 기록을 찾는다."
+          ]
+        },
+        {
+          "type": "query",
+          "id": "Q08-13",
+          "text": "agent.name: \"bastion\"\nAND location: \"/var/log/auth.log\"\nAND full_log: \"sshd[2537]\"",
+          "purpose": "사례의 한 SSH 연결이 남긴 실패·성공·세션 원문을 모은다.",
+          "syntax": "full_log의 sshd[2537]을 큰따옴표로 묶어 찾는다. 프로세스 번호는 같은 호스트·시간 범위 안에서 비교한다. 번호가 재사용될 수 있으므로 장기간 기록을 번호 하나로 묶지 않는다.",
+          "result": "사례에서는 5503·5760·5715·5501·5502가 나온다. 직접 실습에서는 성공 원문의 프로세스 번호를 사용한다. 기록이 빠지면 같은 기간의 wazuh-archives-*와 auth.log를 확인한다.",
+          "where": "Windows · Discover · wazuh-alerts-*"
+        },
+        {
+          "type": "p",
+          "text": "사례의 sshd[2537]은 출발지 포트 42688의 연결이다. 다음 표의 시각은 auth.log 원문에서 읽었다. message repeated 줄은 같은 프로세스의 앞선 실패를 반복한 기록이다."
+        },
+        {
+          "type": "table",
+          "head": [
+            "원문 시각",
+            "기록",
+            "읽을 내용"
+          ],
+          "rows": [
+            [
+              "20:37:02",
+              "PAM 실패 · 5503",
+              "인증 처리 중 실패"
+            ],
+            [
+              "20:37:04",
+              "Failed password · 5760",
+              "ccc · 192.168.0.108:42688"
+            ],
+            [
+              "20:37:11",
+              "message repeated 2 times · 5760",
+              "직전 실패가 두 번 더 반복됨"
+            ],
+            [
+              "20:37:12",
+              "Accepted password · 5715",
+              "같은 계정·주소·포트의 인증 성공"
+            ],
+            [
+              "20:37:12",
+              "session opened / closed",
+              "sshd[2537] 세션의 열림·닫힘"
+            ]
+          ],
+          "widths": [
+            27,
+            45,
+            55
+          ],
+          "keep": false
+        },
+        {
+          "type": "p",
+          "text": "첫 Failed password 한 번과 요약된 두 번을 합하면 실패는 세 번이다. PAM 실패와 세션 열림·닫힘은 이 인증 과정의 다른 기록이다. 같은 초의 이벤트 순서는 수집 시각과 파일의 줄 순서를 함께 읽는다."
+        },
+        {
+          "type": "h",
+          "text": "sudo 요청과 변경 대상 찾기"
+        },
+        {
+          "type": "p",
+          "text": "사례의 sudo 명령은 20:38:35에 기록됐다. 이때의 SSH 연결은 포트 38900, 프로세스 sshd[2651]이다. 앞서 성공한 42688 연결은 20:37:12에 닫혔으므로 두 실습 연결을 따로 적는다. sudo 원문에는 sshd 프로세스 번호가 없어 직접 연결할 공통 필드가 부족하다."
+        },
+        {
+          "type": "list",
+          "style": "number",
+          "items": [
+            "Q08-08로 sudo 원문을 열고 srcuser=ccc, dstuser=root, COMMAND와 PWD를 적는다.",
+            "해당 시각의 인증 기록에서 ccc 세션의 열림·닫힘을 찾는다. 여러 세션이 겹치면 각각 후보로 남긴다. TTY가 기록됐다면 함께 비교한다.",
+            "Q08-12로 book08-user가 들어간 인증 원문을 모은다. sudo의 useradd·usermod·userdel 요청과 계정 변경 원문을 대조한다."
+          ]
+        },
+        {
+          "type": "table",
+          "head": [
+            "기록",
+            "요청자",
+            "권한 또는 변경 대상"
+          ],
+          "rows": [
+            [
+              "sudo COMMAND=useradd…",
+              "srcuser ccc",
+              "dstuser root로 생성 요청"
+            ],
+            [
+              "useradd new user · 5902",
+              "이 원문에는 없음",
+              "dstuser book08-user · UID·GID·홈·셸"
+            ],
+            [
+              "sudo COMMAND=usermod…",
+              "srcuser ccc",
+              "root로 sudo 그룹 추가 요청"
+            ],
+            [
+              "userdel delete user · 5903",
+              "이 원문에는 없음",
+              "srcuser book08-user가 삭제 대상"
+            ]
+          ],
+          "widths": [
+            51,
+            28,
+            48
+          ],
+          "keep": false
+        },
+        {
+          "type": "p",
+          "text": "sudo 요청과 새 계정의 변경 원문을 대조하면 요청 계정·명령·변경 결과를 찾을 수 있다. 여러 ccc 세션 중 어느 세션이 요청했는지는 인증 시각·TTY와 추가 감사 기록으로 좁힌다. 9장에서는 실행 감사의 로그인 사용자 번호와 세션 번호를 추가로 사용한다."
+        },
+        {
+          "type": "box",
+          "kind": "field",
+          "text": [
+            "정상 관리 작업도 같은 인증 성공·sudo·useradd 기록을 만든다. 계정 담당자의 작업 시간과 승인 내역을 확인하고, 승인된 작업과 일치한 항목을 조사 표에 표시한다."
+          ],
+          "title": "분석 참고"
+        },
+        {
+          "type": "h",
+          "text": "조사 기록과 공격 일지 대조"
+        },
+        {
+          "type": "p",
+          "text": "다음 항목을 채운 뒤 공격 일지를 열어 실제 실행 순서와 비교한다. 기록으로 확인한 결과, 근거가 부족한 연결 관계, 추가로 확인할 파일을 각각 적는다."
+        },
+        {
+          "type": "table",
+          "head": [
+            "조사 항목",
+            "기록할 근거"
+          ],
+          "rows": [
+            [
+              "실패 뒤 성공",
+              "계정·출발지·포트·sshd 번호·원문 시각"
+            ],
+            [
+              "자동 대응",
+              "대응 add/delete 시각·대상 IP·현재 규칙·새 연결 결과"
+            ],
+            [
+              "sudo 권한 사용",
+              "요청자·권한 대상·COMMAND·TTY·실행 결과"
+            ],
+            [
+              "계정 변경",
+              "생성 이름·UID·그룹·홈·셸·삭제 결과"
+            ],
+            [
+              "문서 식별",
+              "검색 인덱스·기간·DQL·_index·_id"
+            ],
+            [
+              "추가 조사",
+              "승인 내역·겹치는 세션·파일·공개 키·예약 작업"
+            ]
+          ],
+          "widths": [
+            31,
+            96
+          ],
+          "keep": false
+        },
+        {
+          "type": "image",
+          "path": "assets/illustrations/rev03/chapter01/notes-v2.png",
+          "caption": "삽화. 분석 담당은 인증 성공의 연결 정보와 sudo 원문을 대조한다. 출발지 포트가 다른 접속은 별도 행에 적고, 작업자가 확인된 명령부터 조사 표에 넣는다.",
+          "width_mm": 58
+        },
+        {
+          "type": "p",
+          "text": "8장에서 확보한 결과는 ccc의 접속, 그 계정이 요청한 root 권한 명령, 실습 계정의 생성·삭제이다. 다음 장에서는 sudo 정책 파일·SSH 공개 키·예약 작업의 변경을 조사해 접속이 끝난 뒤 남는 접근 수단과 실행 조건을 확인한다."
+        }
+      ]
+    },
+    {
+      "title": "8.9  로그 수집 설정과 탐지 규칙",
+      "kind": "body",
+      "level": "section",
+      "break": false,
+      "blocks": [
+        {
+          "type": "p",
+          "text": "원문이 어떤 파일에서 들어왔고 어느 정의가 필드를 만들었는지 확인한다. auth.log의 localfile은 bastion에서, 디코더·규칙과 자동 대응 설정은 Manager에서 읽는다. 이 절에서는 설정을 변경하지 않는다."
+        },
+        {
+          "type": "command",
+          "id": "C08-51",
+          "where": "kt66-bastion · root 셸",
+          "text": "grep -n -F -A 3 -B 2 '/var/log/auth.log' \\\n/var/ossec/etc/ossec.conf",
+          "result": "localfile 안에 location=/var/log/auth.log와 log_format=syslog가 있는지 확인한다. 설정을 바꾸기 전에 에이전트 상태와 실제 파일 기록부터 대조한다.",
+          "purpose": "bastion root 관리 셸에서 auth.log 수집 항목을 찾는다.",
+          "syntax": "-n은 줄 번호, -F는 고정 문자열 검색, -A 3과 -B 2는 일치 뒤 3줄·앞 2줄을 함께 출력한다. 작은따옴표로 경로를 한 인수로 전달한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-52",
+          "where": "kt66-bastion · root 관리 셸",
+          "text": "exit",
+          "result": "kt66 VM의 관리 셸로 돌아온다.",
+          "syntax": "exit로 컨테이너 셸을 끝낸다.",
+          "purpose": "bastion 관리 셸을 닫고 kt66 VM으로 돌아간다."
+        },
+        {
+          "type": "command",
+          "id": "C08-53",
+          "text": "docker exec -it kt66-siem /bin/bash",
+          "purpose": "Manager의 규칙과 디코더를 읽을 셸을 연다.",
+          "syntax": "C08-03과 같은 형식이며 대상 컨테이너는 kt66-siem이다.",
+          "result": "Manager 컨테이너의 root 프롬프트로 바뀐다.",
+          "where": "kt66 VM · 관리 셸"
+        },
+        {
+          "type": "command",
+          "id": "C08-54",
+          "where": "kt66-siem · root 셸",
+          "text": "grep -n -F -A 6 -B 2 '<command>firewall-drop' \\\n/var/ossec/etc/ossec.conf",
+          "result": "active-response 안의 location=local, rules_id=5712,5763, timeout=180을 확인한다. 설치가 다르면 그 값을 기준으로 해석한다.",
+          "purpose": "Manager의 Active Response 설정에서 firewall-drop 연결 항목과 앞뒤 문맥을 읽는다.",
+          "syntax": "-F로 꺾쇠를 포함한 문자열을 그대로 찾는다. 작은따옴표가 <와 >의 셸 해석을 막는다. -n·-A·-B는 줄 번호와 앞뒤 문맥을 표시한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-55",
+          "text": "cd /var/ossec/ruleset\npwd\ngrep -n -A 16 -F 'id=\"5763\"' \\\n  rules/0095-sshd_rules.xml",
+          "purpose": "반복 실패 규칙의 상관 조건을 설치 파일에서 읽는다.",
+          "syntax": "cd로 ruleset에 들어가 pwd로 위치를 확인한다. -F는 id=\"5763\"을 그대로 찾고 -A 16은 뒤 16줄을 출력한다. -n은 줄 번호이다.",
+          "result": "5760 이력, 같은 출발지, frequency=8·timeframe=120·ignore=60을 찾는다.",
+          "where": "kt66-siem · root 관리 셸"
+        },
+        {
+          "type": "p",
+          "text": "if_matched_sid는 앞서 일치한 규칙의 이력을, same_source_ip는 같은 출발지 조건을 지정한다. timeframe의 단위는 초이며 ignore는 규칙 발화 뒤 같은 규칙의 재발화를 억제하는 기간이다. frequency는 연관 조건의 설정값이다. 실제 포함 이벤트는 previous_output과 full_log로 읽는다. [5]"
+        },
+        {
+          "type": "command",
+          "id": "C08-56",
+          "text": "grep -n -A 5 -F 'id=\"5903\"' \\\n  rules/0020-syslog_rules.xml\ngrep -n -A 7 -F 'name=\"sudo-fields\"' \\\n  decoders/0320-sudo_decoders.xml",
+          "purpose": "삭제 규칙과 sudo 하위 디코더의 조건·출력 필드를 읽는다.",
+          "syntax": "-A 뒤 숫자는 일치 줄 다음에 보여 줄 줄 수이다. 작은따옴표가 큰따옴표를 포함한 XML 속성을 한 인수로 전달한다.",
+          "result": "5903의 delete user·account deleted·remove group과 sudo-fields의 parent·regex·order·fts를 확인한다.",
+          "where": "kt66-siem · root 관리 셸"
+        },
+        {
+          "type": "p",
+          "text": "sudo-fields는 부모 sudo 아래에서 srcuser·tty·pwd·dstuser·command를 차례로 추출한다. 화면의 decoder.name은 sudo이다. 프로그램 이름 sudo, 하위 정의 sudo-fields, 표시되는 디코더 이름 sudo의 역할을 구분한다. FTS 조건 name·srcuser·location은 Wazuh가 보관한 최초 관찰 상태에 사용된다. [8]"
+        },
+        {
+          "type": "table",
+          "head": [
+            "읽을 파일",
+            "확인할 정의"
+          ],
+          "rows": [
+            [
+              "rules/0095-sshd_rules.xml",
+              "5710·5712: 없는 계정 / 5760·5763: 실패 / 5715: 성공"
+            ],
+            [
+              "rules/0020-syslog_rules.xml",
+              "5402·5403: sudo / 5902·5903·5904: 계정"
+            ],
+            [
+              "decoders/0310-ssh_decoders.xml",
+              "sshd 부모와 계정·주소 추출 하위 정의"
+            ],
+            [
+              "decoders/0320-sudo_decoders.xml",
+              "sudo-fields와 FTS 조건"
+            ]
+          ],
+          "widths": [
+            71,
+            56
+          ],
+          "keep": false
+        },
+        {
+          "type": "command",
+          "id": "C08-57",
+          "where": "kt66-siem · root 셸",
+          "text": "exit",
+          "result": "kt66 VM 호스트 셸로 돌아간다.",
+          "purpose": "현재 셸을 끝내고 바깥 실행 위치로 돌아간다.",
+          "syntax": "exit로 Manager 셸을 닫고 kt66 VM 관리 셸로 돌아간다."
+        }
+      ]
+    },
+    {
+      "title": "8.10  결과가 다를 때와 원상복구",
+      "kind": "body",
+      "level": "section",
+      "break": false,
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            "증상",
+            "확인 순서"
+          ],
+          "rows": [
+            [
+              "SSH 연결 거부",
+              "VM 주소·포트, docker ps, docker port, bastion의 sshd 순서로 확인한다."
+            ],
+            [
+              "SSH 시간 초과",
+              "두 VM의 연결, 방화벽, Active Response의 add·delete와 현재 규칙을 확인한다."
+            ],
+            [
+              "암호 인증 실패",
+              "호스트용 ccc / 1과 bastion용 ccc / ccc를 구분한다. root는 유효 정책과 잠금 상태를 확인한다."
+            ],
+            [
+              "Hydra 접속 오류",
+              "반복 실행을 멈추고 서버 auth.log, 자동 차단과 도구 종료 사유를 확인한다."
+            ],
+            [
+              "경보 0건",
+              "브라우저 시간 범위, 인덱스, agent.name, 필드 조건, 원본 로그, 수집 설정 순서로 좁힌다."
+            ],
+            [
+              "계정 변경 결과 불일치",
+              "sudo 실행 요청과 실제 종료 결과, getent·id, auth.log를 대조한다."
+            ]
+          ],
+          "widths": [
+            39,
+            88
+          ],
+          "keep": false
+        },
+        {
+          "type": "p",
+          "text": "특정 srcip·dstuser를 붙였을 때만 결과가 사라지면 그 필드가 실제 문서에 있는지 확인한다. 반복 요약 기록이나 다른 디코더의 이름 필드가 원인일 수 있다. 조건을 하나씩 덜어 원문을 찾는다."
+        },
+        {
+          "type": "p",
+          "text": "실습용 명령과 별개로 조사자의 sudo 조회도 새 기록을 만든다. 조사 시작 시각과 확인 명령을 기록해 공격 행위와 구분한다."
+        },
+        {
+          "type": "h",
+          "text": "실습 파일과 세션 원상복구"
+        },
+        {
+          "type": "command",
+          "id": "C08-58",
+          "where": "공격자 VM · att 셸",
+          "text": "cd ~/book08\npwd\nls -la",
+          "result": "/home/att/book08과 자신이 만든 목록 파일을 확인한다. 다른 자료가 있으면 함께 삭제하지 않는다.",
+          "purpose": "정리할 디렉터리와 목록을 확인한다.",
+          "syntax": "ls -a는 숨김 파일도 포함하고 -l은 자세한 정보를 표시한다."
+        },
+        {
+          "type": "command",
+          "id": "C08-59",
+          "where": "공격자 VM · att 셸",
+          "text": "rm -i pw-fail.txt users-invalid.txt pw-success.txt",
+          "result": "ls -l로 파일이 사라졌는지 확인한다. Hydra 중단으로 hydra.restore가 생겼다면 내용을 재실행하지 말고 자신의 중단 기록인지 확인한 뒤 rm -i hydra.restore로 삭제한다.",
+          "syntax": "이번 실습에서 만든 후보 목록만 삭제한다. -i의 질문마다 경로를 확인한 뒤 y로 답한다.",
+          "purpose": "이번 실습에서 만든 암호·계정 후보 파일을 삭제한다."
+        },
+        {
+          "type": "p",
+          "text": "SSH 호스트 키를 승인해 생긴 ~/.ssh/known_hosts 항목은 서버 신원 확인 자료이므로 목록 파일과 함께 무조건 지우지 않는다. 디렉터리를 비우려는 경우 남은 자료를 확인한 후 호스트 키 기록을 유지할 위치를 정한다."
+        },
+        {
+          "type": "p",
+          "text": "bastion에서는 root의 원래 암호 상태·SSH 정책, book08-user의 부재, sudo 그룹의 기존 구성원을 확인한다. Active Response에 남은 차단이 없는지 확인하고 ccc 정상 접속과 Wazuh 검색을 마지막으로 점검한다."
+        },
+        {
+          "type": "p",
+          "text": "공격자 VM에 설치한 Hydra는 다음 학습에 사용할 도구이므로 그대로 둔다. 조사 로그와 Wazuh 경보는 삭제하지 않는다. 열린 실습 SSH 셸은 exit로 종료한다."
+        }
+      ]
+    },
+    {
+      "title": "8장 정리",
+      "kind": "body",
+      "level": "section",
+      "break": false,
+      "blocks": [
+        {
+          "type": "h",
+          "text": "핵심 정리"
+        },
+        {
+          "type": "list",
+          "items": [
+            "SSH 연결은 계정·출발지 IP·포트·sshd 번호와 시간 범위로 구분한다. 반복 요약의 원문까지 읽어 실패 횟수를 계산한다.",
+            "5715는 인증 성공, sudo의 COMMAND는 권한 사용 요청, useradd·userdel은 계정 변경 결과를 조사하는 기록이다.",
+            "srcuser·dstuser의 뜻은 원문과 디코더별로 확인한다. 삭제 대상 계정과 삭제 요청자를 각각 적는다.",
+            "대응 명령의 add/delete, 방화벽 규칙, 실제 연결 결과를 대조한다. 원상복구는 변경 전 파일·계정·정책과 비교한다."
+          ]
+        },
+        {
+          "type": "h",
+          "text": "확인 문제"
+        },
+        {
+          "type": "list",
+          "style": "number",
+          "items": [
+            "Hydra에 후보 12개를 넣었는데 경보 수가 12와 다르다. 어떤 원문을 구분해 세어야 하는가?",
+            "같은 ccc 계정의 실패와 성공에 포트 42688이 있고, 뒤의 sudo 시각에는 포트 38900의 접속이 있다. 조사 표를 어떻게 나누는가?",
+            "5715의 dstuser=root와 sudo의 dstuser=root에서 각각 누가 어떤 방식으로 root를 사용했는가?",
+            "book08-user는 암호 상태 L이며 sudo 그룹에 추가됐다. 추가로 확인할 인증·권한 조건은 무엇인가?",
+            "5903의 srcuser=book08-user를 삭제 요청자로 적었다. 어떤 원문 두 종류로 바로잡는가?"
+          ]
+        },
+        {
+          "type": "h",
+          "text": "확인 문제 해설"
+        },
+        {
+          "type": "list",
+          "style": "number",
+          "items": [
+            "개별 Failed password, message repeated의 반복 수, PAM 실패, 연결 종료, 반복 실패 경보를 구분한다. 후보 수는 도구의 입력이며 경보 문서는 규칙과 수집에 따라 생성된다.",
+            "42688 연결의 실패·성공·종료를 한 묶음으로 적고 38900 접속은 별도 묶음으로 적는다. sudo에는 sshd 번호가 없으므로 시각·계정·TTY와 추가 감사 기록으로 실행 세션을 좁힌다.",
+            "5715의 root는 SSH 인증 대상 계정이다. sudo의 root는 명령 실행 권한의 대상이다. sudo의 요청자는 srcuser와 원문의 첫 사용자 이름에서 읽고 접속 경로는 인증 기록에서 찾는다.",
+            "L은 암호 잠금이다. 등록된 공개 키·계정 만료·SSH 정책과 sudo -l의 허용 명령을 확인한다. ccc의 NOPASSWD 정책은 ccc에 적용되며 새 계정의 sudo 그룹 권한과 구분한다.",
+            "userdel의 delete user 원문에서 book08-user가 삭제 대상임을 확인한다. 앞선 sudo COMMAND의 userdel 요청에서 srcuser=ccc, dstuser=root를 읽는다."
+          ]
+        },
+        {
+          "type": "h",
+          "text": "더 읽을거리"
+        },
+        {
+          "type": "p",
+          "text": "OpenSSH의 접속 조건별 정책을 읽고 8.5에서 사용한 -T·-C 결과와 비교한다."
+        },
+        {
+          "type": "link",
+          "text": "OpenSSH · sshd_config",
+          "url": "https://man.openbsd.org/sshd_config"
+        },
+        {
+          "type": "p",
+          "text": "Wazuh의 SSH 반복 실패 대응 예제에서 규칙 선택·실행 위치·해제 시간을 8.9의 kt66 설정과 대조한다."
+        },
+        {
+          "type": "link",
+          "text": "Wazuh · Blocking SSH brute-force attack",
+          "url": "https://documentation.wazuh.com/current/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html"
+        }
+      ]
+    },
+    {
+      "title": "8장 참고 자료",
+      "kind": "body",
+      "level": "section",
+      "break": false,
+      "blocks": [
+        {
+          "type": "link",
+          "text": "[1] Ubuntu 22.04 ssh 사용 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man1/ssh.1.html"
+        },
+        {
+          "type": "link",
+          "text": "[2] Ubuntu 22.04 sshd 및 설정 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man8/sshd.8.html"
+        },
+        {
+          "type": "link",
+          "text": "Ubuntu 22.04 sshd_config 설정 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man5/sshd_config.5.html"
+        },
+        {
+          "type": "link",
+          "text": "[3] THC Hydra 공식 저장소",
+          "url": "https://github.com/vanhauser-thc/thc-hydra"
+        },
+        {
+          "type": "link",
+          "text": "[4] Wazuh 4.10.0 SSH 디코더",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/decoders/0310-ssh_decoders.xml"
+        },
+        {
+          "type": "link",
+          "text": "[5] Wazuh 4.10.0 SSH 규칙",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0095-sshd_rules.xml"
+        },
+        {
+          "type": "link",
+          "text": "[6] Wazuh SSH 반복 인증 실패 차단",
+          "url": "https://documentation.wazuh.com/current/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html"
+        },
+        {
+          "type": "link",
+          "text": "[7] Ubuntu 22.04 sudo 사용 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man8/sudo.8.html"
+        },
+        {
+          "type": "link",
+          "text": "[8] Wazuh 4.10.0 시스템 로그 규칙",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/rules/0020-syslog_rules.xml"
+        },
+        {
+          "type": "link",
+          "text": "Wazuh 4.10.0 sudo 디코더",
+          "url": "https://github.com/wazuh/wazuh/blob/v4.10.0/ruleset/decoders/0320-sudo_decoders.xml"
+        },
+        {
+          "type": "link",
+          "text": "[9] Ubuntu 22.04 useradd 사용 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man8/useradd.8.html"
+        },
+        {
+          "type": "link",
+          "text": "[10] Ubuntu 22.04 usermod 사용 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man8/usermod.8.html"
+        },
+        {
+          "type": "link",
+          "text": "[11] Ubuntu 22.04 userdel 사용 설명서",
+          "url": "https://manpages.ubuntu.com/manpages/jammy/man8/userdel.8.html"
+        }
+      ]
+    }
+  ],
+  "editorial_review": {
+    "date": "2026-11-06",
+    "structure_basis": "REV01 1~7·9~11장과 부록 A의 용어·연결 관계, 7장의 도입·연속 조판·장말 구성",
+    "procedure_basis": "manuscript/REV02/volume01-chapter08.json",
+    "evidence_basis": [
+      "editorial/chapter08-review.md",
+      "editorial/evidence/chapter08/2026-11-02/authentication-alerts.json"
+    ],
+    "corrections": [
+      "인증 성공의 sshd[2537]·출발지 포트42688과 뒤의 권한 사용 시각 sshd[2651]·포트38900을 별도 접속으로 구분했다.",
+      "5763의 설정값 frequency=8을 암호 입력8회로 환산하지 않고 previous_output·full_log와 반복 요약을 읽도록 했다.",
+      "sudo의 요청자·권한 대상, useradd의 생성 대상, userdel의 삭제 대상 필드를 각 원문과 대조했다.",
+      "0600으로 제한한 shadow 백업은 복원 시 cp -p 대신 cp를 써 기존 대상의 소유자·권한을 유지하고 처음 기록한 값과 비교하도록 했다."
+    ],
+    "verification": {
+      "official_definitions": "Wazuh v4.10.0의 0095-sshd_rules.xml·0020-syslog_rules.xml·0320-sudo_decoders.xml 및 OpenSSH·Ubuntu·Wazuh 공식 문서를 대조했다.",
+      "static": "명령59개 Bash -n, 검색식13개 따옴표·괄호, 입력 파일과 본문 일치, 교차참조, 내장 그림15개의 원본 해시, 캡처7개 테두리, 표 머리행 서식, 전체 URL을 확인했다.",
+      "layout": "B5 원본의 판형·여백·테마를 보존했다. Word로 임시 렌더한68쪽 전체를 확인하고 글자 잘림·겹침·표 분할·URL 줄바꿈을 점검했다.",
+      "not_run": "새 공격, VM 설정 변경, 신규 UI 촬영, 신규 DQL 실행, 빈 환경에서의 전체 실습 재현은 수행하지 않았다. Active Response의 차단 중 패킷 시험은 기존 검토에서도 수행하지 않았다."
+    }
+  }
+}
